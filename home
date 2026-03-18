@@ -54,7 +54,7 @@ h2 {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('https://opistole.github.io/rebe-website/Untitled%20design-13.png');
+  background-image: url('https://opistole.github.io/justrebe-home/Untitled%20design-13.png');
   background-size: cover;
   background-position: center 30%;
   filter: brightness(.45);
@@ -363,21 +363,21 @@ h2 {
 <section class="pcards">
   <div class="pcards-row">
     <div class="pcard">
-      <img src="https://opistole.github.io/rebe-website/iStock-1587604256.jpg" alt="Community">
+      <img src="https://opistole.github.io/justrebe-home/iStock-1587604256.jpg" alt="Community">
       <div class="pcard-overlay">
         <div class="pcard-label">Community</div>
         <div class="pcard-title">Belonging starts here</div>
       </div>
     </div>
     <div class="pcard">
-      <img src="https://opistole.github.io/rebe-website/iStock-2150324095.jpg" alt="Education">
+      <img src="https://opistole.github.io/justrebe-home/iStock-2150324095.jpg" alt="Education">
       <div class="pcard-overlay">
         <div class="pcard-label">Education</div>
         <div class="pcard-title">Whole educators. Whole students.</div>
       </div>
     </div>
     <div class="pcard">
-      <img src="https://opistole.github.io/rebe-website/iStock-2209704862.jpg" alt="Corporate">
+      <img src="https://opistole.github.io/justrebe-home/iStock-2209704862.jpg" alt="Corporate">
       <div class="pcard-overlay">
         <div class="pcard-label">Corporate</div>
         <div class="pcard-title">People-first workplaces</div>
@@ -397,10 +397,10 @@ h2 {
     </div>
     <div class="story-right">
       <div class="story-img-big">
-        <img src="https://opistole.github.io/rebe-website/iStock-2209704862.jpg" alt="Our Story">
+        <img src="https://opistole.github.io/justrebe-home/iStock-2209704862.jpg" alt="Our Story">
       </div>
       <div class="story-img-sm">
-        <img src="https://opistole.github.io/rebe-website/iStock-2150324095.jpg" alt="Our Story secondary">
+        <img src="https://opistole.github.io/justrebe-home/iStock-2150324095.jpg" alt="Our Story secondary">
       </div>
     </div>
   </div>
@@ -493,7 +493,7 @@ h2 {
     </div>
     <div class="sol-grid">
       <div class="sol-card sol-edu">
-        <img class="sol-img" src="https://opistole.github.io/rebe-website/iStock-2150324095.jpg" alt="ReBe Education">
+        <img class="sol-img" src="https://opistole.github.io/justrebe-home/iStock-2150324095.jpg" alt="ReBe Education">
         <div class="sol-body">
           <div class="sol-tag">ReBe Education</div>
           <div class="sol-h">Whole Educators. Whole Students. Whole Schools.</div>
@@ -510,7 +510,7 @@ h2 {
         </div>
       </div>
       <div class="sol-card sol-corp">
-        <img class="sol-img" src="https://opistole.github.io/rebe-website/iStock-2209704862.jpg" alt="ReBe Corporate">
+        <img class="sol-img" src="https://opistole.github.io/justrebe-home/iStock-2209704862.jpg" alt="ReBe Corporate">
         <div class="sol-body">
           <div class="sol-tag">ReBe Corporate</div>
           <div class="sol-h">Reset. Reframe. Relaunch.</div>
@@ -547,14 +547,12 @@ h2 {
 (function () {
   var DURATION = 2000;
   var EASING = function (t) { return 1 - Math.pow(1 - t, 3); };
-
   function animateCounter(el) {
     var target   = parseFloat(el.getAttribute('data-target'));
     var prefix   = el.getAttribute('data-prefix') || '';
     var suffix   = el.getAttribute('data-suffix') || '';
     var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
     var start    = null;
-
     function step(timestamp) {
       if (!start) start = timestamp;
       var elapsed  = timestamp - start;
@@ -570,7 +568,6 @@ h2 {
     }
     requestAnimationFrame(step);
   }
-
   function init() {
     var counters = document.querySelectorAll('[data-countup]');
     if (!counters.length) return;
@@ -588,7 +585,6 @@ h2 {
       counters.forEach(animateCounter);
     }
   }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
