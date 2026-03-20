@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Apply for a Pilot - ReBe</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+html, body { margin: 0; padding: 0; overflow-x: hidden; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1A1A1A;
+  background: #fff;
+}
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.header {
+  background: #034E64;
+  color: #fff;
+  padding: 80px 0;
+  text-align: center;
+}
+.header h1 {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.header p {
+  font-size: 18px;
+  color: rgba(255,255,255,.85);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.form-section {
+  padding: 80px 0;
+  background: #fff;
+}
+.form-intro {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.form-intro p {
+  font-size: 16px;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.form-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.form-group {
+  margin-bottom: 28px;
+}
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #1A1A1A;
+  margin-bottom: 10px;
+}
+.form-group.required label::after {
+  content: ' *';
+  color: #F06905;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  color: #1A1A1A;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #034E64;
+  box-shadow: 0 0 0 3px rgba(3,78,100,.1);
+}
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.form-row .form-group {
+  margin-bottom: 0;
+}
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.radio-option,
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.radio-option input[type="radio"],
+.checkbox-option input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #034E64;
+}
+.radio-option label,
+.checkbox-option label {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #444;
+  cursor: pointer;
+  flex: 1;
+}
+.form-submit {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 40px;
+}
+.btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  background: #034E64;
+  color: #fff;
+  text-transform: uppercase;
+}
+.btn-submit:hover {
+  background: #023d4f;
+  transform: translateY(-2px);
+}
+.btn-submit:active {
+  transform: scale(0.98);
+}
+.form-note {
+  font-size: 13px;
+  color: #888;
+  margin-top: 16px;
+}
+.success-message {
+  display: none;
+  padding: 20px;
+  background: #f0f9ff;
+  border-left: 4px solid #638D13;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  color: #034E64;
+}
+.success-message.show {
+  display: block;
+  animation: fadeInUp 0.6s ease;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 768px) {
+  .container { padding: 0 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .header { padding: 60px 0; }
+  .form-section { padding: 60px 0; }
+}
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="container">
+        <h1>Be a Pioneer. Start the Shift.</h1>
+        <p>ReBe is launching its next wave of pilot partnerships—and we're inviting visionary schools and organizations to lead the way.</p>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="container">
+        <div class="form-intro">
+          <p><strong>Fill out the short form below and a member of our team will follow up to schedule a discovery call.</strong></p>
+        </div>
+
+        <div class="form-wrapper">
+          <div class="success-message">
+            <strong>Thank you!</strong> Your application has been received. We'll be in touch soon to schedule your discovery call.
+          </div>
+
+          <form id="pilotForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="form-row">
+              <div class="form-group required">
+                <label for="firstName">Name</label>
+                <input type="text" id="firstName" name="first_name" placeholder="First" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName" style="opacity: 0;">Last</label>
+                <input type="text" id="lastName" name="last_name" placeholder="Last" required>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label for="organization">Organization / School / District</label>
+              <input type="text" id="organization" name="organization" placeholder="" required>
+            </div>
+
+            <div class="form-group required">
+              <label for="title">Role / Title</label>
+              <input type="text" id="title" name="title" placeholder="" required>
+            </div>
+
+            <div class="form-group required">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="" required>
+            </div>
+
+            <div class="form-group">
+              <label for="website">Website</label>
+              <input type="url" id="website" name="website" placeholder="">
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="">
+            </div>
+
+            <div class="form-group required">
+              <label>Which pathway are you interested in?</label>
+              <div class="radio-group">
+                <div class="radio-option">
+                  <input type="radio" id="education" name="pathway" value="ReBe Education" required>
+                  <label for="education">ReBe Education</label>
+                </div>
+                <div class="radio-option">
+                  <input type="radio" id="workplace" name="pathway" value="ReBe Workplace">
+                  <label for="workplace">ReBe Workplace</label>
+                </div>
+                <div class="radio-option">
+                  <input type="radio" id="both" name="pathway" value="Both / Not Sure">
+                  <label for="both">Both / Not Sure</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label>What challenges are you looking to address?</label>
+              <div class="checkbox-group">
+                <div class="checkbox-option">
+                  <input type="checkbox" id="burnout" name="challenges" value="Staff burnout">
+                  <label for="burnout">Staff burnout</label>
+                </div>
+                <div class="checkbox-option">
+                  <input type="checkbox" id="behavior" name="challenges" value="Student behavior or disengagement">
+                  <label for="behavior">Student behavior or disengagement</label>
+                </div>
+                <div class="checkbox-option">
+                  <input type="checkbox" id="culture" name="challenges" value="Team culture / trust">
+                  <label for="culture">Team culture / trust</label>
+                </div>
+                <div class="checkbox-option">
+                  <input type="checkbox" id="leadership" name="challenges" value="Leadership development">
+                  <label for="leadership">Leadership development</label>
+                </div>
+                <div class="checkbox-option">
+                  <input type="checkbox" id="resilience" name="challenges" value="Emotional resilience / regulation">
+                  <label for="resilience">Emotional resilience / regulation</label>
+                </div>
+                <div class="checkbox-option">
+                  <input type="checkbox" id="retention" name="challenges" value="Retention or morale">
+                  <label for="retention">Retention or morale</label>
+                </div>
+                <div class="checkbox-option">
+                  <input type="checkbox" id="other" name="challenges" value="Other">
+                  <label for="other">Other</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label for="timing">What makes now the right time to explore ReBe?</label>
+              <textarea id="timing" name="timing" placeholder="" required></textarea>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn-submit">Schedule a Discovery Call →</button>
+            </div>
+            <p class="form-note">* Required fields</p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('pilotForm').addEventListener('submit', function(e) {
+        // You'll need to set up different Formspree endpoints based on pathway selection
+        var pathway = document.querySelector('input[name="pathway"]:checked').value;
+        // For now, this goes to one endpoint. Update after getting your Formspree IDs
+        
+        // Show success message after submission
+        setTimeout(function() {
+          if (document.querySelector('.success-message')) {
+            document.querySelector('.success-message').classList.add('show');
+          }
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
