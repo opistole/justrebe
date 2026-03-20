@@ -1,56 +1,264 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Education — ReBe</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    .ft{background:#034E64;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;width:100%}
-    .ft-brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
-    .ft-logo{font-size:20px;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1}
-    .ft-logo span{color:#FEB909}
-    .ft-tag{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase;border-left:1px solid rgba(255,255,255,.2);padding-left:12px}
-    .ft-nav{display:flex;align-items:center;gap:32px}
-    .ft-nav a{font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;letter-spacing:.04em;font-weight:500;transition:color .2s}
-    .ft-nav a:hover{color:#fff}
-    .ft-right{display:flex;align-items:center;gap:20px;flex-shrink:0}
-    .ft-email a{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;letter-spacing:.03em;transition:color .2s}
-    .ft-email a:hover{color:#FEB909}
-    .ft-copy{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.04em;border-left:1px solid rgba(255,255,255,.15);padding-left:16px}
-    @media(max-width:768px){.ft{height:auto;padding:20px 24px;flex-direction:column;gap:16px;text-align:center}.ft-tag{display:none}.ft-nav{gap:16px;flex-wrap:wrap;justify-content:center}.ft-right{flex-direction:column;gap:8px}.ft-copy{border-left:none;padding-left:0}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReBe Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1A1A1A;background:#fff}
+.container{max-width:1140px;margin:0 auto;padding:0 48px}
+.section{padding:88px 0}
+.sc{background:#fff}
+.st{background:#034E64}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;margin-bottom:16px}
+.eyebrow::before{display:none}
+.h1{font-size:clamp(32px,4vw,56px);font-weight:900;color:#034E64;letter-spacing:-.025em;line-height:1.1;margin-bottom:16px}
+.h2{font-size:clamp(26px,3.2vw,44px);font-weight:900;color:#111;letter-spacing:-.025em;line-height:1.1;margin-bottom:16px}
+.ac{color:#F06905;font-style:italic}
+.lead{font-size:17px;color:#444;line-height:1.7;max-width:640px}
+.blg{font-size:16px;color:#555;line-height:1.75;text-align:center;max-width:640px;margin:0 auto}
+.eyebrow-c{justify-content:center}
+/* Hero — reduced top padding */
+.hero{padding:40px 0 72px;text-align:center}
+.hero-img{width:100%;max-height:400px;object-fit:cover;border-radius:16px;margin-top:48px;box-shadow:0 8px 40px rgba(3,78,100,.15)}
+/* Stats strip */
+.stats-strip{background:#034E64;padding:48px 0}
+.sg{display:grid;grid-template-columns:repeat(4,1fr)}
+.sv{font-size:clamp(26px,3vw,44px);font-weight:900;color:#FEB909;letter-spacing:-.02em;line-height:1}
+.sl{font-size:13px;color:rgba(255,255,255,.8);margin-top:6px;line-height:1.4}
+.ss{padding:0 28px;text-align:center;border-right:1px solid rgba(255,255,255,.12)}
+.ss:last-child{border-right:none}
+.ss-src{font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;text-transform:uppercase;letter-spacing:.06em}
+/* Problem / Solution grids */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+/* FIXED: was height:100% min-height:420px which caused the image to stretch */
+.pg-img{width:100%;height:420px;max-height:420px;object-fit:cover;object-position:center top;border-radius:16px;box-shadow:0 8px 32px rgba(3,78,100,.12);display:block}
+.ps-list{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.ps{display:flex;gap:14px;align-items:flex-start;padding:16px;background:rgba(3,78,100,.05);border-radius:12px;border-left:3px solid #034E64}
+.ps-num{font-size:20px;font-weight:900;color:#034E64;min-width:52px}
+.ps-text{font-size:14px;color:#555;line-height:1.55}
+/* Sol points */
+.sol-pts{display:flex;flex-direction:column;gap:18px;margin-top:20px}
+.sp{display:flex;gap:14px;align-items:flex-start}
+.sp-icon{width:34px;height:34px;border-radius:50%;background:#034E64;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.sp-title{font-size:15px;font-weight:700;color:#111;margin-bottom:3px}
+.sp-desc{font-size:14px;color:#666;line-height:1.6}
+/* EPICS */
+.epics{background:#0a6a87;padding:88px 0}
+.epics-hd{text-align:center;margin-bottom:56px}
+.epics-ey{display:flex;align-items:center;justify-content:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:16px}
+.epics-ey::before,.epics-ey::after{content:'';display:block;width:28px;height:2px;background:#FEB909}
+.epics-h{font-size:clamp(20px,2vw,32px);font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
+.epics-sub{font-size:16px;color:rgba(255,255,255,.7);max-width:580px;margin:0 auto}
+.epics-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
+.ec{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:28px 16px;text-align:center;transition:transform 0.3s ease,background 0.3s ease,box-shadow 0.3s ease}
+.ec:hover{transform:translateY(-7px);background:rgba(255,255,255,.16);box-shadow:0 16px 48px rgba(0,0,0,.25)}
+.ec-hex{width:82px;height:82px;margin:0 auto 20px;display:block;object-fit:contain;filter:drop-shadow(0 6px 20px rgba(0,0,0,.45));transition:transform 0.3s ease;border-radius:12px;padding:4px;background:rgba(255,255,255,.15)}
+.ec:hover .ec-hex{transform:scale(1.1)}
+.ec-title{font-size:12px;font-weight:800;color:#FEB909;letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px;white-space:nowrap}
+.ec-desc{font-size:13px;color:rgba(255,255,255,.75);line-height:1.65}
+/* Deliverables */
+.del-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:44px}
+.del-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.08);transition:transform .3s ease,box-shadow .3s ease}
+.del-card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(3,78,100,.14)}
+.del-img{width:100%;height:190px;object-fit:cover}
+.del-body{padding:18px}
+.del-title{font-size:14px;font-weight:800;color:#034E64;margin-bottom:6px;line-height:1.3}
+.del-desc{font-size:13px;color:#777;line-height:1.5}
+/* Who */
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.wc{background:#fff;border-radius:14px;padding:24px 20px;box-shadow:0 2px 16px rgba(0,0,0,.06);border-left:3px solid #638D13;transition:transform .25s ease}
+.wc:hover{transform:translateY(-3px)}
+.wc-title{font-size:15px;font-weight:800;color:#034E64;margin-bottom:8px}
+.wc-desc{font-size:14px;color:#666;line-height:1.6}
+/* Outcomes */
+.out-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.oc{text-align:center;padding:32px 20px;background:#fff;border-radius:16px;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .25s ease}
+.oc:hover{transform:translateY(-3px)}
+.oc-val{font-size:40px;font-weight:900;color:#034E64;letter-spacing:-.02em;line-height:1}
+.oc-label{font-size:14px;color:#666;margin-top:8px;line-height:1.5}
+.oc-src{font-size:10px;color:#aaa;margin-top:6px;letter-spacing:.05em;text-transform:uppercase}
+/* CTA */
+.cta-sec{background:#034E64;padding:88px 0;text-align:center}
+.cta-h{font-size:clamp(22px,2.8vw,38px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:16px}
+.cta-sub{font-size:17px;color:rgba(255,255,255,.75);margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto}
+.btn-wrap{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:16px 36px;border-radius:50px;font-size:15px;font-weight:700;text-decoration:none;transition:all .25s ease;cursor:pointer;border:none}
+.btn-p{background:#638D13;color:#fff;box-shadow:0 4px 18px rgba(99,141,19,.3)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(99,141,19,.4)}
+.btn-s{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5)}
+.btn-s:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.epics-grid .ec:nth-child(1){animation:fadeUp .5s ease .1s both}
+.epics-grid .ec:nth-child(2){animation:fadeUp .5s ease .2s both}
+.epics-grid .ec:nth-child(3){animation:fadeUp .5s ease .3s both}
+.epics-grid .ec:nth-child(4){animation:fadeUp .5s ease .4s both}
+.epics-grid .ec:nth-child(5){animation:fadeUp .5s ease .5s both}
+@media(max-width:768px){
+  .container{padding:0 24px}
+  .sg{grid-template-columns:repeat(2,1fr)}
+  .two-col{grid-template-columns:1fr}
+  .epics-grid{grid-template-columns:repeat(2,1fr)}
+  .del-grid{grid-template-columns:repeat(2,1fr)}
+  .who-grid,.out-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
-  <div class="education-page">
-    <h1>Education</h1>
-    <p>ReBe offers a range of educational programs and resources to support the growth and development of individuals and organizations.</p>
-    <div class="education-content">
-      <div class="education-program">
-        <h2>Program Name</h2>
-        <p>Program description</p>
-      </div>
-    </div>
-  </div>
-  <div class="ft">
-    <div class="ft-brand">
-      <div class="ft-logo">re<span>·</span>be</div>
-      <div class="ft-tag">Better Me. Better We.</div>
-    </div>
-    <nav class="ft-nav">
-      <a href="about.html">About Us</a>
-      <a href="corporate.html">Corporate</a>
-      <a href="education.html">Education</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <div class="ft-right">
-      <div class="ft-email"><a href="mailto:hello@justrebe.com">hello@justrebe.com</a></div>
-      <div class="ft-copy">© 2025 ReBe. All rights reserved.</div>
-    </div>
-  </div>
+
+<!-- HERO -->
+<section class="hero">
+<div class="container">
+<div class="eyebrow eyebrow-c">REBE EDUCATION</div>
+<h1 class="h1">Whole Educators.<br><span class="ac">Whole Students. Whole Schools.</span></h1>
+<p class="blg" style="margin-top:16px">The first ACE-informed platform built for K-12 — addressing the root causes of disengagement, burnout, and disconnection across our school communities.</p>
+<div class="btn-wrap" style="margin-top:36px">
+<a href="mailto:pilot@justrebe.com" class="btn btn-p">Apply for a Pilot →</a>
+<a href="#epics" class="btn" style="background:transparent;color:#638D13;border:2px solid #638D13">See How It Works ↓</a>
+</div>
+<img class="hero-img" src="https://static.wixstatic.com/media/1d3e2c_c7f89c9a394042d49f5209990b993380~mv2.jpg" alt="Students in a classroom" />
+</div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+<div class="container">
+<div class="sg">
+<div class="ss"><div class="sv">76%</div><div class="sl">of U.S. students have experienced at least 1 ACE</div><div class="ss-src">CDC Youth Risk Survey</div></div>
+<div class="ss"><div class="sv">5×</div><div class="sl">more attendance issues for students with ACEs</div><div class="ss-src">Kaiser Permanente</div></div>
+<div class="ss"><div class="sv">68%</div><div class="sl">of educators report emotional exhaustion</div><div class="ss-src">Gallup 2024</div></div>
+<div class="ss"><div class="sv">$124B</div><div class="sl">annual cost of unaddressed ACEs in education</div><div class="ss-src">JAMA Network Open</div></div>
+</div>
+</div>
+</div>
+
+<!-- PROBLEM -->
+<section class="section">
+<div class="container">
+<div class="two-col">
+<div>
+<div class="eyebrow">The Classroom Crisis</div>
+<h2 class="h2">What's really happening in our schools.</h2>
+<p class="lead">Adverse Childhood Experiences don't stay at home. They follow students and educators into every classroom — shaping attention, behavior, relationships, and learning every single day.</p>
+<div class="ps-list">
+<div class="ps"><div class="ps-num">1 in 5</div><div class="ps-text">students show signs of chronic stress that directly impairs their ability to learn and connect with others</div></div>
+<div class="ps"><div class="ps-num">73%</div><div class="ps-text">of early-care teachers report experiencing at least one ACE themselves — affecting how they teach and connect</div></div>
+<div class="ps"><div class="ps-num">3×</div><div class="ps-text">higher academic failure rate for students with 4+ ACEs compared to peers without them</div></div>
+</div>
+</div>
+<div>
+<img class="pg-img" src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=700&q=80" alt="Teacher with students" />
+</div>
+</div>
+</div>
+</section>
+
+<!-- SOLUTION -->
+<section class="section" style="background:#fff">
+<div class="container">
+<div class="two-col">
+<div>
+<img class="pg-img" src="https://static.wixstatic.com/media/1d3e2c_44f23037b67a45789aa34dafc881ed24~mv2.jpg" alt="Students collaborating" />
+</div>
+<div>
+<div class="eyebrow">Our Solution</div>
+<h2 class="h2">Our students and teachers deserve more than good intentions. They deserve a solution.</h2>
+<p class="lead">ReBe Education is a comprehensive, ACE-informed platform — delivering practical tools for whole-student wellness, educator resilience, and culture transformation.</p>
+<div class="sol-pts">
+<div class="sp"><div class="sp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg></div><div><div class="sp-title">EPICS Framework for Wholeness</div><div class="sp-desc">Addressing Emotional, Physical, Intellectual, Cultural &amp; Social health in every lesson</div></div></div>
+<div class="sp"><div class="sp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg></div><div><div class="sp-title">Age-appropriate K-12 content</div><div class="sp-desc">Grade-level Health Boosts, Literacy LABS, and Facilitator Guides ready for every classroom</div></div></div>
+<div class="sp"><div class="sp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg></div><div><div class="sp-title">Whole Educator focus</div><div class="sp-desc">Supporting teacher resilience and wellbeing as the foundation of student success</div></div></div>
+<div class="sp"><div class="sp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg></div><div><div class="sp-title">Measurable district-wide outcomes</div><div class="sp-desc">Aggregated data showing engagement, attendance, and culture shifts — privacy safe</div></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- EPICS -->
+<section class="epics" id="epics">
+<div class="container">
+<div class="epics-hd">
+<div class="epics-ey">The EPICS Framework</div>
+<h2 class="epics-h">Emotional · Physical · Intellectual · Cultural · Social</h2>
+<p class="epics-sub">ReBe addresses the five dimensions of student wholeness — the root of sustainable learning and growth.</p>
+</div>
+<div class="epics-grid">
+<div class="ec"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_07903f6702b14b86aa893bead03b6d17~mv2.png" alt="Emotional" /><div class="ec-title">E — Emotional</div><p class="ec-desc">We help students recognize and understand their emotions so they can respond to challenges in healthier ways. Emotional awareness builds resilience, confidence, and stronger relationships with teachers and peers.</p></div>
+<div class="ec"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_f7bccc09be054724bcff61cf006a467e~mv2.png" alt="Physical" /><div class="ec-title">P — Physical</div><p class="ec-desc">We help students understand the connection between physical wellbeing, energy, and learning. Developing healthy habits equips students to focus, participate, and succeed in the classroom.</p></div>
+<div class="ec"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_ea59bff4a9414e62a25668433d93e0e9~mv2.png" alt="Intellectual" /><div class="ec-title">I — Intellectual</div><p class="ec-desc">We help students strengthen critical thinking, curiosity, and problem-solving skills. As students gain confidence in how they think and learn, they become more engaged, motivated, and prepared for success.</p></div>
+<div class="ec"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_7df3f260e662400092688830757bace2~mv2.png" alt="Cultural" /><div class="ec-title">C — Cultural</div><p class="ec-desc">We help schools build cultures of respect, civility, and understanding. Fostering empathy and appreciation for different perspectives makes classrooms safer environments where every student can thrive.</p></div>
+<div class="ec"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_3a253f928b2544638d9cb530da65be7d~mv2.png" alt="Social" /><div class="ec-title">S — Social</div><p class="ec-desc">We help students develop the social skills needed to build healthy friendships and positive community. Students learn communication, cooperation, and empathy — growing into confident contributors.</p></div>
+</div>
+</div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="section" style="background:#fff">
+<div class="container">
+<div style="text-align:center">
+<div class="eyebrow eyebrow-c">What's Included</div>
+<h2 class="h2">Ready-to-use resources for every classroom.</h2>
+<p class="blg">Everything your educators need — designed, researched, and ready to implement from day one.</p>
+</div>
+<div class="del-grid">
+<div class="del-card"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_54e78aac470f4a29b554e62f8677a79e~mv2.png" alt="Differentiated Literacy LABS" /><div class="del-body"><div class="del-title">Differentiated Literacy LABS</div><div class="del-desc">Learning Applied by Students — EPICS-health focused literacy units differentiated across grade bands</div></div></div>
+<div class="del-card"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_5cbf09d55e6041eeaa094b563236b506~mv2.png" alt="Grade-level Health Boosts" /><div class="del-body"><div class="del-title">Grade-level Health Boosts</div><div class="del-desc">Age-appropriate K-12 wellness content connecting EPICS health to real classroom moments</div></div></div>
+<div class="del-card"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_515210f2dcec488084a3abe1baf93d0d~mv2.png" alt="Educator Facilitator Guides" /><div class="del-body"><div class="del-title">Educator Facilitator Guides</div><div class="del-desc">Step-by-step guides helping teachers deliver ReBe content with confidence and care</div></div></div>
+<div class="del-card"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_fc4a2bc6ab6c440dae01e5eeaa7d72eb~mv2.png" alt="EPICS-health focused content" /><div class="del-body"><div class="del-title">EPICS-Health Focused Content</div><div class="del-desc">Curriculum rooted in the five dimensions of wholeness — embedded into daily classroom practice</div></div></div>
+</div>
+</div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="section" style="background:#fff">
+<div class="container">
+<div style="text-align:center">
+<div class="eyebrow eyebrow-c">Who It's For</div>
+<h2 class="h2">Built for every level of the school community.</h2>
+</div>
+<div class="who-grid">
+<div class="wc"><div class="wc-title">Classroom Teachers</div><div class="wc-desc">Ready-to-use resources that integrate seamlessly with existing curriculum and daily routines</div></div>
+<div class="wc"><div class="wc-title">School Administrators</div><div class="wc-desc">Aggregated culture insights and outcomes reporting — without individual student disclosure</div></div>
+<div class="wc"><div class="wc-title">District Leaders</div><div class="wc-desc">Scalable district-wide implementation with trauma-informed professional development</div></div>
+<div class="wc"><div class="wc-title">Special Education Teams</div><div class="wc-desc">Differentiated content that meets students where they are — emotionally, physically, intellectually</div></div>
+<div class="wc"><div class="wc-title">School Counselors</div><div class="wc-desc">A science-informed framework to reinforce social-emotional learning school-wide</div></div>
+<div class="wc"><div class="wc-title">Progressive Districts</div><div class="wc-desc">Florida, Virginia &amp; Indiana focus — supporting trauma-informed mandates with measurable outcomes</div></div>
+</div>
+</div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="section">
+<div class="container">
+<div style="text-align:center">
+<div class="eyebrow eyebrow-c">The Return Is Real</div>
+<h2 class="h2">What happens when schools invest in wholeness.</h2>
+<p class="blg">Schools that implement ACE-informed approaches see measurable, lasting results.</p>
+</div>
+<div class="out-grid">
+<div class="oc"><div class="oc-val">41%</div><div class="oc-label">reduction in absenteeism in schools with trauma-informed practices</div><div class="oc-src">JAMA Network Open · 2025</div></div>
+<div class="oc"><div class="oc-val">3×</div><div class="oc-label">improvement in academic engagement for students with ACE-informed support</div><div class="oc-src">EBSCO Meta-Analysis · 2025</div></div>
+<div class="oc"><div class="oc-val">79%</div><div class="oc-label">of teachers report improved classroom culture after trauma-informed training</div><div class="oc-src">Gallup Education Index · 2024</div></div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+<div class="container">
+<h2 class="cta-h">Let's build a healthier school culture — together.</h2>
+<p class="cta-sub">Book a demo and see how ReBe Education can transform your school community from the inside out.</p>
+<div class="btn-wrap">
+<a href="mailto:pilot@justrebe.com" class="btn btn-p">Apply for a Pilot →</a>
+<a href="mailto:pilot@justrebe.com" class="btn btn-s" style="border-color:rgba(255,255,255,.6)">Download Program Overview →</a>
+</div>
+<p style="color:rgba(255,255,255,.4);font-size:12px;margin-top:24px;letter-spacing:.05em">Contact: pilot@justrebe.com · justrebe.com</p>
+</div>
+</section>
+
 </body>
 </html>
