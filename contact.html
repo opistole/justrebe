@@ -223,7 +223,7 @@ body {
             <strong>Thank you!</strong> Your application has been received. We'll be in touch soon to schedule your discovery call.
           </div>
 
-          <form id="pilotForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <form id="pilotForm" action="https://formspree.io/f/mojkbyzq" method="POST">
             <div class="form-row">
               <div class="form-group required">
                 <label for="firstName">Name</label>
@@ -328,9 +328,23 @@ body {
 
     <script>
       document.getElementById('pilotForm').addEventListener('submit', function(e) {
-        // You'll need to set up different Formspree endpoints based on pathway selection
         var pathway = document.querySelector('input[name="pathway"]:checked').value;
-        // For now, this goes to one endpoint. Update after getting your Formspree IDs
+        
+        // Map pathway to recipient email
+        var emailMap = {
+          'Education': 'v.ellery@justrebe.com',
+          'Workplace': 'e.good@justrebe.com',
+          'Both/Not Sure': 'hello@justrebe.com'
+        };
+        
+        var recipientEmail = emailMap[pathway] || 'hello@justrebe.com';
+        
+        // Add custom subject with routing info
+        var routingField = document.createElement('input');
+        routingField.type = 'hidden';
+        routingField.name = '_subject';
+        routingField.value = `New Pilot Application - ${pathway} (Route to: ${recipientEmail})`;
+        this.appendChild(routingField);
         
         // Show success message after submission
         setTimeout(function() {
