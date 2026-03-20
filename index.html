@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="styles.css">
     <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 html, body { margin: 0; padding: 0; overflow-x: hidden; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -35,10 +36,13 @@ h2 {
   font-weight: 700;
   letter-spacing: 0.02em;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
   border: none;
   white-space: nowrap;
+}
+.btn:active {
+  transform: scale(0.98);
 }
 .btn-teal { background: #034E64; color: #fff; box-shadow: 0 4px 18px rgba(3,78,100,.25); }
 .btn-teal:hover { background: #023d4f; transform: translateY(-1px); }
@@ -62,6 +66,7 @@ h2 {
   background-image: url('Images/Hero.jpg');
   background-size: cover;
   background-position: center 30%;
+  background-attachment: fixed;
   filter: brightness(.65);
 }
 .hero-inner {
@@ -161,6 +166,11 @@ h2 {
   position: relative;
   height: 420px;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pcard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.2);
 }
 .pcard img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease, filter .5s ease; }
 .pcard:hover img { transform: scale(1.05); filter: brightness(.75); }
@@ -233,7 +243,7 @@ h2 {
   padding: 0 20px;
 }
 .sbar-num {
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(24px, 3vw, 38px);
   font-weight: 900;
   color: #FEB909;
   letter-spacing: -.02em;
@@ -272,6 +282,11 @@ h2 {
   display: flex;
   flex-direction: column;
   background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sol-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px rgba(0,0,0,.15);
 }
 .sol-img { width: 100%; height: 220px; object-fit: cover; object-position: center 85%; display: block; }
 .sol-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
@@ -326,6 +341,22 @@ h2 {
   .story-img-big, .story-img-sm { position: relative; width: 100%; height: auto; left: auto; right: auto; bottom: auto; top: auto; }
   .story-img-big { height: 220px; margin-bottom: 16px; }
   .story-img-sm { height: 160px; border-width: 0; }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in {
+  animation: fadeInUp 0.8s ease forwards;
+}
+.pcard, .sol-card, .story-left, .what-left, .what-body {
+  opacity: 0;
 }
     </style>
   </head>
@@ -598,6 +629,31 @@ h2 {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
+  }
+})();
+
+// Scroll animations - fade in elements
+(function () {
+  function observeElements() {
+    var elements = document.querySelectorAll('.pcard, .sol-card, .story-left, .what-left, .what-body');
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach(function (el) { el.classList.add('fade-in'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    elements.forEach(function (el) { observer.observe(el); });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', observeElements);
+  } else {
+    observeElements();
   }
 })();
     </script>
