@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ReBe</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { margin: 0; padding: 0; overflow-x: hidden; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1A1A1A;
+  background: #fff;
+}
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+h2 {
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+.ac { color: #F06905; font-style: italic; }
+.acg { color: #638D13; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+.btn-teal { background: #034E64; color: #fff; box-shadow: 0 4px 18px rgba(3,78,100,.25); }
+.btn-teal:hover { background: #023d4f; transform: translateY(-1px); }
+.btn-green { background: #638D13; color: #fff; box-shadow: 0 4px 18px rgba(99,141,19,.25); }
+.btn-green:hover { background: #527610; transform: translateY(-1px); }
+.btn-gold { background: #FEB909; color: #1A1A1A; box-shadow: 0 4px 18px rgba(254,185,9,.3); }
+.btn-gold:hover { background: #e5a708; transform: translateY(-1px); }
+.btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.5); }
+.btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+.hero {
+  position: relative;
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #034E64;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://opistole.github.io/justrebe-home/Untitled design.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  filter: brightness(.65);
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 96px 72px;
+  width: 100%;
+}
+.hero-tag {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  margin-bottom: 20px;
+}
+.hero-h1 {
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+  color: #fff;
+  max-width: 700px;
+  margin-bottom: 24px;
+}
+.hero-sub {
+  font-size: clamp(16px, 1.8vw, 22px);
+  color: rgba(255,255,255,.8);
+  line-height: 1.6;
+  max-width: 560px;
+  margin-bottom: 40px;
+  font-weight: 400;
+}
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+.hero-btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FEB909;
+  color: #1A1A1A;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  letter-spacing: .02em;
+  transition: all .2s ease;
+}
+.hero-btn-gold:hover { background: #e5a708; transform: translateY(-2px); }
+.hero-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  letter-spacing: .02em;
+  border: 2px solid rgba(255,255,255,.6);
+  transition: all .2s ease;
+}
+.hero-btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+.what { padding: 88px 0; background: #fff; }
+.what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.ey {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #F06905;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.ey::before { display: none; }
+.what-body p { font-size: 16px; color: #555; line-height: 1.75; margin-bottom: 16px; }
+.what-body p strong { color: #1A1A1A; }
+.btn-stack { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; margin-top: 28px; }
+.pcards { background: #F2EDE8; padding: 80px 0; }
+.pcards-row {
+  display: flex;
+  gap: 24px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.pcard {
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  height: 420px;
+  cursor: pointer;
+}
+.pcard img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease, filter .5s ease; }
+.pcard:hover img { transform: scale(1.05); filter: brightness(.75); }
+.pcard-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+  background: linear-gradient(to top, rgba(3,78,100,.85) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.pcard:hover .pcard-overlay { opacity: 1; }
+.pcard-label { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #FEB909; margin-bottom: 6px; }
+.pcard-title { font-size: 22px; font-weight: 900; color: #fff; line-height: 1.2; }
+.story { background: #fff; padding: 96px 0; }
+.story-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.story-ey { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #F06905; margin-bottom: 16px; }
+.story-h { font-size: clamp(28px, 3.5vw, 48px); font-weight: 900; color: #034E64; letter-spacing: -.025em; line-height: 1.1; margin-bottom: 24px; }
+.story-body { font-size: 16px; color: #444; line-height: 1.8; margin-bottom: 16px; }
+.story-body strong { color: #1A1A1A; }
+.story-right { position: relative; height: 520px; }
+.story-img-big {
+  position: absolute;
+  top: 0; right: 0;
+  width: 88%; height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.15);
+}
+.story-img-big img, .story-img-sm img { width: 100%; height: 100%; object-fit: cover; }
+.story-img-sm {
+  position: absolute;
+  bottom: 40px; left: 0;
+  width: 46%; height: 54%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,.2);
+  border: 4px solid #fff;
+}
+.sbar { background: #034E64; padding: 40px 0; }
+.sbar-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 48px;
+  gap: 0;
+}
+.sbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  min-width: 140px;
+  padding: 0 20px;
+}
+.sbar-num {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900;
+  color: #FEB909;
+  letter-spacing: -.02em;
+  line-height: 1;
+  min-height: 1.2em;
+}
+.sbar-lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,.7);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-top: 8px;
+  font-weight: 600;
+}
+.sbar-div { width: 1px; background: rgba(255,255,255,.15); align-self: stretch; margin: 0; }
+.cost { background: #F2EDE8; padding: 80px 0; }
+.cost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.cost-list { list-style: none; padding: 0; margin: 20px 0 0; }
+.cost-list li {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  font-size: 15px;
+  color: #444;
+  line-height: 1.5;
+}
+.cost-list li:last-child { border-bottom: none; }
+.cost-num { font-size: 22px; font-weight: 900; color: #034E64; min-width: 72px; flex-shrink: 0; }
+.solutions { background: #fff; padding: 80px 0; }
+.sol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; }
+.sol-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,.08);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+.sol-img { width: 100%; height: 220px; object-fit: cover; object-position: center 30%; display: block; }
+.sol-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+.sol-tag { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+.sol-edu .sol-tag { color: #638D13; }
+.sol-corp .sol-tag { color: #034E64; }
+.sol-h { font-size: 21px; font-weight: 900; color: #111; margin-bottom: 8px; letter-spacing: -.01em; }
+.sol-sub { font-size: 14px; color: #888; margin-bottom: 16px; font-style: italic; }
+.sol-feats { list-style: none; padding: 0; margin: 0 0 20px; flex: 1; }
+.sol-feats li { font-size: 14px; color: #444; padding: 5px 0; display: flex; gap: 8px; align-items: flex-start; }
+.sol-feats li::before { content: '→'; color: #F06905; font-weight: 700; flex-shrink: 0; }
+.sol-foot { font-size: 12px; color: #999; padding-top: 16px; border-top: 1px solid #eee; margin-top: auto; }
+.sol-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 22px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all .2s ease;
+  margin-top: 16px;
+}
+.sol-btn-edu { background: #638D13; color: #fff; }
+.sol-btn-edu:hover { background: #527610; }
+.sol-btn-corp { background: #034E64; color: #fff; }
+.sol-btn-corp:hover { background: #023d4f; }
+.cta-sec { background: #034E64; padding: 80px 0; text-align: center; }
+.cta-sec .container { max-width: 760px; }
+.cta-ey { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 20px; }
+.cta-h { font-size: clamp(22px, 2.8vw, 38px); font-weight: 900; color: #fff; letter-spacing: -.025em; line-height: 1.15; margin-bottom: 16px; }
+.cta-sub { font-size: 17px; color: rgba(255,255,255,.75); line-height: 1.65; margin-bottom: 36px; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.cta-emails { margin-top: 24px; font-size: 13px; color: rgba(255,255,255,.45); letter-spacing: .04em; }
+@media (max-width: 900px) {
+  .hero-inner, .container, .pcards-row, .story-inner, .sbar-row { padding-left: 24px; padding-right: 24px; }
+  .what-grid, .story-inner, .cost-grid, .sol-grid { grid-template-columns: 1fr; gap: 36px; }
+  .pcards-row { flex-direction: column; }
+  .pcard { height: 320px; }
+  .story-right { height: 420px; }
+  .sbar-div { display: none; }
+  .sbar-item { min-width: 45%; padding: 16px 10px; }
+}
+@media (max-width: 768px) {
+  .hero { min-height: auto; }
+  .hero-inner { padding-top: 80px; padding-bottom: 80px; }
+  .hero-btns, .cta-btns { flex-direction: column; align-items: flex-start; }
+  .cta-btns { align-items: center; }
+  .hero-btn-gold, .hero-btn-outline, .btn { width: 100%; justify-content: center; }
+  .story-right { height: 360px; }
+  .story-img-big, .story-img-sm { position: relative; width: 100%; height: auto; left: auto; right: auto; bottom: auto; top: auto; }
+  .story-img-big { height: 220px; margin-bottom: 16px; }
+  .story-img-sm { height: 160px; border-width: 0; }
+}
+    </style>
+  </head>
+
+  <body>
+
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-tag">ACE-Informed Wellness Platform</div>
+        <h1 class="hero-h1">Rebuilding people<br>from the inside out.</h1>
+        <p class="hero-sub">Restoring identity, belonging, and purpose in schools and workplaces — addressing the root cause no wellness program has ever touched.</p>
+        <div class="hero-btns">
+          <a href="/contact" class="hero-btn-gold">Apply for a Pilot →</a>
+          <a href="/corporate" class="hero-btn-outline">Explore Our Solutions</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="what">
+      <div class="container">
+        <div class="what-grid">
+          <div class="what-left">
+            <div class="ey">WHAT IS RE·BE?</div>
+            <h2>We don't treat symptoms.<br><span class="ac">We go to the root.</span></h2>
+            <blockquote style="border-left:3px solid #F06905;padding-left:16px;margin:0 0 20px;font-size:17px;font-weight:600;color:#1A1A1A;line-height:1.5">
+              ReBe is not therapy. It's not a program. It's a shift — from the inside out.
+            </blockquote>
+            <div class="btn-stack">
+              <a href="/corporate" class="btn btn-teal">Reveal What's Holding Your Team Back →</a>
+              <a href="/education" class="btn btn-green">Unlock What Students &amp; Staff Need →</a>
+            </div>
+          </div>
+          <div class="what-body">
+            <p>In a world aching for authenticity, ReBe exists to revitalize the human spirit and restore what disconnection, stress, and early experiences have disrupted.</p>
+            <p>Most wellness programs offer surface-level solutions — apps, webinars, yoga subscriptions. ReBe goes deeper. We address the hidden experiences that shape how people show up at work and in the classroom — <strong>Adverse Childhood Experiences, or ACEs.</strong></p>
+            <p>ACEs are traumatic or stressful events that happen before age 18. They don't stay in childhood. They follow people into every meeting, every classroom, every relationship — and they quietly drive the disengagement, burnout, and disconnection costing organizations billions every year.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pcards">
+      <div class="pcards-row">
+        <div class="pcard">
+          <img src="https://opistole.github.io/justrebe-home/iStock-1587604256.jpg" alt="Community">
+          <div class="pcard-overlay">
+            <div class="pcard-label">Community</div>
+            <div class="pcard-title">Belonging starts here</div>
+          </div>
+        </div>
+        <div class="pcard">
+          <img src="https://opistole.github.io/justrebe-home/iStock-2150324095.jpg" alt="Education">
+          <div class="pcard-overlay">
+            <div class="pcard-label">Education</div>
+            <div class="pcard-title">Whole educators. Whole students.</div>
+          </div>
+        </div>
+        <div class="pcard">
+          <img src="https://opistole.github.io/justrebe-home/iStock-2209704862.jpg" alt="Corporate">
+          <div class="pcard-overlay">
+            <div class="pcard-label">Corporate</div>
+            <div class="pcard-title">People-first workplaces</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="story-inner">
+        <div class="story-left">
+          <div class="story-ey">OUR STORY</div>
+          <h2 class="story-h">A Shift Born From<br>Lived Experience</h2>
+          <p class="story-body"><strong>Every human deserves to thrive</strong> — not just survive — across all stages of life. But for too many, early challenges go unrecognized for decades, showing up in adulthood as disengagement, anxiety, low performance, or burnout.</p>
+          <p class="story-body"><strong>Over 70%</strong> of adults have experienced one or more unresolved early-life traumas. At ReBe, we see a world where workplaces and classrooms are spaces of connection, not disconnection — where people are seen, heard, and able to thrive from the inside out.</p>
+          <p class="story-body">We are helping to flip the script: <strong>reconnect, reframe,</strong> and <strong>restore</strong> — bridging the gap between childhood and maturity. Wholeness is both a personal and collective shift back to humanity and hope.</p>
+        </div>
+        <div class="story-right">
+          <div class="story-img-big">
+            <img src="https://opistole.github.io/justrebe-home/iStock-2209704862.jpg" alt="Our Story">
+          </div>
+          <div class="story-img-sm">
+            <img src="https://opistole.github.io/justrebe-home/iStock-2150324095.jpg" alt="Our Story secondary">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sbar">
+      <div class="sbar-row">
+        <div class="sbar-item">
+          <span class="sbar-num" data-countup data-target="14.8" data-prefix="$" data-suffix="T" data-decimals="1">$0T</span>
+          <span class="sbar-lbl">Annual U.S. ACE burden</span>
+        </div>
+        <div class="sbar-div"></div>
+        <div class="sbar-item">
+          <span class="sbar-num" data-countup data-target="85" data-suffix="%">0%</span>
+          <span class="sbar-lbl">Employees disengaged</span>
+        </div>
+        <div class="sbar-div"></div>
+        <div class="sbar-item">
+          <span class="sbar-num" data-countup data-target="76" data-suffix="%">0%</span>
+          <span class="sbar-lbl">Students carry an ACE</span>
+        </div>
+        <div class="sbar-div"></div>
+        <div class="sbar-item">
+          <span class="sbar-num" data-static>14:1</span>
+          <span class="sbar-lbl">ROI on ACE prevention</span>
+        </div>
+        <div class="sbar-div"></div>
+        <div class="sbar-item">
+          <span class="sbar-num" data-countup data-target="7" data-suffix="x">0x</span>
+          <span class="sbar-lbl">Behavioral health ROI</span>
+        </div>
+        <div class="sbar-div"></div>
+        <div class="sbar-item">
+          <span class="sbar-num" data-countup data-target="575" data-prefix="$" data-suffix="B">$0B</span>
+          <span class="sbar-lbl">Lost to ACE productivity</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cost">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:48px">
+          <div style="display:flex;align-items:center;gap:16px;justify-content:center;margin-bottom:12px">
+            <span style="flex:1;height:2px;background:#F06905;max-width:28px"></span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;white-space:nowrap">THE HIDDEN COST</span>
+            <span style="flex:1;height:2px;background:#F06905;max-width:28px"></span>
+          </div>
+          <h2>The numbers behind <span class="ac">the silence.</span></h2>
+        </div>
+        <div class="cost-grid">
+          <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;margin-bottom:20px">EDUCATION</p>
+            <ul class="cost-list">
+              <li><span class="cost-num">76%</span>of students have experienced at least one ACE before age 18</li>
+              <li><span class="cost-num">$1.2B</span>total addressable market for K–12 ACE-informed wellness programs</li>
+              <li><span class="cost-num">3×</span>higher dropout risk for students with 4+ ACEs</li>
+              <li><span class="cost-num">40%</span>of teachers leave the profession within 5 years — burnout is the #1 reason</li>
+              <li><span class="cost-num">14:1</span>ROI on every dollar invested in early childhood ACE prevention</li>
+            </ul>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;margin-bottom:20px">CORPORATE</p>
+            <ul class="cost-list">
+              <li><span class="cost-num">$575B</span>lost annually to ACE-related productivity loss in U.S. workplaces</li>
+              <li><span class="cost-num">$322B</span>annual cost of employee burnout — 76% of your workforce affected (Deloitte)</li>
+              <li><span class="cost-num">3–5%</span>only this fraction of employees ever engage with traditional EAP programs</li>
+              <li><span class="cost-num">4×</span>more workdays missed by employees with poor mental health vs. healthy peers</li>
+              <li><span class="cost-num">40%</span>of job turnover is stress-related — a direct cost your organization absorbs</li>
+            </ul>
+          </div>
+        </div>
+        <p style="font-size:18px;color:#034E64;font-weight:700;margin-top:40px;text-align:center;line-height:1.5">
+          ReBe is the only platform addressing the root cause — <span class="ac">across corporations and schools simultaneously.</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="solutions">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:48px">
+          <div style="display:flex;align-items:center;gap:16px;justify-content:center;margin-bottom:12px">
+            <span style="flex:1;height:2px;background:#F06905;max-width:28px"></span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;white-space:nowrap">TWO SOLUTIONS. ONE FRAMEWORK.</span>
+            <span style="flex:1;height:2px;background:#F06905;max-width:28px"></span>
+          </div>
+          <h2>From the classroom to the boardroom —<br><span class="acg">ReBe covers the full human journey.</span></h2>
+          <p style="font-size:16px;color:#666;max-width:640px;margin:16px auto 0;line-height:1.7">
+            The only platform in the world addressing ACEs across both education and the workplace. Two tailored solutions. One connected framework. A lifetime of impact.
+          </p>
+        </div>
+        <div class="sol-grid">
+          <div class="sol-card sol-edu">
+            <img class="sol-img" src="https://opistole.github.io/justrebe-home/iStock-2150324095.jpg" alt="ReBe Education">
+            <div class="sol-body">
+              <div class="sol-tag">ReBe Education</div>
+              <div class="sol-h">Whole Educators. Whole Students. Whole Schools.</div>
+              <div class="sol-sub">A K–12 health and literacy program built around EPICS</div>
+              <ul class="sol-feats">
+                <li>Grade-level Health Boosts for K–12</li>
+                <li>Age-appropriate video content and facilitator guides</li>
+                <li>Differentiated Literacy LABS — Learning Applied by Students</li>
+                <li>ReBe Educator Certification</li>
+                <li>Measurable academic and behavioral outcomes</li>
+              </ul>
+              <div class="sol-foot">District licensing model · TAM: $1.2B</div>
+              <a href="/education" class="sol-btn sol-btn-edu">Explore Education →</a>
+            </div>
+          </div>
+          <div class="sol-card sol-corp">
+            <img class="sol-img" src="https://opistole.github.io/justrebe-home/iStock-2209704862.jpg" alt="ReBe Corporate">
+            <div class="sol-body">
+              <div class="sol-tag">ReBe Corporate</div>
+              <div class="sol-h">Reset. Reframe. Relaunch.</div>
+              <div class="sol-sub">A three-phase, ACE-informed employee wellness platform</div>
+              <ul class="sol-feats">
+                <li>Phase 1 — Awareness: Individual, private, self-paced</li>
+                <li>Phase 2 — Engagement: Live facilitated team sessions</li>
+                <li>Phase 3 — Activation: Culture embedding + HR analytics</li>
+                <li>Enterprise-ready app for all workforce types</li>
+                <li>REAL TALK™ methodology, proven in 19+ countries since 2020</li>
+              </ul>
+              <div class="sol-foot">Enterprise licensing model · ROI: 1.9x–7x</div>
+              <a href="/corporate" class="sol-btn sol-btn-corp">Explore Corporate →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-sec">
+      <div class="container">
+        <div class="cta-ey">BETTER ME. BETTER WE.</div>
+        <h2 class="cta-h">Ready to help your people become the heroes they were meant to be?</h2>
+        <p class="cta-sub">ReBe is not therapy or a program — it's a shift. We uncover what is beneath the surface to transform people and organizations from the inside out.</p>
+        <div class="cta-btns">
+          <a href="/corporate" class="btn btn-gold">Apply for a Pilot →</a>
+          <a href="/about-us" class="btn btn-outline-white">Investment Opportunities →</a>
+        </div>
+        <p class="cta-emails">pilot@justrebe.com · invest@justrebe.com · hello@justrebe.com</p>
+      </div>
+    </section>
+
+    <script src="main.js"></script>
+    <script>
+(function () {
+  var DURATION = 2000;
+  var EASING = function (t) { return 1 - Math.pow(1 - t, 3); };
+  function animateCounter(el) {
+    var target   = parseFloat(el.getAttribute('data-target'));
+    var prefix   = el.getAttribute('data-prefix') || '';
+    var suffix   = el.getAttribute('data-suffix') || '';
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var start    = null;
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var elapsed  = timestamp - start;
+      var progress = Math.min(elapsed / DURATION, 1);
+      var eased    = EASING(progress);
+      var current  = eased * target;
+      el.textContent = prefix + current.toFixed(decimals) + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = prefix + target.toFixed(decimals) + suffix;
+      }
+    }
+    requestAnimationFrame(step);
+  }
+  function init() {
+    var counters = document.querySelectorAll('[data-countup]');
+    if (!counters.length) return;
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      counters.forEach(function (el) { observer.observe(el); });
+    } else {
+      counters.forEach(animateCounter);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+    </script>
+  </body>
+</html>
