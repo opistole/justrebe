@@ -91,12 +91,53 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1A1A
 .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(99,141,19,.4)}
 .btn-s{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5)}
 .btn-s:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+/* ── SCROLL REVEAL BASE ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.05s}.d2{transition-delay:.12s}.d3{transition-delay:.19s}
+.d4{transition-delay:.26s}.d5{transition-delay:.33s}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-.epics-grid .ec:nth-child(1){animation:fadeUp .5s ease .1s both}
-.epics-grid .ec:nth-child(2){animation:fadeUp .5s ease .2s both}
-.epics-grid .ec:nth-child(3){animation:fadeUp .5s ease .3s both}
-.epics-grid .ec:nth-child(4){animation:fadeUp .5s ease .4s both}
-.epics-grid .ec:nth-child(5){animation:fadeUp .5s ease .5s both}
+
+/* Hero load animations */
+.hero .eyebrow{opacity:0;animation:fadeUp .6s .1s cubic-bezier(.22,1,.36,1) forwards}
+.hero .h1{opacity:0;animation:fadeUp .7s .2s cubic-bezier(.22,1,.36,1) forwards}
+.hero .blg{opacity:0;animation:fadeUp .7s .32s cubic-bezier(.22,1,.36,1) forwards}
+.hero .btn-wrap{opacity:0;animation:fadeUp .7s .44s cubic-bezier(.22,1,.36,1) forwards}
+.hero .hero-img{opacity:0;animation:fadeUp .8s .56s cubic-bezier(.22,1,.36,1) forwards}
+
+/* Stat items */
+.ss{transition:transform .25s cubic-bezier(.22,1,.36,1)}
+.ss:hover{transform:translateY(-4px)}
+
+/* Problem/solution images subtle zoom */
+.pg-img{transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .3s}
+
+/* Deliverable cards */
+.del-card:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 20px 48px rgba(3,78,100,.15)}
+.del-img{transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.del-card:hover .del-img{transform:scale(1.06)}
+
+/* Who cards */
+.wc{transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s}
+.wc:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(3,78,100,.1);border-color:#034E64}
+
+/* Outcome cards */
+.oc{transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}
+.oc:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(3,78,100,.1)}
+
+/* EPICS cards — scroll-triggered via JS */
+.ec{opacity:0;transform:translateY(28px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1),background .3s ease,box-shadow .3s ease}
+.ec.visible{opacity:1;transform:translateY(0)}
+
+/* CTA buttons */
+.btn{transition:all .25s ease}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(99,141,19,.4)}
+.btn-s:hover{border-color:#fff;background:rgba(255,255,255,.1);transform:translateY(-2px)}
 @media(max-width:768px){
   .container{padding:0 24px}
   .sg{grid-template-columns:repeat(2,1fr)}
@@ -127,10 +168,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1A1A
 <div class="stats-strip">
 <div class="container">
 <div class="sg">
-<div class="ss"><div class="sv">76%</div><div class="sl">of U.S. students have experienced at least 1 ACE</div><div class="ss-src">CDC Youth Risk Survey</div></div>
-<div class="ss"><div class="sv">5×</div><div class="sl">more attendance issues for students with ACEs</div><div class="ss-src">Kaiser Permanente</div></div>
-<div class="ss"><div class="sv">68%</div><div class="sl">of educators report emotional exhaustion</div><div class="ss-src">Gallup 2024</div></div>
-<div class="ss"><div class="sv">$124B</div><div class="sl">annual cost of unaddressed ACEs in education</div><div class="ss-src">JAMA Network Open</div></div>
+<div class="ss reveal d1"><div class="sv">76%</div><div class="sl">of U.S. students have experienced at least 1 ACE</div><div class="ss-src">CDC Youth Risk Survey</div></div>
+<div class="ss reveal d2"><div class="sv">5×</div><div class="sl">more attendance issues for students with ACEs</div><div class="ss-src">Kaiser Permanente</div></div>
+<div class="ss reveal d3"><div class="sv">68%</div><div class="sl">of educators report emotional exhaustion</div><div class="ss-src">Gallup 2024</div></div>
+<div class="ss reveal d4"><div class="sv">$124B</div><div class="sl">annual cost of unaddressed ACEs in education</div><div class="ss-src">JAMA Network Open</div></div>
 </div>
 </div>
 </div>
@@ -139,7 +180,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1A1A
 <section class="section">
 <div class="container">
 <div class="two-col">
-<div>
+<div class="reveal-left">
 <div class="eyebrow">The Classroom Crisis</div>
 <h2 class="h2">What's really happening in our schools.</h2>
 <p class="lead">Adverse Childhood Experiences don't stay at home. They follow students and educators into every classroom — shaping attention, behavior, relationships, and learning every single day.</p>
@@ -149,7 +190,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1A1A
 <div class="ps"><div class="ps-num">3×</div><div class="ps-text">higher academic failure rate for students with 4+ ACEs compared to peers without them</div></div>
 </div>
 </div>
-<div>
+<div class="reveal-right">
 <img class="pg-img" src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=700&q=80" alt="Teacher with students" />
 </div>
 </div>
@@ -160,10 +201,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1A1A
 <section class="section" style="background:#fff">
 <div class="container">
 <div class="two-col">
-<div>
+<div class="reveal-left">
 <img class="pg-img" src="https://static.wixstatic.com/media/1d3e2c_44f23037b67a45789aa34dafc881ed24~mv2.jpg" alt="Students collaborating" />
 </div>
-<div>
+<div class="reveal-right">
 <div class="eyebrow">Our Solution</div>
 <h2 class="h2">Our students and teachers deserve more than good intentions. They deserve a solution.</h2>
 <p class="lead">ReBe Education is a comprehensive, ACE-informed platform — delivering practical tools for whole-student wellness, educator resilience, and culture transformation.</p>
@@ -205,10 +246,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1A1A
 <p class="blg">Everything your educators need — designed, researched, and ready to implement from day one.</p>
 </div>
 <div class="del-grid">
-<div class="del-card"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_54e78aac470f4a29b554e62f8677a79e~mv2.png" alt="Differentiated Literacy LABS" /><div class="del-body"><div class="del-title">Differentiated Literacy LABS</div><div class="del-desc">Learning Applied by Students — EPICS-health focused literacy units differentiated across grade bands</div></div></div>
-<div class="del-card"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_5cbf09d55e6041eeaa094b563236b506~mv2.png" alt="Grade-level Health Boosts" /><div class="del-body"><div class="del-title">Grade-level Health Boosts</div><div class="del-desc">Age-appropriate K-12 wellness content connecting EPICS health to real classroom moments</div></div></div>
-<div class="del-card"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_515210f2dcec488084a3abe1baf93d0d~mv2.png" alt="Educator Facilitator Guides" /><div class="del-body"><div class="del-title">Educator Facilitator Guides</div><div class="del-desc">Step-by-step guides helping teachers deliver ReBe content with confidence and care</div></div></div>
-<div class="del-card"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_fc4a2bc6ab6c440dae01e5eeaa7d72eb~mv2.png" alt="EPICS-health focused content" /><div class="del-body"><div class="del-title">EPICS-Health Focused Content</div><div class="del-desc">Curriculum rooted in the five dimensions of wholeness — embedded into daily classroom practice</div></div></div>
+<div class="del-card reveal d1"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_54e78aac470f4a29b554e62f8677a79e~mv2.png" alt="Differentiated Literacy LABS" /><div class="del-body"><div class="del-title">Differentiated Literacy LABS</div><div class="del-desc">Learning Applied by Students — EPICS-health focused literacy units differentiated across grade bands</div></div></div>
+<div class="del-card reveal d2"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_5cbf09d55e6041eeaa094b563236b506~mv2.png" alt="Grade-level Health Boosts" /><div class="del-body"><div class="del-title">Grade-level Health Boosts</div><div class="del-desc">Age-appropriate K-12 wellness content connecting EPICS health to real classroom moments</div></div></div>
+<div class="del-card reveal d3"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_515210f2dcec488084a3abe1baf93d0d~mv2.png" alt="Educator Facilitator Guides" /><div class="del-body"><div class="del-title">Educator Facilitator Guides</div><div class="del-desc">Step-by-step guides helping teachers deliver ReBe content with confidence and care</div></div></div>
+<div class="del-card reveal d4"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_fc4a2bc6ab6c440dae01e5eeaa7d72eb~mv2.png" alt="EPICS-health focused content" /><div class="del-body"><div class="del-title">EPICS-Health Focused Content</div><div class="del-desc">Curriculum rooted in the five dimensions of wholeness — embedded into daily classroom practice</div></div></div>
 </div>
 </div>
 </section>
@@ -221,12 +262,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1A1A
 <h2 class="h2">Built for every level of the school community.</h2>
 </div>
 <div class="who-grid">
-<div class="wc"><div class="wc-title">Classroom Teachers</div><div class="wc-desc">Ready-to-use resources that integrate seamlessly with existing curriculum and daily routines</div></div>
-<div class="wc"><div class="wc-title">School Administrators</div><div class="wc-desc">Aggregated culture insights and outcomes reporting — without individual student disclosure</div></div>
-<div class="wc"><div class="wc-title">District Leaders</div><div class="wc-desc">Scalable district-wide implementation with trauma-informed professional development</div></div>
-<div class="wc"><div class="wc-title">Special Education Teams</div><div class="wc-desc">Differentiated content that meets students where they are — emotionally, physically, intellectually</div></div>
-<div class="wc"><div class="wc-title">School Counselors</div><div class="wc-desc">A science-informed framework to reinforce social-emotional learning school-wide</div></div>
-<div class="wc"><div class="wc-title">Progressive Districts</div><div class="wc-desc">Florida, Virginia &amp; Indiana focus — supporting trauma-informed mandates with measurable outcomes</div></div>
+<div class="wc reveal d1"><div class="wc-title">Classroom Teachers</div><div class="wc-desc">Ready-to-use resources that integrate seamlessly with existing curriculum and daily routines</div></div>
+<div class="wc reveal d2"><div class="wc-title">School Administrators</div><div class="wc-desc">Aggregated culture insights and outcomes reporting — without individual student disclosure</div></div>
+<div class="wc reveal d3"><div class="wc-title">District Leaders</div><div class="wc-desc">Scalable district-wide implementation with trauma-informed professional development</div></div>
+<div class="wc reveal d4"><div class="wc-title">Special Education Teams</div><div class="wc-desc">Differentiated content that meets students where they are — emotionally, physically, intellectually</div></div>
+<div class="wc reveal d5"><div class="wc-title">School Counselors</div><div class="wc-desc">A science-informed framework to reinforce social-emotional learning school-wide</div></div>
+<div class="wc reveal d5"><div class="wc-title">Progressive Districts</div><div class="wc-desc">Florida, Virginia &amp; Indiana focus — supporting trauma-informed mandates with measurable outcomes</div></div>
 </div>
 </div>
 </section>
@@ -240,9 +281,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1A1A
 <p class="blg">Schools that implement ACE-informed approaches see measurable, lasting results.</p>
 </div>
 <div class="out-grid">
-<div class="oc"><div class="oc-val">41%</div><div class="oc-label">reduction in absenteeism in schools with trauma-informed practices</div><div class="oc-src">JAMA Network Open · 2025</div></div>
-<div class="oc"><div class="oc-val">3×</div><div class="oc-label">improvement in academic engagement for students with ACE-informed support</div><div class="oc-src">EBSCO Meta-Analysis · 2025</div></div>
-<div class="oc"><div class="oc-val">79%</div><div class="oc-label">of teachers report improved classroom culture after trauma-informed training</div><div class="oc-src">Gallup Education Index · 2024</div></div>
+<div class="oc reveal d1"><div class="oc-val">41%</div><div class="oc-label">reduction in absenteeism in schools with trauma-informed practices</div><div class="oc-src">JAMA Network Open · 2025</div></div>
+<div class="oc reveal d2"><div class="oc-val">3×</div><div class="oc-label">improvement in academic engagement for students with ACE-informed support</div><div class="oc-src">EBSCO Meta-Analysis · 2025</div></div>
+<div class="oc reveal d3"><div class="oc-val">79%</div><div class="oc-label">of teachers report improved classroom culture after trauma-informed training</div><div class="oc-src">Gallup Education Index · 2024</div></div>
 </div>
 </div>
 </section>
@@ -250,15 +291,39 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1A1A
 <!-- CTA -->
 <section class="cta-sec">
 <div class="container">
-<h2 class="cta-h">Let's build a healthier school culture — together.</h2>
-<p class="cta-sub">Book a demo and see how ReBe Education can transform your school community from the inside out.</p>
-<div class="btn-wrap">
+<h2 class="cta-h reveal">Let's build a healthier school culture — together.</h2>
+<p class="cta-sub reveal d1">Book a demo and see how ReBe Education can transform your school community from the inside out.</p>
+<div class="btn-wrap reveal d2">
 <a href="mailto:pilot@justrebe.com" class="btn btn-p">Apply for a Pilot →</a>
 <a href="mailto:pilot@justrebe.com" class="btn btn-s" style="border-color:rgba(255,255,255,.6)">Download Program Overview →</a>
 </div>
-<p style="color:rgba(255,255,255,.4);font-size:12px;margin-top:24px;letter-spacing:.05em">Contact: pilot@justrebe.com · justrebe.com</p>
+<p style="color:rgba(255,255,255,.4);font-size:12px;margin-top:24px;letter-spacing:.05em" class="reveal d3">Contact: pilot@justrebe.com · justrebe.com</p>
 </div>
 </section>
 
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .ec').forEach(el => {
+  observer.observe(el);
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
 </body>
 </html>
