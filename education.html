@@ -27,7 +27,7 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 .hero{background:#fff;padding:40px 0 72px;text-align:center;border-bottom:1px solid #f0ebe5;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(240,105,5,.05) 0%,transparent 70%);pointer-events:none}
 .hero-tag{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F06905;margin-bottom:24px;opacity:0;animation:fadeUp .6s .1s cubic-bezier(.22,1,.36,1) forwards}
-.hero h1{font-size:clamp(26px,3.2vw,44px);font-weight:700;color:#034E64;letter-spacing:-.025em;line-height:1.1;margin-bottom:16px;opacity:0;animation:fadeUp .7s .2s cubic-bezier(.22,1,.36,1) forwards}
+.hero h1{font-size:clamp(22px,2.6vw,36px);font-weight:700;color:#034E64;letter-spacing:-.025em;line-height:1.1;margin-bottom:16px;opacity:0;animation:fadeUp .7s .2s cubic-bezier(.22,1,.36,1) forwards}
 .hero h1 em{color:#F06905;font-style:italic}
 .hero p{font-size:18px;color:#555;max-width:560px;margin:0 auto 40px;line-height:1.7;opacity:0;animation:fadeUp .7s .32s cubic-bezier(.22,1,.36,1) forwards}
 .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .44s cubic-bezier(.22,1,.36,1) forwards}
@@ -39,6 +39,16 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 .btn-primary:hover{background:#527610;transform:translateY(-2px);box-shadow:0 8px 28px rgba(99,141,19,.4)}
 .btn-ol{background:transparent;color:#638D13;font-size:15px;font-weight:700;padding:14px 32px;border-radius:50px;text-decoration:none;border:2px solid #638D13;display:inline-flex;align-items:center;transition:all .2s}
 .btn-ol:hover{background:#638D13;color:#fff;transform:translateY(-2px)}
+
+/* STATS STRIP */
+.stats-strip{background:#034E64;padding:48px 0}
+.sg{display:grid;grid-template-columns:repeat(4,1fr)}
+.ss{padding:0 28px;text-align:center;border-right:1px solid rgba(255,255,255,.12);transition:transform .25s cubic-bezier(.22,1,.36,1)}
+.ss:last-child{border-right:none}
+.ss:hover{transform:translateY(-4px)}
+.sv{font-size:clamp(26px,3vw,44px);font-weight:900;color:#FEB909;letter-spacing:-.02em;line-height:1}
+.sl{font-size:13px;color:rgba(255,255,255,.8);margin-top:6px;line-height:1.4}
+.ss-src{font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;text-transform:uppercase;letter-spacing:.06em}
 
 /* STATS STRIP */
 .stats-strip{background:#034E64;padding:48px 0}
