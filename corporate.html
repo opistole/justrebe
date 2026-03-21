@@ -1,52 +1,306 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-aple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#111;-webkit-font-smoothing:antialiased}
+.container{max-width:1140px;margin:0 auto;padding:0 48px}
+.section{padding:88px 0}
+.sc{background:#F2EDE8}
+.st{background:#034E64}
+.sw{background:#fff}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F06905;margin-bottom:18px}
+.eyebrow::before{display:none}
+.et{color:#034E64}.et::before{background:#034E64}
+.ew{color:rgba(255,255,255,.65)}.ew::before{background:rgba(255,255,255,.4)}
+.h1{font-size:clamp(26px,3vw,44px);font-weight:900;line-height:1.1;letter-spacing:-.025em;color:#034E64}
+.h2{font-size:clamp(28px,3.2vw,48px);font-weight:800;line-height:1.1;letter-spacing:-.02em;color:#034E64}
+.blg{font-size:clamp(15px,1.3vw,18px);line-height:1.7;color:#333}
+.ac{color:#F06905;font-style:italic}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:700;padding:14px 28px;border-radius:6px;text-decoration:none;cursor:pointer;border:none;transition:all .2s}
+.bt{background:#034E64;color:#fff}.bt:hover{background:#0a6a85}
+.bg{background:#FEB909;color:#111}.bg:hover{background:#ffc72a}
+.bo{background:transparent;color:#111;border:2px solid #111}.bo:hover{background:#111;color:#fff}
+.bow{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}.bow:hover{background:rgba(255,255,255,.12)}
+.hero{padding:88px 0 72px;text-align:center;background:#fff}
+.hero .eyebrow{justify-content:center;color:#034E64}.hero .eyebrow::before{display:none}
+.hh{margin:0 auto 24px;max-width:900px}
+.hs{max-width:660px;margin:0 auto 44px}
+.hb{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.sc2{background:#fff;border-radius:10px;padding:28px 24px;transition:transform .2s,box-shadow .2s}
+.sc2:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(3,78,100,.1)}
+.sv{font-size:clamp(30px,3.5vw,46px);font-weight:900;color:#034E64;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
+.sv sup,.sv sub{font-size:55%;vertical-align:super}.sv sub{vertical-align:baseline}
+.sl{font-size:14px;font-weight:700;color:#111;line-height:1.3;margin-bottom:5px}
+.sd{font-size:13px;color:#666;line-height:1.5}
+.ss{display:block;font-size:10px;color:#aaa;letter-spacing:.06em;text-transform:uppercase;margin-top:8px}
+.co{background:#034E64;border-radius:10px;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.ct{font-size:16px;color:rgba(255,255,255,.82);line-height:1.65;flex:1;min-width:280px}.ct strong{color:#fff}
+.pl{display:flex;flex-direction:column}
+.pi{display:grid;grid-template-columns:180px 1fr 280px;gap:0;border-top:1px solid #e8e2db;padding:48px 0;align-items:center}
+.pi-img{width:240px;height:240px;object-fit:cover;border-radius:10px;box-shadow:0 4px 20px rgba(3,78,100,0.12);transition:transform 0.3s ease;display:block;margin-left:auto}
+.pi-img:hover{transform:scale(1.04);box-shadow:0 8px 28px rgba(3,78,100,0.18)}
+.pi-img-wrap{display:flex;align-items:center;justify-content:flex-end}
+.pi:last-child{border-bottom:1px solid #e8e2db}
+.pleft{padding-right:44px}
+.pn{font-size:64px;font-weight:900;letter-spacing:-.04em;line-height:1;color:#034E64;margin-bottom:6px}
+.pc{font-size:13px;font-style:italic;color:#aaa}
+.pt{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#aaa;margin-bottom:10px}
+.ph{font-size:clamp(22px,2.5vw,34px);font-weight:800;letter-spacing:-.02em;color:#111;margin-bottom:16px;line-height:1.1}
+.pd{font-size:15px;line-height:1.7;color:#444;max-width:600px;margin-bottom:18px}
+.pp{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#034E64;border:1.5px solid rgba(3,78,100,.28);padding:6px 16px;border-radius:100px}
+.fg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.fr{display:flex;align-items:flex-start;gap:14px;padding:20px 22px;background:#fff;border-radius:8px;transition:transform .2s,box-shadow .2s}
+.fr:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(3,78,100,.09)}
+.ck{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:#034E64;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.ck svg{width:10px;height:10px}
+.ft{font-size:14px;font-weight:500;color:#333;line-height:1.55}
+.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rc{padding:32px 28px;border:1.5px solid #e8e2db;border-radius:10px;transition:all .25s}
+.rc:hover{border-color:#034E64;transform:translateY(-3px);box-shadow:0 8px 28px rgba(3,78,100,.1)}
+.rv{font-size:clamp(28px,3vw,42px);font-weight:900;color:#034E64;letter-spacing:-.03em;line-height:1;margin-bottom:10px}
+.rl{font-size:14px;color:#333;line-height:1.55;margin-bottom:8px}
+.rs{font-size:10px;color:#aaa;letter-spacing:.06em;text-transform:uppercase}
+.ag{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ac2{background:#fff;border-radius:10px;padding:28px 16px;text-align:center;border:1.5px solid transparent;transition:all .25s}
+.ac2:hover{border-color:#034E64;box-shadow:0 8px 24px rgba(3,78,100,.1);transform:translateY(-4px)}
+.ai{font-size:22px;display:block;margin-bottom:12px}
+.at{font-size:14px;font-weight:700;color:#111;margin-bottom:7px;line-height:1.3}
+.ad{font-size:12px;color:#888;line-height:1.5}
+.cta{padding:88px 0}
+.ci{text-align:center;max-width:700px;margin:0 auto}
+.ci .h2{color:#fff;margin-bottom:18px}
+.ci .blg{color:rgba(255,255,255,.75);margin-bottom:40px;max-width:560px;margin-left:auto;margin-right:auto}
+.cb{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.cn{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.06em}
+.ci .eyebrow{justify-content:center;margin-bottom:20px}.ci .eyebrow::before{display:none}
+.foot{background:#fff;border-top:1.5px solid #e8e2db;padding:56px 0 40px;text-align:center}
+.fl{font-size:22px;font-weight:900;color:#034E64;letter-spacing:-.02em;margin-bottom:12px}
+.ftag{font-size:14px;color:#888;font-style:italic;margin-bottom:32px}
+.flinks{display:flex;justify-content:center;gap:32px;list-style:none;margin-bottom:32px;flex-wrap:wrap}
+.flinks a{font-size:13px;font-weight:500;color:#444;text-decoration:none;transition:color .2s}
+.flinks a:hover{color:#034E64}
+.fhr{height:1px;background:#e8e2db;margin-bottom:20px}
+.fc,.fcc{font-size:12px;color:#aaa;margin-bottom:4px}
+.finv{font-size:12px;color:#aaa;margin-top:16px}
+.finv a{color:#034E64;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:768px){.container{padding:0 24px}.sg{grid-template-columns:1fr}.pi{grid-template-columns:1fr}.pi-img-wrap{justify-content:flex-start;padding-top:16px}.pi-img{width:180px;height:180px;margin-left:0}.pn{font-size:48px}.fg{grid-template-columns:1fr}.rg{grid-template-columns:1fr}.ag{grid-template-columns:repeat(2,1fr)}.hb{flex-direction:column;align-items:center}.cb{flex-direction:column;align-items:center}}
 
+.epics{background:#0a6a87;padding:88px 0}
+.epics-hd{text-align:center;margin-bottom:56px}
+.epics-ey{display:flex;align-items:center;justify-content:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:16px}
+.epics-ey::before{display:none}
+.epics-ey::after{display:none}
+.epics-h{font-size:clamp(28px,3vw,42px);font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
+.epics-sub{font-size:16px;color:rgba(255,255,255,.7);max-width:600px;margin:0 auto}
+.epics-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.ec{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:28px 16px;text-align:center;transition:transform 0.3s ease,background 0.3s ease,box-shadow 0.3s ease}
+.ec:hover{transform:translateY(-7px);background:rgba(255,255,255,.16);box-shadow:0 16px 48px rgba(0,0,0,.25)}.ec:hover .ec-hex{transform:scale(1.1)}
+.ec-hex{width:82px;height:82px;margin:0 auto 20px;display:block;object-fit:contain;filter:drop-shadow(0 6px 16px rgba(0,0,0,.4));transition:transform 0.3s ease;border-radius:50%;background:transparent}
+.ec-title{font-size:12px;font-weight:800;color:#FEB909;letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px;white-space:nowrap}
+.ec-desc{font-size:13px;color:rgba(255,255,255,.75);line-height:1.65}
+@media(max-width:900px){.epics-grid{grid-template-columns:repeat(2,1fr)}}.
+@media(max-width:600px){.epics-grid{grid-template-columns:1fr}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.epics-grid .ec:nth-child(1){animation:fadeUp .5s ease .1s both}
+.epics-grid .ec:nth-child(2){animation:fadeUp .5s ease .2s both}
+.epics-grid .ec:nth-child(3){animation:fadeUp .5s ease .3s both}
+.epics-grid .ec:nth-child(4){animation:fadeUp .5s ease .4s both}
+.epics-grid .ec:nth-child(5){animation:fadeUp .5s ease .5s both}
 
+/* === GLOBAL SITE ENHANCEMENTS === */
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Corporate — ReBe</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    .ft{background:#034E64;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;width:100%}
-    .ft-brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
-    .ft-logo{font-size:20px;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1}
-    .ft-logo span{color:#FEB909}
-    .ft-tag{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase;border-left:1px solid rgba(255,255,255,.2);padding-left:12px}
-    .ft-nav{display:flex;align-items:center;gap:32px}
-    .ft-nav a{font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;letter-spacing:.04em;font-weight:500;transition:color .2s}
-    .ft-nav a:hover{color:#fff}
-    .ft-right{display:flex;align-items:center;gap:20px;flex-shrink:0}
-    .ft-email a{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;letter-spacing:.03em;transition:color .2s}
-    .ft-email a:hover{color:#FEB909}
-    .ft-copy{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.04em;border-left:1px solid rgba(255,255,255,.15);padding-left:16px}
-    @media(max-width:768px){.ft{height:auto;padding:20px 24px;flex-direction:column;gap:16px;text-align:center}.ft-tag{display:none}.ft-nav{gap:16px;flex-wrap:wrap;justify-content:center}.ft-right{flex-direction:column;gap:8px}.ft-copy{border-left:none;padding-left:0}}
-  </style>
-</head>
-<body>
-  <div class="corporate-page">
-    <h1>Corporate</h1>
-    <p>ReBe is a company that provides services to help organizations improve their operations and efficiency.</p>
-    <p>Our team of experts has extensive experience in the field of operations and efficiency.</p>
-    <p>ReBe is committed to providing the best possible services to our clients.</p>
-  </div>
-  <div class="ft">
-    <div class="ft-brand">
-      <div class="ft-logo">re<span>·</span>be</div>
-      <div class="ft-tag">Better Me. Better We.</div>
-    </div>
-    <nav class="ft-nav">
-      <a href="about.html">About Us</a>
-      <a href="corporate.html">Corporate</a>
-      <a href="education.html">Education</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <div class="ft-right">
-      <div class="ft-email"><a href="mailto:hello@justrebe.com">hello@justrebe.com</a></div>
-      <div class="ft-copy">© 2025 ReBe. All rights reserved.</div>
-    </div>
-  </div>
-</body>
-</html>
+/* Button polish — rounded pill shape, smoother transitions */
+.btn,.cta a,a.btn,button.btn{
+  border-radius:50px !important;
+  transition:all 0.25s ease !important;
+  letter-spacing:.01em;
+}
+
+/* Primary teal button — deeper shadow + lift on hover */
+.cb .btn, .cta .btn, a[href*="apply"], a[href*="pilot"]{
+  box-shadow:0 4px 18px rgba(3,78,100,.25) !important;
+}
+.cb .btn:hover, .cta .btn:hover{
+  transform:translateY(-2px) !important;
+  box-shadow:0 8px 28px rgba(3,78,100,.35) !important;
+}
+
+/* Stat cards — softer shadow + slight rounding upgrade */
+.sc .rc{
+  border-radius:14px !important;
+  box-shadow:0 2px 16px rgba(0,0,0,.06) !important;
+  transition:transform 0.25s ease,box-shadow 0.25s ease !important;
+}
+.sc .rc:hover{
+  transform:translateY(-3px) !important;
+  box-shadow:0 8px 28px rgba(0,0,0,.1) !important;
+}
+
+/* Feature/platform cards — rounding + shadow */
+.fg .fr, .ac2{
+  border-radius:14px !important;
+  box-shadow:0 2px 12px rgba(0,0,0,.06) !important;
+  transition:transform 0.25s ease,box-shadow 0.25s ease !important;
+}
+.fg .fr:hover, .ac2:hover{
+  transform:translateY(-3px) !important;
+  box-shadow:0 8px 24px rgba(0,0,0,.1) !important;
+}
+
+/* Phase images — ensure consistent rounding */
+.pi-img{border-radius:14px !important;}
+
+/* Section dividers — softer */
+.pi{border-top:1px solid rgba(0,0,0,.07) !important;}
+
+/* Who it's for audience tags — pill shape */
+.rc{border-radius:12px !important;}
+
+</style>
+
+<div class="hero">
+<div class="container">
+<div class="eyebrow reveal">ReBe Corporate</div>
+<h1 class="h1 hh reveal">Your people are your greatest asset. <span class="ac">It's time to invest in their wellbeing.</span></h1>
+<p class="blg hs reveal">Disengagement. Burnout. Conflict. High turnover. These aren't personality problems — they're often rooted in unresolved childhood adversity that follows people into every workplace. ReBe Corporate is the first ACE-informed employee wellness platform built to address the root cause — and unlock the performance that's been waiting underneath.</p>
+<div class="hb reveal">
+<a href="/contact" class="btn bt">Apply for a Pilot →</a>
+<a href="#how" class="btn bo">See How It Works ↓</a>
+</div>
+</div>
+</div>
+
+<section class="section sc">
+<div class="container">
+<div class="eyebrow reveal">The Business Case</div>
+<h2 class="h2 reveal" style="margin-bottom:40px;max-width:540px">What unaddressed trauma is quietly costing your organization.</h2>
+<div class="sg">
+<div class="sc2 reveal"><div class="sv"><sup>$</sup>575<sub>B</sub></div><div class="sl">ACE-Related Productivity Loss</div><div class="sd">Lost annually in U.S. corporations</div><span class="ss">Economic Research · 2024</span></div>
+<div class="sc2 reveal"><div class="sv"><sup>$</sup>322<sub>B</sub></div><div class="sl">Annual Burnout Cost</div><div class="sd">76% of your workforce affected</div><span class="ss">Deloitte · 2024</span></div>
+<div class="sc2 reveal"><div class="sv">3–5<sub>%</sub></div><div class="sl">EAP Engagement Rate</div><div class="sd">Of employees who ever use traditional programs</div><span class="ss">Industry average</span></div>
+<div class="sc2 reveal"><div class="sv">40<sub>%</sub></div><div class="sl">Stress-Related Turnover</div><div class="sd">A fixable problem with the right approach</div><span class="ss">Workforce studies</span></div>
+</div>
+<div class="co reveal"><p class="ct">These are not performance problems. They are story problems. <strong>The question isn't whether your organization can afford ReBe. It's whether it can afford not to.</strong></p><a href="/contact" class="btn bg">See How It Works →</a></div>
+</div>
+</section>
+
+<section class="section sw" id="how">
+<div class="container">
+<div style="margin-bottom:64px">
+<div class="eyebrow et reveal">How It Works</div>
+<h2 class="h2 reveal" style="margin-bottom:16px;max-width:480px">Three phases.<br>Lasting transformation.</h2>
+<p class="blg reveal" style="max-width:560px">ReBe Corporate delivers change through a structured, science-grounded journey — meeting employees where they are and moving the entire organization forward together.</p>
+</div>
+<div class="pl">
+<div class="pi reveal"><div class="pleft"><div class="pn">01</div><div class="pc">Lights.</div></div><div><div class="pt">Phase 1</div><div class="ph">Awareness</div><p class="pd">Transformation begins with awareness. Through the ReBe app, individuals gain insight into how Adverse Childhood Experiences (ACEs), trauma, culture, and life experiences can shape behavior, stress responses, and decision-making patterns. By recognizing these influences in a safe, science-informed way, participants begin to understand the "why" behind how they show up at work and in life, opening the door for meaningful change.</p><span class="pp">Self-paced · Private · Any device</span></div>
+<div class="pi-img-wrap"><img class="pi-img" src="https://static.wixstatic.com/media/1d3e2c_c97be5acf56743e88b132f5ff952652c~mv2.png" alt="ReBe app — Phase 1 Awareness" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'320\' height=\'260\' viewBox=\'0 0 320 260\'%3E%3Crect width=\'320\' height=\'260\' fill=\'%23F2EDE8\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%23034E64\' text-anchor=\'middle\' dy=\'.3em\'%3EPhase 1 Image%3C/text%3E%3C/svg%3E'" /></div></div>
+<div class="pi reveal"><div class="pleft"><div class="pn">02</div><div class="pc">Camera.</div></div><div><div class="pt">Phase 2</div><div class="ph">Engagement</div><p class="pd">With awareness established, participants move into deeper engagement through video teachings, guided content, and live learning sessions. In this phase, individuals explore their personal patterns, perspectives, and strengths while learning practical tools to reframe experiences, build emotional intelligence, and develop healthier ways of thinking, communicating, and responding to challenges.</p><span class="pp">Facilitated sessions · Scalable · Live or virtual</span></div>
+<div class="pi-img-wrap"><img class="pi-img" src="https://static.wixstatic.com/media/1d3e2c_2c883728b2c9407793d9b0fe047c5f38~mv2.png" alt="ReBe — Phase 2 Engagement" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'320\' height=\'260\' viewBox=\'0 0 320 260\'%3E%3Crect width=\'320\' height=\'260\' fill=\'%23F2EDE8\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%23034E64\' text-anchor=\'middle\' dy=\'.3em\'%3EPhase 2 Image%3C/text%3E%3C/svg%3E'" /></div></div>
+<div class="pi reveal"><div class="pleft"><div class="pn">03</div><div class="pc">Action.</div></div><div><div class="pt">Phase 3</div><div class="ph">Activation</div><p class="pd">Real transformation happens in community. In the Activation phase, participants are invited into facilitated group experiences and RealTalk™ sessions where open, honest conversations allow individuals to apply what they have learned and step into their full potential. As individuals grow and become more self-aware, organizations begin to experience measurable culture shifts — healthier teams, stronger relationships, and a more engaged, resilient workforce.</p><span class="pp">HR dashboard · Leadership alignment · Culture embedding</span></div>
+<div class="pi-img-wrap"><img class="pi-img" src="https://static.wixstatic.com/media/1d3e2c_7c8e25fa3db44fb7bfb72a167c1e837f~mv2.png" alt="ReBe — Phase 3 Activation" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'320\' height=\'260\' viewBox=\'0 0 320 260\'%3E%3Crect width=\'320\' height=\'260\' fill=\'%23F2EDE8\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%23034E64\' text-anchor=\'middle\' dy=\'.3em\'%3EPhase 3 Image%3C/text%3E%3C/svg%3E'" /></div></div>
+</div>
+</div>
+</section>
+
+<section class="epics">
+<div class="container">
+<div class="epics-hd reveal">
+<div class="epics-ey">The EPICS Framework</div>
+<h2 class="epics-h">Emotional · Physical · Intellectual · Cultural · Spiritual</h2>
+<p class="epics-sub">ReBe addresses the five dimensions of human wholeness — the root of sustainable transformation.</p>
+</div>
+<div class="epics-grid">
+<div class="ec reveal">
+<img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_07903f6702b14b86aa893bead03b6d17~mv2.png" alt="Emotional" />
+<div class="ec-title">E — Emotional</div>
+<p class="ec-desc">We help employees recognize the emotional patterns that shape how they respond to stress, conflict, and pressure. With greater self-awareness and resilience, individuals communicate better and build healthier workplace relationships.</p>
+</div>
+<div class="ec reveal">
+<img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_f7bccc09be054724bcff61cf006a467e~mv2.png" alt="Physical" />
+<div class="ec-title">P — Physical</div>
+<p class="ec-desc">We help employees understand how stress and life experiences impact energy, focus, and overall health. By learning practical strategies for wellbeing, they can sustain the physical energy needed to perform and thrive.</p>
+</div>
+<div class="ec reveal">
+<img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_ea59bff4a9414e62a25668433d93e0e9~mv2.png" alt="Intellectual" />
+<div class="ec-title">I — Intellectual</div>
+<p class="ec-desc">We help employees gain insight into how experiences shape thinking, decision-making, and problem-solving. This awareness strengthens clarity, creativity, and confidence when navigating challenges at work.</p>
+</div>
+<div class="ec reveal">
+<img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_7df3f260e662400092688830757bace2~mv2.png" alt="Cultural" />
+<div class="ec-title">C — Cultural</div>
+<p class="ec-desc">We help organizations build cultures of trust, respect, and stronger human connection. When people feel valued and understood, collaboration improves and teams perform at a higher level.</p>
+</div>
+<div class="ec reveal">
+<img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_45475a1a4a4047b28c56cdb950fcb8c4~mv2.png" alt="Spiritual" />
+<div class="ec-title">S — Spiritual</div>
+<p class="ec-desc">We help individuals reconnect with purpose, meaning, and the deeper motivation behind their work. When employees feel aligned with their values, engagement, fulfillment, and long-term commitment grow.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section sc">
+<div class="container">
+<div style="margin-bottom:48px"><div class="eyebrow reveal">Platform Features</div><h2 class="h2 reveal">Built for the real world of work.</h2></div>
+<div class="fg">
+<div class="fr reveal"><div class="ck"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 3.8,8 8.5,2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="ft">Enterprise-ready app — accessible for both blue-collar and white-collar workforces</span></div>
+<div class="fr reveal"><div class="ck"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 3.8,8 8.5,2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="ft">HR analytics dashboard with aggregated, anonymized insights</span></div>
+<div class="fr reveal"><div class="ck"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 3.8,8 8.5,2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="ft">Complete data privacy — individual responses are never disclosed to employers</span></div>
+<div class="fr reveal"><div class="ck"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 3.8,8 8.5,2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="ft">REAL TALK™ methodology — proven in 19+ countries since 2020</span></div>
+<div class="fr reveal"><div class="ck"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 3.8,8 8.5,2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="ft">Next-generation AI that is science-grounded and enterprise-safe</span></div>
+<div class="fr reveal"><div class="ck"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 3.8,8 8.5,2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="ft">Full onboarding, company launch support, and ongoing facilitation</span></div>
+<div class="fr reveal"><div class="ck"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 3.8,8 8.5,2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="ft">Configurable for organizations of any size</span></div>
+<div class="fr reveal"><div class="ck"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 3.8,8 8.5,2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="ft">Employee benefit design + employer liability protection</span></div>
+</div>
+</div>
+</section>
+
+<section class="section sw">
+<div class="container">
+<div style="margin-bottom:48px"><div class="eyebrow et reveal">The Return Is Real</div><h2 class="h2 reveal">The numbers don't lie.</h2></div>
+<div class="rg">
+<div class="rc reveal"><div class="rv">1.9×–7×</div><div class="rl">ROI on behavioral health investment</div><div class="rs">JAMA Network Open · 2025</div></div>
+<div class="rc reveal"><div class="rv">$8,500+</div><div class="rl">Saved per employee annually through trauma-informed programs</div></div>
+<div class="rc reveal"><div class="rv">$300K</div><div class="rl">Saved for a 1,000-person company with just 2% less turnover</div></div>
+<div class="rc reveal"><div class="rv">$4</div><div class="rl">Returned in productivity for every $1 invested in mental health</div><div class="rs">World Health Organization</div></div>
+<div class="rc reveal"><div class="rv">41%</div><div class="rl">Lower absenteeism in organizations with strong wellbeing programs</div></div>
+<div class="rc reveal"><div class="rv">79%</div><div class="rl">More likely to stay with employers who offer quality mental health support</div></div>
+</div>
+</div>
+</section>
+
+<section class="section sc">
+<div class="container">
+<div style="margin-bottom:48px"><div class="eyebrow reveal">Who It's For</div><h2 class="h2 reveal">ReBe Corporate is built<br>for leaders who care.</h2></div>
+<div class="ag">
+<div class="ac2 reveal"><span class="ai">🏢</span><div class="at">CEOs &amp; C-Suite</div><div class="ad">Leaders ready to build cultures of real performance</div></div>
+<div class="ac2 reveal"><span class="ai">👥</span><div class="at">HR &amp; People Leaders</div><div class="ad">Directors looking for measurable, lasting impact</div></div>
+<div class="ac2 reveal"><span class="ai">⚙️</span><div class="at">Operations Leaders</div><div class="ad">Managing high-stress, high-turnover workforces</div></div>
+<div class="ac2 reveal"><span class="ai">🔄</span><div class="at">Growing Orgs</div><div class="ad">Navigating change, growth, or recovery</div></div>
+<div class="ac2 reveal"><span class="ai">🌿</span><div class="at">ESG &amp; DEI Leaders</div><div class="ad">Serious about real employee wellbeing</div></div>
+</div>
+</div>
+</section>
+
+<section class="cta st">
+<div class="container">
+<div class="ci">
+<div class="eyebrow ew reveal">Let's Talk</div>
+<h2 class="h2 reveal">Let's talk about what ReBe<br>can do for your team.</h2>
+<p class="blg reveal">We'll walk you through a tailored pilot program, show you the platform, and map out the ROI you can expect within 12 months. No pressure — just an honest conversation.</p>
+<div class="cb reveal">
+<a href="/contact" class="btn bg">Apply for a Pilot →</a>
+<a href="#" class="btn bow">Download Corporate Overview →</a>
+</div>
+<p class="cn reveal">Enterprise licensing model · ROI: 1.9×–7×</p>
+</div>
+</div>
+</section>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
+},{threshold:0.1,rootMargin:'0px 0px -32px 0px'});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
