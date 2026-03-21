@@ -24,7 +24,7 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 .d5{transition-delay:.33s}.d6{transition-delay:.40s}
 
 /* HERO */
-.hero{background:#fff;padding:80px 0 72px;text-align:center;border-bottom:1px solid #f0ebe5;position:relative;overflow:hidden}
+.hero{background:#fff;padding:64px 0 72px;text-align:center;border-bottom:1px solid #f0ebe5;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(240,105,5,.05) 0%,transparent 70%);pointer-events:none}
 .hero-tag{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F06905;margin-bottom:24px;opacity:0;animation:fadeUp .6s .1s cubic-bezier(.22,1,.36,1) forwards}
 .hero h1{font-size:clamp(22px,2.6vw,36px);font-weight:700;color:#034E64;letter-spacing:-.025em;line-height:1.1;margin-bottom:16px;opacity:0;animation:fadeUp .7s .2s cubic-bezier(.22,1,.36,1) forwards}
@@ -50,21 +50,10 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 .sl{font-size:13px;color:rgba(255,255,255,.8);margin-top:6px;line-height:1.4}
 .ss-src{font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;text-transform:uppercase;letter-spacing:.06em}
 
-/* STATS STRIP */
-.stats-strip{background:#034E64;padding:48px 0}
-.sg{display:grid;grid-template-columns:repeat(4,1fr)}
-.ss{padding:0 28px;text-align:center;border-right:1px solid rgba(255,255,255,.12);transition:transform .25s cubic-bezier(.22,1,.36,1)}
-.ss:last-child{border-right:none}
-.ss:hover{transform:translateY(-4px)}
-.sv{font-size:clamp(26px,3vw,44px);font-weight:900;color:#FEB909;letter-spacing:-.02em;line-height:1}
-.sl{font-size:13px;color:rgba(255,255,255,.8);margin-top:6px;line-height:1.4}
-.ss-src{font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;text-transform:uppercase;letter-spacing:.06em}
-
 /* PROBLEM / SOLUTION */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .pg-img{width:100%;height:420px;max-height:420px;object-fit:cover;object-position:center top;border-radius:16px;box-shadow:0 8px 32px rgba(3,78,100,.12);display:block;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .3s}
 .eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;margin-bottom:16px}
-.eyebrow-c{justify-content:center}
 .h2{font-size:clamp(26px,3.2vw,44px);font-weight:900;color:#111;letter-spacing:-.025em;line-height:1.1;margin-bottom:16px}
 .lead{font-size:17px;color:#444;line-height:1.7;max-width:640px}
 .ps-list{display:flex;flex-direction:column;gap:14px;margin-top:24px}
@@ -85,8 +74,7 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 .sec-hd h2{font-size:clamp(20px,2vw,32px);font-weight:900;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
 .sec-hd p{font-size:16px;max-width:580px;margin:0 auto;line-height:1.6}
 .epics-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
-.ec{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:28px 16px;text-align:center;opacity:0;transform:translateY(28px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1),background .3s,box-shadow .3s}
-.ec.visible{opacity:1;transform:translateY(0)}
+.ec{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:28px 16px;text-align:center;transition:transform .3s cubic-bezier(.22,1,.36,1),background .3s,box-shadow .3s}
 .ec:hover{transform:translateY(-7px);background:rgba(255,255,255,.16);box-shadow:0 16px 48px rgba(0,0,0,.25)}
 .ec-hex{width:82px;height:82px;margin:0 auto 20px;display:block;object-fit:contain;filter:drop-shadow(0 6px 20px rgba(0,0,0,.45));border-radius:12px;padding:4px;background:rgba(255,255,255,.15);transition:transform .3s cubic-bezier(.22,1,.36,1)}
 .ec:hover .ec-hex{transform:scale(1.1)}
@@ -151,7 +139,7 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
   <h1>Whole Educators.<br><em>Whole Students. Whole Schools.</em></h1>
   <p>The first ACE-informed platform built for K-12 — addressing the root causes of disengagement, burnout, and disconnection across our school communities.</p>
   <div class="hero-btns">
-    <a href="/cdn-cgi/l/email-protection#95e5fcf9fae1d5ffe0e6e1e7f0f7f0bbf6faf8" class="btn-primary">Apply for a Pilot →</a>
+    <a href="mailto:pilot@justrebe.com" class="btn-primary">Apply for a Pilot →</a>
     <a href="#epics" class="btn-ol">See How It Works ↓</a>
   </div>
   <img class="hero-img" src="https://static.wixstatic.com/media/1d3e2c_c7f89c9a394042d49f5209990b993380~mv2.jpg" alt="Students in a classroom" />
@@ -216,14 +204,14 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 <!-- EPICS -->
 <section class="epics" id="epics">
 <div class="c">
-<div class="sec-hd reveal">
-  <div class="ey-c" style="color:rgba(255,255,255,.65)">
+<div class="sec-hd">
+  <div class="ey-c" style="color:rgba(255,255,255,.65);display:flex;align-items:center;justify-content:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px">
     <span style="display:block;width:28px;height:2px;background:#FEB909;flex-shrink:0"></span>
     The EPICS Framework
     <span style="display:block;width:28px;height:2px;background:#FEB909;flex-shrink:0"></span>
   </div>
-  <h2 style="color:#fff">Emotional · Physical · Intellectual · Cultural · Social</h2>
-  <p style="color:rgba(255,255,255,.7)">ReBe addresses the five dimensions of student wholeness — the root of sustainable learning and growth.</p>
+  <h2 style="color:#fff;font-size:clamp(20px,2vw,32px);font-weight:900;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px">Emotional · Physical · Intellectual · Cultural · Social</h2>
+  <p style="color:rgba(255,255,255,.7);font-size:16px;max-width:580px;margin:0 auto;line-height:1.6">ReBe addresses the five dimensions of student wholeness — the root of sustainable learning and growth.</p>
 </div>
 <div class="epics-grid">
   <div class="ec d1"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_07903f6702b14b86aa893bead03b6d17~mv2.png" alt="Emotional" /><div class="ec-title">E — Emotional</div><p class="ec-desc">We help students recognize and understand their emotions so they can respond to challenges in healthier ways. Emotional awareness builds resilience and stronger relationships.</p></div>
@@ -238,10 +226,12 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 <!-- DELIVERABLES -->
 <section style="background:#fff;padding:88px 0">
 <div class="c">
-<div class="sec-hd reveal">
-  <div class="ey-c" style="color:#F06905"><span style="background:#F06905"></span>What's Included<span style="background:#F06905"></span></div>
-  <h2 style="color:#034E64">Ready-to-use resources for every classroom.</h2>
-  <p style="color:#555">Everything your educators need — designed, researched, and ready to implement from day one.</p>
+<div style="text-align:center;margin-bottom:56px">
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;margin-bottom:12px">
+    <span style="display:block;width:28px;height:2px;background:#F06905"></span>What's Included<span style="display:block;width:28px;height:2px;background:#F06905"></span>
+  </div>
+  <h2 style="font-size:clamp(26px,3.2vw,42px);font-weight:900;color:#034E64;letter-spacing:-.025em;margin-bottom:12px">Ready-to-use resources for every classroom.</h2>
+  <p style="font-size:17px;color:#555;max-width:540px;margin:0 auto;line-height:1.6">Everything your educators need — designed, researched, and ready to implement from day one.</p>
 </div>
 <div class="del-grid">
   <div class="del-card reveal d1"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_54e78aac470f4a29b554e62f8677a79e~mv2.png" alt="Differentiated Literacy LABS" /><div class="del-body"><div class="del-title">Differentiated Literacy LABS</div><div class="del-desc">Learning Applied by Students — EPICS-health focused literacy units differentiated across grade bands</div></div></div>
@@ -255,10 +245,12 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 <!-- WHO IT'S FOR -->
 <section style="background:#F2EDE8;padding:88px 0">
 <div class="c">
-<div class="sec-hd reveal">
-  <div class="ey-c" style="color:#F06905"><span style="background:#F06905"></span>Who It's For<span style="background:#F06905"></span></div>
-  <h2 style="color:#034E64">Built for every level of the school community.</h2>
-  <p style="color:#555">From the individual classroom to the entire district — ReBe meets your community where it is.</p>
+<div style="text-align:center;margin-bottom:56px">
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;margin-bottom:12px">
+    <span style="display:block;width:28px;height:2px;background:#F06905"></span>Who It's For<span style="display:block;width:28px;height:2px;background:#F06905"></span>
+  </div>
+  <h2 style="font-size:clamp(26px,3.2vw,42px);font-weight:900;color:#034E64;letter-spacing:-.025em;margin-bottom:12px">Built for every level of the school community.</h2>
+  <p style="font-size:17px;color:#555;max-width:540px;margin:0 auto;line-height:1.6">From the individual classroom to the entire district — ReBe meets your community where it is.</p>
 </div>
 <div class="who-grid">
   <div class="wc reveal d1"><div class="wc-title">Classroom Teachers</div><div class="wc-desc">Ready-to-use resources that integrate seamlessly with existing curriculum and daily routines</div></div>
@@ -274,10 +266,12 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 <!-- OUTCOMES -->
 <section style="background:#fff;padding:88px 0">
 <div class="c">
-<div class="sec-hd reveal">
-  <div class="ey-c" style="color:#F06905"><span style="background:#F06905"></span>The Return Is Real<span style="background:#F06905"></span></div>
-  <h2 style="color:#034E64">What happens when schools invest in wholeness.</h2>
-  <p style="color:#555">Schools that implement ACE-informed approaches see measurable, lasting results.</p>
+<div style="text-align:center;margin-bottom:56px">
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;margin-bottom:12px">
+    <span style="display:block;width:28px;height:2px;background:#F06905"></span>The Return Is Real<span style="display:block;width:28px;height:2px;background:#F06905"></span>
+  </div>
+  <h2 style="font-size:clamp(26px,3.2vw,42px);font-weight:900;color:#034E64;letter-spacing:-.025em;margin-bottom:12px">What happens when schools invest in wholeness.</h2>
+  <p style="font-size:17px;color:#555;max-width:540px;margin:0 auto;line-height:1.6">Schools that implement ACE-informed approaches see measurable, lasting results.</p>
 </div>
 <div class="out-grid">
   <div class="oc reveal d1"><div class="oc-val">41%</div><div class="oc-label">reduction in absenteeism in schools with trauma-informed practices</div><div class="oc-src">JAMA Network Open · 2025</div></div>
@@ -293,13 +287,13 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
   <h2 class="reveal">Let's build a healthier school culture — together.</h2>
   <p class="reveal d1">Book a demo and see how ReBe Education can transform your school community from the inside out.</p>
   <div class="cta-btns reveal d2">
-    <a href="/cdn-cgi/l/email-protection#7e0e1712110a3e140b0d0a0c1b1c1b501d1113" class="btn-gold">Apply for a Pilot →</a>
-    <a href="/cdn-cgi/l/email-protection#32425b5e5d467258474146405750571c515d5f" class="btn-wol">Download Program Overview →</a>
+    <a href="mailto:pilot@justrebe.com" class="btn-gold">Apply for a Pilot →</a>
+    <a href="mailto:pilot@justrebe.com" class="btn-wol">Download Program Overview →</a>
   </div>
 </div>
 </section>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── Intersection Observer for scroll reveals ──
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -307,9 +301,9 @@ const observer = new IntersectionObserver((entries) => {
       entry.target.classList.add('visible');
     }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0, rootMargin: '0px' });
 
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .ec').forEach(el => {
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
   observer.observe(el);
 });
 
@@ -326,4 +320,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 // ── iframe height reporter ──
 (function(){
-  function h(){var s=Math.max(do
+  function h(){var s=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);window.parent.postMessage({type:'height',value:s},'*');}
+  h();window.addEventListener('load',h);setTimeout(h,500);setTimeout(h,1500);
+})();
+</script>
+</body>
+</html>
