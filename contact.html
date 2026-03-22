@@ -11,6 +11,7 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #1A1A1A;
   background: #fff;
+  padding-top: 64px;
 }
 .container {
   max-width: 1140px;
@@ -205,6 +206,9 @@ body {
   </head>
 
   <body>
+
+<div id="header"></div>
+
     <div class="header">
       <div class="container">
         <h1>Be a Pioneer. Start the Shift.</h1>
@@ -357,5 +361,14 @@ body {
         }, 500);
       });
     </script>
-  </body>
+  <div id="footer"></div>
+
+<script>
+function loadComponent(id, file) {
+  fetch(file).then(r => r.text()).then(h => document.getElementById(id).innerHTML = h);
+}
+loadComponent('header', 'header.html');
+loadComponent('footer', 'footer.html');
+</script>
+</body>
 </html>
