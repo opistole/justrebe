@@ -584,7 +584,7 @@ h2 {
         <p class="cta-emails">pilot@justrebe.com · invest@justrebe.com · hello@justrebe.com</p>
       </div>
     </section>
-
+<div id="footer"></div>
     <script src="main.js"></script>
     <script>
 (function () {
@@ -660,5 +660,11 @@ h2 {
   }
 })();
     </script>
+    <script>
+  function loadComponent(id, file) {
+    fetch(file).then(r => r.text()).then(h => document.getElementById(id).innerHTML = h);
+  }
+  loadComponent('footer', 'footer.html');
+</script>
   </body>
 </html>
