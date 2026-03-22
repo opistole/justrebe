@@ -11,6 +11,7 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #1A1A1A;
   background: #fff;
+  padding-top: 64px;
 }
 .container {
   max-width: 1140px;
@@ -363,6 +364,9 @@ h2 {
 
   <body>
 
+<div id="header"></div>
+
+
 
 
 
@@ -664,7 +668,8 @@ h2 {
   function loadComponent(id, file) {
     fetch(file).then(r => r.text()).then(h => document.getElementById(id).innerHTML = h);
   }
-  loadComponent('footer', 'footer.html');
+  loadComponent('header', 'header.html');
+    loadComponent('footer', 'footer.html');
 </script>
   </body>
 </html>
