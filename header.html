@@ -1,0 +1,56 @@
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Re·Be</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.site-nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="education.html">Education</a></li>
+      <li><a href="corporate.html">Corporate</a></li>
+      <li><a href="contact.html" class="nav-cta">Apply for a Pilot</a></li>
+    </ul>
+  </div>
+</nav>
+<style>
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(3,78,100,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08);transition:background .3s,box-shadow .3s}
+.site-nav.scrolled{background:rgba(3,78,100,.98);box-shadow:0 2px 20px rgba(0,0,0,.15)}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-size:22px;font-weight:900;color:#FEB909;text-decoration:none;letter-spacing:-.02em;transition:opacity .2s}
+.nav-logo:hover{opacity:.85}
+.nav-links{list-style:none;display:flex;align-items:center;gap:32px;margin:0;padding:0}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.02em;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-links .nav-cta{background:#FEB909;color:#1A1A1A;padding:10px 24px;border-radius:50px;font-weight:700;transition:background .2s,transform .2s}
+.nav-links .nav-cta:hover{background:#e5a708;transform:translateY(-1px)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px}
+.nav-toggle span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s}
+.site-nav.open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.site-nav.open .nav-toggle span:nth-child(2){opacity:0}
+.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:768px){
+  .nav-inner{padding:0 24px}
+  .nav-toggle{display:flex}
+  .nav-links{position:absolute;top:64px;left:0;right:0;background:rgba(3,78,100,.98);flex-direction:column;gap:0;padding:0;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+  .site-nav.open .nav-links{max-height:400px;padding:16px 0;border-top:1px solid rgba(255,255,255,.08)}
+  .nav-links li{width:100%}
+  .nav-links a{display:block;padding:14px 24px;font-size:15px}
+  .nav-links .nav-cta{margin:8px 24px;text-align:center;display:block;border-radius:50px}
+}
+</style>
+<script>
+(function(){
+  var nav=document.querySelector('.site-nav');
+  if(!nav)return;
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>40)nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+  var path=window.location.pathname.split('/').pop()||'index.html';
+  var links=nav.querySelectorAll('.nav-links a:not(.nav-cta)');
+  links.forEach(function(a){
+    if(a.getAttribute('href')===path)a.style.color='#FEB909';
+  });
+})();
+</script>
