@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overflow-x:hidden}
+html,body{padding-top:64px;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overflow-x:hidden}
 .c{max-width:1140px;margin:0 auto;padding:0 64px}
 
 /* ── SCROLL REVEAL BASE ── */
@@ -135,6 +135,9 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 </style>
 </head>
 <body>
+
+<div id="header"></div>
+
 
 <!-- HERO -->
 <section class="hero">
@@ -361,6 +364,16 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   function h(){var s=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);window.parent.postMessage({type:'height',value:s},'*');}
   h();window.addEventListener('load',h);setTimeout(h,500);setTimeout(h,1500);
 })();
+</script>
+
+<div id="footer"></div>
+
+<script>
+function loadComponent(id, file) {
+  fetch(file).then(r => r.text()).then(h => document.getElementById(id).innerHTML = h);
+}
+loadComponent('header', 'header.html');
+loadComponent('footer', 'footer.html');
 </script>
 </body>
 </html>
