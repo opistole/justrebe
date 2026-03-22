@@ -262,20 +262,23 @@ h2 {
 }
 .sbar-div { width: 1px; background: rgba(255,255,255,.15); align-self: stretch; margin: 0; }
 .cost { background: #F2EDE8; padding: 80px 0; }
-.cost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-.cost-list { list-style: none; padding: 0; margin: 20px 0 0; }
-.cost-list li {
-  display: flex;
-  gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(0,0,0,.08);
-  font-size: 15px;
-  color: #444;
-  line-height: 1.5;
-}
-.cost-list li:last-child { border-bottom: none; }
-.cost-num { font-size: 22px; font-weight: 900; color: #034E64; min-width: 72px; flex-shrink: 0; }
-.solutions { background: #fff; padding: 80px 0; }
+    .cost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; }
+    .cost-col-head { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid; }
+    .cost-col-head.edu { color: #F06905; border-color: #F06905; }
+    .cost-col-head.corp { color: #034E64; border-color: #034E64; }
+    .cost-stat { display: flex; align-items: flex-start; gap: 20px; padding: 20px; margin-bottom: 12px; border-radius: 12px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.04); transition: transform .25s ease, box-shadow .25s ease; position: relative; overflow: hidden; }
+    .cost-stat:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+    .cost-stat::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: 4px 0 0 4px; }
+    .cost-stat.edu::before { background: linear-gradient(180deg, #F06905, #FEB909); }
+    .cost-stat.corp::before { background: linear-gradient(180deg, #034E64, #0891b2); }
+    .cost-num { font-size: 28px; font-weight: 900; min-width: 80px; line-height: 1.1; }
+    .cost-stat.edu .cost-num { color: #F06905; }
+    .cost-stat.corp .cost-num { color: #034E64; }
+    .cost-desc { font-size: 14px; color: #555; line-height: 1.5; padding-top: 4px; }
+    .cost-bottom { text-align: center; margin-top: 48px; padding: 32px; background: linear-gradient(135deg, #034E64, #045d77); border-radius: 16px; }
+    .cost-bottom p { font-size: clamp(16px, 2vw, 20px); font-weight: 700; color: #fff; margin: 0; }
+    .cost-bottom .ac { color: #FEB909; }
+    .solutions { background: #fff; padding: 80px 0; }
 .sol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; }
 .sol-card {
   border-radius: 16px;
@@ -290,7 +293,7 @@ h2 {
   transform: translateY(-6px);
   box-shadow: 0 12px 36px rgba(0,0,0,.15);
 }
-.sol-img { width: 100%; height: 220px; object-fit: cover; object-position: center 85%; display: block; }
+.sol-img { width: 100%; height: 300px; object-fit: cover; object-position: center 85%; display: block; }
 .sol-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
 .sol-tag { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
 .sol-edu .sol-tag { color: #638D13; }
@@ -299,7 +302,7 @@ h2 {
 .sol-sub { font-size: 14px; color: #888; margin-bottom: 16px; font-style: italic; }
 .sol-feats { list-style: none; padding: 0; margin: 0 0 20px; flex: 1; }
 .sol-feats li { font-size: 14px; color: #444; padding: 5px 0; display: flex; gap: 8px; align-items: flex-start; }
-.sol-feats li::before { content: '&rarr;'; color: #F06905; font-weight: 700; flex-shrink: 0; }
+.sol-feats li::before { content: '\2192'; color: #F06905; font-weight: 700; flex-shrink: 0; }
 .sol-foot { font-size: 12px; color: #999; padding-top: 16px; border-top: 1px solid #eee; margin-top: auto; }
 .sol-btn {
   display: inline-flex;
@@ -360,6 +363,14 @@ h2 {
 .pcard, .sol-card, .story-left, .what-left, .what-body {
   opacity: 0;
 }
+    
+    @media (max-width: 900px) {
+      .sol-img { height: 240px; }
+      .sol-grid { gap: 24px; }
+    }
+    @media (max-width: 600px) {
+      .sol-img { height: 200px; }
+    }
     </style>
   </head>
 
@@ -489,39 +500,61 @@ h2 {
 
     <section class="cost">
       <div class="container">
-        <div style="text-align:center;margin-bottom:48px">
-          <div style="display:flex;align-items:center;gap:16px;justify-content:center;margin-bottom:12px">
-            <span style="flex:1;height:2px;background:#F06905;max-width:28px"></span>
-            <span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;white-space:nowrap">THE HIDDEN COST</span>
-            <span style="flex:1;height:2px;background:#F06905;max-width:28px"></span>
-          </div>
-          <h2>The numbers behind <span class="ac">the silence.</span></h2>
+        <div style="text-align:center;">
+          <div class="ey">&mdash; THE HIDDEN COST &mdash;</div>
+          <h2 class="sh">The numbers behind <span class="ac"><em>the problem.</em></span></h2>
         </div>
         <div class="cost-grid">
           <div>
-            <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;margin-bottom:20px">EDUCATION</p>
-            <ul class="cost-list">
-              <li><span class="cost-num">76%</span>of students have experienced at least one ACE before age 18</li>
-              <li><span class="cost-num">$1.2B</span>total addressable market for K&ndash;12 ACE-informed wellness programs</li>
-              <li><span class="cost-num">3Ã</span>higher dropout risk for students with 4+ ACEs</li>
-              <li><span class="cost-num">40%</span>of teachers leave the profession within 5 years &mdash; burnout is the #1 reason</li>
-              <li><span class="cost-num">14:1</span>ROI on every dollar invested in early childhood ACE prevention</li>
-            </ul>
+            <div class="cost-col-head edu">Education</div>
+            <div class="cost-stat edu">
+              <div class="cost-num">76%</div>
+              <div class="cost-desc">of students have experienced at least one ACE before age 18</div>
+            </div>
+            <div class="cost-stat edu">
+              <div class="cost-num">$1.2B</div>
+              <div class="cost-desc">total addressable market for K&ndash;12 ACE-informed wellness programs</div>
+            </div>
+            <div class="cost-stat edu">
+              <div class="cost-num">3&times;</div>
+              <div class="cost-desc">higher dropout risk for students with 4+ ACEs</div>
+            </div>
+            <div class="cost-stat edu">
+              <div class="cost-num">40%</div>
+              <div class="cost-desc">of teachers leave the profession within 5 years &mdash; burnout is the #1 reason</div>
+            </div>
+            <div class="cost-stat edu">
+              <div class="cost-num">14:1</div>
+              <div class="cost-desc">ROI on every dollar invested in early childhood ACE prevention</div>
+            </div>
           </div>
           <div>
-            <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F06905;margin-bottom:20px">CORPORATE</p>
-            <ul class="cost-list">
-              <li><span class="cost-num">$575B</span>lost annually to ACE-related productivity loss in U.S. workplaces</li>
-              <li><span class="cost-num">$322B</span>annual cost of employee burnout &mdash; 76% of your workforce affected (Deloitte)</li>
-              <li><span class="cost-num">3&ndash;5%</span>only this fraction of employees ever engage with traditional EAP programs</li>
-              <li><span class="cost-num">4Ã</span>more workdays missed by employees with poor mental health vs. healthy peers</li>
-              <li><span class="cost-num">40%</span>of job turnover is stress-related &mdash; a direct cost your organization absorbs</li>
-            </ul>
+            <div class="cost-col-head corp">Corporate</div>
+            <div class="cost-stat corp">
+              <div class="cost-num">$575B</div>
+              <div class="cost-desc">lost annually to ACE-related productivity loss in U.S. workplaces</div>
+            </div>
+            <div class="cost-stat corp">
+              <div class="cost-num">$322B</div>
+              <div class="cost-desc">annual cost of employee burnout &mdash; 76% of your workforce affected (Deloitte)</div>
+            </div>
+            <div class="cost-stat corp">
+              <div class="cost-num">3&ndash;5%</div>
+              <div class="cost-desc">only this fraction of employees ever engage with traditional EAP programs</div>
+            </div>
+            <div class="cost-stat corp">
+              <div class="cost-num">4&times;</div>
+              <div class="cost-desc">more workdays missed by employees with poor mental health vs. healthy peers</div>
+            </div>
+            <div class="cost-stat corp">
+              <div class="cost-num">40%</div>
+              <div class="cost-desc">of job turnover is stress-related &mdash; a direct cost your organization absorbs</div>
+            </div>
           </div>
         </div>
-        <p style="font-size:18px;color:#034E64;font-weight:700;margin-top:40px;text-align:center;line-height:1.5">
-          ReBe is the only platform addressing the root cause &mdash; <span class="ac">across corporations and schools simultaneously.</span>
-        </p>
+        <div class="cost-bottom">
+          <p>ReBe is the only platform addressing the root cause &mdash; <span class="ac"><em>across corporations and schools simultaneously.</em></span></p>
+        </div>
       </div>
     </section>
 
@@ -674,5 +707,6 @@ h2 {
 </script>
   </body>
 </html>
+
 
 
