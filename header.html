@@ -6,10 +6,10 @@
     </button>
     <ul class="nav-links">
       <li></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="education.html">Education</a></li>
-      <li><a href="corporate.html">Corporate</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="education.html" class="nav-link">Education</a></li>
+      <li><a href="corporate.html" class="nav-link">Corporate</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
 <li><a href="pilot.html" class="nav-cta">Apply for a Pilot</a></li>
       
     </ul>
@@ -67,25 +67,3 @@ html{scroll-behavior:smooth}
 
 
 
-<script>
-(function(){
-  // Favicon
-  if(!document.querySelector('link[rel="icon"]')){
-    var fav=document.createElement('link');fav.rel='icon';fav.href='Images/Logo.png';fav.type='image/png';document.head.appendChild(fav);
-  }
-  // Meta description
-  if(!document.querySelector('meta[name="description"]')){
-    var m=document.createElement('meta');m.name='description';m.content='ReBe is an ACE-informed wellness platform rebuilding people from the inside out. Restoring identity, belonging, and purpose in schools and workplaces.';document.head.appendChild(m);
-  }
-  // OG tags
-  if(!document.querySelector('meta[property="og:title"]')){
-    var props=[["og:title","ReBe · Rebuilding People From the Inside Out"],["og:description","ACE-informed wellness platform restoring identity, belonging, and purpose in schools and workplaces."],["og:type","website"],["og:image","Images/Hero.jpg"]];
-    props.forEach(function(p){var t=document.createElement('meta');t.setAttribute('property',p[0]);t.content=p[1];document.head.appendChild(t)});
-  }
-  // Active nav highlight
-  var page=location.pathname.split('/').pop()||'index.html';
-  document.querySelectorAll('.nav-link').forEach(function(a){
-    if(a.getAttribute('href')===page)a.classList.add('active');
-  });
-})();
-</script>
