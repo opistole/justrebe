@@ -41,6 +41,13 @@
   .nav-links a{display:block;padding:12px 24px;font-size:14px}
   .nav-links .nav-cta{margin:8px 24px;text-align:center;display:block;border-radius:50px}
 }
+
+/* Active nav state */
+.nav-link.active{color:#FEB909;position:relative}
+.nav-link.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:#FEB909;border-radius:1px}
+
+/* Smooth scroll */
+html{scroll-behavior:smooth}
 </style>
 <script>
 (function(){
@@ -59,3 +66,26 @@
 </script>
 
 
+
+<script>
+(function(){
+  // Favicon
+  if(!document.querySelector('link[rel="icon"]')){
+    var fav=document.createElement('link');fav.rel='icon';fav.href='Images/Logo.png';fav.type='image/png';document.head.appendChild(fav);
+  }
+  // Meta description
+  if(!document.querySelector('meta[name="description"]')){
+    var m=document.createElement('meta');m.name='description';m.content='ReBe is an ACE-informed wellness platform rebuilding people from the inside out. Restoring identity, belonging, and purpose in schools and workplaces.';document.head.appendChild(m);
+  }
+  // OG tags
+  if(!document.querySelector('meta[property="og:title"]')){
+    var props=[["og:title","ReBe · Rebuilding People From the Inside Out"],["og:description","ACE-informed wellness platform restoring identity, belonging, and purpose in schools and workplaces."],["og:type","website"],["og:image","Images/Hero.jpg"]];
+    props.forEach(function(p){var t=document.createElement('meta');t.setAttribute('property',p[0]);t.content=p[1];document.head.appendChild(t)});
+  }
+  // Active nav highlight
+  var page=location.pathname.split('/').pop()||'index.html';
+  document.querySelectorAll('.nav-link').forEach(function(a){
+    if(a.getAttribute('href')===page)a.classList.add('active');
+  });
+})();
+</script>
