@@ -184,5 +184,6 @@ fetch('footer.html').then(r=>r.text()).then(h=>{document.getElementById('footer'
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>observer.observe(el));
 </script>
+<script src="site.js"></script>
 </body>
 </html>
