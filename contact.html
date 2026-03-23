@@ -63,6 +63,11 @@ p{font-size:17px;color:#555;line-height:1.7}
 .form-row{grid-template-columns:1fr}
 .hero{padding:120px 0 56px}
 }
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero h1{opacity:0;animation:fadeUp .7s .15s cubic-bezier(.22,1,.36,1) forwards}
+.hero p{opacity:0;animation:fadeUp .7s .3s cubic-bezier(.22,1,.36,1) forwards}
+.hero .ey{opacity:0;animation:fadeUp .7s .05s cubic-bezier(.22,1,.36,1) forwards}
 </style>
 </head>
 <body>
@@ -115,7 +120,11 @@ p{font-size:17px;color:#555;line-height:1.7}
 <h3>Message Sent!</h3>
 <p>Thank you for reaching out. We’ll get back to you soon.</p>
 </div>
-<form id="contact-form-el" class="reveal" onsubmit="handleSubmit(event)">
+<form id="contact-form-el" class="reveal" action="https://formsubmit.co/hello@justrebe.com" method="POST">
+<input type="hidden" name="_subject" value="New Contact Form Submission">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="https://justrebe-qj6m.vercel.app/contact.html">
 <div class="form-row">
 <div class="form-group">
 <label>First Name</label>
@@ -162,13 +171,14 @@ p{font-size:17px;color:#555;line-height:1.7}
 </div>
 </section>
 
-<div style="height:80px;background:#FAFAF7"></div>
+<!-- Footer -->
+<div id="footer"></div>
 
 <script>
 fetch('header.html').then(r=>r.text()).then(h=>{document.getElementById('header-placeholder').innerHTML=h;document.querySelectorAll('.nav-link').forEach(a=>{if(a.getAttribute('href')===location.pathname.split('/').pop())a.classList.add('active')})});
 </script>
 <script>
-function handleSubmit(e){e.preventDefault();document.getElementById('contact-form-el').style.display='none';document.getElementById('success-msg').style.display='block'}
+fetch('footer.html').then(r=>r.text()).then(h=>{document.getElementById('footer').innerHTML=h});
 </script>
 <script>
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
