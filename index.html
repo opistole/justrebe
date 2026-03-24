@@ -372,14 +372,14 @@ h2 {
       .sol-img { height: 260px; }
     }
     
-.rebe-words{display:flex;gap:48px;align-items:center;margin:28px 0 32px;user-select:none}
-.rebe-word-row{display:flex;align-items:baseline;gap:0;overflow:hidden;height:1.25em}
-.rebe-prefix{font-size:32px;font-weight:800;color:#FEB909;letter-spacing:-.02em;line-height:1.25}
-.rebe-cycle{display:inline-flex;flex-direction:column;height:1.25em;overflow:hidden;position:relative;margin-left:2px}
-.rebe-cycle .rebe-word{display:block;font-size:32px;font-weight:300;color:rgba(255,255,255,.85);letter-spacing:-.01em;line-height:1.25;height:1.25em;opacity:0;transform:translateY(8px);position:absolute;left:0;top:0;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.rebe-words{display:flex;gap:48px;align-items:center;margin:24px 0 28px;user-select:none}
+.rebe-word-row{display:flex;align-items:baseline;overflow:hidden;height:42px}
+.rebe-prefix{font-size:32px;font-weight:800;color:#FEB909;letter-spacing:-.02em;line-height:42px}
+.rebe-cycle{display:inline-block;height:42px;overflow:hidden;position:relative;margin-left:3px;min-width:180px}
+.rebe-cycle .rebe-word{display:block;font-size:32px;font-weight:300;color:rgba(255,255,255,.85);letter-spacing:-.01em;line-height:42px;height:42px;opacity:0;transform:translateY(10px);position:absolute;left:0;top:0;white-space:nowrap;transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
 .rebe-cycle .rebe-word.active{opacity:1;transform:translateY(0);position:relative}
-.rebe-cycle .rebe-word.exiting{opacity:0;transform:translateY(-8px);position:absolute}
-@media(max-width:768px){.rebe-words{flex-direction:column;gap:12px;align-items:flex-start;margin:20px 0 24px}.rebe-prefix,.rebe-cycle .rebe-word{font-size:24px}}
+.rebe-cycle .rebe-word.exiting{opacity:0;transform:translateY(-10px);position:absolute}
+@media(max-width:768px){.rebe-words{flex-direction:column;gap:8px;align-items:flex-start;margin:18px 0 22px}.rebe-word-row{height:34px}.rebe-prefix{font-size:26px;line-height:34px}.rebe-cycle{height:34px;min-width:140px}.rebe-cycle .rebe-word{font-size:26px;line-height:34px;height:34px}}
 </style>
   </head>
 
