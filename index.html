@@ -374,9 +374,9 @@ h2 {
     
 
 .rebe-solo-word{margin:20px 0 24px;height:56px;display:flex;align-items:center}
-.rebe-solo{font-size:48px;font-weight:200;color:rgba(255,255,255,.22);letter-spacing:.02em;display:inline-block;opacity:0;transition:opacity 1.2s ease;font-style:italic}
-.rebe-solo.visible{opacity:1}
-.rebe-solo.fading{opacity:0}
+.rebe-solo{font-size:48px;font-weight:200;color:rgba(255,255,255,.22);letter-spacing:.02em;display:inline-block;opacity:0;filter:blur(18px);-webkit-filter:blur(18px);transition:opacity 1.4s cubic-bezier(.4,0,.2,1),filter 1.4s cubic-bezier(.4,0,.2,1),-webkit-filter 1.4s cubic-bezier(.4,0,.2,1);font-style:italic}
+.rebe-solo.visible{opacity:1;filter:blur(0);-webkit-filter:blur(0)}
+.rebe-solo.fading{opacity:0;filter:blur(18px);-webkit-filter:blur(18px)}
 @media(max-width:768px){.rebe-solo-word{height:40px;margin:14px 0 18px}.rebe-solo{font-size:34px}}
 </style>
   </head>
