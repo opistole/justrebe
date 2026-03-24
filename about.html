@@ -87,7 +87,7 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 .founder-card:hover .founder-img::after{opacity:1}
 .founder-img img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s cubic-bezier(.22,1,.36,1)}
 .founder-card:hover .founder-img img{transform:scale(1.06)}
-.founder-body{padding:24px}
+.founder-body{padding:24px 24px 48px 24px}
 .founder-name{font-size:17px;font-weight:800;color:#034E64;margin-bottom:3px;line-height:1.2}
 .founder-role{font-size:11px;font-weight:700;color:#F06905;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
 .founder-creds{list-style:none}
@@ -97,7 +97,7 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 /* ADVISORS */
 .advisors{background:#fff;padding:88px 0}
 .adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.adv-card{border:1px solid #e8e3de;border-radius:16px;padding:32px;transition:box-shadow .3s cubic-bezier(.22,1,.36,1),transform .3s cubic-bezier(.22,1,.36,1),border-color .3s,background .3s}
+.adv-card{border:1px solid #e8e3de;border-radius:16px;padding:32px 32px 48px 32px;transition:box-shadow .3s cubic-bezier(.22,1,.36,1),transform .3s cubic-bezier(.22,1,.36,1),border-color .3s,background .3s}
 .adv-card:hover{box-shadow:0 12px 40px rgba(3,78,100,.12);transform:translateY(-6px);border-color:#034E64;background:#fafaf9}
 
 /* subtle left-border accent on hover */
@@ -133,8 +133,8 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 .founders-grid,.adv-grid{grid-template-columns:1fr}
 }
 .founder-card, .adv-card { position: relative; }
-.li-icon { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:10px; background:rgba(0,119,181,0.08); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:1px solid rgba(0,119,181,0.15); box-shadow:0 4px 14px rgba(0,119,181,0.10), inset 0 1px 2px rgba(255,255,255,0.7); color:#0077B5; text-decoration:none; position:absolute; bottom:16px; right:16px; transition:all 0.3s ease; }
-.li-icon:hover { background:rgba(0,119,181,0.15); border-color:rgba(0,119,181,0.3); box-shadow:0 6px 20px rgba(0,119,181,0.18), inset 0 1px 2px rgba(255,255,255,0.8); transform:scale(1.1); color:#005f8d; }
+.li-icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:10px; background:rgba(0,119,181,0.07); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 2px 8px rgba(0,119,181,0.08); color:#0077B5; text-decoration:none; position:absolute; bottom:14px; right:14px; transition:all 0.3s ease; }
+.li-icon:hover { background:rgba(0,119,181,0.14); box-shadow:0 4px 14px rgba(0,119,181,0.15); transform:scale(1.1); color:#005f8d; }
 </style>
 </head>
 <body>
