@@ -372,14 +372,12 @@ h2 {
       .sol-img { height: 260px; }
     }
     
-.rebe-words{display:flex;gap:48px;align-items:center;margin:24px 0 28px;user-select:none}
-.rebe-word-row{display:flex;align-items:baseline;overflow:hidden;height:42px}
-.rebe-prefix{font-size:32px;font-weight:800;color:#FEB909;letter-spacing:-.02em;line-height:42px}
-.rebe-cycle{display:inline-block;height:42px;overflow:hidden;position:relative;margin-left:3px;min-width:180px}
-.rebe-cycle .rebe-word{display:block;font-size:32px;font-weight:300;color:rgba(255,255,255,.85);letter-spacing:-.01em;line-height:42px;height:42px;opacity:0;transform:translateY(10px);position:absolute;left:0;top:0;white-space:nowrap;transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
-.rebe-cycle .rebe-word.active{opacity:1;transform:translateY(0);position:relative}
-.rebe-cycle .rebe-word.exiting{opacity:0;transform:translateY(-10px);position:absolute}
-@media(max-width:768px){.rebe-words{flex-direction:column;gap:8px;align-items:flex-start;margin:18px 0 22px}.rebe-word-row{height:34px}.rebe-prefix{font-size:26px;line-height:34px}.rebe-cycle{height:34px;min-width:140px}.rebe-cycle .rebe-word{font-size:26px;line-height:34px;height:34px}}
+
+.rebe-solo-word{margin:20px 0 24px;height:56px;display:flex;align-items:center}
+.rebe-solo{font-size:48px;font-weight:200;color:rgba(255,255,255,.22);letter-spacing:.02em;display:inline-block;opacity:0;transition:opacity 1.2s ease;font-style:italic}
+.rebe-solo.visible{opacity:1}
+.rebe-solo.fading{opacity:0}
+@media(max-width:768px){.rebe-solo-word{height:40px;margin:14px 0 18px}.rebe-solo{font-size:34px}}
 </style>
   </head>
 
@@ -397,16 +395,8 @@ h2 {
         <div class="hero-tag">ACE-Informed Wellness Platform</div>
         <h1 class="hero-h1">Rebuilding people<br>from the inside out.</h1>
         <p class="hero-sub">Restoring identity, belonging, and purpose in schools and workplaces &mdash; addressing the root cause no wellness program has ever touched.</p>
-<div class="rebe-words" aria-hidden="true">
-<div class="rebe-word-row">
-<span class="rebe-prefix">Re</span><span class="rebe-cycle rebe-cycle-re"><span class="rebe-word">build</span><span class="rebe-word">connect</span><span class="rebe-word">cover</span><span class="rebe-word">store</span><span class="rebe-word">discover</span><span class="rebe-word">imagine</span></span>
-</div>
-<div class="rebe-word-row">
-<span class="rebe-prefix">Be</span><span class="rebe-cycle rebe-cycle-be"><span class="rebe-word">come</span><span class="rebe-word">long</span><span class="rebe-word">whole</span><span class="rebe-word">present</span><span class="rebe-word">lieve</span><span class="rebe-word">you</span></span>
-</div>
-</div>
-
-        <div class="hero-btns">
+<div class="rebe-solo-word" aria-hidden="true"><span class="rebe-solo"></span></div>
+<div class="hero-btns">
           <a href="pilot.html" class="hero-btn-gold">Apply for a Pilot &rarr;</a>
           <a href="#solutions" class="hero-btn-outline">Explore Our Solutions</a>
         </div>
@@ -721,8 +711,23 @@ h2 {
 </script>
   <script src="site.js"></script>
 
+
+
 <script>
-(function(){var rw=document.querySelectorAll(".rebe-cycle-re .rebe-word");var bw=document.querySelectorAll(".rebe-cycle-be .rebe-word");if(!rw.length)return;var ri=0,bi=0;rw[0].classList.add("active");bw[0].classList.add("active");function cycleR(){var p=rw[ri];ri=(ri+1)%rw.length;var n=rw[ri];p.classList.remove("active");p.classList.add("exiting");n.classList.add("active");n.classList.remove("exiting");setTimeout(function(){p.classList.remove("exiting")},700)}function cycleB(){var p=bw[bi];bi=(bi+1)%bw.length;var n=bw[bi];p.classList.remove("active");p.classList.add("exiting");n.classList.add("active");n.classList.remove("exiting");setTimeout(function(){p.classList.remove("exiting")},700)}setInterval(cycleR,2800);setTimeout(function(){setInterval(cycleB,2800)},1400)})();
+(function(){
+var el=document.querySelector(".rebe-solo");
+if(!el)return;
+var words=["Rebuild","Reconnect","Recover","Restore","Rediscover","Reimagine","Become","Belong","Believe","Be whole","Be present","Be you"];
+var i=0;
+function show(){
+el.textContent=words[i];
+el.className="rebe-solo";
+setTimeout(function(){el.classList.add("visible")},50);
+setTimeout(function(){el.classList.add("fading");el.classList.remove("visible")},2600);
+setTimeout(function(){i=(i+1)%words.length;show()},3800);
+}
+show();
+})();
 </script>
 </body>
 </html>
