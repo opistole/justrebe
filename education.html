@@ -231,6 +231,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .outcome-label{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#034E64;margin-bottom:10px;white-space:nowrap}
 .outcome-text{font-size:15px;color:#444;line-height:1.7}
 @media(max-width:768px){.core-grid,.outcomes-grid{grid-template-columns:1fr}}
+
+.dl-arrow{font-size:10px;opacity:.6;transition:transform .3s;display:inline-block;margin-left:6px}
+.dl-open .dl-arrow{transform:rotate(180deg)}
+.dl-open .dl-expand{display:block!important}
+.dl-open{min-width:220px;padding:20px 24px!important}
 </style>
 </head>
 <body>
@@ -372,18 +377,15 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 </section>
 
 <!-- EPICS -->
-<section class="epics" id="epics">
+<section class="epics section st" id="epics">
 <div class="container">
-<div class="epics-hd reveal">
-  <div class="epics-ey">The EPICS Framework</div>
-  <h2 class="epics-h">Emotional · Physical · Intellectual · Cultural · Social</h2>
-  <p class="epics-sub">ReBe addresses the five pathways of student wholeness — the root of sustainable learning and growth.</p>
-</div>
-<div class="epics-intro reveal">
-  <div class="epics-intro-title">Interactive Health Boosts and Literacy LABS™ for Every Child’s Educational Journey</div>
-  <p class="epics-intro-text">ReBe’s EPICS are 7–10 minute Health Boosts for K–12 students, organized into five EPICS pathways with a total of 25 boosts per grade.</p>
-</div>
-<div class="epics-grid">
+  <div class="epics-hd reveal">
+    <div class="epics-ey">The EPICS Framework</div>
+    <h2 class="epics-h">Emotional · Physical · Intellectual · Cultural · Social</h2>
+    <p class="epics-sub" style="margin-bottom:8px">Interactive Health Boosts</p>
+    <p style="font-size:15px;color:rgba(255,255,255,.75);max-width:740px;margin:0 auto;line-height:1.7">ReBe addresses the five pathways of student wholeness—the root of sustainable learning and growth. ReBe’s EPICS are 7–10 minute Health Boosts for K–12 students, organized into five EPICS pathways with a total of 25 boosts per grade.</p>
+  </div>
+  <div class="epics-grid">
   <div class="ec" style="border-top:3px solid #f4b183"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_07903f6702b14b86aa893bead03b6d17~mv2.png" alt="Emotional" /><div class="ec-title">E — Emotional</div><p class="ec-desc">Helping students recognize and regulate their emotions for resilience and stronger relationships.</p><div class="ec-keywords"><span class="ec-kw">Gratefulness</span><span class="ec-kw">Joyfulness</span><span class="ec-kw">Resilience</span><span class="ec-kw">Self-Awareness</span><span class="ec-kw">Self-Regulation</span></div></div>
   <div class="ec" style="border-top:3px solid #a9d18e"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_f7bccc09be054724bcff61cf006a467e~mv2.png" alt="Physical" /><div class="ec-title">P — Physical</div><p class="ec-desc">Building habits of movement, nutrition, and self-care that fuel focus and well-being.</p><div class="ec-keywords"><span class="ec-kw">Movement</span><span class="ec-kw">Nutrition</span><span class="ec-kw">Peacefulness</span><span class="ec-kw">Self-Care</span><span class="ec-kw">Self-Control</span></div></div>
   <div class="ec" style="border-top:3px solid #8faadc"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_ea59bff4a9414e62a25668433d93e0e9~mv2.png" alt="Intellectual" /><div class="ec-title">I — Intellectual</div><p class="ec-desc">Strengthening critical thinking, executive function, and motivation for deeper learning.</p><div class="ec-keywords"><span class="ec-kw">Decision-Making</span><span class="ec-kw">Cognitive Capacity</span><span class="ec-kw">Critical Thinking</span><span class="ec-kw">Executive Function</span><span class="ec-kw">Self-Motivation</span></div></div>
@@ -476,9 +478,36 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
     <p class="diff-sub">Sample Differentiation Levels for Strategic Station at Word Work LABS™</p>
   </div>
   <div class="diff-levels">
-    <div class="diff-level dl-novice"><div class="diff-level-name">Novice</div><div class="diff-level-bar"></div></div>
-    <div class="diff-level dl-apprentice"><div class="diff-level-name">Apprentice</div><div class="diff-level-bar"></div></div>
-    <div class="diff-level dl-mastery"><div class="diff-level-name">Mastery</div><div class="diff-level-bar"></div></div>
+    <div class="diff-level dl-novice" onclick="this.classList.toggle('dl-open')" style="cursor:pointer">
+      <div class="diff-level-name">Novice <span class="dl-arrow">▼</span></div>
+      <div class="diff-level-bar"></div>
+      <div class="dl-expand" style="display:none;margin-top:12px;text-align:left;font-size:13px;color:rgba(255,255,255,.85);line-height:1.6">
+        <p style="margin-bottom:6px;font-weight:600;color:#FEB909">Word Work LABS™ — Novice</p>
+        <p>• Letter-sound matching with visual supports</p>
+        <p>• Guided phoneme segmentation activities</p>
+        <p>• Scaffolded decoding with word families</p>
+      </div>
+    </div>
+    <div class="diff-level dl-apprentice" onclick="this.classList.toggle('dl-open')" style="cursor:pointer">
+      <div class="diff-level-name">Apprentice <span class="dl-arrow">▼</span></div>
+      <div class="diff-level-bar"></div>
+      <div class="dl-expand" style="display:none;margin-top:12px;text-align:left;font-size:13px;color:rgba(255,255,255,.85);line-height:1.6">
+        <p style="margin-bottom:6px;font-weight:600;color:#F06905">Word Work LABS™ — Apprentice</p>
+        <p>• Multi-syllable word building and analysis</p>
+        <p>• Context clue strategies for unknown words</p>
+        <p>• Independent morpheme identification</p>
+      </div>
+    </div>
+    <div class="diff-level dl-mastery" onclick="this.classList.toggle('dl-open')" style="cursor:pointer">
+      <div class="diff-level-name">Mastery <span class="dl-arrow">▼</span></div>
+      <div class="diff-level-bar"></div>
+      <div class="dl-expand" style="display:none;margin-top:12px;text-align:left;font-size:13px;color:rgba(255,255,255,.85);line-height:1.6">
+        <p style="margin-bottom:6px;font-weight:600;color:#fff">Word Work LABS™ — Mastery</p>
+        <p>• Advanced etymology and word origin analysis</p>
+        <p>• Cross-disciplinary vocabulary application</p>
+        <p>• Student-led word study and peer teaching</p>
+      </div>
+    </div>
   </div>
   <p class="diff-note">*All LABS™ will have the three differentiation levels per ReBe’s Literacy LABS™</p>
 </div>
@@ -500,6 +529,56 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   <div class="wc reveal"><div class="wc-title">School Counselors</div><div class="wc-desc">A science-informed framework to reinforce social-emotional learning school-wide</div></div>
   <div class="wc reveal"><div class="wc-title">Progressive Districts</div><div class="wc-desc">Florida, Virginia &amp; Indiana focus — supporting trauma-informed mandates with measurable outcomes</div></div>
 </div>
+</div>
+</section>
+
+
+<!-- DELIVERABLES -->
+<section class="section sc" id="deliverables">
+<div class="container">
+  <div class="reveal" style="text-align:center;margin-bottom:40px">
+    <div class="eyebrow" style="justify-content:center">What’s Included</div>
+    <h2 class="h2">Program Deliverables</h2>
+    <p class="blg" style="max-width:640px;margin:12px auto 0">Everything schools need to launch and sustain ReBe’s whole-literacy platform.</p>
+  </div>
+  <div class="del-grid reveal">
+    <div class="del-card">
+      <div style="width:100%;height:190px;background:linear-gradient(135deg,#034E64,#0a6a87);display:flex;align-items:center;justify-content:center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FEB909" stroke-width="1.5"><path d="M12 22c-4.97 0-7-3.58-7-7 0-4 3.5-7.5 3.5-7.5S10 9 10 6c0-1-.5-2-1-3 2.5 1 5.5 4 5.5 7 .5-.5 1.5-2 1.5-2s2 2.5 2 5c0 3.42-2.03 7-6 7z"/></svg>
+      </div>
+      <div class="del-body">
+        <div class="del-title">EPICS Health Boosts</div>
+        <div class="del-desc">125 ready-to-use, 7–10 minute health boost activities across 5 EPICS pathways per grade band.</div>
+      </div>
+    </div>
+    <div class="del-card">
+      <div style="width:100%;height:190px;background:linear-gradient(135deg,#F06905,#ff8534);display:flex;align-items:center;justify-content:center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+      </div>
+      <div class="del-body">
+        <div class="del-title">Literacy LABS™ Kits</div>
+        <div class="del-desc">5 differentiated Literacy LABS with 4 strategic stations each, aligned to the Science of Reading.</div>
+      </div>
+    </div>
+    <div class="del-card">
+      <div style="width:100%;height:190px;background:linear-gradient(135deg,#FEB909,#ffd24d);display:flex;align-items:center;justify-content:center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#034E64" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="del-body">
+        <div class="del-title">PLC &amp; Coaching Guides</div>
+        <div class="del-desc">Professional Learning Community facilitation guides and coaching frameworks for sustained implementation.</div>
+      </div>
+    </div>
+    <div class="del-card">
+      <div style="width:100%;height:190px;background:linear-gradient(135deg,#034E64,#02384a);display:flex;align-items:center;justify-content:center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FEB909" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="del-body">
+        <div class="del-title">EPICS Learning Walks</div>
+        <div class="del-desc">Observation tools, data collection templates, and analysis frameworks to monitor program impact.</div>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
 
