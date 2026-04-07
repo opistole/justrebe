@@ -45,11 +45,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .hero-img{width:100%;max-height:680px;object-fit:cover;object-position:top;border-radius:12px;margin-top:80px;box-shadow:0 8px 40px rgba(3,78,100,.15)}
 
 /* STATS STRIP */
-.stats-strip{background:#034E64;padding:48px 0}
-.sg{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
-.sc2{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:18px 12px;text-align:center;transition:transform .3s,background .3s,box-shadow .3s}
+.stats-strip{background:#034E64;padding:32px 0}
+.sg{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.sc2{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:14px 10px;text-align:center;transition:transform .3s,background .3s,box-shadow .3s}
 .sc2:hover{transform:translateY(-4px);background:rgba(255,255,255,.14);box-shadow:0 8px 24px rgba(0,0,0,.2)}
-.sv{font-size:clamp(22px,2.2vw,32px);font-weight:900;color:#FEB909;letter-spacing:-.03em;line-height:1;margin-bottom:6px}
+.sv{font-size:clamp(20px,2vw,28px);font-weight:900;color:#FEB909;letter-spacing:-.03em;line-height:1;margin-bottom:6px}
 .sl{font-size:11px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:4px}
 .sd{font-size:11px;color:rgba(255,255,255,.65);line-height:1.45}
 .ss{display:block;font-size:9px;color:rgba(255,255,255,.35);letter-spacing:.05em;text-transform:uppercase;margin-top:6px}
@@ -158,7 +158,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .lab-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:28px 20px;text-align:center;transition:transform .3s,background .3s,box-shadow .3s,border-color .3s;cursor:pointer}
 .lab-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.14);box-shadow:0 12px 36px rgba(0,0,0,.25);border-color:rgba(254,185,9,.3)}
 .lab-num{font-size:32px;line-height:1;margin-bottom:12px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.15))}
-.lab-name{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3;letter-spacing:.01em}
+.lab-name{font-size:13px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3;letter-spacing:.01em;white-space:nowrap}
 .lab-tag{font-size:11px;color:#FEB909;letter-spacing:.04em;text-transform:uppercase;font-weight:600;opacity:.8}
 
 /* LAB EXPAND */
@@ -174,16 +174,16 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
 
 /* DIFFERENTIATION */
-.labs-diff{margin-top:48px;padding:36px;background:linear-gradient(135deg,rgba(254,185,9,.08),rgba(255,255,255,.05));border-radius:18px;border:1px solid rgba(254,185,9,.2);text-align:center}
+.labs-diff{margin-top:48px;padding:40px;background:linear-gradient(135deg,rgba(254,185,9,.15),rgba(255,255,255,.12));border-radius:18px;border:1px solid rgba(254,185,9,.3);text-align:center;backdrop-filter:blur(8px)}
 .diff-header{margin-bottom:28px}
-.diff-badge{display:inline-block;font-size:14px;font-weight:800;color:#FEB909;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border:2px solid rgba(254,185,9,.3);border-radius:50px;margin-bottom:12px}
+.diff-badge{display:inline-block;font-size:14px;font-weight:800;color:#FEB909;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border:2px solid rgba(254,185,9,.45);border-radius:50px;margin-bottom:12px}
 .diff-sub{font-size:14px;color:rgba(255,255,255,.7);line-height:1.6}
 .diff-levels{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
 .diff-level{padding:18px 32px;border-radius:12px;text-align:center;min-width:160px;transition:transform .2s,box-shadow .2s}
 .diff-level:hover{transform:translateY(-3px)}
-.dl-novice{background:linear-gradient(135deg,rgba(254,185,9,.2),rgba(254,185,9,.08));border:1px solid rgba(254,185,9,.3)}
-.dl-apprentice{background:linear-gradient(135deg,rgba(240,105,5,.2),rgba(240,105,5,.08));border:1px solid rgba(240,105,5,.3)}
-.dl-mastery{background:linear-gradient(135deg,rgba(3,78,100,.3),rgba(3,78,100,.12));border:1px solid rgba(255,255,255,.2)}
+.dl-novice{background:linear-gradient(135deg,rgba(254,185,9,.3),rgba(254,185,9,.15));border:1px solid rgba(254,185,9,.4)}
+.dl-apprentice{background:linear-gradient(135deg,rgba(240,105,5,.28),rgba(240,105,5,.14));border:1px solid rgba(240,105,5,.4)}
+.dl-mastery{background:linear-gradient(135deg,rgba(3,78,100,.4),rgba(3,78,100,.2));border:1px solid rgba(255,255,255,.3)}
 .diff-level-name{font-size:15px;font-weight:800;color:#fff;letter-spacing:.04em;text-transform:uppercase}
 .dl-novice .diff-level-name{color:#FEB909}
 .dl-apprentice .diff-level-name{color:#F06905}
@@ -198,8 +198,8 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .crisis-item:hover{transform:translateX(4px);box-shadow:2px 4px 12px rgba(240,105,5,.08)}
 .crisis-icon{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(240,105,5,.1);display:flex;align-items:center;justify-content:center}
 .crisis-text{font-size:14px;color:#444;line-height:1.55;font-weight:500}
-.crisis-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(3,78,100,.08);border:1px solid rgba(3,78,100,.08);transition:transform .3s,box-shadow .3s}
-.crisis-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(3,78,100,.14)}
+.crisis-card{background:#fff;border-radius:16px;padding:32px 28px;box-shadow:0 4px 20px rgba(3,78,100,.08);border:1px solid rgba(3,78,100,.06);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}.crisis-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#034E64,#0a6a87,#FEB909)}
+.crisis-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(3,78,100,.13)}
 .crisis-card-header{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:#034E64;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid rgba(3,78,100,.1)}
 .crisis-stat-row{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(3,78,100,.06)}
 .crisis-stat-row:last-child{border-bottom:none}
@@ -259,10 +259,8 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   <div class="sc2 reveal"><div class="sv">76%</div><div class="sl">Students with ACEs</div><div class="sd">of U.S. students have experienced at least 1 ACE</div><span class="ss">CDC Youth Risk Survey</span></div>
   <div class="sc2 reveal"><div class="sv">5×</div><div class="sl">Attendance Impact</div><div class="sd">more attendance issues for students with ACEs</div><span class="ss">Kaiser Permanente</span></div>
   <div class="sc2 reveal"><div class="sv">68%</div><div class="sl">Educator Burnout</div><div class="sd">of educators report emotional exhaustion</div><span class="ss">Gallup 2024</span></div>
-  <div class="sc2 reveal"><div class="sv">$124B</div><div class="sl">Annual Cost</div><div class="sd">annual cost of unaddressed ACEs in education</div><span class="ss">JAMA Network Open</span></div>
   <div class="sc2 reveal"><div class="sv">66%</div><div class="sl">Sadness & Hopelessness</div><div class="sd">of students have persistent feelings of sadness or hopelessness</div><span class="ss">CDC, 2023</span></div>
   <div class="sc2 reveal"><div class="sv">40%</div><div class="sl">Below Grade Level</div><div class="sd">of 4th graders cannot read on grade level</div><span class="ss">NAEP, 2024</span></div>
-  <div class="sc2 reveal"><div class="sv">70%</div><div class="sl">Inmate Literacy</div><div class="sd">of U.S. inmates cannot read above a 4th-grade level</div><span class="ss">NCES/Ed, 2014</span></div>
 </div>
 </div>
 </div>
@@ -276,13 +274,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
     <h2 class="h2" style="margin-bottom:16px">The Challenge in Today’s Schools</h2>
     <p class="lead">Educational outcomes are at historic lows and schools are facing overlapping challenges that affect both students and educators. Classrooms aren’t just academic spaces—they’re emotional ecosystems. Every educator brings their own life experience into the room. So does every student.</p>
     <div style="display:flex;flex-direction:column;gap:14px;margin-top:24px">
-      <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="crisis-text">Educators are burning out at historic rates</div></div>
-      <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="crisis-text">Students are struggling with self-regulation, motivation, literacy and overall well-being—emotional, physical, intellectual, cultural, and social health</div></div>
-      <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="crisis-text">Administrators are managing behavior more than academic outcomes</div></div>
+      <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c-4.97 0-7-3.58-7-7 0-4 3.5-7.5 3.5-7.5S10 9 10 6c0-1-.5-2-1-3 2.5 1 5.5 4 5.5 7 .5-.5 1.5-2 1.5-2s2 2.5 2 5c0 3.42-2.03 7-6 7z"/></svg></div><div class="crisis-text">Educators are burning out at historic rates</div></div>
+      <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg></div><div class="crisis-text">Students are struggling with self-regulation, motivation, literacy and overall well-being—emotional, physical, intellectual, cultural, and social health</div></div>
+      <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg></div><div class="crisis-text">Administrators are managing behavior more than academic outcomes</div></div>
     </div>
-    <p class="lead" style="margin-top:24px">When educators and students carry unseen stress, it shows up in burnout, behavior, and disengagement. Collectively, these challenges constitute a drastic crisis in which students lack adequate literacy, life skills, and wellness support to thrive, while educators are also contending with unaddressed adverse childhood experiences (ACEs), burnout and increasing attrition rates.</p>
-    <p class="lead" style="font-weight:700;color:#034E64;margin-top:16px">ReBe exists to address these dual crises by supporting the whole educator, the whole student, and the whole classroom with comprehensive support systems and targeted solutions.</p>
-  </div>
+    <p class="lead" style="margin-top:24px;font-size:14px">When educators and students carry unseen stress, it shows up in burnout, behavior, and disengagement. Collectively, these challenges constitute a drastic crisis in which students lack adequate literacy, life skills, and wellness support to thrive, while educators are also contending with unaddressed adverse childhood experiences (ACEs), burnout and increasing attrition rates.</p>
+      </div>
   <div class="reveal-right">
     <div style="display:flex;flex-direction:column;gap:20px">
       <div class="crisis-card">
@@ -304,6 +301,15 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   </div>
 </div>
 </div>
+</section>
+
+
+<!-- MISSION BRIDGE -->
+<section style="background:linear-gradient(135deg,#034E64 0%,#0a6a87 50%,#034E64 100%);padding:56px 0;text-align:center;position:relative;overflow:hidden">
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,rgba(254,185,9,.06) 0%,transparent 60%);pointer-events:none"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <p style="font-size:clamp(16px,1.8vw,20px);color:rgba(255,255,255,.92);line-height:1.8;max-width:800px;margin:0 auto;font-weight:500">ReBe exists to address these dual crises by supporting the <span style="color:#FEB909;font-weight:700">whole educator</span> and <span style="color:#FEB909;font-weight:700">whole student</span>—equipping schools with tools that are <span style="color:#FEB909;font-weight:700">trauma-informed</span>, <span style="color:#FEB909;font-weight:700">literacy-rich</span>, and <span style="color:#FEB909;font-weight:700">culturally responsive</span>.</p>
+  </div>
 </section>
 
 <!-- SOLUTION -->
