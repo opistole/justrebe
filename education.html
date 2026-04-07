@@ -46,13 +46,13 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
 /* STATS STRIP */
 .stats-strip{background:#034E64;padding:48px 0}
-.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.sc2{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:28px 24px;text-align:center;transition:transform .2s,background .2s}
-.sc2:hover{transform:translateY(-3px);background:rgba(255,255,255,.13)}
-.sv{font-size:clamp(30px,3.5vw,46px);font-weight:900;color:#FEB909;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
-.sl{font-size:14px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:5px}
-.sd{font-size:13px;color:rgba(255,255,255,.7);line-height:1.5}
-.ss{display:block;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;margin-top:8px}
+.sg{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.sc2{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:18px 12px;text-align:center;transition:transform .3s,background .3s,box-shadow .3s}
+.sc2:hover{transform:translateY(-4px);background:rgba(255,255,255,.14);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.sv{font-size:clamp(22px,2.2vw,32px);font-weight:900;color:#FEB909;letter-spacing:-.03em;line-height:1;margin-bottom:6px}
+.sl{font-size:11px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:4px}
+.sd{font-size:11px;color:rgba(255,255,255,.65);line-height:1.45}
+.ss{display:block;font-size:9px;color:rgba(255,255,255,.35);letter-spacing:.05em;text-transform:uppercase;margin-top:6px}
 
 /* PROBLEM / SOLUTION */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
@@ -76,7 +76,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .epics-h{font-size:clamp(28px,3vw,42px);font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
 .epics-sub{font-size:16px;color:rgba(255,255,255,.7);max-width:600px;margin:0 auto}
 .epics-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
-.ec{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:28px 16px;text-align:center;transition:transform .3s ease,background .3s ease,box-shadow .3s ease}
+.ec{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:28px 16px;text-align:center;transition:transform .3s ease,background .3s ease,box-shadow .3s ease;display:flex;flex-direction:column}
 .ec:hover{transform:translateY(-7px);background:rgba(255,255,255,.16);box-shadow:0 16px 48px rgba(0,0,0,.25)}
 .ec-hex{width:82px;height:82px;margin:0 auto 20px;display:block;object-fit:contain;filter:drop-shadow(0 6px 16px rgba(0,0,0,.4));transition:transform .3s ease;border-radius:50%}
 .ec:hover .ec-hex{transform:scale(1.1)}
@@ -128,7 +128,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .epics-grid .ec:nth-child(4){animation:fadeUp .5s ease .4s both}
 .epics-grid .ec:nth-child(5){animation:fadeUp .5s ease .5s both}
 
-@media(max-width:768px){
+@media(max-width:768px){.sg{grid-template-columns:repeat(2,1fr)}
   .container{padding:0 24px}
   .sg{grid-template-columns:repeat(2,1fr)}
   .two-col{grid-template-columns:1fr}
@@ -143,53 +143,92 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
 
 /* EPICS KEYWORDS */
-.ec-keywords{display:flex;flex-direction:column;gap:6px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.15)}
-.ec-kw{font-size:12px;color:rgba(255,255,255,.75);line-height:1.3;letter-spacing:.01em}
-.epics-intro{text-align:center;max-width:800px;margin:0 auto 48px;padding:32px;background:rgba(255,255,255,.07);border-radius:14px;border:1px solid rgba(255,255,255,.12)}
+.ec-desc{flex:1}
+.ec-keywords{display:flex;flex-direction:column;gap:5px;margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.15)}
+.ec-kw{font-size:12px;color:rgba(255,255,255,.8);line-height:1.3;letter-spacing:.01em;padding:3px 0;font-weight:500}
+.epics-intro{text-align:center;max-width:800px;margin:0 auto 48px;padding:36px;background:linear-gradient(135deg,rgba(254,185,9,.08),rgba(255,255,255,.06));border-radius:16px;border:1px solid rgba(254,185,9,.2);backdrop-filter:blur(4px)}
 .epics-intro-title{font-size:clamp(18px,2vw,24px);font-weight:900;color:#FEB909;margin-bottom:12px;line-height:1.2}
 .epics-intro-text{font-size:15px;color:rgba(255,255,255,.8);line-height:1.7}
 /* LITERACY LABS */
-.labs-section{background:#034E64;padding:80px 0;margin-top:0}
+.labs-section{background:linear-gradient(180deg,#034E64 0%,#02384a 100%);padding:90px 0;margin-top:0}
 .labs-header{text-align:center;margin-bottom:48px}
-.labs-title{font-size:clamp(24px,2.5vw,36px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:12px}
+.labs-title{font-size:clamp(24px,2.5vw,36px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:12px;line-height:1.1}
 .labs-sub{font-size:16px;color:rgba(255,255,255,.75);max-width:700px;margin:0 auto;line-height:1.7}
 .labs-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
-.lab-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:28px 20px;text-align:center;transition:transform .3s,background .3s}
-.lab-card:hover{transform:translateY(-5px);background:rgba(255,255,255,.18)}
-.lab-num{font-size:36px;font-weight:900;color:#FEB909;line-height:1;margin-bottom:10px}
-.lab-name{font-size:15px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3}
-.lab-tag{font-size:12px;color:rgba(255,255,255,.6);letter-spacing:.04em;text-transform:uppercase}
+.lab-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:28px 20px;text-align:center;transition:transform .3s,background .3s,box-shadow .3s,border-color .3s;cursor:pointer}
+.lab-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.14);box-shadow:0 12px 36px rgba(0,0,0,.25);border-color:rgba(254,185,9,.3)}
+.lab-num{font-size:32px;line-height:1;margin-bottom:12px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.15))
+.lab-name{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3;letter-spacing:.01em}
+.lab-tag{font-size:11px;color:#FEB909;letter-spacing:.04em;text-transform:uppercase;font-weight:600;opacity:.8}
 
 /* LAB EXPAND */
 .lab-card{cursor:pointer}
 .lab-expand{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;padding:0 4px}
 .lab-expand.open{max-height:500px;padding:14px 4px 4px}
-.lab-station{font-size:13px;color:rgba(255,255,255,.82);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.1);text-align:left}
+.lab-station{font-size:13px;color:rgba(255,255,255,.85);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;border-radius:6px;transition:background .2s}
+.lab-station:hover{background:rgba(255,255,255,.06)}
 .lab-station:last-child{border-bottom:none}
 .lab-grade{font-size:11px;font-weight:800;color:#FEB909;letter-spacing:.08em;text-transform:uppercase;padding:4px 0;text-align:left}
 @media(max-width:768px){.labs-grid{grid-template-columns:1fr 1fr}.labs-grid .lab-card:last-child{grid-column:span 2;max-width:50%;margin:0 auto}}
 
+
+
+/* DIFFERENTIATION */
+.labs-diff{margin-top:48px;padding:36px;background:linear-gradient(135deg,rgba(254,185,9,.08),rgba(255,255,255,.05));border-radius:18px;border:1px solid rgba(254,185,9,.2);text-align:center}
+.diff-header{margin-bottom:28px}
+.diff-badge{display:inline-block;font-size:14px;font-weight:800;color:#FEB909;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border:2px solid rgba(254,185,9,.3);border-radius:50px;margin-bottom:12px}
+.diff-sub{font-size:14px;color:rgba(255,255,255,.7);line-height:1.6}
+.diff-levels{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.diff-level{padding:18px 32px;border-radius:12px;text-align:center;min-width:160px;transition:transform .2s,box-shadow .2s}
+.diff-level:hover{transform:translateY(-3px)}
+.dl-novice{background:linear-gradient(135deg,rgba(254,185,9,.2),rgba(254,185,9,.08));border:1px solid rgba(254,185,9,.3)}
+.dl-apprentice{background:linear-gradient(135deg,rgba(240,105,5,.2),rgba(240,105,5,.08));border:1px solid rgba(240,105,5,.3)}
+.dl-mastery{background:linear-gradient(135deg,rgba(3,78,100,.3),rgba(3,78,100,.12));border:1px solid rgba(255,255,255,.2)}
+.diff-level-name{font-size:15px;font-weight:800;color:#fff;letter-spacing:.04em;text-transform:uppercase}
+.dl-novice .diff-level-name{color:#FEB909}
+.dl-apprentice .diff-level-name{color:#F06905}
+.diff-level-bar{height:3px;border-radius:2px;margin-top:8px;background:rgba(255,255,255,.15)}
+.dl-novice .diff-level-bar{background:linear-gradient(90deg,#FEB909,rgba(254,185,9,.3));width:33%}
+.dl-apprentice .diff-level-bar{background:linear-gradient(90deg,#F06905,rgba(240,105,5,.3));width:66%;margin:8px auto 0}
+.dl-mastery .diff-level-bar{background:linear-gradient(90deg,#fff,rgba(255,255,255,.3));width:100%}
+.diff-note{font-size:12px;color:rgba(255,255,255,.45);margin-top:20px}
+
+/* CRISIS SECTION */
+.crisis-item{display:flex;gap:14px;align-items:flex-start;padding:14px 18px;background:rgba(240,105,5,.06);border-radius:10px;border-left:3px solid #F06905;transition:transform .2s,box-shadow .2s}
+.crisis-item:hover{transform:translateX(4px);box-shadow:2px 4px 12px rgba(240,105,5,.08)}
+.crisis-icon{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(240,105,5,.1);display:flex;align-items:center;justify-content:center}
+.crisis-text{font-size:14px;color:#444;line-height:1.55;font-weight:500}
+.crisis-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(3,78,100,.08);border:1px solid rgba(3,78,100,.08);transition:transform .3s,box-shadow .3s}
+.crisis-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(3,78,100,.14)}
+.crisis-card-header{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:#034E64;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid rgba(3,78,100,.1)}
+.crisis-stat-row{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(3,78,100,.06)}
+.crisis-stat-row:last-child{border-bottom:none}
+.crisis-stat-num{font-size:24px;font-weight:900;color:#034E64;min-width:65px;line-height:1.1}
+.crisis-stat-desc{font-size:13px;color:#555;line-height:1.5}
+.crisis-src{display:block;font-size:10px;color:#999;margin-top:3px;text-transform:uppercase;letter-spacing:.04em}
 /* CORE COMPONENTS */
-.core-section{background:#fff;padding:80px 0 60px}
+.core-section{background:#FAFAF7;padding:80px 0 70px}
 .core-header{text-align:center;margin-bottom:48px}
 .core-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.core-card{background:#034E64;border-radius:16px;padding:36px 28px;color:#fff;display:flex;flex-direction:column}
-.core-card.alt{background:#1A1A1A}
-.core-card-title{font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FEB909;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid rgba(255,255,255,.15)}
-.core-card.alt .core-card-title{color:#F06905}
+.core-card{background:linear-gradient(145deg,#034E64 0%,#0a6a87 100%);border-radius:16px;padding:36px 28px;color:#fff;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+.core-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(3,78,100,.25)}
+.core-card.alt{background:linear-gradient(145deg,#045a72 0%,#034E64 100%)}
+.core-card-title{font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FEB909;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid rgba(254,185,9,.3);white-space:nowrap}
+.core-card.alt .core-card-title{color:#FEB909}
 .core-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:16px}
 .core-item:last-child{margin-bottom:0}
 .core-check{color:#FEB909;font-size:16px;flex-shrink:0;margin-top:2px}
-.core-card.alt .core-check{color:#F06905}
+.core-card.alt .core-check{color:#FEB909}
 .core-item-text{font-size:14px;color:rgba(255,255,255,.88);line-height:1.6}
 /* OUTCOMES */
-.outcomes-section{background:#FAFAF7;padding:72px 0 80px}
+.outcomes-section{background:#fff;padding:80px 0 90px}
 .outcomes-header{text-align:center;margin-bottom:48px}
 .outcomes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1100px;margin:0 auto}
-.outcome-card{background:#fff;border-radius:14px;padding:32px 28px;box-shadow:0 2px 16px rgba(3,78,100,.06);border-top:4px solid #FEB909;transition:transform .2s,box-shadow .2s}
-.outcome-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(3,78,100,.1)}
-.outcome-icon{width:44px;height:44px;border-radius:50%;background:#034E64;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-.outcome-label{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#034E64;margin-bottom:10px}
+.outcome-card{background:#fff;border-radius:16px;padding:36px 30px;box-shadow:0 4px 20px rgba(3,78,100,.07);border:1px solid rgba(3,78,100,.06);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.outcome-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#034E64,#FEB909)}
+.outcome-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(3,78,100,.14)}
+.outcome-icon{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#034E64,#0a6a87);display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 4px 12px rgba(3,78,100,.2)}
+.outcome-label{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#034E64;margin-bottom:10px;white-space:nowrap}
 .outcome-text{font-size:15px;color:#444;line-height:1.7}
 @media(max-width:768px){.core-grid,.outcomes-grid{grid-template-columns:1fr}}
 </style>
@@ -231,38 +270,36 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 <!-- PROBLEM -->
 <section class="section sw">
 <div class="container">
-<div class="two-col">
+<div class="two-col" style="gap:48px">
   <div class="reveal">
     <div class="eyebrow">The Classroom Crisis</div>
     <h2 class="h2" style="margin-bottom:16px">The Challenge in Today’s Schools</h2>
     <p class="lead">Educational outcomes are at historic lows and schools are facing overlapping challenges that affect both students and educators. Classrooms aren’t just academic spaces—they’re emotional ecosystems. Every educator brings their own life experience into the room. So does every student.</p>
-    <div class="ps-list">
-      <div class="ps"><div class="ps-num">⚠</div><div class="ps-text">Educators are burning out at historic rates</div></div>
-      <div class="ps"><div class="ps-num">⚠</div><div class="ps-text">Students are struggling with self-regulation, motivation, literacy and overall well-being—emotional, physical, intellectual, cultural, and social health</div></div>
-      <div class="ps"><div class="ps-num">⚠</div><div class="ps-text">Administrators are managing behavior more than academic outcomes</div></div>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:24px">
+      <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="crisis-text">Educators are burning out at historic rates</div></div>
+      <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="crisis-text">Students are struggling with self-regulation, motivation, literacy and overall well-being—emotional, physical, intellectual, cultural, and social health</div></div>
+      <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="crisis-text">Administrators are managing behavior more than academic outcomes</div></div>
     </div>
     <p class="lead" style="margin-top:24px">When educators and students carry unseen stress, it shows up in burnout, behavior, and disengagement. Collectively, these challenges constitute a drastic crisis in which students lack adequate literacy, life skills, and wellness support to thrive, while educators are also contending with unaddressed adverse childhood experiences (ACEs), burnout and increasing attrition rates.</p>
-    <p class="lead" style="font-weight:700;color:#034E64">ReBe exists to address these dual crises by supporting the whole educator, the whole student, and the whole classroom with comprehensive support systems and targeted solutions.</p>
+    <p class="lead" style="font-weight:700;color:#034E64;margin-top:16px">ReBe exists to address these dual crises by supporting the whole educator, the whole student, and the whole classroom with comprehensive support systems and targeted solutions.</p>
   </div>
   <div class="reveal-right">
-    <div style="display:flex;flex-direction:column;gap:16px">
-      <div style="background:#034E64;border-radius:12px;padding:32px;color:#fff">
-        <h3 style="font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FEB909;margin-bottom:20px">Educator Crisis</h3>
-        <div class="ps-list" style="gap:12px">
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:28px;font-weight:900;color:#FEB909;min-width:60px;line-height:1">68%</div><div style="font-size:14px;color:rgba(255,255,255,.85);line-height:1.5">of educators report emotional exhaustion<span style="display:block;font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;text-transform:uppercase;letter-spacing:.06em">Pew Research Center, 2024</span></div></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:28px;font-weight:900;color:#FEB909;min-width:60px;line-height:1">77%</div><div style="font-size:14px;color:rgba(255,255,255,.85);line-height:1.5">say their job is frequently stressful<span style="display:block;font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;text-transform:uppercase;letter-spacing:.06em">Pew Research Center, 2024</span></div></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:28px;font-weight:900;color:#FEB909;min-width:60px;line-height:1">44%</div><div style="font-size:14px;color:rgba(255,255,255,.85);line-height:1.5">teacher retention beyond five years, with districts spending $10K+ per new hire<span style="display:block;font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;text-transform:uppercase;letter-spacing:.06em">Education Week, 2018</span></div></div>
-        </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="crisis-card">
+        <div class="crisis-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#034E64" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Educator Crisis</span></div>
+        <div class="crisis-stat-row"><div class="crisis-stat-num">68%</div><div class="crisis-stat-desc">of educators report emotional exhaustion<span class="crisis-src">Pew Research Center, 2024</span></div></div>
+        <div class="crisis-stat-row"><div class="crisis-stat-num">77%</div><div class="crisis-stat-desc">say their job is frequently stressful<span class="crisis-src">Pew Research Center, 2024</span></div></div>
+        <div class="crisis-stat-row"><div class="crisis-stat-num">44%</div><div class="crisis-stat-desc">teacher retention beyond five years, with districts spending $10K+ per new hire<span class="crisis-src">Education Week, 2018</span></div></div>
       </div>
-      <div style="background:#1A1A1A;border-radius:12px;padding:32px;color:#fff">
-        <h3 style="font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#F06905;margin-bottom:20px">Student Crisis</h3>
-        <div class="ps-list" style="gap:12px">
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:28px;font-weight:900;color:#F06905;min-width:60px;line-height:1">3 in 4</div><div style="font-size:14px;color:rgba(255,255,255,.85);line-height:1.5">high school students experienced one or more ACEs; 1 in 5 experienced four or more<span style="display:block;font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;text-transform:uppercase;letter-spacing:.06em">CDC, 2024</span></div></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:28px;font-weight:900;color:#F06905;min-width:60px;line-height:1">66%</div><div style="font-size:14px;color:rgba(255,255,255,.85);line-height:1.5">of students have persistent feelings of sadness or hopelessness<span style="display:block;font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;text-transform:uppercase;letter-spacing:.06em">CDC, 2023</span></div></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:28px;font-weight:900;color:#F06905;min-width:60px;line-height:1">40%</div><div style="font-size:14px;color:rgba(255,255,255,.85);line-height:1.5">of 4th graders cannot read on grade level<span style="display:block;font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;text-transform:uppercase;letter-spacing:.06em">NAEP, 2024</span></div></div>
-        </div>
+      <div class="crisis-card">
+        <div class="crisis-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#034E64" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span>Student Crisis</span></div>
+        <div class="crisis-stat-row"><div class="crisis-stat-num">3 in 4</div><div class="crisis-stat-desc">high school students experienced one or more ACEs; 1 in 5 experienced four or more<span class="crisis-src">CDC, 2024</span></div></div>
+        <div class="crisis-stat-row"><div class="crisis-stat-num">66%</div><div class="crisis-stat-desc">of students have persistent feelings of sadness or hopelessness<span class="crisis-src">CDC, 2023</span></div></div>
+        <div class="crisis-stat-row"><div class="crisis-stat-num">40%</div><div class="crisis-stat-desc">of 4th graders cannot read on grade level<span class="crisis-src">NAEP, 2024</span></div></div>
       </div>
-      <p style="text-align:center;font-size:15px;font-weight:700;color:#034E64;margin-top:8px">These aren’t just policy problems. They’re people problems—and ReBe offers people-first solutions.</p>
+      <div style="text-align:center;padding:20px 24px;background:linear-gradient(135deg,#034E64,#0a6a87);border-radius:14px;color:#fff">
+        <p style="font-size:15px;font-weight:600;line-height:1.5;margin:0">These aren’t just policy problems. They’re people problems—and <span style="color:#FEB909;font-weight:800">ReBe offers people-first solutions.</span></p>
+      </div>
     </div>
   </div>
 </div>
@@ -315,12 +352,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="outcome-text">Reduced stress and burnout, stronger retention rates, improved professional community, and revitalized teaching.</div>
     </div>
     <div class="outcome-card reveal">
-      <div class="outcome-icon" style="background:#F06905"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+      <div class="outcome-icon" style="background:linear-gradient(135deg,#F06905,#ff8534)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
       <div class="outcome-label">For Students</div>
       <div class="outcome-text">Higher literacy achievement, coping and life skills for future workplaces, greater engagement, and increased resiliency.</div>
     </div>
     <div class="outcome-card reveal">
-      <div class="outcome-icon" style="background:#FEB909"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="outcome-icon" style="background:linear-gradient(135deg,#FEB909,#ffd04a)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
       <div class="outcome-label">For Schools & Districts</div>
       <div class="outcome-text">Lower turnover and hiring costs, better attendance, enhanced learning environments, and a pathway to long-term systemic change.</div>
     </div>
@@ -427,31 +464,17 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
     </div>
   </div>
 </div>
-<div class="labs-diff reveal" style="text-align:center;margin-top:40px;padding:24px;background:rgba(255,255,255,.08);border-radius:12px;border:1px solid rgba(255,255,255,.15)">
-  <p style="font-size:14px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:6px"><strong style="color:#FEB909">Differentiated Literacy LABS™</strong></p>
-  <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.6">Sample Differentiation Levels for Strategic Station at Word Work LABS™</p>
-  <div style="display:flex;justify-content:center;gap:20px;margin-top:16px;flex-wrap:wrap">
-    <div style="background:rgba(254,185,9,.15);border:1px solid rgba(254,185,9,.3);border-radius:8px;padding:12px 24px;text-align:center"><div style="font-size:13px;font-weight:800;color:#FEB909;letter-spacing:.06em;text-transform:uppercase">Novice</div></div>
-    <div style="background:rgba(240,105,5,.15);border:1px solid rgba(240,105,5,.3);border-radius:8px;padding:12px 24px;text-align:center"><div style="font-size:13px;font-weight:800;color:#F06905;letter-spacing:.06em;text-transform:uppercase">Apprentice</div></div>
-    <div style="background:rgba(3,78,100,.25);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 24px;text-align:center"><div style="font-size:13px;font-weight:800;color:#fff;letter-spacing:.06em;text-transform:uppercase">Mastery</div></div>
+<div class="labs-diff reveal">
+  <div class="diff-header">
+    <div class="diff-badge">Differentiated Literacy LABS™</div>
+    <p class="diff-sub">Sample Differentiation Levels for Strategic Station at Word Work LABS™</p>
   </div>
-  <p style="font-size:12px;color:rgba(255,255,255,.5);margin-top:14px">*All LABS™ will have the three differentiation levels per ReBe’s Literacy LABS™</p>
-</div>
-</div>
-</section>
-
-<!-- DELIVERABLES -->
-<section class="section sw">
-<div class="container">
-<div style="margin-bottom:48px">
-  <div class="eyebrow reveal">What's Included</div>
-  <h2 class="h2 reveal">Ready-to-use resources for every classroom.</h2>
-</div>
-<div class="del-grid">
-  <div class="del-card reveal"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_54e78aac470f4a29b554e62f8677a79e~mv2.png" alt="Differentiated Literacy LABS" /><div class="del-body"><div class="del-title">Differentiated Literacy LABS</div><div class="del-desc">Learning Applied By Students — There are five Literacy LABS™ with four Strategic Stations at each of the LABS™</div></div></div>
-  <div class="del-card reveal"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_5cbf09d55e6041eeaa094b563236b506~mv2.png" alt="Grade-level Health Boosts" /><div class="del-body"><div class="del-title">Grade-level Health Boosts</div><div class="del-desc">Age-appropriate K-12 wellness content connecting EPICS health to real classroom moments</div></div></div>
-  <div class="del-card reveal"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_515210f2dcec488084a3abe1baf93d0d~mv2.png" alt="Educator Facilitator Guides" /><div class="del-body"><div class="del-title">Educator Facilitator Guides</div><div class="del-desc">Step-by-step guides helping teachers deliver ReBe content with confidence and care</div></div></div>
-  <div class="del-card reveal"><img class="del-img" src="https://static.wixstatic.com/media/1d3e2c_fc4a2bc6ab6c440dae01e5eeaa7d72eb~mv2.png" alt="EPICS-health focused content" /><div class="del-body"><div class="del-title">EPICS-Health Focused Content</div><div class="del-desc">Curriculum rooted in the five dimensions of wholeness — embedded into daily classroom practice</div></div></div>
+  <div class="diff-levels">
+    <div class="diff-level dl-novice"><div class="diff-level-name">Novice</div><div class="diff-level-bar"></div></div>
+    <div class="diff-level dl-apprentice"><div class="diff-level-name">Apprentice</div><div class="diff-level-bar"></div></div>
+    <div class="diff-level dl-mastery"><div class="diff-level-name">Mastery</div><div class="diff-level-bar"></div></div>
+  </div>
+  <p class="diff-note">*All LABS™ will have the three differentiation levels per ReBe’s Literacy LABS™</p>
 </div>
 </div>
 </section>
