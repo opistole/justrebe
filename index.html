@@ -11,6 +11,8 @@
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 html, body { margin: 0; padding: 0; width: 100%; max-width: 100%; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
 body {
+  -webkit-font-smoothing: auto;
+  text-rendering: optimizeLegibility;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #1A1A1A;
   background: #fff;
@@ -22,7 +24,7 @@ body {
   padding: 0 48px;
 }
 h2 {
-  font-size: clamp(26px, 3vw, 42px);
+  font-size: clamp(30px, 3.2vw, 46px);
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.15;
@@ -36,7 +38,7 @@ h2 {
   gap: 8px;
   padding: 14px 28px;
   border-radius: 50px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.02em;
   text-decoration: none;
@@ -90,7 +92,7 @@ h2 {
   margin-bottom: 20px;
 }
 .hero-h1 {
-  font-size: clamp(36px, 5vw, 68px);
+  font-size: clamp(44px, 5.5vw, 72px);
   font-weight: 900;
   letter-spacing: -.03em;
   line-height: 1.05;
@@ -99,7 +101,7 @@ h2 {
   margin-bottom: 24px;
 }
 .hero-sub {
-  font-size: clamp(16px, 1.8vw, 22px);
+  font-size: clamp(18px, 2vw, 24px);
   color: rgba(255,255,255,.8);
   line-height: 1.6;
   max-width: 560px;
