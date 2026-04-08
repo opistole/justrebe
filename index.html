@@ -404,17 +404,19 @@ h2 {
 
 /* Safari desktop normalization - hanging-punctuation is Safari-only */
 @supports (hanging-punctuation: first) {
-  /* Font weight: Safari renders thinner, so bump weight and use stroke to thicken */
+  /* Font weight: Safari renders thinner, so use stroke to thicken */
   body {
     -webkit-text-stroke: 0.3px;
   }
-  /* Scale all text up ~5-8% to match Chrome's rendering */
+  /* Scale hero text up to match Chrome */
   .hero-h1 {
     font-size: clamp(48px, 6vw, 82px);
     -webkit-text-stroke: 0.5px;
+    max-width: min(750px, 60vw);
   }
   .hero-sub {
     font-size: clamp(20px, 2.3vw, 27px);
+    max-width: min(620px, 52vw);
   }
   .hero-tag {
     font-size: 13px;
@@ -438,10 +440,15 @@ h2 {
   .site-nav a {
     font-size: 16px;
   }
+  /* Reduce ALL container padding so content isn't squeezed */
   .container,
-  .hero-inner {
-    padding-left: clamp(28px, 3.5vw, 48px);
-    padding-right: clamp(28px, 3.5vw, 48px);
+  .hero-inner,
+  .pcards-row,
+  .story-inner,
+  .sbar-row,
+  .nav-inner {
+    padding-left: clamp(20px, 2.5vw, 36px);
+    padding-right: clamp(20px, 2.5vw, 36px);
   }
 }
 </style>
