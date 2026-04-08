@@ -8,10 +8,11 @@
     <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
     img { max-width: 100%; height: auto; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; -moz-text-size-adjust: 100%; text-size-adjust: 100%; }
 html, body { margin: 0; padding: 0; width: 100%; max-width: 100%; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
 body {
-  -webkit-font-smoothing: auto;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
   text-rendering: optimizeLegibility;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #1A1A1A;
@@ -80,7 +81,7 @@ h2 {
   z-index: 2;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 96px 48px 96px 48px;
+  padding: 96px clamp(32px, 5vw, 64px);
   width: 100%;
 }
 .hero-tag {
@@ -92,19 +93,19 @@ h2 {
   margin-bottom: 20px;
 }
 .hero-h1 {
-  font-size: clamp(44px, 5.5vw, 72px);
+  font-size: clamp(44px, 5.5vw, 76px);
   font-weight: 900;
   letter-spacing: -.03em;
   line-height: 1.05;
   color: #fff;
-  max-width: 700px;
+  max-width: min(700px, 55vw);
   margin-bottom: 24px;
 }
 .hero-sub {
   font-size: clamp(18px, 2vw, 24px);
   color: rgba(255,255,255,.8);
   line-height: 1.6;
-  max-width: 560px;
+  max-width: min(580px, 46vw);
   margin-bottom: 40px;
   font-weight: 400;
 }
