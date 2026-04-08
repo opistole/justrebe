@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Samples · ReBe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{width:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;max-width:100%;overflow-x:hidden;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#034E64;color:#fff;-webkit-font-smoothing:antialiased;min-height:100vh}
+img{max-width:100%;height:auto}
+.container{max-width:900px;margin:0 auto;padding:0 32px}
+
+/* HERO HEADER */
+.sample-hero{padding:64px 0 40px;text-align:center}
+.sample-logo{width:120px;margin-bottom:24px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.25))}
+.sample-eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#FEB909;margin-bottom:16px;padding:6px 16px;border:1.5px solid rgba(254,185,9,.35);border-radius:50px;background:rgba(254,185,9,.08)}
+.sample-title{font-size:clamp(28px,4vw,42px);font-weight:900;line-height:1.1;letter-spacing:-.025em;color:#fff;margin-bottom:14px}
+.sample-title span{color:#FEB909}
+.sample-sub{font-size:clamp(15px,1.4vw,17px);color:rgba(255,255,255,.7);line-height:1.7;max-width:600px;margin:0 auto}
+
+/* DIVIDER */
+.divider{width:60px;height:3px;background:linear-gradient(90deg,#FEB909,rgba(254,185,9,.3));border-radius:2px;margin:48px auto}
+
+/* SECTION */
+.sample-section{margin-bottom:56px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:10px;text-align:center}
+.section-title{font-size:clamp(20px,2.5vw,28px);font-weight:800;color:#fff;text-align:center;margin-bottom:28px;letter-spacing:-.02em}
+
+/* VIDEO WRAPPER */
+.video-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.video-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.3)}
+.video-embed{position:relative;padding-top:56.25%;background:#000}
+.video-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.video-info{padding:20px 24px}
+.video-name{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px}
+.video-desc{font-size:13px;color:rgba(255,255,255,.6);line-height:1.5}
+
+/* QUIZ BUTTONS */
+.quiz-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.quiz-btn{display:flex;flex-direction:column;align-items:center;gap:14px;padding:36px 28px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;text-decoration:none;color:#fff;transition:transform .3s,background .3s,box-shadow .3s,border-color .3s;cursor:pointer}
+.quiz-btn:hover{transform:translateY(-6px);background:rgba(255,255,255,.14);box-shadow:0 12px 36px rgba(0,0,0,.25);border-color:rgba(254,185,9,.3)}
+.quiz-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#FEB909,#ffd04a);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(254,185,9,.3);transition:transform .3s}
+.quiz-btn:hover .quiz-icon{transform:scale(1.1)}
+.quiz-icon svg{width:26px;height:26px}
+.quiz-label{font-size:16px;font-weight:800;letter-spacing:.02em}
+.quiz-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.5;text-align:center}
+
+/* FOOTER NOTE */
+.sample-footer{text-align:center;padding:40px 0 56px;border-top:1px solid rgba(255,255,255,.08);margin-top:24px}
+.sample-footer p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.6}
+.sample-footer a{color:#FEB909;text-decoration:none;font-weight:600}
+.sample-footer a:hover{text-decoration:underline}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .container{padding:0 20px}
+  .quiz-grid{grid-template-columns:1fr}
+  .sample-hero{padding:48px 0 32px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="sample-hero">
+<div class="container">
+  <img class="sample-logo" src="Images/Logo.png" alt="ReBe Logo">
+  <div><span class="sample-eyebrow">Preview</span></div>
+  <h1 class="sample-title">Experience <span>ReBe</span> in Action</h1>
+  <p class="sample-sub">Get a first look at how ReBe supports whole-student wellness through animated BB videos and interactive self-discovery journeys.</p>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VIDEO 1 -->
+<section class="sample-section fade-in">
+<div class="container">
+  <div class="section-label">Video Sample</div>
+  <div class="section-title">BB Sample 1</div>
+  <div class="video-card">
+    <div class="video-embed">
+      <iframe src="https://player.vimeo.com/video/1181318960?badge=0&autopause=0&player_id=0&app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="BB Studio Tour Guide SAMPLE 2"></iframe>
+    </div>
+    <div class="video-info">
+      <div class="video-name">BB Studio Tour Guide</div>
+      <div class="video-desc">Meet BB the Bee — ReBe's animated guide who narrates big ideas and helps answer essential questions for grade-level EPICS™ Health Boosts.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- VIDEO 2 -->
+<section class="sample-section fade-in">
+<div class="container">
+  <div class="section-label">Video Sample</div>
+  <div class="section-title">BB Sample 2</div>
+  <div class="video-card">
+    <div class="video-embed">
+      <iframe src="https://player.vimeo.com/video/1181325524?badge=0&autopause=0&player_id=0&app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="BB1 Sample for Testing"></iframe>
+    </div>
+    <div class="video-info">
+      <div class="video-name">BB Health Boost Sample</div>
+      <div class="video-desc">See how BB delivers age-appropriate EPICS™ Health Boosts — brief, engaging microlearning experiences designed for K–12 students.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- QUIZ BUTTONS -->
+<section class="sample-section fade-in">
+<div class="container">
+  <div class="section-label">Interactive Quizzes</div>
+  <div class="section-title">Self-Discovery Journeys</div>
+  <div class="quiz-grid">
+    <a href="ReBe%20Journey1%20Awareness.html" class="quiz-btn">
+      <div class="quiz-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#034E64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      </div>
+      <div class="quiz-label">Journey 1: Awareness</div>
+      <div class="quiz-desc">Begin your self-discovery journey with an interactive exploration of awareness and mindfulness.</div>
+    </a>
+    <a href="ReBe%20Journey2%20HiddenThings.html" class="quiz-btn">
+      <div class="quiz-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#034E64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+      </div>
+      <div class="quiz-label">Journey 2: Hidden Things</div>
+      <div class="quiz-desc">Dive deeper into self-reflection with an interactive journey exploring the things beneath the surface.</div>
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<div class="sample-footer">
+<div class="container">
+  <p>This is a preview of the ReBe platform experience.<br>
+  <a href="index.html">Visit the full ReBe site →</a></p>
+</div>
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
+  });
+},{threshold:0,rootMargin:'0px'});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
