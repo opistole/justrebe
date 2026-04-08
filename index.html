@@ -7,8 +7,9 @@
     
     <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+    img { max-width: 100%; height: auto; }
 html { scroll-behavior: smooth; }
-html, body { margin: 0; padding: 0; overflow-x: hidden; }
+html, body { margin: 0; padding: 0; width: 100%; max-width: 100%; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #1A1A1A;
@@ -348,7 +349,23 @@ h2 {
   .story-img-big { height: 280px; margin-bottom: 16px; }
   .story-img-sm { height: 220px; border-width: 0; }
 }
-@keyframes fadeInUp {
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .hero-inner { padding: 60px 16px; }
+      .pcards-row, .story-inner, .sbar-row { padding-left: 16px; padding-right: 16px; }
+      .hero-h1 { font-size: 28px; }
+      .hero-sub { font-size: 15px; }
+      h2 { font-size: 22px; }
+      .sbar-item { min-width: 33%; padding: 12px 6px; }
+      .sbar-num { font-size: 20px; }
+      .sbar-lbl { font-size: 9px; }
+      .pcard { height: 300px; }
+      .story-right { height: 300px; }
+      .cost-num { font-size: 22px; min-width: 60px; }
+      .sol-img { height: 200px; }
+    }
+    @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(30px);
