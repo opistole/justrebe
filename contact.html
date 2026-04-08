@@ -68,7 +68,12 @@ p{font-size:17px;color:#555;line-height:1.7}
 .hero h1{font-size:clamp(26px,3vw,44px);font-weight:900;color:#034E64;letter-spacing:-.025em;line-height:1.1;opacity:0;animation:fadeUp .7s .15s cubic-bezier(.22,1,.36,1) forwards}
 .hero p{opacity:0;animation:fadeUp .7s .3s cubic-bezier(.22,1,.36,1) forwards}
 .hero .ey{opacity:0;animation:fadeUp .7s .05s cubic-bezier(.22,1,.36,1) forwards}
-</style>
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      h2 { font-size: 22px; }
+    }
+    </style>
 </head>
 <body>
 <div id="header-placeholder"></div>
