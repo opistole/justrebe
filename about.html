@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+img{max-width:100%;height:auto}
 html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overflow-x:hidden}
 .c{max-width:1140px;margin:0 auto;padding:0 64px}
 
@@ -135,6 +137,12 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;overfl
 .founder-card, .adv-card { position: relative; }
 .li-icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:10px; background:rgba(0,119,181,0.07); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 2px 8px rgba(0,119,181,0.08); color:#0077B5; text-decoration:none; position:absolute; bottom:14px; right:14px; transition:all 0.3s ease; }
 .li-icon:hover { background:rgba(0,119,181,0.14); box-shadow:0 4px 14px rgba(0,119,181,0.15); transform:scale(1.1); color:#005f8d; }
+
+@media(max-width:480px){
+  .container{padding:0 16px}
+  .section{padding:60px 0}
+  h2{font-size:22px}
+}
 </style>
 </head>
 <body>
