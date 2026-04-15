@@ -350,7 +350,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   <img class="hero-img reveal" src="Images/Education.jpg" alt="Students in a classroom" />
 </div>
 
+
 </section>
+<!-- Only one footer placeholder, back-to-top button, and scripts at the end -->
 <div id="footer"></div>
 <button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});document.body.scrollTop=0;document.documentElement.scrollTop=0">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
@@ -376,6 +378,14 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   ck();
 })();
 </script>
+<script>
+function loadComponent(id, file) {
+  fetch(file).then(r => r.text()).then(h => document.getElementById(id).innerHTML = h);
+}
+loadComponent('header', 'header.html');
+loadComponent('footer', 'footer.html');
+</script>
+<script src="site.js"></script>
 
 <!-- STATS STRIP REMOVED -->
 
@@ -668,6 +678,8 @@ loadComponent('footer', 'footer.html');
 </script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});document.body.scrollTop=0;document.documentElement.scrollTop=0">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});document.body.scrollTop=0;document.documentElement.scrollTop=0">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 </body>
 </html>
