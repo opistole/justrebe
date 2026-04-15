@@ -1,0 +1,41 @@
+/* WHO IT'S FOR GRID RESTORED */
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 36px;
+}
+.wc {
+  background: #fff;
+  border-radius: 10px;
+  padding: 28px 24px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  border-left: 3px solid #638D13;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.wc:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(3,78,100,.1);
+  border-color: #034E64;
+}
+.wc-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 7px;
+}
+.wc-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .who-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .who-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -7,6 +7,69 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+
+/* OUTCOMES SECTION RESTORED */
+.outcomes-section {
+  background: #fff;
+  padding: 80px 0 90px;
+}
+.outcomes-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.outcome-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 30px;
+  box-shadow: 0 4px 20px rgba(3,78,100,.07);
+  border: 1px solid rgba(3,78,100,.06);
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s,box-shadow .3s;
+}
+.outcome-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,#034E64,#FEB909);
+}
+.outcome-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(3,78,100,.14);
+}
+.outcome-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg,#034E64,#0a6a87);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(3,78,100,.2);
+}
+.outcome-label {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #034E64;
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+.outcome-text {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.7;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{width:100%;zoom:1;-webkit-transform:translateZ(0);-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{width:100%;max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
@@ -45,7 +108,16 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .hh{margin:0 auto 24px;max-width:900px}
 .hs{max-width:660px;margin:0 auto 44px}
 .hb{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-.hero-img{width:100%;max-height:680px;object-fit:cover;object-position:top;border-radius:12px;margin-top:80px;box-shadow:0 8px 40px rgba(3,78,100,.15)}
+.hero-img{
+  width:100%;
+  height:900px;
+  max-height:1400px;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:12px;
+  margin-top:80px;
+  box-shadow:0 8px 40px rgba(3,78,100,.15);
+}
 
 /* STATS STRIP */
 .stats-strip{background:#034E64;padding:32px 0}
@@ -270,36 +342,28 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 <div class="container">
   <div class="eyebrow reveal">ReBe Education</div>
   <h1 class="h1 hh reveal">Whole Educators.<br><span class="ac">Whole Students. Whole Schools.</span></h1>
-  <p class="blg hs reveal">The first Whole Literacy platform built for K-12— designed with ACE-informed Health Boosts Content, Science of Reading Foundation, Financial and Digital Literacy Strategies- all focusing on the root causes of disengagement, burnout, and disconnection across our school communities.</p>
+  <p class="blg hs reveal" style="max-width:900px;margin:0 auto 44px;">The first Whole Literacy platform built for K-12— designed with ACE-informed Health Boosts Content, Science of Reading Foundation, Financial and Digital Literacy Strategies—all focusing on the root causes of disengagement, burnout, and disconnection across our school communities.</p>
   <div class="hb reveal">
     <a href="pilot.html" class="btn bt">Apply for a Pilot →</a>
     <a href="#epics" class="btn bo">See How It Works ↓</a>
   </div>
-  <img class="hero-img reveal" src="https://static.wixstatic.com/media/1d3e2c_c7f89c9a394042d49f5209990b993380~mv2.jpg" alt="Students in a classroom" />
+  <img class="hero-img reveal" src="Images/Education.jpg" alt="Students in a classroom" />
 </div>
 </section>
 
-<!-- STATS STRIP -->
-<div class="stats-strip">
-<div class="container">
-<div class="sg">
-  <div class="sc2 reveal"><div class="sv">76%</div><div class="sl">Students with ACEs</div><div class="sd">of U.S. students have experienced at least 1 ACE</div><span class="ss">CDC Youth Risk Survey</span></div>
-  <div class="sc2 reveal"><div class="sv">5×</div><div class="sl">Attendance Impact</div><div class="sd">more attendance issues for students with ACEs</div><span class="ss">Kaiser Permanente</span></div>
-  <div class="sc2 reveal"><div class="sv">68%</div><div class="sl">Educator Burnout</div><div class="sd">of educators report emotional exhaustion</div><span class="ss">Gallup 2024</span></div>
-  <div class="sc2 reveal"><div class="sv">66%</div><div class="sl">Sadness & Hopelessness</div><div class="sd">of students have persistent feelings of sadness or hopelessness</div><span class="ss">CDC, 2023</span></div>
-  <div class="sc2 reveal"><div class="sv">40%</div><div class="sl">Below Grade Level</div><div class="sd">of 4th graders cannot read on grade level</div><span class="ss">NAEP, 2024</span></div>
-</div>
-</div>
-</div>
+<!-- STATS STRIP REMOVED -->
 
 <!-- PROBLEM -->
-<section class="section sw">
+<section class="section" style="background:linear-gradient(135deg,#f2ede8 0%,#e6f2fa 100%);">
 <div class="container">
 <div class="two-col" style="gap:48px">
   <div class="reveal">
     <div class="eyebrow">The Classroom Crisis</div>
     <h2 class="h2" style="margin-bottom:16px">The Challenge in Today’s Schools</h2>
-    <p class="lead">Educational outcomes are at historic lows and schools are facing overlapping challenges that affect both students and educators. Classrooms aren’t just academic spaces—they’re emotional ecosystems. Every educator brings their own life experience into the room. So does every student.</p>
+    <p class="lead">Educational outcomes are at historic lows and schools are facing overlapping challenges that affect both students and educators. Every educator brings their own life experience into the room. So does every student.</p>
+    <div style="margin:24px 0 0 0;padding:20px 18px;background:#fffbe6;border-left:5px solid #FEB909;border-radius:12px;box-shadow:0 4px 18px rgba(254,185,9,.08);font-size:18px;font-weight:700;color:#F06905;max-width:520px;">
+      “Classrooms aren’t just academic spaces—they’re emotional ecosystems.”
+    </div>
 
     <div style="display:flex;flex-direction:column;gap:14px;margin-top:24px">
       <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c-4.97 0-7-3.58-7-7 0-4 3.5-7.5 3.5-7.5S10 9 10 6c0-1-.5-2-1-3 2.5 1 5.5 4 5.5 7 .5-.5 1.5-2 1.5-2s2 2.5 2 5c0 3.42-2.03 7-6 7z"/></svg></div><div class="crisis-text">Educators are burning out at historic rates</div></div>
@@ -307,7 +371,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="crisis-item"><div class="crisis-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F06905" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg></div><div class="crisis-text">Administrators are managing behavior more than academic outcomes</div></div>
     </div>
     <p class="lead" style="margin-top:24px;font-size:14px">When educators and students carry unseen stress, it shows up in burnout, behavior, and disengagement. Collectively, these challenges constitute a drastic crisis in which students lack adequate literacy, life skills, and wellness support to thrive, while educators are also contending with unaddressed adverse childhood experiences (ACEs), burnout and increasing attrition rates.</p>
-      </div>
+  </div>
   <div class="reveal-right">
     <div style="display:flex;flex-direction:column;gap:20px">
       <div class="crisis-card">
@@ -318,12 +382,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       </div>
       <div class="crisis-card">
         <div class="crisis-card-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#034E64" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span>Student Crisis</span></div>
-        <div class="crisis-stat-row"><div class="crisis-stat-num">3 in 4</div><div class="crisis-stat-desc">high school students experienced one or more ACEs; 1 in 5 experienced four or more<span class="crisis-src">CDC, 2024</span></div></div>
+        <div class="crisis-stat-row"><div class="crisis-stat-num">75%</div><div class="crisis-stat-desc">high school students experienced one or more ACEs; 1 in 5 experienced four or more<span class="crisis-src">CDC, 2024</span></div></div>
         <div class="crisis-stat-row"><div class="crisis-stat-num">66%</div><div class="crisis-stat-desc">of students have persistent feelings of sadness or hopelessness<span class="crisis-src">CDC, 2023</span></div></div>
         <div class="crisis-stat-row"><div class="crisis-stat-num">40%</div><div class="crisis-stat-desc">of 4th graders cannot read on grade level<span class="crisis-src">NAEP, 2024</span></div></div>
       </div>
       <div style="text-align:center;padding:20px 24px;background:linear-gradient(135deg,#034E64,#0a6a87);border-radius:14px;color:#fff">
-        <p style="font-size:15px;font-weight:600;line-height:1.5;margin:0">These aren’t just policy problems. They’re people problems—and <span style="color:#FEB909;font-weight:800">ReBe offers people-first solutions.</span></p>
+        <p style="font-size:15px;font-weight:600;line-height:1.5;margin:0">These are not just policy problems. They are people problems—and<br><span style="color:#FEB909;font-weight:800">ReBe offers people-first solutions.</span></p>
       </div>
     </div>
   </div>
@@ -336,7 +400,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 <section style="background:linear-gradient(135deg,#034E64 0%,#0a6a87 50%,#034E64 100%);padding:56px 0;text-align:center;position:relative;overflow:hidden">
   <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,rgba(254,185,9,.06) 0%,transparent 60%);pointer-events:none"></div>
   <div class="container" style="position:relative;z-index:1">
-    <p style="font-size:clamp(16px,1.8vw,20px);color:rgba(255,255,255,.92);line-height:1.8;max-width:800px;margin:0 auto;font-weight:500">ReBe exists to address these dual crises by supporting the <span style="color:#FEB909;font-weight:700">whole educator</span> and <span style="color:#FEB909;font-weight:700">whole student</span>—equipping schools with tools that are <span style="color:#FEB909;font-weight:700">trauma-informed</span>, <span style="color:#FEB909;font-weight:700">literacy-rich</span>, and <span style="color:#FEB909;font-weight:700">culturally responsive</span>.</p>
+    <p style="font-size:clamp(16px,1.8vw,20px);color:rgba(255,255,255,.92);line-height:1.8;max-width:800px;margin:0 auto;font-weight:500">ReBe exists to address these dual crises by supporting the <span style="color:#FEB909;font-weight:700">whole educator</span> and <span style="color:#FEB909;font-weight:700">whole student</span>—igniting wholeness—true wellness, productivity, and social connection within a literacy rich environment.</p>
   </div>
 </section>
 
@@ -348,7 +412,8 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   <div class="core-header reveal">
     <div class="eyebrow" style="justify-content:center">Our Solution</div>
     <h2 class="h2">Education’s Core Components</h2>
-    <p class="lead" style="max-width:700px;margin:16px auto 0;text-align:center">Our students and teachers deserve more than good intentions. ReBe delivers solutions-driven resources across three integrated pillars.</p>
+    <p class="lead" style="max-width:700px;margin:16px auto 0;text-align:center">Our students and teachers deserve more than good intentions.</p>
+    <p class="lead" style="max-width:700px;margin:0 auto 0;text-align:center">ReBe delivers solutions-driven resources across three integrated pillars.</p>
   </div>
   <div class="core-grid">
     <div class="core-card reveal">
@@ -374,10 +439,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 </section>
 
 <!-- OUTCOMES -->
-<section class="outcomes-section section">
+<section class="outcomes-section section outcomes-bg">
 <div class="container">
   <div class="outcomes-header reveal">
-    <div class="eyebrow" style="justify-content:center">ReBe’s Solutions</div>
+    <!-- Eyebrow removed as requested -->
     <h2 class="h2">Real outcomes for real people.</h2>
   </div>
   <div class="outcomes-grid">
@@ -410,11 +475,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
     <p style="font-size:15px;color:rgba(255,255,255,.75);max-width:740px;margin:0 auto;line-height:1.7">ReBe addresses the five pathways of student wholeness—the root of sustainable learning and growth. ReBe’s EPICS are 7–10 minute Health Boosts for K–12 students, organized into five EPICS pathways with a total of 25 boosts per grade.</p>
   </div>
   <div class="epics-grid">
-  <div class="ec" style="border-top:3px solid #f4b183"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_07903f6702b14b86aa893bead03b6d17~mv2.png" alt="Emotional" /><div class="ec-title">E — Emotional</div><p class="ec-desc">Helping students recognize and regulate their emotions for resilience and stronger relationships.</p><div class="ec-keywords"><span class="ec-kw">Gratefulness</span><span class="ec-kw">Joyfulness</span><span class="ec-kw">Resilience</span><span class="ec-kw">Self-Awareness</span><span class="ec-kw">Self-Regulation</span></div></div>
-  <div class="ec" style="border-top:3px solid #a9d18e"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_f7bccc09be054724bcff61cf006a467e~mv2.png" alt="Physical" /><div class="ec-title">P — Physical</div><p class="ec-desc">Building habits of movement, nutrition, and self-care that fuel focus and well-being.</p><div class="ec-keywords"><span class="ec-kw">Movement</span><span class="ec-kw">Nutrition</span><span class="ec-kw">Peacefulness</span><span class="ec-kw">Self-Care</span><span class="ec-kw">Self-Control</span></div></div>
-  <div class="ec" style="border-top:3px solid #8faadc"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_ea59bff4a9414e62a25668433d93e0e9~mv2.png" alt="Intellectual" /><div class="ec-title">I — Intellectual</div><p class="ec-desc">Strengthening critical thinking, executive function, and motivation for deeper learning.</p><div class="ec-keywords"><span class="ec-kw">Decision-Making</span><span class="ec-kw">Cognitive Capacity</span><span class="ec-kw">Critical Thinking</span><span class="ec-kw">Executive Function</span><span class="ec-kw">Self-Motivation</span></div></div>
-  <div class="ec" style="border-top:3px solid #ffd966"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_7df3f260e662400092688830757bace2~mv2.png" alt="Cultural" /><div class="ec-title">C — Cultural</div><p class="ec-desc">Building cultures of civility, respect, and open-mindedness in every classroom.</p><div class="ec-keywords"><span class="ec-kw">Civility</span><span class="ec-kw">Civil Discourse</span><span class="ec-kw">Compassionate Love</span><span class="ec-kw">Conflict Resolution</span><span class="ec-kw">Open Mindedness</span></div></div>
-  <div class="ec" style="border-top:3px solid #c5a3d9"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_3a253f928b2544638d9cb530da65be7d~mv2.png" alt="Social" /><div class="ec-title">S — Social</div><p class="ec-desc">Developing communication, empathy, and collaboration for healthy relationships and community.</p><div class="ec-keywords"><span class="ec-kw">Communication</span><span class="ec-kw">Collaboration</span><span class="ec-kw">Empathy</span><span class="ec-kw">Kindness</span><span class="ec-kw">Trustworthiness</span></div></div>
+  <div class="ec" style="border-top:3px solid #f4b183"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_07903f6702b14b86aa893bead03b6d17~mv2.png" alt="Emotional" /><div class="ec-title">E — Emotional</div><p class="ec-desc">Helping students recognize and regulate their emotions for resilience and stronger relationships.</p></div>
+  <div class="ec" style="border-top:3px solid #a9d18e"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_f7bccc09be054724bcff61cf006a467e~mv2.png" alt="Physical" /><div class="ec-title">P — Physical</div><p class="ec-desc">Building habits of movement, nutrition, and self-care that fuel focus and well-being.</p></div>
+  <div class="ec" style="border-top:3px solid #8faadc"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_ea59bff4a9414e62a25668433d93e0e9~mv2.png" alt="Intellectual" /><div class="ec-title">I — Intellectual</div><p class="ec-desc">Strengthening critical thinking, executive function, and motivation for deeper learning.</p></div>
+  <div class="ec" style="border-top:3px solid #ffd966"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_7df3f260e662400092688830757bace2~mv2.png" alt="Cultural" /><div class="ec-title">C — Cultural</div><p class="ec-desc">Building cultures of civility, respect, and open-mindedness in every classroom.</p></div>
+  <div class="ec" style="border-top:3px solid #c5a3d9"><img class="ec-hex" src="https://static.wixstatic.com/media/1d3e2c_3a253f928b2544638d9cb530da65be7d~mv2.png" alt="Social" /><div class="ec-title">S — Social</div><p class="ec-desc">Developing communication, empathy, and collaboration for healthy relationships and community.</p></div>
 </div>
 </div>
 </section>
@@ -428,72 +493,25 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   <p class="labs-sub">ReBe’s Literacy LABS™ (Learning Applied By Students) provides intentional spaced practice posturing a culture of inquiry and rigor. There are five Literacy LABS™ with four Strategic Stations at each of the LABS™.</p>
 </div>
 <div class="labs-grid">
-  <div class="lab-card reveal" onclick="this.querySelector('.lab-expand').classList.toggle('open')">
+  <div class="lab-card reveal">
     <div class="lab-card-img"><img src="Images/wordworks.svg" alt="Word Work LABS"></div>
     <div class="lab-name">Word Work LABS™</div>
-    <div class="lab-tag">Click to expand</div>
-    <div class="lab-expand">
-      <div class="lab-station">Isolating & Identifying</div>
-      <div class="lab-station">Blending & Segmenting</div>
-      <div class="lab-station">Manipulating & Analyzing</div>
-      <div class="lab-station">Synthesizing & Spelling</div>
-    </div>
   </div>
-  <div class="lab-card reveal" onclick="this.querySelector('.lab-expand').classList.toggle('open')">
+  <div class="lab-card reveal">
     <div class="lab-card-img"><img src="Images/wordpower2.svg" alt="Word Power LABS"></div>
     <div class="lab-name">Word Power LABS™</div>
-    <div class="lab-tag">Click to expand</div>
-    <div class="lab-expand">
-      <div class="lab-station">Associating</div>
-      <div class="lab-station">Categorizing</div>
-      <div class="lab-station">Analyzing Morphemes</div>
-      <div class="lab-station">Contextualizing</div>
-    </div>
   </div>
-  <div class="lab-card reveal" onclick="this.querySelector('.lab-expand').classList.toggle('open')">
+  <div class="lab-card reveal">
     <div class="lab-card-img"><img src="Images/contentpower.svg" alt="Content Power LABS"></div>
     <div class="lab-name">Content Power LABS™</div>
-    <div class="lab-tag">Click to expand</div>
-    <div class="lab-expand">
-      <div class="lab-station">Inferring</div>
-      <div class="lab-station">Questioning</div>
-      <div class="lab-station">Determining Importance</div>
-      <div class="lab-station">Summarizing</div>
-    </div>
   </div>
-  <div class="lab-card reveal" onclick="this.querySelector('.lab-expand').classList.toggle('open')">
+  <div class="lab-card reveal">
     <div class="lab-card-img"><img src="Images/finacialliteracy2.svg" alt="Financial Literacy LABS"></div>
     <div class="lab-name">Financial Literacy LABS™</div>
-    <div class="lab-tag">Click to expand</div>
-    <div class="lab-expand">
-      <div class="lab-grade">K–5</div>
-      <div class="lab-station">Counting & Identifying Money</div>
-      <div class="lab-station">Managing Money</div>
-      <div class="lab-station">Earning Money</div>
-      <div class="lab-station">Spending & Saving Money</div>
-      <div class="lab-grade" style="margin-top:10px">6–12</div>
-      <div class="lab-station">Budgeting & Managing Money</div>
-      <div class="lab-station">Consuming & Producing</div>
-      <div class="lab-station">Trading Goods & Services</div>
-      <div class="lab-station">Earning Money</div>
-    </div>
   </div>
-  <div class="lab-card reveal" onclick="this.querySelector('.lab-expand').classList.toggle('open')">
+  <div class="lab-card reveal">
     <div class="lab-card-img"><img src="Images/digitalliteracy.svg" alt="Digital Literacy LABS"></div>
     <div class="lab-name">Digital Literacy LABS™</div>
-    <div class="lab-tag">Click to expand</div>
-    <div class="lab-expand">
-      <div class="lab-grade">K–5</div>
-      <div class="lab-station">Digital Citizenship</div>
-      <div class="lab-station">Digital Safety</div>
-      <div class="lab-station">Interacting & Engaging with AI</div>
-      <div class="lab-station">Creating & Collaborating with AI</div>
-      <div class="lab-grade" style="margin-top:10px">6–12</div>
-      <div class="lab-station">Digital Safety</div>
-      <div class="lab-station">Creating/Collaborating with AI</div>
-      <div class="lab-station">Managing AI</div>
-      <div class="lab-station">Designing & Applying AI</div>
-    </div>
   </div>
 </div>
 
@@ -503,64 +521,63 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 <!-- WHO IT'S FOR -->
 <section class="section sc">
 <div class="container">
-<div style="margin-bottom:48px">
-  <div class="eyebrow reveal">Who It's For</div>
-  <h2 class="h2 reveal">Built for every level of the school community.</h2>
-</div>
-<div class="who-grid">
-  <div class="wc reveal"><div class="wc-title">Classroom Teachers</div><div class="wc-desc">Ready-to-use resources that integrate seamlessly with existing curriculum and daily routines</div></div>
-  <div class="wc reveal"><div class="wc-title">School Administrators</div><div class="wc-desc">Aggregated culture insights and outcomes reporting — without individual student disclosure</div></div>
-  <div class="wc reveal"><div class="wc-title">District Leaders &amp; Instructional Coaches</div><div class="wc-desc">Scalable district-wide implementation with Whole Literacy professional development — including Health, Science of Reading, Financial and Digital Literacy.</div></div>
-  <div class="wc reveal"><div class="wc-title">Special Education Teams &amp; Alternative Education</div><div class="wc-desc">Differentiated content that meets students where they are — emotionally, physically, intellectually, culturally, and socially. Includes youth programs and alternative education pathways.</div></div>
-  <div class="wc reveal"><div class="wc-title">School Counselors</div><div class="wc-desc">A science-informed framework to reinforce social-emotional learning school-wide</div></div>
-  <div class="wc reveal"><div class="wc-title">K–12 Public, Private &amp; Charter Schools</div><div class="wc-desc">Comprehensive EPICS™ Health Boosts and Literacy LABS™ for diverse school settings and student populations.</div></div>
-  <div class="wc reveal"><div class="wc-title">Higher Education &amp; Educator Preparation</div><div class="wc-desc">Equipping pre-service and in-service educators with whole-literacy frameworks for classroom-ready implementation.</div></div>
-  <div class="wc reveal"><div class="wc-title">Student Support Services</div><div class="wc-desc">Social-emotional and behavioral health resources for counselors, social workers, and student support professionals.</div></div>
-  <div class="wc reveal"><div class="wc-title">Homeschool &amp; Micro-School Networks</div><div class="wc-desc">Flexible, self-paced EPICS Health Boosts and Literacy LABS™ for non-traditional learning environments.</div></div>
+  <div style="margin-bottom:48px">
+    <div class="eyebrow reveal">Who It's For</div>
+    <h2 class="h2 reveal">Built for every level of the school community.</h2>
+  </div>
+  <div class="who-grid">
+    <div class="wc reveal"><div class="wc-title">Classroom Teachers</div><div class="wc-desc">Ready-to-use resources that integrate seamlessly with existing curriculum and daily routines</div></div>
+    <div class="wc reveal"><div class="wc-title">School Administrators</div><div class="wc-desc">Aggregated culture insights and outcomes reporting — without individual student disclosure</div></div>
+    <div class="wc reveal"><div class="wc-title">District Leaders &amp; Instructional Coaches</div><div class="wc-desc">Scalable district-wide implementation with Whole Literacy professional development — including Health, Science of Reading, Financial and Digital Literacy.</div></div>
+    <div class="wc reveal"><div class="wc-title">Special Education Teams &amp; Alternative Education</div><div class="wc-desc">Differentiated content that meets students where they are — emotionally, physically, intellectually, culturally, and socially. Includes youth programs and alternative education pathways.</div></div>
+    <div class="wc reveal"><div class="wc-title">School Counselors</div><div class="wc-desc">A science-informed framework to reinforce social-emotional learning school-wide</div></div>
+    <div class="wc reveal"><div class="wc-title">K–12 Public, Private &amp; Charter Schools</div><div class="wc-desc">Comprehensive EPICS™ Health Boosts and Literacy LABS™ for diverse school settings and student populations.</div></div>
+    <div class="wc reveal"><div class="wc-title">Higher Education &amp; Educator Preparation</div><div class="wc-desc">Equipping pre-service and in-service educators with whole-literacy frameworks for classroom-ready implementation.</div></div>
+    <div class="wc reveal"><div class="wc-title">Student Support Services</div><div class="wc-desc">Social-emotional and behavioral health resources for counselors, social workers, and student support professionals.</div></div>
+    <div class="wc reveal"><div class="wc-title">Homeschool &amp; Micro-School Networks</div><div class="wc-desc">Flexible, self-paced EPICS Health Boosts and Literacy LABS™ for non-traditional learning environments.</div></div>
   </div>
 </div>
 </section>
 
 
 <!-- DELIVERABLES -->
-<section class="section sc" id="deliverables">
-<div class="container">
-  <div class="reveal" style="text-align:center;margin-bottom:40px">
-    <div class="eyebrow" style="justify-content:center">What’s Included</div>
-    <h2 class="h2">Program Deliverables</h2>
-    <p class="blg" style="max-width:640px;margin:12px auto 0">Everything schools need to launch and sustain ReBe’s whole-literacy platform.</p>
+<section class="section" id="deliverables" style="background:#034E64;">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:40px">
+      <div class="eyebrow" style="justify-content:center;color:#FEB909;">What’s Included</div>
+      <h2 class="h2" style="color:#fff;">Program Deliverables</h2>
+      <p class="blg" style="max-width:640px;margin:12px auto 0;color:rgba(255,255,255,0.85);">Everything schools need to launch and sustain ReBe’s whole-literacy platform.</p>
+    </div>
+    <div class="del-grid reveal" style="align-items:stretch;">
+      <div class="del-card" style="background:#fff;border-radius:16px;box-shadow:0 2px 16px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:flex-start;height:100%;">
+        <div style="width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:#e6f2fa;border-top-left-radius:16px;border-top-right-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-bottom:4px solid #e8e2db;">
+          <img src="Images/LMS.jpg" alt="LMS platform" style="width:92%;height:92%;border-radius:12px;border:4px solid #fff;box-shadow:0 2px 12px rgba(3,78,100,.10);background:#fff;object-fit:cover;object-position:center;" />
+        </div>
+        <div class="del-body" style="flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:18px;">
+          <div class="del-title" style="color:#034E64;margin-bottom:6px;">K–12 Grade-level Health Boosts</div>
+          <div class="del-desc" style="color:#555;">Five EPICS™ pathways of wholeness — embedded into brief microlearning age-appropriate Literacy Health Boosts on a digital Learning Management System platform.</div>
+        </div>
+      </div>
+      <div class="del-card" style="background:#fff;border-radius:16px;box-shadow:0 2px 16px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:flex-start;height:100%;">
+        <div style="width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:#e6f2fa;border-top-left-radius:16px;border-top-right-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-bottom:4px solid #e8e2db;">
+          <img src="Images/LiteracyLabsLMS.jpg" alt="Literacy LABS LMS" style="width:92%;height:92%;border-radius:12px;border:4px solid #fff;box-shadow:0 2px 12px rgba(3,78,100,.10);background:#fff;object-fit:cover;object-position:center;" />
+        </div>
+        <div class="del-body" style="flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:18px;">
+          <div class="del-title" style="color:#034E64;margin-bottom:6px;">Literacy LABS™ Kits</div>
+          <div class="del-desc" style="color:#555;">5 differentiated Literacy LABS with 4 strategic stations each, aligned to the Science of Reading.</div>
+        </div>
+      </div>
+      <div class="del-card" style="background:#fff;border-radius:16px;box-shadow:0 2px 16px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:flex-start;height:100%;">
+        <div style="width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:#e6f2fa;border-top-left-radius:16px;border-top-right-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-bottom:4px solid #e8e2db;">
+          <img src="Images/BB-Ed.jpg" alt="BB the Bee - ReBe mascot" class="del-img" style="width:92%;height:92%;border-radius:12px;border:4px solid #fff;box-shadow:0 2px 12px rgba(3,78,100,.10);background:#fff;object-fit:cover;object-position:center;" />
+        </div>
+        <div class="del-body" style="flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:18px;">
+          <div class="del-title" style="color:#034E64;margin-bottom:6px;">Age-Appropriate K–12 Animated Videos</div>
+          <div class="del-desc" style="color:#555;">Introducing ReBe’s mascot, BB the Bee who narrates the big ideas and helps to answer the essential questions for the grade-level EPICS™ Health Boosts.</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="del-grid reveal">
-    <div class="del-card">
-      <div style="width:100%;height:190px;background:linear-gradient(135deg,#034E64,#0a6a87);display:flex;align-items:center;justify-content:center">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FEB909" stroke-width="1.5"><path d="M12 22c-4.97 0-7-3.58-7-7 0-4 3.5-7.5 3.5-7.5S10 9 10 6c0-1-.5-2-1-3 2.5 1 5.5 4 5.5 7 .5-.5 1.5-2 1.5-2s2 2.5 2 5c0 3.42-2.03 7-6 7z"/></svg>
-      </div>
-      <div class="del-body">
-        <div class="del-title">K–12 Grade-level Health Boosts</div>
-        <div class="del-desc">Five EPICS™ pathways of wholeness — embedded into brief microlearning age-appropriate Literacy Health Boosts on a digital Learning Management System platform.</div>
-      </div>
-    </div>
-    <div class="del-card">
-      <div style="width:100%;height:190px;background:linear-gradient(135deg,#F06905,#ff8534);display:flex;align-items:center;justify-content:center">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-      </div>
-      <div class="del-body">
-        <div class="del-title">Literacy LABS™ Kits</div>
-        <div class="del-desc">5 differentiated Literacy LABS with 4 strategic stations each, aligned to the Science of Reading.</div>
-      </div>
-    </div>
-    <div class="del-card">
-      <img src="Images/BB-Ed.jpg" alt="BB the Bee - ReBe mascot" class="del-img">
-      <div class="del-body">
-        <div class="del-title">Age-Appropriate K–12 Animated Videos</div>
-        <div class="del-desc">Introducing ReBe’s mascot, BB the Bee who narrates the big ideas and helps to answer the essential questions for the grade-level EPICS™ Health Boosts.</div>
-      </div>
-    </div>
-    
-      </div>
-    </div>
-  </div>
-</div>
 </section>
 
 <!-- OUTCOMES -->
@@ -621,6 +638,7 @@ loadComponent('header', 'header.html');
 loadComponent('footer', 'footer.html');
 </script>
 <script src="site.js">
+</script>
 ;(function(){var btn=document.getElementById("backToTop");function ck(){var st=window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop||0;if(btn){if(st>500)btn.classList.add("visible");else btn.classList.remove("visible")}var nav=document.querySelector(".site-nav");if(nav){if(st>40)nav.classList.add("scrolled");else nav.classList.remove("scrolled")}}window.addEventListener("scroll",ck,{passive:true});document.addEventListener("scroll",ck,{passive:true});if(document.body)document.body.addEventListener("scroll",ck,{passive:true});ck()})();
 </script>
 
