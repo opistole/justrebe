@@ -6,6 +6,14 @@
 <title>Education · ReBe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Education · ReBe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* Footer styles (inlined from footer.html) */
 .site-footer {
@@ -422,6 +430,70 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 <body>
 
 <div id="header"></div>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="Images/Logo.png" alt="ReBe" class="nav-logo-img"></a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.site-nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="education.html" class="nav-link">Education</a></li>
+      <li><a href="corporate.html" class="nav-link">Corporate</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="pilot.html" class="nav-cta">Apply for a Pilot</a></li>
+    </ul>
+  </div>
+</nav>
+<style>
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(3,78,100,.85);border-bottom:1px solid rgba(255,255,255,.15);transition:background .3s,box-shadow .3s,border-color .3s}
+.site-nav.scrolled{background:rgba(3,78,100,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.15);border-color:transparent}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-logo{text-decoration:none;display:flex;align-items:center;transition:opacity .2s}
+.nav-logo-img{height:56px;width:auto}
+.nav-logo:hover{opacity:.85}
+.nav-links{list-style:none;display:flex;align-items:center;gap:28px;margin:0;padding:0}
+.nav-links a{color:rgba(255,255,255,.95);text-decoration:none;font-size:15px;font-weight:500;letter-spacing:.03em;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-links .nav-cta{background:#FEB909;color:#1A1A1A;padding:10px 24px;border-radius:50px;font-weight:700;font-size:13px;letter-spacing:.04em;transition:background .2s,transform .2s}
+.nav-links .nav-cta:hover{background:#e5a708;transform:translateY(-1px)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:4px}
+.nav-toggle span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s}
+.site-nav.open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.site-nav.open .nav-toggle span:nth-child(2){opacity:0}
+.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media(max-width:768px){
+  .nav-inner{padding:0 24px}
+  .nav-toggle{display:flex}
+  .nav-links{position:absolute;top:72px;left:0;right:0;background:rgba(3,78,100,.98);backdrop-filter:blur(10px);flex-direction:column;gap:0;padding:0;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+  .site-nav.open .nav-links{max-height:400px;padding:12px 0;border-top:1px solid rgba(255,255,255,.08)}
+  .nav-links li{width:100%}
+  .nav-links a{display:block;padding:12px 24px;font-size:14px}
+  .nav-links .nav-cta{margin:8px 24px;text-align:center;display:block;border-radius:50px}
+}
+/* Active nav state */
+.nav-link.active{color:#FEB909;position:relative}
+.nav-link.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:#FEB909;border-radius:1px}
+html{scroll-behavior:smooth}
+</style>
+<script>
+(function(){
+  var nav=document.querySelector('.site-nav');
+  if(!nav)return;
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>40)nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+  var path=window.location.pathname.split('/').pop()||'index.html';
+  var links=nav.querySelectorAll('.nav-link');
+  links.forEach(function(link){
+    if(link.getAttribute('href')===path){
+      link.classList.add('active');
+    }
+  });
+})();
+</script>
 
 
 <!-- HERO -->
@@ -440,43 +512,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
 </section>
 <!-- Only one footer placeholder, back-to-top button, and scripts at the end -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="index.html" class="footer-logo"><img src="Images/Logo.png" alt="ReBe" class="footer-logo-img"></a>
-        <p class="footer-tagline">Rebuilding people from the inside out.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Solutions</h4>
-        <ul>
-          <li><a href="education.html">ReBe Education</a></li>
-          <li><a href="corporate.html">ReBe Corporate</a></li>
-          <li><a href="pilot.html">Apply for a Pilot</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Get in Touch</h4>
-        <ul>
-          <li><a href="mailto:hello@justrebe.com">hello@justrebe.com</a></li>
-          <li><a href="mailto:pilot@justrebe.com">pilot@justrebe.com</a></li>
-          <li><a href="mailto:invest@justrebe.com">invest@justrebe.com</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 ReBe. All rights reserved.</p>
-      <p class="footer-motto">Better Me. Better We.</p>
-    </div>
-  </div>
-</footer>
 <button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});document.body.scrollTop=0;document.documentElement.scrollTop=0">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
@@ -784,23 +819,46 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 })();
 </script>
 
-<script>
-function loadComponent(id, file) {
-  fetch(file).then(r => r.text()).then(h => document.getElementById(id).innerHTML = h);
-}
-loadComponent('header', 'header.html');
-loadComponent('footer', 'footer.html');
-</script>
-<script src="site.js"></script>
-<script>
-;(function(){var btn=document.getElementById("backToTop");function ck(){var st=window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop||0;if(btn){if(st>500)btn.classList.add("visible");else btn.classList.remove("visible")}var nav=document.querySelector(".site-nav");if(nav){if(st>40)nav.classList.add("scrolled");else nav.classList.remove("scrolled")}}window.addEventListener("scroll",ck,{passive:true});document.addEventListener("scroll",ck,{passive:true});if(document.body)document.body.addEventListener("scroll",ck,{passive:true});ck()})();
-</script>
-<button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});document.body.scrollTop=0;document.documentElement.scrollTop=0">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-<button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});document.body.scrollTop=0;document.documentElement.scrollTop=0">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-</button>
-</body>
-</html>
+
+
+<!-- FOOTER (inlined) -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo"><img src="Images/Logo.png" alt="ReBe" class="footer-logo-img"></a>
+        <p class="footer-tagline">Rebuilding people from the inside out.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="education.html">ReBe Education</a></li>
+          <li><a href="corporate.html">ReBe Corporate</a></li>
+          <li><a href="pilot.html">Apply for a Pilot</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get in Touch</h4>
+        <ul>
+          <li><a href="mailto:hello@justrebe.com">hello@justrebe.com</a></li>
+          <li><a href="mailto:pilot@justrebe.com">pilot@justrebe.com</a></li>
+          <li><a href="mailto:invest@justrebe.com">invest@justrebe.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ReBe. All rights reserved.</p>
+      <p class="footer-motto">Better Me. Better We.</p>
+    </div>
+  </div>
+</footer>
+<!-- END FOOTER -->
 </body>
 </html>
