@@ -1,5 +1,23 @@
 // ReBe Site-Wide Enhancements
 (function() {
+
+  // 0. Dynamically load header.html into #header
+  function loadHeader() {
+    var headerDiv = document.getElementById('header');
+    if (!headerDiv) return;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'header.html', true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        headerDiv.innerHTML = xhr.responseText;
+        // Re-run nav highlight after header loads
+        highlightActiveNav();
+      }
+    };
+    xhr.send();
+  }
+  loadHeader();
+
   // 1. Smooth scroll
   document.documentElement.style.scrollBehavior = 'smooth';
 
