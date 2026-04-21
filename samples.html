@@ -1,3 +1,22 @@
+/* LIVE APP BUTTON */
+.live-app-btn {
+  display: inline-block;
+  padding: 32px 64px;
+  font-size: 2rem;
+  font-weight: 900;
+  background: #FEB909;
+  color: #034E64;
+  border-radius: 18px;
+  text-decoration: none;
+  box-shadow: 0 8px 32px rgba(254,185,9,.22);
+  transition: background .2s, color .2s, transform .2s;
+  margin-bottom: 10px;
+}
+.live-app-btn:hover {
+  background: #ffd04a;
+  color: #022f3a;
+  transform: scale(1.04);
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,7 +138,7 @@ img{max-width:100%;height:auto}
 <!-- LIVE APP LINK -->
 <div class="sample-section fade-in">
   <div class="container" style="text-align:center; margin-bottom:32px;">
-    <a href="https://rebe-intro.vercel.app" target="_blank" rel="noopener" style="display:inline-block;padding:18px 36px;font-size:18px;font-weight:800;background:#FEB909;color:#034E64;border-radius:12px;text-decoration:none;box-shadow:0 4px 24px rgba(254,185,9,.18);transition:background .2s, color .2s;">Try the Live ReBe App →</a>
+    <a href="https://rebe-intro.vercel.app" target="_blank" rel="noopener" class="live-app-btn">Try the Live ReBe App →</a>
     <div style="margin-top:10px;font-size:13px;color:rgba(255,255,255,.6);">(Opens in a new tab)</div>
   </div>
 </div>
