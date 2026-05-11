@@ -10,7 +10,7 @@
 <link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#F2EDE8;color:#1A1A1A;overflow-x:hidden}
 
 /* ── Minimal header ── */
@@ -87,13 +87,13 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="fb-step">
         <div class="fb-step-num">Step 1</div>
         <p class="fb-step-text">Explore the app, moving through all sections.</p>
-        <a href="https://rebe-intro.vercel.app" target="_blank" rel="noopener" class="btn btn-teal">Explore the App &rarr;</a>
+        <a href="https://rebe-intro.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-teal">Explore the App &rarr;</a>
       </div>
 
       <div class="fb-step">
         <div class="fb-step-num">Step 2</div>
         <p class="fb-step-text">As soon as you have finished exploring the app, complete the feedback survey. (It will take you 10 minutes at the most!)</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScaBeBH6Bom3BoHfD1TOiU_d07mIqZm3InqmW3hA-tY8RWajw/viewform" target="_blank" rel="noopener" class="btn btn-gold">Take the Survey &rarr;</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScaBeBH6Bom3BoHfD1TOiU_d07mIqZm3InqmW3hA-tY8RWajw/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Take the Survey &rarr;</a>
       </div>
 
     </div>
@@ -109,7 +109,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
 <script>
   function loadComponent(id, file) {
-    fetch(file).then(r => r.text()).then(h => document.getElementById(id).innerHTML = h);
+    fetch(file).then(r => r.text()).then(h => document.getElementById(id).innerHTML = h).catch(function(err){ console.error('Failed to load ' + file, err); });
   }
   loadComponent('footer', 'footer.html');
 </script>
