@@ -34,7 +34,7 @@
   if (!document.querySelector('meta[name="description"]')) {
     var m = document.createElement('meta');
     m.name = 'description';
-    m.content = 'ReBe is an ACE-informed wellness platform rebuilding people from the inside out. Restoring identity, belonging, and purpose in schools and workplaces.';
+    m.content = 'ReBe is an ACE-informed wellbeing platform rebuilding people from the inside out. Restoring identity, belonging, and purpose in schools and workplaces.';
     document.head.appendChild(m);
   }
 
@@ -42,7 +42,7 @@
   if (!document.querySelector('meta[property="og:title"]')) {
     var ogTags = [
       ['og:title', document.title || 'ReBe'],
-      ['og:description', 'ACE-informed wellness platform restoring identity, belonging, and purpose in schools and workplaces.'],
+      ['og:description', 'ACE-informed wellbeing platform restoring identity, belonging, and purpose in schools and workplaces.'],
       ['og:type', 'website'],
       ['og:image', 'Images/Hero.jpg']
     ];
