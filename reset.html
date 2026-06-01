@@ -447,7 +447,11 @@
   .about-photo {
     position: relative; z-index: 1;
     width: 100%; aspect-ratio: 4/5; border-radius: 12px;
-    background: var(--bone) url('Images/elizabeth-facilitator.jpg') center top/cover;
+    background-color: var(--bone);
+    background-image: url('Images/elizabeth-facilitator.jpg');
+    background-image: image-set(url('Images/elizabeth-facilitator.webp') type('image/webp'), url('Images/elizabeth-facilitator.jpg') type('image/jpeg'));
+    background-position: center top;
+    background-size: cover;
   }
   .about-name {
     font-family: var(--serif); font-weight: 400; font-size: 32px;
@@ -624,8 +628,10 @@
 <!-- HERO -->
 <section class="hero" aria-labelledby="hero-h1">
   <picture>
+    <source media="(max-width: 640px)" type="image/webp" srcset="Images/Reset_616_port.webp">
     <source media="(max-width: 640px)" srcset="Images/Reset_616_port.png">
-    <img class="hero-banner" src="Images/RESET_616_Pres.png" alt="A woman lifting away a mask that dissolves into the wind, looking toward open sky and mountains.">
+    <source type="image/webp" srcset="Images/RESET_616_Pres.webp">
+    <img class="hero-banner" src="Images/RESET_616_Pres.png" width="1920" height="1080" alt="A woman lifting away a mask that dissolves into the wind, looking toward open sky and mountains." fetchpriority="high">
   </picture>
   <div class="hero-under">
     <p class="eyebrow-hero fade-in">A free 60-minute reset</p>
