@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>SMS Terms & Conditions — ReBe</title>
+<meta name="description" content="Terms and conditions for ReBe SMS messaging — program description, frequency, rates, and opt-out instructions." />
+<link rel="icon" type="image/png" href="favicon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --mist: #FAF9F7;
+    --navy: #060B50;
+    --slate: #212B37;
+    --body: #5A6470;
+    --muted: #9DA1A8;
+    --coral: #EA492E;
+    --bone: #E2E2E2;
+
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    --content-w: 760px;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--body);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (max-width: 640px) { body { font-size: 16px; } }
+
+  :focus-visible {
+    outline: 3px solid rgba(6,11,80,.35);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .bar {
+    border-bottom: 1px solid var(--bone);
+    background: var(--paper);
+  }
+  .bar-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; height: 56px;
+  }
+  .wordmark {
+    font-family: var(--sans); font-weight: 700;
+    color: var(--navy); letter-spacing: .02em; font-size: 18px;
+    text-decoration: none;
+  }
+  .wordmark span { color: var(--coral); }
+  .bar a.back {
+    font-family: var(--sans); font-weight: 600; font-size: 14px;
+    color: var(--navy); text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding: 4px 0;
+  }
+  .bar a.back:hover { border-bottom-color: var(--navy); }
+
+  main {
+    max-width: var(--content-w);
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+  @media (max-width: 640px) { main { padding: 40px 20px 64px; } }
+
+  .eyebrow {
+    font-family: var(--sans); text-transform: uppercase;
+    font-weight: 700; font-size: 11px; letter-spacing: .12em;
+    color: var(--coral); margin: 0 0 16px;
+  }
+
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(34px, 5vw, 48px); line-height: 1.15;
+    letter-spacing: -.01em;
+    color: var(--navy);
+    margin: 0 0 16px;
+  }
+  .updated {
+    font-family: var(--sans); font-size: 14px;
+    color: var(--muted); margin: 0 0 48px;
+  }
+
+  h2 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(22px, 2.6vw, 28px); line-height: 1.25;
+    color: var(--navy);
+    margin: 48px 0 16px;
+  }
+
+  p { margin: 0 0 18px; }
+
+  ul { padding-left: 20px; margin: 0 0 18px; }
+  li { margin-bottom: 8px; line-height: 1.65; }
+
+  a { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--coral); }
+
+  strong { color: var(--slate); font-weight: 700; }
+
+  .stop-help {
+    color: var(--coral);
+    font-weight: 700;
+    font-size: 1.05em;
+  }
+
+  hr {
+    border: none; height: 1px; background: var(--bone);
+    margin: 56px 0;
+  }
+
+  .callout {
+    background: var(--mist);
+    border-left: 3px solid var(--coral);
+    padding: 16px 20px;
+    border-radius: 0 10px 10px 0;
+    margin: 20px 0;
+    font-size: 15px;
+    color: var(--slate);
+  }
+
+  .summary-box {
+    background: var(--mist);
+    border: 1px solid var(--bone);
+    border-radius: 14px;
+    padding: 28px;
+    margin: 32px 0;
+  }
+  .summary-box dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 14px 24px;
+  }
+  .summary-box dt {
+    font-family: var(--sans); font-weight: 700;
+    font-size: 13px; text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--slate);
+  }
+  .summary-box dd {
+    margin: 0;
+    font-family: var(--sans); font-weight: 400;
+    color: var(--body);
+  }
+  @media (max-width: 640px) {
+    .summary-box dl { grid-template-columns: 1fr; gap: 4px 0; }
+    .summary-box dd { margin-bottom: 14px; }
+  }
+
+  footer {
+    background: var(--mist);
+    border-top: 1px solid var(--bone);
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .foot-line {
+    font-family: var(--sans); font-weight: 400; font-size: 13px;
+    color: var(--muted); margin: 0 0 14px;
+  }
+  .foot-links {
+    display: flex; gap: 24px; justify-content: center;
+    margin: 0 0 14px; flex-wrap: wrap;
+  }
+  .foot-links a {
+    font-family: var(--sans); font-weight: 700; font-size: 13px;
+    color: var(--navy); text-decoration: none;
+    letter-spacing: .02em;
+    padding: 8px 4px;
+  }
+  .foot-links a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-inner">
+    <a href="/" class="wordmark">Re<span>Be</span></a>
+    <a href="/" class="back">← Back to ReBe</a>
+  </div>
+</header>
+
+<main>
+  <p class="eyebrow">Legal · Mobile messaging</p>
+  <h1>SMS Terms &amp; Conditions</h1>
+  <p class="updated">Last updated: May 27, 2026</p>
+
+  <p>These Terms govern your participation in SMS (text message) communications from ReBe. By providing your mobile number and checking the SMS consent box at registration, you agree to these Terms.</p>
+
+  <div class="summary-box">
+    <dl>
+      <dt>Program name</dt>
+      <dd>ReBe Workshop &amp; Program Notifications</dd>
+
+      <dt>Operator</dt>
+      <dd>ReBe (justrebe.com)</dd>
+
+      <dt>Description</dt>
+      <dd>Transactional reminder SMS for ReBe-hosted free workshops, 6-week cohort programs, and 1:1 sessions.</dd>
+
+      <dt>Message frequency</dt>
+      <dd>Typically 2–4 messages around each event you've registered for.</dd>
+
+      <dt>Cost</dt>
+      <dd>Message and data rates may apply per your mobile carrier's plan. ReBe does not charge for messages.</dd>
+
+      <dt>Opt-out</dt>
+      <dd>Reply <span class="stop-help">STOP</span> at any time to cancel.</dd>
+
+      <dt>Help</dt>
+      <dd>Reply <span class="stop-help">HELP</span> for assistance.</dd>
+
+      <dt>Support contact</dt>
+      <dd><a href="mailto:hello@justrebe.com">hello@justrebe.com</a></dd>
+    </dl>
+  </div>
+
+  <h2>1. Program description</h2>
+  <p><strong>ReBe Workshop &amp; Program Notifications</strong> is an SMS messaging program operated by ReBe (justrebe.com). The program sends transactional and reminder text messages to participants who have voluntarily registered for our live workshops, 6-week cohort programs, or 1:1 sessions and have explicitly opted in to receive SMS messages.</p>
+  <p>Messages may include:</p>
+  <ul>
+    <li>Registration confirmation</li>
+    <li>Reminders before scheduled events (typically one day before and one hour before)</li>
+    <li>Links to join scheduled events (such as Zoom meeting links)</li>
+    <li>Brief follow-up messages after sessions, where appropriate</li>
+  </ul>
+  <p>This is not a marketing or promotional SMS program. All messages are tied to events you have registered for. We do not send promotional or advertising content via SMS.</p>
+
+  <h2>2. How to opt in</h2>
+  <p>You opt in to receive SMS messages from ReBe by actively checking a dedicated SMS consent checkbox at the time of registration on justrebe.com. The checkbox is separate from any other consent (such as email marketing) and is never pre-selected.</p>
+  <p><strong>Consent to receive SMS messages is not a condition of registration.</strong> You may register for any ReBe program without opting in to SMS — you will still receive email communications related to your registration.</p>
+
+  <h2>3. Message frequency</h2>
+  <p>Message frequency varies depending on the events you have registered for. Typically, you can expect <strong>2–4 messages around each event</strong>. Frequency may be higher during the week of a multi-week cohort program.</p>
+
+  <h2>4. Message and data rates</h2>
+  <p><strong>Message and data rates may apply</strong> per your mobile carrier's plan. ReBe does not charge you for SMS messages, but your carrier may charge standard messaging rates per your contract with them. Please consult your mobile carrier for specific rate information.</p>
+
+  <h2>5. How to opt out</h2>
+  <p>You can opt out of SMS messages from ReBe at any time by replying <span class="stop-help">STOP</span> to any message you receive from us. After you reply <span class="stop-help">STOP</span>:</p>
+  <ul>
+    <li>You will receive one final confirmation message acknowledging your opt-out.</li>
+    <li>No further SMS messages will be sent to your number for this program.</li>
+    <li>Your email communications and event registration are not affected.</li>
+  </ul>
+  <p>If you want to opt back in later, you can re-register on justrebe.com and check the SMS consent box again.</p>
+
+  <h2>6. How to get help</h2>
+  <p>Reply <span class="stop-help">HELP</span> to any SMS message from ReBe to receive an automated response with contact information.</p>
+  <p>For all other questions, contact support at:</p>
+  <div class="callout">
+    <strong>Email:</strong> <a href="mailto:hello@justrebe.com">hello@justrebe.com</a><br>
+    <strong>Web:</strong> <a href="https://justrebe.com">justrebe.com</a>
+  </div>
+
+  <h2>7. Carriers</h2>
+  <p>SMS messages are delivered through major US mobile carriers including AT&amp;T, Verizon, T-Mobile, Sprint, and others. Carriers are not liable for delayed or undelivered messages. Delivery is subject to your carrier's network conditions.</p>
+
+  <h2>8. Privacy</h2>
+  <p>Your mobile phone number and SMS consent record are stored securely and used only to deliver the messages described in this program. We do not sell, rent, or share your mobile information with third parties or affiliates for their marketing or promotional purposes. For full details, see our <a href="/privacy.html">Privacy Policy</a>.</p>
+
+  <h2>9. Changes to these terms</h2>
+  <p>We may update these SMS Terms from time to time. When we do, we will update the "Last updated" date at the top of this page. For material changes that affect your rights, we will make a reasonable effort to notify you by email or SMS before the change takes effect.</p>
+
+  <h2>10. Acceptance</h2>
+  <p>By providing your mobile phone number and checking the SMS consent box on the registration form, you confirm that you are the subscriber or authorized user of that mobile number, that you have read these Terms, and that you agree to receive automated SMS messages from ReBe at that number under the conditions described here.</p>
+
+  <hr>
+
+  <p style="font-size:14px; color:var(--muted);">These Terms apply solely to ReBe's SMS messaging program. For broader information about how we handle your data, see our <a href="/privacy.html">Privacy Policy</a>.</p>
+</main>
+
+<footer>
+  <p class="foot-line">ReBe — Rebuilding people from the inside out.</p>
+  <p class="foot-links">
+    <a href="/">Home</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="mailto:hello@justrebe.com">Contact</a>
+  </p>
+  <p class="foot-line">© 2026 ReBe. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>You Weren't Born Anxious — A Free Group Session with Elizabeth Good | ReBe</title>
+<meta name="description" content="A free 60-minute live group session with Elizabeth Good. You weren't born anxious, angry, stressed, or lonely — somewhere the script changed. An honest hour on how to get back to the real you. Tuesday, June 9, 2026 · 11:00 AM ET." />
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --mist: #FAF9F7;
+    --navy: #060B50;
+    --navy-dark: #040832;
+    --green: #449945;
+    --green-ink: #3A8438;
+    --green-wash: #F2F8F2;
+    --gold: #E3A01F;
+    --gold-ink: #B07D14;
+    --gold-wash: #FBF4E4;
+    --green-deep: #2B5D2C;
+    --blue-wash: #EEF3F8;
+    --soft-blue: #8DB0CD;
+    --coral: #EA492E;
+    --coral-dark: #D43E26;
+    --slate: #212B37;
+    --body: #4A535E;
+    --muted: #9DA1A8;
+    --bone: #E2E2E2;
+
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --display: 'Anton', 'Arial Narrow', Impact, sans-serif;
+
+    --content-w: 760px;
+    --letter-w: 680px;
+    --card-w: 560px;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+
+    --curl: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'><path d='M2,8 Q50,2 100,7 T198,6' stroke='%23449945' stroke-width='3' fill='none' stroke-linecap='round'/></svg>");
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--body);
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.75;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (max-width: 640px) { body { font-size: 16px; } }
+
+  .skip-link {
+    position: absolute; left: -9999px;
+    background: var(--navy); color: #fff;
+    padding: 10px 16px; border-radius: 6px;
+    z-index: 200; font-weight: 700;
+  }
+  .skip-link:focus { left: 16px; top: 16px; }
+
+  :focus-visible {
+    outline: 3px solid rgba(6,11,80,.4);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Signature gradient underline (animates in on reveal) */
+  .curl {
+    background-image: linear-gradient(90deg, var(--green), var(--gold));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% .14em;
+    padding-bottom: .02em;
+    border-radius: 2px;
+  }
+  .js .curl { background-size: 0% .16em; transition: background-size .7s var(--ease) .2s; }
+  .js .in .curl { background-size: 100% .16em; }
+  .sec-dark .curl { background-image: linear-gradient(90deg, #fff, var(--gold)); }
+
+  /* =======================================================
+     UTILITY BAR (transparent over hero, solid on scroll)
+     ======================================================= */
+  .util-bar {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--bone);
+  }
+  .util-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; height: 56px;
+  }
+  .wordmark {
+    font-family: var(--sans); font-weight: 700;
+    color: var(--navy); letter-spacing: .02em; font-size: 18px;
+    text-decoration: none;
+    transition: color .25s var(--ease);
+  }
+  .wordmark span { color: var(--green); }
+  .util-cta {
+    font-family: var(--sans); font-weight: 700;
+    color: var(--navy); font-size: 14px;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding: 6px 0;
+    transition: color .25s var(--ease), border-color .15s var(--ease);
+  }
+  .util-cta:hover { border-bottom-color: currentColor; }
+  @media (max-width: 640px) {
+    .util-cta { display: none; }
+    .util-inner { justify-content: center; }
+  }
+
+  /* =======================================================
+     HERO — full-bleed photo, navy→green gradient, type bottom-left
+     ======================================================= */
+  .hero { position: relative; background: var(--paper); }
+  .hero-banner { display: block; width: 100%; height: auto; border-bottom: 4px solid var(--green); }
+  .hero-under {
+    position: relative;
+    max-width: 900px; margin: 0 auto;
+    padding: 56px 24px 72px;
+    text-align: center;
+  }
+  .hero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 26px; justify-content: center; }
+  .hero-chip {
+    font-family: var(--sans); font-weight: 700; font-size: 13px;
+    letter-spacing: .05em; text-transform: uppercase;
+    padding: 11px 16px; border-radius: 8px; line-height: 1;
+  }
+  .hero-chip--gold { background: var(--gold); color: var(--navy-dark); }
+  .hero-chip--green { background: var(--green); color: #fff; }
+  .hero-chip--ghost { background: transparent; color: var(--navy); border: 1.5px solid rgba(6,11,80,.28); }
+  @media (max-width: 860px) {
+    .hero-under { padding: 40px 20px 56px; }
+  }
+
+  .eyebrow-hero {
+    font-family: var(--sans);
+    text-transform: uppercase; font-weight: 700;
+    font-size: 12px; letter-spacing: .16em;
+    color: var(--green-ink);
+    margin: 0 0 20px;
+  }
+
+  .h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    color: var(--navy);
+    text-transform: uppercase;
+    font-size: clamp(26px, 3.4vw, 42px);
+    line-height: 1.05;
+    letter-spacing: .01em;
+    margin: 0 auto 18px;
+    max-width: 22ch;
+  }
+  .h1 .born { color: var(--green); }
+  .h1-expand { display: block; }
+  .h1-expand .fade-word {
+    opacity: 0;
+    display: inline-block;
+    animation: fadeWord .5s var(--ease) forwards;
+  }
+  .h1-expand .fade-word:nth-child(1) { animation-delay: .7s; }
+  .h1-expand .fade-word:nth-child(2) { animation-delay: 1.0s; }
+  .h1-expand .fade-word:nth-child(3) { animation-delay: 1.3s; }
+  @keyframes fadeWord { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .subhead-hero {
+    font-family: var(--sans); font-weight: 400;
+    font-size: clamp(17px, 2.1vw, 21px);
+    line-height: 1.6;
+    color: var(--body);
+    margin: 0 auto 30px;
+    max-width: 520px;
+  }
+
+  .cta-block { margin-bottom: 18px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans); font-weight: 700; font-size: 15px;
+    letter-spacing: .02em;
+    background: linear-gradient(135deg, #54AC54, var(--green-ink)); color: #fff;
+    padding: 17px 34px; min-height: 54px;
+    border: none; border-radius: 50px;
+    cursor: pointer; text-decoration: none;
+    box-shadow: 0 8px 22px rgba(68,153,69,.28);
+    transition: transform .15s var(--ease), box-shadow .2s var(--ease), filter .15s var(--ease);
+  }
+  .btn:hover { filter: brightness(1.07); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(68,153,69,.38); }
+  .btn:active { transform: translateY(0); }
+  .btn[disabled] { opacity: .75; cursor: not-allowed; transform: none; }
+  .btn-arrow { font-size: 16px; transition: transform .2s var(--ease); }
+  .btn:hover .btn-arrow { transform: translateX(2px); }
+
+  .microcopy-hero {
+    font-family: var(--sans); font-size: 13px; font-weight: 400;
+    color: var(--muted);
+    margin: 12px 0 0;
+  }
+  .meta-hero {
+    font-family: var(--sans); font-size: 13px; font-weight: 400;
+    color: rgba(255,255,255,.8);
+    letter-spacing: .03em; margin: 16px 0 0; line-height: 1.6;
+  }
+
+  /* =======================================================
+     HOOK PULL-QUOTE SECTION
+     ======================================================= */
+  .hook-section { background: var(--green-wash); padding: 64px 24px; }
+  .hook {
+    max-width: 760px; margin: 0 auto;
+    padding-left: 24px;
+    border-left: 4px solid var(--green);
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(24px, 3.4vw, 38px);
+    line-height: 1.3; color: var(--navy);
+  }
+
+  /* =======================================================
+     TRUST STRIP
+     ======================================================= */
+  .trust {
+    background: var(--paper);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--bone);
+  }
+  .trust-line {
+    font-family: var(--sans); font-weight: 400;
+    color: var(--body); font-size: 14px; line-height: 1.7;
+    max-width: 820px; margin: 0 auto;
+  }
+  .trust-line strong { color: var(--navy); font-weight: 700; }
+  .rtc-mark { border-bottom: 2px solid var(--green); padding-bottom: 1px; }
+  .trust-line .sep { color: var(--soft-blue); margin: 0 12px; }
+  @media (max-width: 640px) {
+    .trust-line .sep { display: none; }
+    .trust-line strong, .trust-line .seg { display: block; margin-bottom: 4px; }
+  }
+
+  /* =======================================================
+     SECTIONS
+     ======================================================= */
+  section { padding: 96px 24px; }
+  @media (max-width: 640px) { section { padding: 64px 20px; } }
+
+  .sec-green-wash { background: var(--green-wash); }
+  .sec-blue-wash  { background: var(--blue-wash); }
+  .sec-paper-alt  { background: var(--mist); }
+
+  .container { max-width: var(--content-w); margin: 0 auto; }
+  .container--letter { max-width: var(--letter-w); }
+  .container--card { max-width: var(--card-w); }
+
+  .eyebrow {
+    font-family: var(--sans); text-transform: uppercase; font-weight: 700;
+    font-size: 11px; letter-spacing: .12em;
+    color: var(--green-ink);
+    margin: 0 0 20px;
+  }
+  .eyebrow--center { text-align: center; }
+
+  .section-h {
+    font-family: var(--display); font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(30px, 4.6vw, 52px);
+    line-height: 1.18; letter-spacing: .01em;
+    color: var(--navy); margin: 0 0 24px;
+  }
+  .section-h em { font-style: normal; color: var(--green); }
+
+  .lede {
+    font-family: var(--sans); font-weight: 400;
+    font-size: 18px; line-height: 1.75; color: var(--body);
+    margin: 0 0 20px;
+  }
+
+  .info-list {
+    list-style: none; padding: 0; margin: 32px 0 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .info-list li {
+    font-family: var(--sans); font-weight: 400; font-size: 15px;
+    color: var(--body); display: flex; align-items: baseline; gap: 10px;
+  }
+  .info-list .ck { color: var(--green); font-weight: 700; }
+  .info-list strong { color: var(--navy); font-weight: 700; }
+
+  /* Who this is for */
+  .who-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px;
+    max-width: var(--content-w); margin: 0 auto;
+  }
+  @media (max-width: 800px) { .who-grid { grid-template-columns: 1fr; gap: 32px; } }
+  .who-list {
+    list-style: none; padding: 0; margin: 24px 0 0;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .who-list li {
+    position: relative; padding-left: 22px;
+    font-size: 17px; line-height: 1.55; color: var(--slate);
+  }
+  .who-list li::before {
+    content: ''; position: absolute; left: 0; top: 11px;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  }
+  .not-for { border-left: 2px solid var(--soft-blue); padding: 4px 0 4px 24px; }
+  .not-for-h {
+    font-family: var(--sans); text-transform: uppercase; font-weight: 700;
+    font-size: 12px; letter-spacing: .08em; color: var(--muted); margin: 0 0 12px;
+  }
+  .not-for p { font-size: 15px; line-height: 1.65; color: var(--body); margin: 0 0 10px; }
+  @media (max-width: 800px) {
+    .not-for {
+      border-left: none; background: var(--paper); border: 1px solid var(--bone);
+      border-radius: 14px; padding: 20px;
+    }
+  }
+
+  /* Framework */
+  .framework { text-align: center; }
+  .framework .container { max-width: var(--letter-w); }
+  .framework .eyebrow { display: inline-block; }
+  .stat-wrap { margin-top: 40px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.22); }
+  .stat-num {
+    display: block; font-family: var(--display); font-weight: 400;
+    font-size: clamp(80px, 12vw, 140px); line-height: 1.0; padding-bottom: .04em; margin-bottom: 8px;
+    background: linear-gradient(100deg, #fff 10%, var(--gold) 90%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .stat-text {
+    font-family: var(--serif); font-style: italic; font-size: 20px;
+    color: var(--green-ink); line-height: 1.5; display: block; max-width: 520px; margin: 0 auto;
+  }
+
+  /* Solid green beat + reusable feature bullets */
+  .sec-dark { background: var(--green-deep); }
+  .sec-dark .eyebrow { color: var(--gold); }
+  .sec-dark .section-h { color: #fff; }
+  .sec-dark .lede { color: rgba(255,255,255,.96); }
+  .sec-dark .stat-text { color: rgba(255,255,255,.96); }
+  .feat-list {
+    list-style: none; padding: 0; margin: 28px 0 0; max-width: 540px;
+    text-align: left; display: flex; flex-direction: column; gap: 14px;
+  }
+  .framework .feat-list { margin-left: auto; margin-right: auto; }
+  .feat-list li {
+    position: relative; padding-left: 32px;
+    font-family: var(--sans); font-size: 16px; line-height: 1.5; color: var(--slate);
+  }
+  .feat-list li::before {
+    content: '✓'; position: absolute; left: 0; top: 1px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--green); color: #fff; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; line-height: 1;
+  }
+  .sec-dark .feat-list li { color: rgba(255,255,255,.96); }
+  .sec-dark .feat-list li::before { background: #fff; color: var(--green-deep); }
+
+  /* Stat band */
+  .statband .container { text-align: center; }
+  .statband-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; margin-top: 40px; }
+  .statband-num {
+    display: block; font-family: var(--display); font-weight: 400;
+    font-size: clamp(52px, 7.5vw, 92px); line-height: 1.1; padding-bottom: .06em; margin-bottom: 10px;
+    background: linear-gradient(100deg, var(--green) 10%, var(--gold-ink) 90%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .statband-label {
+    display: block; font-family: var(--sans); font-size: 15px; line-height: 1.5;
+    color: var(--body); max-width: 240px; margin: 0 auto;
+  }
+  @media (max-width: 760px) { .statband-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+  /* Who-this-is-for cards */
+  .who-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 40px; }
+  .who-card {
+    background: var(--paper); border: 1px solid var(--bone); border-radius: 14px;
+    padding: 22px 20px; display: flex; gap: 14px; align-items: flex-start;
+    transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease);
+  }
+  .who-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(6,11,80,.08); border-color: var(--green); }
+  .who-card p { margin: 0; font-family: var(--sans); font-size: 15px; line-height: 1.5; color: var(--slate); }
+  .who-icon {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--green); color: #fff; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; line-height: 1;
+  }
+  .who-card--not { background: var(--blue-wash); border-color: var(--soft-blue); }
+  .who-card--not .who-icon { background: var(--coral); }
+  .who-card--not p strong { color: var(--navy); }
+  @media (max-width: 860px) { .who-cards { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .who-cards { grid-template-columns: 1fr; } }
+
+  /* Walkaway */
+  .walkaway { text-align: center; }
+  .walkaway .eyebrow { display: inline-block; }
+  .pull {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(34px, 5vw, 54px); color: var(--navy); line-height: 1.25;
+    margin: 0 0 32px; text-align: left;
+    padding-left: 20px; border-left: 4px solid var(--green);
+  }
+  .letter-body { text-align: left; font-size: 18px; line-height: 1.85; color: var(--body); }
+  .letter-body p { margin: 0 0 22px; }
+  .letter-body p:last-child { margin-bottom: 0; }
+  .walkaway .cta-block { margin-top: 48px; text-align: center; }
+  .walkaway .microcopy-dark { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+
+  /* About */
+  .about-grid {
+    display: grid; grid-template-columns: minmax(220px, 280px) 1fr; gap: 56px; align-items: start;
+    max-width: var(--content-w); margin: 0 auto;
+  }
+  @media (max-width: 800px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .about-photo-wrap { position: relative; width: 100%; }
+  @media (max-width: 800px) { .about-photo-wrap { max-width: 260px; } }
+  .about-photo-wrap::before {
+    content: ''; position: absolute; inset: 14px -14px -14px 14px;
+    background: var(--green); border-radius: 12px; z-index: 0;
+  }
+  .about-photo {
+    position: relative; z-index: 1;
+    width: 100%; aspect-ratio: 4/5; border-radius: 12px;
+    background: var(--bone) url('Images/elizabeth-facilitator.jpg') center top/cover;
+  }
+  .about-name {
+    font-family: var(--serif); font-weight: 400; font-size: 32px;
+    color: var(--navy); margin: 0 0 4px; line-height: 1.2;
+  }
+  .about-role { font-family: var(--sans); font-weight: 400; font-size: 14px; color: var(--muted); margin: 0 0 24px; }
+  .about-bio p { font-size: 16px; line-height: 1.8; color: var(--body); margin: 0 0 16px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .chip {
+    font-family: var(--sans); font-size: 12px; font-weight: 400; color: var(--body);
+    background: var(--paper); border: 1px solid rgba(141,176,205,.5);
+    padding: 6px 12px; border-radius: 50px; line-height: 1.3;
+  }
+  .chip strong { color: var(--navy); font-weight: 700; }
+
+  /* Form */
+  #register { padding: 64px 24px 96px; }
+  .form-card {
+    background: var(--paper);
+    border: 1px solid var(--bone); border-top: 4px solid var(--green);
+    border-radius: 14px; padding: 48px;
+    max-width: var(--card-w); margin: 0 auto;
+    box-shadow: 0 10px 40px rgba(6,11,80,.05);
+  }
+  @media (max-width: 640px) { .form-card { padding: 28px 22px; } }
+  .form-head { text-align: center; margin-bottom: 32px; }
+  .form-head .form-eyebrow {
+    display: inline-block; font-family: var(--sans); text-transform: uppercase;
+    font-weight: 700; font-size: 11px; letter-spacing: .12em; color: var(--green-ink); margin: 0 0 16px;
+  }
+  .form-head h2 {
+    font-family: var(--serif); font-weight: 400; font-style: italic; font-size: 28px;
+    color: var(--navy); margin: 0 0 10px; line-height: 1.2;
+  }
+  .form-head p { font-family: var(--sans); font-weight: 400; font-size: 14px; color: var(--muted); margin: 0; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 760px) { .field-row { grid-template-columns: 1fr; } }
+  .field { margin-bottom: 14px; }
+  .label {
+    display: block; font-family: var(--sans); text-transform: uppercase; font-weight: 700;
+    font-size: 12px; letter-spacing: .06em; color: var(--slate); margin-bottom: 8px;
+  }
+  .label .req { color: var(--coral); margin-left: 2px; }
+  .label .opt { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--muted); font-size: 12px; }
+
+  .input, .select {
+    width: 100%; background: var(--mist); border: 1px solid var(--bone); border-radius: 10px;
+    padding: 14px 16px; font-family: var(--sans); font-size: 16px; font-weight: 400;
+    color: var(--slate); line-height: 1.4; min-height: 52px;
+    transition: border-color .15s var(--ease), box-shadow .15s var(--ease);
+  }
+  .input:focus, .select:focus {
+    outline: none; border-color: var(--navy); border-width: 2px;
+    box-shadow: 0 0 0 3px rgba(6,11,80,.08); padding: 13px 15px;
+  }
+  .input[aria-invalid="true"], .select[aria-invalid="true"] { border-color: var(--coral); }
+  .field-error { display: none; font-family: var(--sans); font-size: 13px; color: var(--coral); margin-top: 6px; }
+  .field.has-error .field-error { display: block; }
+
+  .consent-box { background: var(--mist); border: 1px solid var(--bone); border-radius: 10px; padding: 16px; margin: 18px 0; }
+  .consent-row { display: flex; align-items: flex-start; gap: 12px; }
+  .consent-row input[type="checkbox"] { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--green); cursor: pointer; flex-shrink: 0; }
+  .consent-row label { font-family: var(--sans); font-size: 15px; font-weight: 400; color: var(--slate); line-height: 1.5; cursor: pointer; }
+  .consent-fine { font-family: var(--sans); font-size: 12px; line-height: 1.55; color: var(--muted); margin: 10px 0 0 32px; }
+  .consent-fine a { color: var(--navy); }
+
+  .submit-btn {
+    width: 100%; margin-top: 12px; background: linear-gradient(135deg, #54AC54, var(--green-ink)); color: #fff;
+    border: none; border-radius: 50px; padding: 18px 24px; min-height: 56px;
+    font-family: var(--sans); font-weight: 700; font-size: 16px; cursor: pointer;
+    box-shadow: 0 8px 22px rgba(68,153,69,.28);
+    transition: transform .15s var(--ease), box-shadow .2s var(--ease), filter .15s var(--ease);
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .submit-btn:hover:not([disabled]) { filter: brightness(1.07); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(68,153,69,.38); }
+  .submit-btn[disabled] { opacity: .8; cursor: wait; }
+
+  .privacy-note { font-family: var(--sans); font-size: 12px; color: var(--muted); margin: 14px 0 0; text-align: center; line-height: 1.55; }
+  .privacy-note a { color: var(--navy); }
+  .form-error {
+    display: none; background: var(--mist); border: 1px solid var(--coral);
+    border-radius: 10px; padding: 12px 16px; font-size: 14px; color: var(--coral); margin-bottom: 14px;
+  }
+  .form-error.shown { display: block; }
+
+  .success-card {
+    display: none; background: var(--paper); border: 2px solid var(--green);
+    border-radius: 14px; padding: 48px; text-align: center; max-width: var(--card-w); margin: 0 auto;
+  }
+  .success-card.shown { display: block; }
+  .success-card h2 { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: 38px; color: var(--navy); margin: 0 0 16px; }
+  .success-card p { font-size: 16px; line-height: 1.7; color: var(--body); margin: 0 0 16px; }
+  .success-date { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--navy); margin: 24px 0; }
+  .cal-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+  .cal-link {
+    font-family: var(--sans); font-size: 14px; font-weight: 700; color: var(--green-ink);
+    border: 1px solid var(--bone); background: var(--paper); padding: 10px 18px; border-radius: 50px; text-decoration: none;
+    transition: background .15s var(--ease), border-color .15s var(--ease);
+  }
+  .cal-link:hover { background: var(--green-wash); border-color: var(--green); }
+
+  /* After */
+  .after { text-align: center; }
+  .after .container { max-width: var(--letter-w); }
+  .after p { font-size: 17px; line-height: 1.75; color: var(--body); margin: 0 0 20px; }
+  .after .link {
+    display: inline-block; font-family: var(--sans); font-weight: 700; font-size: 15px;
+    color: var(--green-ink); border-bottom: 1px solid var(--green-ink); text-decoration: none; padding-bottom: 2px;
+  }
+  .after .link:hover { border-bottom-width: 2px; }
+
+  /* Footer */
+  footer { background: var(--mist); padding: 48px 24px; text-align: center; border-top: 1px solid var(--bone); }
+  .foot-line { font-family: var(--sans); font-weight: 400; font-size: 13px; color: var(--muted); margin: 0 0 14px; line-height: 1.6; }
+  .foot-links { display: flex; gap: 24px; justify-content: center; margin: 0 0 14px; flex-wrap: wrap; }
+  .foot-links a {
+    font-family: var(--sans); font-weight: 700; font-size: 13px; color: var(--navy); text-decoration: none;
+    letter-spacing: .02em; padding: 8px 4px;
+  }
+  .foot-links a:hover { text-decoration: underline; text-decoration-color: var(--green); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+
+  /* Scroll reveal */
+  .js main section > .container,
+  .js main .who-grid,
+  .js main .about-grid,
+  .js #register .form-card {
+    opacity: 0; transform: translateY(26px);
+    transition: opacity .7s var(--ease), transform .7s var(--ease);
+  }
+  .js main section > .container.in,
+  .js main .who-grid.in,
+  .js main .about-grid.in,
+  .js #register .form-card.in {
+    opacity: 1; transform: none;
+  }
+
+  /* Hero entrance */
+  .fade-in { opacity: 0; transform: translateY(12px); animation: fadeIn .6s var(--ease) forwards; }
+  .fade-in.d-1 { animation-delay: .1s; }
+  .fade-in.d-2 { animation-delay: .25s; }
+  .fade-in.d-3 { animation-delay: .4s; }
+  @keyframes fadeIn { to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    .h1-expand .fade-word { opacity: 1; }
+    .js main section > .container,
+    .js main .who-grid,
+    .js main .about-grid,
+    .js #register .form-card { opacity: 1 !important; transform: none !important; }
+    .js .curl { background-size: 100% .16em !important; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#register" class="skip-link">Skip to registration</a>
+
+<header class="util-bar" id="util">
+  <div class="util-inner">
+    <a href="/" class="wordmark">Re<span>Be</span></a>
+    <a href="#register" class="util-cta">Save my seat →</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-h1">
+  <picture>
+    <source media="(max-width: 640px)" srcset="Images/E_portrait.png">
+    <img class="hero-banner" src="Images/Hero.png" alt="A woman lifting away a mask that dissolves into the wind, looking toward open sky and mountains.">
+  </picture>
+  <div class="hero-under">
+    <p class="eyebrow-hero fade-in">A free 60-minute reset</p>
+    <h1 id="hero-h1" class="h1 fade-in d-1">Whatever rewrote your story — <span class="born">you can write it back.</span></h1>
+    <p class="subhead-hero fade-in d-2">Anxious, angry, stressed, lonely, numb, or just not yourself this season — none of it is where you have to stay. One honest, free hour with Elizabeth Good and a small group, to start finding your way back.</p>
+    <div class="hero-chips fade-in d-2">
+      <span class="hero-chip hero-chip--gold">11:00 AM ET</span>
+      <span class="hero-chip hero-chip--ghost">Tue · June 9, 2026</span>
+      <span class="hero-chip hero-chip--green">Live on Zoom · Free</span>
+    </div>
+    <div class="cta-block fade-in d-3">
+      <a href="#register" class="btn">Save my seat <span class="btn-arrow" aria-hidden="true">→</span></a>
+      <p class="microcopy-hero">Live only. Recording goes to attendees afterward.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOOK PULL-QUOTE -->
+<section class="hook-section" aria-label="The idea behind this hour">
+  <div class="container">
+    <p class="hook">You were trained to imagine danger before it arrives. We're gathering to unlearn that — and learn something better.</p>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust" aria-label="About your host">
+  <p class="trust-line">
+    <span class="seg">Led by <strong>Elizabeth Good</strong></span>
+    <span class="sep">·</span>
+    <span class="seg">Founder, <span class="rtc-mark">Real Talk Collective</span></span>
+    <span class="sep">·</span>
+    <span class="seg">20+ years working with adults in quiet burnout</span>
+  </p>
+</section>
+
+<!-- WHAT THIS HOUR IS -->
+<section aria-labelledby="what-h">
+  <div class="container">
+    <p class="eyebrow">What this hour is</p>
+    <h2 id="what-h" class="section-h">One free hour. Live, on Zoom. <span class="curl">Honestly</span> led.</h2>
+    <p class="lede">Sixty minutes with Elizabeth Good and a small group of adults quietly running the same loops — the worry, the anger, the numbness, the survival patterns no one chose. No slides. No homework. No upsell.</p>
+    <ul class="feat-list">
+      <li>Notice the story you've been living inside of</li>
+      <li>Name what's actually driving it</li>
+      <li>Practice picturing something different</li>
+    </ul>
+    <ul class="info-list">
+      <li><span class="ck" aria-hidden="true">✓</span> <strong>Tuesday, June 9, 2026</strong></li>
+      <li><span class="ck" aria-hidden="true">✓</span> <strong>11:00 AM Eastern</strong> &nbsp;·&nbsp; 8:00 AM Pacific</li>
+      <li><span class="ck" aria-hidden="true">✓</span> <strong>60 minutes</strong></li>
+      <li><span class="ck" aria-hidden="true">✓</span> <strong>Live on Zoom</strong> — link sent after you register</li>
+    </ul>
+  </div>
+</section>
+
+<!-- STAT BAND -->
+<section class="statband sec-green-wash" aria-label="What the research shows">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">What the research shows</p>
+    <h2 class="section-h" style="text-align:center;">It's not just you — and it's <span class="curl">not your fault</span>.</h2>
+    <div class="statband-grid">
+      <div class="statband-item">
+        <span class="statband-num">90%</span>
+        <span class="statband-label">of our thoughts just repeat — the same loop, day after day</span>
+      </div>
+      <div class="statband-item">
+        <span class="statband-num">by 7</span>
+        <span class="statband-label">the age most of our core beliefs are already set</span>
+      </div>
+      <div class="statband-item">
+        <span class="statband-num">1 in 10</span>
+        <span class="statband-label">of us are truly self-aware — the rest of us have blind spots</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGINATION FRAMEWORK -->
+<section class="framework sec-dark" aria-labelledby="framework-h">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">What we're actually doing</p>
+    <h2 id="framework-h" class="section-h">Most of us were never taught how to use our <span class="curl">imagination</span>.</h2>
+    <p class="lede">We were handed worry, anger, shame, and survival patterns — and ran them so long they started to feel like us. Learning to picture something different is the opposite. Not wishful thinking — it's rehearsal for a future your body hasn't lived yet.</p>
+    <ul class="feat-list">
+      <li>Grounded in trauma recovery and nervous-system regulation</li>
+      <li>Borrowed from elite performance coaching</li>
+      <li>Built on attachment repair — not positive thinking</li>
+    </ul>
+    <div class="stat-wrap">
+      <span class="stat-num">85%</span>
+      <span class="stat-text">of what you worry about never actually happens. Most of our thoughts just repeat on a loop. In one honest hour, we start to interrupt it.</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU'LL WALK AWAY WITH -->
+<section class="walkaway sec-paper-alt" aria-labelledby="walk-h">
+  <div class="container container--letter">
+    <p class="eyebrow eyebrow--center">What you'll walk away with</p>
+    <p class="pull" id="walk-h">This isn't a fix.</p>
+    <div class="letter-body">
+      <p>An hour for adults who are tired in a way that doesn't quite have a name yet. Come sit down. We'll name the loops, you'll meet others quietly in the same place, and you'll leave having practiced something most adults never do — picturing a future worth living. No pep talk. No homework. Just a window opening.</p>
+    </div>
+    <div class="cta-block">
+      <a href="#register" class="btn">Save my seat <span class="btn-arrow" aria-hidden="true">→</span></a>
+      <p class="microcopy-dark">Live only. Recording goes to attendees afterward.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT ELIZABETH -->
+<section aria-labelledby="host-h">
+  <div class="about-grid">
+    <div class="about-photo-wrap">
+      <div class="about-photo" role="img" aria-label="Elizabeth Good, founder of Real Talk Collective."></div>
+    </div>
+    <div>
+      <p class="eyebrow">Your host</p>
+      <h2 id="host-h" class="about-name">Elizabeth Good</h2>
+      <p class="about-role">Co-Founder &amp; Chief Strategy &amp; Vision Officer, ReBe · Founder, Real Talk Collective</p>
+      <div class="about-bio">
+        <p>Elizabeth Good is the Co-Founder and Chief Strategy &amp; Vision Officer of ReBe. After three decades across corporate leadership and global advocacy, she built ReBe to do one thing well: help people thrive from the inside out — by addressing not just the symptoms we carry, but the deeper patterns that quietly limit us.</p>
+        <p>She's a recognized pioneer in the work of healing and restoration, author of <em>Groomed</em> (HarperCollins, 2020) and <em>Speak the Unspeakable</em>, has delivered two TEDx talks, and has keynoted global stages from U.S. military leadership and the 2022 Global Strategy Forum in Austria to the Parliamentary Palace in Romania.</p>
+        <p>She'll lead the hour on June 9 the way she leads every conversation — plainly, with room, and without trying to sell you on a version of yourself you don't recognize.</p>
+      </div>
+      <div class="chips">
+        <span class="chip"><strong>Co-Founder</strong> · ReBe</span>
+        <span class="chip"><strong>Author</strong> · Groomed (HarperCollins, 2020)</span>
+        <span class="chip"><strong>2× TEDx</strong> Speaker</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section id="register" class="sec-paper-alt" aria-labelledby="form-h">
+  <div class="form-card" id="form-wrap">
+    <div class="form-head">
+      <p class="form-eyebrow">Save your seat</p>
+      <h2 id="form-h">It takes about 40 seconds.</h2>
+      <p>Tuesday, June 9 · 11 AM ET · 60 minutes · Free</p>
+    </div>
+
+    <div class="form-error" id="form-error" role="alert" aria-live="polite"></div>
+
+    <form id="register-form" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label class="label" for="first_name">First name <span class="req">*</span></label>
+          <input class="input" type="text" id="first_name" name="first_name" required autocomplete="given-name" aria-required="true">
+          <div class="field-error">Please enter your first name.</div>
+        </div>
+        <div class="field">
+          <label class="label" for="last_name">Last name <span class="req">*</span></label>
+          <input class="input" type="text" id="last_name" name="last_name" required autocomplete="family-name" aria-required="true">
+          <div class="field-error">Please enter your last name.</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="email">Email <span class="req">*</span></label>
+        <input class="input" type="email" id="email" name="email" required autocomplete="email" aria-required="true">
+        <div class="field-error">Please enter a valid email address.</div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="phone">Mobile phone <span class="req">*</span></label>
+        <input class="input" type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="(555) 123-4567" aria-required="true">
+        <div class="field-error">Please enter a phone number.</div>
+      </div>
+
+      <div class="consent-box">
+        <div class="consent-row">
+          <input type="checkbox" id="sms_consent" name="sms_consent">
+          <label for="sms_consent">Text me workshop reminders and the Zoom link.</label>
+        </div>
+        <p class="consent-fine">By checking this box, you agree to receive recurring automated SMS messages from ReBe at the phone number provided, including a reminder before the workshop and a link to join. Message frequency varies (typically 2–4 messages around the event). Message and data rates may apply. Reply STOP to cancel, HELP for help. Consent is not a condition of registration. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">SMS Terms</a>.</p>
+      </div>
+
+      <div class="consent-box">
+        <div class="consent-row">
+          <input type="checkbox" id="marketing_consent" name="marketing_consent">
+          <label for="marketing_consent">Keep me on the ReBe list for occasional emails about cohorts and workshops. (Unsubscribe anytime.)</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="source">How did you hear about this? <span class="opt">(optional)</span></label>
+        <select class="select" id="source" name="source">
+          <option value="">Choose one…</option>
+          <option value="elizabeth">Elizabeth invited me</option>
+          <option value="email">Email from ReBe</option>
+          <option value="social">Social media</option>
+          <option value="friend">A friend told me</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <button class="submit-btn" type="submit" id="submit-btn">
+        <span class="btn-label">Save my seat</span>
+        <span class="btn-arrow" aria-hidden="true">→</span>
+      </button>
+
+      <p class="privacy-note">We use your information to send you workshop details and the recording. We don't sell or share your data. Read our <a href="/privacy.html">Privacy Policy</a>.</p>
+    </form>
+  </div>
+
+  <div class="success-card" id="success-card" role="status" aria-live="polite">
+    <h2>You're in.</h2>
+    <p>Check your email for the Zoom link and a calendar invite. We'll send one reminder the day before and one an hour before.</p>
+    <p class="success-date">Tuesday, June 9, 2026 · 11:00 AM ET</p>
+    <p style="font-size:14px; color:var(--muted); margin-bottom:0;">Add to your calendar:</p>
+    <div class="cal-links">
+      <a class="cal-link" id="cal-google" href="#" target="_blank" rel="noopener">Google</a>
+      <a class="cal-link" id="cal-ical" href="#" download="rebe-workshop.ics">Apple / Outlook</a>
+    </div>
+  </div>
+</section>
+
+<!-- AFTER THE HOUR -->
+<section class="after" aria-labelledby="after-h">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">After the hour</p>
+    <h2 id="after-h" class="section-h" style="text-align:center;">If the hour lands and you want <span class="curl">more</span>, there's more.</h2>
+    <p>For the people who want to keep going, ReBe ReFresh is a six-week guided group experience built on the same framework. Small group. Real facilitator. One private session. Not recorded — these are the times you set aside to actually be there.</p>
+    <p>You'll hear about it at the session. No pressure either way.</p>
+    <p style="margin-top:32px;"><a href="refresh-groups.html" class="link">Read about ReBe ReFresh →</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p class="foot-line">ReBe — Rebuilding people from the inside out.</p>
+  <p class="foot-line">This is a guided group experience, not crisis care. If you're in acute distress, reach out to a therapist, your doctor, or 988 (Suicide &amp; Crisis Lifeline).</p>
+  <p class="foot-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">SMS Terms</a>
+    <a href="mailto:hello@justrebe.com">Contact</a>
+    <a href="refresh-groups.html">ReBe ReFresh</a>
+  </p>
+  <p class="foot-line">© 2026 ReBe. All rights reserved.</p>
+</footer>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  const SUPABASE_URL = 'https://erbncxjkgwqtfhulricc.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_3L24YRPqcRSQNHWa8ofpSA_t0mAB6LY'
+  const PROGRAM_SLUG = 'reset-2026-06-09'
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+
+  const util = document.getElementById('util')
+  const onScroll = () => util.classList.toggle('scrolled', window.scrollY > 40)
+  window.addEventListener('scroll', onScroll, { passive: true })
+  onScroll()
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('main section > .container, main .who-grid, main .about-grid, #register .form-card')
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } })
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' })
+    revealEls.forEach(el => io.observe(el))
+  } else {
+    revealEls.forEach(el => el.classList.add('in'))
+  }
+
+  const SMS_CONSENT_TEXT = "By checking this box, you agree to receive recurring automated SMS messages from ReBe at the phone number provided, including a reminder before the workshop and a link to join. Message frequency varies (typically 2-4 messages around the event). Message and data rates may apply. Reply STOP to cancel, HELP for help. Consent is not a condition of registration."
+
+  const form = document.getElementById('register-form')
+  const submitBtn = document.getElementById('submit-btn')
+  const btnLabel = submitBtn.querySelector('.btn-label')
+  const formError = document.getElementById('form-error')
+  const formWrap = document.getElementById('form-wrap')
+  const successCard = document.getElementById('success-card')
+
+  const fields = ['first_name', 'last_name', 'email', 'phone']
+
+  const showError = (msg) => { formError.textContent = msg; formError.classList.add('shown') }
+  const hideError = () => { formError.classList.remove('shown'); formError.textContent = '' }
+
+  const validateField = (name) => {
+    const input = document.getElementById(name)
+    const wrap = input.closest('.field')
+    const value = input.value.trim()
+    let valid = value.length > 0
+    if (name === 'email' && valid) valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+    if (name === 'phone' && valid) valid = value.replace(/\D/g, '').length >= 10
+    wrap.classList.toggle('has-error', !valid)
+    input.setAttribute('aria-invalid', !valid)
+    return valid
+  }
+
+  fields.forEach(name => {
+    const el = document.getElementById(name)
+    el.addEventListener('blur', () => { if (el.value.trim()) validateField(name) })
+    el.addEventListener('input', () => { const wrap = el.closest('.field'); if (wrap.classList.contains('has-error')) validateField(name) })
+  })
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    hideError()
+    const allValid = fields.map(validateField).every(Boolean)
+    if (!allValid) {
+      showError('Please check the highlighted fields and try again.')
+      const firstError = form.querySelector('.field.has-error input')
+      if (firstError) firstError.focus()
+      return
+    }
+    submitBtn.disabled = true
+    btnLabel.textContent = 'Saving your seat…'
+    const data = new FormData(form)
+    try {
+      const { data: result, error } = await supabase.rpc('register_for_program', {
+        p_first_name: data.get('first_name').trim(),
+        p_last_name: data.get('last_name').trim(),
+        p_email: data.get('email').trim(),
+        p_phone: data.get('phone').trim(),
+        p_sms_consent: data.get('sms_consent') === 'on',
+        p_marketing_consent: data.get('marketing_consent') === 'on',
+        p_program_slug: PROGRAM_SLUG,
+        p_source: data.get('source') || null,
+        p_consent_text: data.get('sms_consent') === 'on' ? SMS_CONSENT_TEXT : null
+      })
+      if (error) throw error
+      if (result && result.success === false) throw new Error(result.error || 'Something went wrong.')
+      formWrap.style.display = 'none'
+      successCard.classList.add('shown')
+      setupCalendarLinks()
+      successCard.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    } catch (err) {
+      console.error('Registration error:', err)
+      showError("We couldn't save your seat. Please try again, or email hello@justrebe.com and we'll add you manually.")
+      submitBtn.disabled = false
+      btnLabel.textContent = 'Save my seat'
+    }
+  })
+
+  function setupCalendarLinks() {
+    const startUTC = '20260609T150000Z'
+    const endUTC   = '20260609T160000Z'
+    const title = "ReBe — You Weren't Born Anxious (free session with Elizabeth Good)"
+    const desc  = 'Free 60-minute live group session with Elizabeth Good. The Zoom link is in your confirmation email.'
+    const loc   = 'Zoom (link in confirmation email)'
+    const googleParams = new URLSearchParams({ action: 'TEMPLATE', text: title, dates: `${startUTC}/${endUTC}`, details: desc, location: loc })
+    document.getElementById('cal-google').href = `https://www.google.com/calendar/render?${googleParams.toString()}`
+    const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//ReBe//Workshop//EN','BEGIN:VEVENT',`UID:${Date.now()}@justrebe.com`,`DTSTAMP:${startUTC}`,`DTSTART:${startUTC}`,`DTEND:${endUTC}`,`SUMMARY:${title}`,`DESCRIPTION:${desc}`,`LOCATION:${loc}`,'END:VEVENT','END:VCALENDAR'].join('\r\n')
+    const blob = new Blob([ics], { type: 'text/calendar' })
+    document.getElementById('cal-ical').href = URL.createObjectURL(blob)
+  }
+</script>
+
+</body>
+</html>

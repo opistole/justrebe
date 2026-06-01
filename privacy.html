@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Privacy Policy & SMS Terms — ReBe</title>
+<meta name="description" content="How ReBe collects, uses, and protects your information, including SMS messaging terms." />
+<link rel="icon" type="image/png" href="favicon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --mist: #FAF9F7;
+    --navy: #060B50;
+    --navy-dark: #040832;
+    --slate: #212B37;
+    --body: #5A6470;
+    --muted: #9DA1A8;
+    --coral: #EA492E;
+    --bone: #E2E2E2;
+
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    --content-w: 760px;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--body);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (max-width: 640px) { body { font-size: 16px; } }
+
+  :focus-visible {
+    outline: 3px solid rgba(6,11,80,.35);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Header bar */
+  .bar {
+    border-bottom: 1px solid var(--bone);
+    background: var(--paper);
+  }
+  .bar-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; height: 56px;
+  }
+  .wordmark {
+    font-family: var(--sans); font-weight: 700;
+    color: var(--navy); letter-spacing: .02em; font-size: 18px;
+    text-decoration: none;
+  }
+  .wordmark span { color: var(--coral); }
+  .bar a.back {
+    font-family: var(--sans); font-weight: 600; font-size: 14px;
+    color: var(--navy); text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding: 4px 0;
+  }
+  .bar a.back:hover { border-bottom-color: var(--navy); }
+
+  /* Page */
+  main {
+    max-width: var(--content-w);
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+  @media (max-width: 640px) { main { padding: 40px 20px 64px; } }
+
+  .eyebrow {
+    font-family: var(--sans); text-transform: uppercase;
+    font-weight: 700; font-size: 11px; letter-spacing: .12em;
+    color: var(--coral); margin: 0 0 16px;
+  }
+
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(34px, 5vw, 48px); line-height: 1.15;
+    letter-spacing: -.01em;
+    color: var(--navy);
+    margin: 0 0 16px;
+  }
+  .updated {
+    font-family: var(--sans); font-size: 14px;
+    color: var(--muted); margin: 0 0 48px;
+  }
+
+  h2 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(22px, 2.6vw, 28px); line-height: 1.25;
+    color: var(--navy);
+    margin: 48px 0 16px;
+  }
+  h3 {
+    font-family: var(--sans); font-weight: 700;
+    font-size: 17px; line-height: 1.4;
+    color: var(--slate);
+    margin: 28px 0 10px;
+  }
+
+  p { margin: 0 0 18px; }
+
+  ul { padding-left: 20px; margin: 0 0 18px; }
+  li { margin-bottom: 8px; line-height: 1.65; }
+
+  a { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--coral); }
+
+  strong { color: var(--slate); font-weight: 700; }
+
+  hr {
+    border: none; height: 1px; background: var(--bone);
+    margin: 56px 0;
+  }
+
+  .toc {
+    background: var(--mist);
+    border: 1px solid var(--bone);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin: 32px 0 48px;
+  }
+  .toc strong { display: block; margin-bottom: 8px; }
+  .toc ol { margin: 0; padding-left: 22px; font-size: 15px; }
+  .toc li { margin-bottom: 4px; }
+  .toc a { text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .callout {
+    background: var(--mist);
+    border-left: 3px solid var(--coral);
+    padding: 16px 20px;
+    border-radius: 0 10px 10px 0;
+    margin: 20px 0;
+    font-size: 15px;
+    color: var(--slate);
+  }
+
+  /* Footer */
+  footer {
+    background: var(--mist);
+    border-top: 1px solid var(--bone);
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .foot-line {
+    font-family: var(--sans); font-weight: 400; font-size: 13px;
+    color: var(--muted); margin: 0 0 14px;
+  }
+  .foot-links {
+    display: flex; gap: 24px; justify-content: center;
+    margin: 0 0 14px; flex-wrap: wrap;
+  }
+  .foot-links a {
+    font-family: var(--sans); font-weight: 700; font-size: 13px;
+    color: var(--navy); text-decoration: none;
+    letter-spacing: .02em;
+    padding: 8px 4px;
+  }
+  .foot-links a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-inner">
+    <a href="/" class="wordmark">Re<span>Be</span></a>
+    <a href="/" class="back">← Back to ReBe</a>
+  </div>
+</header>
+
+<main>
+  <p class="eyebrow">Legal</p>
+  <h1>Privacy Policy & SMS Terms</h1>
+  <p class="updated">Last updated: May 27, 2026</p>
+
+  <p>This Privacy Policy explains how ReBe ("we," "us," "our") collects, uses, and protects your information when you visit justrebe.com or register for a workshop, cohort, or 1:1 session. By using our website or services, you agree to the practices described here.</p>
+
+  <div class="toc">
+    <strong>On this page</strong>
+    <ol>
+      <li><a href="#info-we-collect">Information we collect</a></li>
+      <li><a href="#how-we-use">How we use your information</a></li>
+      <li><a href="#sms-terms">SMS messaging terms</a></li>
+      <li><a href="#email">Email communications</a></li>
+      <li><a href="#cookies">Cookies and analytics</a></li>
+      <li><a href="#third-party">Third-party services</a></li>
+      <li><a href="#retention">Data retention</a></li>
+      <li><a href="#your-rights">Your rights</a></li>
+      <li><a href="#children">Children's privacy</a></li>
+      <li><a href="#changes">Changes to this policy</a></li>
+      <li><a href="#contact">Contact us</a></li>
+    </ol>
+  </div>
+
+  <h2 id="info-we-collect">1. Information we collect</h2>
+  <p>When you register for a workshop, cohort, or 1:1 session, we collect:</p>
+  <ul>
+    <li><strong>Name</strong> — first and last name</li>
+    <li><strong>Email address</strong></li>
+    <li><strong>Mobile phone number</strong> — only if you provide it</li>
+    <li><strong>SMS consent status</strong> — whether you opted in to text messages</li>
+    <li><strong>Email marketing consent status</strong> — whether you opted in to occasional emails</li>
+    <li><strong>How you heard about us</strong> — optional, for attribution</li>
+    <li><strong>Timestamp, IP address, and browser user-agent</strong> — when you submit SMS consent, recorded as part of our compliance audit trail</li>
+  </ul>
+  <p>We do not collect Social Security numbers, payment card numbers (payments are processed by our third-party payment provider — we never see or store full card details), or any sensitive personal information beyond what you voluntarily share with us in registration forms or sessions.</p>
+
+  <h2 id="how-we-use">2. How we use your information</h2>
+  <p>We use the information you provide to:</p>
+  <ul>
+    <li>Register you for the workshop, cohort, or session you signed up for</li>
+    <li>Send you the Zoom link and reminders before your event</li>
+    <li>Send confirmation emails and post-event follow-ups</li>
+    <li>Communicate with you about other ReBe programs (only if you opted in to marketing emails)</li>
+    <li>Maintain a record of your participation across ReBe programs</li>
+    <li>Comply with legal obligations and respond to lawful requests</li>
+  </ul>
+  <p>We do <strong>not</strong> sell, rent, or trade your personal information to third parties for their marketing purposes.</p>
+
+  <h2 id="sms-terms">3. SMS messaging terms</h2>
+  <p>This section governs all SMS (text) messages sent by ReBe through Twilio.</p>
+
+  <h3>Opt-in</h3>
+  <p>You opt in to receive SMS messages from ReBe by actively checking a dedicated SMS consent checkbox during registration on our website. The checkbox is separate from any other consent (such as email marketing) and is never pre-selected. Consent is not a condition of registration — you may register without opting in to SMS.</p>
+
+  <h3>Types of messages you'll receive</h3>
+  <ul>
+    <li>Confirmation of your registration</li>
+    <li>Reminders before workshops, cohort sessions, or 1:1 sessions (typically one day before and one hour before)</li>
+    <li>The Zoom link to join your scheduled event</li>
+    <li>Brief follow-up after your session, where appropriate</li>
+  </ul>
+
+  <h3>Frequency</h3>
+  <p>Message frequency varies based on the events you've registered for. Typically you can expect 2–4 messages around each event. We do not send promotional SMS — all messages are transactional and related to events you've registered for.</p>
+
+  <h3>Costs</h3>
+  <p>Message and data rates may apply per your mobile carrier's plan. ReBe does not charge you for SMS messages, but your carrier may.</p>
+
+  <h3>Opt-out</h3>
+  <p>You can opt out of SMS messages at any time by replying <strong>STOP</strong> to any message you receive from us. After you reply STOP, we will send one final confirmation message and no further SMS will be sent. Opting out of SMS does not unsubscribe you from email communications or remove you from our event registration.</p>
+
+  <h3>Help</h3>
+  <p>Reply <strong>HELP</strong> to any SMS for assistance, or contact us at <a href="mailto:hello@justrebe.com">hello@justrebe.com</a>.</p>
+
+  <h3>Carriers</h3>
+  <p>SMS messages are delivered through major US mobile carriers. Carriers are not liable for delayed or undelivered messages.</p>
+
+  <h3>Privacy of mobile information</h3>
+  <p>The mobile information collected from SMS consent (including phone numbers and opt-in records) will not be shared with third parties or affiliates for marketing or promotional purposes. All other information categories follow the policies described elsewhere in this document.</p>
+
+  <h2 id="email">4. Email communications</h2>
+  <p>When you register, we may send you transactional emails related to your registration (confirmation, Zoom link, reminders, post-event materials). If you check the optional marketing consent box, we may also send occasional emails about upcoming ReBe programs, workshops, and cohorts.</p>
+  <p>You can unsubscribe from marketing emails at any time using the unsubscribe link at the bottom of any marketing email. Unsubscribing does not remove you from transactional emails about events you've registered for.</p>
+
+  <h2 id="cookies">5. Cookies and analytics</h2>
+  <p>Our website uses essential cookies required for the site to function. We may also use limited analytics (such as page view counts) to understand how visitors use the site. We do not currently use third-party advertising cookies or behavioral tracking pixels.</p>
+
+  <h2 id="third-party">6. Third-party services</h2>
+  <p>We use trusted third-party services to operate ReBe. These providers process data on our behalf and are bound by their own privacy policies:</p>
+  <ul>
+    <li><strong>Supabase</strong> — hosts our database where registrations and contact information are stored. <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase Privacy Policy</a></li>
+    <li><strong>Twilio</strong> — sends SMS messages on our behalf. <a href="https://www.twilio.com/legal/privacy" target="_blank" rel="noopener">Twilio Privacy Policy</a></li>
+    <li><strong>Kit (formerly ConvertKit)</strong> — sends email communications. <a href="https://kit.com/privacy" target="_blank" rel="noopener">Kit Privacy Policy</a></li>
+    <li><strong>Zoom</strong> — hosts live workshops and sessions. <a href="https://explore.zoom.us/en/privacy/" target="_blank" rel="noopener">Zoom Privacy Policy</a></li>
+    <li><strong>Vercel</strong> — hosts our website. <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Vercel Privacy Policy</a></li>
+  </ul>
+
+  <h2 id="retention">7. Data retention</h2>
+  <p>We retain your registration and contact information for as long as you remain a participant in ReBe programs, plus a reasonable period afterward for record-keeping and legal compliance. SMS opt-in audit records are retained for at least four years to satisfy A2P 10DLC and carrier compliance requirements.</p>
+  <p>If you would like us to delete your information, contact us at <a href="mailto:hello@justrebe.com">hello@justrebe.com</a> and we will honor your request unless we are required by law to retain it.</p>
+
+  <h2 id="your-rights">8. Your rights</h2>
+  <p>You have the right to:</p>
+  <ul>
+    <li>Request a copy of the personal information we hold about you</li>
+    <li>Request corrections to inaccurate information</li>
+    <li>Request deletion of your information (subject to legal retention requirements)</li>
+    <li>Withdraw consent for SMS or marketing emails at any time</li>
+    <li>Object to or restrict certain uses of your information</li>
+  </ul>
+  <p>To exercise any of these rights, email us at <a href="mailto:hello@justrebe.com">hello@justrebe.com</a>. If you are a California or EU resident, additional rights may apply under CCPA or GDPR — contact us for details.</p>
+
+  <h2 id="children">9. Children's privacy</h2>
+  <p>ReBe is designed for adults. We do not knowingly collect personal information from anyone under the age of 18. If you believe a minor has provided us with personal information, please contact us and we will delete it promptly.</p>
+
+  <h2 id="changes">10. Changes to this policy</h2>
+  <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page. For material changes, we will make a reasonable effort to notify registered participants by email.</p>
+
+  <h2 id="contact">11. Contact us</h2>
+  <p>If you have questions about this Privacy Policy or how we handle your information, contact us at:</p>
+  <div class="callout">
+    <strong>ReBe</strong><br>
+    Email: <a href="mailto:hello@justrebe.com">hello@justrebe.com</a><br>
+    Web: <a href="https://justrebe.com">justrebe.com</a>
+  </div>
+
+  <hr>
+
+  <p style="font-size:14px; color:var(--muted);">This Privacy Policy is provided for transparency and compliance purposes. It is not legal advice. If you have specific legal questions, please consult an attorney.</p>
+</main>
+
+<footer>
+  <p class="foot-line">ReBe — Rebuilding people from the inside out.</p>
+  <p class="foot-links">
+    <a href="/">Home</a>
+    <a href="/contact">Contact</a>
+    <a href="/refresh-groups.html">ReBe ReFresh</a>
+  </p>
+  <p class="foot-line">© 2026 ReBe. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
