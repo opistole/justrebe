@@ -182,6 +182,16 @@
   .form-intro p{font-size:15px;color:var(--body)}
   .form-card{max-width:var(--card-w);margin:0 auto;background:var(--paper);border:1px solid var(--bone);border-top:4px solid var(--green);border-radius:16px;padding:44px;box-shadow:0 10px 40px rgba(6,11,80,.05)}
   @media (max-width:640px){.form-card{padding:28px 22px}}
+  /* Two-step form */
+  .form-step-2[hidden]{display:none}
+  .form-step-2{margin-top:14px;padding-top:30px;border-top:1px dashed var(--bone);animation:stepReveal .55s cubic-bezier(.16,1,.3,1)}
+  .form-step-2-intro{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-ink);margin:0 0 22px;text-align:center}
+  @keyframes stepReveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .form-field--fieldset{border:0;padding:0;margin-bottom:18px}
+  .form-fieldset-legend{display:block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);margin-bottom:8px;padding:0}
+  .form-field .opt{color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media (prefers-reduced-motion:reduce){.form-step-2{animation:none}}
   .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media (max-width:600px){.form-row{grid-template-columns:1fr}}
   .form-field{margin-bottom:18px}
@@ -343,69 +353,79 @@
     </div>
     <form id="refresh-form" class="form-card" novalidate>
 
-      <div class="field-section-label">About you</div>
-      <div class="form-row">
-        <div class="form-field"><label for="full_name">Full name <span class="req">*</span></label><input type="text" id="full_name" name="full_name" autocomplete="name"></div>
-        <div class="form-field"><label for="email">Email <span class="req">*</span></label><input type="email" id="email" name="email" autocomplete="email"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-field"><label for="phone">Phone <span class="req">*</span></label><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
-        <div class="form-field"><label for="organization_name">Organization <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label><input type="text" id="organization_name" name="organization_name"></div>
-      </div>
-      <div class="form-field"><label for="role_title">Role / Title <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label><input type="text" id="role_title" name="role_title"></div>
-
-      <div class="field-section-label">What brings you here</div>
-      <div class="form-field"><label for="reason_for_interest">What drew you to ReBe ReFresh? <span class="req">*</span></label><textarea id="reason_for_interest" name="reason_for_interest" placeholder="A few sentences — whatever feels true."></textarea></div>
-      <div class="form-field">
-        <label for="area_needing_refresh">Which area are you most ready to refresh? <span class="req">*</span></label>
-        <select id="area_needing_refresh" name="area_needing_refresh">
-          <option value="">Choose one…</option>
-          <option value="Burnout recovery">Burnout recovery</option>
-          <option value="Emotional resilience &amp; regulation">Emotional resilience &amp; regulation</option>
-          <option value="Communication &amp; relationships">Communication &amp; relationships</option>
-          <option value="Purpose &amp; clarity">Purpose &amp; clarity</option>
-          <option value="Inner healing &amp; growth">Inner healing &amp; growth</option>
-          <option value="Leadership &amp; self-awareness">Leadership &amp; self-awareness</option>
-          <option value="Other">Other (describe below)</option>
-        </select>
-        <input type="text" name="area_other" placeholder="Or in your own words (optional)" maxlength="200" style="margin-top:10px">
-      </div>
-      <div class="form-field">
-        <label>Have you done a ReBe or Real Talk experience before? <span class="req">*</span></label>
-        <div class="radio-group">
-          <div class="radio-pill"><input type="radio" id="prev_yes" name="previous_rebe_experience" value="yes"><label for="prev_yes">Yes</label></div>
-          <div class="radio-pill"><input type="radio" id="prev_no" name="previous_rebe_experience" value="no"><label for="prev_no">No</label></div>
+      <!-- STEP 1 — minimal contact + path -->
+      <div class="form-step-1">
+        <div class="field-section-label">About you</div>
+        <div class="form-row">
+          <div class="form-field"><label for="full_name">Full name <span class="req">*</span></label><input type="text" id="full_name" name="full_name" autocomplete="name" required aria-required="true"></div>
+          <div class="form-field"><label for="email">Email <span class="req">*</span></label><input type="email" id="email" name="email" autocomplete="email" required aria-required="true"></div>
         </div>
+        <div class="form-field"><label for="phone">Phone <span class="req">*</span></label><input type="tel" id="phone" name="phone" autocomplete="tel" required aria-required="true"></div>
+
+        <fieldset class="form-field form-field--fieldset">
+          <legend class="form-fieldset-legend">How would you like to move forward? <span class="req">*</span></legend>
+          <div class="radio-group" style="flex-direction:column">
+            <div class="radio-pill" style="flex:1 1 100%"><input type="radio" id="r_pay" name="readiness" value="ready_to_pay" required aria-required="true"><label for="r_pay">I'm ready to reserve my seat &amp; check out</label></div>
+            <div class="radio-pill" style="flex:1 1 100%"><input type="radio" id="r_info" name="readiness" value="wants_more_info"><label for="r_info">I have questions first</label></div>
+            <div class="radio-pill" style="flex:1 1 100%"><input type="radio" id="r_wait" name="readiness" value="waitlist"><label for="r_wait">These dates don't work — add me to the waitlist</label></div>
+          </div>
+        </fieldset>
       </div>
 
-      <div class="field-section-label">Where you are in this decision</div>
-      <div class="form-field">
-        <label>How would you like to move forward? <span class="req">*</span></label>
-        <div class="radio-group" style="flex-direction:column">
-          <div class="radio-pill" style="flex:1 1 100%"><input type="radio" id="r_pay" name="readiness" value="ready_to_pay"><label for="r_pay">I'm ready to reserve my seat &amp; check out</label></div>
-          <div class="radio-pill" style="flex:1 1 100%"><input type="radio" id="r_info" name="readiness" value="wants_more_info"><label for="r_info">I have questions first</label></div>
-          <div class="radio-pill" style="flex:1 1 100%"><input type="radio" id="r_wait" name="readiness" value="waitlist"><label for="r_wait">These dates don't work — add me to the waitlist</label></div>
+      <!-- STEP 2 — deeper questions, revealed once readiness chosen -->
+      <div class="form-step-2" id="form-step-2" hidden>
+        <p class="form-step-2-intro" id="form-step-2-intro">Just a few more questions →</p>
+
+        <div class="field-section-label">What brings you here</div>
+        <div class="form-field"><label for="reason_for_interest">What drew you to ReBe ReFresh? <span class="req">*</span></label><textarea id="reason_for_interest" name="reason_for_interest" placeholder="A few sentences — whatever feels true."></textarea></div>
+        <div class="form-field">
+          <label for="area_needing_refresh">Which area are you most ready to refresh? <span class="req">*</span></label>
+          <select id="area_needing_refresh" name="area_needing_refresh">
+            <option value="">Choose one…</option>
+            <option value="Burnout recovery">Burnout recovery</option>
+            <option value="Emotional resilience &amp; regulation">Emotional resilience &amp; regulation</option>
+            <option value="Communication &amp; relationships">Communication &amp; relationships</option>
+            <option value="Purpose &amp; clarity">Purpose &amp; clarity</option>
+            <option value="Inner healing &amp; growth">Inner healing &amp; growth</option>
+            <option value="Leadership &amp; self-awareness">Leadership &amp; self-awareness</option>
+            <option value="Other">Other (describe below)</option>
+          </select>
+          <label for="area_other" class="sr-only">Area to refresh — in your own words</label>
+          <input type="text" id="area_other" name="area_other" placeholder="Or in your own words (optional)" maxlength="200" style="margin-top:10px">
         </div>
-      </div>
-      <div class="form-field"><label for="notes">Anything else you'd like us to know? <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label><textarea id="notes" name="notes" placeholder="Optional — share anything that would help us support you."></textarea></div>
+        <fieldset class="form-field form-field--fieldset">
+          <legend class="form-fieldset-legend">Have you done a ReBe or Real Talk experience before? <span class="req">*</span></legend>
+          <div class="radio-group">
+            <div class="radio-pill"><input type="radio" id="prev_yes" name="previous_rebe_experience" value="yes"><label for="prev_yes">Yes</label></div>
+            <div class="radio-pill"><input type="radio" id="prev_no" name="previous_rebe_experience" value="no"><label for="prev_no">No</label></div>
+          </div>
+        </fieldset>
 
-      <div class="field-section-label">Referral</div>
-      <div class="form-row">
-        <div class="form-field"><label for="who_referred_you">Who referred you? <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label><input type="text" id="who_referred_you" name="who_referred_you" placeholder="Name of the person who sent you"></div>
-        <div class="form-field"><label for="referral_code">Referral code <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label><input type="text" id="referral_code" name="referral_code" placeholder="Have a code? Enter it here"></div>
+        <div class="field-section-label">Anything else</div>
+        <div class="form-field"><label for="notes">Anything else you'd like us to know? <span class="opt">(optional)</span></label><textarea id="notes" name="notes" placeholder="Optional — share anything that would help us support you."></textarea></div>
+        <div class="form-row">
+          <div class="form-field"><label for="organization_name">Organization <span class="opt">(optional)</span></label><input type="text" id="organization_name" name="organization_name"></div>
+          <div class="form-field"><label for="role_title">Role / Title <span class="opt">(optional)</span></label><input type="text" id="role_title" name="role_title"></div>
+        </div>
+
+        <div class="field-section-label">Referral</div>
+        <div class="form-row">
+          <div class="form-field"><label for="who_referred_you">Who referred you? <span class="opt">(optional)</span></label><input type="text" id="who_referred_you" name="who_referred_you" placeholder="Name of the person who sent you"></div>
+          <div class="form-field"><label for="referral_code">Referral code <span class="opt">(optional)</span></label><input type="text" id="referral_code" name="referral_code" placeholder="Have a code? Enter it here"></div>
+        </div>
+
+        <div class="field-section-label">Consent</div>
+        <div class="checkbox-field"><input type="checkbox" id="consent_to_contact" name="consent_to_contact"><label for="consent_to_contact">I consent to be contacted by ReBe about my enrollment and ReBe ReFresh. <span class="req">*</span></label></div>
+        <div class="checkbox-field"><input type="checkbox" id="consent_to_confidentiality" name="consent_to_confidentiality"><label for="consent_to_confidentiality">I agree to maintain confidentiality about what's shared in the group. <span class="req">*</span></label></div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn" style="width:100%">Submit →</button>
+          <p class="form-note">* Required fields</p>
+        </div>
       </div>
 
       <input type="hidden" name="preferred_group_time" value="June 23 · 11 AM ET">
       <input type="hidden" name="group_type" value="no_preference">
-
-      <div class="field-section-label">Consent</div>
-      <div class="checkbox-field"><input type="checkbox" id="consent_to_contact" name="consent_to_contact"><label for="consent_to_contact">I consent to be contacted by ReBe about my enrollment and ReBe ReFresh.</label></div>
-      <div class="checkbox-field"><input type="checkbox" id="consent_to_confidentiality" name="consent_to_confidentiality"><label for="consent_to_confidentiality">I agree to maintain confidentiality about what's shared in the group.</label></div>
-
-      <div class="form-submit">
-        <button type="submit" class="btn" style="width:100%">Submit →</button>
-        <p class="form-note">* Required fields</p>
-      </div>
     </form>
     <div id="post-submit-zone" class="post-submit"></div>
     <p class="email-note">Questions, or want to talk it through first? Email <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a> — we'll get right back to you.</p>
@@ -654,6 +674,43 @@
       var name=btn.getAttribute('data-prefill-confidant');
       var sel=document.getElementById('conf-confidant');
       if(sel){ for(var i=0;i<sel.options.length;i++){ if(sel.options[i].value===name){ sel.selectedIndex=i; break; } } }
+    });
+  });
+})();
+</script>
+
+<!-- ========== TWO-STEP FORM REVEAL ========== -->
+<script>
+(function(){
+  var step2 = document.getElementById('form-step-2');
+  if (!step2) return;
+  var radios = document.querySelectorAll('input[name="readiness"]');
+  function reveal(){
+    if (!step2.hasAttribute('hidden')) return;
+    step2.removeAttribute('hidden');
+    // Tailor the intro line to the chosen path
+    var pick = document.querySelector('input[name="readiness"]:checked');
+    var intro = document.getElementById('form-step-2-intro');
+    if (pick && intro){
+      if (pick.value === 'ready_to_pay') intro.textContent = "Great — just a few more questions before checkout";
+      else if (pick.value === 'wants_more_info') intro.textContent = "Tell us a bit more so we can answer well";
+      else if (pick.value === 'waitlist') intro.textContent = "Tell us a bit more so we know what you're looking for";
+    }
+    // Scroll the intro into view so the user sees that the form expanded
+    setTimeout(function(){
+      intro && intro.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 80);
+  }
+  radios.forEach(function(r){ r.addEventListener('change', reveal); });
+  // Also update intro line if user changes readiness after step 2 is revealed
+  radios.forEach(function(r){
+    r.addEventListener('change', function(){
+      var intro = document.getElementById('form-step-2-intro');
+      if (!step2.hasAttribute('hidden') && intro){
+        if (r.value === 'ready_to_pay') intro.textContent = "Great — just a few more questions before checkout";
+        else if (r.value === 'wants_more_info') intro.textContent = "Tell us a bit more so we can answer well";
+        else if (r.value === 'waitlist') intro.textContent = "Tell us a bit more so we know what you're looking for";
+      }
     });
   });
 })();

@@ -791,10 +791,10 @@
         <div class="field-error">Please enter a valid email address.</div>
       </div>
 
-      <div class="field">
-        <label class="label" for="phone">Mobile phone <span class="req">*</span></label>
-        <input class="input" type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="(555) 123-4567" aria-required="true">
-        <div class="field-error">Please enter a phone number.</div>
+      <div class="field" id="phone-field">
+        <label class="label" for="phone">Mobile phone <span class="opt" id="phone-opt-label">(only if you want text reminders)</span></label>
+        <input class="input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(555) 123-4567">
+        <div class="field-error">Please enter a phone number (with at least 10 digits) so we can text you.</div>
       </div>
 
       <div class="consent-box">
@@ -904,7 +904,29 @@
   const formWrap = document.getElementById('form-wrap')
   const successCard = document.getElementById('success-card')
 
-  const fields = ['first_name', 'last_name', 'email', 'phone']
+  const smsConsentEl = document.getElementById('sms_consent')
+  const phoneEl = document.getElementById('phone')
+  const phoneLabelOpt = document.getElementById('phone-opt-label')
+
+  // Reflect whether phone is required based on SMS consent
+  function syncPhoneRequired(){
+    const required = smsConsentEl.checked
+    if (required){
+      phoneEl.required = true
+      phoneEl.setAttribute('aria-required', 'true')
+      if (phoneLabelOpt) phoneLabelOpt.textContent = '*'
+      if (phoneLabelOpt) phoneLabelOpt.style.color = 'var(--coral)'
+    } else {
+      phoneEl.required = false
+      phoneEl.removeAttribute('aria-required')
+      if (phoneLabelOpt) { phoneLabelOpt.textContent = '(only if you want text reminders)'; phoneLabelOpt.style.color = '' }
+      // Clear any earlier error state
+      phoneEl.closest('.field').classList.remove('has-error')
+      phoneEl.removeAttribute('aria-invalid')
+    }
+  }
+  smsConsentEl.addEventListener('change', syncPhoneRequired)
+  syncPhoneRequired()
 
   const showError = (msg) => { formError.textContent = msg; formError.classList.add('shown') }
   const hideError = () => { formError.classList.remove('shown'); formError.textContent = '' }
@@ -913,6 +935,12 @@
     const input = document.getElementById(name)
     const wrap = input.closest('.field')
     const value = input.value.trim()
+    // Phone is conditionally required — skip validation entirely when SMS consent is unchecked
+    if (name === 'phone' && !smsConsentEl.checked){
+      wrap.classList.remove('has-error')
+      input.removeAttribute('aria-invalid')
+      return true
+    }
     let valid = value.length > 0
     if (name === 'email' && valid) valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
     if (name === 'phone' && valid) valid = value.replace(/\D/g, '').length >= 10
@@ -921,6 +949,7 @@
     return valid
   }
 
+  const fields = ['first_name', 'last_name', 'email', 'phone']
   fields.forEach(name => {
     const el = document.getElementById(name)
     el.addEventListener('blur', () => { if (el.value.trim()) validateField(name) })
