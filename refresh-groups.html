@@ -23,13 +23,13 @@
     --serif:'Fraunces',Georgia,serif;
     --sans:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
     --display:'Anton','Arial Narrow',Impact,sans-serif;
-    --content-w:760px; --letter-w:680px; --card-w:680px;
+    --content-w:760px; --letter-w:680px; --card-w:720px;
     --ease:cubic-bezier(.16,1,.3,1);
   }
   *,*::before,*::after{box-sizing:border-box}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{margin:0;background:var(--paper);color:var(--body);font-family:var(--sans);font-weight:400;font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-  @media (max-width:640px){body{font-size:16px}}
+  body{margin:0;background:var(--paper);color:var(--body);font-family:var(--sans);font-weight:400;font-size:20px;line-height:1.75;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  @media (max-width:640px){body{font-size:18px}}
   img{max-width:100%;height:auto;display:block}
   .skip-link{position:absolute;left:-9999px;background:var(--navy);color:#fff;padding:10px 16px;border-radius:6px;z-index:200;font-weight:700}
   .skip-link:focus{left:16px;top:16px}
@@ -50,20 +50,24 @@
   .util-cta:hover{border-bottom-color:currentColor}
   @media (max-width:640px){.util-cta{display:none}.util-inner{justify-content:center}}
 
-  /* Hero (light text hero) */
-  .hero{position:relative;background:var(--paper)}
-  .hero-under{max-width:900px;margin:0 auto;padding:72px 24px 64px;text-align:center}
-  @media (max-width:860px){.hero-under{padding:48px 20px 52px}}
-  .eyebrow-hero{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.16em;color:var(--green-ink);margin:0 0 20px}
-  .h1{font-family:var(--display);font-weight:400;color:var(--navy);text-transform:uppercase;font-size:clamp(34px,6vw,64px);line-height:1.04;letter-spacing:.01em;margin:0 auto 18px;max-width:18ch}
-  .h1 .accent{color:var(--green)}
-  .subhead-hero{font-family:var(--sans);font-size:clamp(17px,2.1vw,21px);line-height:1.6;color:var(--body);margin:0 auto 28px;max-width:600px}
-  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 28px;justify-content:center}
+  /* Hero — dark navy editorial */
+  .hero{position:relative;background:var(--navy-dark);overflow:hidden;color:#fff;isolation:isolate}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 82% 8%,rgba(227,160,31,.22),transparent 55%),radial-gradient(ellipse at 8% 92%,rgba(68,153,69,.20),transparent 50%);pointer-events:none;z-index:0}
+  .hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(180deg,transparent,var(--paper));pointer-events:none;z-index:0}
+  .hero-under{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:96px 24px 104px;text-align:center}
+  @media (max-width:860px){.hero-under{padding:72px 20px 88px}}
+  .hero .eyebrow-hero{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.16em;color:var(--gold);margin:0 0 22px}
+  .hero .h1{font-family:var(--display);font-weight:400;color:#fff;text-transform:uppercase;font-size:clamp(38px,6.6vw,68px);line-height:1.04;letter-spacing:.01em;margin:0 auto 22px;max-width:18ch}
+  .hero .h1 .accent{color:var(--gold)}
+  .hero .subhead-hero{font-family:var(--sans);font-size:clamp(18px,2.1vw,22px);line-height:1.6;color:rgba(255,255,255,.86);margin:0 auto 32px;max-width:600px}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px;justify-content:center}
   .hero-chip{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;padding:11px 16px;border-radius:8px;line-height:1}
   .hero-chip--gold{background:var(--gold);color:var(--navy-dark)}
   .hero-chip--green{background:var(--green);color:#fff}
-  .hero-chip--ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(6,11,80,.28)}
-  .microcopy-hero{font-family:var(--sans);font-size:13px;color:var(--muted);margin:12px 0 0}
+  .hero-chip--ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.36)}
+  .hero .microcopy-hero{font-family:var(--sans);font-size:14px;color:rgba(255,255,255,.72);margin:14px 0 0}
+  .hero .microcopy-hero a{color:var(--gold)!important;text-decoration:none;border-bottom:1px solid rgba(227,160,31,.5);padding-bottom:1px}
+  .hero .btn{box-shadow:0 8px 28px rgba(68,153,69,.42),0 0 0 1px rgba(255,255,255,.08) inset}
 
   /* Buttons */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.02em;background:linear-gradient(135deg,#54AC54,var(--green-ink));color:#fff;padding:17px 34px;min-height:54px;border:none;border-radius:50px;cursor:pointer;text-decoration:none;box-shadow:0 8px 22px rgba(68,153,69,.28);transition:transform .15s var(--ease),box-shadow .2s var(--ease),filter .15s var(--ease)}
@@ -92,13 +96,27 @@
   .eyebrow--center{text-align:center;display:block}
   .section-h{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(30px,4.4vw,50px);line-height:1.18;letter-spacing:.01em;color:var(--navy);margin:0 0 24px}
   .section-h em{font-style:normal;color:var(--green)}
+  /* Architectural numbered section markers */
+  .section-num{display:flex;align-items:center;gap:14px;font-family:var(--display);font-size:26px;color:var(--gold);letter-spacing:.04em;margin:0 0 16px;line-height:1}
+  .section-num::after{content:'';display:block;height:2px;width:0;background:currentColor;opacity:.6;transition:width .9s var(--ease) .15s}
+  .section-num.center{justify-content:center}
+  .in .section-num::after{width:42px}
+  .sec-dark .section-num{color:var(--gold)}
+  /* Hero entrance fades */
+  .fade-in{opacity:0;transform:translateY(14px);animation:fadeIn .65s var(--ease) forwards}
+  .fade-in.d-1{animation-delay:.08s}
+  .fade-in.d-2{animation-delay:.22s}
+  .fade-in.d-3{animation-delay:.36s}
+  .fade-in.d-4{animation-delay:.50s}
+  @keyframes fadeIn{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.fade-in{opacity:1;transform:none;animation:none}}
   .sec-dark .eyebrow{color:var(--gold)}
   .sec-dark .section-h{color:#fff}
-  .lede{font-family:var(--sans);font-size:18px;line-height:1.75;color:var(--body);margin:0 0 18px}
+  .lede{font-family:var(--sans);font-size:22px;line-height:1.75;color:var(--body);margin:0 0 18px}
   .sec-dark .lede{color:rgba(255,255,255,.95)}
 
   /* Story */
-  .story p{font-size:17px;line-height:1.85;color:var(--body);margin:0 0 20px}
+  .story p{font-size:20px;line-height:1.85;color:var(--body);margin:0 0 20px}
   .story p strong{color:var(--navy);font-weight:700}
   .story .pull{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,30px);line-height:1.35;color:var(--green-ink);margin:28px 0;padding-left:22px;border-left:4px solid var(--green)}
   .story .signoff{font-family:var(--display);text-transform:uppercase;font-size:clamp(22px,3vw,32px);color:var(--navy);letter-spacing:.01em;margin:32px 0 0}
@@ -231,17 +249,17 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-under">
-    <p class="eyebrow-hero">ReBe ReFresh · A 6-Week Group Experience</p>
-    <h1 class="h1">Discover your story. <span class="accent">Then rewrite it.</span></h1>
-    <p class="subhead-hero">Six weeks. One small group. A guided path from isolation into real community — picturing safety, envisioning freedom, rehearsing a future worth living.</p>
-    <div class="hero-chips">
+    <p class="eyebrow-hero fade-in">ReBe ReFresh · A 6-Week Group Experience</p>
+    <h1 class="h1 fade-in d-1">Discover your story. <span class="accent">Then rewrite it.</span></h1>
+    <p class="subhead-hero fade-in d-2">Six weeks. One small group. A guided path from isolation into real community — picturing safety, envisioning freedom, rehearsing a future worth living.</p>
+    <div class="hero-chips fade-in d-3">
       <span class="hero-chip hero-chip--gold">$497 · 6 sessions</span>
       <span class="hero-chip hero-chip--ghost">Starts June 23</span>
       <span class="hero-chip hero-chip--green">11 AM ET</span>
     </div>
-    <div class="cta-block">
+    <div class="cta-block fade-in d-4">
       <a href="#enroll" class="btn">Reserve my seat <span class="btn-arrow" aria-hidden="true">→</span></a>
-      <p class="microcopy-hero">Prefer a 1:1? <a href="#private" style="color:var(--green-ink);font-weight:700">See private sessions ↓</a></p>
+      <p class="microcopy-hero">Prefer a 1:1? <a href="#private">See private sessions ↓</a></p>
     </div>
   </div>
 </section>
@@ -256,6 +274,7 @@
 <!-- STORY -->
 <section class="story sec-paper-alt" aria-labelledby="story-h">
   <div class="container">
+    <div class="section-num">01</div>
     <p class="eyebrow">Why ReBe exists</p>
     <h2 id="story-h" class="section-h">Somewhere between a therapy room and a <em>classroom</em>.</h2>
     <p>Between a survivor's story and a child's silence, we found the same wound — and we built ReBe to heal it. Most of us were never taught how to use our imagination. We were handed fear loops, inherited worry, and survival patterns, and ran them so long they started to feel like us.</p>
@@ -268,6 +287,7 @@
 <!-- STAT BAND -->
 <section class="statband sec-green-wash" aria-label="Why this matters">
   <div class="container">
+    <div class="section-num center">02</div>
     <p class="eyebrow eyebrow--center">The need is real</p>
     <h2 class="section-h" style="text-align:center">It's not just you — and it's <em>not your fault</em>.</h2>
     <div class="statband-grid">
@@ -281,6 +301,7 @@
 <!-- COHORT OFFER -->
 <section class="sec-dark" aria-labelledby="offer-h">
   <div class="container">
+    <div class="section-num">03</div>
     <p class="eyebrow">The 6-week cohort</p>
     <h2 id="offer-h" class="section-h">Six sessions. One group. Your way <em style="color:var(--gold)">back</em>.</h2>
     <p class="lede">A guided, root-cause group experience for adults — walked out in real, live community. Not therapy, not coaching: inner work, with company.</p>
@@ -551,6 +572,63 @@
     },{threshold:0.1,rootMargin:'0px 0px -8% 0px'});
     els.forEach(function(el){io.observe(el)});
   } else { els.forEach(function(el){el.classList.add('in')}); }
+})();
+</script>
+
+<!-- ========== STAT COUNT-UP + CARD STAGGER ========== -->
+<script>
+(function(){
+  if (!('IntersectionObserver' in window)) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+
+  // Count-up on stat numbers (real number stays visible until observer fires)
+  var stats = document.querySelectorAll('.statband-num');
+  stats.forEach(function(el){
+    var m = el.textContent.trim().match(/^(\d+)(%?)$/);
+    if (!m) return;
+    el.dataset.target = m[1];
+    el.dataset.suffix = m[2];
+  });
+  function countUp(el){
+    var target = parseInt(el.dataset.target, 10);
+    var suffix = el.dataset.suffix || '';
+    el.textContent = '0' + suffix;
+    var dur = 1500, start = performance.now();
+    function step(now){
+      var t = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = target + suffix;
+    }
+    requestAnimationFrame(step);
+  }
+  var statIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && e.target.dataset.target){
+        countUp(e.target);
+        statIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.45 });
+  stats.forEach(function(el){ if (el.dataset.target) statIO.observe(el); });
+
+  // Staggered fade-in for confidant cards as they enter view
+  var cards = document.querySelectorAll('.conf-card');
+  cards.forEach(function(c){ c.style.opacity = 0; c.style.transform = 'translateY(20px)'; c.style.transition = 'opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1)'; });
+  var cardIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){
+        var idx = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
+        e.target.style.transitionDelay = (idx * 80) + 'ms';
+        e.target.style.opacity = 1;
+        e.target.style.transform = 'none';
+        cardIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  cards.forEach(function(c){ cardIO.observe(c); });
 })();
 </script>
 
