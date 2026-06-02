@@ -59,25 +59,23 @@
   .util-cta:hover{border-bottom-color:currentColor}
   @media (max-width:640px){.util-cta{display:none}.util-inner{justify-content:center}}
 
-  /* Hero — dark navy editorial */
-  .hero{position:relative;background:var(--navy-dark);overflow:hidden;color:#fff;isolation:isolate}
-  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 82% 8%,rgba(227,160,31,.22),transparent 55%),radial-gradient(ellipse at 8% 92%,rgba(68,153,69,.20),transparent 50%);pointer-events:none;z-index:0}
-  .hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(180deg,transparent,var(--green-wash));pointer-events:none;z-index:0}
-  .hero-under{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:96px 24px 104px;text-align:center}
-  @media (max-width:860px){.hero-under{padding:72px 20px 88px}}
-  .hero .eyebrow-hero{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:14px;letter-spacing:.2em;color:var(--gold);margin:0 0 26px;position:relative;display:inline-block}
-  .hero .eyebrow-hero::before{content:'';display:block;width:48px;height:1px;background:var(--gold);margin:0 auto 18px;opacity:.65}
-  .hero .h1{font-family:var(--display);font-weight:400;color:#fff;text-transform:uppercase;font-size:clamp(38px,6.6vw,68px);line-height:1.04;letter-spacing:.01em;margin:0 auto 22px;max-width:18ch}
-  .hero .h1 .accent{color:var(--gold)}
-  .hero .subhead-hero{font-family:var(--sans);font-size:clamp(18px,2.1vw,22px);line-height:1.6;color:rgba(255,255,255,.86);margin:0 auto 32px;max-width:600px}
+  /* Hero — light + airy */
+  .hero{position:relative;background:linear-gradient(180deg,var(--paper) 0%,#FDFAF3 100%);overflow:hidden;color:var(--body);isolation:isolate}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 82% 10%,rgba(227,160,31,.10),transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(68,153,69,.10),transparent 50%);pointer-events:none;z-index:0}
+  .hero-under{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:96px 24px 96px;text-align:center}
+  @media (max-width:860px){.hero-under{padding:72px 20px 80px}}
+  .hero .eyebrow-hero{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:13px;letter-spacing:.2em;color:var(--green-ink);margin:0 0 24px;position:relative;display:inline-block}
+  .hero .eyebrow-hero::before{content:'';display:block;width:48px;height:1px;background:var(--green-ink);margin:0 auto 18px;opacity:.55}
+  .hero .h1{font-family:var(--display);font-weight:400;color:var(--navy);text-transform:uppercase;font-size:clamp(38px,6.4vw,64px);line-height:1.06;letter-spacing:.01em;margin:0 auto 22px;max-width:18ch}
+  .hero .h1 .accent{color:var(--green)}
+  .hero .subhead-hero{font-family:var(--sans);font-size:clamp(18px,2.1vw,22px);line-height:1.6;color:var(--body);margin:0 auto 32px;max-width:600px}
   .hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px;justify-content:center}
   .hero-chip{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;padding:11px 16px;border-radius:8px;line-height:1}
   .hero-chip--gold{background:var(--gold);color:var(--navy-dark)}
   .hero-chip--green{background:var(--green);color:#fff}
-  .hero-chip--ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.36)}
-  .hero .microcopy-hero{font-family:var(--sans);font-size:14px;color:rgba(255,255,255,.72);margin:14px 0 0}
-  .hero .microcopy-hero a{color:var(--gold)!important;text-decoration:none;border-bottom:1px solid rgba(227,160,31,.5);padding-bottom:1px}
-  .hero .btn{box-shadow:0 8px 28px rgba(68,153,69,.42),0 0 0 1px rgba(255,255,255,.08) inset}
+  .hero-chip--ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(6,11,80,.28)}
+  .hero .microcopy-hero{font-family:var(--sans);font-size:14px;color:var(--muted);margin:14px 0 0}
+  .hero .microcopy-hero a{color:var(--green-ink)!important;text-decoration:none;border-bottom:1px solid rgba(58,132,56,.5);padding-bottom:1px;font-weight:700}
 
   /* Buttons */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.02em;background:linear-gradient(135deg,#54AC54,var(--green-ink));color:#fff;padding:17px 34px;min-height:54px;border:none;border-radius:50px;cursor:pointer;text-decoration:none;box-shadow:0 8px 22px rgba(68,153,69,.28);transition:transform .15s var(--ease),box-shadow .2s var(--ease),filter .15s var(--ease)}
@@ -128,16 +126,18 @@
   /* How-it-works steps */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
   @media (max-width:760px){.steps{grid-template-columns:1fr}}
-  .step{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:26px 24px;color:rgba(255,255,255,.92)}
-  .step-num{font-family:var(--display);font-size:36px;color:var(--gold);line-height:1;margin-bottom:14px}
-  .step h3{font-family:var(--serif);font-weight:600;font-size:20px;color:#fff;margin:0 0 8px}
-  .step p{font-size:15px;line-height:1.6;color:rgba(255,255,255,.85);margin:0}
+  .step{background:var(--paper);border:1px solid var(--bone);border-radius:14px;padding:28px 24px;color:var(--body);box-shadow:0 6px 20px rgba(6,11,80,.04);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+  .step:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(6,11,80,.08)}
+  .step-num{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-ink));color:#fff;font-family:var(--display);font-size:20px;line-height:1;margin-bottom:18px}
+  .step h3{font-family:var(--serif);font-weight:600;font-size:20px;color:var(--navy);margin:0 0 8px}
+  .step p{font-size:15px;line-height:1.6;color:var(--body);margin:0}
 
-  /* Confidant cards — vertical (matches refresh-groups) */
-  .conf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:44px auto 0;align-items:start}
+  /* Confidant cards — vertical, equal-height across the grid */
+  .conf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:44px auto 0;grid-auto-rows:1fr}
   @media (max-width:860px){.conf-grid{grid-template-columns:1fr 1fr}}
   @media (max-width:560px){.conf-grid{grid-template-columns:1fr;max-width:360px}}
-  .conf-card{position:relative;background:var(--paper);border:1px solid var(--bone);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+  .conf-card{position:relative;background:var(--paper);border:1px solid var(--bone);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;height:100%;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+  .conf-role{min-height:2.6em}
   .conf-card:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(6,11,80,.12);border-color:var(--green)}
   .conf-photo{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bone);display:block}
   .conf-card-body{padding:22px 20px 26px;display:flex;flex-direction:column;flex:1;text-align:center}
@@ -234,17 +234,17 @@
 <!-- HERO -->
 <section class="hero" aria-labelledby="private-hero-h1">
   <div class="hero-under">
-    <p class="eyebrow-hero fade-in">ReBe ReFresh · Private 1:1 Sessions</p>
-    <h1 id="private-hero-h1" class="h1 fade-in d-1">One hour. One confidant. <span class="accent">The story you bring.</span></h1>
-    <p class="subhead-hero fade-in d-2">An unhurried 1:1 with the ReBe confidant of your choice. Your guide reaches out within 48 hours to schedule directly with you — no shuffling through calendars on your own.</p>
+    <p class="eyebrow-hero fade-in">Private session</p>
+    <h1 id="private-hero-h1" class="h1 fade-in d-1">A private session, with the <span class="accent">guide you choose</span>.</h1>
+    <p class="subhead-hero fade-in d-2">Pick the confidant whose story or season fits yours. They'll reach out within 48 hours to schedule directly with you.</p>
     <div class="hero-chips fade-in d-3">
-      <span class="hero-chip hero-chip--gold">$197 · 1 session</span>
+      <span class="hero-chip hero-chip--gold">$197 per session</span>
       <span class="hero-chip hero-chip--ghost">~1 hour</span>
       <span class="hero-chip hero-chip--green">Your choice of guide</span>
     </div>
     <div class="cta-block fade-in d-4">
       <a href="#confidants" class="btn">Meet the confidants <span class="btn-arrow" aria-hidden="true">↓</span></a>
-      <p class="microcopy-hero">Looking for the 6-week group instead? <a href="refresh-groups.html">See the cohort →</a></p>
+      <p class="microcopy-hero">Looking for a group instead? <a href="refresh-groups.html">See the 6-week cohort →</a></p>
     </div>
   </div>
 </section>
@@ -269,12 +269,12 @@
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="sec-dark" aria-labelledby="how-h">
+<section aria-labelledby="how-h">
   <div class="container">
     <div class="section-num" aria-hidden="true">02</div>
-    <p class="eyebrow">How a 1:1 works</p>
-    <h2 id="how-h" class="section-h">Three steps. No script. <em style="color:var(--gold)">Real conversation</em>.</h2>
-    <p class="lede">A 1:1 isn't therapy, coaching, or pastoral counseling. It's inner work with company — a single, unhurried hour with someone who's done the work and knows how to walk with you.</p>
+    <p class="eyebrow">How a session works</p>
+    <h2 id="how-h" class="section-h">Three steps. No script. <em>Real conversation</em>.</h2>
+    <p class="lede">A private session isn't therapy, coaching, or pastoral counseling. It's an honest, unhurried hour with someone who's done the work and knows how to walk with you.</p>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
