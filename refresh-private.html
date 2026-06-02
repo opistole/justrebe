@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>ReBe ReFresh · 6-Week Cohort + Private Sessions</title>
-<meta name="description" content="ReBe ReFresh — a six-week group experience for adults, plus private 1:1 sessions with a confidant. An ACEs-informed, root-cause path from isolation into real human community. $497 cohort · $197 private session." />
-<meta property="og:title" content="ReBe ReFresh · 6-Week Cohort + Private Sessions" />
-<meta property="og:description" content="Six weeks. One small group. A guided path from isolation into real community. $497 cohort · $197 private 1:1 session with a confidant." />
+<title>ReBe ReFresh · Private 1:1 Sessions with a Confidant</title>
+<meta name="description" content="A private 1:1 with the ReBe confidant of your choice. One unhurried hour, your choice of guide, $197. Your confidant reaches out within 48 hours to schedule." />
+<meta property="og:title" content="ReBe ReFresh · Private 1:1 Sessions" />
+<meta property="og:description" content="A private 1:1 with the ReBe confidant of your choice. One unhurried hour. $197 per session." />
 <meta property="og:image" content="https://justrebe.com/Images/RESET_616_Pres.png" />
-<meta property="og:url" content="https://justrebe.com/refresh-groups.html" />
+<meta property="og:url" content="https://justrebe.com/refresh-private.html" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="ReBe ReFresh · 6-Week Cohort + Private Sessions" />
-<meta name="twitter:description" content="Six weeks. One small group. A guided path from isolation into real community." />
+<meta name="twitter:title" content="ReBe ReFresh · Private 1:1 Sessions" />
+<meta name="twitter:description" content="A private 1:1 with the ReBe confidant of your choice. One unhurried hour. $197 per session." />
 <meta name="twitter:image" content="https://justrebe.com/Images/RESET_616_Pres.png" />
 <link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
 <script>document.documentElement.classList.add('js');</script>
@@ -106,6 +106,10 @@
   .eyebrow--center{text-align:center;display:block}
   .section-h{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(30px,4.4vw,50px);line-height:1.18;letter-spacing:.01em;color:var(--navy);margin:0 0 24px}
   .section-h em{font-style:normal;color:var(--green)}
+  .sec-dark .eyebrow{color:var(--gold)}
+  .sec-dark .section-h{color:#fff}
+  .lede{font-family:var(--sans);font-weight:300;font-size:24px;line-height:1.55;color:var(--body);margin:0 0 18px;letter-spacing:-.005em}
+  .sec-dark .lede{color:rgba(255,255,255,.95)}
   /* Architectural numbered section markers */
   .section-num{display:flex;align-items:center;gap:14px;font-family:var(--display);font-size:28px;color:var(--gold-ink);letter-spacing:.04em;margin:0 0 24px;line-height:1}
   .section-num::after{content:'';display:block;height:2px;width:0;background:currentColor;opacity:.7;transition:width .9s var(--ease) .15s}
@@ -120,39 +124,16 @@
   .fade-in.d-4{animation-delay:.50s}
   @keyframes fadeIn{to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.fade-in{opacity:1;transform:none;animation:none}}
-  .sec-dark .eyebrow{color:var(--gold)}
-  .sec-dark .section-h{color:#fff}
-  .lede{font-family:var(--sans);font-weight:300;font-size:24px;line-height:1.55;color:var(--body);margin:0 0 18px;letter-spacing:-.005em}
-  .sec-dark .lede{color:rgba(255,255,255,.95)}
 
-  /* Story */
-  .story .container{max-width:680px}
-  .story p{font-size:22px;line-height:1.75;color:var(--body);margin:0 0 20px}
-  .story p strong{color:var(--navy);font-weight:700}
-  .story .pull{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,30px);line-height:1.35;color:var(--green-ink);margin:28px 0;padding-left:22px;border-left:4px solid var(--green)}
-  .story .signoff{font-family:var(--display);text-transform:uppercase;font-size:clamp(22px,3vw,32px);color:var(--navy);letter-spacing:.01em;margin:32px 0 0}
-  .story .signoff span{color:var(--green)}
+  /* How-it-works steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
+  @media (max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:26px 24px;color:rgba(255,255,255,.92)}
+  .step-num{font-family:var(--display);font-size:36px;color:var(--gold);line-height:1;margin-bottom:14px}
+  .step h3{font-family:var(--serif);font-weight:600;font-size:20px;color:#fff;margin:0 0 8px}
+  .step p{font-size:15px;line-height:1.6;color:rgba(255,255,255,.85);margin:0}
 
-  /* Stat band */
-  .statband .container{text-align:center}
-  .statband-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px}
-  .statband-num{display:block;font-family:var(--display);font-weight:400;font-size:clamp(52px,7.5vw,90px);line-height:1.1;padding-bottom:.06em;margin-bottom:10px;background:linear-gradient(100deg,var(--green) 10%,var(--gold-ink) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .statband-label{display:block;font-family:var(--sans);font-size:15px;line-height:1.5;color:var(--body);max-width:260px;margin:0 auto}
-  @media (max-width:760px){.statband-grid{grid-template-columns:1fr;gap:34px}}
-
-  /* Offer / feature bullets */
-  .feat-list{list-style:none;padding:0;margin:28px 0 0;max-width:560px;display:flex;flex-direction:column;gap:14px}
-  .feat-list.center{margin-left:auto;margin-right:auto}
-  .feat-list li{position:relative;padding-left:32px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--slate)}
-  .feat-list li::before{content:'✓';position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
-  .sec-dark .feat-list li{color:rgba(255,255,255,.96)}
-  .sec-dark .feat-list li::before{background:#fff;color:var(--green-deep)}
-
-  .price-card{max-width:var(--card-w);margin:36px auto 0;background:var(--paper);border:1px solid var(--bone);border-top:4px solid var(--green);border-radius:16px;padding:36px;text-align:center;box-shadow:0 10px 40px rgba(6,11,80,.05)}
-  .price-num{font-family:var(--display);font-size:clamp(56px,9vw,84px);line-height:1;color:var(--navy);margin:0}
-  .price-sub{font-size:14px;color:var(--muted);margin:6px 0 22px}
-
-  /* Confidant cards — vertical */
+  /* Confidant cards — vertical (matches refresh-groups) */
   .conf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:44px auto 0;align-items:start}
   @media (max-width:860px){.conf-grid{grid-template-columns:1fr 1fr}}
   @media (max-width:560px){.conf-grid{grid-template-columns:1fr;max-width:360px}}
@@ -160,13 +141,11 @@
   .conf-card:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(6,11,80,.12);border-color:var(--green)}
   .conf-photo{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bone);display:block}
   .conf-card-body{padding:22px 20px 26px;display:flex;flex-direction:column;flex:1;text-align:center}
-  .conf-badge{position:absolute;top:12px;left:12px;z-index:2;background:var(--gold);color:var(--navy-dark);font-family:var(--sans);font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:50px;box-shadow:0 4px 12px rgba(6,11,80,.18)}
   .conf-name{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--navy);margin:0 0 4px}
   .conf-role{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-ink);margin:0 0 12px}
   .conf-desc{font-size:14px;line-height:1.55;color:var(--body);margin:0 0 22px;flex:1}
   .conf-request-btn{align-self:center;margin-top:auto;display:inline-block;background:linear-gradient(135deg,#54AC54,var(--green-ink));color:#fff;padding:12px 24px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;box-shadow:0 6px 18px rgba(68,153,69,.26)}
   .conf-request-btn:hover{filter:brightness(1.07)}
-  .conf-request-btn.ghost{background:transparent;color:var(--green-ink);border:2px solid var(--green-ink);box-shadow:none}
   .conf-bio{margin:0 0 18px;text-align:left}
   .conf-bio summary{list-style:none;cursor:pointer;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-ink);display:flex;align-items:center;justify-content:center;gap:6px}
   .conf-bio summary::-webkit-details-marker{display:none}
@@ -176,24 +155,12 @@
   .conf-bio-body p{margin:0 0 10px}
   .conf-bio-body p:last-child{margin:0}
 
-  /* Forms (group + confidant) */
+  /* Form */
   .form-section{padding:80px 24px 96px;background:var(--mist)}
   .form-intro{max-width:680px;margin:0 auto 32px;text-align:center}
   .form-intro p{font-size:15px;color:var(--body)}
   .form-card{max-width:var(--card-w);margin:0 auto;background:var(--paper);border:1px solid var(--bone);border-top:4px solid var(--green);border-radius:16px;padding:44px;box-shadow:0 10px 40px rgba(6,11,80,.05)}
   @media (max-width:640px){.form-card{padding:28px 22px}}
-  /* Two-step form */
-  .form-step-2[hidden]{display:none}
-  .form-step-2{margin-top:14px;padding-top:30px;border-top:1px dashed var(--bone);animation:stepReveal .55s cubic-bezier(.16,1,.3,1)}
-  .form-step-2-intro{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-ink);margin:0 0 22px;text-align:center}
-  @keyframes stepReveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  .form-field--fieldset{border:0;padding:0;margin-bottom:18px}
-  .form-fieldset-legend{display:block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);margin-bottom:8px;padding:0}
-  .form-field .opt{color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px}
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-  @media (prefers-reduced-motion:reduce){.form-step-2{animation:none}}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  @media (max-width:600px){.form-row{grid-template-columns:1fr}}
   .form-field{margin-bottom:18px}
   .form-field label{display:block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
   .form-field label .req{color:var(--coral)}
@@ -201,21 +168,11 @@
   .form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(68,153,69,.12);background:#fff}
   .form-field textarea{resize:vertical;min-height:96px;line-height:1.5}
   .form-field .hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5}
-  .field-section-label{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:26px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--bone)}
-  .radio-group{display:flex;gap:10px;flex-wrap:wrap}
-  .radio-pill{flex:1;min-width:130px;position:relative}
-  .radio-pill input{position:absolute;opacity:0;pointer-events:none}
-  .radio-pill label{display:block;padding:12px 16px;background:var(--mist);border:1px solid var(--bone);border-radius:10px;font-size:14px;font-weight:600;text-align:center;color:var(--slate);cursor:pointer;transition:all .15s;margin:0;text-transform:none;letter-spacing:0}
-  .radio-pill input:checked+label{background:var(--green);color:#fff;border-color:var(--green)}
-  .checkbox-field{display:flex;align-items:flex-start;gap:12px;padding:12px 0}
-  .checkbox-field input{width:20px;height:20px;margin-top:2px;accent-color:var(--green);flex-shrink:0;cursor:pointer}
-  .checkbox-field label{font-size:14px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--slate);line-height:1.5;cursor:pointer;margin:0}
   .form-check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--body);line-height:1.55;padding:10px 0}
   .form-check input{margin-top:3px;width:16px;height:16px;flex-shrink:0;accent-color:var(--green)}
   .field-error{font-size:12px;color:var(--coral);margin-top:6px}
   [aria-invalid=true]{border-color:var(--coral)!important}
   .form-submit{margin-top:26px;text-align:center}
-  .form-note{font-size:12px;color:var(--muted);margin-top:12px}
   .submit-error{max-width:var(--card-w);margin:18px auto 0;padding:14px 18px;background:#fdecea;border:1px solid #f5b7b1;border-radius:10px;color:#922b21;font-size:14px;line-height:1.6}
   .submit-error a{color:#922b21;font-weight:700}
   .email-note{max-width:var(--card-w);margin:18px auto 0;text-align:center;font-size:14px;color:var(--body);line-height:1.6}
@@ -237,6 +194,11 @@
   .faq-item[open] summary::after{transform:rotate(45deg)}
   .faq-item p{font-size:15px;line-height:1.7;color:var(--body);margin-top:12px}
 
+  /* Bottom CTA */
+  .bottom-cta{padding:64px 24px;background:var(--sec-paper-alt);text-align:center;background:var(--mist);border-top:1px solid var(--bone)}
+  .bottom-cta p{font-size:16px;color:var(--body);margin:0 0 16px}
+  .bottom-cta strong{color:var(--navy)}
+
   /* Footer */
   footer{background:var(--mist);padding:48px 24px;text-align:center;border-top:1px solid var(--bone)}
   .foot-line{font-family:var(--sans);font-size:14px;color:var(--body);margin:0 0 14px;line-height:1.65}
@@ -246,51 +208,51 @@
   .foot-links a:hover{text-decoration:underline;text-decoration-color:var(--green);text-underline-offset:4px;text-decoration-thickness:2px}
 
   /* Scroll reveal */
-  .js main section>.container,.js #enroll .form-card{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-  .js main section>.container.in,.js #enroll .form-card.in{opacity:1;transform:none}
+  .js main section>.container,.js #request-1on1 .form-card{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .js main section>.container.in,.js #request-1on1 .form-card.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
     .js .curl{background-size:100% .16em!important}
-    .js main section>.container,.js #enroll .form-card{opacity:1!important;transform:none!important}
+    .js main section>.container,.js #request-1on1 .form-card{opacity:1!important;transform:none!important}
     .fade-in{opacity:1!important;transform:none!important;animation:none!important}
   }
 </style>
 </head>
 <body>
 
-<a href="#enroll" class="skip-link">Skip to enrollment</a>
+<a href="#request-1on1" class="skip-link">Skip to request form</a>
 
 <header class="util-bar">
   <div class="util-inner">
     <a href="/" class="wordmark">Re<span>Be</span></a>
-    <a href="#enroll" class="util-cta">Reserve my seat →</a>
+    <a href="#request-1on1" class="util-cta">Request a session →</a>
   </div>
 </header>
 
 <main>
 
 <!-- HERO -->
-<section class="hero" aria-labelledby="refresh-hero-h1">
+<section class="hero" aria-labelledby="private-hero-h1">
   <div class="hero-under">
-    <p class="eyebrow-hero fade-in">ReBe ReFresh · A 6-Week Group Experience</p>
-    <h1 id="refresh-hero-h1" class="h1 fade-in d-1">Discover your story. <span class="accent">Then rewrite it.</span></h1>
-    <p class="subhead-hero fade-in d-2">Six weeks. One small group. A guided path from isolation into real community — picturing safety, envisioning freedom, rehearsing a future worth living.</p>
+    <p class="eyebrow-hero fade-in">ReBe ReFresh · Private 1:1 Sessions</p>
+    <h1 id="private-hero-h1" class="h1 fade-in d-1">One hour. One confidant. <span class="accent">The story you bring.</span></h1>
+    <p class="subhead-hero fade-in d-2">An unhurried 1:1 with the ReBe confidant of your choice. Your guide reaches out within 48 hours to schedule directly with you — no shuffling through calendars on your own.</p>
     <div class="hero-chips fade-in d-3">
-      <span class="hero-chip hero-chip--gold">$497 · 6 sessions</span>
-      <span class="hero-chip hero-chip--ghost">Starts June 23</span>
-      <span class="hero-chip hero-chip--green">11 AM ET</span>
+      <span class="hero-chip hero-chip--gold">$197 · 1 session</span>
+      <span class="hero-chip hero-chip--ghost">~1 hour</span>
+      <span class="hero-chip hero-chip--green">Your choice of guide</span>
     </div>
     <div class="cta-block fade-in d-4">
-      <a href="#enroll" class="btn">Reserve my seat <span class="btn-arrow" aria-hidden="true">→</span></a>
-      <p class="microcopy-hero">Prefer a 1:1? <a href="refresh-private.html">See private sessions →</a></p>
+      <a href="#confidants" class="btn">Meet the confidants <span class="btn-arrow" aria-hidden="true">↓</span></a>
+      <p class="microcopy-hero">Looking for the 6-week group instead? <a href="refresh-groups.html">See the cohort →</a></p>
     </div>
   </div>
 </section>
 
 <!-- HOOK -->
-<section class="hook-section" aria-label="The idea behind ReBe">
+<section class="hook-section" aria-label="The idea behind a 1:1 session">
   <div class="container">
-    <p class="hook">You cannot heal what you have never been helped to understand.</p>
+    <p class="hook">Some seasons need a group. Some need one honest hour with one honest person.</p>
   </div>
 </section>
 
@@ -301,143 +263,45 @@
     <p class="eyebrow">Why ReBe exists</p>
     <h2 id="story-h" class="section-h">Somewhere between a therapy room and a <em>classroom</em>.</h2>
     <p>Between a survivor's story and a child's silence, we found the same wound — and we built ReBe to heal it. Most of us were never taught how to use our imagination. We were handed fear loops, inherited worry, and survival patterns, and ran them so long they started to feel like us.</p>
-    <p class="pull">But the story isn't finished. You cannot heal what you've never been helped to understand.</p>
+    <p class="lede" style="color:var(--green-ink);font-style:italic;border-left:4px solid var(--green);padding-left:22px;margin:28px 0;font-weight:400">But the story isn't finished. You cannot heal what you've never been helped to understand.</p>
     <p>ReBe is a guided, root-cause path from isolation into real community — picturing safety, envisioning freedom, rehearsing a future worth living. No performance. No pressure.</p>
-    <p class="signoff">Better me. <span>Better we.</span></p>
   </div>
 </section>
 
-<!-- STAT BAND -->
-<section class="statband sec-green-wash" aria-label="Why this matters">
+<!-- HOW IT WORKS -->
+<section class="sec-dark" aria-labelledby="how-h">
   <div class="container">
-    <div class="section-num center" aria-hidden="true">02</div>
-    <p class="eyebrow eyebrow--center">The need is real</p>
-    <h2 class="section-h" style="text-align:center">It's not just you — and it's <em>not your fault</em>.</h2>
-    <div class="statband-grid">
-      <div><span class="statband-num">70%</span><span class="statband-label">of adults carry one or more unresolved early-life traumas (ACEs)</span></div>
-      <div><span class="statband-num">76%</span><span class="statband-label">of adults are affected by burnout</span></div>
-      <div><span class="statband-num" data-no-count>15</span><span class="statband-label">cigarettes a day — the health risk the Surgeon General equates with loneliness</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- COHORT OFFER -->
-<section class="sec-dark" aria-labelledby="offer-h">
-  <div class="container">
-    <div class="section-num" aria-hidden="true">03</div>
-    <p class="eyebrow">The 6-week cohort</p>
-    <h2 id="offer-h" class="section-h">Six sessions. One group. Your way <em style="color:var(--gold)">back</em>.</h2>
-    <p class="lede">A guided, root-cause group experience for adults — walked out in real, live community. Not therapy, not coaching: inner work, with company.</p>
-    <ul class="feat-list">
-      <li>Six weekly live sessions with Elizabeth and the ReBe team</li>
-      <li>A small group — small enough to be known, large enough to be honest</li>
-      <li>Anchored in EPICS and the story-as-genre framework</li>
-      <li>Not recorded — real-time, fully present</li>
-      <li><strong>First group starts June 23 · 11 AM Eastern</strong></li>
-    </ul>
-    <div class="price-card">
-      <p class="price-num">$497</p>
-      <p class="price-sub">for all six sessions · starts June 23, 11 AM ET</p>
-      <a href="#enroll" class="btn">Reserve my seat <span class="btn-arrow" aria-hidden="true">→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ENROLL FORM -->
-<section class="form-section" id="enroll">
-  <div class="container">
-    <div class="form-intro">
-      <p class="eyebrow eyebrow--center">Reserve your seat · $497</p>
-      <h2 class="section-h" style="text-align:center">Join the first <em>group</em>.</h2>
-      <p>Starts June 23 · 11 AM Eastern. Tell us a bit about you and choose how you'd like to move forward.</p>
-    </div>
-    <form id="refresh-form" class="form-card" novalidate>
-
-      <!-- STEP 1 — minimal contact + path -->
-      <div class="form-step-1">
-        <div class="field-section-label">About you</div>
-        <div class="form-row">
-          <div class="form-field"><label for="full_name">Full name <span class="req">*</span></label><input type="text" id="full_name" name="full_name" autocomplete="name" required aria-required="true"></div>
-          <div class="form-field"><label for="email">Email <span class="req">*</span></label><input type="email" id="email" name="email" autocomplete="email" required aria-required="true"></div>
-        </div>
-        <div class="form-field"><label for="phone">Phone <span class="req">*</span></label><input type="tel" id="phone" name="phone" autocomplete="tel" required aria-required="true"></div>
-
-        <fieldset class="form-field form-field--fieldset">
-          <legend class="form-fieldset-legend">How would you like to move forward? <span class="req">*</span></legend>
-          <div class="radio-group" style="flex-direction:column">
-            <div class="radio-pill" style="flex:1 1 100%"><input type="radio" id="r_pay" name="readiness" value="ready_to_pay" required aria-required="true"><label for="r_pay">I'm ready to reserve my seat &amp; check out</label></div>
-            <div class="radio-pill" style="flex:1 1 100%"><input type="radio" id="r_info" name="readiness" value="wants_more_info"><label for="r_info">I have questions first</label></div>
-            <div class="radio-pill" style="flex:1 1 100%"><input type="radio" id="r_wait" name="readiness" value="waitlist"><label for="r_wait">These dates don't work — add me to the waitlist</label></div>
-          </div>
-        </fieldset>
+    <div class="section-num" aria-hidden="true">02</div>
+    <p class="eyebrow">How a 1:1 works</p>
+    <h2 id="how-h" class="section-h">Three steps. No script. <em style="color:var(--gold)">Real conversation</em>.</h2>
+    <p class="lede">A 1:1 isn't therapy, coaching, or pastoral counseling. It's inner work with company — a single, unhurried hour with someone who's done the work and knows how to walk with you.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Pick a confidant</h3>
+        <p>Scan the bios below and choose the one whose story or season resonates. Or pick "match me" and we'll route you.</p>
       </div>
-
-      <!-- STEP 2 — deeper questions, revealed once readiness chosen -->
-      <div class="form-step-2" id="form-step-2" hidden>
-        <p class="form-step-2-intro" id="form-step-2-intro">Just a few more questions →</p>
-
-        <div class="field-section-label">What brings you here</div>
-        <div class="form-field"><label for="reason_for_interest">What drew you to ReBe ReFresh? <span class="req">*</span></label><textarea id="reason_for_interest" name="reason_for_interest" placeholder="A few sentences — whatever feels true."></textarea></div>
-        <div class="form-field">
-          <label for="area_needing_refresh">Which area are you most ready to refresh? <span class="req">*</span></label>
-          <select id="area_needing_refresh" name="area_needing_refresh">
-            <option value="">Choose one…</option>
-            <option value="Burnout recovery">Burnout recovery</option>
-            <option value="Emotional resilience &amp; regulation">Emotional resilience &amp; regulation</option>
-            <option value="Communication &amp; relationships">Communication &amp; relationships</option>
-            <option value="Purpose &amp; clarity">Purpose &amp; clarity</option>
-            <option value="Inner healing &amp; growth">Inner healing &amp; growth</option>
-            <option value="Leadership &amp; self-awareness">Leadership &amp; self-awareness</option>
-            <option value="Other">Other (describe below)</option>
-          </select>
-          <label for="area_other" class="sr-only">Area to refresh — in your own words</label>
-          <input type="text" id="area_other" name="area_other" placeholder="Or in your own words (optional)" maxlength="200" style="margin-top:10px">
-        </div>
-        <fieldset class="form-field form-field--fieldset">
-          <legend class="form-fieldset-legend">Have you done a ReBe or Real Talk experience before? <span class="req">*</span></legend>
-          <div class="radio-group">
-            <div class="radio-pill"><input type="radio" id="prev_yes" name="previous_rebe_experience" value="yes"><label for="prev_yes">Yes</label></div>
-            <div class="radio-pill"><input type="radio" id="prev_no" name="previous_rebe_experience" value="no"><label for="prev_no">No</label></div>
-          </div>
-        </fieldset>
-
-        <div class="field-section-label">Anything else</div>
-        <div class="form-field"><label for="notes">Anything else you'd like us to know? <span class="opt">(optional)</span></label><textarea id="notes" name="notes" placeholder="Optional — share anything that would help us support you."></textarea></div>
-        <div class="form-row">
-          <div class="form-field"><label for="organization_name">Organization <span class="opt">(optional)</span></label><input type="text" id="organization_name" name="organization_name"></div>
-          <div class="form-field"><label for="role_title">Role / Title <span class="opt">(optional)</span></label><input type="text" id="role_title" name="role_title"></div>
-        </div>
-
-        <div class="field-section-label">Referral</div>
-        <div class="form-row">
-          <div class="form-field"><label for="who_referred_you">Who referred you? <span class="opt">(optional)</span></label><input type="text" id="who_referred_you" name="who_referred_you" placeholder="Name of the person who sent you"></div>
-          <div class="form-field"><label for="referral_code">Referral code <span class="opt">(optional)</span></label><input type="text" id="referral_code" name="referral_code" placeholder="Have a code? Enter it here"></div>
-        </div>
-
-        <div class="field-section-label">Consent</div>
-        <div class="checkbox-field"><input type="checkbox" id="consent_to_contact" name="consent_to_contact"><label for="consent_to_contact">I consent to be contacted by ReBe about my enrollment and ReBe ReFresh. <span class="req">*</span></label></div>
-        <div class="checkbox-field"><input type="checkbox" id="consent_to_confidentiality" name="consent_to_confidentiality"><label for="consent_to_confidentiality">I agree to maintain confidentiality about what's shared in the group. <span class="req">*</span></label></div>
-
-        <div class="form-submit">
-          <button type="submit" class="btn" style="width:100%">Submit →</button>
-          <p class="form-note">* Required fields</p>
-        </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Submit the request</h3>
+        <p>A short form — name, email, what you're working through. Then $197 to hold the session.</p>
       </div>
-
-      <input type="hidden" name="preferred_group_time" value="June 23 · 11 AM ET">
-      <input type="hidden" name="group_type" value="no_preference">
-    </form>
-    <div id="post-submit-zone" class="post-submit"></div>
-    <p class="email-note">Questions, or want to talk it through first? Email <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a> — we'll get right back to you.</p>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Your confidant reaches out</h3>
+        <p>Within 48 hours, they'll email you directly to schedule. Calendly self-booking is coming soon — for now it's the human touch.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- PRIVATE SESSIONS -->
-<section id="private" class="sec-paper-alt" aria-labelledby="private-h">
+<!-- CONFIDANTS -->
+<section id="confidants" aria-labelledby="confidants-h">
   <div class="container container--wide">
-    <p class="eyebrow eyebrow--center">Private 1:1 Sessions · $197</p>
-    <h2 id="private-h" class="section-h" style="text-align:center">Rather go <em>one-on-one</em>? Meet the confidants.</h2>
-    <p class="lede" style="text-align:center;max-width:640px;margin:0 auto">A single 1:1 with the confidant of your choice — $197. Open a card to read their story, then request a session. Your confidant reaches out within 48 hours to schedule.</p>
+    <div class="section-num center" aria-hidden="true">03</div>
+    <p class="eyebrow eyebrow--center">Meet the Confidants</p>
+    <h2 id="confidants-h" class="section-h" style="text-align:center">Trusted guides, walking <em>with</em> you.</h2>
+    <p class="lede" style="text-align:center;max-width:640px;margin:0 auto">Every confidant is chosen for depth, discretion, and the kind of presence that doesn't rush. Several have ministry or faith backgrounds — mention it on the request form and we'll match accordingly.</p>
 
     <div class="conf-grid">
 
@@ -537,12 +401,12 @@
       <p>We'll route you to your chosen confidant. Payment happens after this form, before scheduling.</p>
     </div>
     <form id="confidant-form" class="form-card" novalidate>
-      <div class="form-field"><label for="conf-name">Your name <span class="req">*</span></label><input type="text" id="conf-name" name="name" autocomplete="name"></div>
-      <div class="form-field"><label for="conf-email">Email <span class="req">*</span></label><input type="email" id="conf-email" name="email" autocomplete="email"></div>
-      <div class="form-field"><label for="conf-phone">Phone (optional)</label><input type="tel" id="conf-phone" name="phone" autocomplete="tel"></div>
+      <div class="form-field"><label for="conf-name">Your name <span class="req">*</span></label><input type="text" id="conf-name" name="name" autocomplete="name" required aria-required="true"></div>
+      <div class="form-field"><label for="conf-email">Email <span class="req">*</span></label><input type="email" id="conf-email" name="email" autocomplete="email" required aria-required="true"></div>
+      <div class="form-field"><label for="conf-phone">Phone <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label><input type="tel" id="conf-phone" name="phone" autocomplete="tel"></div>
       <div class="form-field">
         <label for="conf-confidant">Preferred confidant <span class="req">*</span></label>
-        <select id="conf-confidant" name="preferred_confidant">
+        <select id="conf-confidant" name="preferred_confidant" required aria-required="true">
           <option value="">— choose —</option>
           <option value="Beth Rech">Beth Rech</option>
           <option value="Elizabeth Good">Elizabeth Good</option>
@@ -552,15 +416,19 @@
           <option value="No preference">No preference — please match me</option>
         </select>
       </div>
-      <div class="form-field"><label for="conf-situation">What you're working through <span class="req">*</span></label><textarea id="conf-situation" name="situation" placeholder="A short paragraph is enough — your confidant will go deeper when you talk."></textarea></div>
-      <div class="form-field"><label for="conf-times">Best times to connect</label><input type="text" id="conf-times" name="best_times" placeholder="e.g. weekday evenings ET, weekend mornings…"><div class="hint">Optional, but helps your confidant find a time that works.</div></div>
+      <div class="form-field"><label for="conf-situation">What you're working through <span class="req">*</span></label><textarea id="conf-situation" name="situation" placeholder="A short paragraph is enough — your confidant will go deeper when you talk." required aria-required="true"></textarea></div>
+      <div class="form-field">
+        <label for="conf-times">Best times to connect</label>
+        <input type="text" id="conf-times" name="best_times" placeholder="e.g. weekday evenings ET, weekend mornings…">
+        <div class="hint">Optional, but helps your confidant find a time that works.</div>
+      </div>
       <label class="form-check"><input type="checkbox" name="consent_to_contact"><span>I'm okay being contacted by my chosen confidant by email or phone to schedule.</span></label>
       <div class="form-submit">
         <button type="submit" class="btn" style="width:100%">Continue to payment · $197</button>
       </div>
     </form>
     <div id="confidant-post-submit" class="post-submit"></div>
-    <p class="email-note">Looking for trauma-specific work with Dr. Quintal? Email <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a> to be connected.</p>
+    <p class="email-note">Looking for trauma-specific work with Dr. Quintal? Email <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a> to be connected directly.</p>
   </div>
 </section>
 
@@ -570,12 +438,22 @@
     <p class="eyebrow eyebrow--center">Questions</p>
     <h2 id="faq-h" class="section-h" style="text-align:center">Things people <em>actually ask</em>.</h2>
     <div class="faq-list">
-      <details class="faq-item"><summary>Is this therapy or coaching?</summary><p>No. ReBe ReFresh is a guided process for inner work — faith-friendly, with company. It's not therapy, coaching, or pastoral counseling. If you're in acute crisis, please reach out to a therapist, your doctor, or 988 first.</p></details>
-      <details class="faq-item"><summary>What's included in the cohort?</summary><p>Six weekly live sessions with Elizabeth and the ReBe team, in a small group. Not recorded — they're the times you set aside to actually be there. $497 total. The first group starts June 23 at 11 AM Eastern.</p></details>
-      <details class="faq-item"><summary>What's the difference between the cohort and a private session?</summary><p>The cohort ($497) is six weeks of guided group work. A standalone private session ($197) is a single 1:1 with the confidant of your choice — book one anytime, on its own.</p></details>
-      <details class="faq-item"><summary>How does payment and scheduling work?</summary><p>Payment is handled securely at checkout after you submit the form. The first cohort starts June 23 at 11 AM Eastern. For a private session, your confidant reaches out within 48 hours to schedule directly.</p></details>
-      <details class="faq-item"><summary>Can my group or organization enroll together?</summary><p>Yes — email <a href="mailto:refresh@justrebe.com" style="color:var(--green-ink);font-weight:700">refresh@justrebe.com</a> and we'll help you set it up.</p></details>
+      <details class="faq-item"><summary>What happens in a 1:1?</summary><p>A real, unhurried conversation. Your confidant will listen, ask honest questions, and meet you wherever you are. There's no script — the work shapes itself around what you bring.</p></details>
+      <details class="faq-item"><summary>How long is a session?</summary><p>Roughly one hour. Your confidant will confirm exact timing when scheduling with you directly.</p></details>
+      <details class="faq-item"><summary>Is this therapy or coaching?</summary><p>No. A confidant session is not therapy, coaching, or pastoral counseling. It's a guided process for inner work — faith-friendly, with company. If you're in acute crisis, please reach out to a therapist, your doctor, or 988 first.</p></details>
+      <details class="faq-item"><summary>Do confidants share my faith?</summary><p>Several of our confidants have ministry or faith backgrounds. If that matters to you, mention it on the request form and we'll match accordingly. The work isn't religious teaching — it's inner work that people of all backgrounds come to.</p></details>
+      <details class="faq-item"><summary>Can I book more than one session?</summary><p>Yes — book additional sessions any time. Each one is $197.</p></details>
+      <details class="faq-item"><summary>How does payment and scheduling work?</summary><p>Payment is handled securely at checkout after you submit the form. Your confidant reaches out within 48 hours to schedule directly with you.</p></details>
+      <details class="faq-item"><summary>What if I'd rather work in a group?</summary><p>The 6-week ReFresh cohort might be a better fit — <a href="refresh-groups.html" style="color:var(--green-ink);font-weight:700">see the cohort</a>.</p></details>
     </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="container">
+    <p>Curious about a deeper, longer experience? Explore the <strong>6-week cohort</strong>.</p>
+    <a class="btn btn-ghost" href="refresh-groups.html">See the cohort · $497 →</a>
   </div>
 </section>
 
@@ -583,12 +461,12 @@
 
 <footer>
   <p class="foot-line foot-line--muted">ReBe — Rebuilding people from the inside out. Better me. Better we.</p>
-  <p class="foot-line">This is a guided group experience, not crisis care. If you're in acute distress, reach out to a therapist, your doctor, or 988 (Suicide &amp; Crisis Lifeline).</p>
+  <p class="foot-line">This is a guided experience, not crisis care. If you're in acute distress, reach out to a therapist, your doctor, or 988 (Suicide &amp; Crisis Lifeline).</p>
   <p class="foot-links">
     <a href="/privacy.html">Privacy Policy</a>
     <a href="/terms.html">Terms</a>
     <a href="mailto:refresh@justrebe.com">Contact</a>
-    <a href="#private">Private 1:1 Sessions</a>
+    <a href="refresh-groups.html">6-week Cohort</a>
   </p>
   <p class="foot-line foot-line--muted">© 2026 Just ReBe, LLC. All rights reserved.</p>
 </footer>
@@ -596,8 +474,7 @@
 <!-- ========== SCROLL REVEAL ========== -->
 <script>
 (function(){
-  document.documentElement.style.scrollBehavior='smooth';
-  var els=document.querySelectorAll('main section>.container, #enroll .form-card');
+  var els=document.querySelectorAll('main section>.container, #request-1on1 .form-card');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
@@ -607,61 +484,25 @@
 })();
 </script>
 
-<!-- ========== STAT COUNT-UP + CARD STAGGER ========== -->
+<!-- ========== CARD STAGGER ========== -->
 <script>
 (function(){
   if (!('IntersectionObserver' in window)) return;
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) return;
-
-  // Count-up on stat numbers (real number stays visible until observer fires)
-  var stats = document.querySelectorAll('.statband-num');
-  stats.forEach(function(el){
-    if (el.hasAttribute('data-no-count')) return;
-    var m = el.textContent.trim().match(/^(\d+)(%?)$/);
-    if (!m) return;
-    el.dataset.target = m[1];
-    el.dataset.suffix = m[2];
-  });
-  function countUp(el){
-    var target = parseInt(el.dataset.target, 10);
-    var suffix = el.dataset.suffix || '';
-    el.textContent = '0' + suffix;
-    var dur = 1500, start = performance.now();
-    function step(now){
-      var t = Math.min(1, (now - start) / dur);
-      var eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if (t < 1) requestAnimationFrame(step);
-      else el.textContent = target + suffix;
-    }
-    requestAnimationFrame(step);
-  }
-  var statIO = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting && e.target.dataset.target){
-        countUp(e.target);
-        statIO.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.45 });
-  stats.forEach(function(el){ if (el.dataset.target) statIO.observe(el); });
-
-  // Staggered fade-in for confidant cards as they enter view
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var cards = document.querySelectorAll('.conf-card');
   cards.forEach(function(c){ c.style.opacity = 0; c.style.transform = 'translateY(20px)'; c.style.transition = 'opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1)'; });
-  var cardIO = new IntersectionObserver(function(entries){
+  var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if (e.isIntersecting){
         var idx = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
         e.target.style.transitionDelay = (idx * 55) + 'ms';
         e.target.style.opacity = 1;
         e.target.style.transform = 'none';
-        cardIO.unobserve(e.target);
+        io.unobserve(e.target);
       }
     });
   }, { threshold: 0.15 });
-  cards.forEach(function(c){ cardIO.observe(c); });
+  cards.forEach(function(c){ io.observe(c); });
 })();
 </script>
 
@@ -678,85 +519,17 @@
 })();
 </script>
 
-<!-- ========== TWO-STEP FORM REVEAL ========== -->
-<script>
-(function(){
-  var step2 = document.getElementById('form-step-2');
-  if (!step2) return;
-  var radios = document.querySelectorAll('input[name="readiness"]');
-  function reveal(){
-    if (!step2.hasAttribute('hidden')) return;
-    step2.removeAttribute('hidden');
-    // Tailor the intro line to the chosen path
-    var pick = document.querySelector('input[name="readiness"]:checked');
-    var intro = document.getElementById('form-step-2-intro');
-    if (pick && intro){
-      if (pick.value === 'ready_to_pay') intro.textContent = "Great — just a few more questions before checkout";
-      else if (pick.value === 'wants_more_info') intro.textContent = "Tell us a bit more so we can answer well";
-      else if (pick.value === 'waitlist') intro.textContent = "Tell us a bit more so we know what you're looking for";
-    }
-    // Scroll the intro into view so the user sees that the form expanded
-    setTimeout(function(){
-      intro && intro.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 80);
-  }
-  radios.forEach(function(r){ r.addEventListener('change', reveal); });
-  // Also update intro line if user changes readiness after step 2 is revealed
-  radios.forEach(function(r){
-    r.addEventListener('change', function(){
-      var intro = document.getElementById('form-step-2-intro');
-      if (!step2.hasAttribute('hidden') && intro){
-        if (r.value === 'ready_to_pay') intro.textContent = "Great — just a few more questions before checkout";
-        else if (r.value === 'wants_more_info') intro.textContent = "Tell us a bit more so we can answer well";
-        else if (r.value === 'waitlist') intro.textContent = "Tell us a bit more so we know what you're looking for";
-      }
-    });
-  });
-})();
-</script>
-
-<!-- ========== SUPABASE + FORMS ========== -->
-<script src="lib/refresh-codes.js"></script>
+<!-- ========== SUPABASE + FORM ========== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
-<script src="lib/refresh-form.js"></script>
 <script src="lib/confidant-form.js"></script>
 <script>
-  // PUBLIC values — replace with real Supabase project values when wiring enrollment live.
+  // PUBLIC keys — RLS protects the data.
   var SUPABASE_URL='https://erbncxjkgwqtfhulricc.supabase.co';
   var SUPABASE_ANON_KEY='sb_publishable_3L24YRPqcRSQNHWa8ofpSA_t0mAB6LY';
   var supabase;
   try { supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY); }
   catch(err){ console.warn('Supabase init failed (placeholder keys). Demo mode only.',err); supabase={supabaseUrl:SUPABASE_URL}; }
 
-  // --- Group enrollment form ($497) ---
-  window.initRefreshForm({
-    form: document.getElementById('refresh-form'),
-    postSubmitZone: document.getElementById('post-submit-zone'),
-    audienceType: 'groups',
-    supabase: supabase,
-    contactEmail: 'refresh@justrebe.com',
-    priceDisplay: '$497',
-    paypalInit: function(container, signupId){
-      if(!window.paypal||!window.paypal.Buttons){ container.innerHTML='<p style="color:#c0392b;font-size:13px">PayPal didn\'t load. Please refresh or email refresh@justrebe.com.</p>'; return; }
-      var basePrice=497;
-      var codeInput=document.querySelector('[name="referral_code"]');
-      var code=codeInput&&codeInput.value?codeInput.value.trim().toUpperCase():'';
-      var discount=(window.REBE_CODES||{})[code]||null;
-      var finalPrice=basePrice;
-      if(discount&&discount.type==='percent') finalPrice=Math.round((basePrice*(1-discount.value/100))*100)/100;
-      else if(discount&&discount.type==='fixed') finalPrice=Math.max(0,basePrice-discount.value);
-      var amt=finalPrice.toFixed(2);
-      if(discount){ var fb=document.createElement('p'); fb.style.cssText='margin:0 0 14px;color:#3a6b4a;font-size:14px;font-weight:700;text-align:center'; fb.innerHTML='✓ Code <strong>'+code+'</strong> applied — new total: <strong>$'+amt+'</strong>'; container.parentNode.insertBefore(fb,container); }
-      paypal.Buttons({
-        style:{layout:'vertical',color:'gold',shape:'pill',label:'pay'},
-        createOrder:function(d,a){ return a.order.create({purchase_units:[{description:'ReBe ReFresh · 6-Week Cohort'+(discount?' (code: '+code+')':''),custom_id:signupId||'no-id',amount:{value:amt,currency_code:'USD'}}]}); },
-        onApprove:function(d,a){ return a.order.capture().then(function(o){ if(signupId&&signupId!=='demo-preview'){ supabase.from('refresh_signups').update({paypal_order_id:o.id,status:'paid',referral_code:code||null}).eq('id',signupId).then(function(){}); } window.location.href='thank-you.html?order='+o.id; }); },
-        onError:function(err){ console.error('PayPal error:',err); var m=document.createElement('p'); m.style.cssText='color:#c0392b;margin-top:12px;font-size:13px;text-align:center'; m.innerHTML='Something went wrong with PayPal. Try again or email <a href="mailto:refresh@justrebe.com" style="color:#c0392b;font-weight:700">refresh@justrebe.com</a>.'; container.appendChild(m); }
-      }).render('#paypal-button-container');
-    }
-  });
-
-  // --- Private 1:1 request form ($197) ---
   window.initConfidantForm({
     form: document.getElementById('confidant-form'),
     postSubmitZone: document.getElementById('confidant-post-submit'),
