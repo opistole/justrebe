@@ -752,8 +752,8 @@
       else if(discount){ var fb=document.createElement('p'); fb.style.cssText='margin:0 0 14px;color:#3a6b4a;font-size:14px;font-weight:700;text-align:center'; fb.innerHTML='✓ Code <strong>'+code+'</strong> applied — new total: <strong>$'+amt+'</strong>'; container.parentNode.insertBefore(fb,container); }
       paypal.Buttons({
         style:{layout:'vertical',color:'gold',shape:'pill',label:'pay'},
-        createOrder:function(d,a){ return a.order.create({purchase_units:[{description:'ReBe ReFresh · 6-Week Cohort'+(discount?' (code: '+code+')':''),custom_id:signupId||'no-id',amount:{value:amt,currency_code:'USD'}}]}); },
-        onApprove:function(d,a){ return a.order.capture().then(function(o){ if(signupId&&signupId!=='demo-preview'){ supabase.from('refresh_signups').update({paypal_order_id:o.id,status:'paid',referral_code:code||null}).eq('id',signupId).then(function(){}); } window.location.href='thank-you.html?order='+o.id; }); },
+        createOrder:function(d,a){ return a.order.create({purchase_units:[{description:'ReBe ReFresh · 6-Week Cohort'+(discount?' (code: '+code+')':'')+(testMode?' (TEST)':''),custom_id:signupId||'no-id',amount:{value:amt,currency_code:'USD'}}],application_context:{shipping_preference:'NO_SHIPPING',brand_name:'ReBe ReFresh',user_action:'PAY_NOW'}}); },
+        onApprove:function(d,a){ return a.order.capture().then(function(o){ if(signupId&&signupId!=='demo-preview'){ supabase.from('refresh_signups').update({paypal_order_id:o.id,status:'paid',referral_code:code||null}).eq('id',signupId).then(function(){}); } window.location.href='thank-you-cohort.html?order='+o.id; }); },
         onError:function(err){ console.error('PayPal error:',err); var m=document.createElement('p'); m.style.cssText='color:#c0392b;margin-top:12px;font-size:13px;text-align:center'; m.innerHTML='Something went wrong with PayPal. Try again or email <a href="mailto:refresh@justrebe.com" style="color:#c0392b;font-weight:700">refresh@justrebe.com</a>.'; container.appendChild(m); }
       }).render('#paypal-button-container');
     }

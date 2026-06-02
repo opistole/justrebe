@@ -542,8 +542,8 @@
       if(testMode){ var tb=document.createElement('p'); tb.style.cssText='margin:0 0 14px;color:#B07D14;font-size:13px;font-weight:700;text-align:center;background:#FBF4E4;padding:10px;border-radius:8px'; tb.innerHTML='⚠️ Internal test mode — price is $1.00'; container.parentNode.insertBefore(tb,container); }
       paypal.Buttons({
         style:{layout:'vertical',color:'gold',shape:'pill',label:'pay'},
-        createOrder:function(d,a){ return a.order.create({purchase_units:[{description:'ReBe ReFresh · Private 1:1 Session'+(testMode?' (TEST)':''),custom_id:requestId||'no-id',amount:{value:amt,currency_code:'USD'}}]}); },
-        onApprove:function(d,a){ return a.order.capture().then(function(o){ if(requestId&&requestId!=='demo-preview'){ supabase.from('confidant_requests').update({paypal_order_id:o.id,status:'paid'}).eq('id',requestId).then(function(){}); } window.location.href='thank-you.html?order='+o.id; }); },
+        createOrder:function(d,a){ return a.order.create({purchase_units:[{description:'ReBe ReFresh · Private 1:1 Session'+(testMode?' (TEST)':''),custom_id:requestId||'no-id',amount:{value:amt,currency_code:'USD'}}],application_context:{shipping_preference:'NO_SHIPPING',brand_name:'ReBe ReFresh',user_action:'PAY_NOW'}}); },
+        onApprove:function(d,a){ return a.order.capture().then(function(o){ if(requestId&&requestId!=='demo-preview'){ supabase.from('confidant_requests').update({paypal_order_id:o.id,status:'paid'}).eq('id',requestId).then(function(){}); } window.location.href='thank-you-private.html?order='+o.id; }); },
         onError:function(err){ console.error('PayPal error:',err); var m=document.createElement('p'); m.style.cssText='color:#c0392b;margin-top:12px;font-size:13px;text-align:center'; m.innerHTML='Something went wrong with PayPal. Try again or email <a href="mailto:refresh@justrebe.com" style="color:#c0392b;font-weight:700">refresh@justrebe.com</a>.'; container.appendChild(m); }
       }).render('#paypal-button-container-1on1');
     }
