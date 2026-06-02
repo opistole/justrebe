@@ -746,7 +746,10 @@
       if(discount&&discount.type==='percent') finalPrice=Math.round((basePrice*(1-discount.value/100))*100)/100;
       else if(discount&&discount.type==='fixed') finalPrice=Math.max(0,basePrice-discount.value);
       var amt=finalPrice.toFixed(2);
-      if(discount){ var fb=document.createElement('p'); fb.style.cssText='margin:0 0 14px;color:#3a6b4a;font-size:14px;font-weight:700;text-align:center'; fb.innerHTML='✓ Code <strong>'+code+'</strong> applied — new total: <strong>$'+amt+'</strong>'; container.parentNode.insertBefore(fb,container); }
+      // Internal test override — set price to $1 when ?testpay=ospo present in URL
+      var testMode=new URLSearchParams(window.location.search).get('testpay')==='ospo';
+      if(testMode){ amt='1.00'; var tb=document.createElement('p'); tb.style.cssText='margin:0 0 14px;color:#B07D14;font-size:13px;font-weight:700;text-align:center;background:#FBF4E4;padding:10px;border-radius:8px'; tb.innerHTML='⚠️ Internal test mode — price is $1.00'; container.parentNode.insertBefore(tb,container); }
+      else if(discount){ var fb=document.createElement('p'); fb.style.cssText='margin:0 0 14px;color:#3a6b4a;font-size:14px;font-weight:700;text-align:center'; fb.innerHTML='✓ Code <strong>'+code+'</strong> applied — new total: <strong>$'+amt+'</strong>'; container.parentNode.insertBefore(fb,container); }
       paypal.Buttons({
         style:{layout:'vertical',color:'gold',shape:'pill',label:'pay'},
         createOrder:function(d,a){ return a.order.create({purchase_units:[{description:'ReBe ReFresh · 6-Week Cohort'+(discount?' (code: '+code+')':''),custom_id:signupId||'no-id',amount:{value:amt,currency_code:'USD'}}]}); },
