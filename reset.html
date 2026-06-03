@@ -1316,6 +1316,24 @@
       })
       if (error) throw error
       if (result && result.success === false) throw new Error(result.error || 'Something went wrong.')
+
+      // Fire notification (email + optional SMS). Fails silently so the user UX is unaffected.
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          kind: 'workshop_signup',
+          first_name: data.get('first_name').trim(),
+          last_name: data.get('last_name').trim(),
+          email: data.get('email').trim(),
+          phone: data.get('phone').trim(),
+          sms_consent: data.get('sms_consent') === 'on',
+          marketing_consent: data.get('marketing_consent') === 'on',
+          source: data.get('source') || null,
+          signup_id: (result && result.contact_id) || null
+        })
+      }).catch((e) => console.warn('notify failed', e))
+
       formWrap.style.display = 'none'
       successCard.classList.add('shown')
       setupCalendarLinks()
