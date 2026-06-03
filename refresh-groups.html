@@ -153,10 +153,11 @@
   .price-sub{font-size:14px;color:var(--muted);margin:6px 0 22px}
 
   /* Confidant cards — vertical */
-  .conf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:44px auto 0;align-items:start}
+  .conf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:44px auto 0;grid-auto-rows:1fr}
   @media (max-width:860px){.conf-grid{grid-template-columns:1fr 1fr}}
   @media (max-width:560px){.conf-grid{grid-template-columns:1fr;max-width:360px}}
-  .conf-card{position:relative;background:var(--paper);border:1px solid var(--bone);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+  .conf-card{position:relative;background:var(--paper);border:1px solid var(--bone);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;height:100%;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+  .conf-role{min-height:2.6em}
   .conf-card:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(6,11,80,.12);border-color:var(--green)}
   .conf-photo{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bone);display:block}
   .conf-card-body{padding:22px 20px 26px;display:flex;flex-direction:column;flex:1;text-align:center}
