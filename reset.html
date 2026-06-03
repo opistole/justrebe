@@ -197,11 +197,11 @@
   /* Subhead block (longer narrative for Hook 05) */
   .hero .subhead {
     font-family: var(--sans); font-weight: 400;
-    font-size: clamp(16px, 1.5vw, 19px);
+    font-size: clamp(18px, 1.8vw, 22px);
     line-height: 1.65;
     color: var(--body);
     margin: 0 auto 44px;
-    max-width: 720px;
+    max-width: 760px;
   }
   .hero .subhead p { margin: 0 0 14px; }
   .hero .subhead p:last-child { margin: 0; }
@@ -219,11 +219,11 @@
   /* Subhead-tail (the second half of the narrative — sits BELOW the photos) */
   .hero .subhead-tail {
     font-family: var(--sans); font-weight: 400;
-    font-size: clamp(16px, 1.5vw, 19px);
+    font-size: clamp(18px, 1.8vw, 22px);
     line-height: 1.65;
     color: var(--body);
     margin: 0 auto 24px;
-    max-width: 640px;
+    max-width: 680px;
     text-align: center;
   }
   .hero .subhead-tail p { margin: 0 0 14px; }
@@ -234,22 +234,24 @@
     color: var(--green-ink); line-height: 1.4;
   }
 
-  /* Confidant photo row (under headline) — clickable cards */
+  /* Confidant photo row (under headline) — clickable cards
+     Flex-centered so partial rows center; fixed card width = uniform sizing */
   .hero-confidants {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 14px;
-    max-width: 980px;
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 22px 18px;
+    max-width: 1080px;
     margin: 0 auto 44px;
   }
-  @media (max-width: 900px) { .hero-confidants { grid-template-columns: repeat(4, 1fr); gap: 14px; } }
-  @media (max-width: 480px) { .hero-confidants { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
   .hero-conf {
-    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
     background: transparent; border: 0; padding: 0; margin: 0;
     cursor: pointer; font: inherit; color: inherit; text-align: center;
     transition: transform .2s var(--ease);
+    flex: 0 0 180px;
+    max-width: 180px;
   }
+  @media (max-width: 720px) { .hero-conf { flex-basis: 28%; max-width: 28%; } }
+  @media (max-width: 480px) { .hero-conf { flex-basis: 44%; max-width: 44%; } }
   .hero-conf:hover { transform: translateY(-3px); }
   .hero-conf:hover .hero-conf-img { border-color: var(--green-ink); box-shadow: 0 12px 28px rgba(68,153,69,.22); }
   .hero-conf:focus-visible { outline: 3px solid rgba(68,153,69,.5); outline-offset: 4px; border-radius: 12px; }
@@ -270,12 +272,13 @@
     letter-spacing: .04em; line-height: 1;
   }
   .hero-conf-name {
-    font-family: var(--serif); font-style: italic; font-size: 16px; font-weight: 600;
+    font-family: var(--serif); font-style: italic; font-size: 18px; font-weight: 600;
     color: var(--navy);
     text-align: center; line-height: 1.2; margin: 0;
+    min-height: 2.4em;
   }
   .hero-conf-title {
-    font-family: var(--sans); font-size: 10px; font-weight: 700;
+    font-family: var(--sans); font-size: 11px; font-weight: 700;
     letter-spacing: .08em; text-transform: uppercase;
     color: var(--green-ink); margin-top: 2px; line-height: 1.3;
   }
