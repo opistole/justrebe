@@ -156,9 +156,12 @@ function buildWorkshopEmails(p) {
 
   const userText = `Hi ${p.first_name || 'there'},
 
-You're in for the ReBe ReFresh free workshop on Tuesday, June 16 at 11:00 AM Eastern.
+You're in for the ReBe ReFresh free workshop.
 
-We'll email you the Zoom link the day before. You'll also get one reminder ~1 hour before we start.
+When:  Tuesday, June 16 at 11:00 AM Eastern (60 minutes)
+Where: Zoom — https://zoom.us/j/9537399182
+
+Save the link and add it to your calendar now. We'll send a reminder the day before and one ~1 hour before we start.
 
 If anything changes on your end, just reply to this email — refresh@justrebe.com will see it.
 
@@ -183,7 +186,7 @@ Signup id: ${p.signup_id || '—'}`;
 
 function buildWorkshopSMS(p) {
   const name = p.first_name || 'there';
-  return `Hi ${name}, you're confirmed for the ReBe ReFresh free workshop Tue June 16 at 11 AM ET. We'll text the Zoom link the day before. Reply STOP to opt out.`;
+  return `Hi ${name}, you're in for the ReBe ReFresh workshop Tue June 16, 11 AM ET. Zoom: https://zoom.us/j/9537399182 Reply STOP to opt out.`;
 }
 
 // ---------- Handler ----------
