@@ -167,7 +167,7 @@ Together we'll:
   • Name what's actually driving it
   • Practice picturing something different
 
-No slides. No homework. No upsell. Just a small group, the ReBe team, and one quiet hour to do something most adults never do — picture a future worth living.
+No slides. No homework. No pressure. Just a small group, the ReBe team, and one quiet hour to do something most adults never do — picture a future worth living.
 
 WHEN & WHERE
 
