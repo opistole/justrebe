@@ -467,6 +467,28 @@
   }
   .chip strong { color: var(--navy); font-weight: 700; }
 
+  /* Confidants list (no photos) */
+  .conf-list {
+    max-width: 900px; margin: 40px auto 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 36px 56px;
+  }
+  @media (max-width: 680px) { .conf-list { grid-template-columns: 1fr; gap: 28px; } }
+  .conf { text-align: left; }
+  .conf-name {
+    font-family: var(--serif); font-style: italic; font-weight: 600;
+    font-size: 24px; color: var(--navy); margin: 0 0 4px; line-height: 1.25;
+  }
+  .conf-role {
+    font-family: var(--sans); font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--green-ink);
+    margin: 0 0 10px;
+  }
+  .conf-desc {
+    font-family: var(--sans); font-weight: 400;
+    font-size: 16px; line-height: 1.6; color: var(--body); margin: 0;
+  }
+  .conf-desc em { font-style: italic; }
+
   /* Form */
   #register { padding: 64px 24px 96px; }
   .form-card {
@@ -742,7 +764,59 @@
   </div>
 </section>
 
-<!-- Host section removed — the hero banner shows the full ReBe team. -->
+<!-- MEET THE CONFIDANTS -->
+<section aria-labelledby="confidants-h">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">Who you'll meet</p>
+    <h2 id="confidants-h" class="section-h" style="text-align:center">Elizabeth Good and the <span class="curl">ReBe team</span>.</h2>
+    <p class="lede" style="text-align:center;max-width:620px;margin:0 auto">A team of confidants who want to come alongside you — and help you rewrite your script.</p>
+    <div class="conf-list">
+
+      <div class="conf">
+        <h3 class="conf-name">Elizabeth Good</h3>
+        <p class="conf-role">Founder · MA Clinical Psychology · Creator of REAL TALK</p>
+        <p class="conf-desc">Three decades helping people heal from burnout, shame, and trauma. Author of <em>Groomed</em> (HarperCollins, 2020) and <em>Speak the Unspeakable</em>. Two-time TEDx speaker.</p>
+      </div>
+
+      <div class="conf">
+        <h3 class="conf-name">Dr. Jason Quintal</h3>
+        <p class="conf-role">PhD · Trauma Specialist · TTR · 25+ yrs</p>
+        <p class="conf-desc">Specializes in PTSD, grief, shame, and abuse recovery. Master practitioner in trauma resolution and NLP — accelerated methods that move people through what's been stuck for years.</p>
+      </div>
+
+      <div class="conf">
+        <h3 class="conf-name">Beth Rech</h3>
+        <p class="conf-role">Mentor · 30+ yrs</p>
+        <p class="conf-desc">Over 30 years mentoring women and helping individuals break free from limiting beliefs, generational patterns, and unresolved trauma. Warmth, presence, and the kind of listening that doesn't rush.</p>
+      </div>
+
+      <div class="conf">
+        <h3 class="conf-name">Jean Park</h3>
+        <p class="conf-role">Family Therapist &amp; Coach</p>
+        <p class="conf-desc">Caltech economics degree, then a Master's in Marriage and Family Therapy from Fuller. Coaches parents and leaders on emotional intelligence and breaking unhealthy generational patterns.</p>
+      </div>
+
+      <div class="conf">
+        <h3 class="conf-name">Fred Feller</h3>
+        <p class="conf-role">Leadership Mentor · 35+ yrs</p>
+        <p class="conf-desc">Has worked with executives, ministry leaders, and teams across nine countries. Known for grounded presence in high-pressure environments. Husband of 50 years, father of four, grandfather of seven.</p>
+      </div>
+
+      <div class="conf">
+        <h3 class="conf-name">Osil Pistole</h3>
+        <p class="conf-role">Coach, Mentor &amp; Speaker</p>
+        <p class="conf-desc">Speaker and transformational coach helping people awaken to their purpose, rediscover their identity, and step into the life they're meant to live.</p>
+      </div>
+
+      <div class="conf">
+        <h3 class="conf-name">Christophe Dessaigne</h3>
+        <p class="conf-role">Restoration Coach</p>
+        <p class="conf-desc">His own story of healing and restoration shapes how he walks with others through theirs. Helps people break the patterns that quietly run their lives — with the honesty of someone who's been there.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- FORM -->
 <section id="register" class="sec-paper-alt" aria-labelledby="form-h">
