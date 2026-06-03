@@ -59,25 +59,31 @@
   .util-cta:hover{border-bottom-color:currentColor}
   @media (max-width:640px){.util-cta{display:none}.util-inner{justify-content:center}}
 
-  /* Hero — dark navy editorial */
-  .hero{position:relative;background:var(--navy-dark);overflow:hidden;color:#fff;isolation:isolate}
-  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 82% 8%,rgba(227,160,31,.22),transparent 55%),radial-gradient(ellipse at 8% 92%,rgba(68,153,69,.20),transparent 50%);pointer-events:none;z-index:0}
-  .hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(180deg,transparent,var(--green-wash));pointer-events:none;z-index:0}
-  .hero-under{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:96px 24px 104px;text-align:center}
-  @media (max-width:860px){.hero-under{padding:72px 20px 88px}}
-  .hero .eyebrow-hero{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:14px;letter-spacing:.2em;color:var(--gold);margin:0 0 26px;position:relative;display:inline-block}
-  .hero .eyebrow-hero::before{content:'';display:block;width:48px;height:1px;background:var(--gold);margin:0 auto 18px;opacity:.65}
-  .hero .h1{font-family:var(--display);font-weight:400;color:#fff;text-transform:uppercase;font-size:clamp(38px,6.6vw,68px);line-height:1.04;letter-spacing:.01em;margin:0 auto 22px;max-width:18ch}
-  .hero .h1 .accent{color:var(--gold)}
-  .hero .subhead-hero{font-family:var(--sans);font-size:clamp(18px,2.1vw,22px);line-height:1.6;color:rgba(255,255,255,.86);margin:0 auto 32px;max-width:600px}
+  /* Hero — light + bold editorial (matches reset.html) */
+  .hero{position:relative;background:var(--paper);color:var(--body);overflow:hidden;isolation:isolate}
+  .hero-inner{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:72px 32px 64px;text-align:center}
+  @media (max-width:640px){.hero-inner{padding:56px 20px 48px}}
+  /* Top badges (date pill + ghost pill, same baseline) */
+  .hero-badges{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 44px}
+  .hero-tag{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:12px 22px;border-radius:50px;line-height:1}
+  .hero-tag--green{background:var(--green);color:#fff}
+  .hero-tag--ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(6,11,80,.28)}
+  /* Two-tier headline */
+  .hero .h1{font-family:var(--display);font-weight:400;color:var(--navy);text-transform:uppercase;line-height:1.0;letter-spacing:0;margin:0 auto 32px;max-width:none}
+  .hero .h1 .h1-primary{display:block;font-size:clamp(40px,7vw,84px);line-height:1.0;margin:0 auto 18px;max-width:18ch}
+  .hero .h1 .h1-secondary{display:block;font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;font-size:clamp(18px,2.4vw,28px);line-height:1.35;letter-spacing:0;color:var(--body);max-width:46ch;margin:0 auto}
+  .hero .h1 .accent{color:var(--green)}
+  /* Subhead */
+  .hero .subhead-hero{font-family:var(--sans);font-size:clamp(17px,2vw,21px);line-height:1.6;color:var(--body);margin:0 auto 32px;max-width:600px}
+  /* Microcopy */
+  .hero .microcopy-hero{font-family:var(--sans);font-size:14px;color:var(--muted);margin:14px 0 0}
+  .hero .microcopy-hero a{color:var(--green-ink)!important;text-decoration:none;border-bottom:1px solid rgba(58,132,56,.5);padding-bottom:1px;font-weight:700}
+  /* (Legacy chip styles kept for any in-page references — not used in hero) */
   .hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px;justify-content:center}
   .hero-chip{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;padding:11px 16px;border-radius:8px;line-height:1}
   .hero-chip--gold{background:var(--gold);color:var(--navy-dark)}
   .hero-chip--green{background:var(--green);color:#fff}
-  .hero-chip--ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.36)}
-  .hero .microcopy-hero{font-family:var(--sans);font-size:14px;color:rgba(255,255,255,.72);margin:14px 0 0}
-  .hero .microcopy-hero a{color:var(--gold)!important;text-decoration:none;border-bottom:1px solid rgba(227,160,31,.5);padding-bottom:1px}
-  .hero .btn{box-shadow:0 8px 28px rgba(68,153,69,.42),0 0 0 1px rgba(255,255,255,.08) inset}
+  .hero-chip--ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(6,11,80,.28)}
 
   /* Buttons */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.02em;background:linear-gradient(135deg,#54AC54,var(--green-ink));color:#fff;padding:17px 34px;min-height:54px;border:none;border-radius:50px;cursor:pointer;text-decoration:none;box-shadow:0 8px 22px rgba(68,153,69,.28);transition:transform .15s var(--ease),box-shadow .2s var(--ease),filter .15s var(--ease)}
@@ -272,19 +278,25 @@
 
 <!-- HERO -->
 <section class="hero" aria-labelledby="refresh-hero-h1">
-  <div class="hero-under">
-    <p class="eyebrow-hero fade-in">ReBe ReFresh · A 6-Week Group Experience</p>
-    <h1 id="refresh-hero-h1" class="h1 fade-in d-1">Discover your story. <span class="accent">Then rewrite it.</span></h1>
-    <p class="subhead-hero fade-in d-2">Six weeks. One small group. A guided path from isolation into real community — picturing safety, envisioning freedom, rehearsing a future worth living.</p>
-    <div class="hero-chips fade-in d-3">
-      <span class="hero-chip hero-chip--gold">$497 · 6 sessions</span>
-      <span class="hero-chip hero-chip--ghost">Starts June 23</span>
-      <span class="hero-chip hero-chip--green">11 AM ET</span>
+  <div class="hero-inner">
+
+    <div class="hero-badges fade-in">
+      <span class="hero-tag hero-tag--green">Starts June 23 · 11 AM ET</span>
+      <span class="hero-tag hero-tag--ghost">$497 · 6 sessions</span>
     </div>
-    <div class="cta-block fade-in d-4">
+
+    <h1 id="refresh-hero-h1" class="h1 fade-in d-1">
+      <span class="h1-primary">Discover your story. <span class="accent">Then rewrite it.</span></span>
+      <span class="h1-secondary">Six weeks. A small group. A guided path back to who you actually are.</span>
+    </h1>
+
+    <p class="subhead-hero fade-in d-2">Not therapy. Not coaching. Live group sessions with the ReBe team — small enough to be known, real enough to do the work that doesn't happen on your own.</p>
+
+    <div class="cta-block fade-in d-3">
       <a href="#enroll" class="btn">Reserve my seat <span class="btn-arrow" aria-hidden="true">→</span></a>
       <p class="microcopy-hero">Prefer a 1:1? <a href="refresh-private.html">See private sessions →</a></p>
     </div>
+
   </div>
 </section>
 
