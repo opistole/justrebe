@@ -144,7 +144,7 @@
   }
   .hero-inner {
     position: relative; z-index: 1;
-    max-width: 1080px; margin: 0 auto;
+    max-width: 1300px; margin: 0 auto;
     padding: 72px 32px 64px;
     text-align: center;
   }
@@ -234,24 +234,34 @@
     color: var(--green-ink); line-height: 1.4;
   }
 
-  /* Confidant photo row (under headline) — clickable cards
-     Flex-centered so partial rows center; fixed card width = uniform sizing */
+  /* Confidant photo row (under headline) — all 7 on one line on desktop */
   .hero-confidants {
-    display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 22px 18px;
-    max-width: 1080px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 14px;
+    width: 100%;
     margin: 0 auto 44px;
   }
+  /* Below 900px, switch to a centered flex layout so partial rows center cleanly */
+  @media (max-width: 900px) {
+    .hero-confidants {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 18px 14px;
+    }
+    .hero-conf { flex: 0 0 calc(25% - 12px); max-width: calc(25% - 12px); }
+  }
+  @media (max-width: 560px) {
+    .hero-conf { flex: 0 0 calc(33.333% - 10px); max-width: calc(33.333% - 10px); }
+  }
+  @media (max-width: 380px) {
+    .hero-conf { flex: 0 0 calc(50% - 8px); max-width: calc(50% - 8px); }
+  }
   .hero-conf {
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
     background: transparent; border: 0; padding: 0; margin: 0;
     cursor: pointer; font: inherit; color: inherit; text-align: center;
     transition: transform .2s var(--ease);
-    flex: 0 0 180px;
-    max-width: 180px;
   }
-  @media (max-width: 720px) { .hero-conf { flex-basis: 28%; max-width: 28%; } }
-  @media (max-width: 480px) { .hero-conf { flex-basis: 44%; max-width: 44%; } }
   .hero-conf:hover { transform: translateY(-3px); }
   .hero-conf:hover .hero-conf-img { border-color: var(--green-ink); box-shadow: 0 12px 28px rgba(68,153,69,.22); }
   .hero-conf:focus-visible { outline: 3px solid rgba(68,153,69,.5); outline-offset: 4px; border-radius: 12px; }
@@ -272,15 +282,14 @@
     letter-spacing: .04em; line-height: 1;
   }
   .hero-conf-name {
-    font-family: var(--serif); font-style: italic; font-size: 18px; font-weight: 600;
+    font-family: var(--serif); font-style: italic; font-size: 16px; font-weight: 600;
     color: var(--navy);
-    text-align: center; line-height: 1.2; margin: 0;
-    min-height: 2.4em;
+    text-align: center; line-height: 1.2; margin: 0 0 4px;
   }
   .hero-conf-title {
     font-family: var(--sans); font-size: 11px; font-weight: 700;
     letter-spacing: .08em; text-transform: uppercase;
-    color: var(--green-ink); margin-top: 2px; line-height: 1.3;
+    color: var(--green-ink); margin: 0; line-height: 1.3;
   }
 
   /* Bio modals (native <dialog>) */
