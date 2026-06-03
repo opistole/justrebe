@@ -1350,8 +1350,8 @@
     const startUTC = '20260616T150000Z'
     const endUTC   = '20260616T160000Z'
     const title = "ReBe — You Weren't Born Anxious (free session with the ReBe team)"
-    const desc  = 'Free 60-minute live group session with the ReBe team. Join via Zoom: https://zoom.us/j/9537399182'
-    const loc   = 'https://zoom.us/j/9537399182'
+    const desc  = 'Free 60-minute live group session with the ReBe team. Join via Zoom: https://us06web.zoom.us/j/9057767620'
+    const loc   = 'https://us06web.zoom.us/j/9057767620'
     const googleParams = new URLSearchParams({ action: 'TEMPLATE', text: title, dates: `${startUTC}/${endUTC}`, details: desc, location: loc })
     document.getElementById('cal-google').href = `https://www.google.com/calendar/render?${googleParams.toString()}`
     const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//ReBe//Workshop//EN','BEGIN:VEVENT',`UID:${Date.now()}@justrebe.com`,`DTSTAMP:${startUTC}`,`DTSTART:${startUTC}`,`DTEND:${endUTC}`,`SUMMARY:${title}`,`DESCRIPTION:${desc}`,`LOCATION:${loc}`,'END:VEVENT','END:VCALENDAR'].join('\r\n')

@@ -172,7 +172,7 @@ No slides. No homework. No upsell. Just a small group, the ReBe team, and one qu
 WHEN & WHERE
 
 When:  Tuesday, June 16 at 11:00 AM Eastern (60 minutes)
-Where: Zoom — https://zoom.us/j/9537399182
+Where: Zoom — https://us06web.zoom.us/j/9057767620
 
 Save the link, add it to your calendar, and come as you are. We'll send one reminder the day before and one about an hour before we start.
 
@@ -200,7 +200,7 @@ Signup id: ${p.signup_id || '—'}`;
 
 function buildWorkshopSMS(p) {
   const name = p.first_name || 'there';
-  return `Hi ${name}! So glad you're in. ReBe ReFresh workshop is Tue June 16, 11 AM ET. Zoom: https://zoom.us/j/9537399182 Reply STOP to opt out.`;
+  return `Hi ${name}! So glad you're in. ReBe ReFresh workshop is Tue June 16, 11 AM ET. Zoom: https://us06web.zoom.us/j/9057767620 Reply STOP to opt out.`;
 }
 
 // ---------- Handler ----------
