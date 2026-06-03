@@ -156,15 +156,29 @@ function buildWorkshopEmails(p) {
 
   const userText = `Hi ${p.first_name || 'there'},
 
-You're in for the ReBe ReFresh free workshop.
+So glad you said yes. You're in for the ReBe ReFresh free workshop — we can't wait to be in the room with you.
+
+WHAT THIS HOUR IS
+
+A live 60-minute group session on Zoom with the full ReBe team — Elizabeth Good, Dr. Jason Quintal, Beth Rech, Jean Park, Fred Feller, Osil Pistole, and Christophe Dessaigne. An honest hour for adults who are tired in a way that doesn't quite have a name yet — anxious, angry, stressed, lonely, or just not yourself this season.
+
+Together we'll:
+  • Notice the story you've been living inside of
+  • Name what's actually driving it
+  • Practice picturing something different
+
+No slides. No homework. No upsell. Just a small group, the ReBe team, and one quiet hour to do something most adults never do — picture a future worth living.
+
+WHEN & WHERE
 
 When:  Tuesday, June 16 at 11:00 AM Eastern (60 minutes)
 Where: Zoom — https://zoom.us/j/9537399182
 
-Save the link and add it to your calendar now. We'll send a reminder the day before and one ~1 hour before we start.
+Save the link, add it to your calendar, and come as you are. We'll send one reminder the day before and one about an hour before we start.
 
-If anything changes on your end, just reply to this email — refresh@justrebe.com will see it.
+Anything come up? Just reply to this email — refresh@justrebe.com will see it.
 
+We're glad you're here.
 — The ReBe team`;
 
   const adminText = `NEW WORKSHOP SIGNUP — reset.html
@@ -186,7 +200,7 @@ Signup id: ${p.signup_id || '—'}`;
 
 function buildWorkshopSMS(p) {
   const name = p.first_name || 'there';
-  return `Hi ${name}, you're in for the ReBe ReFresh workshop Tue June 16, 11 AM ET. Zoom: https://zoom.us/j/9537399182 Reply STOP to opt out.`;
+  return `Hi ${name}! So glad you're in. ReBe ReFresh workshop is Tue June 16, 11 AM ET. Zoom: https://zoom.us/j/9537399182 Reply STOP to opt out.`;
 }
 
 // ---------- Handler ----------
