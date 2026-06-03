@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>You Weren't Born Anxious — A Free Group Session with Elizabeth Good | ReBe</title>
-<meta name="description" content="A free 60-minute live group session with Elizabeth Good. You weren't born anxious, angry, stressed, or lonely — somewhere the script changed. An honest hour on how to get back to the real you. Tuesday, June 16, 2026 · 11:00 AM ET." />
-<meta property="og:title" content="You Weren't Born Anxious — A Free 60-Minute Session with Elizabeth Good" />
-<meta property="og:description" content="Free live group session. June 16, 11 AM ET. One honest hour for adults quietly running the same loops — and how to get back to the real you." />
+<title>You Weren't Born Anxious — A Free Group Session with the ReBe Team | ReBe</title>
+<meta name="description" content="A free 60-minute live group session with the ReBe team. You weren't born anxious, angry, stressed, or lonely — somewhere the script changed. An honest hour on how to get back to the real you. Tuesday, June 16, 2026 · 11:00 AM ET." />
+<meta property="og:title" content="You Weren't Born Anxious — A Free 60-Minute Session with the ReBe Team" />
+<meta property="og:description" content="Free live group session. June 16, 11 AM ET. One honest hour with the ReBe team for adults quietly running the same loops — and how to get back to the real you." />
 <meta property="og:image" content="https://justrebe.com/Images/RESET_616_Pres.png" />
 <meta property="og:url" content="https://justrebe.com/reset.html" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="You Weren't Born Anxious — A Free 60-Minute Session with Elizabeth Good" />
-<meta name="twitter:description" content="Free live group session. June 16, 11 AM ET. One honest hour for adults quietly running the same loops." />
+<meta name="twitter:title" content="You Weren't Born Anxious — A Free 60-Minute Session with the ReBe Team" />
+<meta name="twitter:description" content="Free live group session. June 16, 11 AM ET. One honest hour with the ReBe team for adults quietly running the same loops." />
 <meta name="twitter:image" content="https://justrebe.com/Images/RESET_616_Pres.png" />
 <link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
 <script>document.documentElement.classList.add('js');</script>
@@ -135,17 +135,195 @@
   }
 
   /* =======================================================
-     HERO — full-bleed photo, navy→green gradient, type bottom-left
+     HERO — light + bold editorial (Carey Nieuwhof reference style,
+     ReBe brand colors, white background)
      ======================================================= */
-  .hero { position: relative; background: var(--paper); }
-  .hero-banner { display: block; width: 100%; height: auto; border-bottom: 4px solid var(--green); }
-  .hero-under {
-    position: relative;
-    max-width: 900px; margin: 0 auto;
-    padding: 56px 24px 72px;
+  .hero {
+    position: relative; background: var(--paper);
+    color: var(--body); overflow: hidden; isolation: isolate;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 1080px; margin: 0 auto;
+    padding: 72px 32px 64px;
     text-align: center;
   }
-  .hero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 26px; justify-content: center; }
+  @media (max-width: 640px) { .hero-inner { padding: 56px 20px 48px; } }
+
+  /* Top badges (date pill + circle) — center-aligned on same baseline */
+  .hero-badges {
+    display: flex; justify-content: center; align-items: center;
+    gap: 22px; flex-wrap: wrap;
+    margin: 0 0 44px;
+  }
+  .hero-tag {
+    font-family: var(--sans); font-size: 13px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 12px 22px; border-radius: 50px;
+    line-height: 1;
+  }
+  .hero-tag--green { background: var(--green); color: #fff; }
+  .hero-tag--ghost {
+    background: transparent; color: var(--navy);
+    border: 1.5px solid rgba(6,11,80,.28);
+  }
+
+  /* Two-tier headline — primary phrase big, qualifier smaller */
+  .hero .h1 {
+    font-family: var(--display); font-weight: 400; color: var(--navy);
+    text-transform: uppercase;
+    line-height: 1.0; letter-spacing: 0;
+    margin: 0 auto 32px;
+    max-width: none;
+  }
+  .hero .h1 .h1-primary {
+    display: block;
+    font-size: clamp(40px, 7vw, 84px);
+    line-height: 1.0;
+    margin: 0 auto 18px;
+    max-width: 22ch;
+  }
+  .hero .h1 .h1-secondary {
+    display: block;
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    text-transform: none;
+    font-size: clamp(18px, 2.4vw, 28px);
+    line-height: 1.35; letter-spacing: 0;
+    color: var(--body);
+    max-width: 46ch; margin: 0 auto;
+  }
+  .hero .h1 .accent { color: var(--green); }
+
+  /* Subhead block (longer narrative for Hook 05) */
+  .hero .subhead {
+    font-family: var(--sans); font-weight: 400;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.65;
+    color: var(--body);
+    margin: 0 auto 44px;
+    max-width: 720px;
+  }
+  .hero .subhead p { margin: 0 0 14px; }
+  .hero .subhead p:last-child { margin: 0; }
+  .hero .subhead .lead-q {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(20px, 2.2vw, 24px);
+    line-height: 1.4;
+    color: var(--navy);
+    margin-bottom: 22px;
+  }
+  .hero .subhead .dims { font-weight: 700; color: var(--slate); }
+  .hero .subhead .dims-tail { color: var(--green-ink); }
+  .hero .subhead em { font-style: normal; color: var(--green-ink); font-weight: 700; }
+
+  /* Subhead-tail (the second half of the narrative — sits BELOW the photos) */
+  .hero .subhead-tail {
+    font-family: var(--sans); font-weight: 400;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.65;
+    color: var(--body);
+    margin: 0 auto 24px;
+    max-width: 640px;
+    text-align: center;
+  }
+  .hero .subhead-tail p { margin: 0 0 14px; }
+  .hero .subhead-tail p:last-child { margin: 0; }
+  .hero .subhead-tail .invite {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--green-ink); line-height: 1.4;
+  }
+
+  /* Confidant photo row (under headline) — clickable cards */
+  .hero-confidants {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 14px;
+    max-width: 980px;
+    margin: 0 auto 44px;
+  }
+  @media (max-width: 900px) { .hero-confidants { grid-template-columns: repeat(4, 1fr); gap: 14px; } }
+  @media (max-width: 480px) { .hero-confidants { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
+  .hero-conf {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    background: transparent; border: 0; padding: 0; margin: 0;
+    cursor: pointer; font: inherit; color: inherit; text-align: center;
+    transition: transform .2s var(--ease);
+  }
+  .hero-conf:hover { transform: translateY(-3px); }
+  .hero-conf:hover .hero-conf-img { border-color: var(--green-ink); box-shadow: 0 12px 28px rgba(68,153,69,.22); }
+  .hero-conf:focus-visible { outline: 3px solid rgba(68,153,69,.5); outline-offset: 4px; border-radius: 12px; }
+  .hero-conf-img {
+    width: 100%; aspect-ratio: 1 / 1;
+    border-radius: 10px; overflow: hidden;
+    background: var(--mist);
+    border: 2px solid var(--green);
+    box-shadow: 0 6px 20px rgba(6,11,80,.08);
+    transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+  }
+  .hero-conf-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-conf-img.placeholder {
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--green), var(--green-ink));
+    color: #fff; font-family: var(--display);
+    font-size: clamp(32px, 5vw, 52px);
+    letter-spacing: .04em; line-height: 1;
+  }
+  .hero-conf-name {
+    font-family: var(--serif); font-style: italic; font-size: 16px; font-weight: 600;
+    color: var(--navy);
+    text-align: center; line-height: 1.2; margin: 0;
+  }
+  .hero-conf-title {
+    font-family: var(--sans); font-size: 10px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--green-ink); margin-top: 2px; line-height: 1.3;
+  }
+
+  /* Bio modals (native <dialog>) */
+  .bio-modal {
+    border: none; border-radius: 16px; padding: 0;
+    max-width: 480px; width: calc(100% - 32px);
+    box-shadow: 0 30px 80px rgba(6,11,80,.35);
+    background: var(--paper); color: var(--body);
+  }
+  .bio-modal::backdrop { background: rgba(6,11,80,.55); backdrop-filter: blur(2px); }
+  .bio-modal[open] { animation: bioPop .25s var(--ease); }
+  @keyframes bioPop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .bio-inner { padding: 32px 32px 28px; position: relative; }
+  .bio-close {
+    position: absolute; top: 12px; right: 12px;
+    width: 36px; height: 36px;
+    background: var(--mist); border: 1px solid var(--bone); border-radius: 50%;
+    cursor: pointer; font-size: 18px; line-height: 1; color: var(--slate);
+    transition: background .15s var(--ease);
+  }
+  .bio-close:hover { background: var(--bone); }
+  .bio-photo {
+    width: 96px; height: 96px; border-radius: 50%; overflow: hidden;
+    margin: 0 auto 18px; border: 2px solid var(--green);
+  }
+  .bio-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bio-name {
+    font-family: var(--serif); font-style: italic; font-weight: 600;
+    font-size: 26px; color: var(--navy); text-align: center; margin: 0 0 6px;
+  }
+  .bio-role {
+    font-family: var(--sans); font-size: 11px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--green-ink);
+    text-align: center; margin: 0 0 20px;
+  }
+  .bio-text { font-size: 15px; line-height: 1.7; color: var(--body); margin: 0; }
+
+  /* Hero CTA */
+  .hero .btn { box-shadow: 0 10px 26px rgba(68,153,69,.32); }
+  .hero .microcopy-hero {
+    font-family: var(--sans); font-size: 13px;
+    color: var(--muted);
+    margin: 14px 0 0;
+  }
+
+  /* (Legacy hero-chip styles kept for any other uses) */
   .hero-chip {
     font-family: var(--sans); font-weight: 700; font-size: 13px;
     letter-spacing: .05em; text-transform: uppercase;
@@ -154,28 +332,12 @@
   .hero-chip--gold { background: var(--gold); color: var(--navy-dark); }
   .hero-chip--green { background: var(--green); color: #fff; }
   .hero-chip--ghost { background: transparent; color: var(--navy); border: 1.5px solid rgba(6,11,80,.28); }
-  @media (max-width: 860px) {
-    .hero-under { padding: 40px 20px 56px; }
-  }
 
-  .eyebrow-hero {
-    font-family: var(--sans);
-    text-transform: uppercase; font-weight: 700;
-    font-size: 12px; letter-spacing: .16em;
-    color: var(--green-ink);
-    margin: 0 0 20px;
-  }
-
+  /* (kept for ref / no longer used) */
   .h1 {
-    font-family: var(--display);
-    font-weight: 400;
-    color: var(--navy);
-    text-transform: uppercase;
-    font-size: clamp(26px, 3.4vw, 42px);
-    line-height: 1.05;
-    letter-spacing: .01em;
-    margin: 0 auto 18px;
-    max-width: 22ch;
+    font-family: var(--display); font-weight: 400; color: var(--navy);
+    text-transform: uppercase; font-size: clamp(26px, 3.4vw, 42px);
+    line-height: 1.05; letter-spacing: .01em; margin: 0 auto 18px; max-width: 22ch;
   }
   .h1 .born { color: var(--green); }
   .h1-expand { display: block; }
@@ -649,25 +811,128 @@
 
 <!-- HERO -->
 <section class="hero" aria-labelledby="hero-h1">
-  <picture>
-    <source media="(max-width: 640px)" type="image/webp" srcset="Images/Reset_Portrait.webp">
-    <source media="(max-width: 640px)" srcset="Images/Reset_Portrait.png">
-    <source type="image/webp" srcset="Images/Reset.webp">
-    <img class="hero-banner" src="Images/Reset.png" width="1920" height="1080" alt="A group of people standing on a ridge looking out over a sunlit valley. Headline: You weren't born anxious. Or angry. Or stressed. Or lonely. Free live group session, June 16. With the ReBe confidants." fetchpriority="high">
-  </picture>
-  <div class="hero-under">
-    <p class="eyebrow-hero fade-in">A free 60-minute reset</p>
-    <h1 id="hero-h1" class="h1 fade-in d-1">Whatever rewrote your story — <span class="born">you can write it back.</span></h1>
-    <p class="subhead-hero fade-in d-2">Anxious, angry, stressed, lonely, numb, or just not yourself this season — none of it is where you have to stay. One honest, free hour with Elizabeth Good and a small group, to start finding your way back.</p>
-    <div class="hero-chips fade-in d-2">
-      <span class="hero-chip hero-chip--gold">11:00 AM ET</span>
-      <span class="hero-chip hero-chip--ghost">Tue · June 16, 2026</span>
-      <span class="hero-chip hero-chip--green">Live on Zoom · Free</span>
+  <div class="hero-inner">
+
+    <div class="hero-badges fade-in">
+      <span class="hero-tag hero-tag--green">June 16 · 11 AM ET</span>
+      <span class="hero-tag hero-tag--ghost">A free conversation about you</span>
     </div>
+
+    <h1 id="hero-h1" class="h1 fade-in d-1">
+      <span class="h1-primary">You weren't born <span class="accent">anxious</span>.</span>
+      <span class="h1-secondary">Or angry. Or stressed. Or lonely. Or… whatever you've been carrying.</span>
+    </h1>
+
+    <div class="subhead fade-in d-2">
+      <p class="lead-q">What would it feel like to have a team — not a therapist, not a coach, not an app — actually committed to your <em>whole health</em>?</p>
+      <p><span class="dims">Your emotional health. Your physical health. Your identity. Your relationships. Your spiritual life.</span> <span class="dims-tail">All of it. At once. Together.</span></p>
+    </div>
+
+    <div class="hero-confidants fade-in d-2">
+      <button class="hero-conf" type="button" aria-label="Read about Elizabeth Good" data-bio="bio-elizabeth">
+        <div class="hero-conf-img"><picture><source type="image/webp" srcset="Images/elizabeth-good.webp"><img src="Images/elizabeth-good.png" alt="" loading="lazy"></picture></div>
+        <div class="hero-conf-name">Elizabeth Good</div>
+        <div class="hero-conf-title">Founder · Masters · Clinical Psychology</div>
+      </button>
+      <button class="hero-conf" type="button" aria-label="Read about Dr. Jason Quintal" data-bio="bio-quintal">
+        <div class="hero-conf-img"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="" loading="lazy"></picture></div>
+        <div class="hero-conf-name">Dr. Jason Quintal</div>
+        <div class="hero-conf-title">PhD · Trauma Specialist</div>
+      </button>
+      <button class="hero-conf" type="button" aria-label="Read about Beth Rech" data-bio="bio-beth">
+        <div class="hero-conf-img"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="" loading="lazy"></picture></div>
+        <div class="hero-conf-name">Beth Rech</div>
+        <div class="hero-conf-title">Inner Healing Mentor · 30+ yrs</div>
+      </button>
+      <button class="hero-conf" type="button" aria-label="Read about Jean Park" data-bio="bio-jean">
+        <div class="hero-conf-img"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="" loading="lazy"></picture></div>
+        <div class="hero-conf-name">Jean Park</div>
+        <div class="hero-conf-title">Family Therapist &amp; Coach</div>
+      </button>
+      <button class="hero-conf" type="button" aria-label="Read about Fred Feller" data-bio="bio-fred">
+        <div class="hero-conf-img"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="" loading="lazy"></picture></div>
+        <div class="hero-conf-name">Fred Feller</div>
+        <div class="hero-conf-title">Leadership Mentor · 35+ yrs</div>
+      </button>
+      <button class="hero-conf" type="button" aria-label="Read about Osil Pistole" data-bio="bio-osil">
+        <div class="hero-conf-img"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="" loading="lazy"></picture></div>
+        <div class="hero-conf-name">Osil Pistole</div>
+        <div class="hero-conf-title">Intuitive Coach &amp; Speaker</div>
+      </button>
+      <button class="hero-conf" type="button" aria-label="Read about Christophe Dessaigne" data-bio="bio-christophe">
+        <div class="hero-conf-img"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="" loading="lazy"></picture></div>
+        <div class="hero-conf-name">Christophe Dessaigne</div>
+        <div class="hero-conf-title">Restoration Coach</div>
+      </button>
+    </div>
+
+    <div class="subhead-tail fade-in d-3">
+      <p>ReBe is that ecosystem. Live groups. Real sessions. A community that keeps showing up. Right now, we're inviting <strong>50 people</strong> to experience it — for free — before we open the doors.</p>
+      <p class="invite">You don't have to be ready. You just have to be curious.</p>
+    </div>
+
+    <!-- Bio modals -->
+    <dialog class="bio-modal" id="bio-elizabeth"><div class="bio-inner">
+      <button class="bio-close" type="button" aria-label="Close">×</button>
+      <div class="bio-photo"><picture><source type="image/webp" srcset="Images/elizabeth-good.webp"><img src="Images/elizabeth-good.png" alt="Elizabeth Good"></picture></div>
+      <h3 class="bio-name">Elizabeth Good</h3>
+      <p class="bio-role">Founder · Masters in Clinical Psychology · Creator of REAL TALK</p>
+      <p class="bio-text">Three decades helping people heal from burnout, shame, and trauma. Author of <em>Groomed</em> (HarperCollins, 2020) and <em>Speak the Unspeakable</em>. Two-time TEDx speaker.</p>
+    </div></dialog>
+
+    <dialog class="bio-modal" id="bio-quintal"><div class="bio-inner">
+      <button class="bio-close" type="button" aria-label="Close">×</button>
+      <div class="bio-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal"></picture></div>
+      <h3 class="bio-name">Dr. Jason Quintal</h3>
+      <p class="bio-role">PhD · Trauma Specialist · TTR · 25+ yrs</p>
+      <p class="bio-text">Specializes in PTSD, grief, shame, and abuse recovery. Master practitioner in trauma resolution and NLP — accelerated methods that move people through what's been stuck for years.</p>
+    </div></dialog>
+
+    <dialog class="bio-modal" id="bio-beth"><div class="bio-inner">
+      <button class="bio-close" type="button" aria-label="Close">×</button>
+      <div class="bio-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech"></picture></div>
+      <h3 class="bio-name">Beth Rech</h3>
+      <p class="bio-role">Inner Healing Mentor · 30+ yrs</p>
+      <p class="bio-text">Over 30 years mentoring women and helping individuals break free from limiting beliefs, generational patterns, and unresolved trauma. Warmth, presence, and the kind of listening that doesn't rush.</p>
+    </div></dialog>
+
+    <dialog class="bio-modal" id="bio-jean"><div class="bio-inner">
+      <button class="bio-close" type="button" aria-label="Close">×</button>
+      <div class="bio-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park"></picture></div>
+      <h3 class="bio-name">Jean Park</h3>
+      <p class="bio-role">Family Therapist &amp; Coach</p>
+      <p class="bio-text">Caltech economics degree, then a Master's in Marriage and Family Therapy from Fuller. Coaches parents and leaders on emotional intelligence and breaking unhealthy generational patterns.</p>
+    </div></dialog>
+
+    <dialog class="bio-modal" id="bio-fred"><div class="bio-inner">
+      <button class="bio-close" type="button" aria-label="Close">×</button>
+      <div class="bio-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller"></picture></div>
+      <h3 class="bio-name">Fred Feller</h3>
+      <p class="bio-role">Leadership Mentor · 35+ yrs</p>
+      <p class="bio-text">Has worked with executives, ministry leaders, and teams across nine countries. Known for grounded presence in high-pressure environments. Husband of 50 years, father of four, grandfather of seven.</p>
+    </div></dialog>
+
+    <dialog class="bio-modal" id="bio-osil"><div class="bio-inner">
+      <button class="bio-close" type="button" aria-label="Close">×</button>
+      <div class="bio-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole"></picture></div>
+      <h3 class="bio-name">Osil Pistole</h3>
+      <p class="bio-role">Intuitive Coach &amp; Speaker</p>
+      <p class="bio-text">Speaker and intuitive coach with a particular gift for speaking into a person's true identity. Tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
+    </div></dialog>
+
+    <dialog class="bio-modal" id="bio-christophe"><div class="bio-inner">
+      <button class="bio-close" type="button" aria-label="Close">×</button>
+      <div class="bio-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne"></picture></div>
+      <h3 class="bio-name">Christophe Dessaigne</h3>
+      <p class="bio-role">Restoration Coach</p>
+      <p class="bio-text">His own story of healing and restoration shapes how he walks with others through theirs. Helps people break the patterns that quietly run their lives — with the honesty of someone who's been there.</p>
+    </div></dialog>
+
     <div class="cta-block fade-in d-3">
-      <a href="#register" class="btn">Save my seat <span class="btn-arrow" aria-hidden="true">→</span></a>
-      <p class="microcopy-hero">Live only. Recording goes to attendees afterward.</p>
+      <a href="#register" class="btn">Join the free Zoom <span class="btn-arrow" aria-hidden="true">→</span></a>
+      <p class="microcopy-hero">Find out if there's more. 50 spots · June 16 · 11 AM ET</p>
     </div>
+
   </div>
 </section>
 
@@ -679,13 +944,13 @@
 </section>
 
 <!-- TRUST -->
-<section class="trust" aria-label="About your host">
+<section class="trust" aria-label="About the team">
   <p class="trust-line">
-    <span class="seg">Led by <strong>Elizabeth Good</strong></span>
+    <span class="seg">Led by <strong>the ReBe team</strong></span>
     <span class="sep">·</span>
-    <span class="seg">Founder, <span class="rtc-mark">Real Talk Collective</span></span>
+    <span class="seg">Seven confidants. One honest hour.</span>
     <span class="sep">·</span>
-    <span class="seg">20+ years working with adults in quiet burnout</span>
+    <span class="seg">Decades of work with adults in quiet burnout</span>
   </p>
 </section>
 
@@ -694,7 +959,7 @@
   <div class="container">
     <p class="eyebrow">What this hour is</p>
     <h2 id="what-h" class="section-h">One free hour. Live, on Zoom. <span class="curl">Honestly</span> led.</h2>
-    <p class="lede">Sixty minutes with Elizabeth Good and a small group of adults quietly running the same loops — the worry, the anger, the numbness, the survival patterns no one chose. No slides. No homework. No upsell.</p>
+    <p class="lede">Sixty minutes with the ReBe team and a small group of adults quietly running the same loops — the worry, the anger, the numbness, the survival patterns no one chose. No slides. No homework. No upsell.</p>
     <ul class="feat-list">
       <li>Notice the story you've been living inside of</li>
       <li>Name what's actually driving it</li>
@@ -768,13 +1033,13 @@
 <section aria-labelledby="confidants-h">
   <div class="container">
     <p class="eyebrow eyebrow--center">Who you'll meet</p>
-    <h2 id="confidants-h" class="section-h" style="text-align:center">Elizabeth Good and the <span class="curl">ReBe team</span>.</h2>
+    <h2 id="confidants-h" class="section-h" style="text-align:center">The <span class="curl">ReBe team</span>.</h2>
     <p class="lede" style="text-align:center;max-width:620px;margin:0 auto">A team of confidants who want to come alongside you — and help you rewrite your script.</p>
     <div class="conf-list">
 
       <div class="conf">
         <h3 class="conf-name">Elizabeth Good</h3>
-        <p class="conf-role">Founder · MA Clinical Psychology · Creator of REAL TALK</p>
+        <p class="conf-role">Founder · Masters in Clinical Psychology · Creator of REAL TALK</p>
         <p class="conf-desc">Three decades helping people heal from burnout, shame, and trauma. Author of <em>Groomed</em> (HarperCollins, 2020) and <em>Speak the Unspeakable</em>. Two-time TEDx speaker.</p>
       </div>
 
@@ -786,7 +1051,7 @@
 
       <div class="conf">
         <h3 class="conf-name">Beth Rech</h3>
-        <p class="conf-role">Mentor · 30+ yrs</p>
+        <p class="conf-role">Inner Healing Mentor · 30+ yrs</p>
         <p class="conf-desc">Over 30 years mentoring women and helping individuals break free from limiting beliefs, generational patterns, and unresolved trauma. Warmth, presence, and the kind of listening that doesn't rush.</p>
       </div>
 
@@ -804,8 +1069,8 @@
 
       <div class="conf">
         <h3 class="conf-name">Osil Pistole</h3>
-        <p class="conf-role">Coach, Mentor &amp; Speaker</p>
-        <p class="conf-desc">Speaker and transformational coach helping people awaken to their purpose, rediscover their identity, and step into the life they're meant to live.</p>
+        <p class="conf-role">Intuitive Coach &amp; Speaker</p>
+        <p class="conf-desc">Speaker and intuitive coach with a particular gift for speaking into a person's true identity. Tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
       </div>
 
       <div class="conf">
@@ -1056,8 +1321,8 @@
   function setupCalendarLinks() {
     const startUTC = '20260616T150000Z'
     const endUTC   = '20260616T160000Z'
-    const title = "ReBe — You Weren't Born Anxious (free session with Elizabeth Good)"
-    const desc  = 'Free 60-minute live group session with Elizabeth Good. The Zoom link is in your confirmation email.'
+    const title = "ReBe — You Weren't Born Anxious (free session with the ReBe team)"
+    const desc  = 'Free 60-minute live group session with the ReBe team. The Zoom link is in your confirmation email.'
     const loc   = 'Zoom (link in confirmation email)'
     const googleParams = new URLSearchParams({ action: 'TEMPLATE', text: title, dates: `${startUTC}/${endUTC}`, details: desc, location: loc })
     document.getElementById('cal-google').href = `https://www.google.com/calendar/render?${googleParams.toString()}`
@@ -1103,6 +1368,30 @@
   }, { threshold: 0.4 });
   stats.forEach(function(el){ if (el.dataset.target) statIO.observe(el); });
 
+})();
+</script>
+
+<script>
+(function(){
+  // Bio modal open/close
+  document.querySelectorAll('.hero-conf[data-bio]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var dlg = document.getElementById(btn.dataset.bio);
+      if (dlg && typeof dlg.showModal === 'function') { dlg.showModal(); }
+    });
+  });
+  document.querySelectorAll('.bio-modal .bio-close').forEach(function(btn){
+    btn.addEventListener('click', function(){ btn.closest('dialog').close(); });
+  });
+  // Click backdrop to close
+  document.querySelectorAll('.bio-modal').forEach(function(dlg){
+    dlg.addEventListener('click', function(e){
+      var r = dlg.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
+        dlg.close();
+      }
+    });
+  });
 })();
 </script>
 
