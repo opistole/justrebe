@@ -1,0 +1,243 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "ReBe" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+        - img "ReBe" [ref=e5]
+      - button "Toggle menu" [ref=e6] [cursor=pointer]
+      - list:
+        - listitem
+        - listitem [ref=e10]:
+          - link "About Us" [ref=e11] [cursor=pointer]:
+            - /url: about.html
+        - listitem [ref=e12]:
+          - link "Education" [ref=e13] [cursor=pointer]:
+            - /url: education.html
+        - listitem [ref=e14]:
+          - link "Corporate" [ref=e15] [cursor=pointer]:
+            - /url: corporate.html
+        - listitem [ref=e16]:
+          - link "Contact" [ref=e17] [cursor=pointer]:
+            - /url: contact.html
+        - listitem [ref=e18]:
+          - link "Apply for a Pilot" [ref=e19] [cursor=pointer]:
+            - /url: pilot.html
+  - generic [ref=e22]:
+    - generic [ref=e23]: ACE-Informed Wellbeing Platform
+    - heading "Rebuilding people from the inside out." [level=1] [ref=e24]:
+      - text: Rebuilding people
+      - text: from the inside out.
+    - paragraph [ref=e25]: Restoring identity, belonging, and purpose in schools and workplaces — addressing the root cause no wellbeing program has ever touched.
+    - generic [ref=e27]: Rebuild
+    - generic [ref=e28]:
+      - link "Apply for a Pilot →" [ref=e29] [cursor=pointer]:
+        - /url: pilot.html
+      - link "Explore Our Solutions" [ref=e30] [cursor=pointer]:
+        - /url: "#solutions"
+  - generic [ref=e33]:
+    - generic [ref=e34]:
+      - generic [ref=e35]: WHAT IS RE·BE?
+      - heading "We don't treat symptoms. We go to the root." [level=2] [ref=e36]:
+        - text: We don't treat symptoms.
+        - text: We go to the root.
+      - blockquote [ref=e37]: ReBe is not therapy. It's not a program. It's a shift — from the inside out.
+      - generic [ref=e38]:
+        - link "Reveal What's Holding Your Team Back →" [ref=e39] [cursor=pointer]:
+          - /url: corporate.html
+        - link "Unlock What Students & Staff Need →" [ref=e40] [cursor=pointer]:
+          - /url: education.html
+    - generic [ref=e41]:
+      - paragraph [ref=e42]: In a world aching for authenticity, ReBe exists to revitalize the human spirit and restore what disconnection, stress, and early experiences have disrupted.
+      - paragraph [ref=e43]:
+        - text: Most wellbeing programs offer surface-level solutions — apps, webinars, yoga subscriptions. ReBe goes deeper. We address the hidden experiences that shape how people show up at work and in the classroom —
+        - strong [ref=e44]: Adverse Childhood Experiences, or ACEs.
+      - paragraph [ref=e45]: ACEs are traumatic or stressful events that happen before age 18. They don't stay in childhood. They follow people into every meeting, every classroom, every relationship — and they quietly drive the disengagement, burnout, and disconnection costing organizations billions every year.
+  - generic [ref=e47]:
+    - generic [ref=e48] [cursor=pointer]:
+      - img "Community" [ref=e49]
+      - generic [ref=e50]:
+        - generic [ref=e51]: Community
+        - generic [ref=e52]: Belonging starts here
+    - generic [ref=e53] [cursor=pointer]:
+      - img "Education" [ref=e54]
+      - generic [ref=e55]:
+        - generic [ref=e56]: Education
+        - generic [ref=e57]: Whole educators. Whole students.
+    - generic [ref=e58] [cursor=pointer]:
+      - img "Corporate" [ref=e59]
+      - generic [ref=e60]:
+        - generic [ref=e61]: Corporate
+        - generic [ref=e62]: People-first workplaces
+  - generic [ref=e64]:
+    - generic [ref=e65]:
+      - generic [ref=e66]: OUR STORY
+      - heading "A Shift Born From Lived Experience" [level=2] [ref=e67]:
+        - text: A Shift Born From
+        - text: Lived Experience
+      - paragraph [ref=e68]:
+        - strong [ref=e69]: Every human deserves to thrive
+        - text: — not just survive — across all stages of life. But for too many, early challenges go unrecognized for decades, showing up in adulthood as disengagement, anxiety, low performance, or burnout.
+      - paragraph [ref=e70]:
+        - strong [ref=e71]: Over 70%
+        - text: of adults have experienced one or more unresolved early-life traumas. At ReBe, we see a world where workplaces and classrooms are spaces of connection, not disconnection — where people are seen, heard, and able to thrive from the inside out.
+      - paragraph [ref=e72]:
+        - text: "We are helping to flip the script:"
+        - strong [ref=e73]: reconnect, reframe,
+        - text: and
+        - strong [ref=e74]: restore
+        - text: — bridging the gap between childhood and maturity. Wholeness is both a personal and collective shift back to humanity and hope.
+    - generic [ref=e75]:
+      - img "Our Story" [ref=e77]
+      - img "Our Story secondary" [ref=e79]
+  - generic [ref=e81]:
+    - generic [ref=e82]:
+      - generic [ref=e83]: $0T
+      - generic [ref=e84]: Annual U.S. ACE burden
+    - generic [ref=e85]:
+      - generic [ref=e86]: 0%
+      - generic [ref=e87]: Employees disengaged
+    - generic [ref=e88]:
+      - generic [ref=e89]: 0%
+      - generic [ref=e90]: Students carry an ACE
+    - generic [ref=e91]:
+      - generic [ref=e92]: 14:1
+      - generic [ref=e93]: ROI on ACE prevention
+    - generic [ref=e94]:
+      - generic [ref=e95]: 0x
+      - generic [ref=e96]: Behavioral health ROI
+    - generic [ref=e97]:
+      - generic [ref=e98]: $0B
+      - generic [ref=e99]: Lost to ACE productivity
+  - generic [ref=e101]:
+    - generic [ref=e102]:
+      - generic [ref=e103]: THE HIDDEN COST
+      - heading "The numbers behind the crisis." [level=2] [ref=e104]:
+        - text: The numbers behind
+        - emphasis [ref=e106]: the crisis.
+    - generic [ref=e107]:
+      - generic [ref=e108]:
+        - generic [ref=e109]: Education
+        - generic [ref=e110]:
+          - generic [ref=e111]: 76%
+          - generic [ref=e112]: of students have experienced at least one ACE before age 18
+        - generic [ref=e113]:
+          - generic [ref=e114]: $1.2B
+          - generic [ref=e115]: total addressable market for K–12 ACE-informed wellbeing programs
+        - generic [ref=e116]:
+          - generic [ref=e117]: 3×
+          - generic [ref=e118]: higher dropout risk for students with 4+ ACEs
+        - generic [ref=e119]:
+          - generic [ref=e120]: 40%
+          - generic [ref=e121]: "of teachers leave the profession within 5 years — burnout is the #1 reason"
+        - generic [ref=e122]:
+          - generic [ref=e123]: 14:1
+          - generic [ref=e124]: ROI on every dollar invested in early childhood ACE prevention
+      - generic [ref=e125]:
+        - generic [ref=e126]: Corporate
+        - generic [ref=e127]:
+          - generic [ref=e128]: $575B
+          - generic [ref=e129]: lost annually to ACE-related productivity loss in U.S. workplaces
+        - generic [ref=e130]:
+          - generic [ref=e131]: $322B
+          - generic [ref=e132]: annual cost of employee burnout — 76% of your workforce affected
+        - generic [ref=e133]:
+          - generic [ref=e134]: 3–5%
+          - generic [ref=e135]: only this fraction of employees ever engage with traditional EAP programs
+        - generic [ref=e136]:
+          - generic [ref=e137]: 4×
+          - generic [ref=e138]: more workdays missed by employees with poor mental health vs. healthy peers
+        - generic [ref=e139]:
+          - generic [ref=e140]: 40%
+          - generic [ref=e141]: of job turnover is stress-related — a direct cost your organization absorbs
+    - paragraph [ref=e143]:
+      - text: ReBe is the only platform addressing the root cause —
+      - emphasis [ref=e145]: across corporations and schools simultaneously.
+  - generic [ref=e147]:
+    - generic [ref=e148]:
+      - generic [ref=e149]: TWO SOLUTIONS. ONE FRAMEWORK.
+      - heading "From the classroom to the boardroom — ReBe covers the full human journey." [level=2] [ref=e150]:
+        - text: From the classroom to the boardroom —
+        - text: ReBe covers the full human journey.
+      - paragraph [ref=e151]: The only platform in the world addressing ACEs across both education and the workplace. Two tailored solutions. One connected framework. A lifetime of impact.
+    - generic [ref=e152]:
+      - generic [ref=e153]:
+        - img "ReBe Education" [ref=e154]
+        - generic [ref=e155]:
+          - generic [ref=e156]: ReBe Education
+          - generic [ref=e157]: Whole Educators. Whole Students. Whole Schools.
+          - generic [ref=e158]: A K–12 health and literacy program built around EPICS
+          - list [ref=e159]:
+            - listitem [ref=e160]: → Grade-level Health Boosts for K–12
+            - listitem [ref=e161]: → Age-appropriate video content and facilitator guides
+            - listitem [ref=e162]: → Differentiated Literacy LABS — Learning Applied by Students
+            - listitem [ref=e163]: → ReBe Educator Certification
+            - listitem [ref=e164]: → Measurable academic and behavioral outcomes
+          - generic [ref=e165]: "District licensing model · TAM: $1.2B"
+          - link "Explore Education →" [ref=e166] [cursor=pointer]:
+            - /url: education.html
+      - generic [ref=e167]:
+        - img "ReBe Corporate" [ref=e168]
+        - generic [ref=e169]:
+          - generic [ref=e170]: ReBe Corporate
+          - generic [ref=e171]: Reset. Reframe. Relaunch.
+          - generic [ref=e172]: A three-phase, ACE-informed employee wellbeing platform
+          - list [ref=e173]:
+            - listitem [ref=e174]: "→ Phase 1 — Awareness: Individual, private, self-paced"
+            - listitem [ref=e175]: "→ Phase 2 — Engagement: Live facilitated team sessions"
+            - listitem [ref=e176]: "→ Phase 3 — Activation: Culture embedding + HR analytics"
+            - listitem [ref=e177]: → Enterprise-ready app for all workforce types
+            - listitem [ref=e178]: → REAL TALK™ methodology, proven in 19+ countries since 2020
+          - generic [ref=e179]: "Enterprise licensing model · ROI: 1.9x–7x"
+          - link "Explore Corporate →" [ref=e180] [cursor=pointer]:
+            - /url: corporate.html
+  - generic [ref=e182]:
+    - generic [ref=e183]: BETTER ME. BETTER WE.
+    - heading "Ready to help your people become the heroes they were meant to be?" [level=2] [ref=e184]
+    - paragraph [ref=e185]: ReBe is not therapy or a program — it's a shift. We uncover what is beneath the surface to transform people and organizations from the inside out.
+    - link "Apply for a Pilot →" [ref=e187] [cursor=pointer]:
+      - /url: pilot.html
+    - paragraph [ref=e188]: pilot@justrebe.com · invest@justrebe.com · hello@justrebe.com
+  - contentinfo [ref=e190]:
+    - generic [ref=e191]:
+      - generic [ref=e192]:
+        - generic [ref=e193]:
+          - link "ReBe" [ref=e194] [cursor=pointer]:
+            - /url: index.html
+            - img "ReBe" [ref=e195]
+          - paragraph [ref=e196]: Rebuilding people from the inside out.
+        - generic [ref=e197]:
+          - heading "Solutions" [level=4] [ref=e198]
+          - list [ref=e199]:
+            - listitem [ref=e200]:
+              - link "ReBe Education" [ref=e201] [cursor=pointer]:
+                - /url: education.html
+            - listitem [ref=e202]:
+              - link "ReBe Corporate" [ref=e203] [cursor=pointer]:
+                - /url: corporate.html
+            - listitem [ref=e204]:
+              - link "Apply for a Pilot" [ref=e205] [cursor=pointer]:
+                - /url: pilot.html
+        - generic [ref=e206]:
+          - heading "Company" [level=4] [ref=e207]
+          - list [ref=e208]:
+            - listitem [ref=e209]:
+              - link "About Us" [ref=e210] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=e211]:
+              - link "Contact" [ref=e212] [cursor=pointer]:
+                - /url: contact.html
+        - generic [ref=e213]:
+          - heading "Get in Touch" [level=4] [ref=e214]
+          - list [ref=e215]:
+            - listitem [ref=e216]:
+              - link "hello@justrebe.com" [ref=e217] [cursor=pointer]:
+                - /url: mailto:hello@justrebe.com
+            - listitem [ref=e218]:
+              - link "pilot@justrebe.com" [ref=e219] [cursor=pointer]:
+                - /url: mailto:pilot@justrebe.com
+            - listitem [ref=e220]:
+              - link "invest@justrebe.com" [ref=e221] [cursor=pointer]:
+                - /url: mailto:invest@justrebe.com
+      - generic [ref=e222]:
+        - paragraph [ref=e223]: © 2026 ReBe. All rights reserved.
+        - paragraph [ref=e224]: Better Me. Better We.

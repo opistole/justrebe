@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ReBe CRM</title>
+<link rel="icon" type="image/jpeg" href="/ReBe_Favicon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:#FFFFFF; --mist:#FAF9F7; --navy:#060B50; --navy-dark:#040832;
+    --green:#449945; --green-ink:#3A8438; --green-wash:#F2F8F2;
+    --gold:#E3A01F; --gold-ink:#B07D14; --gold-wash:#FBF4E4;
+    --slate:#212B37; --body:#4A535E; --muted:#9DA1A8; --bone:#E2E2E2; --coral:#EA492E;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--mist);color:var(--body);font-family:var(--sans);font-size:15px;line-height:1.6;min-height:100vh}
+
+  /* Loading curtain */
+  .gate{position:fixed;inset:0;background:var(--mist);display:flex;align-items:center;justify-content:center;z-index:1000;font-size:14px;color:var(--muted)}
+  .gate.hidden{display:none}
+
+  /* Header bar */
+  header.bar{position:sticky;top:0;z-index:50;background:var(--navy-dark);color:#fff;border-bottom:3px solid var(--green)}
+  .bar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 28px}
+  .brand{font-family:var(--sans);font-weight:700;font-size:18px;letter-spacing:.02em;color:#fff;text-decoration:none}
+  .brand span{color:var(--green)}
+  .brand small{font-weight:400;color:rgba(255,255,255,.55);margin-left:8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .me{display:flex;align-items:center;gap:14px;font-size:13px;color:rgba(255,255,255,.85)}
+  .me .who{font-weight:700;color:#fff}
+  .me .role{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:rgba(227,160,31,.15);padding:3px 8px;border-radius:50px}
+  .signout{font-size:13px;font-weight:700;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:50px;transition:background .15s var(--ease)}
+  .signout:hover{background:rgba(255,255,255,.1)}
+
+  /* Page header */
+  .page{max-width:1200px;margin:0 auto;padding:36px 28px 80px}
+  .page-h{font-family:var(--serif);font-style:italic;font-weight:400;font-size:32px;color:var(--navy);margin:0 0 6px;line-height:1.2}
+  .page-sub{font-size:14px;color:var(--muted);margin:0 0 28px}
+
+  /* Toolbar */
+  .toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:20px;background:#fff;border:1px solid var(--bone);border-radius:14px;padding:14px 18px}
+  .search{flex:1;min-width:260px;display:flex;align-items:center;gap:10px;background:var(--mist);border:1px solid var(--bone);border-radius:10px;padding:8px 14px}
+  .search input{flex:1;border:none;outline:none;background:none;font-family:var(--sans);font-size:15px;color:var(--slate);padding:6px 0}
+  .search svg{flex-shrink:0;color:var(--muted)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--mist);border:1px solid var(--bone);color:var(--slate);padding:8px 14px;border-radius:50px;cursor:pointer;transition:all .15s var(--ease)}
+  .chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .chip:hover:not(.active){border-color:var(--navy);color:var(--navy)}
+  .count{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+
+  /* Table */
+  .list{background:#fff;border:1px solid var(--bone);border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(6,11,80,.04)}
+  table{width:100%;border-collapse:collapse}
+  thead{background:var(--mist);border-bottom:1px solid var(--bone)}
+  th{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:14px 18px}
+  th.sortable{cursor:pointer;user-select:none}
+  th.sortable:hover{color:var(--navy)}
+  th .arrow{display:inline-block;margin-left:4px;opacity:.5}
+  th.sorted .arrow{opacity:1;color:var(--green-ink)}
+  tbody tr{border-bottom:1px solid var(--bone);cursor:pointer;transition:background .12s var(--ease)}
+  tbody tr:hover{background:var(--green-wash)}
+  tbody tr:last-child{border-bottom:none}
+  td{padding:16px 18px;vertical-align:middle}
+  .cell-name{font-weight:700;color:var(--navy);font-size:15px}
+  .cell-email{font-size:13px;color:var(--body)}
+  .cell-when{font-size:13px;color:var(--muted);white-space:nowrap}
+  .src{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:50px;white-space:nowrap}
+  .src-workshop{background:rgba(141,176,205,.18);color:#3a648a}
+  .src-cohort{background:var(--green-wash);color:var(--green-ink)}
+  .src-1on1{background:var(--gold-wash);color:var(--gold-ink)}
+  .stat{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:50px;white-space:nowrap;background:var(--mist);color:var(--body);border:1px solid var(--bone)}
+  .stat-paid{background:var(--green-wash);color:var(--green-ink);border-color:transparent}
+  .stat-waitlist{background:var(--gold-wash);color:var(--gold-ink);border-color:transparent}
+  .stat-pending{background:rgba(141,176,205,.18);color:#3a648a;border-color:transparent}
+
+  /* Empty + loading states */
+  .empty{padding:60px 24px;text-align:center;color:var(--muted)}
+  .empty h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px;color:var(--navy);margin:0 0 10px}
+
+  /* Mobile */
+  @media (max-width:760px){
+    .page{padding:24px 16px 60px}
+    .bar-inner{padding:12px 16px}
+    .me{font-size:12px;gap:8px}
+    .me .role{display:none}
+    th,td{padding:12px 12px}
+    th:nth-child(3),td:nth-child(3),th:nth-child(5),td:nth-child(5){display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">Checking sign-in…</div>
+
+<header class="bar">
+  <div class="bar-inner">
+    <a href="/crm/index.html" class="brand">Re<span>Be</span> <small>CRM</small></a>
+    <div class="me" id="me">
+      <span class="who" id="me-name">—</span>
+      <span class="role" id="me-role">—</span>
+      <a href="#" id="signout" class="signout">Sign out</a>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <h1 class="page-h">Contacts.</h1>
+  <p class="page-sub" id="lastsync">—</p>
+
+  <div class="toolbar">
+    <label class="search" aria-label="Search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search by name, email, or phone…" autocomplete="off">
+    </label>
+    <div class="chips" id="src-chips" role="tablist" aria-label="Filter by source">
+      <button class="chip active" data-src="all" role="tab" aria-selected="true">All</button>
+      <button class="chip" data-src="workshop" role="tab" aria-selected="false">Workshop</button>
+      <button class="chip" data-src="cohort" role="tab" aria-selected="false">Cohort</button>
+      <button class="chip" data-src="1on1" role="tab" aria-selected="false">1:1</button>
+    </div>
+    <span class="count" id="count">—</span>
+  </div>
+
+  <div class="list">
+    <table>
+      <thead>
+        <tr>
+          <th class="sortable sorted" data-sort="name">Name<span class="arrow">▼</span></th>
+          <th>Source</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th class="sortable" data-sort="created_at">Signed up<span class="arrow">▼</span></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="empty" style="display:none">
+      <h3>No matches yet.</h3>
+      <p>Try clearing the search or selecting a different source.</p>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  const SUPABASE_URL = 'https://erbncxjkgwqtfhulricc.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_3L24YRPqcRSQNHWa8ofpSA_t0mAB6LY'
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+
+  // ----- Auth gate -----
+  const gate = document.getElementById('gate')
+  let { data: { session } } = await supabase.auth.getSession()
+  if (!session) {
+    // Maybe we just landed back from the magic-link redirect
+    await new Promise(r => setTimeout(r, 250))
+    const refreshed = await supabase.auth.getSession()
+    session = refreshed.data.session
+  }
+  if (!session) {
+    window.location.replace('/crm/login.html')
+    throw new Error('not signed in')
+  }
+
+  // Confirm the signed-in email is on the allowlist
+  const myEmail = (session.user.email || '').toLowerCase()
+  const { data: meRow, error: meErr } = await supabase
+    .from('admin_emails')
+    .select('email, display_name, role')
+    .eq('email', myEmail)
+    .maybeSingle()
+
+  if (meErr || !meRow) {
+    gate.innerHTML = `<div style="text-align:center;max-width:380px">
+      <h3 style="color:var(--coral);font-family:var(--serif);font-style:italic;margin:0 0 12px">You're signed in, but not on the team yet.</h3>
+      <p style="color:var(--body);margin:0 0 18px">Email <strong>${myEmail}</strong> isn't on the CRM allowlist. Ask Osil to add you, then sign in again.</p>
+      <button onclick="(async()=>{await window.__supa.auth.signOut();location.href='/crm/login.html'})()" style="background:var(--navy);color:#fff;border:0;border-radius:50px;padding:12px 24px;font-weight:700;cursor:pointer">Sign out</button>
+    </div>`
+    window.__supa = supabase
+    return
+  }
+
+  document.getElementById('me-name').textContent = meRow.display_name || myEmail
+  document.getElementById('me-role').textContent = meRow.role
+  document.getElementById('signout').addEventListener('click', async (e) => {
+    e.preventDefault()
+    await supabase.auth.signOut()
+    window.location.href = '/crm/login.html'
+  })
+
+  gate.classList.add('hidden')
+
+  // ----- Load signups -----
+  const { data: rows, error } = await supabase
+    .from('crm_signups')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(2000)
+
+  if (error) {
+    console.error(error)
+    document.getElementById('rows').innerHTML = `<tr><td colspan="5" style="padding:40px;text-align:center;color:var(--coral)">Couldn't load contacts: ${error.message}</td></tr>`
+    return
+  }
+
+  let allRows = rows || []
+  document.getElementById('lastsync').textContent =
+    `${allRows.length} signup${allRows.length === 1 ? '' : 's'} total · synced just now`
+
+  // ----- State -----
+  let state = { search: '', source: 'all', sort: 'created_at', dir: 'desc' }
+
+  function render() {
+    let r = allRows.slice()
+    if (state.source !== 'all') r = r.filter(x => x.source === state.source)
+    if (state.search) {
+      const q = state.search.toLowerCase()
+      r = r.filter(x =>
+        (x.name || '').toLowerCase().includes(q) ||
+        (x.email || '').toLowerCase().includes(q) ||
+        (x.phone || '').toLowerCase().includes(q)
+      )
+    }
+    r.sort((a,b) => {
+      let av = a[state.sort], bv = b[state.sort]
+      if (state.sort === 'created_at'){ av = new Date(av || 0); bv = new Date(bv || 0); }
+      else { av = (av||'').toString().toLowerCase(); bv = (bv||'').toString().toLowerCase(); }
+      return (av > bv ? 1 : av < bv ? -1 : 0) * (state.dir === 'asc' ? 1 : -1)
+    })
+
+    const tbody = document.getElementById('rows')
+    const empty = document.getElementById('empty')
+    document.getElementById('count').textContent = `${r.length} shown`
+
+    if (r.length === 0){ tbody.innerHTML = ''; empty.style.display = 'block'; return }
+    empty.style.display = 'none'
+
+    tbody.innerHTML = r.map(x => {
+      const dt = x.created_at ? new Date(x.created_at) : null
+      const when = dt ? dt.toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' }) : '—'
+      const statusClass = (x.status === 'paid') ? 'stat stat-paid'
+                          : (x.status === 'waitlist' || x.status === 'pending') ? 'stat stat-waitlist'
+                          : (x.status === 'registered' || x.status === 'new') ? 'stat stat-pending'
+                          : 'stat'
+      const params = new URLSearchParams({ source: x.source, id: x.signup_id, email: x.email || '' })
+      return `<tr data-href="/crm/contact.html?${params}">
+        <td><div class="cell-name">${escapeHTML(x.name || '—')}</div><div class="cell-email" style="display:none">${escapeHTML(x.email || '')}</div></td>
+        <td><span class="src src-${x.source}">${labelFor(x.source)}</span></td>
+        <td><div class="cell-email">${escapeHTML(x.email || '—')}</div></td>
+        <td><span class="${statusClass}">${escapeHTML(x.status || 'new')}</span></td>
+        <td><div class="cell-when">${when}</div></td>
+      </tr>`
+    }).join('')
+
+    tbody.querySelectorAll('tr').forEach(tr => {
+      tr.addEventListener('click', () => { window.location.href = tr.dataset.href })
+    })
+  }
+
+  function labelFor(s){ return s === '1on1' ? '1:1' : s.charAt(0).toUpperCase() + s.slice(1) }
+  function escapeHTML(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])) }
+
+  document.getElementById('q').addEventListener('input', (e) => { state.search = e.target.value; render() })
+  document.querySelectorAll('#src-chips .chip').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('#src-chips .chip').forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected','false') })
+      c.classList.add('active'); c.setAttribute('aria-selected','true')
+      state.source = c.dataset.src; render()
+    })
+  })
+  document.querySelectorAll('th.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.sort
+      if (state.sort === key) state.dir = state.dir === 'asc' ? 'desc' : 'asc'
+      else { state.sort = key; state.dir = key === 'created_at' ? 'desc' : 'asc' }
+      document.querySelectorAll('th.sortable').forEach(t => t.classList.remove('sorted'))
+      th.classList.add('sorted')
+      th.querySelector('.arrow').textContent = state.dir === 'asc' ? '▲' : '▼'
+      render()
+    })
+  })
+
+  render()
+</script>
+</body>
+</html>

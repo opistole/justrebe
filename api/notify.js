@@ -32,7 +32,6 @@ const COHORT_READINESS_LABEL = {
   ready_to_pay:      'Ready to Pay',
   waitlist:          'Waitlist',
   wants_more_info:   'Wants Info',
-  wants_intake_call: 'Intake Call',
 };
 
 // Map preferred_group_time row value → tag slot label.
@@ -157,18 +156,6 @@ If you didn't finish checkout yet, just reload the page and click Pay when you'r
 
 — The ReBe team
 refresh@justrebe.com`;
-  } else if (readiness === 'wants_intake_call') {
-    subject = "We received your ReBe ReFresh intake call request";
-    body = `Hi ${name},
-
-Thank you for asking for an intake call before you commit. We're glad you did — a quick conversation is a great way to feel whether this is the right fit.
-
-${timeLine}
-
-The booking link is on the page where you submitted. If you couldn't find it or it didn't work, just reply to this email and we'll send you a fresh one.
-
-— The ReBe team
-refresh@justrebe.com`;
   } else if (readiness === 'waitlist') {
     subject = "You're on the ReBe ReFresh waitlist";
     body = `Hi ${name},
@@ -243,7 +230,7 @@ function buildConfidantEmails(row) {
 
 Thank you for requesting a private 1:1 session with ${row.preferred_confidant || 'a ReBe confidant'}.
 
-Your confidant will reach out within 48 hours to schedule directly with you. If you indicated you're ready to pay, you'll be guided through checkout next.
+You'll be guided through checkout next on the same page (if you haven't already). Once payment is confirmed, your confidant will reach out within 48 hours to schedule directly with you.
 
 — The ReBe team
 refresh@justrebe.com`;

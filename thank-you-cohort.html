@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="robots" content="noindex,nofollow" />
-<title>Thank you · ReBe ReFresh 6-Week Cohort</title>
-<meta name="description" content="You're in. The first ReBe ReFresh cohort starts June 23, 11 AM Eastern. Watch your inbox for the Zoom link and welcome." />
+<title>Thank you · ReBe ReFresh 5-Week Cohort</title>
+<meta name="description" content="You're in. The first ReBe ReFresh cohort starts June 23. Watch your inbox for the Zoom link and welcome." />
 <link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,7 +93,7 @@
     <div class="cohort-meta">
       <p class="label">Cohort starts</p>
       <p class="date">JUNE 23, 2026</p>
-      <p class="time">11 AM Eastern · 6 sessions over 6 weeks</p>
+      <p class="time" id="cohort-time">5 weekly sessions · 5 weeks</p>
     </div>
 
     <div class="card">
@@ -101,9 +101,23 @@
       <ol>
         <li>You'll get a confirmation email from <strong>refresh@justrebe.com</strong> within an hour.</li>
         <li>Within <strong>24–48 hours</strong>, you'll receive your cohort welcome with the Zoom link and what to bring (which is mostly: yourself).</li>
-        <li>Six weekly live sessions starting <strong>Tuesday, June 23 at 11 AM Eastern</strong>. They're not recorded — these are the times you set aside to actually be there.</li>
+        <li id="next-step-3">Five weekly live sessions starting <strong>Tuesday, June 23</strong>. They're not recorded — these are the times you set aside to actually be there.</li>
       </ol>
     </div>
+
+    <script>
+      // Read ?slot= from URL (set by the form before Stripe checkout) and
+      // show the right meeting time on this page.
+      (function(){
+        var params = new URLSearchParams(window.location.search);
+        var slot = (params.get('slot') || '').toLowerCase();
+        var timeLabel = slot === '8pm' ? '8 PM Eastern' : '11 AM Eastern';
+        var timeEl = document.getElementById('cohort-time');
+        var stepEl = document.getElementById('next-step-3');
+        if (timeEl) timeEl.textContent = timeLabel + ' · 5 weekly sessions · 5 weeks';
+        if (stepEl) stepEl.innerHTML = 'Five weekly live sessions starting <strong>Tuesday, June 23 at ' + timeLabel + '</strong>. They\'re not recorded — these are the times you set aside to actually be there.';
+      })();
+    </script>
 
     <p class="help">
       Questions, or didn't see the welcome within 48 hours? Email <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a>.

@@ -1,0 +1,15 @@
+[    2611ms] [ERROR] Failed to load resource: the server responded with a status of 405 () @ https://claude.ai/sentry?o=1158394&p=4504646202490880:0
+[    4578ms] [INFO] [O11Y] [DatadogRUM] Initialized {service: claude-ai, env: production, version: c538b3d4c5} @ https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ccc72bfa9-D6hDhjmb.js:0
+[    5608ms] [ERROR] Not signed in with the identity provider. @ https://claude.ai/login?selectAccount=true&returnTo=%2Foauth%2Fauthorize%3Fcode%3Dtrue%26client_id%3D9d1c250a-e61b-44d9-88ed-5944d1962f5e%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fplatform.claude.com%252Foauth%252Fcode%252Fcallback%26scope%3Dorg%253Acreate_api_key%2Buser%253Aprofile%2Buser%253Ainference%2Buser%253Asessions%253Aclaude_code%2Buser%253Amcp_servers%2Buser%253Afile_upload%26code_challenge%3DAmXU-NXTs3L_YICWwe-aph9X2Zsq263aQ4Wlalzu_Rs%26code_challenge_method%3DS256%26state%3D_XA-dxwl7G7B7bngeSitxw3eK_nDwjS-OcBGiZvcqko:0
+[    8228ms] [ERROR] Cross-Origin-Opener-Policy policy would block the window.closed call. @ https://accounts.google.com/gsi/client:135
+[    8228ms] [ERROR] Cross-Origin-Opener-Policy policy would block the window.closed call. @ https://accounts.google.com/gsi/client:135
+[   14681ms] [ERROR] Cross-Origin-Opener-Policy policy would block the window.closed call. @ https://accounts.google.com/gsi/client:135
+[   14681ms] [ERROR] Cross-Origin-Opener-Policy policy would block the window.closed call. @ https://accounts.google.com/gsi/client:135
+[   20823ms] [ERROR] [GSI_LOGGER]: FedCM get() rejects with NetworkError: Error retrieving a token. @ https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ccc72bfa9-D6hDhjmb.js:0
+[   27204ms] [ERROR] Cross-Origin-Opener-Policy policy would block the window.closed call. @ https://accounts.google.com/gsi/client:135
+[   27204ms] [ERROR] Cross-Origin-Opener-Policy policy would block the window.closed call. @ https://accounts.google.com/gsi/client:135
+[   29707ms] [ERROR] Cross-Origin-Opener-Policy policy would block the window.closed call. @ https://accounts.google.com/gsi/client:135
+[   29708ms] [ERROR] Cross-Origin-Opener-Policy policy would block the window.closed call. @ https://accounts.google.com/gsi/client:135
+[   31560ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://claude.ai/v1/privacy-consents?prefix=cookies.:0
+[   35832ms] [WARNING] [antalytics] track() called before init(); event dropped @ https://platform.claude.com/_next/static/chunks/42670-e190e1cb34880c00.js:13
+[   36941ms] [WARNING] [Intercom] The App ID in your code snippet has not been set. Set it to your App ID found in settings to complete installation: https://app.intercom.com/a/apps/_/settings/web @ https://js.intercomcdn.com/frame-modern.1eb85609.js:0

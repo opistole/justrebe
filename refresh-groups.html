@@ -631,11 +631,13 @@
         <select id="conf-confidant" name="preferred_confidant">
           <option value="">— choose —</option>
           <option value="Beth Rech">Beth Rech</option>
+          <option value="Christophe Dessaigne">Christophe Dessaigne</option>
+          <option value="Dr. Jason Quintal">Dr. Jason Quintal</option>
           <option value="Elizabeth Good">Elizabeth Good</option>
           <option value="Fred Feller">Fred Feller</option>
           <option value="Jean Park">Jean Park</option>
           <option value="Osil Pistole">Osil Pistole</option>
-          <option value="No preference">No preference — please match me</option>
+          <option value="Any (Choose for me)">Any (Choose for me)</option>
         </select>
       </div>
       <div class="form-field"><label for="conf-situation">What you're working through <span class="req">*</span></label><textarea id="conf-situation" name="situation" placeholder="A short paragraph is enough — your confidant will go deeper when you talk."></textarea></div>
@@ -1016,8 +1018,11 @@ document.querySelectorAll('.bio-modal-pop').forEach(function(m){
       else if(discount){ var fb=document.createElement('p'); fb.style.cssText='margin:0 0 14px;color:#3a6b4a;font-size:14px;font-weight:700;text-align:center'; fb.innerHTML='✓ Code <strong>'+code+'</strong> applied — new total: <strong>$'+amtDisplay+'</strong>'; container.parentNode.insertBefore(fb,container); }
       var emailInput=document.querySelector('#refresh-form [name="email"]');
       var nameInput=document.querySelector('#refresh-form [name="full_name"]');
+      var timeRadio=document.querySelector('#refresh-form [name="preferred_group_time"]:checked');
       var customerEmail=emailInput?emailInput.value.trim():'';
       var customerName=nameInput?nameInput.value.trim():'';
+      // Map preferred_group_time radio value → ?slot=11am|8pm for thank-you page.
+      var slotParam = (timeRadio && timeRadio.value === 'Tuesdays at 8 PM ET') ? '8pm' : '11am';
       var btn=document.createElement('button');
       btn.type='button';
       btn.textContent='Pay $'+amtDisplay;
@@ -1037,7 +1042,7 @@ document.querySelectorAll('.bio-modal-pop').forEach(function(m){
             customer_name:customerName,
             amount_cents:amtCents,
             description:'ReBe ReFresh · 5-Week Cohort'+(discount?' (code: '+code+')':'')+(testMode?' (TEST)':''),
-            success_url:origin+'/thank-you-cohort.html',
+            success_url:origin+'/thank-you-cohort.html?slot='+slotParam,
             cancel_url:origin+'/refresh-groups.html',
             referral_code:code||null
           })

@@ -1,0 +1,257 @@
+- generic [active] [ref=e1]:
+  - link "Skip to enrollment" [ref=e2] [cursor=pointer]:
+    - /url: "#enroll"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "ReBe" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - link "Reserve my seat →" [ref=e6] [cursor=pointer]:
+        - /url: "#enroll"
+  - main [ref=e7]:
+    - generic [ref=e9]:
+      - paragraph [ref=e10]: ReBe ReFresh · A 6-Week Group Experience
+      - heading "Discover your story. Then rewrite it." [level=1] [ref=e11]
+      - paragraph [ref=e12]: Six weeks. One small group. A guided path from isolation into real community — picturing safety, envisioning freedom, rehearsing a future worth living.
+      - generic [ref=e13]:
+        - generic [ref=e14]: $497 · 6 sessions
+        - generic [ref=e15]: Starts June 23
+        - generic [ref=e16]: 11 AM ET
+      - generic [ref=e17]:
+        - link "Reserve my seat" [ref=e18] [cursor=pointer]:
+          - /url: "#enroll"
+          - text: Reserve my seat
+          - generic [ref=e19]: →
+        - paragraph [ref=e20]:
+          - text: Prefer a 1:1?
+          - link "See private sessions ↓" [ref=e21] [cursor=pointer]:
+            - /url: "#private"
+    - region "The idea behind ReBe" [ref=e22]:
+      - paragraph [ref=e24]: You cannot heal what you have never been helped to understand.
+    - region "Somewhere between a therapy room and a classroom." [ref=e25]:
+      - generic [ref=e26]:
+        - paragraph [ref=e27]: Why ReBe exists
+        - heading "Somewhere between a therapy room and a classroom." [level=2] [ref=e28]:
+          - text: Somewhere between a therapy room and a
+          - emphasis [ref=e29]: classroom
+          - text: .
+        - paragraph [ref=e30]: Between a survivor's story and a child's silence, we found the same wound — and we built ReBe to heal it. Most of us were never taught how to use our imagination. We were handed fear loops, inherited worry, and survival patterns, and ran them so long they started to feel like us.
+        - paragraph [ref=e31]: But the story isn't finished. You cannot heal what you've never been helped to understand.
+        - paragraph [ref=e32]: ReBe is a guided, root-cause path from isolation into real community — picturing safety, envisioning freedom, rehearsing a future worth living. No performance. No pressure.
+        - paragraph [ref=e33]: Better me. Better we.
+    - region "Why this matters" [ref=e34]:
+      - generic [ref=e35]:
+        - paragraph [ref=e36]: The need is real
+        - heading "It's not just you — and it's not your fault." [level=2] [ref=e37]:
+          - text: It's not just you — and it's
+          - emphasis [ref=e38]: not your fault
+          - text: .
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: 70%
+            - generic [ref=e42]: of adults carry one or more unresolved early-life traumas (ACEs)
+          - generic [ref=e43]:
+            - generic [ref=e44]: 76%
+            - generic [ref=e45]: of adults are affected by burnout
+          - generic [ref=e46]:
+            - generic [ref=e47]: "15"
+            - generic [ref=e48]: cigarettes a day — the health risk the Surgeon General equates with loneliness
+    - region "Six sessions. One group. Your way back." [ref=e49]:
+      - generic [ref=e50]:
+        - paragraph [ref=e51]: The 6-week cohort
+        - heading "Six sessions. One group. Your way back." [level=2] [ref=e52]:
+          - text: Six sessions. One group. Your way
+          - emphasis [ref=e53]: back
+          - text: .
+        - paragraph [ref=e54]: "A guided, root-cause group experience for adults — walked out in real, live community. Not therapy, not coaching: inner work, with company."
+        - list [ref=e55]:
+          - listitem [ref=e56]: ✓ Six weekly live sessions with Elizabeth and the ReBe team
+          - listitem [ref=e57]: ✓ A small group — small enough to be known, large enough to be honest
+          - listitem [ref=e58]: ✓ Anchored in EPICS and the story-as-genre framework
+          - listitem [ref=e59]: ✓ Not recorded — real-time, fully present
+          - listitem [ref=e60]:
+            - text: ✓
+            - strong [ref=e61]: First group starts June 23 · 11 AM Eastern
+        - generic [ref=e62]:
+          - paragraph [ref=e63]: $497
+          - paragraph [ref=e64]: for all six sessions · starts June 23, 11 AM ET
+          - link "Reserve my seat" [ref=e65] [cursor=pointer]:
+            - /url: "#enroll"
+            - text: Reserve my seat
+            - generic [ref=e66]: →
+    - generic [ref=e68]:
+      - generic [ref=e69]:
+        - paragraph [ref=e70]: Reserve your seat · $497
+        - heading "Join the first group." [level=2] [ref=e71]:
+          - text: Join the first
+          - emphasis [ref=e72]: group
+          - text: .
+        - paragraph [ref=e73]: Starts June 23 · 11 AM Eastern. A couple of details and you'll go straight to payment to hold your seat.
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - generic [ref=e76]:
+            - generic [ref=e77]: Full name *
+            - textbox "Full name *" [ref=e78]
+          - generic [ref=e79]:
+            - generic [ref=e80]: Email *
+            - textbox "Email *" [ref=e81]
+        - generic [ref=e82]:
+          - generic [ref=e83]: Phone *
+          - textbox "Phone *" [ref=e84]
+        - generic [ref=e85]:
+          - generic [ref=e86]: Referral code (optional)
+          - textbox "Referral code (optional)" [ref=e87]:
+            - /placeholder: Have a code? Enter it here
+        - generic [ref=e88]:
+          - checkbox "I consent to be contacted by ReBe about my enrollment and ReBe ReFresh." [ref=e89] [cursor=pointer]
+          - generic [ref=e90] [cursor=pointer]: I consent to be contacted by ReBe about my enrollment and ReBe ReFresh.
+        - generic [ref=e91]:
+          - checkbox "I agree to maintain confidentiality about what's shared in the group." [ref=e92] [cursor=pointer]
+          - generic [ref=e93] [cursor=pointer]: I agree to maintain confidentiality about what's shared in the group.
+        - generic [ref=e94]:
+          - button "Continue to payment · $497" [ref=e95] [cursor=pointer]
+          - paragraph [ref=e96]: "* Required fields"
+      - paragraph [ref=e97]:
+        - text: Questions, or want to talk it through first? Email
+        - link "refresh@justrebe.com" [ref=e98] [cursor=pointer]:
+          - /url: mailto:refresh@justrebe.com
+        - text: — we'll get right back to you.
+    - region "Rather go one-on-one? Meet the confidants." [ref=e99]:
+      - generic [ref=e100]:
+        - paragraph [ref=e101]: Private 1:1 Sessions · $197
+        - heading "Rather go one-on-one? Meet the confidants." [level=2] [ref=e102]:
+          - text: Rather go
+          - emphasis [ref=e103]: one-on-one
+          - text: "? Meet the confidants."
+        - paragraph [ref=e104]: A single 1:1 with the confidant of your choice — $197. Open a card to read their story, then request a session. Your confidant reaches out within 48 hours to schedule.
+        - generic [ref=e105]:
+          - generic [ref=e106]:
+            - img "Elizabeth Good" [ref=e107]
+            - generic [ref=e108]:
+              - generic [ref=e109]: Facilitator
+              - heading "Elizabeth Good" [level=3] [ref=e110]
+              - paragraph [ref=e111]: Founder · Creator of REAL TALK
+              - paragraph [ref=e112]:
+                - text: Three decades guiding healing, identity, and transformation. Author of
+                - emphasis [ref=e113]: Groomed
+                - text: and
+                - emphasis [ref=e114]: Speak the Unspeakable
+                - text: .
+              - link "Request a session →" [ref=e115] [cursor=pointer]:
+                - /url: "#request-1on1"
+          - generic [ref=e116]:
+            - img "Beth Rech" [ref=e117]
+            - generic [ref=e118]:
+              - heading "Beth Rech" [level=3] [ref=e119]
+              - paragraph [ref=e120]: Mentor & Guide · 30+ yrs
+              - paragraph [ref=e121]: Inner healing, generational patterns, and women's growth — with warmth and a nurturing presence.
+              - link "Request a session →" [ref=e122] [cursor=pointer]:
+                - /url: "#request-1on1"
+          - generic [ref=e123]:
+            - img "Fred Feller" [ref=e124]
+            - generic [ref=e125]:
+              - heading "Fred Feller" [level=3] [ref=e126]
+              - paragraph [ref=e127]: Leadership Mentor · 35+ yrs
+              - paragraph [ref=e128]: Resilience, mindset, and breakthrough — a grounded presence for leaders and individuals alike.
+              - link "Request a session →" [ref=e129] [cursor=pointer]:
+                - /url: "#request-1on1"
+          - generic [ref=e130]:
+            - img "Jean Park" [ref=e131]
+            - generic [ref=e132]:
+              - heading "Jean Park" [level=3] [ref=e133]
+              - paragraph [ref=e134]: Family Therapist & Coach
+              - paragraph [ref=e135]: Relationships, emotional health, and breaking unhealthy generational patterns. MFT, Fuller Seminary.
+              - link "Request a session →" [ref=e136] [cursor=pointer]:
+                - /url: "#request-1on1"
+          - generic [ref=e137]:
+            - img "Osil Pistole" [ref=e138]
+            - generic [ref=e139]:
+              - heading "Osil Pistole" [level=3] [ref=e140]
+              - paragraph [ref=e141]: Coach, Mentor & Speaker
+              - paragraph [ref=e142]: Purpose, identity, and forward momentum — helping people break free from fear and self-doubt.
+              - link "Request a session →" [ref=e143] [cursor=pointer]:
+                - /url: "#request-1on1"
+          - generic [ref=e144]:
+            - img "Dr. Jason Quintal" [ref=e145]
+            - generic [ref=e146]:
+              - heading "Dr. Jason Quintal" [level=3] [ref=e147]
+              - paragraph [ref=e148]: Trauma Specialist · TTR · 25+ yrs
+              - paragraph [ref=e149]: Master practitioner in trauma resolution & NLP. PTSD, grief, and abuse recovery.
+              - link "Email to connect →" [ref=e150] [cursor=pointer]:
+                - /url: mailto:refresh@justrebe.com
+    - generic [ref=e152]:
+      - generic [ref=e153]:
+        - paragraph [ref=e154]: Private 1:1 · $197 per session
+        - heading "Request a session with a confidant." [level=2] [ref=e155]:
+          - text: Request a session with a
+          - emphasis [ref=e156]: confidant
+          - text: .
+        - paragraph [ref=e157]: We'll route you to your chosen confidant. Payment happens after this form, before scheduling.
+      - generic [ref=e158]:
+        - generic [ref=e159]:
+          - generic [ref=e160]: Your name *
+          - textbox "Your name *" [ref=e161]
+        - generic [ref=e162]:
+          - generic [ref=e163]: Email *
+          - textbox "Email *" [ref=e164]
+        - generic [ref=e165]:
+          - generic [ref=e166]: Phone (optional)
+          - textbox "Phone (optional)" [ref=e167]
+        - generic [ref=e168]:
+          - generic [ref=e169]: Preferred confidant *
+          - combobox "Preferred confidant *" [ref=e170]:
+            - option "— choose —" [selected]
+            - option "Beth Rech"
+            - option "Elizabeth Good"
+            - option "Fred Feller"
+            - option "Jean Park"
+            - option "Osil Pistole"
+            - option "No preference — please match me"
+        - generic [ref=e171]:
+          - generic [ref=e172]: What you're working through *
+          - textbox "What you're working through *" [ref=e173]:
+            - /placeholder: A short paragraph is enough — your confidant will go deeper when you talk.
+        - generic [ref=e174]:
+          - generic [ref=e175]: Best times to connect
+          - textbox "Best times to connect" [ref=e176]:
+            - /placeholder: e.g. weekday evenings ET, weekend mornings…
+          - generic [ref=e177]: Optional, but helps your confidant find a time that works.
+        - generic [ref=e178]:
+          - checkbox "I'm okay being contacted by my chosen confidant by email or phone to schedule." [ref=e179]
+          - generic [ref=e180]: I'm okay being contacted by my chosen confidant by email or phone to schedule.
+        - button "Continue to payment · $197" [ref=e182] [cursor=pointer]
+      - paragraph [ref=e183]:
+        - text: Looking for trauma-specific work with Dr. Quintal? Email
+        - link "refresh@justrebe.com" [ref=e184] [cursor=pointer]:
+          - /url: mailto:refresh@justrebe.com
+        - text: to be connected.
+    - region "Things people actually ask." [ref=e185]:
+      - generic [ref=e186]:
+        - paragraph [ref=e187]: Questions
+        - heading "Things people actually ask." [level=2] [ref=e188]:
+          - text: Things people
+          - emphasis [ref=e189]: actually ask
+          - text: .
+        - generic [ref=e190]:
+          - group [ref=e191]:
+            - generic "Is this therapy or coaching? +" [ref=e192] [cursor=pointer]
+          - group [ref=e193]:
+            - generic "What's included in the cohort? +" [ref=e194] [cursor=pointer]
+          - group [ref=e195]:
+            - generic "What's the difference between the cohort and a private session? +" [ref=e196] [cursor=pointer]
+          - group [ref=e197]:
+            - generic "How does payment and scheduling work? +" [ref=e198] [cursor=pointer]
+          - group [ref=e199]:
+            - generic "Can my group or organization enroll together? +" [ref=e200] [cursor=pointer]
+  - contentinfo [ref=e201]:
+    - paragraph [ref=e202]: ReBe — Rebuilding people from the inside out. Better me. Better we.
+    - paragraph [ref=e203]: This is a guided group experience, not crisis care. If you're in acute distress, reach out to a therapist, your doctor, or 988 (Suicide & Crisis Lifeline).
+    - paragraph [ref=e204]:
+      - link "Privacy Policy" [ref=e205] [cursor=pointer]:
+        - /url: /privacy.html
+      - link "Terms" [ref=e206] [cursor=pointer]:
+        - /url: /terms.html
+      - link "Contact" [ref=e207] [cursor=pointer]:
+        - /url: mailto:refresh@justrebe.com
+      - link "Private 1:1 Sessions" [ref=e208] [cursor=pointer]:
+        - /url: refresh-private.html
+    - paragraph [ref=e209]: © 2026 Just ReBe, LLC. All rights reserved.

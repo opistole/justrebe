@@ -1,0 +1,212 @@
+- generic [active] [ref=e1]:
+  - link "Skip to request form" [ref=e2] [cursor=pointer]:
+    - /url: "#request-1on1"
+  - banner [ref=e3]:
+    - link "ReBe" [ref=e5] [cursor=pointer]:
+      - /url: /
+  - main [ref=e6]:
+    - region "A private session, with the confidant you choose." [ref=e7]:
+      - generic [ref=e8]:
+        - paragraph [ref=e9]: Private session
+        - heading "A private session, with the confidant you choose." [level=1] [ref=e10]
+        - paragraph [ref=e11]: Pick the confidant whose story or season fits yours. They'll reach out within 48 hours to schedule directly with you.
+        - generic [ref=e12]:
+          - generic [ref=e13]: $197 per session
+          - generic [ref=e14]: ~1 hour
+          - generic [ref=e15]: Your choice of confidant
+        - generic [ref=e16]:
+          - link "Meet the confidants" [ref=e17] [cursor=pointer]:
+            - /url: "#confidants"
+            - text: Meet the confidants
+            - generic [ref=e18]: ↓
+          - paragraph [ref=e19]:
+            - text: Looking for a group instead?
+            - link "See the 6-week cohort →" [ref=e20] [cursor=pointer]:
+              - /url: refresh-groups.html
+    - region "The idea behind a 1:1 session" [ref=e21]:
+      - paragraph [ref=e23]: Some seasons need a group. Some need one honest hour with one honest person.
+    - region "Somewhere between a therapy room and a classroom." [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]: "01"
+        - paragraph [ref=e27]: Why ReBe exists
+        - heading "Somewhere between a therapy room and a classroom." [level=2] [ref=e28]:
+          - text: Somewhere between a therapy room and a
+          - emphasis [ref=e29]: classroom
+          - text: .
+        - paragraph [ref=e30]: Between a survivor's story and a child's silence, we found the same wound — and we built ReBe to heal it. Most of us were never taught how to use our imagination. We were handed fear loops, inherited worry, and survival patterns, and ran them so long they started to feel like us.
+        - paragraph [ref=e31]: But the story isn't finished. You cannot heal what you've never been helped to understand.
+        - paragraph [ref=e32]: ReBe is a guided, root-cause path from isolation into real community — picturing safety, envisioning freedom, rehearsing a future worth living. No performance. No pressure.
+    - region "Three steps. No script. Real conversation." [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]: "02"
+        - paragraph [ref=e36]: How a session works
+        - heading "Three steps. No script. Real conversation." [level=2] [ref=e37]:
+          - text: Three steps. No script.
+          - emphasis [ref=e38]: Real conversation
+          - text: .
+        - paragraph [ref=e39]: A private session isn't therapy, coaching, or pastoral counseling. It's an honest, unhurried hour with someone who's done the work and knows how to walk with you.
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - generic [ref=e42]: "1"
+            - heading "Pick a confidant" [level=3] [ref=e43]
+            - paragraph [ref=e44]: Scan the bios below and choose the one whose story or season resonates. Or pick "match me" and we'll route you.
+          - generic [ref=e45]:
+            - generic [ref=e46]: "2"
+            - heading "Submit the request" [level=3] [ref=e47]
+            - paragraph [ref=e48]: A short form — name, email, what you're working through. Then $197 to hold the session.
+          - generic [ref=e49]:
+            - generic [ref=e50]: "3"
+            - heading "Your confidant reaches out" [level=3] [ref=e51]
+            - paragraph [ref=e52]: Within 48 hours, they'll email you directly to schedule. Calendly self-booking is coming soon — for now it's the human touch.
+    - region "Trusted confidants, walking with you." [ref=e53]:
+      - generic [ref=e54]:
+        - generic [ref=e55]: "03"
+        - paragraph [ref=e56]: Meet the Confidants
+        - heading "Trusted confidants, walking with you." [level=2] [ref=e57]:
+          - text: Trusted confidants, walking
+          - emphasis [ref=e58]: with
+          - text: you.
+        - paragraph [ref=e59]: Every confidant is chosen for depth, discretion, and the kind of presence that doesn't rush. Several have ministry or faith backgrounds — mention it on the request form and we'll match accordingly.
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - img "Elizabeth Good — portrait" [ref=e63]
+            - generic [ref=e64]:
+              - heading "Elizabeth Good" [level=3] [ref=e65]
+              - paragraph [ref=e66]: Founder · MA Clinical Psychology · Creator of REAL TALK
+              - group [ref=e67]:
+                - generic "Read bio +" [ref=e68] [cursor=pointer]
+              - link "Request a session →" [ref=e69] [cursor=pointer]:
+                - /url: "#request-1on1"
+          - generic [ref=e70]:
+            - img "Beth Rech — portrait" [ref=e72]
+            - generic [ref=e73]:
+              - heading "Beth Rech" [level=3] [ref=e74]
+              - paragraph [ref=e75]: Mentor · 30+ yrs
+              - group [ref=e76]:
+                - generic "Read bio +" [ref=e77] [cursor=pointer]
+              - link "Request a session →" [ref=e78] [cursor=pointer]:
+                - /url: "#request-1on1"
+          - generic [ref=e79]:
+            - img "Fred Feller — portrait" [ref=e81]
+            - generic [ref=e82]:
+              - heading "Fred Feller" [level=3] [ref=e83]
+              - paragraph [ref=e84]: Leadership Mentor · 35+ yrs
+              - group [ref=e85]:
+                - generic "Read bio +" [ref=e86] [cursor=pointer]
+              - link "Request a session →" [ref=e87] [cursor=pointer]:
+                - /url: "#request-1on1"
+          - generic [ref=e88]:
+            - img "Jean Park — portrait" [ref=e90]
+            - generic [ref=e91]:
+              - heading "Jean Park" [level=3] [ref=e92]
+              - paragraph [ref=e93]: Family Therapist & Coach
+              - group [ref=e94]:
+                - generic "Read bio +" [ref=e95] [cursor=pointer]
+              - link "Request a session →" [ref=e96] [cursor=pointer]:
+                - /url: "#request-1on1"
+          - generic [ref=e97]:
+            - img "Osil Pistole — portrait" [ref=e99]
+            - generic [ref=e100]:
+              - heading "Osil Pistole" [level=3] [ref=e101]
+              - paragraph [ref=e102]: Coach, Mentor & Speaker
+              - group [ref=e103]:
+                - generic "Read bio +" [ref=e104] [cursor=pointer]
+              - link "Request a session →" [ref=e105] [cursor=pointer]:
+                - /url: "#request-1on1"
+          - generic [ref=e106]:
+            - img "Dr. Jason Quintal — portrait" [ref=e108]
+            - generic [ref=e109]:
+              - heading "Dr. Jason Quintal" [level=3] [ref=e110]
+              - paragraph [ref=e111]: PhD · Trauma Specialist · TTR · 25+ yrs
+              - group [ref=e112]:
+                - generic "Read bio +" [ref=e113] [cursor=pointer]
+              - link "Email to connect →" [ref=e114] [cursor=pointer]:
+                - /url: mailto:refresh@justrebe.com
+    - generic [ref=e116]:
+      - generic [ref=e117]:
+        - paragraph [ref=e118]: Private 1:1 · $197 per session
+        - heading "Request a session with a confidant." [level=2] [ref=e119]:
+          - text: Request a session with a
+          - emphasis [ref=e120]: confidant
+          - text: .
+        - paragraph [ref=e121]: We'll route you to your chosen confidant. Payment happens after this form, before scheduling.
+      - generic [ref=e122]:
+        - generic [ref=e123]:
+          - generic [ref=e124]: Your name *
+          - textbox "Your name *" [ref=e125]
+        - generic [ref=e126]:
+          - generic [ref=e127]: Email *
+          - textbox "Email *" [ref=e128]
+        - generic [ref=e129]:
+          - generic [ref=e130]: Phone (optional)
+          - textbox "Phone (optional)" [ref=e131]
+        - generic [ref=e132]:
+          - generic [ref=e133]: Preferred confidant *
+          - combobox "Preferred confidant *" [ref=e134]:
+            - option "— choose —" [selected]
+            - option "Beth Rech"
+            - option "Elizabeth Good"
+            - option "Fred Feller"
+            - option "Jean Park"
+            - option "Osil Pistole"
+            - option "No preference — please match me"
+        - generic [ref=e135]:
+          - generic [ref=e136]: What you're working through *
+          - textbox "What you're working through *" [ref=e137]:
+            - /placeholder: A short paragraph is enough — your confidant will go deeper when you talk.
+        - generic [ref=e138]:
+          - generic [ref=e139]: Best times to connect
+          - textbox "Best times to connect" [ref=e140]:
+            - /placeholder: e.g. weekday evenings ET, weekend mornings…
+          - generic [ref=e141]: Optional, but helps your confidant find a time that works.
+        - generic [ref=e142]:
+          - checkbox "I'm okay being contacted by my chosen confidant by email or phone to schedule." [ref=e143]
+          - generic [ref=e144]: I'm okay being contacted by my chosen confidant by email or phone to schedule.
+        - button "Continue to payment · $197" [ref=e146] [cursor=pointer]
+      - paragraph [ref=e147]:
+        - text: Looking for trauma-specific work with Dr. Quintal? Email
+        - link "refresh@justrebe.com" [ref=e148] [cursor=pointer]:
+          - /url: mailto:refresh@justrebe.com
+        - text: to be connected directly.
+    - region "Things people actually ask." [ref=e149]:
+      - generic [ref=e150]:
+        - paragraph [ref=e151]: Questions
+        - heading "Things people actually ask." [level=2] [ref=e152]:
+          - text: Things people
+          - emphasis [ref=e153]: actually ask
+          - text: .
+        - generic [ref=e154]:
+          - group [ref=e155]:
+            - generic "What happens in a 1:1? +" [ref=e156] [cursor=pointer]
+          - group [ref=e157]:
+            - generic "How long is a session? +" [ref=e158] [cursor=pointer]
+          - group [ref=e159]:
+            - generic "Is this therapy or coaching? +" [ref=e160] [cursor=pointer]
+          - group [ref=e161]:
+            - generic "Do confidants share my faith? +" [ref=e162] [cursor=pointer]
+          - group [ref=e163]:
+            - generic "Can I book more than one session? +" [ref=e164] [cursor=pointer]
+          - group [ref=e165]:
+            - generic "How does payment and scheduling work? +" [ref=e166] [cursor=pointer]
+          - group [ref=e167]:
+            - generic "What if I'd rather work in a group? +" [ref=e168] [cursor=pointer]
+    - generic [ref=e170]:
+      - paragraph [ref=e171]:
+        - text: Curious about a deeper, longer experience? Explore the
+        - strong [ref=e172]: 6-week cohort
+        - text: .
+      - link "See the cohort · $497 →" [ref=e173] [cursor=pointer]:
+        - /url: refresh-groups.html
+  - contentinfo [ref=e174]:
+    - paragraph [ref=e175]: ReBe — Rebuilding people from the inside out. Better me. Better we.
+    - paragraph [ref=e176]: This is a guided experience, not crisis care. If you're in acute distress, reach out to a therapist, your doctor, or 988 (Suicide & Crisis Lifeline).
+    - paragraph [ref=e177]:
+      - link "Privacy Policy" [ref=e178] [cursor=pointer]:
+        - /url: /privacy.html
+      - link "Terms" [ref=e179] [cursor=pointer]:
+        - /url: /terms.html
+      - link "Contact" [ref=e180] [cursor=pointer]:
+        - /url: mailto:refresh@justrebe.com
+      - link "6-week Cohort" [ref=e181] [cursor=pointer]:
+        - /url: refresh-groups.html
+    - paragraph [ref=e182]: © 2026 Just ReBe, LLC. All rights reserved.

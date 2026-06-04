@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /crm/
+Disallow: /api/
+
+Sitemap: https://www.justrebe.com/sitemap.xml

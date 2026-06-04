@@ -23,7 +23,7 @@
 //     "customer_email": "buyer@example.com",
 //     "customer_name":  "Full Name",
 //     "amount_cents":   49700,         // $497.00 (or 19700 for $197, or 100 for $1 test)
-//     "description":    "ReBe ReFresh · 6-Week Cohort",
+//     "description":    "ReBe ReFresh · 5-Week Cohort",
 //     "success_url":    "https://justrebe.com/thank-you-cohort.html",
 //     "cancel_url":     "https://justrebe.com/refresh-groups.html",
 //     "referral_code":  "FOUNDING50" | null

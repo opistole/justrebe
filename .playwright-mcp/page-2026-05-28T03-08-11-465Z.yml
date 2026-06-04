@@ -1,0 +1,196 @@
+- generic [active] [ref=e1]:
+  - link "Skip to registration" [ref=e2] [cursor=pointer]:
+    - /url: "#register"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "ReBe" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - link "Save my seat →" [ref=e6] [cursor=pointer]:
+        - /url: "#register"
+  - main [ref=e7]:
+    - region "You weren't born anxious. Or angry. Or stressed. Or lonely." [ref=e8]:
+      - generic [ref=e9]:
+        - paragraph [ref=e10]: Free Live Group Session · June 9
+        - heading "You weren't born anxious. Or angry. Or stressed. Or lonely." [level=1] [ref=e11]:
+          - text: You weren't born anxious.
+          - generic [ref=e12]:
+            - generic [ref=e13]: Or angry.
+            - generic [ref=e14]: Or stressed.
+            - generic [ref=e15]: Or lonely.
+        - paragraph [ref=e16]: Somewhere along the way, your script got rewritten. This is a free group hour to find your way back to the real you — live with Elizabeth Good.
+        - generic [ref=e17]:
+          - link "Save my seat" [ref=e18] [cursor=pointer]:
+            - /url: "#register"
+            - text: Save my seat
+            - generic [ref=e19]: →
+          - paragraph [ref=e20]: Live only. Recording goes to attendees afterward.
+        - paragraph [ref=e21]: Tuesday, June 9, 2026 · 11:00 AM ET · 60 minutes · Live · Free
+    - region "The idea behind this hour" [ref=e22]:
+      - paragraph [ref=e23]: You were trained to imagine danger before it arrives. We're gathering to unlearn that — and learn something better.
+    - region "About your host" [ref=e24]:
+      - paragraph [ref=e25]:
+        - generic [ref=e26]:
+          - text: Led by
+          - strong [ref=e27]: Elizabeth Good
+        - text: ·
+        - generic [ref=e28]: Founder, Real Talk Collective
+        - text: · 20+ years working with adults in quiet burnout
+    - region "One free hour. Live, on Zoom. Honestly led." [ref=e29]:
+      - generic [ref=e30]:
+        - paragraph [ref=e31]: What this hour is
+        - heading "One free hour. Live, on Zoom. Honestly led." [level=2] [ref=e32]
+        - paragraph [ref=e33]: Sixty minutes with Elizabeth Good and a small group of other adults who are quietly running the same loops on repeat — fear loops, inherited worry, survival patterns we never chose. No slides to sit through. No homework. No upsell built into the middle. Just an honest hour to notice the story you've been living inside of, name what's actually driving it, and practice picturing something different.
+        - list [ref=e34]:
+          - listitem [ref=e35]:
+            - generic [ref=e36]: ✓
+            - strong [ref=e37]: Tuesday, June 9, 2026
+          - listitem [ref=e38]:
+            - generic [ref=e39]: ✓
+            - strong [ref=e40]: 11:00 AM Eastern
+            - text: · 8:00 AM Pacific
+          - listitem [ref=e41]:
+            - generic [ref=e42]: ✓
+            - strong [ref=e43]: 60 minutes
+          - listitem [ref=e44]:
+            - generic [ref=e45]: ✓
+            - strong [ref=e46]: Live on Zoom
+            - text: — link sent after you register
+    - region "You're still functioning. That's part of the problem." [ref=e47]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - paragraph [ref=e50]: Who this is for
+          - heading "You're still functioning. That's part of the problem." [level=2] [ref=e51]
+          - paragraph [ref=e52]: If you've been the one holding it together at work, at home, or both — and you've started to notice you're more tired than the day asks for — this hour is for you. Most of us were never taught how to use our imagination. We were handed fear loops, inherited worry, and survival patterns, and we ran them on repeat long enough that they started to feel like us.
+          - list [ref=e53]:
+            - listitem [ref=e54]: The capable one everyone calls first
+            - listitem [ref=e55]: The parent who's running on coffee and goodwill
+            - listitem [ref=e56]: The leader whose team thinks they're fine
+            - listitem [ref=e57]: The friend who listens but never quite gets asked back
+            - listitem [ref=e58]: The person who hasn't had a real conversation in months and hadn't noticed until just now
+        - complementary [ref=e59]:
+          - paragraph [ref=e60]: A note on who this isn't for
+          - paragraph [ref=e61]: This isn't crisis care. If you're in acute distress, please reach out to a therapist, your doctor, or 988 (Suicide & Crisis Lifeline).
+          - paragraph [ref=e62]: This hour is for the quieter place that comes before that — when something has been thinning out for a while and you'd like to name it before it gets worse.
+    - region "Most of us were never taught how to use our imagination." [ref=e63]:
+      - generic [ref=e64]:
+        - paragraph [ref=e65]: What we're actually doing
+        - heading "Most of us were never taught how to use our imagination." [level=2] [ref=e66]
+        - paragraph [ref=e67]: We were handed fear loops, inherited worry, and survival patterns — and we ran them on repeat so long they started to feel like us. Like our personality. Like our fate.
+        - paragraph [ref=e68]: Healthy visualization is the opposite. It's grounded in trauma recovery, elite performance coaching, attachment repair, and nervous-system regulation. It is not wishful thinking. It is rehearsal for a different future — before your body has lived it.
+        - generic [ref=e69]:
+          - generic [ref=e70]: 85%
+          - generic [ref=e71]: Research suggests that's how much of what you worry about never actually happens. Most of our thoughts repeat on a loop. In one honest hour, we'll start to interrupt the loop.
+    - region "This isn't a fix." [ref=e72]:
+      - generic [ref=e73]:
+        - paragraph [ref=e74]: What you'll walk away with
+        - paragraph [ref=e75]: This isn't a fix.
+        - generic [ref=e76]:
+          - paragraph [ref=e77]: It's an hour — honestly led by Elizabeth Good — for adults who are tired in a way that doesn't quite have a name yet. You're still functioning. You're still showing up. And somewhere underneath, something has been thinning out for a while.
+          - paragraph [ref=e78]: Come sit down. We'll name the loops you've been running without choosing them. You'll meet a few other people who are quietly in the same place. And you'll leave having practiced something most adults never get to — picturing safety. Envisioning freedom. Rehearsing a future worth living.
+          - paragraph [ref=e79]: No pep talk. No homework. Just an hour that feels like a window opening.
+        - generic [ref=e80]:
+          - link "Save my seat" [ref=e81] [cursor=pointer]:
+            - /url: "#register"
+            - text: Save my seat
+            - generic [ref=e82]: →
+          - paragraph [ref=e83]: Live only. Recording goes to attendees afterward.
+    - region "Elizabeth Good" [ref=e84]:
+      - generic [ref=e85]:
+        - img "Elizabeth Good, founder of Real Talk Collective." [ref=e87]
+        - generic [ref=e88]:
+          - paragraph [ref=e89]: Your host
+          - heading "Elizabeth Good" [level=2] [ref=e90]
+          - paragraph [ref=e91]: Co-Founder & Chief Strategy & Vision Officer, ReBe · Founder, Real Talk Collective
+          - generic [ref=e92]:
+            - paragraph [ref=e93]: "Elizabeth Good is the Co-Founder and Chief Strategy & Vision Officer of ReBe. After three decades across corporate leadership and global advocacy, she built ReBe to do one thing well: help people thrive from the inside out — by addressing not just the symptoms we carry, but the deeper patterns that quietly limit us."
+            - paragraph [ref=e94]:
+              - text: She's a recognized pioneer in the work of healing and restoration, author of
+              - emphasis [ref=e95]: Groomed
+              - text: (HarperCollins, 2020) and
+              - emphasis [ref=e96]: Speak the Unspeakable
+              - text: ", has delivered two TEDx talks, and has keynoted global stages from U.S. military leadership and the 2022 Global Strategy Forum in Austria to the Parliamentary Palace in Romania."
+            - paragraph [ref=e97]: She'll lead the hour on June 9 the way she leads every conversation — plainly, with room, and without trying to sell you on a version of yourself you don't recognize.
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - strong [ref=e100]: Co-Founder
+              - text: · ReBe
+            - generic [ref=e101]:
+              - strong [ref=e102]: Author
+              - text: · Groomed (HarperCollins, 2020)
+            - generic [ref=e103]:
+              - strong [ref=e104]: 2× TEDx
+              - text: Speaker
+    - region "It takes about 40 seconds." [ref=e105]:
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - paragraph [ref=e108]: Save your seat
+          - heading "It takes about 40 seconds." [level=2] [ref=e109]
+          - paragraph [ref=e110]: Tuesday, June 9 · 11 AM ET · 60 minutes · Free
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - generic [ref=e113]:
+              - generic [ref=e114]: First name *
+              - textbox "First name *" [ref=e115]
+            - generic [ref=e116]:
+              - generic [ref=e117]: Last name *
+              - textbox "Last name *" [ref=e118]
+          - generic [ref=e119]:
+            - generic [ref=e120]: Email *
+            - textbox "Email *" [ref=e121]
+          - generic [ref=e122]:
+            - generic [ref=e123]: Mobile phone *
+            - textbox "Mobile phone *" [ref=e124]:
+              - /placeholder: (555) 123-4567
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - checkbox "Text me workshop reminders and the Zoom link." [ref=e127] [cursor=pointer]
+              - generic [ref=e128] [cursor=pointer]: Text me workshop reminders and the Zoom link.
+            - paragraph [ref=e129]:
+              - text: By checking this box, you agree to receive recurring automated SMS messages from ReBe at the phone number provided, including a reminder before the workshop and a link to join. Message frequency varies (typically 2–4 messages around the event). Message and data rates may apply. Reply STOP to cancel, HELP for help. Consent is not a condition of registration. See our
+              - link "Privacy Policy" [ref=e130] [cursor=pointer]:
+                - /url: /privacy.html
+              - text: and
+              - link "SMS Terms" [ref=e131] [cursor=pointer]:
+                - /url: /terms.html
+              - text: .
+          - generic [ref=e133]:
+            - checkbox "Keep me on the ReBe list for occasional emails about cohorts and workshops. (Unsubscribe anytime.)" [ref=e134] [cursor=pointer]
+            - generic [ref=e135] [cursor=pointer]: Keep me on the ReBe list for occasional emails about cohorts and workshops. (Unsubscribe anytime.)
+          - generic [ref=e136]:
+            - generic [ref=e137]: How did you hear about this? (optional)
+            - combobox "How did you hear about this? (optional)" [ref=e138]:
+              - option "Choose one…" [selected]
+              - option "Elizabeth invited me"
+              - option "Email from ReBe"
+              - option "Social media"
+              - option "A friend told me"
+              - option "Other"
+          - button "Save my seat" [ref=e139] [cursor=pointer]:
+            - generic [ref=e140]: Save my seat
+            - generic [ref=e141]: →
+          - paragraph [ref=e142]:
+            - text: We use your information to send you workshop details and the recording. We don't sell or share your data. Read our
+            - link "Privacy Policy" [ref=e143] [cursor=pointer]:
+              - /url: /privacy.html
+            - text: .
+    - region "If the hour lands and you want more, there's more." [ref=e144]:
+      - generic [ref=e145]:
+        - paragraph [ref=e146]: After the hour
+        - heading "If the hour lands and you want more, there's more." [level=2] [ref=e147]
+        - paragraph [ref=e148]: For the people who want to keep going, ReBe ReFresh is a six-week guided group experience built on the same framework. Small group. Real facilitator. One private session. Not recorded — these are the times you set aside to actually be there.
+        - paragraph [ref=e149]: You'll hear about it at the session. No pressure either way.
+        - paragraph [ref=e150]:
+          - link "Read about ReBe ReFresh →" [ref=e151] [cursor=pointer]:
+            - /url: refresh-groups.html
+  - contentinfo [ref=e152]:
+    - paragraph [ref=e153]: ReBe — Rebuilding people from the inside out.
+    - paragraph [ref=e154]:
+      - link "Privacy Policy" [ref=e155] [cursor=pointer]:
+        - /url: /privacy.html
+      - link "SMS Terms" [ref=e156] [cursor=pointer]:
+        - /url: /terms.html
+      - link "Contact" [ref=e157] [cursor=pointer]:
+        - /url: mailto:hello@justrebe.com
+      - link "ReBe ReFresh" [ref=e158] [cursor=pointer]:
+        - /url: refresh-groups.html
+    - paragraph [ref=e159]: © 2026 ReBe. All rights reserved.

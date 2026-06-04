@@ -1,0 +1,96 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e3]:
+    - generic [ref=e6]:
+      - link "Header Logo" [ref=e8] [cursor=pointer]:
+        - /url: /
+        - img "Header Logo" [ref=e9]
+      - link "Home" [ref=e12] [cursor=pointer]:
+        - /url: https://www.thelovedoc.com/
+      - button "Book Group" [ref=e14] [cursor=pointer]
+      - button "Book Self-Paced Coaching Programs" [ref=e16] [cursor=pointer]
+      - link "Log In" [ref=e20] [cursor=pointer]:
+        - /url: /login
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - generic [ref=e28]:
+        - generic [ref=e30]:
+          - heading "Individual Coaching Sessions" [level=1] [ref=e31]
+          - separator [ref=e32]
+          - heading "Book a 30- or 55-minute individual virtual session with one of our certified coaches." [level=4] [ref=e33]
+        - button "Looking for Couples Coaching? Click Here" [ref=e36] [cursor=pointer]
+      - generic [ref=e44]:
+        - heading "Each 30-minute session includes a Q&A style session that can help you shift the way you see yourself and your relationships. Each 55-minute session includes a personalized attachment-style assessment, identifying your core relational patterns, emotional triggers, and unique strengths. Your coach will then synthesize these insights in real-time and explain next steps for how to fix your painful relationship cycles." [level=5] [ref=e45]:
+          - generic [ref=e47]:
+            - text: Each 30-minute session includes a Q&A style session that can help you shift the way you see yourself and your relationships. Each 55-minute session includes a
+            - strong [ref=e48]: personalized attachment-style assessment
+            - text: ", identifying your core relational patterns, emotional triggers, and unique strengths. Your coach will then synthesize these insights in real-time and explain next steps for how to fix your painful relationship cycles."
+        - paragraph [ref=e49]:
+          - generic [ref=e50]: "Note: The 30-minute sessions are available for Q&A only."
+        - paragraph [ref=e51]:
+          - generic [ref=e52]: Please choose a 30- or 55-minute session below with the coach of your choice.
+        - paragraph [ref=e53]:
+          - generic [ref=e55]:
+            - text: "To learn more about each coach please click here:"
+            - link "Meet Our Team | The Love Doc | Relationship Coaching" [ref=e56] [cursor=pointer]:
+              - /url: https://thelovedoc.com/meet-our-team/
+      - generic [ref=e62]:
+        - generic [ref=e65]:
+          - link [ref=e66] [cursor=pointer]:
+            - /url: https://elizabeth.thelovedoc.com/virtual-coaching-elizabeth
+            - img [ref=e67]
+          - generic [ref=e68]:
+            - paragraph [ref=e70]: To book an individual coaching session with Coach Elizabeth, use this link.
+            - link "Book Individual Coaching" [ref=e71] [cursor=pointer]:
+              - /url: https://elizabeth.thelovedoc.com/virtual-coaching-elizabeth
+        - generic [ref=e74]:
+          - link [ref=e75] [cursor=pointer]:
+            - /url: https://amy.thelovedoc.com/virtual-coaching-amy
+            - img [ref=e76]
+          - generic [ref=e77]:
+            - paragraph [ref=e79]: To book an individual coaching session with Coach Amy, use this link.
+            - link "Book Individual Coaching" [ref=e80] [cursor=pointer]:
+              - /url: https://amy.thelovedoc.com/virtual-coaching-amy
+        - generic [ref=e83]:
+          - link [ref=e84] [cursor=pointer]:
+            - /url: /resource_redirect/landing_pages/2151718164
+            - img [ref=e85]
+          - generic [ref=e86]:
+            - paragraph [ref=e88]: To book an individual coaching session with Dr. Sarah Hensley, use this link.
+            - link "Book Individual Coaching" [ref=e89] [cursor=pointer]:
+              - /url: /resource_redirect/landing_pages/2151718164
+      - generic [ref=e97]:
+        - paragraph [ref=e98]:
+          - strong [ref=e100]: "TERMS AND CONDITIONS:"
+        - paragraph [ref=e101]: Information in individual coaching is not clinical or medical advice. Dr. Sarah Hensley and The Love Doc Relationship Coaching Services makes no promises or claims for specific outcomes. As with any practice, results vary dependent upon commitment of individual. Any copying or distribution of this material without the written consent of Dr. Sarah Hensley, Hensley Media and Consulting, LLC or The Love Doc Relationship Coaching Services © is strictly prohibited under the penalty of law.
+        - paragraph [ref=e102]:
+          - strong [ref=e103]:
+            - generic [ref=e104]: "REFUND POLICY:"
+        - paragraph [ref=e105]: Refunds will not be issued for attended calls that are found unsatisfactory. Refunds for missed calls can be made in the event of certain life circumstances.
+        - paragraph [ref=e106]:
+          - strong [ref=e107]: "RESPECTFUL REFUND POLICY:"
+        - paragraph [ref=e108]:
+          - text: All sessions are expected to be conducted in a respectful and professional manner. If at any point a participant becomes hostile, uses profane language, or engages in rude or disruptive behavior, Dr. Hensley and all certified Love Doc Coaches reserve the right to end the session immediately or request that the individual leave, at their sole discretion.
+          - strong [ref=e109]: No refund will be issued if the session is ended early due to such behavior.
+  - contentinfo [ref=e111]:
+    - generic [ref=e113]:
+      - generic [ref=e114]: © 2026 The Love Doc
+      - generic [ref=e117]:
+        - link "" [ref=e118] [cursor=pointer]:
+          - /url: https://www.facebook.com/profile.php?id=100088398625539
+          - generic [ref=e119]: 
+        - link "" [ref=e120] [cursor=pointer]:
+          - /url: https://www.instagram.com/dr.sarahhensley_lovedoc/
+          - generic [ref=e121]: 
+        - link "" [ref=e122] [cursor=pointer]:
+          - /url: http://www.youtube.com/@Dr.SarahHensley
+          - generic [ref=e123]: 
+        - link "" [ref=e124] [cursor=pointer]:
+          - /url: https://www.tiktok.com/@drsarahhensley
+          - generic [ref=e125]: 
+      - generic [ref=e129]:
+        - link "Group and Dr. Hensley's Coaching Login" [ref=e130] [cursor=pointer]:
+          - /url: https://courses.thelovedoc.com/login
+        - link "Coach Elizabeth's Coaching Login" [ref=e131] [cursor=pointer]:
+          - /url: https://elizabeth.thelovedoc.com/login
+        - link "Coach Amy's Login" [ref=e132] [cursor=pointer]:
+          - /url: https://amy.thelovedoc.com/login
