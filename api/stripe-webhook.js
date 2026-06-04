@@ -76,9 +76,14 @@ function verifyStripeSignature(rawBody, sigHeader, secret, toleranceSeconds = 30
 
 // PATCH a Supabase row using the service-role key (bypasses RLS).
 async function supabasePatch({ table, id, patch }) {
-  const url = process.env.SUPABASE_URL;
+  const rawUrl = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new Error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY');
+  if (!rawUrl || !key) throw new Error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY');
+
+  // Defensive: strip whitespace and trailing slash, and remove any
+  // accidentally-included REST path component (e.g., "/rest/v1") so the
+  // resulting URL is always well-formed.
+  const url = rawUrl.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
 
   const r = await fetch(`${url}/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, {
     method: 'PATCH',
