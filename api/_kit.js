@@ -44,14 +44,18 @@ async function getTagMap() {
 }
 
 async function subscribeToTag(tagId, { email, first_name }) {
-  const apiSecret = process.env.KIT_API_SECRET;
-  if (!apiSecret) throw new Error('Missing KIT_API_SECRET');
+  // Use API Key (not Secret) — Kit V3 docs allow either for the
+  // subscribe-to-tag endpoint, and the Key is what we already know
+  // works (the tag-list GET uses it). If api_secret was misconfigured
+  // in Vercel, falling back to api_key sidesteps that.
+  const apiKey = process.env.KIT_API_KEY;
+  if (!apiKey) throw new Error('Missing KIT_API_KEY');
 
   const r = await fetch(`https://api.convertkit.com/v3/tags/${tagId}/subscribe`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      api_secret: apiSecret,
+      api_key: apiKey,
       email,
       ...(first_name ? { first_name } : {}),
     }),
