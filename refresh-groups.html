@@ -258,6 +258,22 @@
   .foot-links a{font-family:var(--sans);font-weight:700;font-size:13px;color:var(--navy);text-decoration:none;letter-spacing:.02em;padding:8px 4px}
   .foot-links a:hover{text-decoration:underline;text-decoration-color:var(--green);text-underline-offset:4px;text-decoration-thickness:2px}
 
+  /* Team strip (top-of-page showcase, photos + names + titles) */
+  .team-strip{background:var(--paper);padding:48px 0 56px}
+  .team-strip .container{max-width:1100px;margin:0 auto;padding:0 24px}
+  .team-strip .eyebrow{text-align:center;margin:0 0 8px}
+  .team-strip h2{font-family:var(--display);font-size:clamp(28px,4vw,40px);line-height:1.15;color:var(--navy);text-align:center;margin:0 0 32px}
+  .team-strip h2 em{font-style:italic;color:var(--green-ink)}
+  .team-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:16px}
+  @media (max-width:900px){.team-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 14px;max-width:680px;margin:0 auto}}
+  @media (max-width:560px){.team-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media (max-width:380px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .team-member{min-width:0;text-align:center}
+  .team-photo{width:100%;aspect-ratio:4/5;border-radius:10px;overflow:hidden;border:2px solid var(--green);background:var(--mist);box-shadow:0 6px 20px rgba(6,11,80,.08);margin-bottom:10px}
+  .team-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .team-name{font-family:var(--serif);font-style:italic;font-size:15px;font-weight:600;color:var(--navy);line-height:1.2;margin:0 0 4px}
+  .team-title{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--green-ink);line-height:1.3;margin:0;overflow-wrap:anywhere}
+
   /* Scroll reveal */
   .js main section>.container,.js #enroll .form-card{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
   .js main section>.container.in,.js #enroll .form-card.in{opacity:1;transform:none}
@@ -303,6 +319,51 @@
       <p class="microcopy-hero">Prefer a 1:1? <a href="refresh-private.html">See private sessions →</a></p>
     </div>
 
+  </div>
+</section>
+
+<!-- TEAM STRIP -->
+<section class="team-strip" aria-label="The ReBe team">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">The ReBe team</p>
+    <h2>Who you'll be in the <em>room</em> with.</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="team-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good" loading="lazy"></picture></div>
+        <p class="team-name">Elizabeth Good</p>
+        <p class="team-title">Founder · M.S. Clinical Psychology</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal" loading="lazy"></picture></div>
+        <p class="team-name">Dr. Jason Quintal</p>
+        <p class="team-title">PhD · Trauma Resolution Specialist</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech" loading="lazy"></picture></div>
+        <p class="team-name">Beth Rech</p>
+        <p class="team-title">Inner Healing Mentor</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park" loading="lazy"></picture></div>
+        <p class="team-name">Jean Park</p>
+        <p class="team-title">Relational Healing &amp; Family Therapist</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller" loading="lazy"></picture></div>
+        <p class="team-name">Fred Feller</p>
+        <p class="team-title">Leadership &amp; Identity Mentor</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole" loading="lazy"></picture></div>
+        <p class="team-name">Osil Pistole</p>
+        <p class="team-title">Spirit &amp; Identity Activator</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne" loading="lazy"></picture></div>
+        <p class="team-name">Christophe Dessaigne</p>
+        <p class="team-title">Restoration &amp; Transformation Coach</p>
+      </div>
+    </div>
   </div>
 </section>
 
