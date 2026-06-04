@@ -85,15 +85,71 @@ function escape(v) {
 }
 
 // ---------- Email content builders ----------
-function buildCohortEmails(row) {
-  const userText = `Hi ${row.full_name || 'there'},
+function cohortUserMessage(row) {
+  const name = row.full_name || 'there';
+  const readiness = row.readiness || '';
+  let subject, body;
 
-Thank you for filling out the ReBe ReFresh enrollment form. We've received your details and you'll hear from us shortly.
+  if (readiness === 'ready_to_pay') {
+    subject = "You're almost in — ReBe ReFresh enrollment received";
+    body = `Hi ${name},
 
-If you indicated you're ready to register and check out, you'll be guided through payment next. If you asked for the waitlist or said you had questions first, we'll reach out personally within 48 hours.
+Thank you for filling out the ReBe ReFresh enrollment form. We've received your details.
+
+If you completed the Stripe checkout, your seat is reserved — you'll get a separate receipt from Stripe, and we'll be in touch with the cohort start details shortly.
+
+If you didn't finish checkout yet, just reload the page and click Pay when you're ready. Or reply to this email and we'll help.
 
 — The ReBe team
 refresh@justrebe.com`;
+  } else if (readiness === 'wants_intake_call') {
+    subject = "We received your ReBe ReFresh intake call request";
+    body = `Hi ${name},
+
+Thank you for asking for an intake call before you commit. We're glad you did — a quick conversation is a great way to feel whether this is the right fit.
+
+The booking link is on the page where you submitted. If you couldn't find it or it didn't work, just reply to this email and we'll send you a fresh one.
+
+— The ReBe team
+refresh@justrebe.com`;
+  } else if (readiness === 'waitlist') {
+    subject = "You're on the ReBe ReFresh waitlist";
+    body = `Hi ${name},
+
+Thank you — you're officially on the waitlist for the next ReBe ReFresh cohort.
+
+As soon as the next cohort dates are set (or a seat opens in the current one), we'll reach out with the new dates and how to confirm your seat.
+
+Questions in the meantime? Just reply to this email.
+
+— The ReBe team
+refresh@justrebe.com`;
+  } else if (readiness === 'wants_more_info') {
+    subject = "We'll be in touch about ReBe ReFresh";
+    body = `Hi ${name},
+
+Thank you for your interest in ReBe ReFresh. We've received your details and we'll reach out within 48 hours with more about the cohort, what to expect, and how to take the next step when you're ready.
+
+If you have a specific question in the meantime, just reply to this email.
+
+— The ReBe team
+refresh@justrebe.com`;
+  } else {
+    subject = "We received your ReBe ReFresh enrollment";
+    body = `Hi ${name},
+
+Thank you for filling out the ReBe ReFresh enrollment form. We've received your details and we'll be in touch within 48 hours with next steps.
+
+— The ReBe team
+refresh@justrebe.com`;
+  }
+
+  return { subject, body };
+}
+
+function buildCohortEmails(row) {
+  const userMsg = cohortUserMessage(row);
+  const userText = userMsg.body;
 
   const adminText = `NEW COHORT SIGNUP — refresh_signups
 
@@ -118,8 +174,8 @@ Consent (confid.):  ${escape(row.consent_to_confidentiality)}
 Row id: ${row.id}`;
 
   return [
-    { to: row.email,    subject: 'We received your ReBe ReFresh enrollment', text: userText },
-    { to: ADMIN_EMAIL,  subject: `New cohort signup — ${row.full_name || row.email}`, text: adminText },
+    { to: row.email,    subject: userMsg.subject, text: userText },
+    { to: ADMIN_EMAIL,  subject: `New cohort signup (${row.readiness || 'no-readiness'}) — ${row.full_name || row.email}`, text: adminText },
   ];
 }
 
@@ -239,6 +295,37 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, sent: results.length, sms_attempted: smsAttempted });
     } catch (err) {
       console.error('Notify error (workshop):', err);
+      return res.status(500).json({ error: 'Email send failed', detail: String(err && err.message || err) });
+    }
+  }
+
+  // -------- A2) Direct cohort signup from refresh-groups.html --------
+  // The form helper calls /api/notify after the Supabase RPC succeeds.
+  // body shape: { kind:'cohort_signup', record: { full_name, email, ... } }
+  if (body.kind === 'cohort_signup') {
+    const row = body.record || {};
+    if (!row.email) return res.status(400).json({ error: 'Missing record.email' });
+    try {
+      const messages = buildCohortEmails(row);
+      await Promise.all(messages.map(sendEmail));
+      return res.status(200).json({ ok: true, sent: messages.length });
+    } catch (err) {
+      console.error('Notify error (cohort_signup):', err);
+      return res.status(500).json({ error: 'Email send failed', detail: String(err && err.message || err) });
+    }
+  }
+
+  // -------- A3) Direct 1:1 request from refresh-private.html / refresh-groups.html --------
+  // body shape: { kind:'confidant_request', record: { name, email, ... } }
+  if (body.kind === 'confidant_request') {
+    const row = body.record || {};
+    if (!row.email) return res.status(400).json({ error: 'Missing record.email' });
+    try {
+      const messages = buildConfidantEmails(row);
+      await Promise.all(messages.map(sendEmail));
+      return res.status(200).json({ ok: true, sent: messages.length });
+    } catch (err) {
+      console.error('Notify error (confidant_request):', err);
       return res.status(500).json({ error: 'Email send failed', detail: String(err && err.message || err) });
     }
   }
