@@ -171,16 +171,22 @@ module.exports = async function handler(req, res) {
   try {
     const rows = await supabasePatch({ table, id: signup_id, patch });
 
-    // Tag the customer in Kit as "ReBe — Customer (Paid)". Fire-and-forget;
-    // a Kit failure shouldn't make Stripe think the webhook failed and retry.
+    // Tag the customer in Kit as "ReBe — Customer (Paid)". Await it so
+    // Vercel doesn't tear down the function before the Kit call finishes.
+    // A Kit failure shouldn't fail the webhook (Stripe would then retry),
+    // so we swallow the error after logging it.
     const customerEmail = (session.customer_details && session.customer_details.email) || session.customer_email;
     const customerName = (session.customer_details && session.customer_details.name) || metadata.customer_name || '';
     if (customerEmail) {
-      kitSubscribe({
-        email: customerEmail,
-        first_name: customerName.trim().split(/\s+/)[0] || '',
-        tags: ['ReBe — Customer (Paid)'],
-      }).catch((e) => console.error('Kit (stripe-webhook):', e));
+      try {
+        await kitSubscribe({
+          email: customerEmail,
+          first_name: customerName.trim().split(/\s+/)[0] || '',
+          tags: ['ReBe — Customer (Paid)'],
+        });
+      } catch (e) {
+        console.error('Kit (stripe-webhook):', e);
+      }
     }
 
     return res.status(200).json({ ok: true, updated: rows.length, table, signup_id });
