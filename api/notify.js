@@ -219,11 +219,23 @@ Row id: ${row.id}`;
 }
 
 function buildConfidantEmails(row) {
+  // Path-agnostic email — fires on form submission, before we know whether
+  // the person completed Stripe checkout. Works for both audiences without
+  // assuming either. The Kit welcome sequence (triggered by the
+  // "ReBe — Customer (Paid)" tag) handles the actual "your confidant will
+  // reach out" message for confirmed payers.
   const userText = `Hi ${row.name || 'there'},
 
-Thank you for requesting a private 1:1 session with ${row.preferred_confidant || 'a ReBe confidant'}.
+Thanks for requesting a private 1:1 session with ${row.preferred_confidant || 'a ReBe confidant'}.
 
-You'll be guided through checkout next on the same page (if you haven't already). Once payment is confirmed, your confidant will reach out within 48 hours to schedule directly with you.
+✓ If you completed your Stripe payment:
+You're all set. Your confidant will reach out within 48 hours to schedule directly with you.
+
+⏳ If you didn't finish checkout yet:
+The next step is paying to lock in your session. Head back here when you're ready:
+https://www.justrebe.com/refresh-private.html#request-1on1
+
+Questions about anything? Just reply to this email and we'll help.
 
 — The ReBe team
 refresh@justrebe.com`;

@@ -40,6 +40,11 @@
 
   .check{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#54AC54,var(--green-ink));color:#fff;font-size:32px;font-weight:700;margin:0 auto 28px;box-shadow:0 12px 30px rgba(68,153,69,.32)}
 
+  .paid-banner{display:none;background:var(--green-wash);border:1px solid #cfe6d0;border-radius:12px;padding:14px 22px;margin:0 auto 28px;max-width:520px;font-family:var(--sans);font-size:15px;color:var(--green-ink);font-weight:600;line-height:1.5;text-align:left}
+  .paid-banner.show{display:block}
+  .paid-banner strong{color:var(--green-ink)}
+  .paid-banner .sub{display:block;margin-top:4px;color:var(--body);font-weight:400;font-size:14px}
+
   .eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:13px;letter-spacing:.2em;color:var(--green-ink);margin:0 0 22px;position:relative;display:inline-block}
   .eyebrow::before{content:'';display:block;width:48px;height:1px;background:var(--green-ink);margin:0 auto 16px;opacity:.55}
 
@@ -80,6 +85,10 @@
 
 <main>
   <div class="wrap">
+    <div class="paid-banner" id="paid-banner" role="status">
+      ✓ <strong>Payment confirmed</strong>
+      <span class="sub">Watch your inbox — your confidant will reach out within 48 hours to schedule.</span>
+    </div>
     <div class="check" aria-hidden="true">✓</div>
     <p class="eyebrow">Payment received</p>
     <h1>Thank you. <span class="accent">We'll be in touch.</span></h1>
@@ -99,6 +108,16 @@
     </p>
     <a href="/" class="home-link">← Back to ReBe</a>
   </div>
+
+  <script>
+    // Show the green "Payment confirmed" banner only when the page is
+    // reached via Stripe checkout (which appends ?session_id=cs_…).
+    (function(){
+      var sessionId = (new URLSearchParams(window.location.search)).get('session_id') || '';
+      var banner = document.getElementById('paid-banner');
+      if (banner && sessionId && sessionId.indexOf('cs_') === 0) banner.classList.add('show');
+    })();
+  </script>
 </main>
 
 <footer>
