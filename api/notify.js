@@ -118,10 +118,16 @@ ${timeLine}
 
 If you completed the Stripe checkout, your seat is reserved — you'll get a separate receipt from Stripe.
 
+WHAT'S INCLUDED
+
+  • Five weekly live sessions with Elizabeth and the ReBe team
+  • Plus multiple bonus sessions led by each of the confidants
+  • A small group — small enough to be known, large enough to be honest
+
 WHERE WE MEET
 Zoom: ${zoomLink}
 
-Save the link, add it to your calendar, and come as you are. We'll send a reminder before the first session on June 23.
+Save the link, add it to your calendar, and come as you are. We'll send a reminder before the first session on June 23, and bonus-session details will follow as they're scheduled.
 
 If you didn't finish checkout yet, just reload the page and click Pay when you're ready. Or reply to this email and we'll help.
 
