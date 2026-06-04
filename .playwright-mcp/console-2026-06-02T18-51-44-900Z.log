@@ -1,2 +1,0 @@
-[   59639ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://erbncxjkgwqtfhulricc.supabase.co/rest/v1/confidant_requests?select=id:0
-[   59641ms] [ERROR] Supabase insert error {code: PGRST205, details: null, hint: Perhaps you meant the table 'public.contacts', message: Could not find the table 'public.confidant_requests' in the schema cache} @ https://www.justrebe.com/lib/confidant-form.js:167

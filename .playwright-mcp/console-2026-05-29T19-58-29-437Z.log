@@ -1,4 +1,0 @@
-[     912ms] [WARNING] Supabase init failed (placeholder keys). Demo mode only. TypeError: Failed to construct 'URL': Invalid URL
-    at new t.default (https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js:7:89675)
-    at t.createClient (https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js:7:93627)
-    at http://localhost:8765/refresh-groups.html:529:34 @ http://localhost:8765/refresh-groups.html:529

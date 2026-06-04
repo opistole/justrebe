@@ -1,0 +1,29 @@
+# macOS noise
+.DS_Store
+**/.DS_Store
+
+# Playwright debug captures
+.playwright-mcp/
+
+# Inner workspace mirror (not deployed; outer repo is what Vercel serves)
+/justrebe/
+
+# CRM Phase 1 (paused — keep local but don't deploy)
+/crm/
+/supabase/migrations/004_crm_foundation.sql
+
+# Root-level debug screenshots from iteration sessions
+/burns-*.png
+/groups-*.png
+/lovedoc-*.png
+/private-*.png
+/refresh-groups-new-hero.png
+/reset-*.png
+/rtc-*.png
+/team-strip-*.png
+/verify-*.png
+
+# Secrets — always ignore
+.env
+.env.*
+!.env.example
