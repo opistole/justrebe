@@ -157,6 +157,12 @@
   .price-card{max-width:var(--card-w);margin:36px auto 0;background:var(--paper);border:1px solid var(--bone);border-top:4px solid var(--green);border-radius:16px;padding:36px;text-align:center;box-shadow:0 10px 40px rgba(6,11,80,.05)}
   .price-num{font-family:var(--display);font-size:clamp(56px,9vw,84px);line-height:1;color:var(--navy);margin:0}
   .price-sub{font-size:14px;color:var(--muted);margin:6px 0 22px}
+  .price-value-stack{font-family:var(--sans);font-size:13px;color:var(--slate);background:#fbfaf7;border:1px solid var(--bone);border-radius:10px;padding:14px 18px;margin:0 auto 18px;max-width:340px;text-align:left;line-height:1.7}
+  .price-value-stack .row{display:flex;justify-content:space-between;gap:12px}
+  .price-value-stack .row strong{color:var(--navy)}
+  .price-value-stack .total{margin-top:8px;padding-top:8px;border-top:1px solid var(--bone);font-weight:700;color:var(--navy)}
+  .price-strike{font-size:15px;color:var(--muted);text-decoration:line-through;margin:0 0 2px;letter-spacing:.02em}
+  .price-firstcohort{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink);margin:0 0 22px}
 
   /* Confidant cards — vertical */
   .conf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:44px auto 0;grid-auto-rows:1fr}
@@ -335,8 +341,8 @@
 <!-- COHORT OFFER -->
 <section class="sec-dark" aria-labelledby="offer-h">
   <div class="container">
-    <p class="eyebrow">The 6-week cohort</p>
-    <h2 id="offer-h" class="section-h">Six sessions. One group. Your way <em style="color:var(--gold)">back</em>.</h2>
+    <p class="eyebrow">The 5-week cohort</p>
+    <h2 id="offer-h" class="section-h">Five sessions. One group. Your way <em style="color:var(--gold)">back</em>.</h2>
     <p class="lede">A guided, root-cause group experience for adults — walked out in real, live community. Not therapy, not coaching: inner work, with company.</p>
     <ul class="feat-list">
       <li>Five weekly live sessions with Elizabeth and the ReBe team</li>
@@ -347,8 +353,15 @@
       <li><strong>Starts June 23 · choose 11 AM or 8 PM Eastern</strong></li>
     </ul>
     <div class="price-card">
+      <div class="price-value-stack" aria-label="What this would normally cost">
+        <div class="row"><span>Five live cohort sessions with the ReBe team</span><strong>$1,500</strong></div>
+        <div class="row"><span>Bonus sessions led by each of the 7 confidants</span><strong>$2,100</strong></div>
+        <div class="row total"><span>Total value</span><strong>$3,600</strong></div>
+      </div>
+      <p class="price-strike">$3,600 value</p>
       <p class="price-num">$300</p>
       <p class="price-sub">five core sessions + bonus sessions with each confidant · starts June 23 · pick 11 AM or 8 PM ET</p>
+      <p class="price-firstcohort">First cohort only — this price won't be offered again</p>
       <a href="#enroll" class="btn">Reserve my seat <span class="btn-arrow" aria-hidden="true">→</span></a>
     </div>
   </div>
@@ -505,7 +518,7 @@
         <picture><source type="image/webp" srcset="Images/jean-park.webp"><img class="conf-photo" src="Images/jean-park.jpg" width="1080" height="1350" loading="lazy" alt="Jean Park — portrait"></picture>
         <div class="conf-card-body">
           <h3 class="conf-name">Jean Park</h3>
-          <p class="conf-role">Relational Healing &amp; Family Therapist</p>
+          <p class="conf-role">Relational Healing &amp; Family Therapist · 20+ yrs</p>
           <details class="conf-bio"><summary>Read bio</summary><div class="conf-bio-body">
             <p>Jean Park helps individuals, parents, and leaders build healthier relationships, strengthen emotional awareness, and break unhealthy generational patterns. Her work is deeply informed by her experience growing up between Korean and American cultural expectations and her journey as a mother raising three teenage boys.</p>
             <p>After earning her degree in Economics from the California Institute of Technology and working as an economic analyst, Jean transitioned into counseling and family systems work, earning her Master's in Marriage and Family Therapy from Fuller Theological Seminary. She trained as a child therapist and school-based therapist, working extensively with youth and families.</p>
