@@ -88,15 +88,40 @@ function escape(v) {
 function cohortUserMessage(row) {
   const name = row.full_name || 'there';
   const readiness = row.readiness || '';
+  const time = row.preferred_group_time || '';
+  // Both time slots use the same Zoom link
+  const zoomLink = 'https://us06web.zoom.us/j/9057767620';
+  // Friendly time-slot summary used in the body of every readiness path
+  let timeLine = '';
+  if (time === 'Tuesdays at 11 AM ET') {
+    timeLine = "Your time slot: Tuesdays at 11 AM Eastern (June 23 – July 21, five weeks).";
+  } else if (time === 'Tuesdays at 8 PM ET') {
+    timeLine = "Your time slot: Tuesdays at 8 PM Eastern (June 23 – July 21, five weeks).";
+  } else if (time) {
+    timeLine = `Your time slot: ${time}.`;
+  }
+
   let subject, body;
 
   if (readiness === 'ready_to_pay') {
-    subject = "You're almost in — ReBe ReFresh enrollment received";
+    // Different subject per time slot (per beta spec)
+    if (time === 'Tuesdays at 8 PM ET') {
+      subject = "You're almost in — ReBe ReFresh 8 PM ET cohort";
+    } else {
+      subject = "You're almost in — ReBe ReFresh 11 AM ET cohort";
+    }
     body = `Hi ${name},
 
 Thank you for filling out the ReBe ReFresh enrollment form. We've received your details.
 
-If you completed the Stripe checkout, your seat is reserved — you'll get a separate receipt from Stripe, and we'll be in touch with the cohort start details shortly.
+${timeLine}
+
+If you completed the Stripe checkout, your seat is reserved — you'll get a separate receipt from Stripe.
+
+WHERE WE MEET
+Zoom: ${zoomLink}
+
+Save the link, add it to your calendar, and come as you are. We'll send a reminder before the first session on June 23.
 
 If you didn't finish checkout yet, just reload the page and click Pay when you're ready. Or reply to this email and we'll help.
 
@@ -108,6 +133,8 @@ refresh@justrebe.com`;
 
 Thank you for asking for an intake call before you commit. We're glad you did — a quick conversation is a great way to feel whether this is the right fit.
 
+${timeLine}
+
 The booking link is on the page where you submitted. If you couldn't find it or it didn't work, just reply to this email and we'll send you a fresh one.
 
 — The ReBe team
@@ -118,7 +145,7 @@ refresh@justrebe.com`;
 
 Thank you — you're officially on the waitlist for the next ReBe ReFresh cohort.
 
-As soon as the next cohort dates are set (or a seat opens in the current one), we'll reach out with the new dates and how to confirm your seat.
+${timeLine ? `We've noted your preferred time: ${time}. ` : ''}As soon as the next cohort dates are set (or a seat opens in the current one), we'll reach out with the new dates and how to confirm your seat.
 
 Questions in the meantime? Just reply to this email.
 
@@ -129,6 +156,8 @@ refresh@justrebe.com`;
     body = `Hi ${name},
 
 Thank you for your interest in ReBe ReFresh. We've received your details and we'll reach out within 48 hours with more about the cohort, what to expect, and how to take the next step when you're ready.
+
+${timeLine}
 
 If you have a specific question in the meantime, just reply to this email.
 

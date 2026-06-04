@@ -546,7 +546,7 @@
       var customerName=nameInput?nameInput.value.trim():'';
       var btn=document.createElement('button');
       btn.type='button';
-      btn.textContent='Pay $'+amtDisplay+' with Stripe';
+      btn.textContent='Pay $'+amtDisplay;
       btn.style.cssText='display:block;width:100%;padding:16px 24px;background:#635BFF;color:#fff;border:none;border-radius:999px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 4px 12px rgba(99,91,255,0.25);transition:box-shadow 0.2s,opacity 0.2s';
       btn.onmouseenter=function(){ btn.style.boxShadow='0 6px 18px rgba(99,91,255,0.35)'; };
       btn.onmouseleave=function(){ btn.style.boxShadow='0 4px 12px rgba(99,91,255,0.25)'; };
@@ -575,7 +575,7 @@
         })
         .catch(function(err){
           console.error('Stripe checkout error:',err);
-          btn.disabled=false; btn.textContent='Pay $'+amtDisplay+' with Stripe'; btn.style.opacity='1'; btn.style.cursor='pointer';
+          btn.disabled=false; btn.textContent='Pay $'+amtDisplay; btn.style.opacity='1'; btn.style.cursor='pointer';
           var m=document.createElement('p'); m.style.cssText='color:#c0392b;margin-top:12px;font-size:13px;text-align:center';
           m.innerHTML='Couldn\'t open Stripe. Try again or email <a href="mailto:refresh@justrebe.com" style="color:#c0392b;font-weight:700">refresh@justrebe.com</a>.';
           container.appendChild(m);
