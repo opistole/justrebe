@@ -271,7 +271,7 @@
     box-shadow: 0 6px 20px rgba(6,11,80,.08);
     transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
   }
-  .hero-conf-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-conf-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
   .hero-conf-img.placeholder {
     display: flex; align-items: center; justify-content: center;
     background: linear-gradient(135deg, var(--green), var(--green-ink));
@@ -285,8 +285,8 @@
     text-align: center; line-height: 1.2; margin: 0 0 4px;
   }
   .hero-conf-title {
-    font-family: var(--sans); font-size: 11px; font-weight: 700;
-    letter-spacing: .08em; text-transform: uppercase;
+    font-family: var(--sans); font-size: 10px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
     color: var(--green-ink); margin: 0; line-height: 1.3;
   }
 
@@ -840,7 +840,7 @@
 
     <div class="hero-confidants fade-in d-2">
       <button class="hero-conf" type="button" aria-label="Read about Elizabeth Good" data-bio="bio-elizabeth">
-        <div class="hero-conf-img"><picture><source type="image/webp" srcset="Images/elizabeth-good.webp"><img src="Images/elizabeth-good.png" alt="" loading="lazy"></picture></div>
+        <div class="hero-conf-img"><picture><img src="Images/Elizabeth.png" alt="" loading="lazy"></picture></div>
         <div class="hero-conf-name">Elizabeth Good</div>
         <div class="hero-conf-title">Founder · M.S. Clinical Psychology</div>
       </button>
@@ -867,7 +867,7 @@
       <button class="hero-conf" type="button" aria-label="Read about Osil Pistole" data-bio="bio-osil">
         <div class="hero-conf-img"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="" loading="lazy"></picture></div>
         <div class="hero-conf-name">Osil Pistole</div>
-        <div class="hero-conf-title">Spirit &amp; Identity Activator</div>
+        <div class="hero-conf-title">Spirit &amp; Identity Activator · 20+ yrs</div>
       </button>
       <button class="hero-conf" type="button" aria-label="Read about Christophe Dessaigne" data-bio="bio-christophe">
         <div class="hero-conf-img"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="" loading="lazy"></picture></div>
@@ -884,7 +884,7 @@
     <!-- Bio modals -->
     <dialog class="bio-modal" id="bio-elizabeth"><div class="bio-inner">
       <button class="bio-close" type="button" aria-label="Close">×</button>
-      <div class="bio-photo"><picture><source type="image/webp" srcset="Images/elizabeth-good.webp"><img src="Images/elizabeth-good.png" alt="Elizabeth Good"></picture></div>
+      <div class="bio-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good"></picture></div>
       <h3 class="bio-name">Elizabeth Good</h3>
       <p class="bio-role">Founder · M.S. Clinical Psychology · Creator of REAL TALK</p>
       <p class="bio-text">Three decades helping people heal from burnout, shame, and trauma. Author of <em>Groomed</em> (HarperCollins, 2020) and <em>Speak the Unspeakable</em>. Two-time TEDx speaker.</p>
@@ -926,7 +926,7 @@
       <button class="bio-close" type="button" aria-label="Close">×</button>
       <div class="bio-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole"></picture></div>
       <h3 class="bio-name">Osil Pistole</h3>
-      <p class="bio-role">Spirit &amp; Identity Activator</p>
+      <p class="bio-role">Spirit &amp; Identity Activator · 20+ yrs</p>
       <p class="bio-text">Speaker and intuitive coach with a particular gift for speaking into a person's true identity. Tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
     </div></dialog>
 
@@ -1079,7 +1079,7 @@
 
       <div class="conf">
         <h3 class="conf-name">Osil Pistole</h3>
-        <p class="conf-role">Spirit &amp; Identity Activator</p>
+        <p class="conf-role">Spirit &amp; Identity Activator · 20+ yrs</p>
         <p class="conf-desc">Speaker and intuitive coach with a particular gift for speaking into a person's true identity. Tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
       </div>
 
