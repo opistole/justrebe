@@ -40,6 +40,11 @@
 
   .check{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#54AC54,var(--green-ink));color:#fff;font-size:32px;font-weight:700;margin:0 auto 28px;box-shadow:0 12px 30px rgba(68,153,69,.32)}
 
+  .paid-banner{display:none;background:var(--green-wash);border:1px solid #cfe6d0;border-radius:12px;padding:14px 22px;margin:0 auto 28px;max-width:520px;font-family:var(--sans);font-size:15px;color:var(--green-ink);font-weight:600;line-height:1.5;text-align:left}
+  .paid-banner.show{display:block}
+  .paid-banner strong{color:var(--green-ink)}
+  .paid-banner .sub{display:block;margin-top:4px;color:var(--body);font-weight:400;font-size:14px}
+
   .eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:13px;letter-spacing:.2em;color:var(--green-ink);margin:0 0 22px;position:relative;display:inline-block}
   .eyebrow::before{content:'';display:block;width:48px;height:1px;background:var(--green-ink);margin:0 auto 16px;opacity:.55}
 
@@ -85,6 +90,10 @@
 
 <main>
   <div class="wrap">
+    <div class="paid-banner" id="paid-banner" role="status">
+      ✓ <strong>Payment confirmed</strong>
+      <span class="sub">Watch your inbox for your welcome email with the Zoom link and what to expect.</span>
+    </div>
     <div class="check" aria-hidden="true">✓</div>
     <p class="eyebrow">Payment received</p>
     <h1>You're in. <span class="accent">See you June 23.</span></h1>
@@ -106,16 +115,22 @@
     </div>
 
     <script>
-      // Read ?slot= from URL (set by the form before Stripe checkout) and
-      // show the right meeting time on this page.
+      // Read ?slot= and ?session_id= from URL. The slot tells us which
+      // meeting time to display; session_id (set automatically by Stripe
+      // after a successful payment) tells us whether to show the green
+      // "Payment confirmed" banner.
       (function(){
         var params = new URLSearchParams(window.location.search);
         var slot = (params.get('slot') || '').toLowerCase();
+        var sessionId = params.get('session_id') || '';
         var timeLabel = slot === '8pm' ? '8 PM Eastern' : '11 AM Eastern';
         var timeEl = document.getElementById('cohort-time');
         var stepEl = document.getElementById('next-step-3');
+        var banner = document.getElementById('paid-banner');
         if (timeEl) timeEl.textContent = timeLabel + ' · 5 weekly sessions · 5 weeks';
         if (stepEl) stepEl.innerHTML = 'Five weekly live sessions starting <strong>Tuesday, June 23 at ' + timeLabel + '</strong>. They\'re not recorded — these are the times you set aside to actually be there.';
+        // Show the payment-confirmed banner only when arriving via Stripe.
+        if (banner && sessionId && sessionId.indexOf('cs_') === 0) banner.classList.add('show');
       })();
     </script>
 

@@ -126,33 +126,26 @@ function cohortUserMessage(row) {
   let subject, body;
 
   if (readiness === 'ready_to_pay') {
-    // Different subject per time slot (per beta spec)
-    if (time === 'Tuesdays at 8 PM ET') {
-      subject = "You're almost in — ReBe ReFresh 8 PM ET cohort";
-    } else {
-      subject = "You're almost in — ReBe ReFresh 11 AM ET cohort";
-    }
+    // This email fires on form submission, BEFORE we know whether the
+    // person completed Stripe checkout. So it's intentionally path-agnostic:
+    // works whether they paid or abandoned at checkout. No Zoom link here —
+    // that's sent by the Kit welcome sequence triggered by the
+    // "ReBe — Customer (Paid)" tag, which the Stripe webhook applies.
+    subject = "We received your ReBe ReFresh enrollment";
     body = `Hi ${name},
 
-Thank you for filling out the ReBe ReFresh enrollment form. We've received your details.
+Thanks for starting your ReBe ReFresh enrollment.
 
 ${timeLine}
 
-If you completed the Stripe checkout, your seat is reserved — you'll get a separate receipt from Stripe.
+✓ If you completed your Stripe payment:
+You're all set — your welcome email with the Zoom link and what to expect is on its way to this inbox within the next few minutes.
 
-WHAT'S INCLUDED
+⏳ If you didn't finish checkout yet:
+The next step is paying to lock in your seat. Head back here when you're ready:
+https://www.justrebe.com/refresh-groups.html#enroll
 
-  • Five main weekly sessions with Elizabeth and the ReBe team
-  • Plus multiple optional bonus group sessions led by each of the 7 confidants
-  • A small group — small enough to be known, large enough to be honest
-  • Anchored in EPICS — Emotional, Physical, Intellectual, Cultural, Spiritual
-
-WHERE WE MEET
-Zoom: ${zoomLink}
-
-Save the link, add it to your calendar, and come as you are. We'll send a reminder before the first session on June 23, and bonus-session details will follow as they're scheduled.
-
-If you didn't finish checkout yet, just reload the page and click Pay when you're ready. Or reply to this email and we'll help.
+Questions about ReBe ReFresh, the cohort, or anything in between? Just reply to this email and we'll help.
 
 — The ReBe team
 refresh@justrebe.com`;
