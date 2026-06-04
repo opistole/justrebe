@@ -120,8 +120,8 @@ If you completed the Stripe checkout, your seat is reserved — you'll get a sep
 
 WHAT'S INCLUDED
 
-  • Five weekly live sessions with Elizabeth and the ReBe team
-  • Plus multiple bonus sessions led by each of the confidants
+  • Five weekly sessions with Elizabeth and the ReBe team
+  • Plus multiple optional group sessions led by each of the 7 confidants
   • A small group — small enough to be known, large enough to be honest
 
 WHERE WE MEET
