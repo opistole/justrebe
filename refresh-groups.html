@@ -165,10 +165,10 @@
   .price-firstcohort{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink);margin:0 0 22px}
 
   /* Confidant cards — vertical */
-  .conf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:1000px;margin:44px auto 0;align-items:start}
+  .conf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:1000px;margin:44px auto 0}
   @media (max-width:860px){.conf-grid{grid-template-columns:1fr 1fr}}
   @media (max-width:560px){.conf-grid{grid-template-columns:1fr;max-width:360px}}
-  .conf-card{position:relative;background:var(--paper);border:1px solid var(--bone);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+  .conf-card{position:relative;background:var(--paper);border:1px solid var(--bone);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;height:100%;min-width:0;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
   .conf-role{min-height:2.6em}
   .conf-card:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(6,11,80,.12);border-color:var(--green)}
   .conf-photo{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bone);display:block}
@@ -180,14 +180,26 @@
   .conf-request-btn{align-self:center;margin-top:auto;display:inline-block;background:linear-gradient(135deg,#54AC54,var(--green-ink));color:#fff;padding:12px 24px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;box-shadow:0 6px 18px rgba(68,153,69,.26)}
   .conf-request-btn:hover{filter:brightness(1.07)}
   .conf-request-btn.ghost{background:transparent;color:var(--green-ink);border:2px solid var(--green-ink);box-shadow:none}
-  .conf-bio{margin:0 0 18px;text-align:left}
-  .conf-bio summary{list-style:none;cursor:pointer;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-ink);display:flex;align-items:center;justify-content:center;gap:6px}
-  .conf-bio summary::-webkit-details-marker{display:none}
-  .conf-bio summary::after{content:'+';font-size:15px;line-height:1;transition:transform .2s}
-  .conf-bio[open] summary::after{transform:rotate(45deg)}
-  .conf-bio-body{margin-top:12px;font-size:13px;line-height:1.65;color:var(--body);text-align:left}
-  .conf-bio-body p{margin:0 0 10px}
-  .conf-bio-body p:last-child{margin:0}
+  /* Bio button (replaces inline details). Triggers a modal — cards stay uniform. */
+  .conf-bio-btn{background:transparent;border:0;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-ink);cursor:pointer;padding:8px 0;margin:0 0 18px;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+  .conf-bio-btn::after{content:'→';transition:transform .2s}
+  .conf-bio-btn:hover::after{transform:translateX(3px)}
+
+  /* Bio modal (popover, replaces inline expansion) */
+  .bio-modal-pop{width:min(560px,calc(100vw - 32px));max-height:90vh;border:0;border-radius:18px;background:#fff;color:var(--navy);box-shadow:0 24px 60px rgba(6,11,80,.22);padding:0;overflow:hidden}
+  .bio-modal-pop::backdrop{background:rgba(6,11,80,.55);backdrop-filter:blur(2px)}
+  @keyframes bioPop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+  .bio-modal-pop[open]{animation:bioPop .25s var(--ease)}
+  .bio-modal-inner{padding:32px 32px 28px;position:relative;overflow-y:auto;max-height:90vh}
+  .bio-modal-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border:1px solid var(--bone);background:transparent;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;color:var(--slate);display:flex;align-items:center;justify-content:center}
+  .bio-modal-close:hover{background:var(--bone)}
+  .bio-modal-photo{width:120px;height:150px;border-radius:12px;overflow:hidden;margin:0 auto 18px;border:2px solid var(--green)}
+  .bio-modal-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .bio-modal-name{font-family:var(--serif);font-style:italic;font-size:24px;font-weight:600;color:var(--navy);text-align:center;margin:0 0 6px}
+  .bio-modal-role{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-ink);text-align:center;margin:0 0 18px}
+  .bio-modal-text{font-size:14px;line-height:1.7;color:var(--body)}
+  .bio-modal-text p{margin:0 0 12px}
+  .bio-modal-text p:last-child{margin:0}
 
   /* Forms (group + confidant) */
   .form-section{padding:80px 24px 96px;background:var(--mist)}
@@ -265,7 +277,10 @@
   .team-strip h2{font-family:var(--display);font-size:clamp(28px,4vw,40px);line-height:1.15;color:var(--navy);text-align:center;margin:0 0 32px}
   .team-strip h2 em{font-style:italic;color:var(--green-ink)}
   .team-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:28px 20px;max-width:880px;margin:0 auto}
-  .team-member{flex:0 0 calc(25% - 15px);max-width:calc(25% - 15px);min-width:0;text-align:center}
+  .team-member{flex:0 0 calc(25% - 15px);max-width:calc(25% - 15px);min-width:0;text-align:center;background:transparent;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;transition:transform .2s var(--ease)}
+  .team-member:hover{transform:translateY(-3px)}
+  .team-member:hover .team-photo{border-color:var(--green-ink);box-shadow:0 12px 30px rgba(68,153,69,.22)}
+  .team-member:focus-visible{outline:3px solid rgba(68,153,69,.5);outline-offset:4px;border-radius:14px}
   @media (max-width:760px){.team-member{flex:0 0 calc(33.333% - 14px);max-width:calc(33.333% - 14px)}}
   @media (max-width:500px){.team-member{flex:0 0 calc(50% - 10px);max-width:calc(50% - 10px)}}
   .team-photo{width:100%;aspect-ratio:4/5;border-radius:12px;overflow:hidden;border:2px solid var(--green);background:var(--mist);box-shadow:0 8px 24px rgba(6,11,80,.10);margin-bottom:12px}
@@ -327,41 +342,41 @@
     <p class="eyebrow eyebrow--center">The ReBe team</p>
     <h2>Who you'll be in the <em>room</em> with.</h2>
     <div class="team-grid">
-      <div class="team-member">
+      <button class="team-member" type="button" data-bio="bio-elizabeth" aria-label="Read about Elizabeth Good">
         <div class="team-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good" loading="lazy"></picture></div>
         <p class="team-name">Elizabeth Good</p>
         <p class="team-title">Founder · M.S. Clinical Psychology</p>
-      </div>
-      <div class="team-member">
+      </button>
+      <button class="team-member" type="button" data-bio="bio-quintal" aria-label="Read about Dr. Jason Quintal">
         <div class="team-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal" loading="lazy"></picture></div>
         <p class="team-name">Dr. Jason Quintal</p>
         <p class="team-title">PhD · Trauma Resolution Specialist</p>
-      </div>
-      <div class="team-member">
+      </button>
+      <button class="team-member" type="button" data-bio="bio-beth" aria-label="Read about Beth Rech">
         <div class="team-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech" loading="lazy"></picture></div>
         <p class="team-name">Beth Rech</p>
         <p class="team-title">Inner Healing Mentor</p>
-      </div>
-      <div class="team-member">
+      </button>
+      <button class="team-member" type="button" data-bio="bio-jean" aria-label="Read about Jean Park">
         <div class="team-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park" loading="lazy"></picture></div>
         <p class="team-name">Jean Park</p>
         <p class="team-title">Relational Healing &amp; Family Therapist</p>
-      </div>
-      <div class="team-member">
+      </button>
+      <button class="team-member" type="button" data-bio="bio-fred" aria-label="Read about Fred Feller">
         <div class="team-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller" loading="lazy"></picture></div>
         <p class="team-name">Fred Feller</p>
         <p class="team-title">Leadership &amp; Identity Mentor</p>
-      </div>
-      <div class="team-member">
+      </button>
+      <button class="team-member" type="button" data-bio="bio-osil" aria-label="Read about Osil Pistole">
         <div class="team-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole" loading="lazy"></picture></div>
         <p class="team-name">Osil Pistole</p>
         <p class="team-title">Spirit &amp; Identity Activator</p>
-      </div>
-      <div class="team-member">
+      </button>
+      <button class="team-member" type="button" data-bio="bio-christophe" aria-label="Read about Christophe Dessaigne">
         <div class="team-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne" loading="lazy"></picture></div>
         <p class="team-name">Christophe Dessaigne</p>
         <p class="team-title">Restoration &amp; Transformation Coach</p>
-      </div>
+      </button>
     </div>
   </div>
 </section>
@@ -408,7 +423,7 @@
       <li>Five main weekly sessions with Elizabeth and the ReBe team</li>
       <li><strong>Plus multiple optional bonus group sessions led by each of the 7 confidants</strong></li>
       <li>A small group — small enough to be known, large enough to be honest</li>
-      <li>Anchored in EPICS — <strong>E</strong>motional, <strong>P</strong>hysical, <strong>I</strong>ntellectual, <strong>C</strong>ultural, <strong>S</strong>ocial — and the story-as-genre framework</li>
+      <li>Anchored in EPICS — <strong>E</strong>motional, <strong>P</strong>hysical, <strong>I</strong>ntellectual, <strong>C</strong>ultural, <strong>S</strong>piritual — and the story-as-genre framework</li>
       <li>Not recorded — real-time, fully present</li>
       <li><strong>Starts June 23 · choose 11 AM or 8 PM Eastern</strong></li>
     </ul>
@@ -537,11 +552,7 @@
         <div class="conf-card-body">
           <h3 class="conf-name">Elizabeth Good</h3>
           <p class="conf-role">Founder · M.S. Clinical Psychology · Creator of REAL TALK</p>
-          <details class="conf-bio"><summary>Read bio</summary><div class="conf-bio-body">
-            <p>For nearly three decades, Elizabeth Good has guided individuals, leaders, and organizations through transformational growth, emotional healing, and identity-centered development. With experience spanning leadership development, behavioral psychology, advocacy, coaching, and organizational care, she has helped thousands move beyond cycles of burnout, shame, trauma, and disconnection into greater clarity, resilience, and authentic leadership.</p>
-            <p>As the creator of REAL TALK and founder of The Foundation United, Elizabeth is recognized for facilitating courageous conversations that foster emotional intelligence, healthy relationships, and sustainable transformation.</p>
-            <p>She is also the author of <em>Speak the Unspeakable</em> and <em>Groomed</em>.</p>
-          </div></details>
+          <button type="button" class="conf-bio-btn" data-bio="bio-elizabeth">Read bio</button>
           <a class="conf-request-btn" href="#request-1on1" data-prefill-confidant="Elizabeth Good">Request a session →</a>
         </div>
       </div>
@@ -551,11 +562,7 @@
         <div class="conf-card-body">
           <h3 class="conf-name">Beth Rech</h3>
           <p class="conf-role">Inner Healing Mentor</p>
-          <details class="conf-bio"><summary>Read bio</summary><div class="conf-bio-body">
-            <p>Beth has spent more than 30 years mentoring women and helping individuals navigate emotional healing, personal growth, and self-discovery. With advanced training in spiritual formation and more than 15 years of inner healing work, she is passionate about helping people break free from limiting beliefs, unresolved trauma, generational patterns, and emotional wounds.</p>
-            <p>Using an integrative approach that values the connection between mind, emotions, body, and inner life, Beth creates safe spaces for people to process pain honestly, build self-awareness, and reconnect to who they truly are beneath fear, shame, and unhealthy narratives.</p>
-            <p>Known for her warmth, authenticity, and nurturing presence, she helps people move toward greater wholeness, emotional resilience, and personal transformation.</p>
-          </div></details>
+          <button type="button" class="conf-bio-btn" data-bio="bio-beth">Read bio</button>
           <a class="conf-request-btn" href="#request-1on1" data-prefill-confidant="Beth Rech">Request a session →</a>
         </div>
       </div>
@@ -565,11 +572,7 @@
         <div class="conf-card-body">
           <h3 class="conf-name">Fred Feller</h3>
           <p class="conf-role">Leadership &amp; Identity Mentor</p>
-          <details class="conf-bio"><summary>Read bio</summary><div class="conf-bio-body">
-            <p>For more than 35 years, Fred Feller has helped leaders, teams, and individuals navigate transformation, breakthrough, and personal growth with clarity, wisdom, and stability. Known for his grounded presence and strategic insight, he has worked extensively with executives, ministry leaders, and organizations to help people overcome limiting beliefs, strengthen emotional resilience, and unlock their full potential.</p>
-            <p>His approach integrates emotional intelligence, mindset transformation, relational health, and leadership development to create lasting change. Having worked internationally across nine countries, Fred is recognized for bringing stability in high-pressure environments.</p>
-            <p>A husband of nearly 50 years, father of four, and grandfather of seven, he leads from a foundation of consistency, integrity, and deep relational wisdom.</p>
-          </div></details>
+          <button type="button" class="conf-bio-btn" data-bio="bio-fred">Read bio</button>
           <a class="conf-request-btn" href="#request-1on1" data-prefill-confidant="Fred Feller">Request a session →</a>
         </div>
       </div>
@@ -579,11 +582,7 @@
         <div class="conf-card-body">
           <h3 class="conf-name">Jean Park</h3>
           <p class="conf-role">Relational Healing &amp; Family Therapist</p>
-          <details class="conf-bio"><summary>Read bio</summary><div class="conf-bio-body">
-            <p>Jean Park helps individuals, parents, and leaders build healthier relationships, strengthen emotional awareness, and break unhealthy generational patterns. Her work is deeply informed by her experience growing up between Korean and American cultural expectations and her journey as a mother raising three teenage boys.</p>
-            <p>After earning her degree in Economics from the California Institute of Technology and working as an economic analyst, Jean transitioned into counseling and family systems work, earning her Master's in Marriage and Family Therapy from Fuller Theological Seminary. She trained as a child therapist and school-based therapist, working extensively with youth and families.</p>
-            <p>Today, Jean coaches parents and leaders in emotional intelligence, self-awareness, communication, and relational health.</p>
-          </div></details>
+          <button type="button" class="conf-bio-btn" data-bio="bio-jean">Read bio</button>
           <a class="conf-request-btn" href="#request-1on1" data-prefill-confidant="Jean Park">Request a session →</a>
         </div>
       </div>
@@ -593,11 +592,7 @@
         <div class="conf-card-body">
           <h3 class="conf-name">Osil Pistole</h3>
           <p class="conf-role">Spirit &amp; Identity Activator</p>
-          <details class="conf-bio"><summary>Read bio</summary><div class="conf-bio-body">
-            <p>Osil is a speaker and intuitive coach with a particular gift for speaking into a person's true identity. She tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
-            <p>Known for her honest, empowering, and engaging approach, Osil creates spaces where people feel seen — not just for what they're working on, but for who they actually are underneath it.</p>
-            <p>Drawing from years of mentoring, intuitive coaching, and speaking, she helps people walk forward in clarity, confidence, and purpose.</p>
-          </div></details>
+          <button type="button" class="conf-bio-btn" data-bio="bio-osil">Read bio</button>
           <a class="conf-request-btn" href="#request-1on1" data-prefill-confidant="Osil Pistole">Request a session →</a>
         </div>
       </div>
@@ -607,10 +602,7 @@
         <div class="conf-card-body">
           <h3 class="conf-name">Dr. Jason Quintal</h3>
           <p class="conf-role">PhD · Trauma Resolution Specialist</p>
-          <details class="conf-bio"><summary>Read bio</summary><div class="conf-bio-body">
-            <p>Dr. Jason Quintal is a trauma specialist with more than 25 years of experience helping people heal from severe and complex trauma — PTSD, grief, shame, abuse recovery, and emotional wounds. He works in TTR (Trauma &amp; Tension Release).</p>
-            <p>As a master practitioner in trauma resolution and Neurolinguistic Programming (NLP), he's continually inspired by the profound shifts these accelerated healing methods bring.</p>
-          </div></details>
+          <button type="button" class="conf-bio-btn" data-bio="bio-quintal">Read bio</button>
           <a class="conf-request-btn" href="mailto:refresh@justrebe.com">Email to connect →</a>
         </div>
       </div>
@@ -669,6 +661,98 @@
     </div>
   </div>
 </section>
+
+<!-- BIO MODALS — opened by the team strip photos AND the confidant card Read bio buttons -->
+<dialog class="bio-modal-pop" id="bio-elizabeth"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good"></picture></div>
+  <h3 class="bio-modal-name">Elizabeth Good</h3>
+  <p class="bio-modal-role">Founder · M.S. Clinical Psychology · Creator of REAL TALK</p>
+  <div class="bio-modal-text">
+    <p>Three decades helping people heal from burnout, shame, and trauma. Author of <em>Groomed</em> (HarperCollins, 2020) and <em>Speak the Unspeakable</em>. Two-time TEDx speaker.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-quintal"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal"></picture></div>
+  <h3 class="bio-modal-name">Dr. Jason Quintal</h3>
+  <p class="bio-modal-role">PhD · Trauma Resolution Specialist</p>
+  <div class="bio-modal-text">
+    <p>25+ years specializing in PTSD, grief, shame, and abuse recovery. Master practitioner in trauma resolution and NLP — accelerated methods that move people through what's been stuck for years.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-beth"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech"></picture></div>
+  <h3 class="bio-modal-name">Beth Rech</h3>
+  <p class="bio-modal-role">Inner Healing Mentor</p>
+  <div class="bio-modal-text">
+    <p>Over 30 years mentoring women and helping individuals break free from limiting beliefs, generational patterns, and unresolved trauma. Warmth, presence, and the kind of listening that doesn't rush.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-jean"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park"></picture></div>
+  <h3 class="bio-modal-name">Jean Park</h3>
+  <p class="bio-modal-role">Relational Healing &amp; Family Therapist</p>
+  <div class="bio-modal-text">
+    <p>Caltech economics degree, then a Master's in Marriage and Family Therapy from Fuller. 20+ years coaching parents and leaders on emotional intelligence and breaking unhealthy generational patterns.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-fred"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller"></picture></div>
+  <h3 class="bio-modal-name">Fred Feller</h3>
+  <p class="bio-modal-role">Leadership &amp; Identity Mentor</p>
+  <div class="bio-modal-text">
+    <p>35+ years working with executives, ministry leaders, and teams across nine countries. Known for grounded presence in high-pressure environments. Husband of 50 years, father of four, grandfather of seven.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-osil"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole"></picture></div>
+  <h3 class="bio-modal-name">Osil Pistole</h3>
+  <p class="bio-modal-role">Spirit &amp; Identity Activator</p>
+  <div class="bio-modal-text">
+    <p>Speaker and intuitive coach with 20+ years of experience and a particular gift for speaking into a person's true identity. Tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-christophe"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne"></picture></div>
+  <h3 class="bio-modal-name">Christophe Dessaigne</h3>
+  <p class="bio-modal-role">Restoration &amp; Transformation Coach</p>
+  <div class="bio-modal-text">
+    <p>His own story of healing and restoration shapes how he walks with others through theirs. Helps people break the patterns that quietly run their lives — with the honesty of someone who's been there.</p>
+  </div>
+</div></dialog>
+
+<script>
+// Bio modal open/close — used by both the team strip up top and the confidant grid lower.
+document.querySelectorAll('[data-bio]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var modal = document.getElementById(btn.getAttribute('data-bio'));
+    if (modal && typeof modal.showModal === 'function') modal.showModal();
+  });
+});
+document.querySelectorAll('.bio-modal-close').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var dlg = btn.closest('dialog');
+    if (dlg) dlg.close();
+  });
+});
+document.querySelectorAll('.bio-modal-pop').forEach(function(m){
+  m.addEventListener('click', function(e){
+    if (e.target === m) m.close();
+  });
+});
+</script>
 
 </main>
 

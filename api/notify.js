@@ -123,7 +123,7 @@ WHAT'S INCLUDED
   • Five main weekly sessions with Elizabeth and the ReBe team
   • Plus multiple optional bonus group sessions led by each of the 7 confidants
   • A small group — small enough to be known, large enough to be honest
-  • Anchored in EPICS — Emotional, Physical, Intellectual, Cultural, Social
+  • Anchored in EPICS — Emotional, Physical, Intellectual, Cultural, Spiritual
 
 WHERE WE MEET
 Zoom: ${zoomLink}
