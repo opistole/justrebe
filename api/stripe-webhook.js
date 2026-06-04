@@ -18,6 +18,7 @@
 // parsed JSON, so we disable Vercel's default body parser below.
 
 const crypto = require('crypto');
+const { kitSubscribe } = require('./_kit.js');
 
 // Tell Vercel to give us the raw body, not a parsed JSON object.
 module.exports.config = {
@@ -164,6 +165,19 @@ module.exports = async function handler(req, res) {
 
   try {
     const rows = await supabasePatch({ table, id: signup_id, patch });
+
+    // Tag the customer in Kit as "ReBe — Customer (Paid)". Fire-and-forget;
+    // a Kit failure shouldn't make Stripe think the webhook failed and retry.
+    const customerEmail = (session.customer_details && session.customer_details.email) || session.customer_email;
+    const customerName = (session.customer_details && session.customer_details.name) || metadata.customer_name || '';
+    if (customerEmail) {
+      kitSubscribe({
+        email: customerEmail,
+        first_name: customerName.trim().split(/\s+/)[0] || '',
+        tags: ['ReBe — Customer (Paid)'],
+      }).catch((e) => console.error('Kit (stripe-webhook):', e));
+    }
+
     return res.status(200).json({ ok: true, updated: rows.length, table, signup_id });
   } catch (err) {
     console.error('Webhook Supabase update failed:', err);

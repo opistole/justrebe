@@ -23,6 +23,29 @@ const FROM         = process.env.NOTIFY_FROM   || 'ReBe ReFresh <refresh@justreb
 const ADMIN_EMAIL  = process.env.NOTIFY_ADMIN  || 'refresh@justrebe.com';
 const WEBHOOK_KEY  = process.env.SUPABASE_WEBHOOK_SECRET || '';
 
+const { kitSubscribe } = require('./_kit.js');
+
+// ---------- Tag plan ----------
+// Maps the cohort readiness option to the Kit tag suffix used in
+// "Cohort · {time} · {label}" tag names.
+const COHORT_READINESS_LABEL = {
+  ready_to_pay:      'Ready to Pay',
+  waitlist:          'Waitlist',
+  wants_more_info:   'Wants Info',
+  wants_intake_call: 'Intake Call',
+};
+
+// Map preferred_group_time row value → tag slot label.
+function cohortSlotLabel(preferred_group_time) {
+  if (preferred_group_time === 'Tuesdays at 8 PM ET') return '8 PM';
+  return '11 AM'; // default for legacy rows / unknown
+}
+
+function firstNameFromFull(full) {
+  if (!full) return '';
+  return String(full).trim().split(/\s+/)[0] || '';
+}
+
 // ---------- Resend (email) ----------
 async function sendEmail({ to, subject, text }) {
   const apiKey = process.env.RESEND_API_KEY;
@@ -316,6 +339,16 @@ module.exports = async function handler(req, res) {
     const messages = buildWorkshopEmails(body);
     const tasks = messages.map((m) => sendEmail(m));
 
+    // Kit tagging
+    const slotTag = body.preferred_time === '8pm'
+      ? 'Workshop · June 16 · 8 PM ET'
+      : 'Workshop · June 16 · 11 AM ET';
+    tasks.push(kitSubscribe({
+      email: body.email,
+      first_name: body.first_name || '',
+      tags: ['ReBe — All', 'ReBe — Workshop', slotTag],
+    }));
+
     let smsAttempted = false;
     if (body.sms_consent && body.phone) {
       smsAttempted = true;
@@ -350,7 +383,17 @@ module.exports = async function handler(req, res) {
     if (!row.email) return res.status(400).json({ error: 'Missing record.email' });
     try {
       const messages = buildCohortEmails(row);
-      await Promise.all(messages.map(sendEmail));
+      // Build cohort tags based on readiness + slot
+      const tags = ['ReBe — All', 'ReBe — Cohort'];
+      const readinessLabel = COHORT_READINESS_LABEL[row.readiness];
+      if (readinessLabel) {
+        tags.push(`Cohort · ${cohortSlotLabel(row.preferred_group_time)} · ${readinessLabel}`);
+      }
+      await Promise.all([
+        ...messages.map(sendEmail),
+        kitSubscribe({ email: row.email, first_name: firstNameFromFull(row.full_name), tags })
+          .catch((e) => console.error('Kit (cohort_signup):', e)),
+      ]);
       return res.status(200).json({ ok: true, sent: messages.length });
     } catch (err) {
       console.error('Notify error (cohort_signup):', err);
@@ -365,7 +408,14 @@ module.exports = async function handler(req, res) {
     if (!row.email) return res.status(400).json({ error: 'Missing record.email' });
     try {
       const messages = buildConfidantEmails(row);
-      await Promise.all(messages.map(sendEmail));
+      // Tag based on which confidant they asked for (or "Any" if none)
+      const confidant = (row.preferred_confidant && row.preferred_confidant.trim()) || 'Any (Choose for me)';
+      const tags = ['ReBe — All', 'ReBe — 1:1 Interest', `1:1 · ${confidant}`];
+      await Promise.all([
+        ...messages.map(sendEmail),
+        kitSubscribe({ email: row.email, first_name: firstNameFromFull(row.name), tags })
+          .catch((e) => console.error('Kit (confidant_request):', e)),
+      ]);
       return res.status(200).json({ ok: true, sent: messages.length });
     } catch (err) {
       console.error('Notify error (confidant_request):', err);
