@@ -78,9 +78,10 @@ module.exports = async function handler(req, res) {
   params.append('line_items[0][price_data][unit_amount]', String(amount_cents));
   params.append('line_items[0][quantity]', '1');
 
-  // Let Stripe show whatever payment methods are enabled in the dashboard
-  // (cards, Affirm, Klarna, Afterpay, Apple Pay, Google Pay, etc.)
-  params.append('automatic_payment_methods[enabled]', 'true');
+  // Stripe Checkout automatically uses whatever payment methods are enabled
+  // in your Dashboard → Settings → Payments → Payment methods. Don't pass
+  // `automatic_payment_methods` — that's a Payment Intents param and Stripe
+  // rejects it on Checkout Sessions with parameter_unknown.
 
   // Redirect URLs
   params.append('success_url', success_url + (success_url.includes('?') ? '&' : '?') + 'session_id={CHECKOUT_SESSION_ID}');
