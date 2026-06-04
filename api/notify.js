@@ -238,6 +238,11 @@ Row id: ${row.id}`;
 
 function buildWorkshopEmails(p) {
   const fullName = [p.first_name, p.last_name].filter(Boolean).join(' ') || 'there';
+  // Two time slots, same Zoom link
+  const timeLabel = p.preferred_time === '8pm'
+    ? 'Tuesday, June 16 at 8:00 PM Eastern'
+    : 'Tuesday, June 16 at 11:00 AM Eastern';
+  const subjectTime = p.preferred_time === '8pm' ? '8 PM ET' : '11 AM ET';
 
   const userText = `Hi ${p.first_name || 'there'},
 
@@ -256,7 +261,7 @@ No slides. No homework. No pressure. Just a small group, the ReBe team, and one 
 
 WHEN & WHERE
 
-When:  Tuesday, June 16 at 11:00 AM Eastern (60 minutes)
+When:  ${timeLabel} (60 minutes)
 Where: Zoom — https://us06web.zoom.us/j/9057767620
 
 Save the link, add it to your calendar, and come as you are. We'll send one reminder the day before and one about an hour before we start.
@@ -271,6 +276,7 @@ We're glad you're here.
 Name:               ${escape(fullName)}
 Email:              ${escape(p.email)}
 Phone:              ${escape(p.phone)}
+Time slot:          ${escape(timeLabel)}
 SMS consent:        ${escape(p.sms_consent)}
 Marketing consent:  ${escape(p.marketing_consent)}
 Source:             ${escape(p.source)}
@@ -278,14 +284,15 @@ Source:             ${escape(p.source)}
 Signup id: ${p.signup_id || '—'}`;
 
   return [
-    { to: p.email,     subject: "You're in — ReBe ReFresh free workshop, June 16", text: userText },
-    { to: ADMIN_EMAIL, subject: `New workshop signup — ${fullName} (${p.email})`,    text: adminText },
+    { to: p.email,     subject: `You're in — ReBe ReFresh workshop, June 16 (${subjectTime})`, text: userText },
+    { to: ADMIN_EMAIL, subject: `New workshop signup (${subjectTime}) — ${fullName} (${p.email})`, text: adminText },
   ];
 }
 
 function buildWorkshopSMS(p) {
   const name = p.first_name || 'there';
-  return `Hi ${name}! So glad you're in. ReBe ReFresh workshop is Tue June 16, 11 AM ET. Zoom: https://us06web.zoom.us/j/9057767620 Reply STOP to opt out.`;
+  const timeShort = p.preferred_time === '8pm' ? '8 PM ET' : '11 AM ET';
+  return `Hi ${name}! So glad you're in. ReBe ReFresh workshop is Tue June 16, ${timeShort}. Zoom: https://us06web.zoom.us/j/9057767620 Reply STOP to opt out.`;
 }
 
 // ---------- Handler ----------
