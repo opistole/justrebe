@@ -262,15 +262,16 @@
     transition: transform .2s var(--ease);
   }
   .hero-conf:hover { transform: translateY(-3px); }
-  .hero-conf:hover .hero-conf-img { border-color: var(--green-ink); box-shadow: 0 12px 28px rgba(68,153,69,.22); }
+  .hero-conf:hover .hero-conf-img { box-shadow: 0 12px 28px rgba(68,153,69,.22), inset 0 0 0 2px var(--green-ink); }
   .hero-conf:focus-visible { outline: 3px solid rgba(68,153,69,.5); outline-offset: 4px; border-radius: 12px; }
   .hero-conf-img {
     width: 100%; aspect-ratio: 4 / 5;
     border-radius: 10px; overflow: hidden;
     background: var(--mist);
-    border: 2px solid var(--green);
-    box-shadow: 0 6px 20px rgba(6,11,80,.08);
-    transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+    box-shadow: 0 6px 20px rgba(6,11,80,.08), inset 0 0 0 2px var(--green);
+    transition: box-shadow .2s var(--ease);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
   }
   .hero-conf-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
   .hero-conf-img.placeholder {

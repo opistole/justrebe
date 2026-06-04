@@ -137,7 +137,7 @@
   .conf-card{position:relative;background:var(--paper);border:1px solid var(--bone);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;height:100%;min-width:0;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
   .conf-role{min-height:2.6em}
   .conf-card:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(6,11,80,.12);border-color:var(--green)}
-  .conf-photo{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bone);display:block}
+  .conf-photo{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bone);display:block;transform:translateZ(0);-webkit-backface-visibility:hidden}
   .conf-card-body{padding:22px 20px 26px;display:flex;flex-direction:column;flex:1;text-align:center}
   .conf-name{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--navy);margin:0 0 4px}
   .conf-role{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-ink);margin:0 0 12px}
