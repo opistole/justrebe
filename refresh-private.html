@@ -131,7 +131,8 @@
   .step p{font-size:15px;line-height:1.6;color:var(--body);margin:0}
 
   /* Confidant cards — vertical, equal-height across the grid */
-  .conf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:44px auto 0;align-items:start}
+  .conf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:1000px;margin:44px auto 0;align-items:start}
+  .conf-card{min-width:0}
   @media (max-width:860px){.conf-grid{grid-template-columns:1fr 1fr}}
   @media (max-width:560px){.conf-grid{grid-template-columns:1fr;max-width:360px}}
   .conf-card{position:relative;background:var(--paper);border:1px solid var(--bone);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
