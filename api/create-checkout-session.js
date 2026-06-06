@@ -1,32 +1,38 @@
 // api/create-checkout-session.js — Vercel serverless function
 //
-// Called by the cohort + 1:1 forms after the user has filled out the form
-// (and the row has been saved in Supabase). Creates a Stripe Checkout
-// Session and returns its hosted-payment URL.
+// Supports BOTH modes of Stripe Checkout:
 //
-// The frontend then redirects the user to that URL. The user completes
-// payment on Stripe's hosted page (cards, Affirm, Klarna, Afterpay,
-// Apple Pay, Google Pay — whatever is enabled in the Stripe Dashboard).
+//   1. HOSTED (legacy / existing flow used by the 1:1 form):
+//      ui_mode omitted or 'hosted'. Returns `url` (Stripe-hosted page).
+//      Frontend redirects to it. Requires success_url + cancel_url.
 //
-// On success, Stripe redirects them back to the success_url (e.g., the
-// thank-you page). Simultaneously, Stripe sends a webhook to
-// /api/stripe-webhook with checkout.session.completed which updates
-// the Supabase row to status='paid'.
+//   2. EMBEDDED (new flow used by /refresh-cohort-11am and -8pm):
+//      ui_mode = 'embedded'. Returns `client_secret` (for Stripe.js
+//      embedded checkout) + `publishable_key` (so the frontend can
+//      initialize Stripe.js without hard-coding the pk). Requires
+//      `return_url` (where to send the user after payment).
+//
+// Webhook (api/stripe-webhook.js) handles BOTH flows:
+//   - If session.metadata.signup_id exists → UPDATE that row
+//   - Otherwise (embedded cohort flow) → CREATE a new row from session data
 //
 // Required env vars (Vercel → Settings → Environment Variables):
-//   STRIPE_SECRET_KEY — sk_test_... or sk_live_... from Stripe Dashboard → Developers → API keys
+//   STRIPE_SECRET_KEY        — sk_live_... or sk_test_...
+//   STRIPE_PUBLISHABLE_KEY   — pk_live_... or pk_test_... (only needed for embedded mode)
 //
 // Expected request body (POST, application/json):
 //   {
 //     "kind":          "cohort" | "private",
-//     "signup_id":     "uuid of the refresh_signups or confidant_requests row",
-//     "customer_email": "buyer@example.com",
-//     "customer_name":  "Full Name",
-//     "amount_cents":   49700,         // $497.00 (or 19700 for $197, or 100 for $1 test)
-//     "description":    "ReBe ReFresh · 5-Week Cohort",
-//     "success_url":    "https://justrebe.com/thank-you-cohort.html",
-//     "cancel_url":     "https://justrebe.com/refresh-groups.html",
-//     "referral_code":  "FOUNDING50" | null
+//     "signup_id":     uuid (optional — required only for hosted/pre-create flow),
+//     "customer_email": "buyer@example.com" (optional in embedded; Stripe collects),
+//     "customer_name":  "Full Name" (optional),
+//     "amount_cents":   30000,
+//     "description":    "ReBe ReFresh · 5-Week Cohort (11 AM ET)",
+//     "ui_mode":        "embedded" | "hosted" (default: "hosted"),
+//     "return_url":     "https://justrebe.com/thank-you-cohort.html?slot=11am" (embedded only),
+//     "success_url":    "https://justrebe.com/thank-you-cohort.html" (hosted only),
+//     "cancel_url":     "https://justrebe.com/refresh-cohort.html" (hosted only),
+//     "slot":           "11am" | "8pm" (cohort only; stored in metadata)
 //   }
 
 module.exports = async function handler(req, res) {
@@ -50,48 +56,61 @@ module.exports = async function handler(req, res) {
     description,
     success_url,
     cancel_url,
+    return_url,
     referral_code,
+    ui_mode,
+    slot,
   } = body;
+
+  const uiMode = ui_mode === 'embedded' ? 'embedded' : 'hosted';
 
   // Basic validation
   if (!kind || !['cohort', 'private'].includes(kind)) {
     return res.status(400).json({ error: "Invalid 'kind' — must be 'cohort' or 'private'" });
   }
-  if (!signup_id) return res.status(400).json({ error: "Missing 'signup_id'" });
-  if (!customer_email) return res.status(400).json({ error: "Missing 'customer_email'" });
   if (!amount_cents || typeof amount_cents !== 'number' || amount_cents < 50) {
     return res.status(400).json({ error: "Invalid 'amount_cents' (must be a number >= 50 cents)" });
   }
   if (!description) return res.status(400).json({ error: "Missing 'description'" });
-  if (!success_url) return res.status(400).json({ error: "Missing 'success_url'" });
-  if (!cancel_url) return res.status(400).json({ error: "Missing 'cancel_url'" });
 
-  // Build Stripe Checkout Session params (URL-encoded form body)
+  if (uiMode === 'embedded') {
+    if (!return_url) return res.status(400).json({ error: "Missing 'return_url' (required for embedded mode)" });
+  } else {
+    if (!signup_id) return res.status(400).json({ error: "Missing 'signup_id'" });
+    if (!customer_email) return res.status(400).json({ error: "Missing 'customer_email'" });
+    if (!success_url) return res.status(400).json({ error: "Missing 'success_url'" });
+    if (!cancel_url) return res.status(400).json({ error: "Missing 'cancel_url'" });
+  }
+
+  // Build Stripe Checkout Session params
   const params = new URLSearchParams();
   params.append('mode', 'payment');
-  params.append('customer_email', customer_email);
-  params.append('client_reference_id', signup_id);
 
-  // Line item — single item, the product
+  if (uiMode === 'embedded') {
+    params.append('ui_mode', 'embedded');
+    params.append('return_url', return_url + (return_url.includes('?') ? '&' : '?') + 'session_id={CHECKOUT_SESSION_ID}');
+    // In embedded mode, Stripe collects email itself; we don't pre-fill.
+    // We DO collect phone since we want it for SMS reminders.
+    params.append('phone_number_collection[enabled]', 'true');
+  } else {
+    if (customer_email) params.append('customer_email', customer_email);
+    if (signup_id) params.append('client_reference_id', signup_id);
+    params.append('success_url', success_url + (success_url.includes('?') ? '&' : '?') + 'session_id={CHECKOUT_SESSION_ID}');
+    params.append('cancel_url', cancel_url);
+  }
+
+  // Line item
   params.append('line_items[0][price_data][currency]', 'usd');
   params.append('line_items[0][price_data][product_data][name]', description);
   params.append('line_items[0][price_data][unit_amount]', String(amount_cents));
   params.append('line_items[0][quantity]', '1');
 
-  // Stripe Checkout automatically uses whatever payment methods are enabled
-  // in your Dashboard → Settings → Payments → Payment methods. Don't pass
-  // `automatic_payment_methods` — that's a Payment Intents param and Stripe
-  // rejects it on Checkout Sessions with parameter_unknown.
-
-  // Redirect URLs
-  params.append('success_url', success_url + (success_url.includes('?') ? '&' : '?') + 'session_id={CHECKOUT_SESSION_ID}');
-  params.append('cancel_url', cancel_url);
-
-  // Metadata travels through to the webhook so we know which row to update
+  // Metadata — travels to the webhook so it knows what was bought
   params.append('metadata[kind]', kind);
-  params.append('metadata[signup_id]', signup_id);
+  if (signup_id) params.append('metadata[signup_id]', signup_id);
   if (customer_name) params.append('metadata[customer_name]', customer_name);
   if (referral_code) params.append('metadata[referral_code]', referral_code);
+  if (slot) params.append('metadata[slot]', slot);
 
   try {
     const r = await fetch('https://api.stripe.com/v1/checkout/sessions', {
@@ -110,6 +129,20 @@ module.exports = async function handler(req, res) {
     }
 
     const session = await r.json();
+
+    if (uiMode === 'embedded') {
+      const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+      if (!publishableKey) {
+        console.error('STRIPE_PUBLISHABLE_KEY env var not set (required for embedded mode)');
+        return res.status(500).json({ error: 'Stripe publishable key not configured' });
+      }
+      return res.status(200).json({
+        id: session.id,
+        client_secret: session.client_secret,
+        publishable_key: publishableKey,
+      });
+    }
+
     return res.status(200).json({
       id: session.id,
       url: session.url,

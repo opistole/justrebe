@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ReBe ReFresh · 8 PM ET Cohort</title>
+<meta name="description" content="Reserve your seat in the Tuesdays-at-8-PM ReBe ReFresh cohort. Five weeks of guided group work with Elizabeth Good and the ReBe team. June 23 – July 21, 2026." />
+<meta property="og:title" content="ReBe ReFresh · 8 PM ET Cohort" />
+<meta property="og:description" content="Tuesdays at 8 PM Eastern · June 23 – July 21 · Elizabeth Good + the ReBe team · $300 (first cohort only)" />
+<meta property="og:image" content="https://justrebe.com/Images/RESET_616_Pres.png" />
+<meta property="og:url" content="https://justrebe.com/refresh-cohort-8pm" />
+<meta property="og:type" content="product" />
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:#FFFFFF; --mist:#FAF9F7; --navy:#060B50; --navy-dark:#040832;
+    --green:#449945; --green-ink:#3A8438; --green-deep:#2A6D2C; --green-wash:#F2F8F2;
+    --gold:#E3A01F; --gold-ink:#B07D14; --gold-wash:#FBF4E4;
+    --slate:#212B37; --body:#4A535E; --muted:#9DA1A8; --bone:#E2E2E2; --coral:#EA492E;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --display:'Anton','Arial Narrow',Impact,sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:linear-gradient(180deg,var(--paper) 0%,#FDFAF3 100%);color:var(--body);font-family:var(--sans);font-weight:400;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* Header */
+  .util-bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--bone)}
+  .util-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+  .wordmark{font-family:var(--sans);font-weight:700;color:var(--navy);letter-spacing:.02em;font-size:18px;text-decoration:none}
+  .wordmark span{color:var(--green)}
+  .util-back{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--navy);text-decoration:none;letter-spacing:.02em}
+  .util-back:hover{color:var(--green-ink)}
+
+  /* Page header (product title block) */
+  .ph{padding:48px 0 24px;text-align:center}
+  .ph-eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--green-ink);margin:0 0 14px}
+  .ph h1{font-family:var(--display);font-size:clamp(36px,5.5vw,58px);line-height:1.04;color:var(--navy);margin:0 0 14px;text-transform:uppercase;letter-spacing:.005em}
+  .ph h1 em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0}
+  .ph .ph-time{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.4vw,26px);color:var(--body);margin:0 0 6px;line-height:1.4}
+  .ph .ph-dates{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;margin:0}
+
+  /* Two-column main layout */
+  .layout{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;max-width:1200px;margin:0 auto;padding:24px 24px 64px;align-items:start}
+  @media (max-width:980px){.layout{grid-template-columns:1fr;gap:32px;padding-bottom:48px}}
+
+  /* Left column: info */
+  .info-col h2{font-family:var(--display);font-size:clamp(26px,3vw,32px);line-height:1.1;color:var(--navy);margin:36px 0 14px;text-transform:uppercase;letter-spacing:.005em}
+  .info-col h2:first-child{margin-top:0}
+  .info-col h2 em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0}
+  .info-col p{margin:0 0 14px;line-height:1.65}
+  .info-col p strong{color:var(--navy)}
+
+  /* Video placeholder */
+  .video-wrap{aspect-ratio:16/9;width:100%;background:var(--navy);border-radius:14px;overflow:hidden;position:relative;margin:0 0 32px;box-shadow:0 12px 32px rgba(6,11,80,.18)}
+  .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:24px;font-family:var(--sans);background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%)}
+  .video-placeholder p{margin:0 0 6px;font-size:14px;color:rgba(255,255,255,.65);letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+  .video-placeholder h3{font-family:var(--display);font-size:clamp(26px,3vw,40px);margin:0 0 12px;color:#fff;letter-spacing:.005em}
+  .video-placeholder .vp-note{font-size:12px;color:rgba(255,255,255,.45);max-width:360px;line-height:1.5;margin-top:14px;text-transform:none;letter-spacing:0;font-weight:400}
+
+  /* What you'll get list */
+  .whatyouget{background:var(--green-wash);border:1px solid #cfe6d0;border-radius:14px;padding:24px 28px;margin:0 0 32px}
+  .whatyouget h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:22px;color:var(--navy);margin:0 0 14px}
+  .whatyouget ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  .whatyouget li{position:relative;padding-left:28px;font-size:15px;line-height:1.55;color:var(--body)}
+  .whatyouget li::before{content:'✓';position:absolute;left:0;top:1px;width:18px;height:18px;border-radius:50%;background:var(--green);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+  .whatyouget li strong{color:var(--navy)}
+
+  /* Facilitator section */
+  .facilitator{display:flex;gap:20px;align-items:flex-start;background:#fbfaf7;border:1px solid var(--bone);border-radius:14px;padding:24px;margin:0 0 32px}
+  .facilitator .fac-photo{flex-shrink:0;width:96px;height:120px;border-radius:10px;overflow:hidden;border:2px solid var(--green);box-shadow:0 6px 16px rgba(6,11,80,.10)}
+  .facilitator .fac-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .facilitator .fac-text h4{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 6px}
+  .facilitator .fac-text h3{font-family:var(--display);font-size:24px;color:var(--navy);margin:0 0 4px;letter-spacing:.005em}
+  .facilitator .fac-text p{font-family:var(--sans);font-size:14px;color:var(--body);line-height:1.55;margin:0}
+
+  /* Confidants strip */
+  .confidants{margin:0 0 32px}
+  .confidants h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:22px;color:var(--navy);margin:0 0 8px}
+  .confidants p{font-family:var(--sans);font-size:14px;color:var(--body);margin:0 0 16px;line-height:1.55}
+  .conf-row{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+  @media (max-width:560px){.conf-row{grid-template-columns:repeat(4,1fr)}}
+  .conf-mini{text-align:center}
+  .conf-mini-photo{width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;border:2px solid var(--green);background:var(--mist);box-shadow:0 4px 12px rgba(6,11,80,.08);margin:0 0 6px}
+  .conf-mini-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .conf-mini-name{font-family:var(--serif);font-style:italic;font-size:12px;color:var(--navy);line-height:1.2;margin:0;font-weight:600}
+
+  /* Right column: checkout */
+  .checkout-col{position:sticky;top:80px;align-self:start}
+  @media (max-width:980px){.checkout-col{position:static}}
+  .checkout-card{background:var(--paper);border:1px solid var(--bone);border-radius:18px;padding:28px;box-shadow:0 12px 36px rgba(6,11,80,.08);overflow:hidden}
+  .checkout-card .cc-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--green-ink);margin:0 0 8px}
+  .checkout-card .cc-title{font-family:var(--display);font-size:28px;line-height:1.06;color:var(--navy);margin:0 0 16px;text-transform:uppercase;letter-spacing:.005em}
+  .checkout-card .cc-price-row{display:flex;align-items:baseline;gap:12px;margin:0 0 6px}
+  .checkout-card .cc-price{font-family:var(--display);font-size:48px;line-height:1;color:var(--navy);margin:0}
+  .checkout-card .cc-once{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink);margin:0 0 22px}
+  .checkout-card .tos-row{display:flex;align-items:flex-start;gap:10px;font-family:var(--sans);font-size:13px;line-height:1.55;color:var(--body);margin:18px 0 14px}
+  .checkout-card .tos-row input{width:18px;height:18px;margin-top:2px;accent-color:var(--green);flex-shrink:0}
+  .checkout-card .tos-row a{color:var(--green-ink);font-weight:700;text-decoration:underline}
+  .checkout-card .checkout-loading{text-align:center;color:var(--muted);padding:28px 0;font-size:14px;font-style:italic}
+  .checkout-card .checkout-error{color:#c0392b;font-size:13px;text-align:center;margin:12px 0;font-weight:700;display:none}
+  .checkout-card #checkout{margin-top:8px}
+  .stripe-note{text-align:center;margin:14px 0 0;font-size:11px;color:var(--muted);line-height:1.5}
+
+  /* Terms (collapsible) */
+  .terms-section{padding:40px 0 56px;background:var(--mist)}
+  .terms-section .container{max-width:780px}
+  .terms-details{border:1px solid var(--bone);border-radius:14px;background:var(--paper);overflow:hidden}
+  .terms-details summary{list-style:none;cursor:pointer;padding:18px 24px;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#faf9f7}
+  .terms-details summary::-webkit-details-marker{display:none}
+  .terms-details summary::after{content:'+';font-size:20px;color:var(--green);font-weight:400;line-height:1;transition:transform .2s}
+  .terms-details[open] summary::after{transform:rotate(45deg)}
+  .terms-content{padding:20px 24px 24px;font-family:var(--sans);font-size:13px;line-height:1.7;color:var(--body);border-top:1px solid var(--bone)}
+  .terms-content h4{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin:16px 0 6px}
+  .terms-content h4:first-child{margin-top:0}
+  .terms-content p{margin:0 0 10px}
+  .terms-content a{color:var(--green-ink);font-weight:600;text-decoration:underline}
+
+  /* Footer */
+  footer{background:var(--paper);padding:40px 24px;text-align:center;border-top:1px solid var(--bone)}
+  .foot-line{font-family:var(--sans);font-size:14px;color:var(--body);margin:0 0 14px;line-height:1.65}
+  .foot-line--muted{color:var(--muted);font-size:13px}
+  .foot-links{display:flex;gap:24px;justify-content:center;margin:0 0 14px;flex-wrap:wrap}
+  .foot-links a{font-family:var(--sans);font-weight:700;font-size:13px;color:var(--navy);text-decoration:none;letter-spacing:.02em;padding:8px 4px}
+  .foot-links a:hover{text-decoration:underline;text-decoration-color:var(--green);text-underline-offset:4px;text-decoration-thickness:2px}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body data-slot="8pm" data-time-label="Tuesdays at 8 PM Eastern" data-zone-label="8 PM ET">
+
+<header class="util-bar">
+  <div class="util-inner">
+    <a href="/" class="wordmark">Re<span>Be</span></a>
+    <a href="/refresh-cohort.html" class="util-back">← Other cohort</a>
+  </div>
+</header>
+
+<main>
+
+<!-- PRODUCT HEADER -->
+<section class="ph">
+  <div class="container">
+    <p class="ph-eyebrow">ReBe ReFresh · 5-Week Cohort</p>
+    <h1>The 8 PM <em>cohort</em></h1>
+    <p class="ph-time">Tuesdays at 8 PM Eastern</p>
+    <p class="ph-dates">June 23 – July 21, 2026 · 60–75 min per session</p>
+  </div>
+</section>
+
+<!-- TWO-COLUMN: LEFT = product info, RIGHT = embedded checkout -->
+<div class="layout">
+
+  <!-- LEFT: PRODUCT INFO -->
+  <div class="info-col">
+
+    <!-- Video -->
+    <div class="video-wrap">
+      <!-- TO EMBED A VIDEO: replace the placeholder below with an <iframe> from YouTube/Vimeo
+           Example: <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID?rel=0&modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      -->
+      <div class="video-placeholder">
+        <p>Video</p>
+        <h3>A note from Elizabeth</h3>
+        <p class="vp-note">Elizabeth will record a short intro to the cohort. The video will live here once it's ready.</p>
+      </div>
+    </div>
+
+    <h2>What this <em>is</em>.</h2>
+    <p>A five-week guided group experience for adults doing inner work — built on the REAL TALK framework, anchored in EPICS (Emotional, Physical, Intellectual, Cultural, Spiritual). Small enough to be known, large enough to be honest.</p>
+    <p>This isn't therapy or coaching in the standard sense. It's a structured five-week practice in a small group of people doing the same work alongside you. <strong>Limited seats. First come, first served.</strong></p>
+
+    <div class="whatyouget">
+      <h3>What you'll get</h3>
+      <ul>
+        <li><strong>Five weekly live Zoom sessions</strong> (60–75 min each) with Elizabeth and the ReBe team — Tuesdays at 8 PM Eastern, June 23 – July 21</li>
+        <li><strong>Multiple optional bonus group sessions</strong> led individually by each of the 7 confidants throughout the 5 weeks</li>
+        <li><strong>Live Q&amp;A in every session</strong> — bring your specific questions</li>
+        <li>A <strong>small cohort</strong> — small enough to be known, large enough to be honest</li>
+        <li>Anchored in <strong>EPICS</strong> — Emotional, Physical, Intellectual, Cultural, Spiritual</li>
+        <li>A <strong>faith-friendly approach</strong> — secular framing welcome, spiritual framing welcome, neither required</li>
+        <li><strong>Tools, language, and practices</strong> you can take into your life immediately</li>
+        <li><strong>Not recorded</strong> — these are the times you set aside to actually be there</li>
+      </ul>
+    </div>
+
+    <h2>Your <em>facilitator</em>.</h2>
+    <div class="facilitator">
+      <div class="fac-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good"></picture></div>
+      <div class="fac-text">
+        <h4>Leading the 5 weekly sessions</h4>
+        <h3>Elizabeth Good</h3>
+        <p>Founder · M.A. Clinical Psychology · Creator of REAL TALK. Three decades helping people heal from burnout, shame, and trauma. Author of <em>Groomed</em> (HarperCollins) and <em>Speak the Unspeakable</em>. Two-time TEDx speaker.</p>
+      </div>
+    </div>
+
+    <h2>The <em>ReBe team</em>.</h2>
+    <p>Each of the seven confidants leads their own optional bonus group session during the cohort. Attend the ones that resonate.</p>
+    <div class="confidants">
+      <div class="conf-row">
+        <div class="conf-mini">
+          <div class="conf-mini-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal"></picture></div>
+          <p class="conf-mini-name">Dr. Jason Quintal</p>
+        </div>
+        <div class="conf-mini">
+          <div class="conf-mini-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech"></picture></div>
+          <p class="conf-mini-name">Beth Rech</p>
+        </div>
+        <div class="conf-mini">
+          <div class="conf-mini-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park"></picture></div>
+          <p class="conf-mini-name">Jean Park</p>
+        </div>
+        <div class="conf-mini">
+          <div class="conf-mini-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller"></picture></div>
+          <p class="conf-mini-name">Fred Feller</p>
+        </div>
+        <div class="conf-mini">
+          <div class="conf-mini-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole"></picture></div>
+          <p class="conf-mini-name">Osil Pistole</p>
+        </div>
+        <div class="conf-mini">
+          <div class="conf-mini-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne"></picture></div>
+          <p class="conf-mini-name">Christophe Dessaigne</p>
+        </div>
+        <div class="conf-mini">
+          <div class="conf-mini-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good"></picture></div>
+          <p class="conf-mini-name">Elizabeth Good</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: EMBEDDED CHECKOUT -->
+  <div class="checkout-col">
+    <div class="checkout-card">
+      <p class="cc-eyebrow">Reserve your seat</p>
+      <p class="cc-title">The 8 PM ET Cohort</p>
+      <div class="cc-price-row">
+        <p class="cc-price">$300</p>
+      </div>
+      <p class="cc-once">First cohort only — one-time price</p>
+
+      <div class="tos-row">
+        <input type="checkbox" id="tos-check">
+        <label for="tos-check" style="margin:0;font-weight:400;text-transform:none;letter-spacing:0">
+          I accept the <a href="#terms" id="tos-link">Terms of Service</a> and <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>, and agree to maintain confidentiality about what's shared in the group.
+        </label>
+      </div>
+
+      <p class="checkout-error" id="checkout-error"></p>
+      <div id="checkout">
+        <p class="checkout-loading" id="checkout-loading">Accept the Terms above to load secure checkout…</p>
+      </div>
+      <p class="stripe-note">Secure checkout via Stripe · cards, Apple Pay, Affirm, Klarna, Afterpay</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- TERMS (collapsible) -->
+<section class="terms-section" id="terms">
+  <div class="container">
+    <details class="terms-details">
+      <summary>Terms &amp; Conditions</summary>
+      <div class="terms-content">
+        <p>Information shared in the ReBe ReFresh cohort is not clinical or medical advice. ReBe and the ReBe team make no promises or claims of specific outcomes. Results vary with individual commitment and participation. Any copying or distribution of cohort materials without ReBe's written consent is prohibited.</p>
+        <h4>SMS Mobile Policy</h4>
+        <p>By providing your phone number, you agree to the terms in our <a href="/terms.html">SMS Mobile Policy</a>.</p>
+        <h4>Refund Policy</h4>
+        <p>The ReBe ReFresh cohort fee is non-refundable due to the limited seat structure and material access. Refunds for missed sessions can only be made in the event of medical or bereavement reasons.</p>
+        <h4>Recording &amp; Privacy</h4>
+        <p>Sessions are <strong>not recorded</strong>. ReBe does not record, store, or distribute any video, audio, or chat content from cohort sessions.</p>
+        <h4>Confidentiality</h4>
+        <p>Participation in the cohort is contingent on respecting group confidentiality: what's shared in the group stays in the group. Violations of this agreement may result in removal from the cohort without refund.</p>
+        <h4>Spiritual Content</h4>
+        <p>ReBe is a faith-friendly experience, not a religious one. Some confidants come from Christian backgrounds; others do not. Spiritual framing is welcome, secular framing is welcome, and neither is required to participate fully.</p>
+        <h4>Inclusivity</h4>
+        <p>All races, religions, sexual orientations, gender identities, and political views are welcome and respected. ReBe creates a safe, inclusive environment for every adult doing inner work.</p>
+        <p>By checking the box above and proceeding to checkout, you confirm you've read and accept these Terms and our <a href="/privacy.html">Privacy Policy</a>.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p class="foot-line foot-line--muted">ReBe — Rebuilding people from the inside out. Better me. Better we.</p>
+  <p class="foot-line">This is a guided group experience, not crisis care. If you're in acute distress, reach out to a therapist, your doctor, or 988 (Suicide &amp; Crisis Lifeline).</p>
+  <p class="foot-links">
+    <a href="/refresh.html">All offerings</a>
+    <a href="/refresh-cohort.html">Both cohorts</a>
+    <a href="/refresh-private.html">Private 1:1</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="mailto:refresh@justrebe.com">Contact</a>
+  </p>
+  <p class="foot-line foot-line--muted">© 2026 Just ReBe, LLC. All rights reserved.</p>
+</footer>
+
+<!-- Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+(function(){
+  var slot = document.body.getAttribute('data-slot') || '11am';
+  var timeLabel = document.body.getAttribute('data-time-label') || 'Tuesdays at 8 PM Eastern';
+  var zoneLabel = document.body.getAttribute('data-zone-label') || '8 PM ET';
+  var testMode = new URLSearchParams(window.location.search).get('testpay') === 'ospo';
+  var basePrice = testMode ? 1 : 300;
+  var amountCents = Math.round(basePrice * 100);
+
+  var tosCheck = document.getElementById('tos-check');
+  var tosLink = document.getElementById('tos-link');
+  var loadingEl = document.getElementById('checkout-loading');
+  var checkoutContainer = document.getElementById('checkout');
+  var errorEl = document.getElementById('checkout-error');
+
+  // Open the Terms section when clicked from the checkbox label
+  if (tosLink) {
+    tosLink.addEventListener('click', function(e){
+      e.preventDefault();
+      var details = document.querySelector('.terms-details');
+      if (details) { details.setAttribute('open', ''); details.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  }
+
+  if (testMode) {
+    var banner = document.createElement('p');
+    banner.style.cssText = 'background:#FBF4E4;border:1px solid #f0d4a8;color:#B07D14;padding:10px 14px;border-radius:8px;font-size:12px;font-weight:700;text-align:center;margin:0 0 12px;letter-spacing:.04em';
+    banner.textContent = '⚠️ Internal test mode — price is $1.00';
+    checkoutContainer.parentNode.insertBefore(banner, checkoutContainer);
+  }
+
+  var loaded = false;
+  var loading = false;
+
+  async function loadCheckout(){
+    if (loaded || loading) return;
+    loading = true;
+    loadingEl.textContent = 'Loading secure checkout…';
+    errorEl.style.display = 'none';
+    errorEl.textContent = '';
+
+    try {
+      var resp = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          kind: 'cohort',
+          slot: slot,
+          ui_mode: 'embedded',
+          amount_cents: amountCents,
+          description: 'ReBe ReFresh · 5-Week Cohort (' + zoneLabel + ')' + (testMode ? ' (TEST)' : ''),
+          return_url: window.location.origin + '/thank-you-cohort.html?slot=' + slot
+        })
+      });
+      var data = await resp.json();
+      if (!resp.ok || !data.client_secret) {
+        throw new Error((data && data.error) || 'Failed to create checkout');
+      }
+
+      var stripe = Stripe(data.publishable_key);
+      var checkout = await stripe.initEmbeddedCheckout({ clientSecret: data.client_secret });
+      loadingEl.style.display = 'none';
+      checkout.mount('#checkout');
+      loaded = true;
+    } catch (err) {
+      console.error('Embedded checkout error', err);
+      loadingEl.style.display = 'none';
+      errorEl.textContent = "Couldn't load checkout. Refresh the page and try again, or email refresh@justrebe.com.";
+      errorEl.style.display = 'block';
+      loading = false;
+    }
+  }
+
+  tosCheck.addEventListener('change', function(){
+    if (tosCheck.checked) loadCheckout();
+  });
+})();
+</script>
+
+</body>
+</html>

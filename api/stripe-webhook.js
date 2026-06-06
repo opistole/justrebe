@@ -74,17 +74,23 @@ function verifyStripeSignature(rawBody, sigHeader, secret, toleranceSeconds = 30
   });
 }
 
+// Strip whitespace and trailing slash, and remove any accidentally-included
+// REST path component (e.g., "/rest/v1") so the resulting URL is well-formed.
+function supabaseBaseUrl() {
+  const rawUrl = process.env.SUPABASE_URL;
+  if (!rawUrl) throw new Error('Missing SUPABASE_URL');
+  return rawUrl.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
+}
+function supabaseKey() {
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!key) throw new Error('Missing SUPABASE_SERVICE_ROLE_KEY');
+  return key;
+}
+
 // PATCH a Supabase row using the service-role key (bypasses RLS).
 async function supabasePatch({ table, id, patch }) {
-  const rawUrl = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!rawUrl || !key) throw new Error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY');
-
-  // Defensive: strip whitespace and trailing slash, and remove any
-  // accidentally-included REST path component (e.g., "/rest/v1") so the
-  // resulting URL is always well-formed.
-  const url = rawUrl.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
-
+  const url = supabaseBaseUrl();
+  const key = supabaseKey();
   const r = await fetch(`${url}/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, {
     method: 'PATCH',
     headers: {
@@ -99,6 +105,29 @@ async function supabasePatch({ table, id, patch }) {
   if (!r.ok) {
     const detail = await r.text();
     throw new Error(`Supabase PATCH ${r.status}: ${detail}`);
+  }
+  return r.json();
+}
+
+// INSERT a Supabase row using the service-role key (bypasses RLS).
+// Used by the embedded-cohort flow where the row is created from Stripe data
+// (since no pre-checkout form ran to pre-create it).
+async function supabaseInsert({ table, row }) {
+  const url = supabaseBaseUrl();
+  const key = supabaseKey();
+  const r = await fetch(`${url}/rest/v1/${table}`, {
+    method: 'POST',
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=representation',
+    },
+    body: JSON.stringify(row),
+  });
+  if (!r.ok) {
+    const detail = await r.text();
+    throw new Error(`Supabase INSERT ${r.status}: ${detail}`);
   }
   return r.json();
 }
@@ -146,9 +175,9 @@ module.exports = async function handler(req, res) {
   const kind = metadata.kind;          // 'cohort' | 'private'
   const signup_id = metadata.signup_id;
 
-  if (!kind || !signup_id) {
-    console.error('Webhook missing metadata.kind or metadata.signup_id', metadata);
-    return res.status(200).json({ ok: true, skipped: 'missing metadata' });
+  if (!kind) {
+    console.error('Webhook missing metadata.kind', metadata);
+    return res.status(200).json({ ok: true, skipped: 'missing kind' });
   }
 
   const table =
@@ -161,22 +190,63 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true, skipped: `unknown kind: ${kind}` });
   }
 
-  const patch = {
-    status: 'paid',
-    stripe_session_id: session.id,
-    paid_amount_cents: session.amount_total ?? null,
-    paid_at: new Date().toISOString(),
-  };
+  // Pull customer details from the session — Stripe collected these.
+  const customerEmail = (session.customer_details && session.customer_details.email) || session.customer_email || '';
+  const customerName  = (session.customer_details && session.customer_details.name)  || metadata.customer_name || '';
+  const customerPhone = (session.customer_details && session.customer_details.phone) || '';
+  const slotMeta      = (metadata.slot || '').toLowerCase();
 
   try {
-    const rows = await supabasePatch({ table, id: signup_id, patch });
+    let rows;
+    if (signup_id) {
+      // EXISTING FLOW: a row was pre-created by the form helper. UPDATE it.
+      const patch = {
+        status: 'paid',
+        stripe_session_id: session.id,
+        paid_amount_cents: session.amount_total ?? null,
+        paid_at: new Date().toISOString(),
+      };
+      rows = await supabasePatch({ table, id: signup_id, patch });
+    } else {
+      // NEW EMBEDDED FLOW: no pre-created row. CREATE one from Stripe data.
+      // Only cohort uses this for now; private still always pre-creates.
+      let row;
+      if (table === 'refresh_signups') {
+        const preferredTime = slotMeta === '8pm' ? 'Tuesdays at 8 PM ET' : 'Tuesdays at 11 AM ET';
+        row = {
+          full_name: customerName || 'Stripe Customer',
+          email: customerEmail,
+          phone: customerPhone || '',
+          audience_type: 'groups',
+          group_type: 'no_preference',
+          preferred_group_time: preferredTime,
+          readiness: 'ready_to_pay',
+          consent_to_contact: true,
+          consent_to_confidentiality: true,
+          status: 'paid',
+          stripe_session_id: session.id,
+          paid_amount_cents: session.amount_total ?? null,
+          paid_at: new Date().toISOString(),
+        };
+      } else {
+        // Defensive — should never hit this for 1:1 since we always pre-create
+        row = {
+          name: customerName || 'Stripe Customer',
+          email: customerEmail,
+          phone: customerPhone || '',
+          status: 'paid',
+          stripe_session_id: session.id,
+          paid_amount_cents: session.amount_total ?? null,
+          paid_at: new Date().toISOString(),
+        };
+      }
+      rows = await supabaseInsert({ table, row });
+    }
 
     // Tag the customer in Kit as "ReBe — Customer (Paid)". Await it so
     // Vercel doesn't tear down the function before the Kit call finishes.
     // A Kit failure shouldn't fail the webhook (Stripe would then retry),
     // so we swallow the error after logging it.
-    const customerEmail = (session.customer_details && session.customer_details.email) || session.customer_email;
-    const customerName = (session.customer_details && session.customer_details.name) || metadata.customer_name || '';
     if (customerEmail) {
       try {
         await kitSubscribe({
@@ -189,7 +259,7 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    return res.status(200).json({ ok: true, updated: rows.length, table, signup_id });
+    return res.status(200).json({ ok: true, updated: rows.length, table, signup_id: signup_id || (rows[0] && rows[0].id) || null });
   } catch (err) {
     console.error('Webhook Supabase update failed:', err);
     // Return 500 so Stripe retries.
