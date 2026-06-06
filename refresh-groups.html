@@ -327,9 +327,11 @@
   .product-card .pc-btn:hover{box-shadow:0 10px 24px rgba(99,91,255,0.42);transform:translateY(-1px)}
   .product-card .pc-firstcohort{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink);margin:14px 0 0;line-height:1.4}
 
-  .notready{text-align:center;margin:36px 0 0;font-family:var(--sans);font-size:15px;color:var(--body)}
-  .notready a{color:var(--green-ink);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-ink);padding-bottom:1px}
-  .notready a:hover{border-bottom-style:solid}
+  .notready-block{max-width:700px;margin:48px auto 0;background:#fbfaf7;border:1px dashed var(--green);border-radius:14px;padding:28px 32px;text-align:center}
+  .notready-block h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:24px;color:var(--navy);margin:0 0 8px}
+  .notready-block p{font-family:var(--sans);font-size:15px;color:var(--body);margin:0 0 18px;line-height:1.55}
+  .notready-block .notready-btn{display:inline-block;background:transparent;border:2px solid var(--green-ink);color:var(--green-ink);padding:12px 28px;border-radius:999px;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.02em;cursor:pointer;text-decoration:none;transition:background .2s,color .2s}
+  .notready-block .notready-btn:hover{background:var(--green-ink);color:#fff}
 
   /* Testimonials */
   .testimonials{background:var(--mist);padding:72px 0 64px}
@@ -567,7 +569,11 @@
       </div>
     </div>
 
-    <p class="notready">Not ready yet? <a href="#" id="open-notready">Get on the list →</a></p>
+    <div class="notready-block">
+      <h3>Have questions first?</h3>
+      <p>Talk to a member of the team. We'll text or email — your preference. No pressure, no sales pitch.</p>
+      <button type="button" class="notready-btn" id="open-notready">Get in touch →</button>
+    </div>
   </div>
 </section>
 
@@ -978,13 +984,21 @@ document.querySelectorAll('.bio-modal-pop').forEach(function(m){
     <button class="reserve-close" type="button" aria-label="Close">×</button>
     <p class="reserve-eyebrow">Not ready yet</p>
     <h3 class="reserve-title" id="notready-title">We'll keep in touch.</h3>
-    <p class="reserve-sub">Tell us a bit about where you're at and we'll follow up.</p>
+    <p class="reserve-sub">A member of the team will follow up — by text or email, whichever you prefer.</p>
     <div id="notready-formfields">
       <form id="notready-form" novalidate>
         <label for="nr_name">Full name</label>
         <input type="text" id="nr_name" name="full_name" autocomplete="name" required>
         <label for="nr_email">Email</label>
         <input type="email" id="nr_email" name="email" autocomplete="email" required>
+        <label for="nr_phone">Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">(if you'd prefer a text)</span></label>
+        <input type="tel" id="nr_phone" name="phone" autocomplete="tel">
+        <label for="nr_contact">How should we reach out?</label>
+        <select id="nr_contact" name="contact_preference">
+          <option value="text">Text (SMS)</option>
+          <option value="email">Email</option>
+          <option value="either">Either is fine</option>
+        </select>
         <label for="nr_interest">I'm interested in…</label>
         <select id="nr_interest" name="interest">
           <option value="wants_more_info">Learning more about ReBe ReFresh</option>
@@ -1303,12 +1317,19 @@ document.querySelectorAll('.bio-modal-pop').forEach(function(m){
       var fd = new FormData(form);
       var fullName = (fd.get('full_name') || '').trim();
       var email = (fd.get('email') || '').trim();
+      var phone = (fd.get('phone') || '').trim();
+      var contactPref = (fd.get('contact_preference') || 'either');
       var interest = (fd.get('interest') || 'wants_more_info');
       var slotPref = (fd.get('preferred_time') || '');
-      var notes = (fd.get('notes') || '').trim();
+      var notesRaw = (fd.get('notes') || '').trim();
 
       if (!fullName || !email) { showError('Please fill in your name and email.'); return; }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('Please enter a valid email address.'); return; }
+      if (contactPref === 'text' && !phone) { showError('Please add a phone number (or change preference to email).'); return; }
+      if (phone && phone.replace(/\D/g,'').length < 10) { showError('Phone must have at least 10 digits.'); return; }
+
+      // Prepend contact preference to notes so the salesperson sees it first
+      var notes = 'Contact preference: ' + contactPref + (notesRaw ? '\n\n' + notesRaw : '');
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
@@ -1316,18 +1337,18 @@ document.querySelectorAll('.bio-modal-pop').forEach(function(m){
       supabase.rpc('submit_cohort_signup', {
         p_full_name:                  fullName,
         p_email:                      email,
-        p_phone:                      '',
+        p_phone:                      phone,
         p_audience_type:              'groups',
         p_organization_name:          null,
         p_role_title:                 null,
         p_group_type:                 'no_preference',
         p_preferred_group_time:       slotPref || 'No preference',
-        p_reason_for_interest:        notes || null,
+        p_reason_for_interest:        notesRaw || null,
         p_area_needing_refresh:       null,
         p_area_other:                 null,
         p_previous_rebe_experience:   null,
         p_readiness:                  interest,
-        p_notes:                      notes || null,
+        p_notes:                      notes,
         p_who_referred_you:           null,
         p_referral_code:              null,
         p_consent_to_contact:         true,
@@ -1349,10 +1370,11 @@ document.querySelectorAll('.bio-modal-pop').forEach(function(m){
               id: res.data,
               full_name: fullName,
               email: email,
-              phone: '',
+              phone: phone,
               audience_type: 'groups',
               preferred_group_time: slotPref || 'No preference',
-              readiness: interest
+              readiness: interest,
+              notes: notes
             }
           })
         }).catch(function(e){ console.warn('notify failed', e); });
