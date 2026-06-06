@@ -393,6 +393,65 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  // -------- A2.25) Cohort intake form — submitted on thank-you-cohort.html after Stripe checkout --------
+  // body shape: { kind:'cohort_intake', record: { full_name, email, phone, city, state, country,
+  //               cohort_slot, prior_experience, why_here[], heard_from, referrer, breakout_preference, notes } }
+  if (body.kind === 'cohort_intake') {
+    const r = body.record || {};
+    if (!r.email) return res.status(400).json({ error: 'Missing record.email' });
+    try {
+      const name = (r.full_name || 'Unknown').trim();
+      const email = (r.email || '').trim();
+      const slot = r.cohort_slot || '(slot unknown)';
+      const whyList = Array.isArray(r.why_here) && r.why_here.length ? r.why_here.join(', ') : '(none selected)';
+      const location = [r.city, r.state, r.country].filter(Boolean).join(', ') || '(not given)';
+
+      const adminMsg = {
+        to: ADMIN_EMAIL,
+        subject: `Intake: ${name} — ${slot} cohort`,
+        text:
+`${name} completed the post-payment intake for the ${slot} cohort.
+
+CONTACT
+  Email:   ${email}
+  Phone:   ${r.phone || '(not given)'}
+  Location: ${location}
+
+PRIOR REBE EXPERIENCE
+  ${r.prior_experience || '(not given)'}
+
+WHY THEY'RE JOINING
+  ${whyList}
+
+HOW THEY HEARD
+  ${r.heard_from || '(not given)'}${r.referrer ? `\n  Referred by: ${r.referrer}` : ''}
+
+BREAKOUT-ROOM PREFERENCE
+  ${r.breakout_preference || '(not given)'}
+
+ANYTHING ELSE WE SHOULD KNOW
+${r.notes ? r.notes : '(nothing added)'}
+
+— Submitted via /thank-you-cohort intake form`
+      };
+
+      // Tag in Kit so segmentation downstream knows they did intake + their reasons
+      const tags = ['ReBe — All', 'ReBe — Cohort', 'Cohort Intake Complete'];
+      if (slot.indexOf('11 AM') === 0) tags.push('Cohort · 11 AM · Intake');
+      if (slot.indexOf('8 PM') === 0) tags.push('Cohort · 8 PM · Intake');
+
+      await Promise.all([
+        sendEmail(adminMsg),
+        kitSubscribe({ email, first_name: firstNameFromFull(name), tags })
+          .catch((e) => console.error('Kit (cohort_intake):', e)),
+      ]);
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      console.error('Notify error (cohort_intake):', err);
+      return res.status(500).json({ error: 'Email send failed', detail: String(err && err.message || err) });
+    }
+  }
+
   // -------- A2.5) BB chat handoff — visitor asked BB to connect them with Ashley --------
   // body shape: { kind:'chat_handoff', record: { name, email, phone?, question, transcript } }
   if (body.kind === 'chat_handoff') {

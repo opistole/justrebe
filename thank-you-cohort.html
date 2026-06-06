@@ -71,6 +71,36 @@
   .help a:hover{border-bottom-style:solid}
   .home-link{display:inline-block;margin-top:24px;font-size:14px;color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid var(--navy);padding-bottom:1px}
 
+  /* ===== Intake form ===== */
+  .intake{background:var(--paper);border:1px solid var(--bone);border-radius:18px;padding:32px 36px;box-shadow:0 10px 40px rgba(6,11,80,.06);text-align:left;margin:0 0 28px;position:relative;overflow:hidden}
+  .intake::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--green) 0%,var(--gold) 100%)}
+  .intake-eyebrow{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 10px}
+  .intake h2{font-family:var(--serif);font-style:italic;font-weight:600;font-size:24px;color:var(--navy);margin:0 0 8px;line-height:1.2}
+  .intake .intake-sub{font-family:var(--sans);font-size:15px;color:var(--body);margin:0 0 26px;line-height:1.55}
+  .field{margin:0 0 18px}
+  .field label{display:block;font-family:var(--sans);font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;margin:0 0 8px}
+  .field label .opt{font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:12px;margin-left:6px;font-style:italic}
+  .field label .req{color:var(--coral);margin-left:3px;font-weight:700}
+  .field input[type="text"], .field input[type="email"], .field input[type="tel"], .field select, .field textarea{width:100%;padding:11px 14px;border:1px solid var(--bone);border-radius:10px;font-family:var(--sans);font-size:15px;color:var(--slate);background:#fff;outline:0;transition:border-color .15s}
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--green)}
+  .field textarea{min-height:90px;resize:vertical;line-height:1.5}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:520px){.field-row{grid-template-columns:1fr}}
+  .checkgroup{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
+  @media (max-width:520px){.checkgroup{grid-template-columns:1fr}}
+  .checkgroup label{font-size:14px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--slate);display:flex;align-items:flex-start;gap:9px;cursor:pointer;padding:6px 0;margin:0}
+  .checkgroup input[type="checkbox"], .checkgroup input[type="radio"]{margin:3px 0 0;accent-color:var(--green);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+  .checkgroup input[type="checkbox"]+span, .checkgroup input[type="radio"]+span{line-height:1.35}
+  .intake-submit{display:block;width:100%;padding:16px 22px;background:var(--green-ink);color:#fff;border:0;border-radius:999px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:background .2s,transform .15s;margin-top:8px}
+  .intake-submit:hover:not(:disabled){background:var(--green-deep);transform:translateY(-1px)}
+  .intake-submit:disabled{opacity:.55;cursor:wait}
+  .intake-error{color:#c0392b;font-size:13px;text-align:center;margin:14px 0 0;line-height:1.5}
+  .intake-success{display:none;text-align:center;padding:30px 8px}
+  .intake-success.show{display:block}
+  .intake-success .ok-mark{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:var(--green-wash);color:var(--green-ink);font-size:28px;font-weight:700;margin:0 0 18px}
+  .intake-success h3{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--navy);margin:0 0 8px}
+  .intake-success p{font-size:15px;color:var(--body);margin:0;line-height:1.55}
+
   footer{background:var(--mist);padding:36px 24px;text-align:center;border-top:1px solid var(--bone);font-size:13px;color:var(--muted);line-height:1.65}
   footer a{color:var(--green-ink);font-weight:700;text-decoration:none}
 
@@ -133,6 +163,219 @@
         if (banner && sessionId && sessionId.indexOf('cs_') === 0) banner.classList.add('show');
       })();
     </script>
+
+    <script>
+      // Intake form submit
+      (function(){
+        var form = document.getElementById('intake-form');
+        var submitBtn = document.getElementById('intake-submit');
+        var errorEl = document.getElementById('intake-error');
+        var successEl = document.getElementById('intake-success');
+        if (!form) return;
+
+        function getSlotFromURL(){
+          var s = (new URLSearchParams(window.location.search).get('slot') || '').toLowerCase();
+          return s === '8pm' ? '8 PM ET' : '11 AM ET';
+        }
+
+        form.addEventListener('submit', async function(e){
+          e.preventDefault();
+          errorEl.textContent = '';
+
+          var fd = new FormData(form);
+          var fullName = (fd.get('full_name') || '').trim();
+          var email = (fd.get('email') || '').trim();
+          var phone = (fd.get('phone') || '').trim();
+          var city = (fd.get('city') || '').trim();
+          var state = (fd.get('state') || '').trim();
+          var country = (fd.get('country') || '').trim();
+          var priorExp = fd.get('prior_experience') || '';
+          var whyHere = fd.getAll('why_here');
+          var heardFrom = fd.get('heard_from') || '';
+          var referrer = (fd.get('referrer') || '').trim();
+          var breakout = fd.get('breakout_preference') || '';
+          var notes = (fd.get('notes') || '').trim();
+
+          // Validation
+          if (!fullName) { errorEl.textContent = 'Please add your full name.'; return; }
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorEl.textContent = 'Please add a valid email.'; return; }
+          if (!phone || phone.replace(/\D/g,'').length < 10) { errorEl.textContent = 'Please add a 10-digit phone number.'; return; }
+          if (!city) { errorEl.textContent = 'Please add your city.'; return; }
+          if (!country) { errorEl.textContent = 'Please choose a country.'; return; }
+          if (!priorExp) { errorEl.textContent = 'Please tell us your prior experience.'; return; }
+          if (whyHere.length === 0) { errorEl.textContent = 'Please pick at least one reason you\'re joining.'; return; }
+          if (!heardFrom) { errorEl.textContent = 'Please choose how you heard about us.'; return; }
+          if (!breakout) { errorEl.textContent = 'Please pick a breakout-room preference.'; return; }
+
+          submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
+          try {
+            var resp = await fetch('/api/notify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                kind: 'cohort_intake',
+                record: {
+                  full_name: fullName,
+                  email: email,
+                  phone: phone,
+                  city: city,
+                  state: state,
+                  country: country,
+                  cohort_slot: getSlotFromURL(),
+                  prior_experience: priorExp,
+                  why_here: whyHere,
+                  heard_from: heardFrom,
+                  referrer: referrer,
+                  breakout_preference: breakout,
+                  notes: notes
+                }
+              })
+            });
+            if (!resp.ok) {
+              var detail = await resp.text();
+              throw new Error(detail || ('HTTP ' + resp.status));
+            }
+            form.style.display = 'none';
+            successEl.classList.add('show');
+            successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } catch (err) {
+            console.error('Intake submit failed', err);
+            errorEl.textContent = "Couldn't send right now — please email refresh@justrebe.com directly. We won't lose your intake.";
+            submitBtn.disabled = false; submitBtn.textContent = 'Send to the team →';
+          }
+        });
+      })();
+    </script>
+
+    <div class="intake" id="intake-card">
+      <p class="intake-eyebrow">One last step</p>
+      <h2>Help us prepare for you.</h2>
+      <p class="intake-sub">A quick 2-minute intake. The more you share, the better Elizabeth and the team can hold the cohort for who you are and where you're coming from.</p>
+
+      <form id="intake-form" novalidate>
+        <div class="field">
+          <label for="if-name">Full name <span class="req">*</span></label>
+          <input id="if-name" name="full_name" type="text" autocomplete="name" required>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="if-email">Email <span class="req">*</span></label>
+            <input id="if-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="if-phone">Phone <span class="req">*</span></label>
+            <input id="if-phone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="if-city">City <span class="req">*</span></label>
+            <input id="if-city" name="city" type="text" autocomplete="address-level2" required>
+          </div>
+          <div class="field">
+            <label for="if-state">State / Province</label>
+            <input id="if-state" name="state" type="text" autocomplete="address-level1">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="if-country">Country <span class="req">*</span></label>
+          <select id="if-country" name="country" required>
+            <option value="">Choose a country…</option>
+            <option value="United States">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Australia">Australia</option>
+            <option value="New Zealand">New Zealand</option>
+            <option value="Ireland">Ireland</option>
+            <option value="Mexico">Mexico</option>
+            <option value="South Africa">South Africa</option>
+            <option value="India">India</option>
+            <option value="Germany">Germany</option>
+            <option value="France">France</option>
+            <option value="Other">Other (please add in the notes below)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Have you done any ReBe or REAL TALK work before? <span class="req">*</span></label>
+          <div class="checkgroup">
+            <label><input type="radio" name="prior_experience" value="First time" required><span>This is my first time with ReBe</span></label>
+            <label><input type="radio" name="prior_experience" value="Reset workshop"><span>I've done a Reset workshop</span></label>
+            <label><input type="radio" name="prior_experience" value="REAL TALK program"><span>I've done the REAL TALK program</span></label>
+            <label><input type="radio" name="prior_experience" value="Refresh cohort"><span>I've done a Refresh cohort before</span></label>
+            <label><input type="radio" name="prior_experience" value="1:1 with a confidant"><span>I've had 1:1s with a ReBe confidant</span></label>
+            <label><input type="radio" name="prior_experience" value="Multiple of the above"><span>Multiple of the above</span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Why are you joining? <span class="opt">(select all that apply)</span> <span class="req">*</span></label>
+          <div class="checkgroup">
+            <label><input type="checkbox" name="why_here" value="Burnout"><span>Burnout</span></label>
+            <label><input type="checkbox" name="why_here" value="Anxiety"><span>Anxiety</span></label>
+            <label><input type="checkbox" name="why_here" value="Grief or loss"><span>Grief or loss</span></label>
+            <label><input type="checkbox" name="why_here" value="Loneliness or isolation"><span>Loneliness or isolation</span></label>
+            <label><input type="checkbox" name="why_here" value="Relationship challenges"><span>Relationship challenges</span></label>
+            <label><input type="checkbox" name="why_here" value="Identity or purpose"><span>Identity / purpose</span></label>
+            <label><input type="checkbox" name="why_here" value="Trauma recovery"><span>Trauma recovery</span></label>
+            <label><input type="checkbox" name="why_here" value="Spiritual exploration"><span>Spiritual exploration</span></label>
+            <label><input type="checkbox" name="why_here" value="Personal growth"><span>Personal growth</span></label>
+            <label><input type="checkbox" name="why_here" value="Not feeling like myself"><span>Not feeling like myself</span></label>
+            <label><input type="checkbox" name="why_here" value="Curious / exploring"><span>Curious / exploring</span></label>
+            <label><input type="checkbox" name="why_here" value="Other"><span>Other (note below)</span></label>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="if-heard">How did you hear about ReBe? <span class="req">*</span></label>
+            <select id="if-heard" name="heard_from" required>
+              <option value="">Choose…</option>
+              <option value="Friend">A friend told me</option>
+              <option value="ReBe team member">A ReBe team member</option>
+              <option value="Elizabeth Good">Elizabeth Good directly</option>
+              <option value="Reset workshop">I attended a Reset workshop</option>
+              <option value="Social media">Social media (Instagram, Facebook, etc.)</option>
+              <option value="Podcast or interview">Podcast or interview</option>
+              <option value="Search">Found it on Google / search</option>
+              <option value="Church or community">My church or community</option>
+              <option value="Other">Other (please note below)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="if-referrer">Who referred you? <span class="opt">(if anyone)</span></label>
+            <input id="if-referrer" name="referrer" type="text" placeholder="Their name">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>For breakout rooms, what are you comfortable with? <span class="req">*</span></label>
+          <div class="checkgroup">
+            <label><input type="radio" name="breakout_preference" value="Co-ed (mixed)" required><span>Co-ed (mixed)</span></label>
+            <label><input type="radio" name="breakout_preference" value="Women only"><span>Women only</span></label>
+            <label><input type="radio" name="breakout_preference" value="Men only"><span>Men only</span></label>
+            <label><input type="radio" name="breakout_preference" value="No strong preference"><span>No strong preference</span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="if-notes">Anything else we should know? <span class="opt">(optional)</span></label>
+          <textarea id="if-notes" name="notes" placeholder="What's bringing you here, what you're hoping for, anything you want Elizabeth and the team to know going in…"></textarea>
+        </div>
+
+        <button type="submit" class="intake-submit" id="intake-submit">Send to the team →</button>
+        <p class="intake-error" id="intake-error"></p>
+      </form>
+
+      <div class="intake-success" id="intake-success" role="status">
+        <div class="ok-mark" aria-hidden="true">✓</div>
+        <h3>Thank you — got it.</h3>
+        <p>Elizabeth and the team will review before the cohort starts.<br>See you Tuesday, June 23.</p>
+      </div>
+    </div>
 
     <p class="help">
       Questions, or didn't see the welcome within 48 hours? Email <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a>.
