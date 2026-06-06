@@ -395,7 +395,8 @@
     } catch (err) {
       console.error('Embedded checkout error', err);
       loadingEl.style.display = 'none';
-      errorEl.textContent = "Couldn't load checkout. Refresh the page and try again, or email refresh@justrebe.com.";
+      var details = (err && err.message) ? err.message : String(err);
+      errorEl.innerHTML = "Couldn't load checkout. Please email refresh@justrebe.com — paste this:<br><code style='display:block;background:#f5f5f5;padding:8px;margin-top:8px;font-size:11px;text-align:left;word-break:break-all;border-radius:4px'>" + details + "</code>";
       errorEl.style.display = 'block';
       loading = false;
     }
