@@ -270,18 +270,12 @@
       </div>
       <p class="cc-once">First cohort only — one-time price</p>
 
-      <div class="tos-row">
-        <input type="checkbox" id="tos-check">
-        <label for="tos-check" style="margin:0;font-weight:400;text-transform:none;letter-spacing:0">
-          I accept the <a href="#terms" id="tos-link">Terms of Service</a> and <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>, and agree to maintain confidentiality about what's shared in the group.
-        </label>
-      </div>
-
       <p class="checkout-error" id="checkout-error"></p>
       <div id="checkout">
-        <p class="checkout-loading" id="checkout-loading">Accept the Terms above to load secure checkout…</p>
+        <p class="checkout-loading" id="checkout-loading">Loading secure checkout…</p>
       </div>
       <p class="stripe-note">Secure checkout via Stripe · cards, Apple Pay, Affirm, Klarna, Afterpay</p>
+      <p class="stripe-note" style="margin-top:10px">By completing payment you agree to our <a href="#terms" id="tos-link" style="color:var(--green-ink);font-weight:600">Terms</a> and <a href="/privacy.html" target="_blank" rel="noopener" style="color:var(--green-ink);font-weight:600">Privacy Policy</a>, and to keep group confidentiality.</p>
     </div>
   </div>
 
@@ -345,13 +339,11 @@
   var basePrice = testMode ? 1 : 300;
   var amountCents = Math.round(basePrice * 100);
 
-  var tosCheck = document.getElementById('tos-check');
   var tosLink = document.getElementById('tos-link');
   var loadingEl = document.getElementById('checkout-loading');
   var checkoutContainer = document.getElementById('checkout');
   var errorEl = document.getElementById('checkout-error');
 
-  // Open the Terms section when clicked from the checkbox label
   if (tosLink) {
     tosLink.addEventListener('click', function(e){
       e.preventDefault();
@@ -409,9 +401,8 @@
     }
   }
 
-  tosCheck.addEventListener('change', function(){
-    if (tosCheck.checked) loadCheckout();
-  });
+  // Load checkout immediately on page load
+  loadCheckout();
 
   // Mobile sticky CTA — scroll to checkout
   var mcBtn = document.getElementById('mc-scroll');

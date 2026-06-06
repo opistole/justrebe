@@ -48,10 +48,10 @@
   .hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:680px;height:680px;background:radial-gradient(circle,rgba(227,160,31,.16) 0%,rgba(227,160,31,0) 70%);pointer-events:none;animation:floatGlow 12s ease-in-out infinite}
   @keyframes floatGlow{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(20px)}}
   .hero-eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--green-ink);margin:0 0 22px;position:relative;display:inline-block;padding:6px 18px;background:var(--green-wash);border-radius:999px}
-  .hero-kicker{font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(18px,2.2vw,24px);color:var(--green-ink);margin:0 0 14px;letter-spacing:0;position:relative}
-  .hero h1{font-family:var(--display);font-size:clamp(48px,8.5vw,96px);line-height:.95;color:var(--navy);margin:0 0 14px;text-transform:uppercase;letter-spacing:.005em;position:relative}
+  .hero-kicker{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--green-ink);margin:0 0 18px;text-transform:uppercase;position:relative;display:inline-block;padding:6px 18px;background:var(--green-wash);border-radius:999px}
+  .hero h1{font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(40px,7vw,80px);line-height:1.0;color:var(--navy);margin:0 0 8px;letter-spacing:-.015em;position:relative;text-transform:none}
   .hero h1 em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0}
-  .hero h2.hero-sub{font-family:var(--display);font-size:clamp(28px,4.5vw,48px);line-height:1.04;color:var(--navy);margin:0 0 26px;text-transform:uppercase;letter-spacing:.005em;position:relative;font-weight:400;opacity:.82}
+  .hero h2.hero-sub{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(24px,4vw,42px);line-height:1.1;color:var(--navy);margin:0 0 24px;letter-spacing:-.005em;position:relative;opacity:.78;text-transform:none}
   .hero h2.hero-sub em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0;opacity:1}
   .hero .deck{font-family:var(--serif);font-size:clamp(19px,2.4vw,24px);line-height:1.45;color:var(--slate);max-width:660px;margin:0 auto 28px;font-style:italic;font-weight:400;position:relative}
   .hero .meta{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--navy);margin:0;letter-spacing:.12em;text-transform:uppercase;position:relative}
@@ -111,36 +111,36 @@
   .p-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:980px;margin:0 auto}
   @media (max-width:780px){.p-grid{grid-template-columns:1fr;gap:26px}}
 
-  .p-card{position:relative;display:flex;flex-direction:column;border-radius:20px;text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 8px 28px rgba(6,11,80,.10);transition:transform .35s var(--ease),box-shadow .35s var(--ease);min-height:480px;background:#1F4A24;background-size:cover;background-position:center}
-  .p-card:hover{transform:translateY(-6px);box-shadow:0 22px 56px rgba(6,11,80,.18)}
+  .p-card{position:relative;display:block;border-radius:18px;text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 10px 28px rgba(6,11,80,.12);transition:transform .35s var(--ease),box-shadow .35s var(--ease);min-height:440px;background:#1F4A24;background-size:cover;background-position:center}
+  .p-card:hover{transform:translateY(-6px);box-shadow:0 22px 56px rgba(6,11,80,.20)}
   .p-card-11am{background-image:url('Images/cohort-bg-11am.jpeg')}
   .p-card-8pm{background-image:url('Images/cohort-bg-8pm.jpeg')}
 
-  /* Soft atmospheric overlay for readability */
-  .p-card-11am::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,40,30,.18) 0%,rgba(20,40,30,.0) 35%,rgba(20,40,30,0) 60%);pointer-events:none}
-  .p-card-8pm::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(30,40,60,.25) 0%,rgba(30,40,60,.05) 35%,transparent 60%);pointer-events:none}
+  /* Dark gradient at bottom for text legibility */
+  .p-card::after{content:'';position:absolute;left:0;right:0;bottom:0;height:75%;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.35) 40%,rgba(0,0,0,.82) 100%);z-index:1;pointer-events:none}
 
-  /* Top section: time badge + icon */
-  .p-top{position:relative;z-index:3;padding:22px 26px 12px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-  .p-card-time-badge{font-family:var(--display);font-size:38px;color:#fff;letter-spacing:.01em;line-height:.95;text-shadow:0 2px 10px rgba(0,0,0,.35)}
-  .p-card-time-badge .pcb-zone{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.22em;display:block;margin-top:5px;text-transform:uppercase;color:#fff;opacity:.92;text-shadow:0 1px 6px rgba(0,0,0,.4)}
-  .p-card-icon{flex-shrink:0;width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.4);border-radius:50%;font-size:17px;line-height:1;color:#fff}
+  /* Top section: time badge + icon (absolute, on photo) */
+  .p-top{position:absolute;top:0;left:0;right:0;z-index:3;padding:20px 22px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .p-card-time-badge{font-family:var(--serif);font-style:italic;font-weight:600;font-size:30px;color:#fff;letter-spacing:-.01em;line-height:1;text-shadow:0 2px 10px rgba(0,0,0,.45)}
+  .p-card-time-badge .pcb-zone{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.22em;display:block;margin-top:6px;text-transform:uppercase;color:#fff;opacity:.9;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+  .p-card-icon{flex-shrink:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.35);border-radius:50%;font-size:16px;line-height:1;color:#fff}
 
-  /* Bottom content panel — refined */
-  .p-card-content{position:relative;z-index:3;margin-top:auto;padding:24px 26px 24px;background:#fff}
-  .p-card-content::before{content:'';position:absolute;left:0;right:0;top:-32px;height:32px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 100%);pointer-events:none;z-index:-1}
+  /* Bottom overlay panel — content sits on top of dark gradient + photo */
+  .p-card-content{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 22px 22px;color:#fff}
 
-  .p-card h3{font-family:var(--display);font-size:22px;line-height:1;color:var(--navy);margin:0 0 12px;text-transform:uppercase;letter-spacing:.03em}
-  .p-card .p-dates{font-family:var(--sans);font-size:14px;color:var(--slate);margin:0 0 3px;line-height:1.5;font-weight:400}
-  .p-card .p-dates strong{color:var(--navy);font-weight:700}
-  .p-card .p-zones{font-family:var(--sans);font-size:12px;color:var(--muted);margin:0 0 18px;line-height:1.5;letter-spacing:.01em}
+  .p-card h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:24px;color:#fff;margin:0 0 8px;line-height:1.04;text-shadow:0 2px 10px rgba(0,0,0,.45);letter-spacing:-.005em}
+  .p-card .p-dates{font-family:var(--sans);font-size:14px;color:rgba(255,255,255,.92);margin:0 0 3px;line-height:1.45;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+  .p-card .p-dates strong{color:#fff;font-weight:700}
+  .p-card .p-zones{font-family:var(--sans);font-size:11px;color:rgba(255,255,255,.72);margin:0 0 14px;line-height:1.5;letter-spacing:.02em;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 
-  .p-card .p-price-row{margin:0;padding-top:16px;border-top:1px solid rgba(0,0,0,.07)}
-  .p-card .p-price{font-family:var(--display);font-size:36px;line-height:1;color:var(--navy);margin:0 0 4px;letter-spacing:-.005em}
-  .p-card .p-once{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green-ink);text-align:left;line-height:1.4;margin:0;max-width:none}
+  /* Price as frosted-glass pill — visually standout */
+  .p-card .p-price-row{display:flex;align-items:baseline;gap:12px;padding:11px 16px;background:rgba(255,255,255,.13);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.28);border-radius:12px;margin:0 0 14px;width:fit-content;max-width:100%}
+  .p-card .p-price{font-family:var(--display);font-size:28px;line-height:1;color:#fff;margin:0;letter-spacing:.005em}
+  .p-card .p-once{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FBD988;line-height:1.3;margin:0;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 
-  .p-card .p-cta{display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.08em;color:#fff;padding:14px 22px;background:var(--green-ink);border-radius:999px;margin-top:18px;transition:background .25s,letter-spacing .25s,box-shadow .25s;text-transform:uppercase;box-shadow:0 4px 14px rgba(68,153,69,.28)}
-  .p-card:hover .p-cta{background:var(--green-deep);letter-spacing:.1em;box-shadow:0 8px 22px rgba(68,153,69,.4)}
+  /* CTA */
+  .p-card .p-cta{display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.12em;color:#fff;padding:13px 20px;background:var(--green-ink);border-radius:999px;transition:background .25s,letter-spacing .25s,box-shadow .25s;text-transform:uppercase;box-shadow:0 6px 18px rgba(0,0,0,.32)}
+  .p-card:hover .p-cta{background:var(--green-deep);letter-spacing:.14em;box-shadow:0 10px 24px rgba(0,0,0,.4)}
   .p-card .p-cta-arrow{transition:transform .3s var(--ease);display:inline-block}
   .p-card:hover .p-cta-arrow{transform:translateX(4px)}
 
@@ -246,7 +246,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container container--narrow">
-    <p class="hero-kicker">ReFresh Group Cohorts</p>
+    <p class="hero-kicker">ReFresh Group Sessions</p>
     <h1>Five weeks.</h1>
     <h2 class="hero-sub">One small <em>group</em>.</h2>
     <p class="deck">A guided group experience with the ReBe team — built on a decades-proven framework.</p>
