@@ -393,6 +393,71 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  // -------- A2.5) BB chat handoff — visitor asked BB to connect them with Ashley --------
+  // body shape: { kind:'chat_handoff', record: { name, email, phone?, question, transcript } }
+  if (body.kind === 'chat_handoff') {
+    const row = body.record || {};
+    if (!row.email) return res.status(400).json({ error: 'Missing record.email' });
+    try {
+      const visitor = (row.name || 'Visitor').trim();
+      const email   = (row.email || '').trim();
+      const phone   = (row.phone || '').trim();
+      const question = (row.question || '(no specific question given)').trim();
+      const transcript = String(row.transcript || '').slice(0, 8000);
+
+      // Email to Ashley (admin)
+      const adminMsg = {
+        to: ADMIN_EMAIL,
+        subject: `BB chat handoff: ${visitor} wants to talk`,
+        text:
+`A visitor on /refresh-cohort asked BB to connect them with you.
+
+NAME:  ${visitor}
+EMAIL: ${email}
+PHONE: ${phone || '(not given)'}
+
+THEIR QUESTION / WHAT THEY'RE WONDERING:
+${question}
+
+------- FULL CHAT TRANSCRIPT -------
+${transcript || '(no transcript captured)'}
+------------------------------------
+
+Reply directly to ${email} — they're expecting to hear from you within 24 hours.
+
+— ReBe`
+      };
+
+      // Confirmation email to the visitor
+      const visitorMsg = {
+        to: email,
+        subject: 'You\'re connected with Ashley — ReBe ReFresh',
+        text:
+`Hi ${firstNameFromFull(visitor) || 'there'},
+
+Thanks for asking BB to put us in touch. Ashley — one of our ReBe confidants — will reach out to you within 24 hours (usually faster) to answer your question and help you decide whether the cohort is the right fit.
+
+If anything comes up in the meantime, just reply to this email.
+
+Warmly,
+The ReBe team
+refresh@justrebe.com`
+      };
+
+      const tags = ['ReBe — All', 'ReBe — Cohort', 'BB Chat Handoff'];
+      await Promise.all([
+        sendEmail(adminMsg),
+        sendEmail(visitorMsg),
+        kitSubscribe({ email, first_name: firstNameFromFull(visitor), tags })
+          .catch((e) => console.error('Kit (chat_handoff):', e)),
+      ]);
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      console.error('Notify error (chat_handoff):', err);
+      return res.status(500).json({ error: 'Email send failed', detail: String(err && err.message || err) });
+    }
+  }
+
   // -------- A3) Direct 1:1 request from refresh-private.html / refresh-groups.html --------
   // body shape: { kind:'confidant_request', record: { name, email, ... } }
   if (body.kind === 'confidant_request') {

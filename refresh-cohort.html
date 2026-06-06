@@ -131,9 +131,9 @@
   .p-card-content{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 22px 22px;color:#fff}
 
   .p-card h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:24px;color:#fff;margin:0 0 8px;line-height:1.04;text-shadow:0 2px 10px rgba(0,0,0,.45);letter-spacing:-.005em}
-  .p-card .p-dates{font-family:var(--sans);font-size:14px;color:rgba(255,255,255,.92);margin:0 0 3px;line-height:1.45;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+  .p-card .p-dates{font-family:var(--sans);font-size:17px;color:#fff;margin:0 0 5px;line-height:1.4;text-shadow:0 1px 6px rgba(0,0,0,.45);font-weight:400}
   .p-card .p-dates strong{color:#fff;font-weight:700}
-  .p-card .p-zones{font-family:var(--sans);font-size:11px;color:rgba(255,255,255,.72);margin:0 0 14px;line-height:1.5;letter-spacing:.02em;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+  .p-card .p-zones{font-family:var(--sans);font-size:13px;color:rgba(255,255,255,.85);margin:0 0 14px;line-height:1.5;letter-spacing:.02em;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 
   /* Price as frosted-glass pill — visually standout */
   .p-card .p-price-row{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:14px 18px;background:rgba(255,255,255,.13);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.28);border-radius:12px;margin:0 0 14px;width:fit-content;max-width:100%}
@@ -231,6 +231,67 @@
     *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
     .reveal{opacity:1!important;transform:none!important}
     .hero::before{animation:none}
+  }
+
+  /* ===== BB the Bee — chat widget ===== */
+  .bb-launcher{position:fixed;right:20px;bottom:20px;z-index:80;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--bone);border-radius:999px;padding:8px 18px 8px 8px;box-shadow:0 12px 28px rgba(6,11,80,.18);cursor:pointer;font-family:var(--sans);transition:transform .2s var(--ease),box-shadow .2s var(--ease);max-width:calc(100vw - 40px)}
+  .bb-launcher:hover{transform:translateY(-3px);box-shadow:0 18px 36px rgba(6,11,80,.24)}
+  .bb-launcher-avatar{width:48px;height:48px;border-radius:50%;background:#FCEFB8 center/cover no-repeat;background-image:url('Images/BB-mascot.png');flex-shrink:0;border:2px solid var(--gold)}
+  .bb-launcher-text{font-size:14px;color:var(--navy);font-weight:700;letter-spacing:.01em;line-height:1.2}
+  .bb-launcher-text small{display:block;font-weight:400;font-size:11px;color:var(--muted);letter-spacing:0;margin-top:2px;font-style:italic}
+  .bb-launcher.is-hidden{display:none}
+
+  .bb-window{position:fixed;right:20px;bottom:20px;z-index:81;width:min(380px,calc(100vw - 40px));height:min(580px,calc(100vh - 40px));background:#fff;border-radius:18px;box-shadow:0 28px 60px rgba(6,11,80,.28);display:none;flex-direction:column;overflow:hidden;font-family:var(--sans);border:1px solid var(--bone)}
+  .bb-window.is-open{display:flex;animation:bbPop .25s var(--ease)}
+  @keyframes bbPop{from{transform:translateY(20px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+
+  .bb-header{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(135deg,var(--gold-wash) 0%,#FBEFCB 100%);border-bottom:1px solid #f0d4a8;flex-shrink:0}
+  .bb-header-avatar{width:42px;height:42px;border-radius:50%;background:#FCEFB8 center/cover no-repeat;background-image:url('Images/BB-mascot.png');flex-shrink:0;border:2px solid var(--gold-ink)}
+  .bb-header-text{flex:1;min-width:0}
+  .bb-header-name{font-weight:700;font-size:15px;color:var(--navy);line-height:1;margin:0 0 3px}
+  .bb-header-sub{font-size:11px;color:var(--gold-ink);line-height:1;margin:0;display:flex;align-items:center;gap:5px}
+  .bb-header-sub::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(68,153,69,.18)}
+  .bb-close{background:transparent;border:0;cursor:pointer;font-size:22px;line-height:1;color:var(--navy);padding:4px 8px;border-radius:6px;flex-shrink:0}
+  .bb-close:hover{background:rgba(0,0,0,.06)}
+
+  .bb-messages{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px;background:var(--mist)}
+  .bb-msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.5;word-wrap:break-word}
+  .bb-msg-bot{background:#fff;border:1px solid var(--bone);color:var(--slate);border-bottom-left-radius:4px;align-self:flex-start;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .bb-msg-user{background:var(--green-ink);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+  .bb-msg p{margin:0 0 6px}
+  .bb-msg p:last-child{margin:0}
+  .bb-typing{align-self:flex-start;background:#fff;border:1px solid var(--bone);border-radius:14px;border-bottom-left-radius:4px;padding:10px 14px;display:none}
+  .bb-typing.is-visible{display:inline-flex;gap:4px;align-items:center}
+  .bb-typing span{width:6px;height:6px;background:var(--muted);border-radius:50%;animation:bbDot 1.3s ease-in-out infinite}
+  .bb-typing span:nth-child(2){animation-delay:.15s}
+  .bb-typing span:nth-child(3){animation-delay:.3s}
+  @keyframes bbDot{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+  .bb-input-row{padding:12px;background:#fff;border-top:1px solid var(--bone);display:flex;gap:8px;align-items:flex-end;flex-shrink:0}
+  .bb-input{flex:1;border:1px solid var(--bone);border-radius:10px;padding:9px 12px;font-family:inherit;font-size:14px;color:var(--slate);resize:none;outline:0;max-height:80px;line-height:1.4;transition:border-color .15s}
+  .bb-input:focus{border-color:var(--green)}
+  .bb-send{background:var(--green-ink);color:#fff;border:0;border-radius:10px;padding:10px 14px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s;flex-shrink:0;letter-spacing:.02em}
+  .bb-send:hover:not(:disabled){background:var(--green-deep)}
+  .bb-send:disabled{opacity:.45;cursor:wait}
+
+  /* Handoff CTA inside chat */
+  .bb-handoff{align-self:stretch;background:linear-gradient(135deg,var(--gold-wash) 0%,#FBEFCB 100%);border:1px solid #f0d4a8;border-radius:12px;padding:14px 16px;margin:6px 0}
+  .bb-handoff h4{font-family:var(--serif);font-style:italic;font-weight:600;font-size:15px;color:var(--navy);margin:0 0 6px;line-height:1.2}
+  .bb-handoff p{font-size:13px;color:var(--slate);line-height:1.45;margin:0 0 10px}
+  .bb-handoff label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin:8px 0 4px}
+  .bb-handoff input{width:100%;border:1px solid #e2d4b8;border-radius:8px;padding:8px 10px;font-family:inherit;font-size:13px;color:var(--slate);background:#fff;outline:0;transition:border-color .15s}
+  .bb-handoff input:focus{border-color:var(--gold-ink)}
+  .bb-handoff button{margin-top:10px;width:100%;background:var(--gold-ink);color:#fff;border:0;border-radius:8px;padding:11px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;transition:background .15s}
+  .bb-handoff button:hover:not(:disabled){background:#8E6510}
+  .bb-handoff button:disabled{opacity:.5;cursor:wait}
+  .bb-handoff-error{color:#c0392b;font-size:12px;margin-top:6px;text-align:center}
+  .bb-handoff-success{font-family:var(--serif);font-style:italic;color:var(--green-deep);font-size:14px;text-align:center;padding:6px 0}
+
+  @media (max-width:520px){
+    .bb-launcher{right:14px;bottom:14px;padding:6px 14px 6px 6px}
+    .bb-launcher-avatar{width:40px;height:40px}
+    .bb-launcher-text{font-size:13px}
+    .bb-window{right:0;bottom:0;width:100%;height:100%;border-radius:0;max-width:100%;max-height:100%}
   }
 </style>
 </head>
@@ -555,6 +616,30 @@
 
 </main>
 
+<!-- BB the Bee — chat widget -->
+<button type="button" class="bb-launcher" id="bb-launcher" aria-label="Chat with BB">
+  <div class="bb-launcher-avatar" aria-hidden="true"></div>
+  <span class="bb-launcher-text">Chat with BB<small>Your ReBe guide · ask anything</small></span>
+</button>
+
+<div class="bb-window" id="bb-window" role="dialog" aria-label="Chat with BB">
+  <div class="bb-header">
+    <div class="bb-header-avatar" aria-hidden="true"></div>
+    <div class="bb-header-text">
+      <p class="bb-header-name">BB</p>
+      <p class="bb-header-sub">Your ReBe guide</p>
+    </div>
+    <button type="button" class="bb-close" id="bb-close" aria-label="Close chat">×</button>
+  </div>
+  <div class="bb-messages" id="bb-messages" aria-live="polite">
+    <div class="bb-typing" id="bb-typing"><span></span><span></span><span></span></div>
+  </div>
+  <div class="bb-input-row">
+    <textarea class="bb-input" id="bb-input" rows="1" placeholder="Ask BB anything about the cohort…" aria-label="Type your message"></textarea>
+    <button type="button" class="bb-send" id="bb-send">Send</button>
+  </div>
+</div>
+
 <footer>
   <p class="foot-line foot-line--muted">ReBe — Rebuilding people from the inside out. Better me. Better we.</p>
   <p class="foot-line">This is a guided group experience, not crisis care. If you're in acute distress, reach out to a therapist, your doctor, or 988 (Suicide &amp; Crisis Lifeline).</p>
@@ -589,6 +674,155 @@
       if (e.target === m) m.close();
     });
   });
+
+  // ===== BB the Bee — chat widget
+  (function(){
+    var launcher = document.getElementById('bb-launcher');
+    var win = document.getElementById('bb-window');
+    var closeBtn = document.getElementById('bb-close');
+    var messagesEl = document.getElementById('bb-messages');
+    var typingEl = document.getElementById('bb-typing');
+    var input = document.getElementById('bb-input');
+    var sendBtn = document.getElementById('bb-send');
+    if (!launcher || !win || !messagesEl || !input || !sendBtn) return;
+
+    var history = [];
+    var transcript = '';
+
+    function appendMessage(role, text){
+      var div = document.createElement('div');
+      div.className = 'bb-msg ' + (role === 'assistant' ? 'bb-msg-bot' : 'bb-msg-user');
+      String(text).split(/\n\n+/).forEach(function(para){
+        var p = document.createElement('p');
+        p.textContent = para;
+        div.appendChild(p);
+      });
+      messagesEl.insertBefore(div, typingEl);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      transcript += (role === 'assistant' ? 'BB' : 'Visitor') + ': ' + text + '\n\n';
+    }
+
+    function showTyping(on){
+      typingEl.classList.toggle('is-visible', !!on);
+      if (on) messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function openHandoffForm(){
+      // Avoid duplicating the form if BB suggests handoff multiple times
+      if (messagesEl.querySelector('.bb-handoff')) return;
+      var card = document.createElement('div');
+      card.className = 'bb-handoff';
+      card.innerHTML =
+        '<h4>Talk with Ashley</h4>' +
+        '<p>Drop your name and email and Ashley will reach out within 24 hours.</p>' +
+        '<label for="bb-h-name">Name</label>' +
+        '<input id="bb-h-name" type="text" autocomplete="name">' +
+        '<label for="bb-h-email">Email</label>' +
+        '<input id="bb-h-email" type="email" autocomplete="email">' +
+        '<label for="bb-h-phone">Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">(optional)</span></label>' +
+        '<input id="bb-h-phone" type="tel" autocomplete="tel">' +
+        '<button type="button" id="bb-h-send">Connect me with Ashley →</button>' +
+        '<p class="bb-handoff-error" id="bb-h-error"></p>';
+      messagesEl.insertBefore(card, typingEl);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+
+      var hSend = card.querySelector('#bb-h-send');
+      var hError = card.querySelector('#bb-h-error');
+
+      hSend.addEventListener('click', async function(){
+        var name = card.querySelector('#bb-h-name').value.trim();
+        var email = card.querySelector('#bb-h-email').value.trim();
+        var phone = card.querySelector('#bb-h-phone').value.trim();
+        hError.textContent = '';
+        if (!name || !email) { hError.textContent = 'Please fill in your name and email.'; return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { hError.textContent = 'That email doesn\'t look right.'; return; }
+        hSend.disabled = true; hSend.textContent = 'Sending…';
+        try {
+          // Pull the visitor's last question from history as the "question"
+          var lastVisitor = '';
+          for (var i = history.length - 1; i >= 0; i--) {
+            if (history[i].role === 'user') { lastVisitor = history[i].content; break; }
+          }
+          var resp = await fetch('/api/notify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              kind: 'chat_handoff',
+              record: { name: name, email: email, phone: phone, question: lastVisitor, transcript: transcript }
+            })
+          });
+          if (!resp.ok) {
+            var d = await resp.text();
+            throw new Error(d || ('HTTP ' + resp.status));
+          }
+          card.innerHTML = '<p class="bb-handoff-success">Got it — Ashley will reach out within 24 hours. Check your inbox for a confirmation.</p>';
+        } catch (err) {
+          console.error('Handoff send failed', err);
+          hError.textContent = 'Couldn\'t send right now — please email refresh@justrebe.com directly.';
+          hSend.disabled = false; hSend.textContent = 'Connect me with Ashley →';
+        }
+      });
+    }
+
+    async function sendMessage(text){
+      if (!text.trim()) return;
+      appendMessage('user', text);
+      history.push({ role: 'user', content: text });
+      input.value = '';
+      input.style.height = 'auto';
+      sendBtn.disabled = true;
+      showTyping(true);
+      try {
+        var resp = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history })
+        });
+        var data = await resp.json();
+        showTyping(false);
+        if (!resp.ok || !data.reply) {
+          appendMessage('assistant', "Sorry — I'm having trouble reaching my brain. Email refresh@justrebe.com and the team will help directly.");
+        } else {
+          appendMessage('assistant', data.reply);
+          history.push({ role: 'assistant', content: data.reply });
+          if (data.suggest_handoff) openHandoffForm();
+        }
+      } catch (err) {
+        console.error('BB error', err);
+        showTyping(false);
+        appendMessage('assistant', "Sorry — I'm having trouble connecting. Email refresh@justrebe.com and the team will help directly.");
+      }
+      sendBtn.disabled = false;
+      input.focus();
+    }
+
+    function openChat(){
+      launcher.classList.add('is-hidden');
+      win.classList.add('is-open');
+      if (history.length === 0) {
+        // Kick off with BB's greeting (no API call — static for instant feel)
+        var greeting = "Hi — I'm BB, your ReBe guide. Ask me anything about the 5-week cohort — dates, format, who facilitates, whether it's right for you. Or I can connect you with Ashley, one of our confidants, anytime.";
+        appendMessage('assistant', greeting);
+        history.push({ role: 'assistant', content: greeting });
+      }
+      setTimeout(function(){ input.focus(); }, 200);
+    }
+    function closeChat(){
+      win.classList.remove('is-open');
+      launcher.classList.remove('is-hidden');
+    }
+
+    launcher.addEventListener('click', openChat);
+    closeBtn.addEventListener('click', closeChat);
+    sendBtn.addEventListener('click', function(){ sendMessage(input.value); });
+    input.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(input.value); }
+    });
+    input.addEventListener('input', function(){
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+    });
+  })();
 
   // ===== Exit-intent popup (desktop only, fires once per session)
   (function(){
