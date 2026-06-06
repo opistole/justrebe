@@ -234,22 +234,22 @@
   }
 
   /* ===== BB the Bee — chat widget ===== */
-  .bb-launcher{position:fixed;right:20px;bottom:20px;z-index:80;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--bone);border-radius:999px;padding:8px 18px 8px 8px;box-shadow:0 12px 28px rgba(6,11,80,.18);cursor:pointer;font-family:var(--sans);transition:transform .2s var(--ease),box-shadow .2s var(--ease);max-width:calc(100vw - 40px)}
+  .bb-launcher{position:fixed;right:22px;bottom:22px;z-index:80;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--bone);border-radius:999px;padding:10px 22px 10px 10px;box-shadow:0 12px 28px rgba(6,11,80,.18);cursor:pointer;font-family:var(--sans);transition:transform .2s var(--ease),box-shadow .2s var(--ease);max-width:calc(100vw - 44px)}
   .bb-launcher:hover{transform:translateY(-3px);box-shadow:0 18px 36px rgba(6,11,80,.24)}
-  .bb-launcher-avatar{width:48px;height:48px;border-radius:50%;background:#FCEFB8 center/cover no-repeat;background-image:url('Images/BB-mascot.png');flex-shrink:0;border:2px solid var(--gold)}
-  .bb-launcher-text{font-size:14px;color:var(--navy);font-weight:700;letter-spacing:.01em;line-height:1.2}
-  .bb-launcher-text small{display:block;font-weight:400;font-size:11px;color:var(--muted);letter-spacing:0;margin-top:2px;font-style:italic}
+  .bb-launcher-avatar{width:76px;height:76px;border-radius:50%;background:#FCEFB8 center/cover no-repeat;background-image:url('Images/BB-mascot.png');flex-shrink:0;border:3px solid var(--gold);box-shadow:0 4px 12px rgba(176,125,20,.25)}
+  .bb-launcher-text{font-size:15px;color:var(--navy);font-weight:700;letter-spacing:.01em;line-height:1.2}
+  .bb-launcher-text small{display:block;font-weight:400;font-size:12px;color:var(--muted);letter-spacing:0;margin-top:3px;font-style:italic}
   .bb-launcher.is-hidden{display:none}
 
-  .bb-window{position:fixed;right:20px;bottom:20px;z-index:81;width:min(380px,calc(100vw - 40px));height:min(580px,calc(100vh - 40px));background:#fff;border-radius:18px;box-shadow:0 28px 60px rgba(6,11,80,.28);display:none;flex-direction:column;overflow:hidden;font-family:var(--sans);border:1px solid var(--bone)}
+  .bb-window{position:fixed;right:22px;bottom:22px;z-index:81;width:min(400px,calc(100vw - 44px));height:min(620px,calc(100vh - 44px));background:#fff;border-radius:18px;box-shadow:0 28px 60px rgba(6,11,80,.28);display:none;flex-direction:column;overflow:hidden;font-family:var(--sans);border:1px solid var(--bone)}
   .bb-window.is-open{display:flex;animation:bbPop .25s var(--ease)}
   @keyframes bbPop{from{transform:translateY(20px) scale(.96);opacity:0}to{transform:none;opacity:1}}
 
-  .bb-header{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(135deg,var(--gold-wash) 0%,#FBEFCB 100%);border-bottom:1px solid #f0d4a8;flex-shrink:0}
-  .bb-header-avatar{width:42px;height:42px;border-radius:50%;background:#FCEFB8 center/cover no-repeat;background-image:url('Images/BB-mascot.png');flex-shrink:0;border:2px solid var(--gold-ink)}
+  .bb-header{display:flex;align-items:center;gap:14px;padding:16px 18px;background:linear-gradient(135deg,var(--gold-wash) 0%,#FBEFCB 100%);border-bottom:1px solid #f0d4a8;flex-shrink:0}
+  .bb-header-avatar{width:64px;height:64px;border-radius:50%;background:#FCEFB8 center/cover no-repeat;background-image:url('Images/BB-mascot.png');flex-shrink:0;border:3px solid var(--gold-ink);box-shadow:0 3px 10px rgba(176,125,20,.25)}
   .bb-header-text{flex:1;min-width:0}
-  .bb-header-name{font-weight:700;font-size:15px;color:var(--navy);line-height:1;margin:0 0 3px}
-  .bb-header-sub{font-size:11px;color:var(--gold-ink);line-height:1;margin:0;display:flex;align-items:center;gap:5px}
+  .bb-header-name{font-weight:700;font-size:17px;color:var(--navy);line-height:1;margin:0 0 5px}
+  .bb-header-sub{font-size:12px;color:var(--gold-ink);line-height:1;margin:0;display:flex;align-items:center;gap:6px}
   .bb-header-sub::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(68,153,69,.18)}
   .bb-close{background:transparent;border:0;cursor:pointer;font-size:22px;line-height:1;color:var(--navy);padding:4px 8px;border-radius:6px;flex-shrink:0}
   .bb-close:hover{background:rgba(0,0,0,.06)}
@@ -288,9 +288,10 @@
   .bb-handoff-success{font-family:var(--serif);font-style:italic;color:var(--green-deep);font-size:14px;text-align:center;padding:6px 0}
 
   @media (max-width:520px){
-    .bb-launcher{right:14px;bottom:14px;padding:6px 14px 6px 6px}
-    .bb-launcher-avatar{width:40px;height:40px}
-    .bb-launcher-text{font-size:13px}
+    .bb-launcher{right:16px;bottom:16px;padding:8px 18px 8px 8px;gap:12px}
+    .bb-launcher-avatar{width:60px;height:60px;border-width:2px}
+    .bb-launcher-text{font-size:14px}
+    .bb-launcher-text small{font-size:11px}
     .bb-window{right:0;bottom:0;width:100%;height:100%;border-radius:0;max-width:100%;max-height:100%}
   }
 </style>
