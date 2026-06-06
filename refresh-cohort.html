@@ -19,7 +19,7 @@
 
 <style>
   :root {
-    --paper:#FFFFFF; --mist:#FAF9F7; --cream:#FDF7E8; --navy:#060B50; --navy-dark:#040832;
+    --paper:#FFFFFF; --mist:#FAF9F7; --cream:#FDF7E8; --navy:#252C5C; --navy-dark:#040832;
     --green:#449945; --green-ink:#3A8438; --green-deep:#2A6D2C; --green-wash:#F2F8F2;
     --gold:#E3A01F; --gold-ink:#B07D14; --gold-wash:#FBF4E4;
     --slate:#212B37; --body:#4A535E; --muted:#9DA1A8; --bone:#E2E2E2; --coral:#EA492E;
@@ -48,9 +48,12 @@
   .hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:680px;height:680px;background:radial-gradient(circle,rgba(227,160,31,.16) 0%,rgba(227,160,31,0) 70%);pointer-events:none;animation:floatGlow 12s ease-in-out infinite}
   @keyframes floatGlow{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(20px)}}
   .hero-eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--green-ink);margin:0 0 22px;position:relative;display:inline-block;padding:6px 18px;background:var(--green-wash);border-radius:999px}
-  .hero h1{font-family:var(--display);font-size:clamp(44px,7.5vw,84px);line-height:1.0;color:var(--navy);margin:0 0 22px;text-transform:uppercase;letter-spacing:.005em;position:relative}
+  .hero-kicker{font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(18px,2.2vw,24px);color:var(--green-ink);margin:0 0 14px;letter-spacing:0;position:relative}
+  .hero h1{font-family:var(--display);font-size:clamp(48px,8.5vw,96px);line-height:.95;color:var(--navy);margin:0 0 14px;text-transform:uppercase;letter-spacing:.005em;position:relative}
   .hero h1 em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0}
-  .hero .deck{font-family:var(--serif);font-size:clamp(20px,2.6vw,26px);line-height:1.45;color:var(--slate);max-width:660px;margin:0 auto 28px;font-style:italic;font-weight:400;position:relative}
+  .hero h2.hero-sub{font-family:var(--display);font-size:clamp(28px,4.5vw,48px);line-height:1.04;color:var(--navy);margin:0 0 26px;text-transform:uppercase;letter-spacing:.005em;position:relative;font-weight:400;opacity:.82}
+  .hero h2.hero-sub em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0;opacity:1}
+  .hero .deck{font-family:var(--serif);font-size:clamp(19px,2.4vw,24px);line-height:1.45;color:var(--slate);max-width:660px;margin:0 auto 28px;font-style:italic;font-weight:400;position:relative}
   .hero .meta{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--navy);margin:0;letter-spacing:.12em;text-transform:uppercase;position:relative}
   .hero .meta .sep{color:var(--muted);font-weight:400;margin:0 8px}
 
@@ -108,25 +111,20 @@
   .p-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:980px;margin:0 auto}
   @media (max-width:780px){.p-grid{grid-template-columns:1fr;gap:26px}}
 
-  .p-card{position:relative;display:flex;flex-direction:column;border-radius:24px;text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 14px 40px rgba(6,11,80,.12);transition:transform .4s var(--ease),box-shadow .4s var(--ease);min-height:600px;background:#E8F0D8}
+  .p-card{position:relative;display:flex;flex-direction:column;border-radius:24px;text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 14px 40px rgba(6,11,80,.12);transition:transform .4s var(--ease),box-shadow .4s var(--ease);min-height:600px;background:#1F4A24;background-size:cover;background-position:center}
   .p-card:hover{transform:translateY(-8px);box-shadow:0 32px 70px rgba(6,11,80,.22)}
+  .p-card-11am{background-image:url('Images/cohort-bg-11am.jpeg')}
+  .p-card-8pm{background-image:url('Images/cohort-bg-8pm.jpeg')}
 
-  /* Full-card nature SVG background */
-  .p-nature{position:absolute;inset:0;width:100%;height:100%;z-index:0;transition:transform .9s var(--ease);display:block}
-  .p-card:hover .p-nature{transform:scale(1.06)}
-
-  /* Color overlays for morning vs evening */
-  .p-card-11am::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(253,247,232,.18) 0%,rgba(253,247,232,0) 50%),radial-gradient(circle at 78% 18%,rgba(248,228,135,.45) 0%,transparent 50%);pointer-events:none}
-  .p-card-8pm::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(40,40,90,.32) 0%,rgba(40,40,90,.08) 35%,transparent 60%),radial-gradient(circle at 76% 20%,rgba(247,212,150,.35) 0%,transparent 45%);pointer-events:none}
+  /* Soft atmospheric overlays for readability + mood */
+  .p-card-11am::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(253,247,232,.08) 0%,rgba(20,40,30,.15) 30%,rgba(20,40,30,.0) 55%),radial-gradient(circle at 75% 18%,rgba(255,248,210,.35) 0%,transparent 55%);pointer-events:none}
+  .p-card-8pm::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(30,40,60,.28) 0%,rgba(30,40,60,.08) 35%,transparent 55%),radial-gradient(circle at 76% 20%,rgba(247,212,150,.28) 0%,transparent 50%);pointer-events:none}
 
   /* Top section: time badge + icon */
   .p-top{position:relative;z-index:3;padding:32px 32px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
-  .p-card-time-badge{font-family:var(--display);font-size:58px;color:var(--navy);letter-spacing:.005em;line-height:.95;text-shadow:0 2px 14px rgba(255,255,255,.65)}
-  .p-card-8pm .p-card-time-badge{color:#fff;text-shadow:0 2px 14px rgba(6,11,80,.5)}
-  .p-card-time-badge .pcb-zone{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.22em;display:block;margin-top:8px;text-transform:uppercase;color:var(--green-deep);text-shadow:0 1px 8px rgba(255,255,255,.7)}
-  .p-card-8pm .p-card-time-badge .pcb-zone{color:#FBD988;text-shadow:0 1px 8px rgba(6,11,80,.5)}
-  .p-card-icon{flex-shrink:0;width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.7);border-radius:50%;font-size:24px;line-height:1;color:var(--gold-ink)}
-  .p-card-8pm .p-card-icon{background:rgba(6,11,80,.45);border-color:rgba(251,217,136,.5);color:#FBD988}
+  .p-card-time-badge{font-family:var(--display);font-size:58px;color:#fff;letter-spacing:.005em;line-height:.95;text-shadow:0 3px 16px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.4)}
+  .p-card-time-badge .pcb-zone{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.22em;display:block;margin-top:8px;text-transform:uppercase;color:#fff;opacity:.95;text-shadow:0 2px 10px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.4)}
+  .p-card-icon{flex-shrink:0;width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.22);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.45);border-radius:50%;font-size:24px;line-height:1;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.3)}
 
   /* Bottom content panel with smooth fade into white */
   .p-card-content{position:relative;z-index:3;margin-top:auto;padding:30px 32px 32px;background:#fff}
@@ -249,10 +247,11 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container container--narrow">
-    <p class="hero-eyebrow">The 5-Week Cohort</p>
-    <h1>Five weeks.<br>One small <em>group</em>.</h1>
+    <p class="hero-kicker">ReFresh Group Cohorts</p>
+    <h1>Five weeks.</h1>
+    <h2 class="hero-sub">One small <em>group</em>.</h2>
     <p class="deck">A guided group experience with the ReBe team — built on a decades-proven framework.</p>
-    <p class="meta">Tuesdays<span class="sep">·</span>June 23 – July 21<span class="sep">·</span>60–75 min/session</p>
+    <p class="meta">Tuesdays<span class="sep">·</span>June 23 – July 21<span class="sep">·</span>60 min/session</p>
   </div>
 </section>
 
@@ -323,7 +322,7 @@
     <div class="whatyouget reveal">
       <h3>What you'll get</h3>
       <ul>
-        <li><strong>Five weekly live Zoom sessions</strong> (60–75 min each) with the ReBe team</li>
+        <li><strong>Five weekly live Zoom sessions</strong> (60 min each) with the ReBe team</li>
         <li><strong>Multiple optional bonus group sessions</strong> led individually by each of the 7 confidants throughout the 5 weeks</li>
         <li><strong>Live Q&amp;A in every session</strong> — bring your specific questions</li>
         <li>A <strong>small cohort</strong> — small enough to be known, large enough to be honest</li>
@@ -346,46 +345,6 @@
     <div class="p-grid">
 
       <a class="p-card p-card-11am reveal" href="refresh-cohort-11am.html" aria-label="The 11 AM ET Cohort">
-        <svg class="p-nature" viewBox="0 0 600 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="sky-11am" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#FDF7E8"/>
-              <stop offset="55%" stop-color="#EEF3DC"/>
-              <stop offset="100%" stop-color="#D8E5C8"/>
-            </linearGradient>
-            <linearGradient id="mfar-11am" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#B8CFA8"/>
-              <stop offset="100%" stop-color="#9CBC8C"/>
-            </linearGradient>
-            <linearGradient id="mmid-11am" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#7FAA70"/>
-              <stop offset="100%" stop-color="#5F8E53"/>
-            </linearGradient>
-            <linearGradient id="mfg-11am" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#3F7240"/>
-              <stop offset="100%" stop-color="#2A5C2E"/>
-            </linearGradient>
-            <radialGradient id="sun-11am" cx="0.5" cy="0.5">
-              <stop offset="0%" stop-color="#F8E58A" stop-opacity="0.8"/>
-              <stop offset="100%" stop-color="#F8E58A" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <rect width="600" height="700" fill="url(#sky-11am)"/>
-          <ellipse cx="465" cy="135" rx="170" ry="150" fill="url(#sun-11am)"/>
-          <circle cx="465" cy="135" r="38" fill="#F8E099" opacity="0.85"/>
-          <path d="M0,440 L70,340 L140,400 L220,310 L300,380 L380,300 L460,360 L540,330 L600,360 L600,700 L0,700 Z" fill="url(#mfar-11am)" opacity="0.7"/>
-          <path d="M0,510 L60,420 L150,490 L230,400 L310,475 L390,395 L470,455 L550,420 L600,440 L600,700 L0,700 Z" fill="url(#mmid-11am)" opacity="0.88"/>
-          <path d="M0,590 L100,540 L200,580 L300,545 L400,585 L500,550 L600,575 L600,700 L0,700 Z" fill="url(#mfg-11am)"/>
-          <g fill="#1F4A24">
-            <polygon points="55,580 67,545 79,580"/>
-            <polygon points="135,585 147,550 159,585"/>
-            <polygon points="220,590 232,553 244,590"/>
-            <polygon points="320,592 332,557 344,592"/>
-            <polygon points="410,595 423,558 436,595"/>
-            <polygon points="495,592 508,556 521,592"/>
-            <polygon points="575,590 587,556 599,590"/>
-          </g>
-        </svg>
         <div class="p-top">
           <div class="p-card-time-badge">11 AM<span class="pcb-zone">Eastern</span></div>
           <div class="p-card-icon" aria-hidden="true">☀</div>
@@ -393,7 +352,7 @@
         <div class="p-card-content">
           <h3>Mornings</h3>
           <p class="p-dates"><strong>Tuesdays · June 23 – July 21</strong></p>
-          <p class="p-zones">11 AM ET · 8 AM PT · 60–75 min per session</p>
+          <p class="p-zones">11 AM ET · 8 AM PT · 60 min per session</p>
           <div class="p-price-row">
             <p class="p-price">$300</p>
             <p class="p-once">First cohort only<br>One-time price</p>
@@ -403,46 +362,6 @@
       </a>
 
       <a class="p-card p-card-8pm reveal d-1" href="refresh-cohort-8pm.html" aria-label="The 8 PM ET Cohort">
-        <svg class="p-nature" viewBox="0 0 600 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="sky-8pm" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#F1E6CC"/>
-              <stop offset="40%" stop-color="#DFD3B2"/>
-              <stop offset="100%" stop-color="#B7C5A8"/>
-            </linearGradient>
-            <linearGradient id="mfar-8pm" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#A9BFA0"/>
-              <stop offset="100%" stop-color="#88A480"/>
-            </linearGradient>
-            <linearGradient id="mmid-8pm" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#6F9665"/>
-              <stop offset="100%" stop-color="#4E7944"/>
-            </linearGradient>
-            <linearGradient id="mfg-8pm" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#365E37"/>
-              <stop offset="100%" stop-color="#234B25"/>
-            </linearGradient>
-            <radialGradient id="moon-8pm" cx="0.5" cy="0.5">
-              <stop offset="0%" stop-color="#FBE6A8" stop-opacity="0.55"/>
-              <stop offset="100%" stop-color="#FBE6A8" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <rect width="600" height="700" fill="url(#sky-8pm)"/>
-          <ellipse cx="465" cy="135" rx="170" ry="150" fill="url(#moon-8pm)"/>
-          <circle cx="465" cy="135" r="32" fill="#FCEFB8" opacity="0.9"/>
-          <path d="M0,440 L70,340 L140,400 L220,310 L300,380 L380,300 L460,360 L540,330 L600,360 L600,700 L0,700 Z" fill="url(#mfar-8pm)" opacity="0.7"/>
-          <path d="M0,510 L60,420 L150,490 L230,400 L310,475 L390,395 L470,455 L550,420 L600,440 L600,700 L0,700 Z" fill="url(#mmid-8pm)" opacity="0.88"/>
-          <path d="M0,590 L100,540 L200,580 L300,545 L400,585 L500,550 L600,575 L600,700 L0,700 Z" fill="url(#mfg-8pm)"/>
-          <g fill="#162E1A">
-            <polygon points="55,580 67,545 79,580"/>
-            <polygon points="135,585 147,550 159,585"/>
-            <polygon points="220,590 232,553 244,590"/>
-            <polygon points="320,592 332,557 344,592"/>
-            <polygon points="410,595 423,558 436,595"/>
-            <polygon points="495,592 508,556 521,592"/>
-            <polygon points="575,590 587,556 599,590"/>
-          </g>
-        </svg>
         <div class="p-top">
           <div class="p-card-time-badge">8 PM<span class="pcb-zone">Eastern</span></div>
           <div class="p-card-icon" aria-hidden="true">☾</div>
@@ -450,7 +369,7 @@
         <div class="p-card-content">
           <h3>Evenings</h3>
           <p class="p-dates"><strong>Tuesdays · June 23 – July 21</strong></p>
-          <p class="p-zones">8 PM ET · 5 PM PT · 60–75 min per session</p>
+          <p class="p-zones">8 PM ET · 5 PM PT · 60 min per session</p>
           <div class="p-price-row">
             <p class="p-price">$300</p>
             <p class="p-once">First cohort only<br>One-time price</p>
