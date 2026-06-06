@@ -268,7 +268,10 @@
   .bb-typing span:nth-child(3){animation-delay:.3s}
   @keyframes bbDot{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 
-  .bb-input-row{padding:12px;background:#fff;border-top:1px solid var(--bone);display:flex;gap:8px;align-items:flex-end;flex-shrink:0}
+  .bb-disclaimer{padding:9px 14px 0;background:#fff;border-top:1px solid var(--bone);font-size:10.5px;color:var(--muted);text-align:center;line-height:1.4;letter-spacing:.01em;flex-shrink:0;font-style:italic}
+  .bb-disclaimer a{color:var(--green-ink);text-decoration:none;border-bottom:1px dotted var(--green-ink)}
+  .bb-disclaimer a:hover{border-bottom-style:solid}
+  .bb-input-row{padding:10px 12px 12px;background:#fff;display:flex;gap:8px;align-items:flex-end;flex-shrink:0}
   .bb-input{flex:1;border:1px solid var(--bone);border-radius:10px;padding:9px 12px;font-family:inherit;font-size:14px;color:var(--slate);resize:none;outline:0;max-height:80px;line-height:1.4;transition:border-color .15s}
   .bb-input:focus{border-color:var(--green)}
   .bb-send{background:var(--green-ink);color:#fff;border:0;border-radius:10px;padding:10px 14px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s;flex-shrink:0;letter-spacing:.02em}
@@ -621,7 +624,7 @@
 <!-- BB the Bee — chat widget -->
 <button type="button" class="bb-launcher" id="bb-launcher" aria-label="Chat with BB">
   <div class="bb-launcher-avatar" aria-hidden="true"></div>
-  <span class="bb-launcher-text">Chat with BB<small>Your ReBe guide · ask anything</small></span>
+  <span class="bb-launcher-text">Chat with BB<small>Your ReBe guide · Ask me anything</small></span>
 </button>
 
 <div class="bb-window" id="bb-window" role="dialog" aria-label="Chat with BB">
@@ -636,8 +639,9 @@
   <div class="bb-messages" id="bb-messages" aria-live="polite">
     <div class="bb-typing" id="bb-typing"><span></span><span></span><span></span></div>
   </div>
+  <p class="bb-disclaimer">BB is an AI assistant. Don't share anything you wouldn't put in an email. <a href="/privacy" target="_blank" rel="noopener">Privacy</a></p>
   <div class="bb-input-row">
-    <textarea class="bb-input" id="bb-input" rows="1" placeholder="Ask BB anything about the cohort…" aria-label="Type your message"></textarea>
+    <textarea class="bb-input" id="bb-input" rows="1" placeholder="Ask BB anything…" aria-label="Type your message"></textarea>
     <button type="button" class="bb-send" id="bb-send">Send</button>
   </div>
 </div>
@@ -803,7 +807,7 @@
       win.classList.add('is-open');
       if (history.length === 0) {
         // Kick off with BB's greeting (no API call — static for instant feel)
-        var greeting = "Hi — I'm BB, your ReBe guide. Ask me anything about the 5-week cohort — dates, format, who facilitates, whether it's right for you. Or I can connect you with Ashley, one of our confidants, anytime.";
+        var greeting = "Hi — I'm BB, your ReBe guide. I'm an AI assistant. Ask me anything — about the 5-week cohort, the team, payment, or whether it's right for you. I can also connect you with Ashley, one of our confidants, anytime.";
         appendMessage('assistant', greeting);
         history.push({ role: 'assistant', content: greeting });
       }
