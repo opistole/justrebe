@@ -138,6 +138,58 @@
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
   }
+
+  /* ===== BB the Bee — matchmaker chat widget ===== */
+  .bb-launcher{position:fixed;right:22px;bottom:22px;z-index:80;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--bone);border-radius:999px;padding:10px 22px 10px 10px;box-shadow:0 12px 28px rgba(6,11,80,.18);cursor:pointer;font-family:var(--sans);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s cubic-bezier(.16,1,.3,1);max-width:calc(100vw - 44px);border:0;font:inherit;color:inherit}
+  .bb-launcher:hover{transform:translateY(-3px);box-shadow:0 18px 36px rgba(6,11,80,.24)}
+  .bb-launcher-avatar{width:76px;height:76px;border-radius:50%;background:#FCEFB8 center/cover no-repeat;background-image:url('Images/BB-mascot.png');flex-shrink:0;border:3px solid var(--gold);box-shadow:0 4px 12px rgba(176,125,20,.25)}
+  .bb-launcher-text{font-size:15px;color:var(--navy);font-weight:700;letter-spacing:.01em;line-height:1.2;text-align:left}
+  .bb-launcher-text small{display:block;font-weight:400;font-size:12px;color:var(--muted);letter-spacing:0;margin-top:3px;font-style:italic}
+  .bb-launcher.is-hidden{display:none}
+
+  .bb-window{position:fixed;right:22px;bottom:22px;z-index:81;width:min(400px,calc(100vw - 44px));height:min(620px,calc(100vh - 44px));background:#fff;border-radius:18px;box-shadow:0 28px 60px rgba(6,11,80,.28);display:none;flex-direction:column;overflow:hidden;font-family:var(--sans);border:1px solid var(--bone)}
+  .bb-window.is-open{display:flex;animation:bbPop .25s cubic-bezier(.16,1,.3,1)}
+  @keyframes bbPop{from{transform:translateY(20px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+
+  .bb-header{display:flex;align-items:center;gap:14px;padding:16px 18px;background:linear-gradient(135deg,var(--gold-wash) 0%,#FBEFCB 100%);border-bottom:1px solid #f0d4a8;flex-shrink:0}
+  .bb-header-avatar{width:64px;height:64px;border-radius:50%;background:#FCEFB8 center/cover no-repeat;background-image:url('Images/BB-mascot.png');flex-shrink:0;border:3px solid var(--gold-ink);box-shadow:0 3px 10px rgba(176,125,20,.25)}
+  .bb-header-text{flex:1;min-width:0}
+  .bb-header-name{font-weight:700;font-size:17px;color:var(--navy);line-height:1;margin:0 0 5px}
+  .bb-header-sub{font-size:12px;color:var(--gold-ink);line-height:1;margin:0;display:flex;align-items:center;gap:6px}
+  .bb-header-sub::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(68,153,69,.18)}
+  .bb-close{background:transparent;border:0;cursor:pointer;font-size:22px;line-height:1;color:var(--navy);padding:4px 8px;border-radius:6px;flex-shrink:0}
+  .bb-close:hover{background:rgba(0,0,0,.06)}
+
+  .bb-messages{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px;background:var(--mist)}
+  .bb-msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.5;word-wrap:break-word}
+  .bb-msg-bot{background:#fff;border:1px solid var(--bone);color:var(--slate);border-bottom-left-radius:4px;align-self:flex-start;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .bb-msg-user{background:var(--green-ink);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+  .bb-msg p{margin:0 0 6px}
+  .bb-msg p:last-child{margin:0}
+  .bb-typing{align-self:flex-start;background:#fff;border:1px solid var(--bone);border-radius:14px;border-bottom-left-radius:4px;padding:10px 14px;display:none}
+  .bb-typing.is-visible{display:inline-flex;gap:4px;align-items:center}
+  .bb-typing span{width:6px;height:6px;background:var(--muted);border-radius:50%;animation:bbDot 1.3s ease-in-out infinite}
+  .bb-typing span:nth-child(2){animation-delay:.15s}
+  .bb-typing span:nth-child(3){animation-delay:.3s}
+  @keyframes bbDot{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+  .bb-disclaimer{padding:9px 14px 0;background:#fff;border-top:1px solid var(--bone);font-size:10.5px;color:var(--muted);text-align:center;line-height:1.4;letter-spacing:.01em;flex-shrink:0;font-style:italic}
+  .bb-disclaimer a{color:var(--green-ink);text-decoration:none;border-bottom:1px dotted var(--green-ink)}
+  .bb-disclaimer a:hover{border-bottom-style:solid}
+  .bb-input-row{padding:10px 12px 12px;background:#fff;display:flex;gap:8px;align-items:flex-end;flex-shrink:0}
+  .bb-input{flex:1;border:1px solid var(--bone);border-radius:10px;padding:9px 12px;font-family:inherit;font-size:14px;color:var(--slate);resize:none;outline:0;max-height:80px;line-height:1.4;transition:border-color .15s}
+  .bb-input:focus{border-color:var(--green)}
+  .bb-send{background:var(--green-ink);color:#fff;border:0;border-radius:10px;padding:10px 14px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s;flex-shrink:0;letter-spacing:.02em}
+  .bb-send:hover:not(:disabled){background:var(--green-deep)}
+  .bb-send:disabled{opacity:.45;cursor:wait}
+
+  @media (max-width:520px){
+    .bb-launcher{right:16px;bottom:16px;padding:8px 18px 8px 8px;gap:12px}
+    .bb-launcher-avatar{width:60px;height:60px;border-width:2px}
+    .bb-launcher-text{font-size:14px}
+    .bb-launcher-text small{font-size:11px}
+    .bb-window{right:0;bottom:0;width:100%;height:100%;border-radius:0;max-width:100%;max-height:100%}
+  }
 </style>
 </head>
 <body>
@@ -300,6 +352,53 @@
   </p>
   <p class="foot-line foot-line--muted">© 2026 Just ReBe, LLC. All rights reserved.</p>
 </footer>
+
+<!-- BB the Bee — matchmaker chat widget -->
+<button type="button" class="bb-launcher" id="bb-launcher" aria-label="Chat with BB">
+  <div class="bb-launcher-avatar" aria-hidden="true"></div>
+  <span class="bb-launcher-text">Chat with BB<small>Your ReBe guide · Ask me anything</small></span>
+</button>
+
+<div class="bb-window" id="bb-window" role="dialog" aria-label="Chat with BB">
+  <div class="bb-header">
+    <div class="bb-header-avatar" aria-hidden="true"></div>
+    <div class="bb-header-text">
+      <p class="bb-header-name">BB</p>
+      <p class="bb-header-sub">Your ReBe guide</p>
+    </div>
+    <button type="button" class="bb-close" id="bb-close" aria-label="Close chat">×</button>
+  </div>
+  <div class="bb-messages" id="bb-messages" aria-live="polite">
+    <div class="bb-typing" id="bb-typing"><span></span><span></span><span></span></div>
+  </div>
+  <p class="bb-disclaimer">BB is an AI assistant. Don't share anything you wouldn't put in an email. <a href="/privacy" target="_blank" rel="noopener">Privacy</a></p>
+  <div class="bb-input-row">
+    <textarea class="bb-input" id="bb-input" rows="1" placeholder="Ask BB anything…" aria-label="Type your message"></textarea>
+    <button type="button" class="bb-send" id="bb-send">Send</button>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var launcher = document.getElementById('bb-launcher');
+    var win = document.getElementById('bb-window');
+    var closeBtn = document.getElementById('bb-close');
+    var messagesEl = document.getElementById('bb-messages');
+    var typingEl = document.getElementById('bb-typing');
+    var input = document.getElementById('bb-input');
+    var sendBtn = document.getElementById('bb-send');
+    if (!launcher || !win || !messagesEl || !input || !sendBtn) return;
+    var history = [];
+    function escapeHTML(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+    function linkify(t){var e=escapeHTML(t);e=e.replace(/(https?:\/\/[^\s<]+[^\s<\.,;:!?\)])/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener" style="color:#3A8438;text-decoration:underline">'+u+'</a>';});e=e.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,function(a){return '<a href="mailto:'+a+'" style="color:#3A8438;text-decoration:underline">'+a+'</a>';});return e;}
+    function appendMessage(role,text){var d=document.createElement('div');d.className='bb-msg '+(role==='assistant'?'bb-msg-bot':'bb-msg-user');String(text).split(/\n\n+/).forEach(function(p){var el=document.createElement('p');if(role==='assistant'){el.innerHTML=linkify(p);}else{el.textContent=p;}d.appendChild(el);});messagesEl.insertBefore(d,typingEl);messagesEl.scrollTop=messagesEl.scrollHeight;}
+    function showTyping(on){typingEl.classList.toggle('is-visible',!!on);if(on)messagesEl.scrollTop=messagesEl.scrollHeight;}
+    async function sendMessage(text){if(!text.trim())return;appendMessage('user',text);history.push({role:'user',content:text});input.value='';input.style.height='auto';sendBtn.disabled=true;showTyping(true);try{var resp=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,page:'refresh'})});var data=await resp.json();showTyping(false);if(!resp.ok||!data.reply){appendMessage('assistant',"Sorry — I'm having trouble reaching my brain. Email refresh@justrebe.com and the team will help directly.");}else{appendMessage('assistant',data.reply);history.push({role:'assistant',content:data.reply});}}catch(err){console.error('BB error',err);showTyping(false);appendMessage('assistant',"Sorry — I'm having trouble connecting. Email refresh@justrebe.com.");}sendBtn.disabled=false;input.focus();}
+    function openChat(){launcher.classList.add('is-hidden');win.classList.add('is-open');if(history.length===0){var g="Hi — I'm BB, your ReBe guide. I'm an AI assistant. Trying to figure out if the cohort or 1:1 is right for you? Or want to know more about either? Ask me anything.";appendMessage('assistant',g);history.push({role:'assistant',content:g});}setTimeout(function(){input.focus();},200);}
+    function closeChat(){win.classList.remove('is-open');launcher.classList.remove('is-hidden');}
+    launcher.addEventListener('click',openChat);closeBtn.addEventListener('click',closeChat);sendBtn.addEventListener('click',function(){sendMessage(input.value);});input.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage(input.value);}});input.addEventListener('input',function(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,80)+'px';});
+  })();
+</script>
 
 </body>
 </html>
