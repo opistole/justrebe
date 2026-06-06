@@ -87,7 +87,9 @@ module.exports = async function handler(req, res) {
   params.append('mode', 'payment');
 
   if (uiMode === 'embedded') {
-    params.append('ui_mode', 'embedded');
+    // Note: Stripe renamed 'embedded' to 'embedded_page' in their API,
+    // but the JS SDK method is still stripe.initEmbeddedCheckout().
+    params.append('ui_mode', 'embedded_page');
     params.append('return_url', return_url + (return_url.includes('?') ? '&' : '?') + 'session_id={CHECKOUT_SESSION_ID}');
     // In embedded mode, Stripe collects email itself; we don't pre-fill.
     // We DO collect phone since we want it for SMS reminders.

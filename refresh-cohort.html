@@ -4,9 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>ReBe ReFresh · The 5-Week Cohort</title>
-<meta name="description" content="Five weeks of guided group work with Elizabeth Good and the full ReBe team. Tuesdays, June 23 – July 21 — choose 11 AM ET or 8 PM ET." />
+<meta name="description" content="Five weeks of guided group work with the ReBe team — Elizabeth Good as facilitator. Tuesdays, June 23 – July 21. Choose 11 AM ET or 8 PM ET." />
 <meta property="og:title" content="ReBe ReFresh · The 5-Week Cohort" />
-<meta property="og:description" content="Five weeks with Elizabeth and the ReBe team. Tuesdays, June 23 – July 21 — 11 AM or 8 PM ET." />
+<meta property="og:description" content="Five weeks with the ReBe team. Tuesdays, June 23 – July 21 — 11 AM or 8 PM ET. Elizabeth Good facilitates." />
 <meta property="og:image" content="https://justrebe.com/Images/RESET_616_Pres.png" />
 <meta property="og:url" content="https://justrebe.com/refresh-cohort" />
 <meta property="og:type" content="website" />
@@ -40,8 +40,8 @@
   .util-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
   .wordmark{font-family:var(--sans);font-weight:700;color:var(--navy);letter-spacing:.02em;font-size:18px;text-decoration:none}
   .wordmark span{color:var(--green)}
-  .util-back{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--navy);text-decoration:none;letter-spacing:.02em}
-  .util-back:hover{color:var(--green-ink)}
+  .util-cta{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--navy);text-decoration:none;border-bottom:2px solid var(--green);padding-bottom:2px;letter-spacing:.02em}
+  .util-cta:hover{color:var(--green-ink)}
 
   /* Hero */
   .hero{padding:72px 0 48px;text-align:center}
@@ -52,11 +52,44 @@
   .hero .meta{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--navy);margin:24px 0 0;letter-spacing:.06em;text-transform:uppercase}
   .hero .meta .sep{color:var(--muted);font-weight:400;margin:0 6px}
 
+  /* Team strip */
+  .team-strip{background:var(--paper);padding:48px 0 56px}
+  .team-strip .eyebrow{text-align:center;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-ink);margin:0 0 10px}
+  .team-strip h2{font-family:var(--display);font-size:clamp(28px,4vw,40px);line-height:1.15;color:var(--navy);text-align:center;margin:0 0 32px;text-transform:uppercase}
+  .team-strip h2 em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0}
+  .team-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:28px 20px;max-width:880px;margin:0 auto}
+  .team-member{flex:0 0 calc(25% - 15px);max-width:calc(25% - 15px);min-width:0;text-align:center}
+  @media (max-width:760px){.team-member{flex:0 0 calc(33.333% - 14px);max-width:calc(33.333% - 14px)}}
+  @media (max-width:500px){.team-member{flex:0 0 calc(50% - 10px);max-width:calc(50% - 10px)}}
+  .team-photo{width:100%;height:0;padding-bottom:125%;position:relative;border-radius:12px;overflow:hidden;background:var(--mist);box-shadow:0 8px 24px rgba(6,11,80,.10),inset 0 0 0 2px var(--green);margin-bottom:12px}
+  .team-photo picture{position:absolute;inset:0;display:block}
+  .team-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .team-name{font-family:var(--serif);font-style:italic;font-size:18px;font-weight:600;color:var(--navy);line-height:1.2;margin:0 0 6px;min-height:2.4em;display:flex;align-items:center;justify-content:center}
+  .team-title{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.01em;color:var(--green-ink);line-height:1.4;margin:0;min-height:2.6em}
+
+  /* About + What you'll get */
+  .about{background:var(--mist);padding:64px 0}
+  .about .container{max-width:780px}
+  .about h2{font-family:var(--display);font-size:clamp(30px,4vw,42px);line-height:1.08;color:var(--navy);margin:0 0 20px;text-transform:uppercase;text-align:center}
+  .about h2 em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0}
+  .about p{font-size:17px;line-height:1.65;margin:0 0 16px;color:var(--slate)}
+  .about p strong{color:var(--navy)}
+  .about p em{font-style:italic;color:var(--green-ink)}
+
+  .whatyouget{background:var(--paper);border:1px solid #cfe6d0;border-radius:18px;padding:32px 36px;max-width:760px;margin:36px auto 0;box-shadow:0 8px 24px rgba(6,11,80,.05)}
+  .whatyouget h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:24px;color:var(--navy);margin:0 0 18px}
+  .whatyouget ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+  .whatyouget li{position:relative;padding-left:30px;font-size:16px;line-height:1.55;color:var(--body)}
+  .whatyouget li::before{content:'✓';position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+  .whatyouget li strong{color:var(--navy)}
+
   /* Two product cards */
-  .products{padding:48px 0 80px}
+  .products{padding:72px 0 56px}
   .products .eyebrow{text-align:center;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-ink);margin:0 0 10px}
-  .products h2{font-family:var(--display);font-size:clamp(32px,4.5vw,48px);line-height:1.08;color:var(--navy);text-align:center;margin:0 0 40px;text-transform:uppercase}
+  .products h2{font-family:var(--display);font-size:clamp(32px,4.5vw,48px);line-height:1.08;color:var(--navy);text-align:center;margin:0 0 14px;text-transform:uppercase}
   .products h2 em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0}
+  .products .p-intro{font-family:var(--sans);font-size:15px;color:var(--body);text-align:center;max-width:560px;margin:0 auto 36px;line-height:1.6}
+  .products .p-intro em{font-style:italic;color:var(--green-ink)}
 
   .p-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:920px;margin:0 auto}
   @media (max-width:780px){.p-grid{grid-template-columns:1fr;gap:22px}}
@@ -68,7 +101,9 @@
   .p-card .p-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--green-ink);margin:6px 0 12px}
   .p-card h3{font-family:var(--display);font-size:32px;line-height:1.06;color:var(--navy);margin:0 0 14px;text-transform:uppercase;letter-spacing:.005em}
   .p-card .p-time{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--green-ink);margin:0 0 6px;line-height:1.3}
-  .p-card .p-dates{font-family:var(--sans);font-size:14px;color:var(--body);margin:0 0 22px;line-height:1.5}
+  .p-card .p-dates{font-family:var(--sans);font-size:14px;color:var(--body);margin:0 0 14px;line-height:1.5}
+  .p-card .p-fac{font-family:var(--sans);font-size:13px;color:var(--slate);background:var(--green-wash);border-radius:8px;padding:8px 14px;margin:0 0 22px;line-height:1.5}
+  .p-card .p-fac strong{color:var(--navy)}
   .p-card .p-price{font-family:var(--display);font-size:48px;line-height:1;color:var(--navy);margin:0 0 6px}
   .p-card .p-once{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink);margin:0 0 22px}
   .p-card .p-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.02em;color:#fff;padding:15px 26px;background:var(--green-ink);border-radius:999px;align-self:flex-start;transition:background .2s,transform .2s}
@@ -118,27 +153,97 @@
 <header class="util-bar">
   <div class="util-inner">
     <a href="/" class="wordmark">Re<span>Be</span></a>
-    <a href="/refresh.html" class="util-back">← All offerings</a>
+    <a href="#products" class="util-cta">Reserve a seat →</a>
   </div>
 </header>
 
 <main>
 
-<!-- HERO — minimal -->
+<!-- HERO -->
 <section class="hero">
   <div class="container container--narrow">
     <p class="hero-eyebrow">The 5-Week Cohort</p>
     <h1>Five weeks. One small <em>group</em>.</h1>
-    <p class="deck">A guided group experience with Elizabeth Good and the full ReBe team — built on the REAL TALK framework.</p>
+    <p class="deck">A guided group experience with the ReBe team — built on the REAL TALK framework.</p>
     <p class="meta">Tuesdays <span class="sep">·</span> June 23 – July 21 <span class="sep">·</span> 60–75 min per session</p>
   </div>
 </section>
 
+<!-- TEAM STRIP -->
+<section class="team-strip" aria-label="The ReBe team">
+  <div class="container">
+    <p class="eyebrow">The ReBe team</p>
+    <h2>Who you'll be in the <em>room</em> with.</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="team-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good" loading="lazy"></picture></div>
+        <p class="team-name">Elizabeth Good</p>
+        <p class="team-title">Founder · M.A. Clinical Psychology</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal" loading="lazy"></picture></div>
+        <p class="team-name">Dr. Jason Quintal</p>
+        <p class="team-title">PhD · Trauma Resolution Specialist</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech" loading="lazy"></picture></div>
+        <p class="team-name">Beth Rech</p>
+        <p class="team-title">Inner Healing Mentor</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park" loading="lazy"></picture></div>
+        <p class="team-name">Jean Park</p>
+        <p class="team-title">Relational Healing &amp; Family Therapist · 20+ yrs</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller" loading="lazy"></picture></div>
+        <p class="team-name">Fred Feller</p>
+        <p class="team-title">Leadership &amp; Identity Mentor</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole" loading="lazy"></picture></div>
+        <p class="team-name">Osil Pistole</p>
+        <p class="team-title">Spirit &amp; Identity Activator · 20+ yrs</p>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne" loading="lazy"></picture></div>
+        <p class="team-name">Christophe Dessaigne</p>
+        <p class="team-title">Restoration &amp; Transformation Coach</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / WHAT THIS IS -->
+<section class="about" aria-labelledby="about-h">
+  <div class="container">
+    <h2 id="about-h">What this <em>is</em>.</h2>
+    <p>A <strong>five-week guided group experience</strong> for adults doing inner work — built on the REAL TALK framework, anchored in <strong>EPICS</strong> (Emotional, Physical, Intellectual, Cultural, Spiritual). Small enough to be known, large enough to be honest.</p>
+    <p>This isn't therapy or coaching in the standard sense. It's a structured <em>five-week practice</em> in a small group of people doing the same work alongside you. Weekly live sessions with the ReBe team, plus optional bonus group sessions led individually by each of the seven confidants throughout the cohort.</p>
+    <p>Whether you're working through <em>burnout, anxiety, grief, loneliness</em>, or simply not feeling like yourself this season — the work meets you where you are. <strong>Limited seats. First come, first served.</strong></p>
+
+    <div class="whatyouget">
+      <h3>What you'll get</h3>
+      <ul>
+        <li><strong>Five weekly live Zoom sessions</strong> (60–75 min each) with the ReBe team</li>
+        <li><strong>Multiple optional bonus group sessions</strong> led individually by each of the 7 confidants throughout the 5 weeks</li>
+        <li><strong>Live Q&amp;A in every session</strong> — bring your specific questions</li>
+        <li>A <strong>small cohort</strong> — small enough to be known, large enough to be honest</li>
+        <li>Anchored in <strong>EPICS</strong> — Emotional, Physical, Intellectual, Cultural, Spiritual</li>
+        <li>A <strong>faith-friendly approach</strong> — secular framing welcome, spiritual framing welcome, neither required</li>
+        <li><strong>Tools, language, and practices</strong> you can take into your life immediately</li>
+        <li><strong>Not recorded</strong> — these are the times you set aside to actually be there</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- TWO PRODUCT CARDS -->
-<section class="products" aria-labelledby="prod-h">
+<section class="products" id="products" aria-labelledby="prod-h">
   <div class="container">
     <p class="eyebrow">Choose your group</p>
     <h2 id="prod-h">Pick the time that <em>fits</em>.</h2>
+    <p class="p-intro">Both cohorts are identical in structure and content. Pick the time that fits your week — then learn more and reserve your seat.</p>
 
     <div class="p-grid">
 
@@ -147,6 +252,7 @@
         <h3>Mornings, Eastern</h3>
         <p class="p-time">Tuesdays at 11 AM ET</p>
         <p class="p-dates">June 23 – July 21 · 8 AM Pacific · 60–75 min per session</p>
+        <p class="p-fac"><strong>Elizabeth Good</strong> is your facilitator for all five sessions.</p>
         <p class="p-price">$300</p>
         <p class="p-once">First cohort only — one-time price</p>
         <span class="p-cta">Learn more &amp; reserve →</span>
@@ -157,6 +263,7 @@
         <h3>Evenings, Eastern</h3>
         <p class="p-time">Tuesdays at 8 PM ET</p>
         <p class="p-dates">June 23 – July 21 · 5 PM Pacific · 60–75 min per session</p>
+        <p class="p-fac"><strong>Elizabeth Good</strong> is your facilitator for all five sessions.</p>
         <p class="p-price">$300</p>
         <p class="p-once">First cohort only — one-time price</p>
         <span class="p-cta">Learn more &amp; reserve →</span>
