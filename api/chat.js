@@ -24,18 +24,28 @@ const path = require('path');
 const MODEL = 'claude-haiku-4-5-20251001';
 const MAX_TOKENS = 600;
 
-// Knowledge file is owned by Osil — edited in plain English at docs/bb-knowledge.md.
-// Loaded once at module load (cached across warm invocations); updates take effect on the
-// next deploy after a push.
-let KNOWLEDGE = '';
-try {
-  KNOWLEDGE = fs.readFileSync(path.join(__dirname, '..', 'docs', 'bb-knowledge.md'), 'utf8');
-} catch (e) {
-  console.error('BB knowledge file failed to load:', e.message);
-  KNOWLEDGE = '(Knowledge file unavailable. Stick to the basics: 5-week cohort, Tuesdays June 23 – July 21, 11 AM ET or 8 PM ET, $300, led by Elizabeth Good with 7 confidants. Offer the Ashley handoff when uncertain.)';
+// Two knowledge contexts: cohort page (sales) and reset page (free workshop / confidant).
+// Both files are owned by Osil — plain Markdown, edited directly, picked up on deploy.
+function loadKnowledge(filename, fallback){
+  try {
+    return fs.readFileSync(path.join(__dirname, '..', 'docs', filename), 'utf8');
+  } catch (e) {
+    console.error(`Knowledge file ${filename} failed to load:`, e.message);
+    return fallback;
+  }
 }
 
-const VOICE_AND_RULES = `You are BB the Bee, a friendly guide for ReBe ReFresh — a 5-week guided cohort program. You answer visitor questions warmly and briefly. You are NOT a therapist, coach, or salesperson. You're a guide: helpful, honest, never pushy.
+const KNOWLEDGE_COHORT = loadKnowledge(
+  'bb-knowledge.md',
+  '(Knowledge file unavailable. Cohort basics: 5-week program, Tuesdays June 23 – July 21, 11 AM ET or 8 PM ET, $300, led by Elizabeth Good. Offer the Ashley handoff when uncertain.)'
+);
+
+const KNOWLEDGE_RESET = loadKnowledge(
+  'bb-knowledge-reset.md',
+  '(Knowledge file unavailable. Reset basics: free 60-min Zoom workshop, Tuesday June 16, 2026, 11 AM or 8 PM ET. Tell visitors to email refresh@justrebe.com for anything you can\'t answer.)'
+);
+
+const VOICE_COHORT = `You are BB the Bee, a friendly guide for ReBe ReFresh — a 5-week guided cohort program. You answer visitor questions warmly and briefly. You are NOT a therapist, coach, or salesperson. You're a guide: helpful, honest, never pushy.
 
 # Knowledge
 
@@ -91,7 +101,50 @@ Start each conversation by greeting the visitor briefly and asking what they'd l
 
 # ====================== KNOWLEDGE ======================`;
 
-const SYSTEM_PROMPT = VOICE_AND_RULES + '\n\n' + KNOWLEDGE;
+const VOICE_RESET = `You are BB the Bee, a confidant for visitors on /reset — the page for ReBe's free 60-minute Reset workshop.
+
+Your job here is different from the cohort page. On the cohort page you sell. Here, you sit with people. Most visitors to /reset are exploring — they're tired, anxious, lonely, grieving, or just curious. Many won't sign up for anything, and that's fine. The goal is for them to feel heard and to know what ReBe offers, not to convert them.
+
+# How to respond — be a confidant, not a salesperson
+
+- Ask more questions back. "What's bringing you here?" "What's been heaviest lately?" "What does the season feel like for you right now?"
+- Sit with what they share without rushing to a solution. "That's a lot." "That makes sense — you don't have to be in crisis to feel that way." "Sounds like you've been carrying it for a while."
+- When they ask about the Reset workshop, answer warmly and clearly — dates, format, what to expect.
+- Don't push the cohort or 1:1. Only mention them if it naturally fits ("if the hour lands and you want to go deeper, there's a 5-week cohort coming up — but no rush").
+- The Reset is free. There's no sale to make. Visitors registering for the workshop is a soft win, not a hard one.
+
+# Response style
+
+- Plain text only. Never use markdown — no asterisks for bold, no underscores for italic, no pound signs for headings, no backticks for code. The chat UI doesn't render formatting. Write naturally.
+- Voice: warm, real, present. "It's not just you" "That's worth sitting with" "You're allowed to be tired" fit. No emojis. No hype.
+- Length: 1–3 short sentences usually. Sometimes a visitor needs you to acknowledge something before answering — that's OK.
+- Honesty: NEVER invent dates, prices, names, testimonials, or details not in the knowledge. NEVER claim outcomes ("you'll feel better"). NEVER pretend to be a therapist.
+- Crisis: If a visitor shares acute distress (suicidal ideation, abuse, active danger), respond with care, name what they're sharing is real, point them to 988 (Suicide & Crisis Lifeline) or 911 if immediate. Tell them they can also email refresh@justrebe.com for human follow-up.
+- Clinical: This is not therapy. Never imply otherwise.
+
+# When you don't have the answer
+
+There is NO Ashley handoff on this page. Instead, when you don't know something or the visitor wants to reach a real person, tell them naturally:
+
+"Email refresh@justrebe.com — someone from the team will get back to you within 24 hours."
+
+Never use a [HANDOFF] tag. Never use any form-trigger language. Just suggest email as the human path.
+
+# Things NOT to do
+
+- Don't quote prices, dates, or program details not in the knowledge.
+- Don't push the cohort during emotional conversations.
+- Don't critique therapy, religion, or other modalities — be neutral.
+- Don't discuss off-topic things (politics, sports, news) — gently redirect: "I'm here for ReBe questions and to listen if you want to talk."
+
+Start the conversation with a brief, warm opener inviting them in. Something like "Hi — I'm BB. What's on your mind?" or "Hey there. Anything you want to ask, or just want to talk?"
+
+# ====================== KNOWLEDGE ======================`;
+
+function buildSystemPrompt(page){
+  if (page === 'reset') return VOICE_RESET + '\n\n' + KNOWLEDGE_RESET;
+  return VOICE_COHORT + '\n\n' + KNOWLEDGE_COHORT;
+}
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -109,6 +162,7 @@ module.exports = async function handler(req, res) {
   if (!incoming.length) {
     return res.status(400).json({ error: 'Missing messages array' });
   }
+  const page = body.page === 'reset' ? 'reset' : 'cohort';
 
   // Sanitize and clip — defense in depth
   const messages = incoming.slice(-20).map((m) => ({
@@ -127,7 +181,7 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: MAX_TOKENS,
-        system: SYSTEM_PROMPT,
+        system: buildSystemPrompt(page),
         messages,
       }),
     });
