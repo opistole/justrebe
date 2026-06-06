@@ -1,0 +1,1458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ReBe ReFresh · 5-Week Cohort + Private Sessions</title>
+<meta name="description" content="ReBe ReFresh — a five-week group experience for adults, plus private 1:1 sessions with a confidant. An ACEs-informed, root-cause path from isolation into real human community. $300 cohort · $197 private session." />
+<meta property="og:title" content="ReBe ReFresh · 5-Week Cohort + Private Sessions" />
+<meta property="og:description" content="Five weeks. One small group. A guided path from isolation into real community. $300 cohort · $197 private 1:1 session with a confidant." />
+<meta property="og:image" content="https://justrebe.com/Images/RESET_616_Pres.png" />
+<meta property="og:url" content="https://justrebe.com/refresh-cohort.html" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ReBe ReFresh · 5-Week Cohort + Private Sessions" />
+<meta name="twitter:description" content="Five weeks. One small group. A guided path from isolation into real community." />
+<meta name="twitter:image" content="https://justrebe.com/Images/RESET_616_Pres.png" />
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- Stripe Checkout is loaded via redirect (no SDK needed); see /api/create-checkout-session -->
+
+<style>
+  :root {
+    --paper:#FFFFFF; --mist:#FAF9F7; --navy:#060B50; --navy-dark:#040832;
+    --green:#449945; --green-ink:#3A8438; --green-wash:#F2F8F2; --green-deep:#2B5D2C;
+    --gold:#E3A01F; --gold-ink:#B07D14; --gold-wash:#FBF4E4;
+    --blue-wash:#EEF3F8; --soft-blue:#8DB0CD; --coral:#EA492E;
+    --slate:#212B37; --body:#4A535E; --muted:#9DA1A8; --bone:#E2E2E2;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --display:'Anton','Arial Narrow',Impact,sans-serif;
+    --content-w:760px; --letter-w:680px; --card-w:720px;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--body);font-family:var(--sans);font-weight:400;font-size:22px;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  @media (max-width:640px){body{font-size:19px}}
+  img{max-width:100%;height:auto;display:block}
+  .skip-link{position:absolute;left:-9999px;background:var(--navy);color:#fff;padding:10px 16px;border-radius:6px;z-index:200;font-weight:700}
+  .skip-link:focus{left:16px;top:16px}
+  :focus-visible{outline:3px solid rgba(6,11,80,.78);outline-offset:3px;border-radius:4px}
+
+  /* Gradient underline (animates in on reveal) */
+  .curl{background-image:linear-gradient(90deg,var(--green),var(--gold));background-repeat:no-repeat;background-position:0 100%;background-size:100% .14em;padding-bottom:.02em;border-radius:2px}
+  .js .curl{background-size:0% .16em;transition:background-size .7s var(--ease) .2s}
+  .js .in .curl{background-size:100% .16em}
+  .sec-dark .curl{background-image:linear-gradient(90deg,#fff,var(--gold))}
+
+  /* Header */
+  .util-bar{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--bone)}
+  .util-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;height:56px}
+  .wordmark{font-family:var(--sans);font-weight:700;color:var(--navy);letter-spacing:.02em;font-size:18px;text-decoration:none}
+  .wordmark span{color:var(--green)}
+  .util-cta{font-family:var(--sans);font-weight:700;color:var(--navy);font-size:14px;text-decoration:none;border-bottom:1px solid transparent;padding:6px 0;transition:border-color .15s var(--ease)}
+  .util-cta:hover{border-bottom-color:currentColor}
+  @media (max-width:640px){.util-cta{display:none}.util-inner{justify-content:center}}
+
+  /* Hero — light + bold editorial (matches reset.html) */
+  .hero{position:relative;background:var(--paper);color:var(--body);overflow:hidden;isolation:isolate}
+  .hero-inner{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:72px 32px 64px;text-align:center}
+  @media (max-width:640px){.hero-inner{padding:56px 20px 48px}}
+  /* Top badges (date pill + ghost pill, same baseline) */
+  .hero-badges{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 44px}
+  .hero-tag{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:12px 22px;border-radius:50px;line-height:1}
+  .hero-tag--green{background:var(--green);color:#fff}
+  .hero-tag--ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(6,11,80,.28)}
+  /* Two-tier headline */
+  .hero .h1{font-family:var(--display);font-weight:400;color:var(--navy);text-transform:uppercase;line-height:1.0;letter-spacing:0;margin:0 auto 32px;max-width:none}
+  .hero .h1 .h1-primary{display:block;font-size:clamp(40px,7vw,84px);line-height:1.0;margin:0 auto 18px;max-width:18ch}
+  .hero .h1 .h1-secondary{display:block;font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;font-size:clamp(18px,2.4vw,28px);line-height:1.35;letter-spacing:0;color:var(--body);max-width:46ch;margin:0 auto}
+  .hero .h1 .accent{color:var(--green)}
+  /* Subhead */
+  .hero .subhead-hero{font-family:var(--sans);font-size:clamp(17px,2vw,21px);line-height:1.6;color:var(--body);margin:0 auto 32px;max-width:600px}
+  /* Microcopy */
+  .hero .microcopy-hero{font-family:var(--sans);font-size:14px;color:var(--muted);margin:14px 0 0}
+  .hero .microcopy-hero a{color:var(--green-ink)!important;text-decoration:none;border-bottom:1px solid rgba(58,132,56,.5);padding-bottom:1px;font-weight:700}
+  /* (Legacy chip styles kept for any in-page references — not used in hero) */
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px;justify-content:center}
+  .hero-chip{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;padding:11px 16px;border-radius:8px;line-height:1}
+  .hero-chip--gold{background:var(--gold);color:var(--navy-dark)}
+  .hero-chip--green{background:var(--green);color:#fff}
+  .hero-chip--ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(6,11,80,.28)}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.02em;background:linear-gradient(135deg,#54AC54,var(--green-ink));color:#fff;padding:17px 34px;min-height:54px;border:none;border-radius:50px;cursor:pointer;text-decoration:none;box-shadow:0 8px 22px rgba(68,153,69,.28);transition:transform .15s var(--ease),box-shadow .2s var(--ease),filter .15s var(--ease)}
+  .btn:hover{filter:brightness(1.07);transform:translateY(-2px);box-shadow:0 12px 30px rgba(68,153,69,.38)}
+  .btn:active{transform:translateY(0)}
+  .btn[disabled]{opacity:.75;cursor:not-allowed;transform:none}
+  .btn-arrow{transition:transform .2s var(--ease)}
+  .btn:hover .btn-arrow{transform:translateX(2px)}
+  .btn-ghost{background:transparent;color:var(--navy);border:2px solid var(--navy);box-shadow:none}
+  .btn-ghost:hover{background:var(--navy);color:#fff;filter:none}
+
+  /* Hook quote */
+  .hook-section{background:var(--green-wash);padding:64px 24px}
+  .hook{max-width:760px;margin:0 auto;padding-left:24px;border-left:4px solid var(--green);font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(24px,3.4vw,38px);line-height:1.3;color:var(--navy)}
+
+  /* Sections */
+  section{padding:88px 24px}
+  @media (max-width:640px){section{padding:60px 20px}}
+  .sec-green-wash{background:var(--green-wash)}
+  .sec-blue-wash{background:var(--blue-wash)}
+  .sec-paper-alt{background:var(--mist)}
+  .sec-dark{background:var(--green-deep)}
+  .container{max-width:var(--content-w);margin:0 auto}
+  .container--wide{max-width:1040px}
+  .eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:11px;letter-spacing:.12em;color:var(--green-ink);margin:0 0 18px}
+  .eyebrow--center{text-align:center;display:block}
+  .section-h{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(30px,4.4vw,50px);line-height:1.18;letter-spacing:.01em;color:var(--navy);margin:0 0 24px}
+  .section-h em{font-style:normal;color:var(--green)}
+  /* Architectural numbered section markers */
+  .section-num{display:flex;align-items:center;gap:14px;font-family:var(--display);font-size:28px;color:var(--gold-ink);letter-spacing:.04em;margin:0 0 24px;line-height:1}
+  .section-num::after{content:'';display:block;height:2px;width:0;background:currentColor;opacity:.7;transition:width .9s var(--ease) .15s}
+  .section-num.center{justify-content:center}
+  .in .section-num::after{width:48px}
+  .sec-dark .section-num{color:var(--gold)}
+  /* Hero entrance fades */
+  .fade-in{opacity:0;transform:translateY(14px);animation:fadeIn .65s var(--ease) forwards}
+  .fade-in.d-1{animation-delay:.08s}
+  .fade-in.d-2{animation-delay:.22s}
+  .fade-in.d-3{animation-delay:.36s}
+  .fade-in.d-4{animation-delay:.50s}
+  @keyframes fadeIn{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.fade-in{opacity:1;transform:none;animation:none}}
+  .sec-dark .eyebrow{color:var(--gold)}
+  .sec-dark .section-h{color:#fff}
+  .lede{font-family:var(--sans);font-weight:300;font-size:24px;line-height:1.55;color:var(--body);margin:0 0 18px;letter-spacing:-.005em}
+  .sec-dark .lede{color:rgba(255,255,255,.95)}
+
+  /* Story */
+  .story .container{max-width:680px}
+  .story p{font-size:22px;line-height:1.75;color:var(--body);margin:0 0 20px}
+  .story p strong{color:var(--navy);font-weight:700}
+  .story .pull{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,30px);line-height:1.35;color:var(--green-ink);margin:28px 0;padding-left:22px;border-left:4px solid var(--green)}
+  .story .signoff{font-family:var(--display);text-transform:uppercase;font-size:clamp(22px,3vw,32px);color:var(--navy);letter-spacing:.01em;margin:32px 0 0}
+  .story .signoff span{color:var(--green)}
+
+  /* Stat band */
+  .statband .container{text-align:center}
+  .statband-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px}
+  .statband-num{display:block;font-family:var(--display);font-weight:400;font-size:clamp(52px,7.5vw,90px);line-height:1.1;padding-bottom:.06em;margin-bottom:10px;background:linear-gradient(100deg,var(--green) 10%,var(--gold-ink) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .statband-label{display:block;font-family:var(--sans);font-size:15px;line-height:1.5;color:var(--body);max-width:260px;margin:0 auto}
+  @media (max-width:760px){.statband-grid{grid-template-columns:1fr;gap:34px}}
+
+  /* Offer / feature bullets */
+  .feat-list{list-style:none;padding:0;margin:28px 0 0;max-width:560px;display:flex;flex-direction:column;gap:14px}
+  .feat-list.center{margin-left:auto;margin-right:auto}
+  .feat-list li{position:relative;padding-left:32px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--slate)}
+  .feat-list li::before{content:'✓';position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+  .sec-dark .feat-list li{color:rgba(255,255,255,.96)}
+  .sec-dark .feat-list li::before{background:#fff;color:var(--green-deep)}
+
+  .price-card{max-width:var(--card-w);margin:36px auto 0;background:var(--paper);border:1px solid var(--bone);border-top:4px solid var(--green);border-radius:16px;padding:36px;text-align:center;box-shadow:0 10px 40px rgba(6,11,80,.05)}
+  .price-num{font-family:var(--display);font-size:clamp(56px,9vw,84px);line-height:1;color:var(--navy);margin:0}
+  .price-sub{font-size:14px;color:var(--muted);margin:6px 0 22px}
+  .price-value-stack{font-family:var(--sans);font-size:13px;color:var(--slate);background:#fbfaf7;border:1px solid var(--bone);border-radius:10px;padding:14px 18px;margin:0 auto 18px;max-width:340px;text-align:left;line-height:1.7}
+  .price-value-stack .row{display:flex;justify-content:space-between;gap:12px}
+  .price-value-stack .row strong{color:var(--navy)}
+  .price-value-stack .total{margin-top:8px;padding-top:8px;border-top:1px solid var(--bone);font-weight:700;color:var(--navy)}
+  .price-strike{font-size:15px;color:var(--muted);text-decoration:line-through;margin:0 0 2px;letter-spacing:.02em}
+  .price-firstcohort{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink);margin:0 0 22px}
+
+  /* Confidant cards — vertical */
+  .conf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:1000px;margin:44px auto 0}
+  @media (max-width:860px){.conf-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:560px){.conf-grid{grid-template-columns:1fr;max-width:360px}}
+  .conf-card{position:relative;background:var(--paper);border:1px solid var(--bone);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;height:100%;min-width:0;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+  .conf-role{min-height:2.6em}
+  .conf-card:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(6,11,80,.12);border-color:var(--green)}
+  .conf-photo{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bone);display:block;transform:translateZ(0);-webkit-backface-visibility:hidden}
+  .conf-card-body{padding:22px 20px 26px;display:flex;flex-direction:column;flex:1;text-align:center}
+  .conf-badge{position:absolute;top:12px;left:12px;z-index:2;background:var(--gold);color:var(--navy-dark);font-family:var(--sans);font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:50px;box-shadow:0 4px 12px rgba(6,11,80,.18)}
+  .conf-name{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--navy);margin:0 0 4px}
+  .conf-role{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-ink);margin:0 0 12px}
+  .conf-desc{font-size:14px;line-height:1.55;color:var(--body);margin:0 0 22px;flex:1}
+  .conf-request-btn{align-self:center;margin-top:auto;display:inline-block;background:linear-gradient(135deg,#54AC54,var(--green-ink));color:#fff;padding:12px 24px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;box-shadow:0 6px 18px rgba(68,153,69,.26)}
+  .conf-request-btn:hover{filter:brightness(1.07)}
+  .conf-request-btn.ghost{background:transparent;color:var(--green-ink);border:2px solid var(--green-ink);box-shadow:none}
+  /* Bio button (replaces inline details). Triggers a modal — cards stay uniform. */
+  .conf-bio-btn{background:transparent;border:0;font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-ink);cursor:pointer;padding:8px 0;margin:0 0 18px;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+  .conf-bio-btn::after{content:'→';transition:transform .2s}
+  .conf-bio-btn:hover::after{transform:translateX(3px)}
+
+  /* Bio modal (popover, replaces inline expansion) */
+  .bio-modal-pop{width:min(560px,calc(100vw - 32px));max-height:90vh;border:0;border-radius:18px;background:#fff;color:var(--navy);box-shadow:0 24px 60px rgba(6,11,80,.22);padding:0;overflow:hidden}
+  .bio-modal-pop::backdrop{background:rgba(6,11,80,.55);backdrop-filter:blur(2px)}
+  @keyframes bioPop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+  .bio-modal-pop[open]{animation:bioPop .25s var(--ease)}
+  .bio-modal-inner{padding:32px 32px 28px;position:relative;overflow-y:auto;max-height:90vh}
+  .bio-modal-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border:1px solid var(--bone);background:transparent;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;color:var(--slate);display:flex;align-items:center;justify-content:center}
+  .bio-modal-close:hover{background:var(--bone)}
+  .bio-modal-photo{width:120px;height:150px;border-radius:12px;overflow:hidden;margin:0 auto 18px;border:2px solid var(--green)}
+  .bio-modal-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .bio-modal-name{font-family:var(--serif);font-style:italic;font-size:24px;font-weight:600;color:var(--navy);text-align:center;margin:0 0 6px}
+  .bio-modal-role{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-ink);text-align:center;margin:0 0 18px}
+  .bio-modal-text{font-size:14px;line-height:1.7;color:var(--body)}
+  .bio-modal-text p{margin:0 0 12px}
+  .bio-modal-text p:last-child{margin:0}
+
+  /* Forms (group + confidant) */
+  .form-section{padding:80px 24px 96px;background:var(--mist)}
+  .form-intro{max-width:680px;margin:0 auto 32px;text-align:center}
+  .form-intro p{font-size:15px;color:var(--body)}
+  .form-card{max-width:var(--card-w);margin:0 auto;background:var(--paper);border:1px solid var(--bone);border-top:4px solid var(--green);border-radius:16px;padding:44px;box-shadow:0 10px 40px rgba(6,11,80,.05)}
+  @media (max-width:640px){.form-card{padding:28px 22px}}
+  /* Two-step form */
+  .form-step-2[hidden]{display:none}
+  .form-step-2{margin-top:14px;padding-top:30px;border-top:1px dashed var(--bone);animation:stepReveal .55s cubic-bezier(.16,1,.3,1)}
+  .form-step-2-intro{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-ink);margin:0 0 22px;text-align:center}
+  @keyframes stepReveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .form-field--fieldset{border:0;padding:0;margin-bottom:18px}
+  .form-fieldset-legend{display:block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);margin-bottom:8px;padding:0}
+  .form-field .opt{color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media (prefers-reduced-motion:reduce){.form-step-2{animation:none}}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:600px){.form-row{grid-template-columns:1fr}}
+  .form-field{margin-bottom:18px}
+  .form-field label{display:block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
+  .form-field label .req{color:var(--coral)}
+  .form-field input[type=text],.form-field input[type=email],.form-field input[type=tel],.form-field select,.form-field textarea{width:100%;background:var(--mist);border:1px solid var(--bone);border-radius:10px;padding:13px 15px;font-family:var(--sans);font-size:16px;color:var(--slate);transition:border-color .15s,box-shadow .15s}
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(68,153,69,.12);background:#fff}
+  .form-field textarea{resize:vertical;min-height:96px;line-height:1.5}
+  .form-field .hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5}
+  .field-section-label{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:26px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--bone)}
+  .radio-group{display:flex;gap:10px;flex-wrap:wrap}
+  .radio-pill{flex:1;min-width:130px;position:relative}
+  .radio-pill input{position:absolute;opacity:0;pointer-events:none}
+  .radio-pill label{display:block;padding:12px 16px;background:var(--mist);border:1px solid var(--bone);border-radius:10px;font-size:14px;font-weight:600;text-align:center;color:var(--slate);cursor:pointer;transition:all .15s;margin:0;text-transform:none;letter-spacing:0}
+  .radio-pill input:checked+label{background:var(--green);color:#fff;border-color:var(--green)}
+  .checkbox-field{display:flex;align-items:flex-start;gap:12px;padding:12px 0}
+  .checkbox-field input{width:20px;height:20px;margin-top:2px;accent-color:var(--green);flex-shrink:0;cursor:pointer}
+  .checkbox-field label{font-size:14px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--slate);line-height:1.5;cursor:pointer;margin:0}
+  .form-check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--body);line-height:1.55;padding:10px 0}
+  .form-check input{margin-top:3px;width:16px;height:16px;flex-shrink:0;accent-color:var(--green)}
+  .field-error{font-size:12px;color:var(--coral);margin-top:6px}
+  [aria-invalid=true]{border-color:var(--coral)!important}
+  .form-submit{margin-top:26px;text-align:center}
+  .form-note{font-size:12px;color:var(--muted);margin-top:12px}
+  .submit-error{max-width:var(--card-w);margin:18px auto 0;padding:14px 18px;background:#fdecea;border:1px solid #f5b7b1;border-radius:10px;color:#922b21;font-size:14px;line-height:1.6}
+  .submit-error a{color:#922b21;font-weight:700}
+  .email-note{max-width:var(--card-w);margin:18px auto 0;text-align:center;font-size:14px;color:var(--body);line-height:1.6}
+  .email-note a{color:var(--green-ink);font-weight:700}
+  .post-submit{display:none;max-width:var(--card-w);margin:0 auto;background:var(--paper);border:1px solid var(--bone);border-radius:16px;padding:44px;text-align:center;box-shadow:0 10px 40px rgba(6,11,80,.06)}
+  .post-h{font-family:var(--serif);font-style:italic;font-size:28px;color:var(--navy);margin:0 0 12px;font-weight:600}
+  .post-recap{font-size:14px;color:var(--green-ink);font-weight:700;letter-spacing:.02em;margin:0 0 20px}
+  .post-help{font-size:13px;color:var(--muted);margin-top:20px}
+  .post-help a{color:var(--green-ink);font-weight:700}
+  .paypal-pending{font-size:14px;color:var(--body);background:var(--green-wash);padding:18px 22px;border-radius:10px;border:1px solid #cfe6d0;line-height:1.7}
+  .paypal-pending a{color:var(--green-ink);font-weight:700}
+
+  /* FAQ */
+  .faq-list{max-width:780px;margin:32px auto 0}
+  .faq-item{border-bottom:1px solid var(--bone);padding:18px 0}
+  .faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:var(--serif);font-size:18px;font-weight:600;color:var(--navy)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:24px;color:var(--green);font-weight:400;flex-shrink:0;transition:transform .2s}
+  .faq-item[open] summary::after{transform:rotate(45deg)}
+  .faq-item p{font-size:15px;line-height:1.7;color:var(--body);margin-top:12px}
+
+  /* Footer */
+  footer{background:var(--mist);padding:48px 24px;text-align:center;border-top:1px solid var(--bone)}
+  .foot-line{font-family:var(--sans);font-size:14px;color:var(--body);margin:0 0 14px;line-height:1.65}
+  .foot-line--muted{color:var(--muted);font-size:13px}
+  .foot-links{display:flex;gap:24px;justify-content:center;margin:0 0 14px;flex-wrap:wrap}
+  .foot-links a{font-family:var(--sans);font-weight:700;font-size:13px;color:var(--navy);text-decoration:none;letter-spacing:.02em;padding:8px 4px}
+  .foot-links a:hover{text-decoration:underline;text-decoration-color:var(--green);text-underline-offset:4px;text-decoration-thickness:2px}
+
+  /* Team strip (top-of-page showcase, photos + names + titles) */
+  .team-strip{background:var(--paper);padding:48px 0 56px}
+  .team-strip .container{max-width:1100px;margin:0 auto;padding:0 24px}
+  .team-strip .eyebrow{text-align:center;margin:0 0 8px}
+  .team-strip h2{font-family:var(--display);font-size:clamp(28px,4vw,40px);line-height:1.15;color:var(--navy);text-align:center;margin:0 0 32px}
+  .team-strip h2 em{font-style:italic;color:var(--green-ink)}
+  .team-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:28px 20px;max-width:880px;margin:0 auto}
+  .team-member{flex:0 0 calc(25% - 15px);max-width:calc(25% - 15px);min-width:0;text-align:center;background:transparent;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;transition:transform .2s var(--ease)}
+  .team-member:hover{transform:translateY(-3px)}
+  .team-member:hover .team-photo{box-shadow:0 12px 30px rgba(68,153,69,.22),inset 0 0 0 2px var(--green-ink)}
+  .team-member:focus-visible{outline:3px solid rgba(68,153,69,.5);outline-offset:4px;border-radius:14px}
+  @media (max-width:760px){.team-member{flex:0 0 calc(33.333% - 14px);max-width:calc(33.333% - 14px)}}
+  @media (max-width:500px){.team-member{flex:0 0 calc(50% - 10px);max-width:calc(50% - 10px)}}
+  /* Use padding-bottom trick for bulletproof 4:5 aspect across all browsers
+     (Safari sometimes drifts on aspect-ratio between siblings). */
+  .team-photo{width:100%;height:0;padding-bottom:125%;position:relative;border-radius:12px;overflow:hidden;background:var(--mist);box-shadow:0 8px 24px rgba(6,11,80,.10),inset 0 0 0 2px var(--green);margin-bottom:12px}
+  .team-photo picture{position:absolute;inset:0;display:block}
+  .team-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .team-name{font-family:var(--serif);font-style:italic;font-size:18px;font-weight:600;color:var(--navy);line-height:1.2;margin:0 0 6px;min-height:2.4em;display:flex;align-items:center;justify-content:center}
+  .team-title{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--green-ink);line-height:1.3;margin:0;min-height:3.9em;hyphens:none;word-break:normal}
+
+  /* ===== Redesigned cohort offer (two products + testimonials + terms) ===== */
+  .offer-block{background:var(--paper);padding:64px 0 56px}
+  .offer-block .container{max-width:960px}
+  .offer-block h2{font-family:var(--display);font-size:clamp(34px,5vw,52px);line-height:1.08;color:var(--navy);text-align:center;margin:0 0 24px}
+  .offer-block h2 em{font-style:italic;color:var(--green-ink)}
+  .offer-block .lede{font-size:19px;line-height:1.65;color:var(--body);text-align:center;max-width:720px;margin:0 auto 32px}
+  .offer-block .lede strong{color:var(--navy)}
+
+  .whatyouget{background:var(--green-wash);border:1px solid #cfe6d0;border-radius:18px;padding:32px 36px;max-width:760px;margin:24px auto 48px}
+  .whatyouget h3{font-family:var(--serif);font-style:italic;font-size:24px;color:var(--navy);margin:0 0 18px}
+  .whatyouget ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+  .whatyouget li{position:relative;padding-left:30px;font-size:16px;line-height:1.55;color:var(--body)}
+  .whatyouget li::before{content:'✓';position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+  .whatyouget li strong{color:var(--navy)}
+
+  .pick-line{font-family:var(--display);font-size:clamp(28px,4vw,40px);text-align:center;color:var(--navy);margin:8px 0 32px}
+  .pick-line em{font-style:italic;color:var(--green-ink)}
+
+  .product-cards{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:920px;margin:0 auto}
+  @media (max-width:760px){.product-cards{grid-template-columns:1fr}}
+  .product-card{background:var(--paper);border:1px solid var(--bone);border-top:6px solid var(--green);border-radius:18px;padding:32px 30px 28px;text-align:center;box-shadow:0 10px 40px rgba(6,11,80,.06);transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+  .product-card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(6,11,80,.10)}
+  .product-card .product-eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 10px}
+  .product-card .product-title{font-family:var(--display);font-size:30px;line-height:1.05;color:var(--navy);margin:0 0 18px}
+  .product-card .product-meta{font-family:var(--sans);font-size:15px;color:var(--body);line-height:1.6;margin:0 0 22px}
+  .product-card .product-meta strong{color:var(--navy)}
+  .product-card .pc-values{font-family:var(--sans);font-size:13px;color:var(--slate);background:#fbfaf7;border:1px solid var(--bone);border-radius:10px;padding:14px 18px;margin:0 0 18px;text-align:left;line-height:1.7}
+  .product-card .pc-values .row{display:flex;justify-content:space-between;gap:12px}
+  .product-card .pc-values .row strong{color:var(--navy)}
+  .product-card .pc-values .total{margin-top:8px;padding-top:8px;border-top:1px solid var(--bone);font-weight:700;color:var(--navy)}
+  .product-card .pc-strike{font-size:14px;color:var(--muted);text-decoration:line-through;margin:0 0 2px}
+  .product-card .pc-price{font-family:var(--display);font-size:64px;line-height:1;color:var(--navy);margin:0 0 18px}
+  .product-card .pc-btn{display:block;width:100%;padding:16px 24px;background:#635BFF;color:#fff;border:none;border-radius:999px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 6px 16px rgba(99,91,255,0.30);transition:box-shadow .2s,transform .1s;text-decoration:none;text-align:center;line-height:1.2}
+  .product-card .pc-btn:hover{box-shadow:0 10px 24px rgba(99,91,255,0.42);transform:translateY(-1px)}
+  .product-card .pc-firstcohort{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink);margin:14px 0 0;line-height:1.4}
+
+  .notready-block{max-width:700px;margin:48px auto 0;background:#fbfaf7;border:1px dashed var(--green);border-radius:14px;padding:28px 32px;text-align:center}
+  .notready-block h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:24px;color:var(--navy);margin:0 0 8px}
+  .notready-block p{font-family:var(--sans);font-size:15px;color:var(--body);margin:0 0 18px;line-height:1.55}
+  .notready-block .notready-btn{display:inline-block;background:transparent;border:2px solid var(--green-ink);color:var(--green-ink);padding:12px 28px;border-radius:999px;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.02em;cursor:pointer;text-decoration:none;transition:background .2s,color .2s}
+  .notready-block .notready-btn:hover{background:var(--green-ink);color:#fff}
+
+  /* Testimonials */
+  .testimonials{background:var(--mist);padding:72px 0 64px}
+  .testimonials .container{max-width:1100px}
+  .testimonials .eyebrow{text-align:center;margin:0 0 10px}
+  .testimonials h2{font-family:var(--display);font-size:clamp(30px,4vw,44px);line-height:1.1;color:var(--navy);text-align:center;margin:0 0 12px}
+  .testimonials h2 em{font-style:italic;color:var(--green-ink)}
+  .testimonials .t-intro{font-size:15px;color:var(--body);text-align:center;max-width:640px;margin:0 auto 40px;line-height:1.6}
+  .testimonials .t-intro em{font-style:italic}
+  .t-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:920px;margin:0 auto}
+  @media (max-width:720px){.t-grid{grid-template-columns:1fr}}
+  .t-card{background:var(--paper);border:1px solid var(--bone);border-radius:14px;padding:26px 28px;position:relative;box-shadow:0 6px 20px rgba(6,11,80,.05)}
+  .t-card::before{content:'\201C';position:absolute;top:8px;left:18px;font-family:var(--serif);font-size:64px;color:var(--green);opacity:.25;line-height:1}
+  .t-card blockquote{font-family:var(--serif);font-size:16px;line-height:1.65;color:var(--slate);margin:0 0 14px;position:relative;z-index:1}
+  .t-card .t-attr{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-ink);margin:0}
+
+  /* Terms (collapsible) */
+  .terms-block{background:var(--paper);padding:48px 0 40px}
+  .terms-block .container{max-width:760px}
+  .terms-details{border:1px solid var(--bone);border-radius:14px;background:var(--paper);overflow:hidden}
+  .terms-details summary{list-style:none;cursor:pointer;padding:20px 26px;font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#faf9f7}
+  .terms-details summary::-webkit-details-marker{display:none}
+  .terms-details summary::after{content:'+';font-size:22px;color:var(--green);font-weight:400;line-height:1;transition:transform .2s}
+  .terms-details[open] summary::after{transform:rotate(45deg)}
+  .terms-content{padding:24px 28px 28px;font-family:var(--sans);font-size:14px;line-height:1.7;color:var(--body);border-top:1px solid var(--bone)}
+  .terms-content h4{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin:18px 0 6px}
+  .terms-content h4:first-child{margin-top:0}
+  .terms-content p{margin:0 0 12px}
+  .terms-content a{color:var(--green-ink);font-weight:600;text-decoration:underline}
+
+  /* Signup modal (minimal form before Stripe) */
+  .reserve-modal{width:min(520px,calc(100vw - 32px));max-height:92vh;border:0;border-radius:18px;background:#fff;color:var(--navy);box-shadow:0 24px 60px rgba(6,11,80,.22);padding:0;overflow:hidden}
+  .reserve-modal::backdrop{background:rgba(6,11,80,.55);backdrop-filter:blur(2px)}
+  @keyframes resPop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+  .reserve-modal[open]{animation:resPop .25s var(--ease)}
+  .reserve-inner{padding:32px 32px 28px;position:relative;overflow-y:auto;max-height:92vh}
+  .reserve-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border:1px solid var(--bone);background:transparent;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;color:var(--slate);display:flex;align-items:center;justify-content:center}
+  .reserve-close:hover{background:var(--bone)}
+  .reserve-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green-ink);margin:0 0 8px}
+  .reserve-title{font-family:var(--display);font-size:30px;line-height:1.08;color:var(--navy);margin:0 0 6px}
+  .reserve-sub{font-size:14px;color:var(--body);margin:0 0 22px;line-height:1.55}
+  .reserve-modal label{display:block;font-family:var(--sans);font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;margin:0 0 6px}
+  .reserve-modal input[type="text"], .reserve-modal input[type="email"], .reserve-modal input[type="tel"], .reserve-modal select, .reserve-modal textarea{width:100%;padding:11px 14px;border:1px solid var(--bone);border-radius:8px;font-family:var(--sans);font-size:15px;color:var(--slate);background:#fff;margin-bottom:14px}
+  .reserve-modal input:focus, .reserve-modal select:focus, .reserve-modal textarea:focus{outline:0;border-color:var(--green)}
+  .reserve-modal textarea{min-height:80px;resize:vertical}
+  .reserve-consent{display:flex;align-items:flex-start;gap:10px;font-family:var(--sans);font-size:13px;line-height:1.55;color:var(--body);margin:6px 0 18px}
+  .reserve-consent input{width:18px;height:18px;margin-top:2px;accent-color:var(--green);flex-shrink:0}
+  .reserve-consent a{color:var(--green-ink);font-weight:700;text-decoration:underline}
+  .reserve-submit{display:block;width:100%;padding:15px 22px;background:#635BFF;color:#fff;border:0;border-radius:999px;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(99,91,255,0.30);transition:box-shadow .2s,opacity .2s}
+  .reserve-submit:hover:not(:disabled){box-shadow:0 10px 24px rgba(99,91,255,0.42)}
+  .reserve-submit:disabled{opacity:.55;cursor:wait}
+  .reserve-error{color:#c0392b;font-size:13px;text-align:center;margin:10px 0 0}
+
+  /* Scroll reveal */
+  .js main section>.container,.js #enroll .form-card{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .js main section>.container.in,.js #enroll .form-card.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    .js .curl{background-size:100% .16em!important}
+    .js main section>.container,.js #enroll .form-card{opacity:1!important;transform:none!important}
+    .fade-in{opacity:1!important;transform:none!important;animation:none!important}
+  }
+</style>
+</head>
+<body>
+
+<a href="#enroll" class="skip-link">Skip to enrollment</a>
+
+<header class="util-bar">
+  <div class="util-inner">
+    <a href="/" class="wordmark">Re<span>Be</span></a>
+    <a href="#enroll" class="util-cta">Reserve my seat →</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="refresh-hero-h1">
+  <div class="hero-inner">
+
+    <div class="hero-badges fade-in">
+      <span class="hero-tag hero-tag--green">Starts June 23 · 11 AM or 8 PM ET</span>
+      <span class="hero-tag hero-tag--ghost">$300 · 5 weeks · full ReBe team</span>
+    </div>
+
+    <h1 id="refresh-hero-h1" class="h1 fade-in d-1">
+      <span class="h1-primary">Discover your story. <span class="accent">Then rewrite it.</span></span>
+      <span class="h1-secondary">Five weeks. A small group. A guided path back to who you actually are.</span>
+    </h1>
+
+    <p class="subhead-hero fade-in d-2">Not therapy. Not coaching. Live group sessions with the ReBe team — small enough to be known, real enough to do the work that doesn't happen on your own.</p>
+
+    <div class="cta-block fade-in d-3">
+      <a href="#enroll" class="btn">Reserve my seat <span class="btn-arrow" aria-hidden="true">→</span></a>
+      <p class="microcopy-hero">Prefer a 1:1? <a href="refresh-private.html">See private sessions →</a></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- TEAM STRIP -->
+<section class="team-strip" aria-label="The ReBe team">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">The ReBe team</p>
+    <h2>Who you'll be in the <em>room</em> with.</h2>
+    <div class="team-grid">
+      <button class="team-member" type="button" data-bio="bio-elizabeth-short" aria-label="Read about Elizabeth Good">
+        <div class="team-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good" loading="lazy"></picture></div>
+        <p class="team-name">Elizabeth Good</p>
+        <p class="team-title">Founder · M.A. Clinical Psychology</p>
+      </button>
+      <button class="team-member" type="button" data-bio="bio-quintal-short" aria-label="Read about Dr. Jason Quintal">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal" loading="lazy"></picture></div>
+        <p class="team-name">Dr. Jason Quintal</p>
+        <p class="team-title">PhD · Trauma Resolution Specialist</p>
+      </button>
+      <button class="team-member" type="button" data-bio="bio-beth-short" aria-label="Read about Beth Rech">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech" loading="lazy"></picture></div>
+        <p class="team-name">Beth Rech</p>
+        <p class="team-title">Inner Healing Mentor</p>
+      </button>
+      <button class="team-member" type="button" data-bio="bio-jean-short" aria-label="Read about Jean Park">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park" loading="lazy"></picture></div>
+        <p class="team-name">Jean Park</p>
+        <p class="team-title">Relational Healing &amp; Family Therapist</p>
+      </button>
+      <button class="team-member" type="button" data-bio="bio-fred-short" aria-label="Read about Fred Feller">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller" loading="lazy"></picture></div>
+        <p class="team-name">Fred Feller</p>
+        <p class="team-title">Leadership &amp; Identity Mentor</p>
+      </button>
+      <button class="team-member" type="button" data-bio="bio-osil-short" aria-label="Read about Osil Pistole">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole" loading="lazy"></picture></div>
+        <p class="team-name">Osil Pistole</p>
+        <p class="team-title">Spirit &amp; Identity Activator</p>
+      </button>
+      <button class="team-member" type="button" data-bio="bio-christophe-short" aria-label="Read about Christophe Dessaigne">
+        <div class="team-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne" loading="lazy"></picture></div>
+        <p class="team-name">Christophe Dessaigne</p>
+        <p class="team-title">Restoration &amp; Transformation Coach</p>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- HOOK -->
+<section class="hook-section" aria-label="The idea behind ReBe">
+  <div class="container">
+    <p class="hook">You cannot heal what you have never been helped to understand.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story sec-paper-alt" aria-labelledby="story-h">
+  <div class="container">
+    <p class="eyebrow">Why ReBe exists</p>
+    <h2 id="story-h" class="section-h">Somewhere between a therapy room and a <em>classroom</em>.</h2>
+    <p>Between a survivor's story and a child's silence, we found the same wound — and we built ReBe to heal it. Most of us were never taught how to use our imagination. We were handed fear loops, inherited worry, and survival patterns, and ran them so long they started to feel like us.</p>
+    <p class="pull">But the story isn't finished. You cannot heal what you've never been helped to understand.</p>
+    <p>ReBe is a guided, root-cause path from isolation into real community — picturing safety, envisioning freedom, rehearsing a future worth living. No performance. No pressure.</p>
+    <p class="signoff">Better me. <span>Better we.</span></p>
+  </div>
+</section>
+
+<!-- STAT BAND -->
+<section class="statband sec-green-wash" aria-label="Why this matters">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">The need is real</p>
+    <h2 class="section-h" style="text-align:center">It's not just you — and it's <em>not your fault</em>.</h2>
+    <div class="statband-grid">
+      <div><span class="statband-num">70%</span><span class="statband-label">of adults carry one or more unresolved early-life traumas (ACEs)</span></div>
+      <div><span class="statband-num">76%</span><span class="statband-label">of adults are affected by burnout</span></div>
+      <div><span class="statband-num" data-no-count>15</span><span class="statband-label">cigarettes a day — the health risk the Surgeon General equates with loneliness</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COHORT OFFER -->
+<section class="offer-block" id="enroll" aria-labelledby="offer-h">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">The 5-week cohort</p>
+    <h2 id="offer-h">Five weeks. One small group. Your way back to <em>who you are</em>.</h2>
+    <p class="lede">Join Elizabeth Good (M.A. Clinical Psychology) and the full ReBe team for five live Tuesday sessions of guided inner work — anchored in <strong>EPICS</strong> (Emotional, Physical, Intellectual, Cultural, Spiritual) and the story-as-genre framework.</p>
+    <p class="lede">This isn't therapy. It isn't coaching in the standard sense. It's a five-week guided experience in a small group of adults doing the same work alongside you — small enough to be known, large enough to be honest.</p>
+    <p class="lede">Five weeks of weekly Tuesday sessions with Elizabeth and the ReBe team, plus multiple optional bonus group sessions led by each of the seven confidants. You can participate openly or, if you'd prefer, anonymously by name and turned-off camera.</p>
+    <p class="lede">Whether you're working through burnout, anxiety, grief, loneliness, or simply not feeling like yourself this season — the work meets you where you are. <strong>Limited seats. First come, first served.</strong></p>
+
+    <div class="whatyouget" aria-label="What's included in the cohort">
+      <h3>What you'll get</h3>
+      <ul>
+        <li><strong>Five weekly 60–75 minute live Zoom sessions</strong> with Elizabeth and the ReBe team</li>
+        <li><strong>Multiple optional bonus group sessions</strong> led by each of the 7 confidants throughout the 5 weeks</li>
+        <li>A <strong>small cohort</strong> — small enough to be known, large enough to be honest</li>
+        <li><strong>Live Q&amp;A in every session</strong> — bring your specific questions</li>
+        <li><strong>Anonymous participation option</strong> — camera off, chat-based, if that's safer for you</li>
+        <li>Anchored in <strong>EPICS</strong> — Emotional, Physical, Intellectual, Cultural, Spiritual</li>
+        <li>A <strong>faith-friendly approach</strong> — secular framing welcome, spiritual framing welcome, neither required</li>
+        <li><strong>Tools, language, and practices</strong> you can take into your life immediately</li>
+        <li><strong>Not recorded</strong> — these are the times you set aside to actually be there</li>
+      </ul>
+    </div>
+
+    <p class="pick-line">Choose your <em>group</em>.</p>
+
+    <div class="product-cards">
+      <div class="product-card">
+        <p class="product-eyebrow">The 11 AM ET Cohort</p>
+        <h3 class="product-title">Tuesdays at 11 AM Eastern</h3>
+        <p class="product-meta"><strong>June 23 – July 21, 2026</strong><br>60–75 minutes per session<br>8 AM Pacific</p>
+        <div class="pc-values" aria-label="Value breakdown">
+          <div class="row"><span>5 weekly cohort sessions</span><strong>$1,500</strong></div>
+          <div class="row"><span>Bonus sessions with each confidant</span><strong>$2,100</strong></div>
+          <div class="row total"><span>Total value</span><strong>$3,600</strong></div>
+        </div>
+        <p class="pc-strike">$3,600 value</p>
+        <p class="pc-price">$300</p>
+        <button type="button" class="pc-btn" data-reserve="11am">Reserve my seat →</button>
+        <p class="pc-firstcohort">First cohort only — this price won't be offered again</p>
+      </div>
+
+      <div class="product-card">
+        <p class="product-eyebrow">The 8 PM ET Cohort</p>
+        <h3 class="product-title">Tuesdays at 8 PM Eastern</h3>
+        <p class="product-meta"><strong>June 23 – July 21, 2026</strong><br>60–75 minutes per session<br>5 PM Pacific</p>
+        <div class="pc-values" aria-label="Value breakdown">
+          <div class="row"><span>5 weekly cohort sessions</span><strong>$1,500</strong></div>
+          <div class="row"><span>Bonus sessions with each confidant</span><strong>$2,100</strong></div>
+          <div class="row total"><span>Total value</span><strong>$3,600</strong></div>
+        </div>
+        <p class="pc-strike">$3,600 value</p>
+        <p class="pc-price">$300</p>
+        <button type="button" class="pc-btn" data-reserve="8pm">Reserve my seat →</button>
+        <p class="pc-firstcohort">First cohort only — this price won't be offered again</p>
+      </div>
+    </div>
+
+    <div class="notready-block">
+      <h3>Have questions first?</h3>
+      <p>Talk to a member of the team. We'll text or email — your preference. No pressure, no sales pitch.</p>
+      <button type="button" class="notready-btn" id="open-notready">Get in touch →</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" aria-label="Past participant testimonials">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">What people are saying</p>
+    <h2>From the <em>REAL TALK</em> community.</h2>
+    <p class="t-intro">From past participants of Elizabeth Good's REAL TALK program — the framework that ReBe ReFresh is built on. Names withheld for confidentiality.</p>
+    <div class="t-grid">
+      <div class="t-card">
+        <blockquote>"I came in feeling stuck and left feeling free, clear, and confident in who I am."</blockquote>
+        <p class="t-attr">Program Participant</p>
+      </div>
+      <div class="t-card">
+        <blockquote>"By the end of the sessions, I felt lighter and more aware. I now understand my triggers, where they started, and that it's not my responsibility to carry shame or fix everyone else. That realization changed everything."</blockquote>
+        <p class="t-attr">Program Participant</p>
+      </div>
+      <div class="t-card">
+        <blockquote>"Being in a space where people released lifelong shame and stepped into freedom was powerful. It wasn't forced or performative. It was invitational, and it worked. I hope everyone gets to experience something like this."</blockquote>
+        <p class="t-attr">Business Leader</p>
+      </div>
+      <div class="t-card">
+        <blockquote>"I didn't even realize how much I was carrying until I went through this process. It helped me break patterns I had been stuck in for years and gave me real hope for the future."</blockquote>
+        <p class="t-attr">Program Participant</p>
+      </div>
+      <div class="t-card">
+        <blockquote>"I shared things I had never told anyone before. Instead of shame, I felt relief and acceptance. That was life-changing."</blockquote>
+        <p class="t-attr">Program Participant</p>
+      </div>
+      <div class="t-card">
+        <blockquote>"This gave me practical tools I can actually use. I'm more aware of my patterns and know how to work through them instead of staying stuck."</blockquote>
+        <p class="t-attr">Program Participant</p>
+      </div>
+      <div class="t-card">
+        <blockquote>"I feel like I got my voice back. I'm more confident, more honest, and more secure in who I am."</blockquote>
+        <p class="t-attr">Program Participant</p>
+      </div>
+      <div class="t-card">
+        <blockquote>"I didn't expect it to be this powerful. It exceeded everything I thought it would be."</blockquote>
+        <p class="t-attr">Program Participant</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERMS (collapsible) -->
+<section class="terms-block" aria-label="Terms and Conditions">
+  <div class="container">
+    <details class="terms-details">
+      <summary>Terms &amp; Conditions</summary>
+      <div class="terms-content">
+        <p>Information shared in the ReBe ReFresh cohort is not clinical or medical advice. ReBe and the ReBe team make no promises or claims of specific outcomes. Results vary with individual commitment and participation. Any copying or distribution of cohort materials without ReBe's written consent is prohibited.</p>
+
+        <h4>SMS Mobile Policy</h4>
+        <p>By providing your phone number, you agree to the terms in our <a href="/terms.html">SMS Mobile Policy</a>.</p>
+
+        <h4>Refund Policy</h4>
+        <p>The ReBe ReFresh cohort fee is non-refundable due to the limited seat structure and material access. Refunds for missed sessions can only be made in the event of medical or bereavement reasons.</p>
+
+        <h4>Recording &amp; Privacy</h4>
+        <p>Sessions are <strong>not recorded</strong>. ReBe does not record, store, or distribute any video, audio, or chat content from cohort sessions.</p>
+
+        <h4>Confidentiality</h4>
+        <p>Participation in the cohort is contingent on respecting group confidentiality: what's shared in the group stays in the group. Violations of this agreement may result in removal from the cohort without refund.</p>
+
+        <h4>Spiritual Content</h4>
+        <p>ReBe is a faith-friendly experience, not a religious one. Some confidants come from Christian backgrounds; others do not. Spiritual framing is welcome, secular framing is welcome, and neither is required to participate fully.</p>
+
+        <h4>Inclusivity</h4>
+        <p>All races, religions, sexual orientations, gender identities, and political views are welcome and respected. ReBe creates a safe, inclusive environment for every adult doing inner work.</p>
+
+        <p>By checking the box on the reservation form and proceeding to checkout, you confirm you've read and accept these Terms and our <a href="/privacy.html">Privacy Policy</a>.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- PRIVATE SESSIONS -->
+<section id="private" class="sec-paper-alt" aria-labelledby="private-h">
+  <div class="container container--wide">
+    <p class="eyebrow eyebrow--center">Private 1:1 Sessions · $197</p>
+    <h2 id="private-h" class="section-h" style="text-align:center">Rather go <em>one-on-one</em>? Meet the confidants.</h2>
+    <p class="lede" style="text-align:center;max-width:640px;margin:0 auto">A single 1:1 with the confidant of your choice — $197. Open a card to read their story, then request a session. Your confidant reaches out within 48 hours to schedule.</p>
+
+    <div class="conf-grid">
+
+      <div class="conf-card">
+        <picture><img class="conf-photo" src="Images/Elizabeth.png" width="1080" height="1350" loading="lazy" alt="Elizabeth Good — portrait"></picture>
+        <div class="conf-card-body">
+          <h3 class="conf-name">Elizabeth Good</h3>
+          <p class="conf-role">Founder · M.A. Clinical Psychology · Creator of REAL TALK</p>
+          <button type="button" class="conf-bio-btn" data-bio="bio-elizabeth">Read bio</button>
+          <a class="conf-request-btn" href="#request-1on1" data-prefill-confidant="Elizabeth Good">Request a session →</a>
+        </div>
+      </div>
+
+      <div class="conf-card">
+        <picture><source type="image/webp" srcset="Images/beth.webp"><img class="conf-photo" src="Images/beth.jpg" width="1080" height="1350" loading="lazy" alt="Beth Rech — portrait"></picture>
+        <div class="conf-card-body">
+          <h3 class="conf-name">Beth Rech</h3>
+          <p class="conf-role">Inner Healing Mentor</p>
+          <button type="button" class="conf-bio-btn" data-bio="bio-beth">Read bio</button>
+          <a class="conf-request-btn" href="#request-1on1" data-prefill-confidant="Beth Rech">Request a session →</a>
+        </div>
+      </div>
+
+      <div class="conf-card">
+        <picture><source type="image/webp" srcset="Images/fred-feller.webp"><img class="conf-photo" src="Images/fred-feller.jpg" width="1080" height="1350" loading="lazy" alt="Fred Feller — portrait"></picture>
+        <div class="conf-card-body">
+          <h3 class="conf-name">Fred Feller</h3>
+          <p class="conf-role">Leadership &amp; Identity Mentor</p>
+          <button type="button" class="conf-bio-btn" data-bio="bio-fred">Read bio</button>
+          <a class="conf-request-btn" href="#request-1on1" data-prefill-confidant="Fred Feller">Request a session →</a>
+        </div>
+      </div>
+
+      <div class="conf-card">
+        <picture><source type="image/webp" srcset="Images/jean-park.webp"><img class="conf-photo" src="Images/jean-park.jpg" width="1080" height="1350" loading="lazy" alt="Jean Park — portrait"></picture>
+        <div class="conf-card-body">
+          <h3 class="conf-name">Jean Park</h3>
+          <p class="conf-role">Relational Healing &amp; Family Therapist</p>
+          <button type="button" class="conf-bio-btn" data-bio="bio-jean">Read bio</button>
+          <a class="conf-request-btn" href="#request-1on1" data-prefill-confidant="Jean Park">Request a session →</a>
+        </div>
+      </div>
+
+      <div class="conf-card">
+        <picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img class="conf-photo" src="Images/osil-pistole.jpg" width="1080" height="1350" loading="lazy" alt="Osil Pistole — portrait"></picture>
+        <div class="conf-card-body">
+          <h3 class="conf-name">Osil Pistole</h3>
+          <p class="conf-role">Spirit &amp; Identity Activator</p>
+          <button type="button" class="conf-bio-btn" data-bio="bio-osil">Read bio</button>
+          <a class="conf-request-btn" href="#request-1on1" data-prefill-confidant="Osil Pistole">Request a session →</a>
+        </div>
+      </div>
+
+      <div class="conf-card">
+        <picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img class="conf-photo" src="Images/jason-quintal.jpg" width="1080" height="1350" loading="lazy" alt="Dr. Jason Quintal — portrait"></picture>
+        <div class="conf-card-body">
+          <h3 class="conf-name">Dr. Jason Quintal</h3>
+          <p class="conf-role">PhD · Trauma Resolution Specialist</p>
+          <button type="button" class="conf-bio-btn" data-bio="bio-quintal">Read bio</button>
+          <a class="conf-request-btn" href="mailto:refresh@justrebe.com">Email to connect →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 1:1 REQUEST FORM -->
+<section class="form-section" id="request-1on1">
+  <div class="container">
+    <div class="form-intro">
+      <p class="eyebrow eyebrow--center">Private 1:1 · $197 per session</p>
+      <h2 class="section-h" style="text-align:center">Request a session with a <em>confidant</em>.</h2>
+      <p>We'll route you to your chosen confidant. Payment happens after this form, before scheduling.</p>
+    </div>
+    <form id="confidant-form" class="form-card" novalidate>
+      <div class="form-field"><label for="conf-name">Your name <span class="req">*</span></label><input type="text" id="conf-name" name="name" autocomplete="name"></div>
+      <div class="form-field"><label for="conf-email">Email <span class="req">*</span></label><input type="email" id="conf-email" name="email" autocomplete="email"></div>
+      <div class="form-field"><label for="conf-phone">Phone (optional)</label><input type="tel" id="conf-phone" name="phone" autocomplete="tel"></div>
+      <div class="form-field">
+        <label for="conf-confidant">Preferred confidant <span class="req">*</span></label>
+        <select id="conf-confidant" name="preferred_confidant">
+          <option value="">— choose —</option>
+          <option value="Beth Rech">Beth Rech</option>
+          <option value="Christophe Dessaigne">Christophe Dessaigne</option>
+          <option value="Dr. Jason Quintal">Dr. Jason Quintal</option>
+          <option value="Elizabeth Good">Elizabeth Good</option>
+          <option value="Fred Feller">Fred Feller</option>
+          <option value="Jean Park">Jean Park</option>
+          <option value="Osil Pistole">Osil Pistole</option>
+          <option value="Any (Choose for me)">Any (Choose for me)</option>
+        </select>
+      </div>
+      <div class="form-field"><label for="conf-situation">What you're working through <span class="req">*</span></label><textarea id="conf-situation" name="situation" placeholder="A short paragraph is enough — your confidant will go deeper when you talk."></textarea></div>
+      <div class="form-field"><label for="conf-times">Best times to connect</label><input type="text" id="conf-times" name="best_times" placeholder="e.g. weekday evenings ET, weekend mornings…"><div class="hint">Optional, but helps your confidant find a time that works.</div></div>
+      <label class="form-check"><input type="checkbox" name="consent_to_contact"><span>I'm okay being contacted by my chosen confidant by email or phone to schedule.</span></label>
+      <div class="form-submit">
+        <button type="submit" class="btn" style="width:100%">Continue to payment · $197</button>
+      </div>
+    </form>
+    <div id="confidant-post-submit" class="post-submit"></div>
+    <p class="email-note">Looking for trauma-specific work with Dr. Quintal? Email <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a> to be connected.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec-green-wash" aria-labelledby="faq-h">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">Questions</p>
+    <h2 id="faq-h" class="section-h" style="text-align:center">Things people <em>actually ask</em>.</h2>
+    <div class="faq-list">
+      <details class="faq-item"><summary>Is this therapy or coaching?</summary><p>No. ReBe ReFresh is a guided process for inner work — faith-friendly, with company. It's not therapy, coaching, or pastoral counseling. If you're in acute crisis, please reach out to a therapist, your doctor, or 988 first.</p></details>
+      <details class="faq-item"><summary>What's included in the cohort?</summary><p>Five main weekly sessions with Elizabeth and the ReBe team, in a small group — plus multiple optional bonus group sessions led by each of the 7 confidants. Not recorded — they're the times you set aside to actually be there. $300 total. The first group starts June 23. You can pick either 11 AM or 8 PM Eastern when you enroll.</p></details>
+      <details class="faq-item"><summary>What's the difference between the cohort and a private session?</summary><p>The cohort ($300) is five weeks of guided group work. A standalone private session ($197) is a single 1:1 with the confidant of your choice — book one anytime, on its own.</p></details>
+      <details class="faq-item"><summary>How does payment and scheduling work?</summary><p>Payment is handled securely at checkout after you submit the form. The first cohort starts June 23 — you pick either 11 AM or 8 PM Eastern when you enroll. For a private session, your confidant reaches out within 48 hours to schedule directly.</p></details>
+      <details class="faq-item"><summary>Can my group or organization enroll together?</summary><p>Yes — email <a href="mailto:refresh@justrebe.com" style="color:var(--green-ink);font-weight:700">refresh@justrebe.com</a> and we'll help you set it up.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- BIO MODALS — opened by the team strip photos AND the confidant card Read bio buttons -->
+<dialog class="bio-modal-pop" id="bio-elizabeth"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good"></picture></div>
+  <h3 class="bio-modal-name">Elizabeth Good</h3>
+  <p class="bio-modal-role">Founder · M.A. Clinical Psychology · Creator of REAL TALK</p>
+  <div class="bio-modal-text">
+    <p>For nearly three decades, Elizabeth Good has guided individuals, leaders, and organizations through transformational growth, emotional healing, and identity-centered development. With experience spanning leadership development, behavioral psychology, advocacy, coaching, and organizational care, she has helped thousands move beyond cycles of burnout, shame, trauma, and disconnection into greater clarity, resilience, and authentic leadership.</p>
+    <p>As the creator of REAL TALK and founder of The Foundation United, Elizabeth is recognized for facilitating courageous conversations that foster emotional intelligence, healthy relationships, and sustainable transformation.</p>
+    <p>She is also the author of <em>Speak the Unspeakable</em> and <em>Groomed</em> (HarperCollins, 2020), and a two-time TEDx speaker.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-quintal"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal"></picture></div>
+  <h3 class="bio-modal-name">Dr. Jason Quintal</h3>
+  <p class="bio-modal-role">PhD · Trauma Resolution Specialist</p>
+  <div class="bio-modal-text">
+    <p>Dr. Jason Quintal is a trauma specialist with more than 25 years of experience helping people heal from severe and complex trauma — PTSD, grief, shame, abuse recovery, and emotional wounds. He works in TTR (Trauma &amp; Tension Release).</p>
+    <p>As a master practitioner in trauma resolution and Neurolinguistic Programming (NLP), he's continually inspired by the profound shifts these accelerated healing methods bring.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-beth"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech"></picture></div>
+  <h3 class="bio-modal-name">Beth Rech</h3>
+  <p class="bio-modal-role">Inner Healing Mentor</p>
+  <div class="bio-modal-text">
+    <p>Beth has spent more than 30 years mentoring women and helping individuals navigate emotional healing, personal growth, and self-discovery. With advanced training in spiritual formation and more than 15 years of inner healing work, she is passionate about helping people break free from limiting beliefs, unresolved trauma, generational patterns, and emotional wounds.</p>
+    <p>Using an integrative approach that values the connection between mind, emotions, body, and inner life, Beth creates safe spaces for people to process pain honestly, build self-awareness, and reconnect to who they truly are beneath fear, shame, and unhealthy narratives.</p>
+    <p>Known for her warmth, authenticity, and nurturing presence, she helps people move toward greater wholeness, emotional resilience, and personal transformation.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-jean"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park"></picture></div>
+  <h3 class="bio-modal-name">Jean Park</h3>
+  <p class="bio-modal-role">Relational Healing &amp; Family Therapist</p>
+  <div class="bio-modal-text">
+    <p>Jean Park helps individuals, parents, and leaders build healthier relationships, strengthen emotional awareness, and break unhealthy generational patterns. Her work is deeply informed by her experience growing up between Korean and American cultural expectations and her journey as a mother raising three teenage boys.</p>
+    <p>After earning her degree in Economics from the California Institute of Technology and working as an economic analyst, Jean transitioned into counseling and family systems work, earning her Master's in Marriage and Family Therapy from Fuller Theological Seminary. She trained as a child therapist and school-based therapist, working extensively with youth and families.</p>
+    <p>Today, Jean coaches parents and leaders in emotional intelligence, self-awareness, communication, and relational health.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-fred"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller"></picture></div>
+  <h3 class="bio-modal-name">Fred Feller</h3>
+  <p class="bio-modal-role">Leadership &amp; Identity Mentor</p>
+  <div class="bio-modal-text">
+    <p>For more than 35 years, Fred Feller has helped leaders, teams, and individuals navigate transformation, breakthrough, and personal growth with clarity, wisdom, and stability. Known for his grounded presence and strategic insight, he has worked extensively with executives, ministry leaders, and organizations to help people overcome limiting beliefs, strengthen emotional resilience, and unlock their full potential.</p>
+    <p>His approach integrates emotional intelligence, mindset transformation, relational health, and leadership development to create lasting change. Having worked internationally across nine countries, Fred is recognized for bringing stability in high-pressure environments.</p>
+    <p>A husband of nearly 50 years, father of four, and grandfather of seven, he leads from a foundation of consistency, integrity, and deep relational wisdom.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-osil"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole"></picture></div>
+  <h3 class="bio-modal-name">Osil Pistole</h3>
+  <p class="bio-modal-role">Spirit &amp; Identity Activator</p>
+  <div class="bio-modal-text">
+    <p>Osil is a speaker and intuitive coach with 20+ years of experience and a particular gift for speaking into a person's true identity. She tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
+    <p>Known for her honest, empowering, and engaging approach, Osil creates spaces where people feel seen — not just for what they're working on, but for who they actually are underneath it.</p>
+    <p>Drawing from years of mentoring, intuitive coaching, and speaking, she helps people walk forward in clarity, confidence, and purpose.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-christophe"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne"></picture></div>
+  <h3 class="bio-modal-name">Christophe Dessaigne</h3>
+  <p class="bio-modal-role">Restoration &amp; Transformation Coach</p>
+  <div class="bio-modal-text">
+    <p>His own story of healing and restoration shapes how he walks with others through theirs. Helps people break the patterns that quietly run their lives — with the honesty of someone who's been there.</p>
+  </div>
+</div></dialog>
+
+<!-- SHORT bio modals — used by the "Who you'll be in the room with" team strip up top -->
+<dialog class="bio-modal-pop" id="bio-elizabeth-short"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good"></picture></div>
+  <h3 class="bio-modal-name">Elizabeth Good</h3>
+  <p class="bio-modal-role">Founder · M.A. Clinical Psychology · Creator of REAL TALK</p>
+  <div class="bio-modal-text">
+    <p>Three decades helping people heal from burnout, shame, and trauma. Author of <em>Groomed</em> (HarperCollins, 2020) and <em>Speak the Unspeakable</em>. Two-time TEDx speaker.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-quintal-short"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal"></picture></div>
+  <h3 class="bio-modal-name">Dr. Jason Quintal</h3>
+  <p class="bio-modal-role">PhD · Trauma Resolution Specialist</p>
+  <div class="bio-modal-text">
+    <p>25+ years specializing in PTSD, grief, shame, and abuse recovery. Master practitioner in trauma resolution and NLP — accelerated methods that move people through what's been stuck for years.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-beth-short"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech"></picture></div>
+  <h3 class="bio-modal-name">Beth Rech</h3>
+  <p class="bio-modal-role">Inner Healing Mentor</p>
+  <div class="bio-modal-text">
+    <p>Over 30 years mentoring women and helping individuals break free from limiting beliefs, generational patterns, and unresolved trauma. Warmth, presence, and the kind of listening that doesn't rush.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-jean-short"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park"></picture></div>
+  <h3 class="bio-modal-name">Jean Park</h3>
+  <p class="bio-modal-role">Relational Healing &amp; Family Therapist</p>
+  <div class="bio-modal-text">
+    <p>Caltech economics degree, then a Master's in Marriage and Family Therapy from Fuller. 20+ years coaching parents and leaders on emotional intelligence and breaking unhealthy generational patterns.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-fred-short"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller"></picture></div>
+  <h3 class="bio-modal-name">Fred Feller</h3>
+  <p class="bio-modal-role">Leadership &amp; Identity Mentor</p>
+  <div class="bio-modal-text">
+    <p>35+ years working with executives, ministry leaders, and teams across nine countries. Known for grounded presence in high-pressure environments. Husband of 50 years, father of four, grandfather of seven.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-osil-short"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole"></picture></div>
+  <h3 class="bio-modal-name">Osil Pistole</h3>
+  <p class="bio-modal-role">Spirit &amp; Identity Activator</p>
+  <div class="bio-modal-text">
+    <p>Speaker and intuitive coach with 20+ years of experience and a particular gift for speaking into a person's true identity. Tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal-pop" id="bio-christophe-short"><div class="bio-modal-inner">
+  <button class="bio-modal-close" type="button" aria-label="Close">×</button>
+  <div class="bio-modal-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne"></picture></div>
+  <h3 class="bio-modal-name">Christophe Dessaigne</h3>
+  <p class="bio-modal-role">Restoration &amp; Transformation Coach</p>
+  <div class="bio-modal-text">
+    <p>His own story of healing and restoration shapes how he walks with others through theirs. Helps people break the patterns that quietly run their lives — with the honesty of someone who's been there.</p>
+  </div>
+</div></dialog>
+
+<script>
+// Bio modal open/close — used by both the team strip up top and the confidant grid lower.
+document.querySelectorAll('[data-bio]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var modal = document.getElementById(btn.getAttribute('data-bio'));
+    if (modal && typeof modal.showModal === 'function') modal.showModal();
+  });
+});
+document.querySelectorAll('.bio-modal-close').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var dlg = btn.closest('dialog');
+    if (dlg) dlg.close();
+  });
+});
+document.querySelectorAll('.bio-modal-pop').forEach(function(m){
+  m.addEventListener('click', function(e){
+    if (e.target === m) m.close();
+  });
+});
+</script>
+
+<!-- RESERVATION MODAL — minimal form before Stripe checkout -->
+<dialog class="reserve-modal" id="reserve-modal" aria-labelledby="reserve-title">
+  <div class="reserve-inner">
+    <button class="reserve-close" type="button" aria-label="Close">×</button>
+    <p class="reserve-eyebrow">Reserve your seat · $300</p>
+    <h3 class="reserve-title" id="reserve-title">Almost there.</h3>
+    <p class="reserve-sub" id="reserve-slot-label">Tuesdays at 11 AM Eastern · June 23 – July 21</p>
+    <form id="reserve-form" novalidate>
+      <input type="hidden" id="reserve-slot" name="slot" value="11am">
+      <label for="rf_name">Full name</label>
+      <input type="text" id="rf_name" name="full_name" autocomplete="name" required>
+      <label for="rf_email">Email</label>
+      <input type="email" id="rf_email" name="email" autocomplete="email" required>
+      <label for="rf_phone">Phone</label>
+      <input type="tel" id="rf_phone" name="phone" autocomplete="tel" required>
+      <div class="reserve-consent">
+        <input type="checkbox" id="rf_tos" name="tos" required>
+        <label for="rf_tos" style="text-transform:none;letter-spacing:0;font-size:13px;font-weight:400;color:var(--body)">I accept the <a href="#" onclick="document.querySelector('.terms-details').setAttribute('open','');document.querySelector('.terms-details').scrollIntoView({behavior:'smooth'});this.closest('dialog').close();return false;">Terms of Service</a> and <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>, and agree to maintain confidentiality about what's shared in the group.</label>
+      </div>
+      <button type="submit" class="reserve-submit" id="reserve-submit">Reserve my seat → checkout</button>
+      <p class="reserve-error" id="reserve-error"></p>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin:12px 0 0;line-height:1.5">Secure checkout via Stripe · cards, Apple Pay, Affirm, Klarna, Afterpay</p>
+    </form>
+  </div>
+</dialog>
+
+<!-- "NOT READY YET" LEAD CAPTURE MODAL — waitlist + wants more info -->
+<dialog class="reserve-modal" id="notready-modal" aria-labelledby="notready-title">
+  <div class="reserve-inner">
+    <button class="reserve-close" type="button" aria-label="Close">×</button>
+    <p class="reserve-eyebrow">Not ready yet</p>
+    <h3 class="reserve-title" id="notready-title">We'll keep in touch.</h3>
+    <p class="reserve-sub">A member of the team will follow up — by text or email, whichever you prefer.</p>
+    <div id="notready-formfields">
+      <form id="notready-form" novalidate>
+        <label for="nr_name">Full name</label>
+        <input type="text" id="nr_name" name="full_name" autocomplete="name" required>
+        <label for="nr_email">Email</label>
+        <input type="email" id="nr_email" name="email" autocomplete="email" required>
+        <label for="nr_phone">Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">(if you'd prefer a text)</span></label>
+        <input type="tel" id="nr_phone" name="phone" autocomplete="tel">
+        <label for="nr_contact">How should we reach out?</label>
+        <select id="nr_contact" name="contact_preference">
+          <option value="text">Text (SMS)</option>
+          <option value="email">Email</option>
+          <option value="either">Either is fine</option>
+        </select>
+        <label for="nr_interest">I'm interested in…</label>
+        <select id="nr_interest" name="interest">
+          <option value="wants_more_info">Learning more about ReBe ReFresh</option>
+          <option value="waitlist">The next cohort (these dates don't work)</option>
+        </select>
+        <label for="nr_time">Preferred time slot (if you know)</label>
+        <select id="nr_time" name="preferred_time">
+          <option value="">No preference</option>
+          <option value="Tuesdays at 11 AM ET">Tuesdays at 11 AM Eastern</option>
+          <option value="Tuesdays at 8 PM ET">Tuesdays at 8 PM Eastern</option>
+        </select>
+        <label for="nr_notes">Anything you'd like us to know (optional)</label>
+        <textarea id="nr_notes" name="notes" placeholder="Questions, scheduling concerns, whatever's true."></textarea>
+        <button type="submit" class="reserve-submit" id="notready-submit">Send →</button>
+        <p class="reserve-error" id="notready-error"></p>
+      </form>
+    </div>
+    <div id="notready-thanks" style="display:none;text-align:center;padding:20px 0">
+      <p style="font-family:var(--serif);font-style:italic;font-size:22px;color:var(--navy);margin:0 0 10px">Got it. We'll be in touch.</p>
+      <p style="font-size:15px;color:var(--body);margin:0 0 16px;line-height:1.6">Check your inbox — you should have a confirmation email within a few minutes.</p>
+      <button type="button" class="reserve-close" style="position:static;width:auto;height:auto;border-radius:8px;padding:10px 24px;font-family:inherit;font-size:14px;font-weight:700">Close</button>
+    </div>
+  </div>
+</dialog>
+
+</main>
+
+<footer>
+  <p class="foot-line foot-line--muted">ReBe — Rebuilding people from the inside out. Better me. Better we.</p>
+  <p class="foot-line">This is a guided group experience, not crisis care. If you're in acute distress, reach out to a therapist, your doctor, or 988 (Suicide &amp; Crisis Lifeline).</p>
+  <p class="foot-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="mailto:refresh@justrebe.com">Contact</a>
+    <a href="#private">Private 1:1 Sessions</a>
+  </p>
+  <p class="foot-line foot-line--muted">© 2026 Just ReBe, LLC. All rights reserved.</p>
+</footer>
+
+<!-- ========== SCROLL REVEAL ========== -->
+<script>
+(function(){
+  document.documentElement.style.scrollBehavior='smooth';
+  var els=document.querySelectorAll('main section>.container, #enroll .form-card');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    },{threshold:0.1,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){io.observe(el)});
+  } else { els.forEach(function(el){el.classList.add('in')}); }
+})();
+</script>
+
+<!-- ========== STAT COUNT-UP + CARD STAGGER ========== -->
+<script>
+(function(){
+  if (!('IntersectionObserver' in window)) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+
+  // Count-up on stat numbers (real number stays visible until observer fires)
+  var stats = document.querySelectorAll('.statband-num');
+  stats.forEach(function(el){
+    if (el.hasAttribute('data-no-count')) return;
+    var m = el.textContent.trim().match(/^(\d+)(%?)$/);
+    if (!m) return;
+    el.dataset.target = m[1];
+    el.dataset.suffix = m[2];
+  });
+  function countUp(el){
+    var target = parseInt(el.dataset.target, 10);
+    var suffix = el.dataset.suffix || '';
+    el.textContent = '0' + suffix;
+    var dur = 1500, start = performance.now();
+    function step(now){
+      var t = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = target + suffix;
+    }
+    requestAnimationFrame(step);
+  }
+  var statIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && e.target.dataset.target){
+        countUp(e.target);
+        statIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.45 });
+  stats.forEach(function(el){ if (el.dataset.target) statIO.observe(el); });
+
+  // Staggered fade-in for confidant cards as they enter view
+  var cards = document.querySelectorAll('.conf-card');
+  cards.forEach(function(c){ c.style.opacity = 0; c.style.transform = 'translateY(20px)'; c.style.transition = 'opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1)'; });
+  var cardIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){
+        var idx = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
+        e.target.style.transitionDelay = (idx * 55) + 'ms';
+        e.target.style.opacity = 1;
+        e.target.style.transform = 'none';
+        cardIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  cards.forEach(function(c){ cardIO.observe(c); });
+})();
+</script>
+
+<!-- ========== CONFIDANT BUTTON PREFILL ========== -->
+<script>
+(function(){
+  document.querySelectorAll('[data-prefill-confidant]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var name=btn.getAttribute('data-prefill-confidant');
+      var sel=document.getElementById('conf-confidant');
+      if(sel){ for(var i=0;i<sel.options.length;i++){ if(sel.options[i].value===name){ sel.selectedIndex=i; break; } } }
+    });
+  });
+})();
+</script>
+
+
+<!-- ========== SUPABASE + FORMS ========== -->
+<script src="lib/refresh-codes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
+<script src="lib/refresh-form.js"></script>
+<script src="lib/confidant-form.js"></script>
+<script>
+  // PUBLIC values — replace with real Supabase project values when wiring enrollment live.
+  var SUPABASE_URL='https://erbncxjkgwqtfhulricc.supabase.co';
+  var SUPABASE_ANON_KEY='sb_publishable_3L24YRPqcRSQNHWa8ofpSA_t0mAB6LY';
+  var supabase;
+  try { supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY); }
+  catch(err){ console.warn('Supabase init failed (placeholder keys). Demo mode only.',err); supabase={supabaseUrl:SUPABASE_URL}; }
+
+  // --- Two-product reservation flow ($300 cohort, 11 AM or 8 PM) ---
+  // The two product cards on the page each open a minimal reservation modal
+  // (name, email, phone, T&C). Submit creates a Supabase row via the
+  // submit_cohort_signup RPC, then opens Stripe Checkout. On success Stripe
+  // redirects to thank-you-cohort.html?slot=11am|8pm.
+  (function setupReserveFlow(){
+    var modal = document.getElementById('reserve-modal');
+    var form = document.getElementById('reserve-form');
+    var slotInput = document.getElementById('reserve-slot');
+    var slotLabel = document.getElementById('reserve-slot-label');
+    var errorEl = document.getElementById('reserve-error');
+    var submitBtn = document.getElementById('reserve-submit');
+    if (!modal || !form) return;
+
+    var testMode = new URLSearchParams(window.location.search).get('testpay') === 'ospo';
+    var basePrice = testMode ? 1 : 300;
+
+    function openFor(slot){
+      slotInput.value = slot;
+      slotLabel.textContent = slot === '8pm' ? 'Tuesdays at 8 PM Eastern · June 23 – July 21' : 'Tuesdays at 11 AM Eastern · June 23 – July 21';
+      errorEl.textContent = '';
+      submitBtn.disabled = false;
+      submitBtn.textContent = testMode ? 'Reserve my seat ($1 test) →' : 'Reserve my seat → checkout';
+      if (typeof modal.showModal === 'function') modal.showModal();
+    }
+
+    // Hook up product card buttons
+    document.querySelectorAll('[data-reserve]').forEach(function(btn){
+      btn.addEventListener('click', function(){ openFor(btn.getAttribute('data-reserve')); });
+    });
+
+    // Close handlers
+    modal.querySelectorAll('.reserve-close').forEach(function(b){
+      b.addEventListener('click', function(){ modal.close(); });
+    });
+    modal.addEventListener('click', function(e){
+      if (e.target === modal) modal.close();
+    });
+
+    function showError(msg){ errorEl.textContent = msg; }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      showError('');
+
+      var fd = new FormData(form);
+      var fullName = (fd.get('full_name') || '').trim();
+      var email = (fd.get('email') || '').trim();
+      var phone = (fd.get('phone') || '').trim();
+      var slot = (fd.get('slot') || '11am');
+      var tos = form.querySelector('[name="tos"]').checked;
+      var preferredTime = slot === '8pm' ? 'Tuesdays at 8 PM ET' : 'Tuesdays at 11 AM ET';
+
+      if (!fullName || !email || !phone) { showError('Please fill in your name, email, and phone.'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('Please enter a valid email address.'); return; }
+      if (phone.replace(/\D/g,'').length < 10) { showError('Phone must have at least 10 digits.'); return; }
+      if (!tos) { showError('Please accept the Terms to continue.'); return; }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Saving your seat…';
+
+      supabase.rpc('submit_cohort_signup', {
+        p_full_name:                  fullName,
+        p_email:                      email,
+        p_phone:                      phone,
+        p_audience_type:              'groups',
+        p_organization_name:          null,
+        p_role_title:                 null,
+        p_group_type:                 'no_preference',
+        p_preferred_group_time:       preferredTime,
+        p_reason_for_interest:        null,
+        p_area_needing_refresh:       null,
+        p_area_other:                 null,
+        p_previous_rebe_experience:   null,
+        p_readiness:                  'ready_to_pay',
+        p_notes:                      null,
+        p_who_referred_you:           null,
+        p_referral_code:              null,
+        p_consent_to_contact:         true,
+        p_consent_to_confidentiality: true
+      }).then(function(res){
+        if (res.error || !res.data) {
+          console.error('submit_cohort_signup error', res.error || res);
+          showError('Something went wrong saving your details. Try again or email refresh@justrebe.com.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = testMode ? 'Reserve my seat ($1 test) →' : 'Reserve my seat → checkout';
+          return;
+        }
+        var signupId = res.data;
+        submitBtn.textContent = 'Opening secure checkout…';
+        // Fire form-submit confirmation email + Kit tags (non-blocking)
+        fetch('/api/notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            kind: 'cohort_signup',
+            record: {
+              id: signupId,
+              full_name: fullName,
+              email: email,
+              phone: phone,
+              audience_type: 'groups',
+              preferred_group_time: preferredTime,
+              readiness: 'ready_to_pay'
+            }
+          })
+        }).catch(function(e){ console.warn('notify failed', e); });
+
+        // Hand off to Stripe
+        var origin = window.location.origin;
+        fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            kind: 'cohort',
+            signup_id: signupId,
+            customer_email: email,
+            customer_name: fullName,
+            amount_cents: Math.round(basePrice * 100),
+            description: 'ReBe ReFresh · 5-Week Cohort' + (testMode ? ' (TEST)' : ''),
+            success_url: origin + '/thank-you-cohort.html?slot=' + slot,
+            cancel_url: origin + '/refresh-cohort.html',
+            referral_code: null
+          })
+        })
+        .then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
+        .then(function(out){
+          if (!out.ok || !out.body.url) throw new Error((out.body && out.body.error) || 'No checkout URL');
+          window.location.href = out.body.url;
+        })
+        .catch(function(err){
+          console.error('Stripe checkout error', err);
+          showError("Couldn't open Stripe. Try again or email refresh@justrebe.com.");
+          submitBtn.disabled = false;
+          submitBtn.textContent = testMode ? 'Reserve my seat ($1 test) →' : 'Reserve my seat → checkout';
+        });
+      }).catch(function(err){
+        console.error('Network error', err);
+        showError('Network error. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = testMode ? 'Reserve my seat ($1 test) →' : 'Reserve my seat → checkout';
+      });
+    });
+  })();
+
+  // --- "Not ready yet?" lead capture (waitlist / wants more info) ---
+  (function setupNotReady(){
+    var modal = document.getElementById('notready-modal');
+    var form = document.getElementById('notready-form');
+    var openLink = document.getElementById('open-notready');
+    var errorEl = document.getElementById('notready-error');
+    var submitBtn = document.getElementById('notready-submit');
+    var thanksEl = document.getElementById('notready-thanks');
+    var formEl = document.getElementById('notready-formfields');
+    if (!modal || !form || !openLink) return;
+
+    openLink.addEventListener('click', function(e){
+      e.preventDefault();
+      errorEl.textContent = '';
+      thanksEl.style.display = 'none';
+      formEl.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send →';
+      form.reset();
+      if (typeof modal.showModal === 'function') modal.showModal();
+    });
+
+    modal.querySelectorAll('.reserve-close').forEach(function(b){
+      b.addEventListener('click', function(){ modal.close(); });
+    });
+    modal.addEventListener('click', function(e){ if (e.target === modal) modal.close(); });
+
+    function showError(msg){ errorEl.textContent = msg; }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      showError('');
+      var fd = new FormData(form);
+      var fullName = (fd.get('full_name') || '').trim();
+      var email = (fd.get('email') || '').trim();
+      var phone = (fd.get('phone') || '').trim();
+      var contactPref = (fd.get('contact_preference') || 'either');
+      var interest = (fd.get('interest') || 'wants_more_info');
+      var slotPref = (fd.get('preferred_time') || '');
+      var notesRaw = (fd.get('notes') || '').trim();
+
+      if (!fullName || !email) { showError('Please fill in your name and email.'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('Please enter a valid email address.'); return; }
+      if (contactPref === 'text' && !phone) { showError('Please add a phone number (or change preference to email).'); return; }
+      if (phone && phone.replace(/\D/g,'').length < 10) { showError('Phone must have at least 10 digits.'); return; }
+
+      // Prepend contact preference to notes so the salesperson sees it first
+      var notes = 'Contact preference: ' + contactPref + (notesRaw ? '\n\n' + notesRaw : '');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      supabase.rpc('submit_cohort_signup', {
+        p_full_name:                  fullName,
+        p_email:                      email,
+        p_phone:                      phone,
+        p_audience_type:              'groups',
+        p_organization_name:          null,
+        p_role_title:                 null,
+        p_group_type:                 'no_preference',
+        p_preferred_group_time:       slotPref || 'No preference',
+        p_reason_for_interest:        notesRaw || null,
+        p_area_needing_refresh:       null,
+        p_area_other:                 null,
+        p_previous_rebe_experience:   null,
+        p_readiness:                  interest,
+        p_notes:                      notes,
+        p_who_referred_you:           null,
+        p_referral_code:              null,
+        p_consent_to_contact:         true,
+        p_consent_to_confidentiality: true
+      }).then(function(res){
+        if (res.error) {
+          console.error('submit_cohort_signup error', res.error);
+          showError('Something went wrong. Try again or email refresh@justrebe.com.');
+          submitBtn.disabled = false; submitBtn.textContent = 'Send →';
+          return;
+        }
+        // Fire confirmation email + Kit tags
+        fetch('/api/notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            kind: 'cohort_signup',
+            record: {
+              id: res.data,
+              full_name: fullName,
+              email: email,
+              phone: phone,
+              audience_type: 'groups',
+              preferred_group_time: slotPref || 'No preference',
+              readiness: interest,
+              notes: notes
+            }
+          })
+        }).catch(function(e){ console.warn('notify failed', e); });
+
+        // Success state
+        formEl.style.display = 'none';
+        thanksEl.style.display = 'block';
+      }).catch(function(err){
+        console.error('Network error', err);
+        showError('Network error. Please try again.');
+        submitBtn.disabled = false; submitBtn.textContent = 'Send →';
+      });
+    });
+  })();
+
+  // --- Private 1:1 request form ($197) ---
+  window.initConfidantForm({
+    form: document.getElementById('confidant-form'),
+    postSubmitZone: document.getElementById('confidant-post-submit'),
+    supabase: supabase,
+    contactEmail: 'refresh@justrebe.com',
+    priceDisplay: '$197',
+    // Stripe Checkout for 1:1 ($197). Same pattern as cohort above — see comment there.
+    paypalInit: function(container, requestId){
+      var testMode=new URLSearchParams(window.location.search).get('testpay')==='ospo';
+      var finalPrice=testMode?1:197;
+      var amtDisplay=finalPrice.toFixed(2);
+      var amtCents=Math.round(finalPrice*100);
+      if(testMode){ var tb=document.createElement('p'); tb.style.cssText='margin:0 0 14px;color:#B07D14;font-size:13px;font-weight:700;text-align:center;background:#FBF4E4;padding:10px;border-radius:8px'; tb.innerHTML='⚠️ Internal test mode — price is $1.00'; container.parentNode.insertBefore(tb,container); }
+      var emailInput=document.querySelector('#confidant-form [name="email"]');
+      var nameInput=document.querySelector('#confidant-form [name="name"]');
+      var customerEmail=emailInput?emailInput.value.trim():'';
+      var customerName=nameInput?nameInput.value.trim():'';
+      var btn=document.createElement('button');
+      btn.type='button';
+      btn.textContent='Pay $'+amtDisplay;
+      btn.style.cssText='display:block;width:100%;padding:16px 24px;background:#635BFF;color:#fff;border:none;border-radius:999px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 4px 12px rgba(99,91,255,0.25);transition:box-shadow 0.2s,opacity 0.2s';
+      btn.onmouseenter=function(){ btn.style.boxShadow='0 6px 18px rgba(99,91,255,0.35)'; };
+      btn.onmouseleave=function(){ btn.style.boxShadow='0 4px 12px rgba(99,91,255,0.25)'; };
+      btn.onclick=function(){
+        btn.disabled=true; btn.textContent='Opening secure checkout…'; btn.style.opacity='0.6'; btn.style.cursor='wait';
+        var origin=window.location.origin;
+        fetch('/api/create-checkout-session',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            kind:'private',
+            signup_id:requestId||'no-id',
+            customer_email:customerEmail,
+            customer_name:customerName,
+            amount_cents:amtCents,
+            description:'ReBe ReFresh · Private 1:1 Session'+(testMode?' (TEST)':''),
+            success_url:origin+'/thank-you-private.html',
+            cancel_url:origin+'/refresh-cohort.html',
+            referral_code:null
+          })
+        })
+        .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,body:j}; }); })
+        .then(function(res){
+          if(!res.ok||!res.body.url) throw new Error((res.body&&res.body.error)||'No checkout URL returned');
+          window.location.href=res.body.url;
+        })
+        .catch(function(err){
+          console.error('Stripe checkout error:',err);
+          btn.disabled=false; btn.textContent='Pay $'+amtDisplay; btn.style.opacity='1'; btn.style.cursor='pointer';
+          var m=document.createElement('p'); m.style.cssText='color:#c0392b;margin-top:12px;font-size:13px;text-align:center';
+          m.innerHTML='Couldn\'t open Stripe. Try again or email <a href="mailto:refresh@justrebe.com" style="color:#c0392b;font-weight:700">refresh@justrebe.com</a>.';
+          container.appendChild(m);
+        });
+      };
+      container.appendChild(btn);
+      var info=document.createElement('p');
+      info.style.cssText='margin:12px 0 0;font-size:12px;color:#666;text-align:center;line-height:1.5';
+      info.innerHTML='Secure checkout via Stripe · cards, Apple Pay, Affirm, Klarna, Afterpay';
+      container.appendChild(info);
+    }
+  });
+</script>
+
+</body>
+</html>
