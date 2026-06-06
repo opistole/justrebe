@@ -101,6 +101,37 @@
   .intake-success h3{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--navy);margin:0 0 8px}
   .intake-success p{font-size:15px;color:var(--body);margin:0;line-height:1.55}
 
+  /* "What happens next" modal — opens AFTER intake submit */
+  .next-modal{width:min(600px,calc(100vw - 32px));max-height:90vh;border:0;border-radius:18px;background:#fff;color:var(--navy);box-shadow:0 28px 72px rgba(6,11,80,.32);padding:0;overflow:hidden}
+  .next-modal::backdrop{background:rgba(6,11,80,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+  @keyframes nextPop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
+  .next-modal[open]{animation:nextPop .25s var(--ease)}
+  .next-inner{padding:36px 36px 32px;position:relative;overflow-y:auto;max-height:90vh}
+  .next-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border:1px solid var(--bone);background:transparent;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;color:var(--slate);display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .next-close:hover{background:var(--bone)}
+  .next-modal h2{font-family:var(--serif);font-style:italic;font-weight:600;font-size:26px;color:var(--navy);margin:0 0 20px;line-height:1.2;padding-right:30px}
+  .next-modal ol{padding:0;margin:0;list-style:none;counter-reset:step}
+  .next-modal li{counter-increment:step;position:relative;padding:14px 0 14px 50px;font-size:16px;line-height:1.6;color:var(--body);border-top:1px solid var(--bone)}
+  .next-modal li:first-child{border-top:none}
+  .next-modal li::before{content:counter(step);position:absolute;left:0;top:14px;width:32px;height:32px;border-radius:50%;background:var(--green-wash);color:var(--green-ink);font-family:var(--display);font-size:18px;display:flex;align-items:center;justify-content:center;line-height:1}
+  .next-modal strong{color:var(--navy);font-weight:700}
+  .next-modal .next-done{display:block;margin:24px auto 0;background:var(--green-ink);color:#fff;border:0;border-radius:999px;padding:13px 30px;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .15s}
+  .next-modal .next-done:hover{background:var(--green-deep)}
+
+  /* Exit-intent reminder — fires if intake not submitted */
+  .exit-modal{width:min(440px,calc(100vw - 32px));border:0;border-radius:18px;background:#fff;color:var(--navy);box-shadow:0 28px 72px rgba(6,11,80,.32);padding:0;overflow:hidden}
+  .exit-modal::backdrop{background:rgba(6,11,80,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+  .exit-modal[open]{animation:nextPop .25s var(--ease)}
+  .exit-inner{padding:30px 32px 28px;text-align:center}
+  .exit-inner h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:22px;color:var(--navy);margin:0 0 10px}
+  .exit-inner p{font-size:15px;color:var(--body);margin:0 0 20px;line-height:1.55}
+  .exit-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .exit-actions button{padding:11px 22px;border-radius:999px;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;border:0;transition:transform .15s,background .15s}
+  .exit-primary{background:var(--green-ink);color:#fff}
+  .exit-primary:hover{background:var(--green-deep)}
+  .exit-secondary{background:transparent;color:var(--slate);border:1px solid var(--bone)!important}
+  .exit-secondary:hover{background:var(--mist)}
+
   footer{background:var(--mist);padding:36px 24px;text-align:center;border-top:1px solid var(--bone);font-size:13px;color:var(--muted);line-height:1.65}
   footer a{color:var(--green-ink);font-weight:700;text-decoration:none}
 
@@ -135,14 +166,8 @@
       <p class="time" id="cohort-time">5 weekly sessions · 5 weeks</p>
     </div>
 
-    <div class="card">
-      <h2>What happens next.</h2>
-      <ol>
-        <li>You'll get a confirmation email from <strong>refresh@justrebe.com</strong> within an hour.</li>
-        <li>Within <strong>24–48 hours</strong>, you'll receive your cohort welcome with the Zoom link and what to bring (which is mostly: yourself).</li>
-        <li id="next-step-3">Five weekly live sessions starting <strong>Tuesday, June 23</strong>. They're not recorded — these are the times you set aside to actually be there.</li>
-      </ol>
-    </div>
+    <!-- "What happens next" is now in a modal that opens AFTER intake submit (see #next-modal below) -->
+
 
     <script>
       // Read ?slot= and ?session_id= from URL. The slot tells us which
@@ -165,6 +190,69 @@
     </script>
 
     <script>
+      var INTAKE_SUBMITTED = false;
+
+      // "What happens next" modal — opens automatically after intake submit
+      (function(){
+        var modal = document.getElementById('next-modal');
+        if (!modal) return;
+        var closeBtn = document.getElementById('next-close');
+        var doneBtn = document.getElementById('next-done');
+        function close(){ modal.close(); }
+        if (closeBtn) closeBtn.addEventListener('click', close);
+        if (doneBtn) doneBtn.addEventListener('click', close);
+        modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+        window.openNextModal = function(){
+          if (typeof modal.showModal === 'function') modal.showModal();
+        };
+      })();
+
+      // Exit-intent reminder — only fires if intake hasn't been submitted
+      (function(){
+        var modal = document.getElementById('exit-modal');
+        if (!modal) return;
+        var fillBtn = document.getElementById('exit-fill');
+        var leaveBtn = document.getElementById('exit-leave');
+        var triggered = false;
+
+        function open(){
+          if (triggered || INTAKE_SUBMITTED) return;
+          triggered = true;
+          if (typeof modal.showModal === 'function') modal.showModal();
+        }
+
+        if (fillBtn) fillBtn.addEventListener('click', function(){
+          modal.close();
+          var formCard = document.getElementById('intake-card');
+          if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(function(){ var first = document.getElementById('if-name'); if (first) first.focus(); }, 400);
+        });
+        if (leaveBtn) leaveBtn.addEventListener('click', function(){
+          modal.close();
+          // Don't fire again this session
+          INTAKE_SUBMITTED = true;
+        });
+
+        // Desktop: mouse moves to top of viewport (likely closing tab / hitting address bar)
+        if (!window.matchMedia('(max-width: 780px)').matches) {
+          setTimeout(function(){
+            document.addEventListener('mouseleave', function(e){
+              if (!INTAKE_SUBMITTED && e.clientY <= 5) open();
+            });
+          }, 5000);
+        }
+
+        // Mobile + universal fallback: pagehide / visibility change
+        // (browser doesn't let us show a modal on beforeunload reliably, so we only set the flag)
+        window.addEventListener('beforeunload', function(e){
+          if (!INTAKE_SUBMITTED) {
+            e.preventDefault();
+            e.returnValue = 'Your intake isn\'t complete yet — Elizabeth and the team use it to prepare for you.';
+            return e.returnValue;
+          }
+        });
+      })();
+
       // Intake form submit
       (function(){
         var form = document.getElementById('intake-form');
@@ -238,6 +326,9 @@
             form.style.display = 'none';
             successEl.classList.add('show');
             successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            INTAKE_SUBMITTED = true;
+            // Open the "What happens next" modal after a brief beat so they see the success first
+            setTimeout(function(){ if (typeof window.openNextModal === 'function') window.openNextModal(); }, 900);
           } catch (err) {
             console.error('Intake submit failed', err);
             errorEl.textContent = "Couldn't send right now — please email refresh@justrebe.com directly. We won't lose your intake.";
@@ -383,6 +474,32 @@
     <a href="/" class="home-link">← Back to ReBe</a>
   </div>
 </main>
+
+<!-- "What happens next" modal — opens automatically after intake submit -->
+<dialog class="next-modal" id="next-modal" aria-labelledby="next-title">
+  <div class="next-inner">
+    <button class="next-close" type="button" id="next-close" aria-label="Close">×</button>
+    <h2 id="next-title">What happens next.</h2>
+    <ol>
+      <li>You'll get a confirmation email from <strong>refresh@justrebe.com</strong> within an hour.</li>
+      <li>Within <strong>24–48 hours</strong>, you'll receive your cohort welcome with the Zoom link and what to bring (which is mostly: yourself).</li>
+      <li id="next-step-3">Five weekly live sessions starting <strong>Tuesday, June 23</strong>.</li>
+    </ol>
+    <button type="button" class="next-done" id="next-done">Got it</button>
+  </div>
+</dialog>
+
+<!-- Exit-intent reminder — fires if intake not submitted -->
+<dialog class="exit-modal" id="exit-modal" aria-labelledby="exit-title">
+  <div class="exit-inner">
+    <h3 id="exit-title">Don't forget your intake.</h3>
+    <p>It takes about 2 minutes. The team uses it to prepare for you before the cohort begins.</p>
+    <div class="exit-actions">
+      <button type="button" class="exit-primary" id="exit-fill">Fill it out</button>
+      <button type="button" class="exit-secondary" id="exit-leave">Leave anyway</button>
+    </div>
+  </div>
+</dialog>
 
 <footer>
   <p>ReBe — Rebuilding people from the inside out. Better me. Better we.</p>
