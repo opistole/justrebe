@@ -67,9 +67,9 @@
   .team-member:focus-visible{outline:3px solid rgba(68,153,69,.5);outline-offset:4px;border-radius:14px}
   @media (max-width:760px){.team-member{flex:0 0 calc(33.333% - 15px);max-width:calc(33.333% - 15px)}}
   @media (max-width:500px){.team-member{flex:0 0 calc(50% - 11px);max-width:calc(50% - 11px)}}
-  .team-photo{width:100%;height:0;padding-bottom:125%;position:relative;border-radius:14px;overflow:hidden;background:var(--mist);box-shadow:0 10px 28px rgba(6,11,80,.12),inset 0 0 0 2px var(--green);margin-bottom:14px;transition:box-shadow .3s var(--ease)}
-  .team-photo picture{position:absolute;inset:0;display:block}
-  .team-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .6s var(--ease)}
+  .team-photo{width:100%;aspect-ratio:4/5;position:relative;border-radius:14px;overflow:hidden;background:var(--mist);box-shadow:0 10px 28px rgba(6,11,80,.12),inset 0 0 0 2px var(--green);margin-bottom:14px;transition:box-shadow .3s var(--ease)}
+  .team-photo picture{position:absolute;inset:0;display:block;width:100%;height:100%}
+  .team-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .6s var(--ease)}
   .team-member:hover .team-photo img{transform:scale(1.05)}
   .team-name{font-family:var(--serif);font-style:italic;font-size:18px;font-weight:600;color:var(--navy);line-height:1.2;margin:0 0 6px;min-height:2.4em;display:flex;align-items:center;justify-content:center}
   .team-title{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.01em;color:var(--green-ink);line-height:1.4;margin:0;min-height:2.6em}
@@ -108,41 +108,44 @@
   .p-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:980px;margin:0 auto}
   @media (max-width:780px){.p-grid{grid-template-columns:1fr;gap:26px}}
 
-  .p-card{position:relative;display:flex;flex-direction:column;background:var(--paper);border-radius:22px;text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 12px 36px rgba(6,11,80,.08);transition:transform .35s var(--ease),box-shadow .35s var(--ease);min-height:520px}
-  .p-card:hover{transform:translateY(-8px);box-shadow:0 28px 70px rgba(6,11,80,.18)}
+  .p-card{position:relative;display:flex;flex-direction:column;border-radius:24px;text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 14px 40px rgba(6,11,80,.12);transition:transform .4s var(--ease),box-shadow .4s var(--ease);min-height:600px;background:#E8F0D8}
+  .p-card:hover{transform:translateY(-8px);box-shadow:0 32px 70px rgba(6,11,80,.22)}
 
-  .p-card-image{position:relative;height:200px;overflow:hidden}
-  .p-card-image::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,transparent 50%,rgba(255,255,255,.4) 85%,#fff 100%);pointer-events:none}
-  .p-card-image img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);display:block}
-  .p-card:hover .p-card-image img{transform:scale(1.08)}
+  /* Full-card nature SVG background */
+  .p-nature{position:absolute;inset:0;width:100%;height:100%;z-index:0;transition:transform .9s var(--ease);display:block}
+  .p-card:hover .p-nature{transform:scale(1.06)}
 
-  .p-card-11am .p-card-image{background:linear-gradient(135deg,#FDF7E8 0%,#F9DFA5 35%,#E3A01F 100%)}
-  .p-card-11am .p-card-image::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.0) 0%,rgba(253,247,232,.4) 100%),radial-gradient(circle at 70% 30%,rgba(255,255,255,.45) 0%,transparent 55%);z-index:1}
+  /* Color overlays for morning vs evening */
+  .p-card-11am::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(253,247,232,.18) 0%,rgba(253,247,232,0) 50%),radial-gradient(circle at 78% 18%,rgba(248,228,135,.45) 0%,transparent 50%);pointer-events:none}
+  .p-card-8pm::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(40,40,90,.32) 0%,rgba(40,40,90,.08) 35%,transparent 60%),radial-gradient(circle at 76% 20%,rgba(247,212,150,.35) 0%,transparent 45%);pointer-events:none}
 
-  .p-card-8pm .p-card-image{background:linear-gradient(135deg,#1A1B40 0%,#3A3866 50%,#665B9A 100%)}
-  .p-card-8pm .p-card-image::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 75% 35%,rgba(227,160,31,.35) 0%,transparent 50%),radial-gradient(circle at 25% 70%,rgba(102,91,154,.4) 0%,transparent 50%);z-index:1}
+  /* Top section: time badge + icon */
+  .p-top{position:relative;z-index:3;padding:32px 32px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+  .p-card-time-badge{font-family:var(--display);font-size:58px;color:var(--navy);letter-spacing:.005em;line-height:.95;text-shadow:0 2px 14px rgba(255,255,255,.65)}
+  .p-card-8pm .p-card-time-badge{color:#fff;text-shadow:0 2px 14px rgba(6,11,80,.5)}
+  .p-card-time-badge .pcb-zone{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.22em;display:block;margin-top:8px;text-transform:uppercase;color:var(--green-deep);text-shadow:0 1px 8px rgba(255,255,255,.7)}
+  .p-card-8pm .p-card-time-badge .pcb-zone{color:#FBD988;text-shadow:0 1px 8px rgba(6,11,80,.5)}
+  .p-card-icon{flex-shrink:0;width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.7);border-radius:50%;font-size:24px;line-height:1;color:var(--gold-ink)}
+  .p-card-8pm .p-card-icon{background:rgba(6,11,80,.45);border-color:rgba(251,217,136,.5);color:#FBD988}
 
-  .p-card-time-badge{position:absolute;top:24px;left:24px;font-family:var(--display);font-size:48px;color:#fff;letter-spacing:.02em;text-shadow:0 4px 12px rgba(0,0,0,.25);z-index:2;line-height:.9}
-  .p-card-11am .p-card-time-badge{color:#fff;text-shadow:0 2px 8px rgba(176,125,20,.45)}
-  .p-card-time-badge .pcb-zone{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.2em;display:block;margin-top:4px;text-shadow:0 2px 6px rgba(0,0,0,.3);opacity:.95}
-  .p-card-icon{position:absolute;top:24px;right:24px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);border-radius:50%;z-index:2;font-size:22px;line-height:1}
+  /* Bottom content panel with smooth fade into white */
+  .p-card-content{position:relative;z-index:3;margin-top:auto;padding:30px 32px 32px;background:#fff}
+  .p-card-content::before{content:'';position:absolute;left:0;right:0;top:-40px;height:40px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 100%);pointer-events:none;z-index:-1}
 
-  .p-card-content{position:relative;padding:32px 32px 32px;display:flex;flex-direction:column;flex:1;background:var(--paper);margin-top:-30px;z-index:3;border-radius:22px 22px 0 0}
-  .p-card-content::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;background:var(--green);border-radius:99px;margin-top:-12px}
+  .p-card h3{font-family:var(--display);font-size:36px;line-height:1.02;color:var(--navy);margin:0 0 18px;text-transform:uppercase;letter-spacing:.005em}
+  .p-card .p-dates{font-family:var(--sans);font-size:17px;color:var(--slate);margin:0 0 6px;line-height:1.5;font-weight:400}
+  .p-card .p-dates strong{color:var(--navy);font-weight:700}
+  .p-card .p-zones{font-family:var(--sans);font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.5;font-style:italic}
 
-  .p-card h3{font-family:var(--display);font-size:30px;line-height:1.04;color:var(--navy);margin:18px 0 14px;text-transform:uppercase;letter-spacing:.005em}
-  .p-card .p-dates{font-family:var(--sans);font-size:14px;color:var(--body);margin:0 0 6px;line-height:1.6}
-  .p-card .p-dates strong{color:var(--navy)}
-  .p-card .p-zones{font-family:var(--sans);font-size:13px;color:var(--muted);margin:0 0 22px;line-height:1.5;font-style:italic}
+  .p-card .p-price-row{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin:0 0 8px;padding-top:8px;border-top:1px solid rgba(0,0,0,.06)}
+  .p-card .p-price-row{padding-top:18px}
+  .p-card .p-price{font-family:var(--display);font-size:64px;line-height:1;color:var(--navy);margin:0;letter-spacing:-.01em}
+  .p-card .p-once{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-ink);text-align:right;line-height:1.5;max-width:160px}
 
-  .p-card .p-price-row{display:flex;align-items:baseline;justify-content:space-between;margin:auto 0 8px;padding-top:24px}
-  .p-card .p-price{font-family:var(--display);font-size:60px;line-height:1;color:var(--navy);margin:0;letter-spacing:-.01em}
-  .p-card .p-once{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-ink);text-align:right;line-height:1.4;max-width:140px}
-
-  .p-card .p-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.04em;color:#fff;padding:16px 28px;background:var(--green-ink);border-radius:999px;margin-top:24px;transition:background .25s,letter-spacing .25s;text-transform:uppercase;box-shadow:0 6px 18px rgba(68,153,69,.28)}
-  .p-card:hover .p-cta{background:var(--green-deep);letter-spacing:.06em;box-shadow:0 10px 28px rgba(68,153,69,.4)}
+  .p-card .p-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:.06em;color:#fff;padding:18px 30px;background:var(--green-ink);border-radius:999px;margin-top:26px;transition:background .25s,letter-spacing .25s,box-shadow .25s;text-transform:uppercase;box-shadow:0 6px 20px rgba(68,153,69,.32)}
+  .p-card:hover .p-cta{background:var(--green-deep);letter-spacing:.08em;box-shadow:0 12px 32px rgba(68,153,69,.45)}
   .p-card .p-cta-arrow{transition:transform .3s var(--ease);display:inline-block}
-  .p-card:hover .p-cta-arrow{transform:translateX(5px)}
+  .p-card:hover .p-cta-arrow{transform:translateX(6px)}
 
   /* ===== "Have questions?" CTA ===== */
   .notready-block{max-width:720px;margin:64px auto 0;background:linear-gradient(135deg,var(--gold-wash) 0%,var(--cream) 100%);border:1px solid #f0d4a8;border-radius:18px;padding:32px 36px;text-align:center;position:relative;overflow:hidden}
@@ -248,7 +251,7 @@
   <div class="container container--narrow">
     <p class="hero-eyebrow">The 5-Week Cohort</p>
     <h1>Five weeks.<br>One small <em>group</em>.</h1>
-    <p class="deck">A guided group experience with the ReBe team — built on the REAL TALK framework.</p>
+    <p class="deck">A guided group experience with the ReBe team — built on a decades-proven framework.</p>
     <p class="meta">Tuesdays<span class="sep">·</span>June 23 – July 21<span class="sep">·</span>60–75 min/session</p>
   </div>
 </section>
@@ -281,7 +284,7 @@
       <button class="team-member reveal d-3" type="button" data-bio="bio-jean" aria-label="Read about Jean Park">
         <div class="team-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park" loading="lazy"></picture></div>
         <p class="team-name">Jean Park</p>
-        <p class="team-title">Relational Healing &amp; Family Therapist · 20+ yrs</p>
+        <p class="team-title">Relational Healing &amp; Family Therapist</p>
         <span class="team-tap">Read bio →</span>
       </button>
       <button class="team-member reveal d-4" type="button" data-bio="bio-fred" aria-label="Read about Fred Feller">
@@ -293,7 +296,7 @@
       <button class="team-member reveal d-5" type="button" data-bio="bio-osil" aria-label="Read about Osil Pistole">
         <div class="team-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole" loading="lazy"></picture></div>
         <p class="team-name">Osil Pistole</p>
-        <p class="team-title">Spirit &amp; Identity Activator · 20+ yrs</p>
+        <p class="team-title">Spirit &amp; Identity Activator</p>
         <span class="team-tap">Read bio →</span>
       </button>
       <button class="team-member reveal d-6" type="button" data-bio="bio-christophe" aria-label="Read about Christophe Dessaigne">
@@ -313,7 +316,7 @@
       <span class="eyebrow">About the cohort</span>
       <h2 id="about-h">What this <em>is</em>.</h2>
     </div>
-    <p>A <strong>five-week guided group experience</strong> for adults doing inner work — built on the REAL TALK framework, anchored in <strong>EPICS</strong> (Emotional, Physical, Intellectual, Cultural, Spiritual). Small enough to be known, large enough to be honest.</p>
+    <p>A <strong>five-week guided group experience</strong> for adults doing inner work — built on a <strong>decades-proven framework</strong>, anchored in <strong>EPICS</strong> (Emotional, Physical, Intellectual, Cultural, Spiritual). Small enough to be known, large enough to be honest.</p>
     <p>This isn't therapy or coaching in the standard sense. It's a structured <em>five-week practice</em> in a small group of people doing the same work alongside you. Weekly live sessions with the ReBe team, plus optional bonus group sessions led individually by each of the seven confidants throughout the cohort.</p>
     <p>Whether you're working through <em>burnout, anxiety, grief, loneliness</em>, or simply not feeling like yourself this season — the work meets you where you are. <strong>Limited seats. First come, first served.</strong></p>
 
@@ -343,7 +346,47 @@
     <div class="p-grid">
 
       <a class="p-card p-card-11am reveal" href="refresh-cohort-11am.html" aria-label="The 11 AM ET Cohort">
-        <div class="p-card-image">
+        <svg class="p-nature" viewBox="0 0 600 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="sky-11am" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FDF7E8"/>
+              <stop offset="55%" stop-color="#EEF3DC"/>
+              <stop offset="100%" stop-color="#D8E5C8"/>
+            </linearGradient>
+            <linearGradient id="mfar-11am" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#B8CFA8"/>
+              <stop offset="100%" stop-color="#9CBC8C"/>
+            </linearGradient>
+            <linearGradient id="mmid-11am" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7FAA70"/>
+              <stop offset="100%" stop-color="#5F8E53"/>
+            </linearGradient>
+            <linearGradient id="mfg-11am" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3F7240"/>
+              <stop offset="100%" stop-color="#2A5C2E"/>
+            </linearGradient>
+            <radialGradient id="sun-11am" cx="0.5" cy="0.5">
+              <stop offset="0%" stop-color="#F8E58A" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#F8E58A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="600" height="700" fill="url(#sky-11am)"/>
+          <ellipse cx="465" cy="135" rx="170" ry="150" fill="url(#sun-11am)"/>
+          <circle cx="465" cy="135" r="38" fill="#F8E099" opacity="0.85"/>
+          <path d="M0,440 L70,340 L140,400 L220,310 L300,380 L380,300 L460,360 L540,330 L600,360 L600,700 L0,700 Z" fill="url(#mfar-11am)" opacity="0.7"/>
+          <path d="M0,510 L60,420 L150,490 L230,400 L310,475 L390,395 L470,455 L550,420 L600,440 L600,700 L0,700 Z" fill="url(#mmid-11am)" opacity="0.88"/>
+          <path d="M0,590 L100,540 L200,580 L300,545 L400,585 L500,550 L600,575 L600,700 L0,700 Z" fill="url(#mfg-11am)"/>
+          <g fill="#1F4A24">
+            <polygon points="55,580 67,545 79,580"/>
+            <polygon points="135,585 147,550 159,585"/>
+            <polygon points="220,590 232,553 244,590"/>
+            <polygon points="320,592 332,557 344,592"/>
+            <polygon points="410,595 423,558 436,595"/>
+            <polygon points="495,592 508,556 521,592"/>
+            <polygon points="575,590 587,556 599,590"/>
+          </g>
+        </svg>
+        <div class="p-top">
           <div class="p-card-time-badge">11 AM<span class="pcb-zone">Eastern</span></div>
           <div class="p-card-icon" aria-hidden="true">☀</div>
         </div>
@@ -355,12 +398,52 @@
             <p class="p-price">$300</p>
             <p class="p-once">First cohort only<br>One-time price</p>
           </div>
-          <span class="p-cta">Learn more &amp; reserve <span class="p-cta-arrow" aria-hidden="true">→</span></span>
+          <span class="p-cta">Join now <span class="p-cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </a>
 
       <a class="p-card p-card-8pm reveal d-1" href="refresh-cohort-8pm.html" aria-label="The 8 PM ET Cohort">
-        <div class="p-card-image">
+        <svg class="p-nature" viewBox="0 0 600 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="sky-8pm" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F1E6CC"/>
+              <stop offset="40%" stop-color="#DFD3B2"/>
+              <stop offset="100%" stop-color="#B7C5A8"/>
+            </linearGradient>
+            <linearGradient id="mfar-8pm" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#A9BFA0"/>
+              <stop offset="100%" stop-color="#88A480"/>
+            </linearGradient>
+            <linearGradient id="mmid-8pm" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6F9665"/>
+              <stop offset="100%" stop-color="#4E7944"/>
+            </linearGradient>
+            <linearGradient id="mfg-8pm" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#365E37"/>
+              <stop offset="100%" stop-color="#234B25"/>
+            </linearGradient>
+            <radialGradient id="moon-8pm" cx="0.5" cy="0.5">
+              <stop offset="0%" stop-color="#FBE6A8" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#FBE6A8" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="600" height="700" fill="url(#sky-8pm)"/>
+          <ellipse cx="465" cy="135" rx="170" ry="150" fill="url(#moon-8pm)"/>
+          <circle cx="465" cy="135" r="32" fill="#FCEFB8" opacity="0.9"/>
+          <path d="M0,440 L70,340 L140,400 L220,310 L300,380 L380,300 L460,360 L540,330 L600,360 L600,700 L0,700 Z" fill="url(#mfar-8pm)" opacity="0.7"/>
+          <path d="M0,510 L60,420 L150,490 L230,400 L310,475 L390,395 L470,455 L550,420 L600,440 L600,700 L0,700 Z" fill="url(#mmid-8pm)" opacity="0.88"/>
+          <path d="M0,590 L100,540 L200,580 L300,545 L400,585 L500,550 L600,575 L600,700 L0,700 Z" fill="url(#mfg-8pm)"/>
+          <g fill="#162E1A">
+            <polygon points="55,580 67,545 79,580"/>
+            <polygon points="135,585 147,550 159,585"/>
+            <polygon points="220,590 232,553 244,590"/>
+            <polygon points="320,592 332,557 344,592"/>
+            <polygon points="410,595 423,558 436,595"/>
+            <polygon points="495,592 508,556 521,592"/>
+            <polygon points="575,590 587,556 599,590"/>
+          </g>
+        </svg>
+        <div class="p-top">
           <div class="p-card-time-badge">8 PM<span class="pcb-zone">Eastern</span></div>
           <div class="p-card-icon" aria-hidden="true">☾</div>
         </div>
@@ -372,7 +455,7 @@
             <p class="p-price">$300</p>
             <p class="p-once">First cohort only<br>One-time price</p>
           </div>
-          <span class="p-cta">Learn more &amp; reserve <span class="p-cta-arrow" aria-hidden="true">→</span></span>
+          <span class="p-cta">Join now <span class="p-cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </a>
 
@@ -389,9 +472,9 @@
 <!-- TESTIMONIALS -->
 <section class="testimonials" aria-labelledby="testi-h">
   <div class="container">
-    <span class="eyebrow">What people are saying</span>
-    <h2 id="testi-h">From the <em>REAL TALK</em> community.</h2>
-    <p class="t-intro">Past participants of Elizabeth's REAL TALK program — the framework ReBe ReFresh is built on. Names withheld for confidentiality.</p>
+    <span class="eyebrow">Testimonials</span>
+    <h2 id="testi-h">From past <em>participants</em>.</h2>
+    <p class="t-intro">Past participants from previous cohorts. Names withheld for confidentiality.</p>
 
     <div class="t-grid">
       <div class="t-card reveal">
@@ -467,9 +550,9 @@
   <button class="bio-close" type="button" aria-label="Close">×</button>
   <div class="bio-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park"></picture></div>
   <h3 class="bio-name">Jean <em>Park</em></h3>
-  <p class="bio-role">Relational Healing &amp; Family Therapist · 20+ yrs</p>
+  <p class="bio-role">Relational Healing &amp; Family Therapist</p>
   <div class="bio-text">
-    <p>Jean Park helps individuals, parents, and leaders build healthier relationships, strengthen emotional awareness, and break unhealthy generational patterns. Her work is deeply informed by her experience growing up between Korean and American cultural expectations and her journey as a mother raising three teenage boys.</p>
+    <p>With 20+ years of experience, Jean Park helps individuals, parents, and leaders build healthier relationships, strengthen emotional awareness, and break unhealthy generational patterns. Her work is deeply informed by her experience growing up between Korean and American cultural expectations and her journey as a mother raising three teenage boys.</p>
     <p>After earning her degree in Economics from Caltech, Jean transitioned into counseling and family systems work, earning her Master's in Marriage and Family Therapy from Fuller Theological Seminary.</p>
   </div>
 </div></dialog>
@@ -489,7 +572,7 @@
   <button class="bio-close" type="button" aria-label="Close">×</button>
   <div class="bio-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole"></picture></div>
   <h3 class="bio-name">Osil <em>Pistole</em></h3>
-  <p class="bio-role">Spirit &amp; Identity Activator · 20+ yrs</p>
+  <p class="bio-role">Spirit &amp; Identity Activator</p>
   <div class="bio-text">
     <p>Osil is a speaker and intuitive coach with 20+ years of experience and a particular gift for speaking into a person's true identity. She tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
     <p>Known for her honest, empowering, and engaging approach, Osil creates spaces where people feel seen — not just for what they're working on, but for who they actually are underneath it.</p>
@@ -588,6 +671,28 @@
       if (e.target === m) m.close();
     });
   });
+
+  // ===== Exit-intent popup (desktop only, fires once per session)
+  (function(){
+    try { if (sessionStorage.getItem('rebe_exit_intent_seen') === '1') return; } catch(e){}
+    if (window.matchMedia && window.matchMedia('(max-width: 780px)').matches) return;
+    var modal = document.getElementById('notready-modal');
+    var openBtn = document.getElementById('open-notready');
+    if (!modal || !openBtn) return;
+    var triggered = false;
+    function onLeave(e){
+      if (triggered) return;
+      if (e.clientY <= 5 && !modal.open) {
+        triggered = true;
+        try { sessionStorage.setItem('rebe_exit_intent_seen', '1'); } catch(e){}
+        openBtn.click();
+        document.removeEventListener('mouseleave', onLeave);
+      }
+    }
+    setTimeout(function(){
+      document.addEventListener('mouseleave', onLeave);
+    }, 7000);
+  })();
 
   // ===== Scroll reveal
   if ('IntersectionObserver' in window) {
