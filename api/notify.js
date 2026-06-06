@@ -302,6 +302,7 @@ Time slot:          ${escape(timeLabel)}
 SMS consent:        ${escape(p.sms_consent)}
 Marketing consent:  ${escape(p.marketing_consent)}
 Source:             ${escape(p.source)}
+Referred by:        ${escape(p.referrer_name)}
 
 Signup id: ${p.signup_id || '—'}`;
 

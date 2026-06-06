@@ -1225,6 +1225,11 @@
         </select>
       </div>
 
+      <div class="field">
+        <label class="label" for="referrer_name">Who referred you? <span class="opt">(optional — their name)</span></label>
+        <input class="input" type="text" id="referrer_name" name="referrer_name" autocomplete="off" placeholder="Their name">
+      </div>
+
       <button class="submit-btn" type="submit" id="submit-btn">
         <span class="btn-label">Save my seat</span>
         <span class="btn-arrow" aria-hidden="true">→</span>
@@ -1401,6 +1406,7 @@
           sms_consent: data.get('sms_consent') === 'on',
           marketing_consent: data.get('marketing_consent') === 'on',
           source: data.get('source') || null,
+          referrer_name: (data.get('referrer_name') || '').trim() || null,
           preferred_time: preferredTime,
           signup_id: (result && result.contact_id) || null
         })
