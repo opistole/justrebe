@@ -389,7 +389,7 @@
 
       var stripe = Stripe(data.publishable_key);
       var checkout = await stripe.initEmbeddedCheckout({ clientSecret: data.client_secret });
-      loadingEl.style.display = 'none';
+      checkoutContainer.innerHTML = '';
       checkout.mount('#checkout');
       loaded = true;
     } catch (err) {
