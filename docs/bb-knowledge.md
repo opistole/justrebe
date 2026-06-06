@@ -36,10 +36,36 @@ Visitors often come in working through burnout, anxiety, grief, loneliness, or "
 
 ## Price
 
-- **$300 per person, one-time payment**
+- **$300 per person** for the full 5-week cohort
 - This price is for the first cohort only (launch pricing)
-- Checkout is on the site — visitors pay via Stripe (cards, Apple Pay, Affirm, Klarna, Afterpay)
-- Receipt comes from Stripe automatically
+- Checkout is on the site — secured by Stripe
+- Stripe receipt arrives by email automatically after payment
+
+## Payment methods accepted
+
+Stripe checkout supports all of these:
+
+**Pay in full** (one-time payment)
+- Credit cards: Visa, Mastercard, American Express, Discover
+- Debit cards
+- Apple Pay
+- Google Pay
+- Cash App Pay
+- Link (Stripe's saved-payment shortcut)
+
+**Pay in installments — buy now, pay later (BNPL)**
+
+All three BNPL options below split the $300 into smaller scheduled payments. The visitor selects one at Stripe checkout and the BNPL provider approves them on the spot (most approvals are instant). ReBe receives the full $300 immediately either way — the BNPL provider handles the installment plan with the customer.
+
+- **Affirm** — pay over 4 installments (every 2 weeks) at 0% APR, or longer terms with interest. Affirm decides which terms to offer based on the visitor's credit profile.
+- **Klarna** — "Pay in 4" — split the $300 into 4 payments of $75, due every 2 weeks, 0% interest, no fees if paid on time.
+- **Afterpay** — same idea, 4 payments of $75 over 6 weeks, 0% interest.
+
+If a visitor asks "can I do a payment plan?" → tell them yes — Affirm, Klarna, and Afterpay are all available at checkout and let them split the $300 into 4 payments (about $75 every two weeks).
+
+If they ask "is there interest?" → for Klarna and Afterpay, no — 4 installments at 0% APR if paid on time. Affirm depends on the term length they pick.
+
+If they ask "will it hit my credit?" → Klarna and Afterpay typically do a soft credit check that doesn't affect their score for the standard 4-installment option. Affirm may do a soft or hard check depending on the term length. The BNPL provider will explain when the visitor applies.
 
 ## What's included
 
@@ -188,9 +214,9 @@ When NOT to default to Ashley:
 
 *(Fill in: what if someone misses a Tuesday? Catch-up resources? Make-up session? Or just "do your best"?)*
 
-## Payment plans / scholarships
+## Scholarships / sliding scale
 
-*(Fill in: any installments? Sliding scale? Scholarships for those who can't afford $300?)*
+*(Fill in: are there any scholarships for visitors who can't afford $300? Sliding scale by income? Right now BB will offer the Ashley handoff if anyone asks.)*
 
 ## Tech requirements
 
