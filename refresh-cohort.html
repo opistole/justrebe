@@ -111,39 +111,38 @@
   .p-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:980px;margin:0 auto}
   @media (max-width:780px){.p-grid{grid-template-columns:1fr;gap:26px}}
 
-  .p-card{position:relative;display:flex;flex-direction:column;border-radius:24px;text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 14px 40px rgba(6,11,80,.12);transition:transform .4s var(--ease),box-shadow .4s var(--ease);min-height:600px;background:#1F4A24;background-size:cover;background-position:center}
-  .p-card:hover{transform:translateY(-8px);box-shadow:0 32px 70px rgba(6,11,80,.22)}
+  .p-card{position:relative;display:flex;flex-direction:column;border-radius:20px;text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 8px 28px rgba(6,11,80,.10);transition:transform .35s var(--ease),box-shadow .35s var(--ease);min-height:480px;background:#1F4A24;background-size:cover;background-position:center}
+  .p-card:hover{transform:translateY(-6px);box-shadow:0 22px 56px rgba(6,11,80,.18)}
   .p-card-11am{background-image:url('Images/cohort-bg-11am.jpeg')}
   .p-card-8pm{background-image:url('Images/cohort-bg-8pm.jpeg')}
 
-  /* Soft atmospheric overlays for readability + mood */
-  .p-card-11am::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(253,247,232,.08) 0%,rgba(20,40,30,.15) 30%,rgba(20,40,30,.0) 55%),radial-gradient(circle at 75% 18%,rgba(255,248,210,.35) 0%,transparent 55%);pointer-events:none}
-  .p-card-8pm::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(30,40,60,.28) 0%,rgba(30,40,60,.08) 35%,transparent 55%),radial-gradient(circle at 76% 20%,rgba(247,212,150,.28) 0%,transparent 50%);pointer-events:none}
+  /* Soft atmospheric overlay for readability */
+  .p-card-11am::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,40,30,.18) 0%,rgba(20,40,30,.0) 35%,rgba(20,40,30,0) 60%);pointer-events:none}
+  .p-card-8pm::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(30,40,60,.25) 0%,rgba(30,40,60,.05) 35%,transparent 60%);pointer-events:none}
 
   /* Top section: time badge + icon */
-  .p-top{position:relative;z-index:3;padding:32px 32px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
-  .p-card-time-badge{font-family:var(--display);font-size:58px;color:#fff;letter-spacing:.005em;line-height:.95;text-shadow:0 3px 16px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.4)}
-  .p-card-time-badge .pcb-zone{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.22em;display:block;margin-top:8px;text-transform:uppercase;color:#fff;opacity:.95;text-shadow:0 2px 10px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.4)}
-  .p-card-icon{flex-shrink:0;width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.22);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.45);border-radius:50%;font-size:24px;line-height:1;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.3)}
+  .p-top{position:relative;z-index:3;padding:22px 26px 12px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .p-card-time-badge{font-family:var(--display);font-size:38px;color:#fff;letter-spacing:.01em;line-height:.95;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+  .p-card-time-badge .pcb-zone{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.22em;display:block;margin-top:5px;text-transform:uppercase;color:#fff;opacity:.92;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+  .p-card-icon{flex-shrink:0;width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.4);border-radius:50%;font-size:17px;line-height:1;color:#fff}
 
-  /* Bottom content panel with smooth fade into white */
-  .p-card-content{position:relative;z-index:3;margin-top:auto;padding:30px 32px 32px;background:#fff}
-  .p-card-content::before{content:'';position:absolute;left:0;right:0;top:-40px;height:40px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 100%);pointer-events:none;z-index:-1}
+  /* Bottom content panel — refined */
+  .p-card-content{position:relative;z-index:3;margin-top:auto;padding:24px 26px 24px;background:#fff}
+  .p-card-content::before{content:'';position:absolute;left:0;right:0;top:-32px;height:32px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 100%);pointer-events:none;z-index:-1}
 
-  .p-card h3{font-family:var(--display);font-size:36px;line-height:1.02;color:var(--navy);margin:0 0 18px;text-transform:uppercase;letter-spacing:.005em}
-  .p-card .p-dates{font-family:var(--sans);font-size:17px;color:var(--slate);margin:0 0 6px;line-height:1.5;font-weight:400}
+  .p-card h3{font-family:var(--display);font-size:22px;line-height:1;color:var(--navy);margin:0 0 12px;text-transform:uppercase;letter-spacing:.03em}
+  .p-card .p-dates{font-family:var(--sans);font-size:14px;color:var(--slate);margin:0 0 3px;line-height:1.5;font-weight:400}
   .p-card .p-dates strong{color:var(--navy);font-weight:700}
-  .p-card .p-zones{font-family:var(--sans);font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.5;font-style:italic}
+  .p-card .p-zones{font-family:var(--sans);font-size:12px;color:var(--muted);margin:0 0 18px;line-height:1.5;letter-spacing:.01em}
 
-  .p-card .p-price-row{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin:0 0 8px;padding-top:8px;border-top:1px solid rgba(0,0,0,.06)}
-  .p-card .p-price-row{padding-top:18px}
-  .p-card .p-price{font-family:var(--display);font-size:64px;line-height:1;color:var(--navy);margin:0;letter-spacing:-.01em}
-  .p-card .p-once{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-ink);text-align:right;line-height:1.5;max-width:160px}
+  .p-card .p-price-row{margin:0;padding-top:16px;border-top:1px solid rgba(0,0,0,.07)}
+  .p-card .p-price{font-family:var(--display);font-size:36px;line-height:1;color:var(--navy);margin:0 0 4px;letter-spacing:-.005em}
+  .p-card .p-once{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green-ink);text-align:left;line-height:1.4;margin:0;max-width:none}
 
-  .p-card .p-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:.06em;color:#fff;padding:18px 30px;background:var(--green-ink);border-radius:999px;margin-top:26px;transition:background .25s,letter-spacing .25s,box-shadow .25s;text-transform:uppercase;box-shadow:0 6px 20px rgba(68,153,69,.32)}
-  .p-card:hover .p-cta{background:var(--green-deep);letter-spacing:.08em;box-shadow:0 12px 32px rgba(68,153,69,.45)}
+  .p-card .p-cta{display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.08em;color:#fff;padding:14px 22px;background:var(--green-ink);border-radius:999px;margin-top:18px;transition:background .25s,letter-spacing .25s,box-shadow .25s;text-transform:uppercase;box-shadow:0 4px 14px rgba(68,153,69,.28)}
+  .p-card:hover .p-cta{background:var(--green-deep);letter-spacing:.1em;box-shadow:0 8px 22px rgba(68,153,69,.4)}
   .p-card .p-cta-arrow{transition:transform .3s var(--ease);display:inline-block}
-  .p-card:hover .p-cta-arrow{transform:translateX(6px)}
+  .p-card:hover .p-cta-arrow{transform:translateX(4px)}
 
   /* ===== "Have questions?" CTA ===== */
   .notready-block{max-width:720px;margin:64px auto 0;background:linear-gradient(135deg,var(--gold-wash) 0%,var(--cream) 100%);border:1px solid #f0d4a8;border-radius:18px;padding:32px 36px;text-align:center;position:relative;overflow:hidden}
@@ -355,7 +354,7 @@
           <p class="p-zones">11 AM ET · 8 AM PT · 60 min per session</p>
           <div class="p-price-row">
             <p class="p-price">$300</p>
-            <p class="p-once">First cohort only<br>One-time price</p>
+            <p class="p-once">First cohort only · One-time price</p>
           </div>
           <span class="p-cta">Join now <span class="p-cta-arrow" aria-hidden="true">→</span></span>
         </div>
@@ -372,7 +371,7 @@
           <p class="p-zones">8 PM ET · 5 PM PT · 60 min per session</p>
           <div class="p-price-row">
             <p class="p-price">$300</p>
-            <p class="p-once">First cohort only<br>One-time price</p>
+            <p class="p-once">First cohort only · One-time price</p>
           </div>
           <span class="p-cta">Join now <span class="p-cta-arrow" aria-hidden="true">→</span></span>
         </div>
