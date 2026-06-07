@@ -261,8 +261,71 @@ module.exports = async function handler(req, res) {
 
     return res.status(200).json({ ok: true, updated: rows.length, table, signup_id: signup_id || (rows[0] && rows[0].id) || null });
   } catch (err) {
-    console.error('Webhook Supabase update failed:', err);
-    // Return 500 so Stripe retries.
-    return res.status(500).json({ error: 'Supabase update failed', detail: String(err && err.message || err) });
+    // Detailed log so the failure shows up clearly in Vercel function logs.
+    console.error('Webhook Supabase update failed', {
+      error: String(err && err.message || err),
+      stripe_session_id: session.id,
+      stripe_event_id: event.id,
+      kind,
+      table,
+      signup_id: signup_id || null,
+      customer_email: customerEmail,
+      amount_total: session.amount_total,
+    });
+
+    // Send the admin a payment-recovery email so the payment is never lost
+    // even if Supabase rejected the update. Fire and forget — don't block the
+    // webhook response on email delivery.
+    try {
+      const fromAddr = process.env.NOTIFY_FROM || 'ReBe ReFresh <refresh@justrebe.com>';
+      const adminAddr = process.env.NOTIFY_ADMIN || 'refresh@justrebe.com';
+      const resendKey = process.env.RESEND_API_KEY;
+      if (resendKey) {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from: fromAddr,
+            to: adminAddr,
+            subject: `🚨 Stripe webhook DB update failed — manual review needed (${kind})`,
+            text:
+`A Stripe payment came through but the Supabase update failed.
+The customer was charged successfully; only the database wasn't updated.
+
+PAYMENT
+  Kind:              ${kind}
+  Customer email:    ${customerEmail || '(not given)'}
+  Customer name:     ${customerName || '(not given)'}
+  Amount:            $${((session.amount_total || 0) / 100).toFixed(2)}
+  Stripe session id: ${session.id}
+  Stripe event id:   ${event.id}
+  Signup id (metadata): ${signup_id || '(none)'}
+
+DATABASE TARGET
+  Table:             ${table}
+  Operation:         ${signup_id ? 'PATCH (by signup_id)' : 'INSERT'}
+
+ERROR
+  ${String(err && err.message || err)}
+
+NEXT STEPS
+  1) Look the customer up in Supabase by email or stripe_session_id.
+  2) Manually set status='paid' (and stripe_session_id/paid_at if needed).
+  3) Verify the customer received their confirmation email from Stripe.
+
+— ReBe webhook`
+          }),
+        });
+      }
+    } catch (e) { console.error('Recovery email failed:', e); }
+
+    // Return 200 so Stripe stops retrying. The payment + the error are now
+    // both captured (Stripe has the charge; we have the recovery email).
+    return res.status(200).json({
+      ok: false,
+      recovered_via_email: true,
+      error: 'Supabase update failed',
+      detail: String(err && err.message || err),
+    });
   }
 };
