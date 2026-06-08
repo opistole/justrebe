@@ -101,7 +101,7 @@ For more than 35 years, Fred has helped leaders, teams, and individuals navigate
 
 Osil is a speaker and intuitive coach with 20+ years of experience and a particular gift for speaking into a person's true identity. She tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud. Honest, empowering, engaging — she creates spaces where people feel seen.
 
-**Christophe Dessaigne** — *Executive Coach for High-Performing Leaders*
+**Christophe Dessaigne** — *Executive Resilience Coach*
 
 Christophe brings 20+ years of business leadership to ReBe as a 7x founder, 3x CEO, and former private equity executive who has built companies across Europe, North and South America, and Africa. He understands firsthand the opportunities and pressures that accompany leadership — and his story offers real hope to people in the hardest places. He's currently training with a Swiss coaching institute to support high-performing leaders as they navigate unwanted behaviors. His greatest victory: married 18 years and father to three amazing children. Co-Founder of Just ReBe, LLC.
 
