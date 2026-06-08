@@ -56,7 +56,7 @@ The seven confidants visitors can book a 1:1 with:
 - **Jean Park** — Relational Healing & Family Therapist (relationships, family systems, parents, leaders)
 - **Fred Feller** — Leadership & Identity Mentor (35+ yrs; leaders, executives, ministry, identity)
 - **Osil Pistole** — Spirit & Identity Activator (20+ yrs; identity, purpose, who you actually are)
-- **Christophe Dessaigne** — Restoration & Transformation Coach (the patterns that quietly run lives)
+- **Christophe Dessaigne** — Co-Founder · Executive Coach (7x founder, 3x CEO, former PE executive — for high-performing leaders navigating unwanted behaviors)
 
 ---
 
