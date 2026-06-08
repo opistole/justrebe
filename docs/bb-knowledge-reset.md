@@ -87,7 +87,7 @@ The same team leads the Reset and the cohort:
 
 **Osil Pistole** — *Spirit & Identity Activator.* 20+ years. Speaker and intuitive coach with a gift for naming who a person actually is, what they carry, and the purpose they're here for.
 
-**Christophe Dessaigne** — *Co-Founder · Executive Coach for High-Performing Leaders.* 7x founder, 3x CEO, former private equity executive with 20+ years across Europe, North and South America, and Africa. Now training with a Swiss coaching institute to support high-performing leaders navigating unwanted behaviors. Co-Founder of Just ReBe, LLC.
+**Christophe Dessaigne** — *Executive Coach for High-Performing Leaders.* 7x founder, 3x CEO, former private equity executive with 20+ years across Europe, North and South America, and Africa. Now training with a Swiss coaching institute to support high-performing leaders navigating unwanted behaviors. Co-Founder of Just ReBe, LLC.
 
 ## How to register
 
