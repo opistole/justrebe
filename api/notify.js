@@ -24,6 +24,22 @@ const ADMIN_EMAIL  = process.env.NOTIFY_ADMIN  || 'refresh@justrebe.com';
 const WEBHOOK_KEY  = process.env.SUPABASE_WEBHOOK_SECRET || '';
 
 const { kitSubscribe } = require('./_kit.js');
+const { createOpenPhoneContact } = require('./_openphone.js');
+
+// Split a "First Last" or "First Middle Last" string into firstName + lastName.
+function splitName(full) {
+  const parts = String(full || '').trim().split(/\s+/);
+  if (!parts.length) return { firstName: '', lastName: '' };
+  if (parts.length === 1) return { firstName: parts[0], lastName: '' };
+  return { firstName: parts[0], lastName: parts.slice(1).join(' ') };
+}
+
+// Fire-and-forget helper — pushes contact into Ashley's OpenPhone workspace.
+// Logs failures, never throws (so OpenPhone hiccups don't break the email flow).
+function pushToOpenPhone(args, sourceLabel) {
+  return createOpenPhoneContact({ ...args, source: sourceLabel })
+    .catch((e) => console.error(`OpenPhone (${sourceLabel}):`, e));
+}
 
 // ---------- Tag plan ----------
 // Maps the cohort readiness option to the Kit tag suffix used in
@@ -348,6 +364,21 @@ module.exports = async function handler(req, res) {
       tasks.push(sendSMS({ to: body.phone, body: buildWorkshopSMS(body) }));
     }
 
+    // OpenPhone — add to Ashley's contacts so she can follow up by text.
+    // We always push (regardless of sms_consent) because adding a contact is
+    // not the same as texting — Ashley decides when/how to reach out.
+    if (body.phone) {
+      tasks.push(pushToOpenPhone(
+        {
+          firstName: body.first_name || '',
+          lastName: body.last_name || '',
+          email: body.email,
+          phone: body.phone,
+        },
+        body.preferred_time === '8pm' ? 'Reset signup · 8 PM ET' : 'Reset signup · 11 AM ET'
+      ));
+    }
+
     try {
       const results = await Promise.allSettled(tasks);
       const failed = results.filter((r) => r.status === 'rejected');
@@ -382,10 +413,15 @@ module.exports = async function handler(req, res) {
       if (readinessLabel) {
         tags.push(`Cohort · ${cohortSlotLabel(row.preferred_group_time)} · ${readinessLabel}`);
       }
+      const { firstName, lastName } = splitName(row.full_name);
       await Promise.all([
         ...messages.map(sendEmail),
         kitSubscribe({ email: row.email, first_name: firstNameFromFull(row.full_name), tags })
           .catch((e) => console.error('Kit (cohort_signup):', e)),
+        pushToOpenPhone(
+          { firstName, lastName, email: row.email, phone: row.phone },
+          `Cohort signup · ${cohortSlotLabel(row.preferred_group_time)}`
+        ),
       ]);
       return res.status(200).json({ ok: true, sent: messages.length });
     } catch (err) {
@@ -441,10 +477,15 @@ ${r.notes ? r.notes : '(nothing added)'}
       if (slot.indexOf('11 AM') === 0) tags.push('Cohort · 11 AM · Intake');
       if (slot.indexOf('8 PM') === 0) tags.push('Cohort · 8 PM · Intake');
 
+      const { firstName, lastName } = splitName(name);
       await Promise.all([
         sendEmail(adminMsg),
         kitSubscribe({ email, first_name: firstNameFromFull(name), tags })
           .catch((e) => console.error('Kit (cohort_intake):', e)),
+        pushToOpenPhone(
+          { firstName, lastName, email, phone: r.phone },
+          `Cohort intake · ${slot}`
+        ),
       ]);
       return res.status(200).json({ ok: true });
     } catch (err) {
@@ -505,11 +546,13 @@ refresh@justrebe.com`
       };
 
       const tags = ['ReBe — All', 'ReBe — Cohort', 'BB Chat Handoff'];
+      const { firstName, lastName } = splitName(visitor);
       await Promise.all([
         sendEmail(adminMsg),
         sendEmail(visitorMsg),
         kitSubscribe({ email, first_name: firstNameFromFull(visitor), tags })
           .catch((e) => console.error('Kit (chat_handoff):', e)),
+        pushToOpenPhone({ firstName, lastName, email, phone }, 'BB Chat Handoff'),
       ]);
       return res.status(200).json({ ok: true });
     } catch (err) {
@@ -528,10 +571,15 @@ refresh@justrebe.com`
       // Tag based on which confidant they asked for (or "Any" if none)
       const confidant = (row.preferred_confidant && row.preferred_confidant.trim()) || 'Any (Choose for me)';
       const tags = ['ReBe — All', 'ReBe — 1:1 Interest', `1:1 · ${confidant}`];
+      const { firstName, lastName } = splitName(row.name);
       await Promise.all([
         ...messages.map(sendEmail),
         kitSubscribe({ email: row.email, first_name: firstNameFromFull(row.name), tags })
           .catch((e) => console.error('Kit (confidant_request):', e)),
+        pushToOpenPhone(
+          { firstName, lastName, email: row.email, phone: row.phone },
+          `1:1 request · ${confidant}`
+        ),
       ]);
       return res.status(200).json({ ok: true, sent: messages.length });
     } catch (err) {
