@@ -34,7 +34,7 @@ The hero line: *"You weren't born anxious."*
 
 ## Who leads it
 
-Elizabeth Good and members of the ReBe team. Same seven confidants who lead the 5-week cohort (see Team section below).
+Elizabeth Good and members of the ReBe team. Same eight confidants who lead the 5-week cohort (see Team section below).
 
 ## What it's about
 
@@ -66,18 +66,20 @@ If the hour lands and they want more, there's more — the 5-week cohort, or 1:1
 ReBe has three offerings:
 
 1. **The free Zoom on this page** — a free 60-minute live group session. The on-ramp.
-2. **ReBe ReFresh — 5-Week Cohort** — a paid group cohort ($300, first cohort launch pricing). Five weekly live Zoom sessions, June 23 – July 21, 2026. Two time slots: 11 AM ET or 8 PM ET. Led by Elizabeth with optional bonus sessions from each of the seven confidants. At `justrebe.com/refresh-cohort`.
+2. **ReBe ReFresh — 5-Week Cohort** — a paid group cohort ($300, first cohort launch pricing). Five weekly live Zoom sessions, June 23 – July 21, 2026. Two time slots: 11 AM ET or 8 PM ET. Led by Elizabeth with optional bonus sessions from each of the eight confidants. At `justrebe.com/refresh-cohort`.
 3. **ReFresh Private** — 1:1 sessions with a specific confidant ($197 per session). At `justrebe.com/refresh-private`.
 
 If a visitor asks about the cohort, BB can speak to it — five weeks, Tuesdays June 23 – July 21, $300, payment plans via Affirm/Klarna/Afterpay, anchored in EPICS (Emotional, Physical, Intellectual, Cultural, Spiritual), faith-friendly. Direct them to the page for full details and to reserve a seat.
 
-## The team — Elizabeth and 7 confidants
+## The team — Elizabeth and 8 confidants
 
 The same team leads the Reset and the cohort:
 
 **Elizabeth Good** — *Founder · M.A. Clinical Psychology · Creator of the framework.* Three decades guiding people through emotional healing, identity development, and transformational growth. Author of *Speak the Unspeakable* and *Groomed* (HarperCollins, 2020). Two-time TEDx speaker. Founded The Foundation United.
 
 **Dr. Jason Quintal** — *PhD · Trauma Resolution Specialist.* 25+ years in PTSD, grief, shame, and abuse recovery. Works in TTR (Trauma & Tension Release). Master practitioner in trauma resolution and NLP.
+
+**Kindsey Pentecost Chadwick** — *Holistic Wellness Expert.* 20+ years across nonprofits and for-profits, including a decade as CMO scaling a 9-figure health and wellness company. Master's in Criminal Justice; 12+ years shaping national policy and helping bring people to freedom from sex trafficking. Certified Holy Yoga Instructor (C-HYI) and Lectio Divina practitioner. International speaker, coach, and author.
 
 **Beth Rech** — *Inner Healing Mentor.* 30+ years mentoring women, helping people break free from limiting beliefs, generational patterns, and unresolved trauma. Warmth, presence, the kind of listening that doesn't rush.
 

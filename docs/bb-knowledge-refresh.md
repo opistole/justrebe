@@ -31,7 +31,7 @@ Do NOT invent the future price. Just say it will go up.
 - **Length**: 60 minutes per session
 - **Format**: Live Zoom, small group, not recorded
 - **Price**: **$300** total for the 5 weeks (launch pricing for the first cohort only — see note above)
-- **Includes**: Five weekly live sessions with the ReBe team + multiple optional bonus group sessions led individually by each of the 7 confidants throughout the 5 weeks
+- **Includes**: Five weekly live sessions with the ReBe team + multiple optional bonus group sessions led individually by each of the 8 confidants throughout the 5 weeks
 - **Led by**: Elizabeth Good (all five sessions)
 - **Page**: `https://www.justrebe.com/refresh-cohort`
 
@@ -48,10 +48,11 @@ Payment options for the cohort:
 - **Cadence**: As often or as rarely as the visitor wants — no commitment to a package
 - **Page**: `https://www.justrebe.com/refresh-private`
 
-The seven confidants visitors can book a 1:1 with:
+The eight confidants visitors can book a 1:1 with:
 
 - **Elizabeth Good** — Founder · M.A. Clinical Psychology · Creator of the framework
 - **Dr. Jason Quintal** — PhD · Trauma Resolution Specialist (PTSD, grief, shame, abuse recovery)
+- **Kindsey Pentecost Chadwick** — Holistic Wellness Expert (20+ yrs across nonprofits + for-profits; former CMO at a 9-figure health & wellness company; Holy Yoga + Lectio Divina; body, mind & spirit)
 - **Beth Rech** — Inner Healing Mentor (30+ yrs; limiting beliefs, generational patterns, women)
 - **Jean Park** — Relational Healing & Family Therapist (relationships, family systems, parents, leaders)
 - **Fred Feller** — Leadership & Identity Mentor (35+ yrs; leaders, executives, ministry, identity)

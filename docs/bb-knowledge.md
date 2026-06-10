@@ -70,12 +70,12 @@ If they ask "will it hit my credit?" → Klarna and Afterpay typically do a soft
 ## What's included
 
 - Five weekly live Zoom sessions with the ReBe team
-- **Multiple optional bonus group sessions** led individually by each of the seven confidants throughout the five weeks — visitors attend the ones that resonate
+- **Multiple optional bonus group sessions** led individually by each of the eight confidants throughout the five weeks — visitors attend the ones that resonate
 - A small cohort (small enough to be known, large enough to be honest)
 - Tools, language, and practices visitors can take into their lives immediately
 - A faith-friendly approach (more on that below)
 
-## The team — Elizabeth and 7 confidants
+## The team — Elizabeth and 8 confidants
 
 **Elizabeth Good** — *Founder · M.A. Clinical Psychology · Creator of the framework*
 
@@ -84,6 +84,10 @@ Elizabeth leads all five weekly sessions. For nearly three decades she has guide
 **Dr. Jason Quintal** — *PhD · Trauma Resolution Specialist*
 
 Dr. Jason Quintal is a trauma specialist with more than 25 years of experience helping people heal from severe and complex trauma — PTSD, grief, shame, abuse recovery, and emotional wounds. He works in TTR (Trauma & Tension Release). As a master practitioner in trauma resolution and Neurolinguistic Programming (NLP), he's known for accelerated healing methods that move people through what's been stuck for years.
+
+**Kindsey Pentecost Chadwick** — *Holistic Wellness Expert*
+
+Kindsey brings 20+ years across nonprofits and for-profits to ReBe — including a decade as CMO scaling a 9-figure health and wellness company. She holds a Master's in Criminal Justice and spent 12+ years shaping national policy and helping bring people to freedom from sex trafficking. Certified Holy Yoga Instructor (C-HYI) and Lectio Divina practitioner, restoring wholeness in body, mind, and spirit. International speaker, coach, and author who has guided thousands toward balance, purpose, and whole-life wellness.
 
 **Beth Rech** — *Inner Healing Mentor · 30+ yrs*
 
