@@ -22,6 +22,10 @@
 const FROM         = process.env.NOTIFY_FROM   || 'ReBe ReFresh <refresh@justrebe.com>';
 const ADMIN_EMAIL  = process.env.NOTIFY_ADMIN  || 'refresh@justrebe.com';
 const WEBHOOK_KEY  = process.env.SUPABASE_WEBHOOK_SECRET || '';
+// Optional — if set, all lead-generation admin emails CC this address too.
+// Set to Ashley's email so she gets every form submission directly without
+// needing to watch the shared inbox.
+const LEAD_NOTIFY_CC = process.env.LEAD_NOTIFY_CC || '';
 
 const { kitSubscribe } = require('./_kit.js');
 const { createOpenPhoneContact } = require('./_openphone.js');
@@ -62,13 +66,15 @@ function firstNameFromFull(full) {
 }
 
 // ---------- Resend (email) ----------
-async function sendEmail({ to, subject, text }) {
+async function sendEmail({ to, subject, text, cc }) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) throw new Error('Missing RESEND_API_KEY');
+  const body = { from: FROM, to, subject, text };
+  if (cc) body.cc = cc;
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: FROM, to, subject, text }),
+    body: JSON.stringify(body),
   });
   if (!r.ok) {
     const detail = await r.text();
@@ -228,9 +234,12 @@ Consent (confid.):  ${escape(row.consent_to_confidentiality)}
 
 Row id: ${row.id}`;
 
+  // Only CC Ashley when the visitor explicitly said they want more info —
+  // not when they're already ready to pay or on the waitlist.
+  const wantsInfo = row.readiness === 'wants_more_info';
   return [
     { to: row.email,    subject: userMsg.subject, text: userText },
-    { to: ADMIN_EMAIL,  subject: `New cohort signup (${row.readiness || 'no-readiness'}) — ${row.full_name || row.email}`, text: adminText },
+    { to: ADMIN_EMAIL,  cc: wantsInfo ? (LEAD_NOTIFY_CC || undefined) : undefined, subject: `New cohort signup (${row.readiness || 'no-readiness'}) — ${row.full_name || row.email}`, text: adminText },
   ];
 }
 
@@ -270,7 +279,7 @@ Row id: ${row.id}`;
 
   return [
     { to: row.email,    subject: 'We received your ReBe ReFresh 1:1 request', text: userText },
-    { to: ADMIN_EMAIL,  subject: `New 1:1 request — ${row.name || row.email}`, text: adminText },
+    { to: ADMIN_EMAIL, cc: LEAD_NOTIFY_CC || undefined, subject: `New 1:1 request — ${row.name || row.email}`, text: adminText },
   ];
 }
 
@@ -509,6 +518,7 @@ ${r.notes ? r.notes : '(nothing added)'}
       // Email to Ashley (admin)
       const adminMsg = {
         to: ADMIN_EMAIL,
+        cc: LEAD_NOTIFY_CC || undefined,
         subject: `BB chat handoff: ${visitor} wants to talk`,
         text:
 `A visitor on /refresh-cohort asked BB to connect them with you.
