@@ -101,7 +101,7 @@ With 20+ years of experience, Jean helps individuals, parents, and leaders build
 
 For more than 35 years, Fred has helped leaders, teams, and individuals navigate transformation, breakthrough, and personal growth with clarity, wisdom, and stability. Worked internationally across nine countries. Recognized for grounded presence in high-pressure environments. Husband of nearly 50 years, father of four, grandfather of seven.
 
-**Osil Pistole** — *Spirit & Identity Activator*
+**Osil Pistole** — *Purpose & Destiny Coach*
 
 Osil is a speaker and intuitive coach with 20+ years of experience and a particular gift for speaking into a person's true identity. She tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud. Honest, empowering, engaging — she creates spaces where people feel seen.
 

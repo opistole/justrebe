@@ -24,7 +24,6 @@ The hero line: *"You weren't born anxious."*
 - A small group of adults
 - No slides, no homework, no pressure
 - Free
-- 50 spots for this first Reset
 
 ## Times
 
@@ -87,7 +86,7 @@ The same team leads the Reset and the cohort:
 
 **Fred Feller** — *Leadership & Identity Mentor.* 35+ years across nine countries with executives, ministry leaders, and teams. Husband of 50 years, father of four, grandfather of seven. Known for grounded presence in high-pressure environments.
 
-**Osil Pistole** — *Spirit & Identity Activator.* 20+ years. Speaker and intuitive coach with a gift for naming who a person actually is, what they carry, and the purpose they're here for.
+**Osil Pistole** — *Purpose & Destiny Coach.* 20+ years. Speaker and intuitive coach with a gift for naming who a person actually is, what they carry, and the purpose they're here for.
 
 **Christophe Dessaigne** — *Executive Resilience Coach.* 7x founder, 3x CEO, former private equity executive with 20+ years across Europe, North and South America, and Africa. Now training with a Swiss coaching institute to support high-performing leaders navigating unwanted behaviors. Co-Founder of Just ReBe, LLC.
 
