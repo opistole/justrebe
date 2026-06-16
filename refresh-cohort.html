@@ -61,6 +61,9 @@
   .hero-btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(31,74,36,.42);color:#fff}
   .hero-link{background:transparent;border:0;padding:4px 2px;font-family:var(--sans);font-weight:600;font-size:14px;color:var(--green-ink);letter-spacing:.04em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;cursor:pointer;transition:opacity .2s var(--ease)}
   .hero-link:hover{opacity:.7}
+  .text-phone{font-family:var(--sans);font-size:13px;color:var(--muted);margin:2px 0 0;letter-spacing:.02em}
+  .text-phone a{color:var(--green-ink);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-ink);padding-bottom:1px}
+  .text-phone a:hover{color:var(--green-deep);border-bottom-style:solid}
 
   /* ===== Team strip — bio modals enabled ===== */
   .team-strip{background:var(--paper);padding:80px 0 72px}
@@ -327,6 +330,7 @@
     <div class="hero-cta">
       <a class="hero-btn hero-btn-primary" href="#products">I'm in</a>
       <button type="button" class="hero-link" onclick="document.getElementById('open-notready').click()">I have questions</button>
+      <p class="text-phone">Prefer to text? <a href="sms:+19412974243">(941) 297-4243</a></p>
     </div>
   </div>
 </section>
@@ -463,6 +467,7 @@
       <h3>Have questions first?</h3>
       <p>Talk to a member of the team. We'll text or email — your preference.</p>
       <button type="button" class="notready-btn" id="open-notready">Get in touch →</button>
+      <p class="text-phone" style="margin-top:14px">or text us at <a href="sms:+19412974243">(941) 297-4243</a></p>
     </div>
   </div>
 </section>
