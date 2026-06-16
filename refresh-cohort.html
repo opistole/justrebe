@@ -43,8 +43,8 @@
   .util-cta:hover{color:var(--green-ink)}
 
   /* ===== Hero with cream gradient + glow ===== */
-  .hero{position:relative;padding:96px 0 72px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#FDF7E8 0%,#FAF9F7 55%,#FFFFFF 100%);overflow:hidden}
-  .hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:680px;height:680px;background:radial-gradient(circle,rgba(227,160,31,.16) 0%,rgba(227,160,31,0) 70%);pointer-events:none;animation:floatGlow 12s ease-in-out infinite}
+  .hero{position:relative;padding:96px 0 72px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#FFF1C2 0%,#FEF8DE 45%,#FFFCF1 100%);overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:840px;height:840px;background:radial-gradient(circle,rgba(227,160,31,.32) 0%,rgba(227,160,31,0) 70%);pointer-events:none;animation:floatGlow 12s ease-in-out infinite}
   @keyframes floatGlow{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(20px)}}
   .hero-eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--green-ink);margin:0 0 22px;position:relative;display:inline-block;padding:6px 18px;background:var(--green-wash);border-radius:999px}
   .hero-kicker{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--green-ink);margin:0 0 18px;text-transform:uppercase;position:relative;display:inline-block;padding:6px 18px;background:var(--green-wash);border-radius:999px}
@@ -57,8 +57,8 @@
   .hero .meta .sep{color:var(--muted);font-weight:400;margin:0 8px}
   .hero-cta{display:flex;gap:14px;justify-content:center;align-items:center;margin:36px 0 0;flex-wrap:wrap;position:relative}
   .hero-btn{display:inline-block;padding:14px 30px;border-radius:999px;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:0;transition:transform .2s var(--ease),box-shadow .2s var(--ease);line-height:1}
-  .hero-btn-primary{background:var(--green-ink);color:#fff;box-shadow:0 8px 20px rgba(31,74,36,.28)}
-  .hero-btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(31,74,36,.36);color:#fff}
+  .hero-btn-primary{padding:20px 48px;font-size:16px;background:var(--green-ink);color:#fff;box-shadow:0 10px 26px rgba(31,74,36,.32)}
+  .hero-btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(31,74,36,.42);color:#fff}
   .hero-btn-secondary{background:transparent;color:var(--green-ink);border:2px solid var(--green-ink);padding:12px 28px}
   .hero-btn-secondary:hover{background:var(--green-wash);transform:translateY(-2px)}
 
@@ -606,7 +606,7 @@
     <button class="bio-close reserve-close" type="button" aria-label="Close">×</button>
     <p class="reserve-eyebrow">Got questions?</p>
     <h3 class="reserve-title" id="notready-title">Let's connect!</h3>
-    <p class="reserve-sub">One of our confidants will reach out — by text or email, whichever you prefer.</p>
+    <p class="reserve-sub">One of our team members will reach out — by text or email, whichever you prefer.</p>
     <div id="notready-formfields">
       <form id="notready-form" novalidate>
         <label for="nr_name">Full name</label>
