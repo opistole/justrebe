@@ -43,8 +43,8 @@
   .util-cta:hover{color:var(--green-ink)}
 
   /* ===== Hero with cream gradient + glow ===== */
-  .hero{position:relative;padding:96px 0 72px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#FFF1C2 0%,#FEF8DE 45%,#FFFCF1 100%);overflow:hidden}
-  .hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:840px;height:840px;background:radial-gradient(circle,rgba(227,160,31,.32) 0%,rgba(227,160,31,0) 70%);pointer-events:none;animation:floatGlow 12s ease-in-out infinite}
+  .hero{position:relative;padding:96px 0 72px;text-align:center;background:#FFFFFF;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:720px;height:720px;background:radial-gradient(circle,rgba(227,160,31,.08) 0%,rgba(227,160,31,0) 70%);pointer-events:none;animation:floatGlow 12s ease-in-out infinite}
   @keyframes floatGlow{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(20px)}}
   .hero-eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--green-ink);margin:0 0 22px;position:relative;display:inline-block;padding:6px 18px;background:var(--green-wash);border-radius:999px}
   .hero-kicker{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--green-ink);margin:0 0 18px;text-transform:uppercase;position:relative;display:inline-block;padding:6px 18px;background:var(--green-wash);border-radius:999px}
@@ -55,12 +55,12 @@
   .hero .deck{font-family:var(--serif);font-size:clamp(19px,2.4vw,24px);line-height:1.45;color:var(--slate);max-width:660px;margin:0 auto 28px;font-style:italic;font-weight:400;position:relative}
   .hero .meta{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--navy);margin:0;letter-spacing:.12em;text-transform:uppercase;position:relative}
   .hero .meta .sep{color:var(--muted);font-weight:400;margin:0 8px}
-  .hero-cta{display:flex;gap:14px;justify-content:center;align-items:center;margin:36px 0 0;flex-wrap:wrap;position:relative}
+  .hero-cta{display:flex;flex-direction:column;gap:18px;justify-content:center;align-items:center;margin:36px 0 0;position:relative}
   .hero-btn{display:inline-block;padding:14px 30px;border-radius:999px;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:0;transition:transform .2s var(--ease),box-shadow .2s var(--ease);line-height:1}
   .hero-btn-primary{padding:20px 48px;font-size:16px;background:var(--green-ink);color:#fff;box-shadow:0 10px 26px rgba(31,74,36,.32)}
   .hero-btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(31,74,36,.42);color:#fff}
-  .hero-btn-secondary{background:transparent;color:var(--green-ink);border:2px solid var(--green-ink);padding:12px 28px}
-  .hero-btn-secondary:hover{background:var(--green-wash);transform:translateY(-2px)}
+  .hero-link{background:transparent;border:0;padding:4px 2px;font-family:var(--sans);font-weight:600;font-size:14px;color:var(--green-ink);letter-spacing:.04em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;cursor:pointer;transition:opacity .2s var(--ease)}
+  .hero-link:hover{opacity:.7}
 
   /* ===== Team strip — bio modals enabled ===== */
   .team-strip{background:var(--paper);padding:80px 0 72px}
@@ -326,7 +326,7 @@
     <p class="meta">Tuesdays<span class="sep">·</span>June 23 – July 21<span class="sep">·</span>60 min/session</p>
     <div class="hero-cta">
       <a class="hero-btn hero-btn-primary" href="#products">I'm in</a>
-      <button type="button" class="hero-btn hero-btn-secondary" onclick="document.getElementById('open-notready').click()">I have questions</button>
+      <button type="button" class="hero-link" onclick="document.getElementById('open-notready').click()">I have questions</button>
     </div>
   </div>
 </section>
@@ -398,7 +398,7 @@
       <h2 id="about-h">What this <em>is</em>.</h2>
     </div>
     <p>A <strong>five-week guided group experience</strong> for adults doing inner work — built on a <strong>decades-proven framework</strong>, anchored in <strong>EPICS</strong> (Emotional, Physical, Intellectual, Cultural, Spiritual). Small enough to be known, large enough to be honest.</p>
-    <p>This isn't therapy or coaching in the standard sense. It's a structured <em>five-week practice</em> in a small group of people doing the same work alongside you. Weekly live sessions with the ReBe ReFresh team, plus optional bonus group sessions led individually by each of the eight confidants throughout the cohort.</p>
+    <p>This isn't therapy or coaching in the standard sense. It's a structured <em>five-week practice</em> in a small group of people doing the same work alongside you. Weekly live sessions with Elizabeth Good, plus 7 optional bonus sessions led by some of the ReBe ReFresh confidants.</p>
     <p>Whether you're working through <em>burnout, anxiety, grief, loneliness</em>, or simply not feeling like yourself this season — the work meets you where you are. <strong>Limited seats. First come, first served.</strong></p>
 
     <div class="whatyouget reveal">
