@@ -55,7 +55,7 @@ The eight confidants visitors can book a 1:1 with:
 - **Kindsey Pentecost Chadwick** — Holistic Wellness Expert (20+ yrs across nonprofits + for-profits; former CMO at a 9-figure health & wellness company; Holy Yoga + Lectio Divina; body, mind & spirit)
 - **Beth Rech** — Inner Healing Mentor (30+ yrs; limiting beliefs, generational patterns, women)
 - **Jean Park** — Relational Healing & Family Therapist (relationships, family systems, parents, leaders)
-- **Fred Feller** — Leadership & Identity Mentor (35+ yrs; leaders, executives, ministry, identity)
+- **Fred Feller** — Leadership & Identity Mentor (35+ yrs; leaders, executives, identity)
 - **Osil Pistole** — Purpose & Destiny Coach (20+ yrs; identity, purpose, who you actually are)
 - **Christophe Dessaigne** — Executive Resilience Coach (7x founder, 3x CEO, former PE executive — for high-performing leaders navigating unwanted behaviors)
 

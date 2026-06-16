@@ -84,7 +84,7 @@ The same team leads the Reset and the cohort:
 
 **Jean Park** — *Relational Healing & Family Therapist.* 20+ years. Caltech economics degree, then M.A. Marriage and Family Therapy from Fuller. Helps individuals, parents, and leaders break unhealthy generational patterns. Korean-American, mother of three teenage boys.
 
-**Fred Feller** — *Leadership & Identity Mentor.* 35+ years across nine countries with executives, ministry leaders, and teams. Husband of 50 years, father of four, grandfather of seven. Known for grounded presence in high-pressure environments.
+**Fred Feller** — *Leadership & Identity Mentor.* 35+ years across nine countries with executives and teams. Husband of 50 years, father of four, grandfather of seven. Known for grounded presence in high-pressure environments.
 
 **Osil Pistole** — *Purpose & Destiny Coach.* 20+ years. Speaker and intuitive coach with a gift for naming who a person actually is, what they carry, and the purpose they're here for.
 
