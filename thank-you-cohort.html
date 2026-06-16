@@ -25,7 +25,7 @@
   }
   *,*::before,*::after{box-sizing:border-box}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{margin:0;background:linear-gradient(180deg,var(--paper) 0%,#FDFAF3 100%);color:var(--body);font-family:var(--sans);font-weight:400;font-size:20px;line-height:1.7;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  body{margin:0;background:#FFFFFF;color:var(--body);font-family:var(--sans);font-weight:400;font-size:20px;line-height:1.7;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
   @media (max-width:640px){body{font-size:18px}}
 
   .util-bar{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--bone)}
@@ -34,7 +34,7 @@
   .wordmark span{color:var(--green)}
 
   main{flex:1;display:flex;align-items:center;justify-content:center;padding:64px 24px 48px;position:relative;overflow:hidden}
-  main::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 10%,rgba(227,160,31,.10),transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(68,153,69,.10),transparent 50%);pointer-events:none;z-index:0}
+  main::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 10%,rgba(227,160,31,.04),transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(68,153,69,.04),transparent 50%);pointer-events:none;z-index:0}
 
   .wrap{position:relative;z-index:1;max-width:720px;width:100%;text-align:center}
 
@@ -70,6 +70,15 @@
   .help a{color:var(--green-ink);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-ink);padding-bottom:1px}
   .help a:hover{border-bottom-style:solid}
   .home-link{display:inline-block;margin-top:24px;font-size:14px;color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid var(--navy);padding-bottom:1px}
+
+  /* ===== Zoom link card (post-payment, before intake) ===== */
+  .zoom-card{background:#F4FAEF;border:1px solid #cfe6d0;border-radius:14px;padding:22px 24px;margin:0 auto 36px;max-width:560px;text-align:center;box-shadow:0 6px 20px rgba(68,153,69,.10)}
+  .zoom-card .zoom-label{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 12px}
+  .zoom-card .zoom-link-row{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 10px;flex-wrap:wrap}
+  .zoom-card .zoom-icon{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--green-ink);color:#fff;font-size:11px}
+  .zoom-card .zoom-link{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--green-ink);text-decoration:underline;word-break:break-all}
+  .zoom-card .zoom-link:hover{color:var(--green-deep)}
+  .zoom-card .zoom-sub{font-family:var(--sans);font-size:13px;color:var(--body);margin:0;line-height:1.5;font-style:italic}
 
   /* ===== Intake form ===== */
   .intake{background:var(--paper);border:1px solid var(--bone);border-radius:18px;padding:32px 36px;box-shadow:0 10px 40px rgba(6,11,80,.06);text-align:left;margin:0 0 28px;position:relative;overflow:hidden}
@@ -166,6 +175,16 @@
       <p class="time" id="cohort-time">5 weekly sessions · 5 weeks</p>
     </div>
 
+    <div class="zoom-card" id="zoom-card">
+      <p class="zoom-label" id="zoom-card-label">11 AM Zoom Group</p>
+      <p class="zoom-sub" style="margin-bottom:14px">Check your email for confirmation.</p>
+      <p class="zoom-link-row">
+        <span class="zoom-icon" aria-hidden="true">▶</span>
+        <a class="zoom-link" id="zoom-card-link" href="https://us06web.zoom.us/j/88554567062" target="_blank" rel="noopener">https://us06web.zoom.us/j/88554567062</a>
+      </p>
+      <p class="zoom-sub" style="margin-top:10px">Save this link — it's the same one every Tuesday for the full 5 weeks.</p>
+    </div>
+
     <!-- "What happens next" is now in a modal that opens AFTER intake submit (see #next-modal below) -->
 
 
@@ -186,10 +205,24 @@
         if (stepEl) stepEl.innerHTML = 'Five weekly live sessions starting <strong>Tuesday, June 23 at ' + timeLabel + '</strong>. They\'re not recorded — these are the times you set aside to actually be there.';
         // Show the payment-confirmed banner only when arriving via Stripe.
         if (banner && sessionId && sessionId.indexOf('cs_') === 0) banner.classList.add('show');
+
+        // Zoom link swap based on slot. 11 AM and 8 PM groups have separate Zoom meeting IDs.
+        var ZOOM_11AM = 'https://us06web.zoom.us/j/88554567062';
+        var ZOOM_8PM  = 'https://us06web.zoom.us/j/81155916766';
+        var zoomLabel = document.getElementById('zoom-card-label');
+        var zoomLink  = document.getElementById('zoom-card-link');
+        var zoomURL   = slot === '8pm' ? ZOOM_8PM : ZOOM_11AM;
+        var zoomGroupLabel = slot === '8pm' ? '8 PM Zoom Group' : '11 AM Zoom Group';
+        if (zoomLabel) zoomLabel.textContent = zoomGroupLabel;
+        if (zoomLink)  { zoomLink.href = zoomURL; zoomLink.textContent = zoomURL; }
+        // Also update the success-state Zoom link
+        var successLink = document.getElementById('intake-success-zoom');
+        if (successLink) { successLink.href = zoomURL; successLink.textContent = zoomURL; }
       })();
     </script>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
       var INTAKE_SUBMITTED = false;
 
       // "What happens next" modal — opens automatically after intake submit
@@ -336,6 +369,7 @@
           }
         });
       })();
+    });
     </script>
 
     <div class="intake" id="intake-card">
@@ -465,6 +499,8 @@
         <div class="ok-mark" aria-hidden="true">✓</div>
         <h3>We've got you.</h3>
         <p>Thank you for filling this out.<br>We can't wait to meet you in the room on Tuesday, June 23.</p>
+        <p style="margin-top:18px;font-size:14px;color:var(--green-ink);font-weight:600">Check your email for confirmation.</p>
+        <p style="margin-top:6px;font-size:13px"><a id="intake-success-zoom" href="https://us06web.zoom.us/j/88554567062" target="_blank" rel="noopener" style="color:var(--green-ink);text-decoration:underline;word-break:break-all">https://us06web.zoom.us/j/88554567062</a></p>
       </div>
     </div>
 
