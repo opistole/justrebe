@@ -55,6 +55,12 @@
   .hero .deck{font-family:var(--serif);font-size:clamp(19px,2.4vw,24px);line-height:1.45;color:var(--slate);max-width:660px;margin:0 auto 28px;font-style:italic;font-weight:400;position:relative}
   .hero .meta{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--navy);margin:0;letter-spacing:.12em;text-transform:uppercase;position:relative}
   .hero .meta .sep{color:var(--muted);font-weight:400;margin:0 8px}
+  .hero-cta{display:flex;gap:14px;justify-content:center;align-items:center;margin:36px 0 0;flex-wrap:wrap;position:relative}
+  .hero-btn{display:inline-block;padding:14px 30px;border-radius:999px;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:0;transition:transform .2s var(--ease),box-shadow .2s var(--ease);line-height:1}
+  .hero-btn-primary{background:var(--green-ink);color:#fff;box-shadow:0 8px 20px rgba(31,74,36,.28)}
+  .hero-btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(31,74,36,.36);color:#fff}
+  .hero-btn-secondary{background:transparent;color:var(--green-ink);border:2px solid var(--green-ink);padding:12px 28px}
+  .hero-btn-secondary:hover{background:var(--green-wash);transform:translateY(-2px)}
 
   /* ===== Team strip — bio modals enabled ===== */
   .team-strip{background:var(--paper);padding:80px 0 72px}
@@ -315,9 +321,13 @@
   <div class="container container--narrow">
     <p class="hero-kicker">ReFresh Group Sessions</p>
     <h1>Five weeks.</h1>
-    <h2 class="hero-sub">One small <em>group</em>.</h2>
-    <p class="deck">A guided group experience with the ReBe ReFresh team — built on a decades-proven framework.</p>
+    <h2 class="hero-sub">Tuesdays together — plus <em>bonus</em> sessions.</h2>
+    <p class="deck">Guided group experiences with the ReBe ReFresh team — built on a decades-proven framework.</p>
     <p class="meta">Tuesdays<span class="sep">·</span>June 23 – July 21<span class="sep">·</span>60 min/session</p>
+    <div class="hero-cta">
+      <a class="hero-btn hero-btn-primary" href="#products">I'm in</a>
+      <button type="button" class="hero-btn hero-btn-secondary" onclick="document.getElementById('open-notready').click()">I have questions</button>
+    </div>
   </div>
 </section>
 
@@ -395,10 +405,9 @@
       <h3>What you'll get</h3>
       <ul>
         <li><strong>Five weekly live Zoom sessions</strong> (60 min each) with the ReBe ReFresh team</li>
-        <li><strong>Multiple optional bonus group sessions</strong> led individually by each of the 8 confidants throughout the 5 weeks</li>
+        <li><strong>7 bonus sessions</strong> led by some of our confidants</li>
         <li>A <strong>small cohort</strong> — small enough to be known, large enough to be honest</li>
         <li>Anchored in <strong>EPICS</strong> — Emotional, Physical, Intellectual, Cultural, Spiritual</li>
-        <li>A <strong>faith-friendly approach</strong> — secular framing welcome, spiritual framing welcome, neither required</li>
         <li><strong>Tools, language, and practices</strong> you can take into your life immediately</li>
       </ul>
     </div>
@@ -595,9 +604,9 @@
 <dialog class="reserve-modal" id="notready-modal" aria-labelledby="notready-title">
   <div class="reserve-inner">
     <button class="bio-close reserve-close" type="button" aria-label="Close">×</button>
-    <p class="reserve-eyebrow">Not ready yet</p>
-    <h3 class="reserve-title" id="notready-title">We'll keep in touch.</h3>
-    <p class="reserve-sub">A member of the team will follow up — by text or email, whichever you prefer.</p>
+    <p class="reserve-eyebrow">Got questions?</p>
+    <h3 class="reserve-title" id="notready-title">Let's connect!</h3>
+    <p class="reserve-sub">One of our confidants will reach out — by text or email, whichever you prefer.</p>
     <div id="notready-formfields">
       <form id="notready-form" novalidate>
         <label for="nr_name">Full name</label>
@@ -611,17 +620,6 @@
           <option value="text">Text (SMS)</option>
           <option value="email">Email</option>
           <option value="either">Either is fine</option>
-        </select>
-        <label for="nr_interest">I'm interested in…</label>
-        <select id="nr_interest" name="interest">
-          <option value="wants_more_info">Learning more about ReBe ReFresh</option>
-          <option value="waitlist">The next cohort (these dates don't work)</option>
-        </select>
-        <label for="nr_time">Preferred time slot (if you know)</label>
-        <select id="nr_time" name="preferred_time">
-          <option value="">No preference</option>
-          <option value="Tuesdays at 11 AM ET">Tuesdays at 11 AM Eastern</option>
-          <option value="Tuesdays at 8 PM ET">Tuesdays at 8 PM Eastern</option>
         </select>
         <label for="nr_notes">Anything you'd like us to know (optional)</label>
         <textarea id="nr_notes" name="notes" placeholder="Questions, scheduling concerns, whatever's true."></textarea>
