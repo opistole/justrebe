@@ -165,7 +165,7 @@ You're all set — your welcome email with the Zoom link and what to expect is o
 
 ⏳ If you didn't finish checkout yet:
 The next step is paying to lock in your seat. Head back here when you're ready:
-https://www.justrebe.com/refresh-groups.html#enroll
+https://www.justrebe.com/refresh-cohort
 
 Questions about ReBe ReFresh, the cohort, or anything in between? Just reply to this email and we'll help.
 
