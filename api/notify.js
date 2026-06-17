@@ -212,7 +212,29 @@ function buildCohortEmails(row) {
   const userMsg = cohortUserMessage(row);
   const userText = userMsg.body;
 
-  const adminText = `NEW COHORT SIGNUP — refresh_signups
+  // Readiness-aware labels so the admin email is unambiguous: a lead form
+  // submission with readiness='wants_more_info' is NOT the same as a paid
+  // signup (paid signups come through the Stripe webhook, not this function).
+  const wantsInfo = row.readiness === 'wants_more_info';
+  const waitlist  = row.readiness === 'waitlist';
+  const readyPay  = row.readiness === 'ready_to_pay';
+
+  let adminSubject, adminHeader;
+  if (wantsInfo) {
+    adminSubject = `Cohort lead — wants more info — ${row.full_name || row.email}`;
+    adminHeader  = `COHORT LEAD — wants more info\n\nSomeone filled out the lead form on /refresh-cohort and would like more details before committing. This is NOT a paid signup. Please reach out within ~24 hours.`;
+  } else if (waitlist) {
+    adminSubject = `Cohort waitlist — ${row.full_name || row.email}`;
+    adminHeader  = `COHORT WAITLIST REQUEST\n\nSomeone wants to be on the waitlist for the next cohort. This is NOT a paid signup.`;
+  } else if (readyPay) {
+    adminSubject = `Cohort interest — ready to pay (no payment yet) — ${row.full_name || row.email}`;
+    adminHeader  = `COHORT INTEREST — ready to pay\n\nSomeone marked themselves as ready to pay but has not completed Stripe checkout yet. Follow up if they don't pay within 24 hours.`;
+  } else {
+    adminSubject = `Cohort lead — ${row.full_name || row.email}`;
+    adminHeader  = `COHORT LEAD — refresh_signups`;
+  }
+
+  const adminText = `${adminHeader}
 
 Name:               ${escape(row.full_name)}
 Email:              ${escape(row.email)}
@@ -234,12 +256,12 @@ Consent (confid.):  ${escape(row.consent_to_confidentiality)}
 
 Row id: ${row.id}`;
 
-  // Only CC Ashley when the visitor explicitly said they want more info —
-  // not when they're already ready to pay or on the waitlist.
-  const wantsInfo = row.readiness === 'wants_more_info';
+  // CC Ashley for both lead types (wants_more_info AND waitlist) since both
+  // need human follow-up, not just paid signups.
+  const ccAshley = wantsInfo || waitlist;
   return [
     { to: row.email,    subject: userMsg.subject, text: userText },
-    { to: ADMIN_EMAIL,  cc: wantsInfo ? (LEAD_NOTIFY_CC || undefined) : undefined, subject: `New cohort signup (${row.readiness || 'no-readiness'}) — ${row.full_name || row.email}`, text: adminText },
+    { to: ADMIN_EMAIL,  cc: ccAshley ? (LEAD_NOTIFY_CC || undefined) : undefined, subject: adminSubject, text: adminText },
   ];
 }
 
