@@ -293,9 +293,13 @@ YOUR ZOOM LINK (save this — it's the same link every Tuesday for all 5 weeks):
 ${slotGroup}
 ${zoomLink}
 
-WHAT'S NEXT:
+PLEASE FILL OUT YOUR INTAKE FORM (about 3 minutes):
 
-- If you didn't already see it after payment, you have a brief intake form to fill out (about 3 minutes). Elizabeth and the team use it to prepare for you — what you're bringing in, how to make the room feel like home. Reply to this email if you need the link.
+https://www.justrebe.com/thank-you-cohort?slot=${slotMeta || '11am'}&session_id=${session.id}
+
+Elizabeth and the team use this to prepare for you — what you're bringing in, what you need from the room, how to make it feel like home. It really matters.
+
+WHAT ELSE TO KNOW:
 
 - Save the dates: every Tuesday, June 23 through July 21, ${slotPretty}.
 
