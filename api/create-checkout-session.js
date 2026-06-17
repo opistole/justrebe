@@ -94,6 +94,11 @@ module.exports = async function handler(req, res) {
     // In embedded mode, Stripe collects email itself; we don't pre-fill.
     // We DO collect phone since we want it for SMS reminders.
     params.append('phone_number_collection[enabled]', 'true');
+    // Force Stripe to create a Customer object so the cardholder's name lands
+    // in session.customer_details.name (otherwise it stays empty).
+    params.append('customer_creation', 'always');
+    // Ask Stripe to collect billing address — needed to populate the name field reliably
+    params.append('billing_address_collection', 'auto');
   } else {
     if (customer_email) params.append('customer_email', customer_email);
     if (signup_id) params.append('client_reference_id', signup_id);

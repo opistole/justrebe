@@ -259,6 +259,96 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    // Welcome email to the customer + new-purchase notification to admin.
+    // Wrap each in try/catch so an email failure never fails the webhook
+    // (Stripe would retry and we'd double-insert into Supabase).
+    if (kind === 'cohort' && customerEmail && process.env.RESEND_API_KEY) {
+      const firstName = (customerName || '').trim().split(/\s+/)[0] || 'friend';
+      const slotPretty = slotMeta === '8pm' ? '8 PM Eastern (5 PM Pacific)' : '11 AM Eastern (8 AM Pacific)';
+      const slotShort  = slotMeta === '8pm' ? '8 PM Eastern' : '11 AM Eastern';
+      const zoomLink   = slotMeta === '8pm' ? 'https://us06web.zoom.us/j/81155916766' : 'https://us06web.zoom.us/j/88554567062';
+      const slotGroup  = slotMeta === '8pm' ? '8 PM Zoom Group' : '11 AM Zoom Group';
+      const fromAddr   = process.env.NOTIFY_FROM || 'ReBe ReFresh <refresh@justrebe.com>';
+      const adminAddr  = process.env.NOTIFY_ADMIN || 'refresh@justrebe.com';
+      const resendKey  = process.env.RESEND_API_KEY;
+
+      // Customer welcome
+      try {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from: fromAddr,
+            to: customerEmail,
+            subject: `Welcome to ReBe ReFresh, ${firstName} — see you June 23`,
+            text:
+`Hi ${firstName},
+
+Welcome to the first ReBe ReFresh cohort. We are so excited that you said yes — and we cannot wait to be in the room with you.
+
+You are confirmed for the ${slotPretty} cohort, every Tuesday from June 23 to July 21, 2026.
+
+YOUR ZOOM LINK (save this — it's the same link every Tuesday for all 5 weeks):
+
+${slotGroup}
+${zoomLink}
+
+WHAT'S NEXT:
+
+- If you didn't already see it after payment, you have a brief intake form to fill out (about 3 minutes). Elizabeth and the team use it to prepare for you — what you're bringing in, how to make the room feel like home. Reply to this email if you need the link.
+
+- Save the dates: every Tuesday, June 23 through July 21, ${slotPretty}.
+
+- Watch your inbox for a follow-up with format details, what to expect, and how to come prepared.
+
+If you have any questions before then, just reply to this email. We read every one.
+
+So glad you're with us.
+
+Warmly,
+Elizabeth & the ReBe ReFresh Team
+refresh@justrebe.com
+https://www.justrebe.com/refresh-cohort`,
+          }),
+        });
+      } catch (e) {
+        console.error('Welcome email (customer) failed:', e);
+      }
+
+      // Admin notification
+      try {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from: fromAddr,
+            to: adminAddr,
+            subject: `🎉 New cohort signup — ${customerName || customerEmail} (${slotShort})`,
+            text:
+`A new ReBe ReFresh cohort signup just came through.
+
+CUSTOMER
+  Name:               ${customerName || '(not given)'}
+  Email:              ${customerEmail}
+  Phone:              ${customerPhone || '(not given)'}
+  Cohort slot:        ${slotShort}
+  Amount paid:        $${((session.amount_total || 0) / 100).toFixed(2)}
+
+STRIPE
+  Session id:         ${session.id}
+  Event id:           ${event.id}
+  Paid at:            ${new Date().toISOString()}
+
+The customer's welcome email (with their Zoom link) has already been sent.
+
+— ReBe webhook`,
+          }),
+        });
+      } catch (e) {
+        console.error('Admin notification email failed:', e);
+      }
+    }
+
     return res.status(200).json({ ok: true, updated: rows.length, table, signup_id: signup_id || (rows[0] && rows[0].id) || null });
   } catch (err) {
     // Detailed log so the failure shows up clearly in Vercel function logs.
