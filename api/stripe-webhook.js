@@ -243,11 +243,29 @@ module.exports = async function handler(req, res) {
       rows = await supabaseInsert({ table, row });
     }
 
-    // Tag the customer in Kit as "ReBe — Customer (Paid)". Await it so
-    // Vercel doesn't tear down the function before the Kit call finishes.
-    // A Kit failure shouldn't fail the webhook (Stripe would then retry),
-    // so we swallow the error after logging it.
-    if (customerEmail) {
+    // Tag the customer in Kit with the full set so Kit segmentation works:
+    //   - 'ReBe — All'                 : master audience tag
+    //   - 'ReBe — Cohort'              : everyone touching the 5-week cohort
+    //   - 'ReBe — Customer (Paid)'     : paid customers across products
+    //   - 'Cohort · 11 AM · Paid' OR 'Cohort · 8 PM · Paid' : slot-specific
+    //     so Kit automations can fire the right welcome / prep series per group
+    //
+    // Await it so Vercel doesn't tear down the function before the Kit call
+    // finishes. A Kit failure shouldn't fail the webhook (Stripe would retry
+    // and we'd double-insert), so we swallow the error after logging it.
+    if (customerEmail && kind === 'cohort') {
+      try {
+        const slotTag = slotMeta === '8pm' ? 'Cohort · 8 PM · Paid' : 'Cohort · 11 AM · Paid';
+        await kitSubscribe({
+          email: customerEmail,
+          first_name: customerName.trim().split(/\s+/)[0] || '',
+          tags: ['ReBe — All', 'ReBe — Cohort', 'ReBe — Customer (Paid)', slotTag],
+        });
+      } catch (e) {
+        console.error('Kit (stripe-webhook):', e);
+      }
+    } else if (customerEmail) {
+      // Non-cohort purchases (1:1 etc.) — keep the original single-tag behavior
       try {
         await kitSubscribe({
           email: customerEmail,
