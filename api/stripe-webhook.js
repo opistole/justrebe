@@ -264,7 +264,7 @@ module.exports = async function handler(req, res) {
     // (Stripe would retry and we'd double-insert into Supabase).
     if (kind === 'cohort' && customerEmail && process.env.RESEND_API_KEY) {
       const firstName = (customerName || '').trim().split(/\s+/)[0] || 'friend';
-      const slotPretty = slotMeta === '8pm' ? '8 PM Eastern (5 PM Pacific)' : '11 AM Eastern (8 AM Pacific)';
+      const slotPretty = slotMeta === '8pm' ? '8 PM Eastern time (5 PM Pacific)' : '11 AM Eastern time (8 AM Pacific)';
       const slotShort  = slotMeta === '8pm' ? '8 PM Eastern' : '11 AM Eastern';
       const zoomLink   = slotMeta === '8pm' ? 'https://us06web.zoom.us/j/81155916766' : 'https://us06web.zoom.us/j/88554567062';
       const slotGroup  = slotMeta === '8pm' ? '8 PM Zoom Group' : '11 AM Zoom Group';
@@ -286,6 +286,8 @@ module.exports = async function handler(req, res) {
 
 Welcome to the first ReBe ReFresh cohort. We are so excited that you said yes — and we cannot wait to be in the room with you.
 
+This is the start of something beautiful. Five weeks together — five Tuesdays — to slow down, reset, reconnect, and remember who you actually are. We are so honored that you're walking this with us.
+
 You are confirmed for the ${slotPretty} cohort, every Tuesday from June 23 to July 21, 2026.
 
 YOUR ZOOM LINK (save this — it's the same link every Tuesday for all 5 weeks):
@@ -305,9 +307,9 @@ WHAT ELSE TO KNOW:
 
 - Watch your inbox for a follow-up with format details, what to expect, and how to come prepared.
 
-If you have any questions before then, just reply to this email. We read every one.
+QUESTIONS? Just reply to this email — we read every single one and we'd love to hear from you.
 
-So glad you're with us.
+We cannot wait to be with you.
 
 Warmly,
 Elizabeth & the ReBe ReFresh Team
