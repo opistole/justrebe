@@ -223,7 +223,7 @@ module.exports = async function handler(req, res) {
           readiness: 'ready_to_pay',
           consent_to_contact: true,
           consent_to_confidentiality: true,
-          status: 'paid',
+          status: 'enrolled',
           stripe_session_id: session.id,
           paid_amount_cents: session.amount_total ?? null,
           paid_at: new Date().toISOString(),
