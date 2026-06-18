@@ -61,6 +61,55 @@
   .hero-btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(31,74,36,.42);color:#fff}
   .hero-link{background:transparent;border:0;padding:4px 2px;font-family:var(--sans);font-weight:600;font-size:14px;color:var(--green-ink);letter-spacing:.04em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;cursor:pointer;transition:opacity .2s var(--ease)}
   .hero-link:hover{opacity:.7}
+
+  /* ===== Video feature (Elizabeth invite, under hero) ===== */
+  .video-feature{padding:0 0 64px;background:#FFFFFF;text-align:center;position:relative;z-index:1}
+  .video-feature .vf-inner{max-width:380px;margin:0 auto;padding:0 24px}
+  .video-feature .vf-eyebrow{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-ink);margin:0 0 14px}
+  .video-feature .vf-title{font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(24px,4vw,32px);color:var(--navy);margin:0 0 24px;line-height:1.15}
+  .video-feature .vf-frame{position:relative;width:100%;padding-top:177.78%;border-radius:18px;overflow:hidden;box-shadow:0 16px 40px rgba(6,11,80,.22);background:#000}
+  .video-feature .vf-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
+  /* ===== Happy Hour Q&A modal (auto-open) ===== */
+  .happy-modal{width:min(540px,calc(100vw - 32px));border:0;border-radius:18px;background:#fff;color:var(--navy);box-shadow:0 28px 72px rgba(6,11,80,.34);padding:0;overflow:hidden}
+  .happy-modal::backdrop{background:rgba(6,11,80,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+  .happy-modal[open]{animation:bioPop .25s var(--ease)}
+  .happy-inner{padding:36px 36px 30px;text-align:center;position:relative}
+  .happy-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:#f0f0f0;border:0;font-size:20px;line-height:1;cursor:pointer;color:var(--navy);transition:background .2s}
+  .happy-close:hover{background:#e2e2e2}
+  .happy-eyebrow{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.22em;color:var(--gold-ink);text-transform:uppercase;margin:0 0 16px;display:inline-block;padding:6px 14px;background:#FBF4E4;border:1px solid #f0d4a8;border-radius:999px}
+  .happy-title{font-family:var(--serif);font-style:italic;font-weight:600;font-size:28px;line-height:1.15;color:var(--navy);margin:0 0 12px;letter-spacing:-.005em}
+  .happy-sub{font-family:var(--serif);font-size:16px;color:var(--body);margin:0 0 22px;line-height:1.5;font-style:italic}
+  .happy-when{background:var(--green-wash);border:1px solid #cfe6d0;border-radius:12px;padding:18px 20px;margin:0 0 24px;text-align:left}
+  .happy-when .happy-when-label{font-family:var(--sans);font-size:11px;font-weight:700;color:var(--green-ink);text-transform:uppercase;letter-spacing:.18em;margin:0 0 4px;display:block}
+  .happy-when .happy-when-time{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--navy);margin:0 0 10px;font-weight:600}
+  .happy-when .happy-zoom-link{display:block;color:var(--green-ink);font-weight:700;text-decoration:none;word-break:break-all;font-family:var(--sans);font-size:14px;margin:0 0 6px}
+  .happy-when .happy-zoom-link:hover{text-decoration:underline}
+  .happy-when .happy-meeting-id{font-family:var(--sans);font-size:13px;color:var(--muted);margin:0}
+  .happy-actions{display:flex;flex-direction:column;gap:12px;align-items:center}
+  .happy-primary{display:inline-block;padding:14px 32px;background:var(--green-ink);color:#fff;font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-radius:999px;box-shadow:0 8px 20px rgba(31,74,36,.28);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+  .happy-primary:hover{transform:translateY(-2px);color:#fff;box-shadow:0 12px 26px rgba(31,74,36,.38)}
+  .happy-skip{background:transparent;border:0;color:var(--muted);font-family:var(--sans);font-size:12px;letter-spacing:.04em;cursor:pointer;padding:4px;text-decoration:underline}
+  .happy-skip:hover{color:var(--body)}
+
+  /* ===== Ashley exit-intent modal ===== */
+  .ashley-modal{width:min(520px,calc(100vw - 32px));border:0;border-radius:18px;background:#fff;color:var(--navy);box-shadow:0 28px 72px rgba(6,11,80,.34);padding:0;overflow:hidden}
+  .ashley-modal::backdrop{background:rgba(6,11,80,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+  .ashley-modal[open]{animation:bioPop .25s var(--ease)}
+  .ashley-inner{padding:36px 36px 30px;text-align:center;position:relative}
+  .ashley-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:#f0f0f0;border:0;font-size:20px;line-height:1;cursor:pointer;color:var(--navy);transition:background .2s}
+  .ashley-close:hover{background:#e2e2e2}
+  .ashley-photo{width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 18px;border:3px solid var(--green);box-shadow:0 10px 26px rgba(68,153,69,.26)}
+  .ashley-photo img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+  .ashley-eyebrow{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.22em;color:var(--green-ink);text-transform:uppercase;margin:0 0 12px}
+  .ashley-title{font-family:var(--serif);font-style:italic;font-weight:600;font-size:26px;line-height:1.18;color:var(--navy);margin:0 0 8px;letter-spacing:-.005em}
+  .ashley-name{font-family:var(--sans);font-size:13px;color:var(--green-ink);margin:0 0 18px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .ashley-sub{font-family:var(--serif);font-size:16px;color:var(--body);margin:0 0 24px;line-height:1.6;font-style:italic}
+  .ashley-actions{display:flex;flex-direction:column;gap:12px;align-items:center}
+  .ashley-primary{display:inline-block;padding:16px 36px;background:var(--green-ink);color:#fff;font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-radius:999px;box-shadow:0 8px 20px rgba(31,74,36,.28);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+  .ashley-primary:hover{transform:translateY(-2px);color:#fff;box-shadow:0 12px 26px rgba(31,74,36,.38)}
+  .ashley-skip{background:transparent;border:0;color:var(--muted);font-family:var(--sans);font-size:12px;letter-spacing:.04em;cursor:pointer;padding:4px;text-decoration:underline}
+  .ashley-skip:hover{color:var(--body)}
   .text-phone{font-family:var(--sans);font-size:13px;color:var(--muted);margin:2px 0 0;letter-spacing:.02em}
   .text-phone a{color:var(--green-ink);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-ink);padding-bottom:1px}
   .text-phone a:hover{color:var(--green-deep);border-bottom-style:solid}
@@ -333,6 +382,17 @@
       <a class="hero-btn hero-btn-primary" href="#products">I'm in</a>
       <button type="button" class="hero-link" onclick="document.getElementById('open-notready').click()">I have questions</button>
       <p class="text-phone">Prefer to text? <a href="sms:+19412974243">(941) 297-4243</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ELIZABETH VIDEO -->
+<section class="video-feature" aria-label="A video invitation from Elizabeth">
+  <div class="vf-inner">
+    <p class="vf-eyebrow">A note from Elizabeth</p>
+    <h2 class="vf-title">Watch the <em style="color:var(--green-ink)">invitation</em>.</h2>
+    <div class="vf-frame">
+      <iframe src="https://player.vimeo.com/video/1202611049?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Elizabeth's Invite" loading="lazy"></iframe>
     </div>
   </div>
 </section>
@@ -642,6 +702,44 @@
   </div>
 </dialog>
 
+<!-- HAPPY HOUR Q&A MODAL — auto-opens on page load (once per session) -->
+<dialog class="happy-modal" id="happy-modal" aria-labelledby="happy-title">
+  <div class="happy-inner">
+    <button class="happy-close" type="button" aria-label="Close">×</button>
+    <p class="happy-eyebrow">🥂 Happy Hour Q&amp;A</p>
+    <h2 class="happy-title" id="happy-title">Sip, chat, and ask us anything.</h2>
+    <p class="happy-sub">Elizabeth &amp; Osil are hosting a casual Q&amp;A — bring your questions about the cohort, the work, the team, anything that's on your mind.</p>
+    <div class="happy-when">
+      <span class="happy-when-label">When</span>
+      <p class="happy-when-time">Friday, June 19 · 3 PM Eastern (12 PM Pacific)</p>
+      <a class="happy-zoom-link" href="https://us06web.zoom.us/j/9057767620" target="_blank" rel="noopener">https://us06web.zoom.us/j/9057767620</a>
+      <p class="happy-meeting-id">Meeting ID: 905 776 7620</p>
+    </div>
+    <div class="happy-actions">
+      <a class="happy-primary" href="https://us06web.zoom.us/j/9057767620" target="_blank" rel="noopener">Save the Zoom link →</a>
+      <button class="happy-skip" type="button" id="happy-skip">No thanks, close this</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- ASHLEY EXIT-INTENT MODAL — fires when user tries to leave -->
+<dialog class="ashley-modal" id="ashley-modal" aria-labelledby="ashley-title">
+  <div class="ashley-inner">
+    <button class="ashley-close" type="button" aria-label="Close">×</button>
+    <div class="ashley-photo">
+      <img src="Images/ashley.jpg" alt="Ashley — our Transformation Concierge" loading="lazy">
+    </div>
+    <p class="ashley-eyebrow">Before you go —</p>
+    <h2 class="ashley-title" id="ashley-title">Want to chat for 15 minutes first?</h2>
+    <p class="ashley-name">Ashley · Transformation Concierge</p>
+    <p class="ashley-sub">No pressure, no pitch — promise. Just a friendly 15 minutes to hear what you're hoping for, answer your questions, and help you figure out if the cohort is the right fit. On the house.</p>
+    <div class="ashley-actions">
+      <a class="ashley-primary" href="https://calendly.com/15-to-freedom" target="_blank" rel="noopener">Book my 15 min with Ashley →</a>
+      <button class="ashley-skip" type="button" id="ashley-skip">Maybe later</button>
+    </div>
+  </div>
+</dialog>
+
 </main>
 
 <!-- BB the Bee — chat widget -->
@@ -881,20 +979,51 @@
     });
   })();
 
-  // ===== Exit-intent popup (desktop only, fires once per session)
+  // ===== Happy Hour Q&A modal — auto-opens on first visit (once per session)
   (function(){
+    var modal = document.getElementById('happy-modal');
+    if (!modal) return;
+    var closeBtn = modal.querySelector('.happy-close');
+    var skipBtn  = document.getElementById('happy-skip');
+    function close(){ if (modal.open) modal.close(); }
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (skipBtn)  skipBtn.addEventListener('click', close);
+    modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+    modal.addEventListener('close', function(){
+      try { sessionStorage.setItem('rebe_happy_hour_seen', '1'); } catch(e){}
+    });
+    try { if (sessionStorage.getItem('rebe_happy_hour_seen') === '1') return; } catch(e){}
+    setTimeout(function(){
+      if (typeof modal.showModal === 'function' && !modal.open) {
+        try { modal.showModal(); } catch(_){}
+      }
+    }, 1200);
+  })();
+
+  // ===== Exit-intent popup — opens Ashley's Calendly modal (desktop only, once per session)
+  (function(){
+    var modal = document.getElementById('ashley-modal');
+    if (!modal) return;
+    var closeBtn = modal.querySelector('.ashley-close');
+    var skipBtn  = document.getElementById('ashley-skip');
+    function close(){ if (modal.open) modal.close(); }
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (skipBtn)  skipBtn.addEventListener('click', close);
+    modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+
     try { if (sessionStorage.getItem('rebe_exit_intent_seen') === '1') return; } catch(e){}
     if (window.matchMedia && window.matchMedia('(max-width: 780px)').matches) return;
-    var modal = document.getElementById('notready-modal');
-    var openBtn = document.getElementById('open-notready');
-    if (!modal || !openBtn) return;
+
     var triggered = false;
     function onLeave(e){
       if (triggered) return;
+      // Don't fire while Happy Hour modal is open
+      var happy = document.getElementById('happy-modal');
+      if (happy && happy.open) return;
       if (e.clientY <= 5 && !modal.open) {
         triggered = true;
         try { sessionStorage.setItem('rebe_exit_intent_seen', '1'); } catch(e){}
-        openBtn.click();
+        if (typeof modal.showModal === 'function') { try { modal.showModal(); } catch(_){} }
         document.removeEventListener('mouseleave', onLeave);
       }
     }
