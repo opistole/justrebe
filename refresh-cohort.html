@@ -199,6 +199,8 @@
   .bio-close:hover{background:var(--bone)}
   .bio-photo{width:130px;height:160px;border-radius:14px;overflow:hidden;margin:0 auto 20px;border:2px solid var(--green);box-shadow:0 12px 30px rgba(68,153,69,.22)}
   .bio-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .bio-video{width:100%;max-width:340px;margin:0 auto 20px;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 12px 30px rgba(6,11,80,.22)}
+  .bio-video video{width:100%;height:auto;max-height:55vh;display:block;object-fit:contain;background:#000}
   .bio-name{font-family:var(--display);font-size:30px;line-height:1.1;color:var(--navy);margin:0 0 6px;text-transform:uppercase;letter-spacing:.005em}
   .bio-name em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0}
   .bio-role{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-ink);margin:0 0 22px}
@@ -540,7 +542,7 @@
 
 <dialog class="bio-modal" id="bio-kindsey"><div class="bio-inner">
   <button class="bio-close" type="button" aria-label="Close">×</button>
-  <div class="bio-photo"><picture><img src="Images/kindsey.png" alt="Kindsey Pentecost Chadwick"></picture></div>
+  <div class="bio-video"><video controls preload="metadata" playsinline poster="Images/kindsey.png"><source src="videos/kindsey.mp4" type="video/mp4"></video></div>
   <h3 class="bio-name">Kindsey Pentecost <em>Chadwick</em></h3>
   <p class="bio-role">Holistic Wellness Expert</p>
   <div class="bio-text">
@@ -551,7 +553,7 @@
 
 <dialog class="bio-modal" id="bio-beth"><div class="bio-inner">
   <button class="bio-close" type="button" aria-label="Close">×</button>
-  <div class="bio-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech"></picture></div>
+  <div class="bio-video"><video controls preload="metadata" playsinline poster="Images/beth.jpg"><source src="videos/beth.mp4" type="video/mp4"></video></div>
   <h3 class="bio-name">Beth <em>Rech</em></h3>
   <p class="bio-role">Inner Healing Mentor · 30+ yrs</p>
   <div class="bio-text">
@@ -573,7 +575,7 @@
 
 <dialog class="bio-modal" id="bio-fred"><div class="bio-inner">
   <button class="bio-close" type="button" aria-label="Close">×</button>
-  <div class="bio-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller"></picture></div>
+  <div class="bio-video"><video controls preload="metadata" playsinline poster="Images/fred-feller.jpg"><source src="videos/fred.mp4" type="video/mp4"></video></div>
   <h3 class="bio-name">Fred <em>Feller</em></h3>
   <p class="bio-role">Leadership &amp; Identity Mentor · 35+ yrs</p>
   <div class="bio-text">
@@ -584,7 +586,7 @@
 
 <dialog class="bio-modal" id="bio-osil"><div class="bio-inner">
   <button class="bio-close" type="button" aria-label="Close">×</button>
-  <div class="bio-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole"></picture></div>
+  <div class="bio-video"><video controls preload="metadata" playsinline poster="Images/osil-pistole.jpg"><source src="videos/osil.mp4" type="video/mp4"></video></div>
   <h3 class="bio-name">Osil <em>Pistole</em></h3>
   <p class="bio-role">Purpose &amp; Destiny Coach</p>
   <div class="bio-text">
@@ -595,7 +597,7 @@
 
 <dialog class="bio-modal" id="bio-christophe"><div class="bio-inner">
   <button class="bio-close" type="button" aria-label="Close">×</button>
-  <div class="bio-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne"></picture></div>
+  <div class="bio-video"><video controls preload="metadata" playsinline poster="Images/Christophe.png"><source src="videos/christophe.mp4" type="video/mp4"></video></div>
   <h3 class="bio-name">Christophe <em>Dessaigne</em></h3>
   <p class="bio-role">Executive Resilience Coach</p>
   <div class="bio-text">
@@ -699,6 +701,12 @@
   document.querySelectorAll('.bio-modal').forEach(function(m){
     m.addEventListener('click', function(e){
       if (e.target === m) m.close();
+    });
+    // Pause + reset any playing video when the modal closes so audio
+    // doesn't keep going in the background after the user closes it.
+    m.addEventListener('close', function(){
+      var v = m.querySelector('video');
+      if (v) { try { v.pause(); v.currentTime = 0; } catch(_) {} }
     });
   });
 
