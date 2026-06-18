@@ -62,13 +62,13 @@
   .hero-link{background:transparent;border:0;padding:4px 2px;font-family:var(--sans);font-weight:600;font-size:14px;color:var(--green-ink);letter-spacing:.04em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;cursor:pointer;transition:opacity .2s var(--ease)}
   .hero-link:hover{opacity:.7}
 
-  /* ===== Video feature (Elizabeth invite, under hero) ===== */
+  /* ===== Video feature (Elizabeth invite, under hero) — 16:9 horizontal ===== */
   .video-feature{padding:0 0 64px;background:#FFFFFF;text-align:center;position:relative;z-index:1}
-  .video-feature .vf-inner{max-width:380px;margin:0 auto;padding:0 24px}
+  .video-feature .vf-inner{max-width:680px;margin:0 auto;padding:0 24px}
   .video-feature .vf-eyebrow{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-ink);margin:0 0 14px}
   .video-feature .vf-title{font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(24px,4vw,32px);color:var(--navy);margin:0 0 24px;line-height:1.15}
-  .video-feature .vf-frame{position:relative;width:100%;padding-top:177.78%;border-radius:18px;overflow:hidden;box-shadow:0 16px 40px rgba(6,11,80,.22);background:#000}
-  .video-feature .vf-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+  .video-feature .vf-frame{position:relative;width:100%;padding-top:56.25%;border-radius:18px;overflow:hidden;box-shadow:0 16px 40px rgba(6,11,80,.22);background:#000}
+  .video-feature .vf-frame video,.video-feature .vf-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block}
 
   /* ===== Happy Hour Q&A compact banner (inside hero, animated pop-in) ===== */
   @keyframes happyPop{
@@ -427,6 +427,19 @@
         <span class="happy-hero-meeting">Meeting ID: 905 776 7620 · 📌 Save this link</span>
       </div>
     </a>
+  </div>
+</section>
+
+<!-- ELIZABETH VIDEO -->
+<section class="video-feature" aria-label="A video invitation from Elizabeth">
+  <div class="vf-inner">
+    <p class="vf-eyebrow">A note from Elizabeth</p>
+    <h2 class="vf-title">Watch the <em style="color:var(--green-ink)">invitation</em>.</h2>
+    <div class="vf-frame">
+      <video controls preload="metadata" playsinline poster="Images/Elizabeth.png">
+        <source src="videos/elizabeth-invite.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
 </section>
 
