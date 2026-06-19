@@ -122,17 +122,41 @@
   .section h2{font-family:var(--serif);font-weight:600;font-size:20px;color:var(--navy);margin:0 0 16px;letter-spacing:-.005em}
   .section h3{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 10px}
 
-  /* === Notes === */
-  .notes-list{display:flex;flex-direction:column;gap:12px;margin:0 0 18px}
-  .note{background:var(--mist);border:1px solid var(--bone);border-radius:10px;padding:14px 16px}
-  .note .note-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 6px;flex-wrap:wrap}
-  .note .note-author{font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.02em}
-  .note .note-date{font-size:11px;color:var(--muted);font-family:var(--sans)}
-  .note .note-body{font-size:14px;color:var(--slate);line-height:1.55;white-space:pre-wrap;margin:0;word-break:break-word}
-  .notes-empty{padding:18px;text-align:center;color:var(--muted);font-style:italic;font-size:13px}
-  .note-form textarea{width:100%;padding:12px 14px;border:1px solid var(--bone);border-radius:10px;font-family:inherit;font-size:14px;color:var(--slate);background:#fff;min-height:80px;resize:vertical;transition:border-color .2s;line-height:1.5}
-  .note-form textarea:focus{outline:0;border-color:var(--green)}
-  .note-form .note-actions{display:flex;justify-content:flex-end;gap:8px;margin:10px 0 0}
+  /* === Notes / Activity === */
+  .activity-list{display:flex;flex-direction:column;gap:10px;margin:0 0 18px}
+  .activity-item{background:var(--mist);border:1px solid var(--bone);border-radius:10px;padding:14px 16px;border-left:3px solid var(--bone)}
+  .activity-item.kind-note{border-left-color:var(--gold)}
+  .activity-item.kind-email{border-left-color:var(--navy)}
+  .activity-item.kind-sms{border-left-color:var(--green-ink)}
+  .activity-item.kind-failed{border-left-color:var(--coral);opacity:.85}
+  .activity-item .ai-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 6px;flex-wrap:wrap}
+  .activity-item .ai-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);font-family:var(--sans);flex-wrap:wrap}
+  .activity-item .ai-type{font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:#fff;padding:2px 8px;border-radius:6px;border:1px solid var(--bone)}
+  .activity-item .ai-type.email{color:var(--navy)}
+  .activity-item .ai-type.sms{color:var(--green-ink)}
+  .activity-item .ai-type.note{color:var(--gold-ink)}
+  .activity-item .ai-author{font-weight:700;color:var(--navy);font-size:12px}
+  .activity-item .ai-date{font-size:11px;color:var(--muted);font-family:var(--sans)}
+  .activity-item .ai-subject{font-size:13px;font-weight:700;color:var(--navy);margin:6px 0 4px;letter-spacing:-.005em}
+  .activity-item .ai-body{font-size:14px;color:var(--slate);line-height:1.55;white-space:pre-wrap;margin:0;word-break:break-word}
+  .activity-item .ai-fail{font-size:11px;color:var(--coral);margin:6px 0 0;font-style:italic}
+  .activity-empty{padding:18px;text-align:center;color:var(--muted);font-style:italic;font-size:13px}
+
+  /* === Compose tabs === */
+  .compose-tabs{display:flex;gap:4px;margin:0 0 14px;border-bottom:1px solid var(--bone);padding-bottom:0}
+  .compose-tab{background:transparent;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:8px 14px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:.02em;transition:all .15s;margin-bottom:-1px}
+  .compose-tab:hover{color:var(--navy)}
+  .compose-tab.active{color:var(--navy);border-bottom-color:var(--green-ink)}
+  .compose-panel{display:flex;flex-direction:column;gap:10px}
+  .compose-panel label{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;margin:0 0 4px;display:block}
+  .compose-panel select,.compose-panel input[type="text"],.compose-panel textarea{width:100%;padding:10px 12px;border:1px solid var(--bone);border-radius:8px;font-family:inherit;font-size:14px;color:var(--slate);background:#fff;transition:border-color .2s;line-height:1.5}
+  .compose-panel select:focus,.compose-panel input:focus,.compose-panel textarea:focus{outline:0;border-color:var(--green)}
+  .compose-panel textarea{min-height:120px;resize:vertical}
+  .compose-panel textarea.sms{min-height:80px}
+  .compose-panel .compose-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:6px 0 0;flex-wrap:wrap}
+  .compose-panel .compose-info{font-size:12px;color:var(--muted);font-style:italic}
+  .compose-panel .char-count{font-size:11px;color:var(--muted);font-family:var(--sans)}
+  .compose-panel .char-count.over{color:var(--coral);font-weight:700}
 
   /* === Utility === */
   .hidden{display:none !important}
@@ -284,18 +308,72 @@
         </div>
 
         <div class="section">
-          <h2>Team notes</h2>
-          <div id="notes-list" class="notes-list">
-            <div class="notes-empty">No notes yet. Be the first.</div>
+          <h2>Send a message</h2>
+          <div class="compose-tabs">
+            <button type="button" class="compose-tab active" data-compose="email">📧 Email</button>
+            <button type="button" class="compose-tab" data-compose="sms">📱 SMS</button>
+            <button type="button" class="compose-tab" data-compose="note">📝 Note</button>
           </div>
-          <form id="note-form" class="note-form">
-            <h3>Add a note</h3>
-            <textarea id="note-input" placeholder="Last call she mentioned she's nervous about Tuesdays. Following up Friday."></textarea>
-            <p class="msg-error" id="note-error"></p>
-            <div class="note-actions">
-              <button type="submit" class="btn" id="note-submit">Save note</button>
+
+          <!-- Email panel -->
+          <div class="compose-panel" id="compose-email">
+            <div>
+              <label for="email-from">From</label>
+              <select id="email-from"></select>
             </div>
-          </form>
+            <div>
+              <label for="email-subject">Subject</label>
+              <input type="text" id="email-subject" placeholder="Quick note from ReBe">
+            </div>
+            <div>
+              <label for="email-body">Message</label>
+              <textarea id="email-body" placeholder="Hi {name}, I wanted to follow up on..."></textarea>
+            </div>
+            <p class="msg-error" id="email-send-error"></p>
+            <p class="msg-success" id="email-send-success"></p>
+            <div class="compose-actions">
+              <span class="compose-info" id="email-send-info">Replies will come back to the address you send from.</span>
+              <button type="button" class="btn" id="email-send-btn">Send email</button>
+            </div>
+          </div>
+
+          <!-- SMS panel -->
+          <div class="compose-panel hidden" id="compose-sms">
+            <div>
+              <label>From</label>
+              <input type="text" disabled value="(941) 297-4243 · ReBe Quo line">
+            </div>
+            <div>
+              <label for="sms-body">Message <span class="char-count" id="sms-char-count">0 chars</span></label>
+              <textarea id="sms-body" class="sms" placeholder="Hi {name}, just checking in. Reply STOP to opt out."></textarea>
+            </div>
+            <p class="msg-error" id="sms-send-error"></p>
+            <p class="msg-success" id="sms-send-success"></p>
+            <div class="compose-actions">
+              <span class="compose-info" id="sms-info">Each 160 chars = 1 segment (~$0.0075). Use STOP language for compliance.</span>
+              <button type="button" class="btn" id="sms-send-btn">Send text</button>
+            </div>
+          </div>
+
+          <!-- Note panel -->
+          <div class="compose-panel hidden" id="compose-note">
+            <div>
+              <label for="note-input">Note</label>
+              <textarea id="note-input" placeholder="Last call she mentioned she's nervous about Tuesdays. Following up Friday."></textarea>
+            </div>
+            <p class="msg-error" id="note-error"></p>
+            <div class="compose-actions">
+              <span class="compose-info">Only visible to your team. Not sent to the customer.</span>
+              <button type="button" class="btn" id="note-submit">Save note</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Activity</h2>
+          <div id="activity-list" class="activity-list">
+            <div class="activity-empty">No activity yet — notes, emails, and texts will show here.</div>
+          </div>
         </div>
       </div>
       <div id="customer-detail-error" class="empty hidden">
@@ -310,6 +388,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/admin/app.js?v=5"></script>
+<script src="/admin/app.js?v=6"></script>
 </body>
 </html>

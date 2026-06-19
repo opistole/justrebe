@@ -83,11 +83,37 @@
   const cdPayment   = document.getElementById('cd-payment');
   const cdReadiness = document.getElementById('cd-readiness');
   const cdIntakeBody = document.getElementById('cd-intake-body');
-  const notesList    = document.getElementById('notes-list');
-  const noteForm     = document.getElementById('note-form');
-  const noteInput    = document.getElementById('note-input');
-  const noteSubmit   = document.getElementById('note-submit');
-  const noteError    = document.getElementById('note-error');
+
+  // Compose tabs
+  const composeTabs = document.querySelectorAll('.compose-tab');
+  const composePanels = {
+    email: document.getElementById('compose-email'),
+    sms:   document.getElementById('compose-sms'),
+    note:  document.getElementById('compose-note'),
+  };
+
+  // Email compose
+  const emailFromSelect = document.getElementById('email-from');
+  const emailSubject    = document.getElementById('email-subject');
+  const emailBody       = document.getElementById('email-body');
+  const emailSendBtn    = document.getElementById('email-send-btn');
+  const emailSendError  = document.getElementById('email-send-error');
+  const emailSendSuccess= document.getElementById('email-send-success');
+
+  // SMS compose
+  const smsBody       = document.getElementById('sms-body');
+  const smsSendBtn    = document.getElementById('sms-send-btn');
+  const smsSendError  = document.getElementById('sms-send-error');
+  const smsSendSuccess= document.getElementById('sms-send-success');
+  const smsCharCount  = document.getElementById('sms-char-count');
+
+  // Note compose
+  const noteInput   = document.getElementById('note-input');
+  const noteSubmit  = document.getElementById('note-submit');
+  const noteError   = document.getElementById('note-error');
+
+  // Activity feed
+  const activityList = document.getElementById('activity-list');
 
   // ============================================================
   // State
@@ -450,14 +476,53 @@
   // Customer detail
   // ============================================================
   let currentDetailEmail = null;
+  let currentDetailPhone = null;
+
+  function allowedSendersForUser(email) {
+    const shared = { email: 'refresh@justrebe.com', label: 'ReBe ReFresh' };
+    const local = (email || '').toLowerCase().split('@')[0];
+    const personalMap = {
+      osilpistole:    { email: 'o.pistole@justrebe.com', label: 'Osil Pistole' },
+      'o.pistole':    { email: 'o.pistole@justrebe.com', label: 'Osil Pistole' },
+      opistole:       { email: 'o.pistole@justrebe.com', label: 'Osil Pistole' },
+      'a.logan':      { email: 'a.logan@justrebe.com',  label: 'Ashley Logan' },
+      alogan:         { email: 'a.logan@justrebe.com',  label: 'Ashley Logan' },
+      'e.good':       { email: 'e.good@justrebe.com',   label: 'Elizabeth Good' },
+      egood:          { email: 'e.good@justrebe.com',   label: 'Elizabeth Good' },
+    };
+    const personal = personalMap[local];
+    return personal ? [shared, personal] : [shared];
+  }
+
+  // Tab switching
+  composeTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-compose');
+      composeTabs.forEach((t) => t.classList.toggle('active', t === tab));
+      Object.entries(composePanels).forEach(([k, p]) => {
+        if (p) p.classList.toggle('hidden', k !== target);
+      });
+    });
+  });
+
+  // SMS char counter
+  if (smsBody && smsCharCount) {
+    smsBody.addEventListener('input', () => {
+      const n = smsBody.value.length;
+      const segments = Math.max(1, Math.ceil(n / 160));
+      smsCharCount.textContent = `${n} chars · ${segments} segment${segments > 1 ? 's' : ''}`;
+      smsCharCount.classList.toggle('over', n > 320);
+    });
+  }
 
   async function loadCustomerDetail(email) {
     currentDetailEmail = email.toLowerCase().trim();
+    currentDetailPhone = null;
     cdLoading.classList.remove('hidden');
     cdContent.classList.add('hidden');
     cdError.classList.add('hidden');
 
-    const [contactRes, cohortRes, notesRes] = await Promise.all([
+    const [contactRes, cohortRes, notesRes, activitiesRes] = await Promise.all([
       sb.from('contacts')
         .select('first_name, last_name, email, phone, sms_consent, marketing_consent, notes, created_at')
         .ilike('email', currentDetailEmail).limit(1),
@@ -468,19 +533,35 @@
         .select('id, body, author_id, author_email, created_at, updated_at')
         .ilike('customer_email', currentDetailEmail)
         .order('created_at', { ascending: false }).limit(200),
+      sb.from('customer_activities')
+        .select('id, type, body, subject, from_addr, to_addr, actor_email, status, error_message, created_at')
+        .ilike('customer_email', currentDetailEmail)
+        .order('created_at', { ascending: false }).limit(200),
     ]);
 
     cdLoading.classList.add('hidden');
 
-    const contact = (contactRes.data || [])[0] || null;
-    const cohort  = (cohortRes.data || [])[0] || null;
-    const notes   = notesRes.data || [];
+    const contact    = (contactRes.data || [])[0] || null;
+    const cohort     = (cohortRes.data || [])[0] || null;
+    const notes      = notesRes.data || [];
+    const activities = activitiesRes.data || [];
 
     if (!contact && !cohort) {
       cdError.classList.remove('hidden');
       return;
     }
     cdContent.classList.remove('hidden');
+
+    // Cache phone for SMS composer
+    currentDetailPhone = (cohort && cohort.phone) || (contact && contact.phone) || null;
+
+    // Populate sender picker for email composer
+    if (emailFromSelect && currentUser) {
+      const senders = allowedSendersForUser(currentUser.email);
+      emailFromSelect.innerHTML = senders.map((s) =>
+        `<option value="${escapeHtml(s.email)}">${escapeHtml(s.label)} &lt;${escapeHtml(s.email)}&gt;</option>`
+      ).join('');
+    }
 
     // Profile
     const name = (cohort && cohort.full_name)
@@ -546,60 +627,187 @@
       cdIntakeBody.innerHTML = '<p class="pf-value muted">No intake data on file.</p>';
     }
 
-    // Notes
-    renderNotes(notes);
+    // Unified activity feed: notes + sent emails + sent texts
+    renderActivity(notes, activities);
   }
 
-  function renderNotes(notes) {
-    if (!notes.length) {
-      notesList.innerHTML = '<div class="notes-empty">No notes yet. Be the first.</div>';
-      return;
-    }
-    notesList.innerHTML = notes.map((n) => `
-      <div class="note">
-        <div class="note-head">
-          <span class="note-author">${escapeHtml(n.author_email || '(unknown)')}</span>
-          <span class="note-date">${escapeHtml(fmtDateTime(n.created_at))}</span>
-        </div>
-        <p class="note-body">${escapeHtml(n.body)}</p>
-      </div>
-    `).join('');
-  }
-
-  noteForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    hideMsg(noteError);
-    const body = (noteInput.value || '').trim();
-    if (!body) { showError(noteError, 'Note can\'t be empty.'); return; }
-    if (!currentDetailEmail) { showError(noteError, 'No customer loaded.'); return; }
-
-    noteSubmit.disabled = true;
-    noteSubmit.textContent = 'Saving…';
-
-    const { error } = await sb.from('customer_notes').insert({
-      customer_email: currentDetailEmail,
-      author_id: currentUser.id,
-      author_email: currentUser.email,
-      body,
+  function renderActivity(notes, activities) {
+    // Merge into a single sorted list, newest first
+    const items = [];
+    (notes || []).forEach((n) => {
+      items.push({
+        kind: 'note',
+        date: n.created_at,
+        author: n.author_email || '(unknown)',
+        body: n.body || '',
+      });
+    });
+    (activities || []).forEach((a) => {
+      items.push({
+        kind: a.type === 'email_sent' ? 'email' : a.type === 'sms_sent' ? 'sms' : 'other',
+        date: a.created_at,
+        author: a.actor_email || '(system)',
+        subject: a.subject,
+        body: a.body || '',
+        from: a.from_addr,
+        to: a.to_addr,
+        failed: a.status === 'failed',
+        error: a.error_message,
+      });
     });
 
-    noteSubmit.disabled = false;
-    noteSubmit.textContent = 'Save note';
+    items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-    if (error) {
-      showError(noteError, `Couldn't save: ${error.message}`);
+    if (!items.length) {
+      activityList.innerHTML = '<div class="activity-empty">No activity yet — notes, emails, and texts will show here.</div>';
       return;
     }
 
-    noteInput.value = '';
+    activityList.innerHTML = items.map((it) => {
+      const cls = ['activity-item', `kind-${it.kind}`];
+      if (it.failed) cls.push('kind-failed');
+      const typeLabel = it.kind === 'note' ? '📝 Note' : it.kind === 'email' ? '📧 Email' : it.kind === 'sms' ? '📱 SMS' : it.kind;
+      const subject = it.subject ? `<p class="ai-subject">${escapeHtml(it.subject)}</p>` : '';
+      const failedMsg = it.failed ? `<p class="ai-fail">✗ Failed to send${it.error ? ': ' + escapeHtml(it.error) : ''}</p>` : '';
+      return `
+        <div class="${cls.join(' ')}">
+          <div class="ai-head">
+            <div class="ai-meta">
+              <span class="ai-type ${it.kind}">${escapeHtml(typeLabel)}</span>
+              <span class="ai-author">${escapeHtml(it.author)}</span>
+            </div>
+            <span class="ai-date">${escapeHtml(fmtDateTime(it.date))}</span>
+          </div>
+          ${subject}
+          <p class="ai-body">${escapeHtml(it.body)}</p>
+          ${failedMsg}
+        </div>
+      `;
+    }).join('');
+  }
 
-    // Refresh notes list
-    const { data: notes } = await sb.from('customer_notes')
-      .select('id, body, author_id, author_email, created_at, updated_at')
-      .ilike('customer_email', currentDetailEmail)
-      .order('created_at', { ascending: false }).limit(200);
-    renderNotes(notes || []);
-  });
+  async function refreshActivity() {
+    if (!currentDetailEmail) return;
+    const [notesRes, activitiesRes] = await Promise.all([
+      sb.from('customer_notes')
+        .select('id, body, author_id, author_email, created_at, updated_at')
+        .ilike('customer_email', currentDetailEmail)
+        .order('created_at', { ascending: false }).limit(200),
+      sb.from('customer_activities')
+        .select('id, type, body, subject, from_addr, to_addr, actor_email, status, error_message, created_at')
+        .ilike('customer_email', currentDetailEmail)
+        .order('created_at', { ascending: false }).limit(200),
+    ]);
+    renderActivity(notesRes.data || [], activitiesRes.data || []);
+  }
+
+  // === Note submit ===
+  if (noteSubmit) {
+    noteSubmit.addEventListener('click', async () => {
+      hideMsg(noteError);
+      const body = (noteInput.value || '').trim();
+      if (!body) { showError(noteError, 'Note can\'t be empty.'); return; }
+      if (!currentDetailEmail) { showError(noteError, 'No customer loaded.'); return; }
+      noteSubmit.disabled = true;
+      noteSubmit.textContent = 'Saving…';
+      const { error } = await sb.from('customer_notes').insert({
+        customer_email: currentDetailEmail,
+        author_id: currentUser.id,
+        author_email: currentUser.email,
+        body,
+      });
+      noteSubmit.disabled = false;
+      noteSubmit.textContent = 'Save note';
+      if (error) { showError(noteError, `Couldn't save: ${error.message}`); return; }
+      noteInput.value = '';
+      refreshActivity();
+    });
+  }
+
+  // === Email send ===
+  if (emailSendBtn) {
+    emailSendBtn.addEventListener('click', async () => {
+      hideMsg(emailSendError); hideMsg(emailSendSuccess);
+      const from = emailFromSelect.value;
+      const subject = (emailSubject.value || '').trim();
+      const body = (emailBody.value || '').trim();
+      if (!subject) { showError(emailSendError, 'Subject required.'); return; }
+      if (!body)    { showError(emailSendError, 'Message body required.'); return; }
+      if (!currentDetailEmail) { showError(emailSendError, 'No customer loaded.'); return; }
+
+      const { data: { session } } = await sb.auth.getSession();
+      if (!session) { showError(emailSendError, 'Not logged in.'); return; }
+
+      emailSendBtn.disabled = true;
+      emailSendBtn.textContent = 'Sending…';
+
+      try {
+        const resp = await fetch('/api/admin/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ to: currentDetailEmail, from, subject, body }),
+        });
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data.error || data.detail || `HTTP ${resp.status}`);
+        showError(emailSendSuccess, `✓ Sent to ${currentDetailEmail}`);
+        emailSubject.value = '';
+        emailBody.value = '';
+        refreshActivity();
+      } catch (err) {
+        showError(emailSendError, `Couldn't send: ${err.message}`);
+      } finally {
+        emailSendBtn.disabled = false;
+        emailSendBtn.textContent = 'Send email';
+      }
+    });
+  }
+
+  // === SMS send ===
+  if (smsSendBtn) {
+    smsSendBtn.addEventListener('click', async () => {
+      hideMsg(smsSendError); hideMsg(smsSendSuccess);
+      const body = (smsBody.value || '').trim();
+      if (!body) { showError(smsSendError, 'Message body required.'); return; }
+      if (!currentDetailPhone) {
+        showError(smsSendError, 'No phone number on file for this customer.');
+        return;
+      }
+      const { data: { session } } = await sb.auth.getSession();
+      if (!session) { showError(smsSendError, 'Not logged in.'); return; }
+
+      smsSendBtn.disabled = true;
+      smsSendBtn.textContent = 'Sending…';
+
+      try {
+        const resp = await fetch('/api/admin/send-sms', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({
+            to: currentDetailPhone,
+            customer_email: currentDetailEmail,
+            body,
+          }),
+        });
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data.error || data.detail || `HTTP ${resp.status}`);
+        showError(smsSendSuccess, `✓ Text sent to ${currentDetailPhone}`);
+        smsBody.value = '';
+        if (smsCharCount) smsCharCount.textContent = '0 chars';
+        refreshActivity();
+      } catch (err) {
+        showError(smsSendError, `Couldn't send: ${err.message}`);
+      } finally {
+        smsSendBtn.disabled = false;
+        smsSendBtn.textContent = 'Send text';
+      }
+    });
+  }
 
   // ============================================================
   // Init — restore session if exists
