@@ -82,6 +82,15 @@
   const taskSubmit  = document.getElementById('task-submit');
   const taskError   = document.getElementById('task-error');
 
+  // Pilot requests
+  const viewPilots       = document.getElementById('view-pilots');
+  const pilotSearchInput = document.getElementById('pilot-search');
+  const pilotFilterPills = document.getElementById('pilot-filter-pills');
+  const pilotTable       = document.getElementById('pilot-table');
+  const pilotTbody       = document.getElementById('pilot-tbody');
+  const pilotLoading     = document.getElementById('pilot-list-loading');
+  const pilotEmpty       = document.getElementById('pilot-empty');
+
   // Customer list
   const searchInput   = document.getElementById('customer-search');
   const filterPills   = document.getElementById('filter-pills');
@@ -372,6 +381,7 @@
     viewDashboard.classList.add('hidden');
     viewCustomers.classList.add('hidden');
     viewCustomer.classList.add('hidden');
+    if (viewPilots) viewPilots.classList.add('hidden');
 
     // Highlight active nav
     navLinks.forEach((a) => {
@@ -388,6 +398,9 @@
         });
       }
       loadCustomerList();
+    } else if (route === 'pilots') {
+      if (viewPilots) viewPilots.classList.remove('hidden');
+      loadPilotList();
     } else if (route === 'customer' && param) {
       viewCustomer.classList.remove('hidden');
       loadCustomerDetail(decodeURIComponent(param));
@@ -1446,6 +1459,133 @@
         smsSendBtn.disabled = false;
         smsSendBtn.textContent = 'Send text';
       }
+    });
+  }
+
+  // ============================================================
+  // Pilot requests
+  // ============================================================
+  let allPilots = [];
+  let pilotSearch = '';
+  let pilotFilter = 'all';
+
+  async function loadPilotList() {
+    if (!pilotLoading) return;
+    pilotLoading.classList.remove('hidden');
+    pilotTable.classList.add('hidden');
+    pilotEmpty.classList.add('hidden');
+
+    const { data, error } = await sb.from('pilot_requests')
+      .select('id, created_at, first_name, last_name, email, phone, website, organization, role_title, pathway, challenges, timing, status, email_forwarded')
+      .order('created_at', { ascending: false })
+      .limit(500);
+
+    pilotLoading.classList.add('hidden');
+    if (error) {
+      console.warn('Pilot requests fetch failed:', error);
+      pilotEmpty.querySelector('p').textContent = 'Couldn\'t load pilot requests: ' + (error.message || error);
+      pilotEmpty.classList.remove('hidden');
+      return;
+    }
+    allPilots = data || [];
+    renderPilotList();
+  }
+
+  function renderPilotList() {
+    const q = pilotSearch.toLowerCase().trim();
+    const filtered = allPilots.filter((p) => {
+      if (q) {
+        const blob = `${p.first_name || ''} ${p.last_name || ''} ${p.organization || ''} ${p.email || ''} ${p.role_title || ''}`.toLowerCase();
+        if (!blob.includes(q)) return false;
+      }
+      if (pilotFilter === 'all') return true;
+      if (pilotFilter === 'workplace' || pilotFilter === 'education' || pilotFilter === 'both') {
+        return p.pathway === pilotFilter;
+      }
+      return p.status === pilotFilter;
+    });
+
+    if (!filtered.length) {
+      pilotTable.classList.add('hidden');
+      pilotEmpty.querySelector('p').textContent = 'No pilot requests match.';
+      pilotEmpty.classList.remove('hidden');
+      return;
+    }
+    pilotEmpty.classList.add('hidden');
+    pilotTable.classList.remove('hidden');
+
+    pilotTbody.innerHTML = filtered.map((p) => {
+      const name = `${p.first_name || ''} ${p.last_name || ''}`.trim() || '(no name)';
+      const pathwayLabel = p.pathway === 'workplace' ? 'Workplace' : p.pathway === 'education' ? 'Education' : 'Both';
+      const statusOptions = ['new', 'contacted', 'qualified', 'closed_won', 'closed_lost', 'spam']
+        .map((s) => `<option value="${s}" ${p.status === s ? 'selected' : ''}>${s.replace('_', ' ')}</option>`)
+        .join('');
+      return `
+        <tr data-pilot-id="${escapeHtml(p.id)}">
+          <td>${escapeHtml(fmtDate(p.created_at))}</td>
+          <td>
+            <div class="name">${escapeHtml(name)}</div>
+            <div class="email">${escapeHtml(p.email)}</div>
+            ${p.phone ? `<div class="phone">${escapeHtml(p.phone)}</div>` : ''}
+          </td>
+          <td>
+            <div class="name">${escapeHtml(p.organization)}</div>
+            <div class="email">${escapeHtml(p.role_title)}</div>
+            ${p.website ? `<div class="phone"><a href="${escapeHtml(p.website)}" target="_blank" rel="noopener">${escapeHtml(p.website)}</a></div>` : ''}
+          </td>
+          <td><span class="source-tag ${p.pathway === 'workplace' ? 'paid' : p.pathway === 'education' ? 'lead' : 'workshop'}">${escapeHtml(pathwayLabel)}</span></td>
+          <td>
+            <select class="pilot-status-select" data-pilot-id="${escapeHtml(p.id)}" onclick="event.stopPropagation()">${statusOptions}</select>
+          </td>
+        </tr>
+        <tr class="pilot-detail-row" data-pilot-id="${escapeHtml(p.id)}" style="display:none">
+          <td colspan="5" style="background:var(--mist);padding:16px 22px">
+            <p style="margin:0 0 10px;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--green-ink);font-weight:700">Challenges</p>
+            <p style="margin:0 0 14px;font-size:13px;color:var(--slate)">${escapeHtml((p.challenges || []).join(' · ') || '—')}</p>
+            <p style="margin:0 0 10px;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--green-ink);font-weight:700">What makes now the right time</p>
+            <p style="margin:0;font-size:14px;color:var(--slate);white-space:pre-wrap">${escapeHtml(p.timing || '(not provided)')}</p>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // Toggle detail row on click
+  if (pilotTbody) {
+    pilotTbody.addEventListener('click', (e) => {
+      if (e.target.closest('.pilot-status-select')) return; // ignore status dropdown
+      const row = e.target.closest('tr[data-pilot-id]');
+      if (!row || row.classList.contains('pilot-detail-row')) return;
+      const id = row.getAttribute('data-pilot-id');
+      const detail = pilotTbody.querySelector(`.pilot-detail-row[data-pilot-id="${id}"]`);
+      if (detail) detail.style.display = detail.style.display === 'none' ? 'table-row' : 'none';
+    });
+
+    // Status change
+    pilotTbody.addEventListener('change', async (e) => {
+      const sel = e.target.closest('.pilot-status-select');
+      if (!sel) return;
+      const id = sel.getAttribute('data-pilot-id');
+      const newStatus = sel.value;
+      const { error } = await sb.from('pilot_requests').update({ status: newStatus }).eq('id', id);
+      if (error) { alert('Couldn\'t update status: ' + error.message); return; }
+      const p = allPilots.find((x) => x.id === id);
+      if (p) p.status = newStatus;
+    });
+  }
+
+  // Pilot search + filter
+  if (pilotSearchInput) {
+    pilotSearchInput.addEventListener('input', () => { pilotSearch = pilotSearchInput.value; renderPilotList(); });
+  }
+  if (pilotFilterPills) {
+    pilotFilterPills.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-pill');
+      if (!btn) return;
+      pilotFilterPills.querySelectorAll('.filter-pill').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      pilotFilter = btn.getAttribute('data-pilot-filter');
+      renderPilotList();
     });
   }
 

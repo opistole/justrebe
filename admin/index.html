@@ -277,6 +277,7 @@
     <nav id="nav-links">
       <a href="#dashboard" data-route="dashboard">Dashboard</a>
       <a href="#customers" data-route="customers">Customers</a>
+      <a href="#pilots" data-route="pilots">Pilots</a>
     </nav>
     <div class="who">
       <span class="email" id="user-email">—</span>
@@ -358,6 +359,43 @@
         </table>
         <div id="customer-empty" class="empty hidden">
           <p>No customers match your filter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== PILOT REQUESTS LIST VIEW ============== -->
+    <section id="view-pilots" class="hidden">
+      <div class="welcome" style="background:linear-gradient(135deg,var(--gold-wash) 0%,var(--mist) 100%)">
+        <h2 style="font-size:22px">Pilot requests</h2>
+        <p>Submissions from <strong>/pilot</strong> on the public site. Education + Workplace + Both. Marked status stays per row.</p>
+      </div>
+      <div class="toolbar">
+        <input type="search" class="search-input" id="pilot-search" placeholder="Search by name, organization, or email…">
+        <div class="filter-pills" id="pilot-filter-pills">
+          <button type="button" class="filter-pill active" data-pilot-filter="all">All</button>
+          <button type="button" class="filter-pill" data-pilot-filter="new">New</button>
+          <button type="button" class="filter-pill" data-pilot-filter="contacted">Contacted</button>
+          <button type="button" class="filter-pill" data-pilot-filter="qualified">Qualified</button>
+          <button type="button" class="filter-pill" data-pilot-filter="workplace">Workplace</button>
+          <button type="button" class="filter-pill" data-pilot-filter="education">Education</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div id="pilot-list-loading" class="loading">Loading pilot requests…</div>
+        <table id="pilot-table" class="hidden">
+          <thead>
+            <tr>
+              <th>Received</th>
+              <th>Name</th>
+              <th>Organization</th>
+              <th>Pathway</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="pilot-tbody"></tbody>
+        </table>
+        <div id="pilot-empty" class="empty hidden">
+          <p>No pilot requests match.</p>
         </div>
       </div>
     </section>
@@ -529,6 +567,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=17"></script>
+<script src="/admin/app.js?v=18"></script>
 </body>
 </html>
