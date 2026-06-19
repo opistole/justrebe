@@ -247,11 +247,28 @@
   }
 
   async function enterApp(user) {
-    const { data: roles } = await sb
+    // Idempotency: if we already loaded this user, skip the second pass
+    // (init getSession + onAuthStateChange both fire on page load).
+    if (currentUser && currentUser.id === user.id && currentRole) {
+      return;
+    }
+
+    const { data: roles, error: rolesError } = await sb
       .from('user_roles').select('role').eq('user_id', user.id).limit(1);
+
+    if (rolesError) {
+      // Network / RLS hiccup — show a soft error but DON'T sign out.
+      // The session stays in localStorage; refresh can retry.
+      console.warn('Role lookup failed:', rolesError);
+      enterLogin();
+      showError(errorEl, 'Couldn\'t verify your role (network glitch). Refresh and try again.');
+      return;
+    }
     if (!roles || !roles.length) {
-      showError(errorEl, 'Your account exists but no team role is assigned yet. Ask Osil to add you to user_roles.');
-      await sb.auth.signOut();
+      // No role assigned — show login view with explanation. Don't signOut;
+      // the user might just need an admin to add their row.
+      enterLogin();
+      showError(errorEl, 'Your account exists but no team role is assigned yet. Ask Osil to add you.');
       return;
     }
 
