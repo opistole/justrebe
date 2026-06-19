@@ -127,6 +127,8 @@
   const smsSendSuccess= document.getElementById('sms-send-success');
   const smsCharCount  = document.getElementById('sms-char-count');
   const smsProvider   = document.getElementById('sms-provider');
+  const smsToDisplay  = document.getElementById('sms-to-display');
+  const emailToDisplay= document.getElementById('email-to-display');
 
   // Note compose
   const noteInput   = document.getElementById('note-input');
@@ -788,6 +790,23 @@
       ).join('');
     }
 
+    // Show recipient clearly in compose panels so we never confuse who we're
+    // texting/emailing
+    const recipientName = (cohort && cohort.full_name)
+      || (contact && [contact.first_name, contact.last_name].filter(Boolean).join(' '))
+      || '';
+    if (emailToDisplay) {
+      emailToDisplay.value = recipientName
+        ? `${recipientName} <${currentDetailEmail}>`
+        : currentDetailEmail;
+    }
+    if (smsToDisplay) {
+      const phoneDisplay = currentDetailPhone || '(no phone on file)';
+      smsToDisplay.value = recipientName
+        ? `${recipientName} · ${phoneDisplay}`
+        : phoneDisplay;
+    }
+
     // Profile
     const name = (cohort && cohort.full_name)
       || (contact && [contact.first_name, contact.last_name].filter(Boolean).join(' '))
@@ -968,6 +987,9 @@
         it.kind === 'sms'    ? '📱 SMS sent' :
         it.kind === 'sms-in' ? '📥 SMS received' :
         it.kind === 'kit'    ? '✨ Kit' : it.kind;
+      const recipientLine = (it.kind === 'email' || it.kind === 'sms') && it.to
+        ? `<p class="ai-subject" style="font-weight:600;font-size:12px;color:var(--muted)">→ ${escapeHtml(it.to)}</p>`
+        : '';
       const subject = it.subject ? `<p class="ai-subject">${escapeHtml(it.subject)}</p>` : '';
       const failedMsg = it.failed ? `<p class="ai-fail">✗ Failed to send${it.error ? ': ' + escapeHtml(it.error) : ''}</p>` : '';
       const actions = it.kind === 'note' && it.mine
@@ -985,6 +1007,7 @@
             </div>
             <span class="ai-date">${escapeHtml(fmtDateTime(it.date))}</span>
           </div>
+          ${recipientLine}
           ${subject}
           <div class="ai-body-wrap"><p class="ai-body">${escapeHtml(it.body)}</p></div>
           ${failedMsg}

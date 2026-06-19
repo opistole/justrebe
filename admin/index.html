@@ -413,6 +413,10 @@
           <!-- Email panel -->
           <div class="compose-panel" id="compose-email">
             <div>
+              <label>To</label>
+              <input type="text" id="email-to-display" disabled>
+            </div>
+            <div>
               <label for="email-from">From</label>
               <select id="email-from"></select>
             </div>
@@ -434,6 +438,10 @@
 
           <!-- SMS panel -->
           <div class="compose-panel hidden" id="compose-sms">
+            <div>
+              <label>To</label>
+              <input type="text" id="sms-to-display" disabled>
+            </div>
             <div>
               <label for="sms-provider">Send from</label>
               <select id="sms-provider">
@@ -513,6 +521,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=14"></script>
+<script src="/admin/app.js?v=15"></script>
 </body>
 </html>
