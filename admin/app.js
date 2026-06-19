@@ -877,6 +877,16 @@
     if (taskAssign) taskAssign.value = '';
     hideMsg(taskError);
 
+    // Reset all compose drafts so they don't bleed between customers
+    if (emailSubject) emailSubject.value = '';
+    if (emailBody)    emailBody.value = '';
+    if (smsBody)      smsBody.value = '';
+    if (smsCharCount) smsCharCount.textContent = '0 chars';
+    if (noteInput)    noteInput.value = '';
+    hideMsg(emailSendError); hideMsg(emailSendSuccess);
+    hideMsg(smsSendError);   hideMsg(smsSendSuccess);
+    hideMsg(noteError);
+
     // Unified activity feed: notes + sent emails + sent texts + kit events
     renderActivity(notes, activities, kitEvents);
   }
