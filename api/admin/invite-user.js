@@ -26,14 +26,18 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const SUPABASE_URL = process.env.SUPABASE_URL;
+  const rawUrl = process.env.SUPABASE_URL;
   const SERVICE_KEY  = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const ADMIN_INVITE_SECRET = process.env.ADMIN_INVITE_SECRET;
 
-  if (!SUPABASE_URL || !SERVICE_KEY) {
+  if (!rawUrl || !SERVICE_KEY) {
     console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY env vars');
     return res.status(500).json({ error: 'Server not configured' });
   }
+
+  // SUPABASE_URL on Vercel includes /rest/v1 suffix. Strip it so /auth/v1/*
+  // and /rest/v1/* requests build correctly.
+  const SUPABASE_URL = rawUrl.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
   if (!ADMIN_INVITE_SECRET) {
     console.error('Missing ADMIN_INVITE_SECRET env var — refusing to allow invites');
     return res.status(500).json({ error: 'Invite endpoint disabled (no secret configured)' });

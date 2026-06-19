@@ -62,8 +62,9 @@ async function requireAdminStaff(req) {
 
   // Confirm user has a role in user_roles using service_role (bypasses RLS).
   // This is the actual auth check — without a row here, the user can't act.
-  // Strip any trailing slash from SUPABASE_URL to avoid // double-slash bugs.
-  const baseUrl = SUPABASE_URL.replace(/\/+$/, '');
+  // SUPABASE_URL on Vercel has /rest/v1 appended (matches stripe-webhook
+  // handling). Strip trailing slash AND /rest/v1 suffix to get a clean base.
+  const baseUrl = SUPABASE_URL.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
   const rolesUrl = `${baseUrl}/rest/v1/user_roles?select=role&user_id=eq.${userId}&limit=1`;
 
   let roleResp;
@@ -122,9 +123,10 @@ async function logActivity({ customerEmail, type, body, subject, fromAddr, toAdd
   const SUPABASE_URL = process.env.SUPABASE_URL;
   const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!SUPABASE_URL || !SERVICE_KEY) return { error: 'env not configured' };
+  const baseUrl = SUPABASE_URL.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
 
   try {
-    const resp = await fetch(`${SUPABASE_URL}/rest/v1/customer_activities`, {
+    const resp = await fetch(`${baseUrl}/rest/v1/customer_activities`, {
       method: 'POST',
       headers: {
         apikey: SERVICE_KEY,
