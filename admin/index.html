@@ -108,12 +108,15 @@
   .profile-card h1{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--navy);margin:0 0 6px;letter-spacing:-.01em}
   .profile-card .profile-meta{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 18px}
   .profile-card .profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0 0;padding:18px 0 0;border-top:1px solid var(--mist)}
-  .profile-card .pf-row{display:flex;flex-direction:column;gap:2px}
-  .profile-card .pf-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.18em;text-transform:uppercase}
-  .profile-card .pf-value{font-size:14px;color:var(--navy);font-weight:600;word-break:break-word}
-  .profile-card .pf-value.muted{color:var(--muted);font-weight:400;font-style:italic}
-  .profile-card .pf-value a{color:var(--green-ink);text-decoration:none}
-  .profile-card .pf-value a:hover{text-decoration:underline}
+  .pf-row{display:flex;flex-direction:column;gap:6px;margin:0 0 14px}
+  .pf-row:last-child{margin-bottom:0}
+  .pf-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.18em;text-transform:uppercase}
+  .pf-value{font-size:14px;color:var(--navy);font-weight:600;word-break:break-word;line-height:1.55}
+  .pf-value.muted{color:var(--muted);font-weight:400;font-style:italic}
+  .pf-value a{color:var(--green-ink);text-decoration:none}
+  .pf-value a:hover{text-decoration:underline}
+  .section .pf-row{padding:10px 0;border-bottom:1px solid var(--mist);margin:0}
+  .section .pf-row:last-child{border-bottom:0;padding-bottom:0}
 
   .section{background:#fff;border:1px solid var(--bone);border-radius:14px;padding:24px 28px;box-shadow:0 4px 14px rgba(6,11,80,.04);margin:0 0 20px}
   .section h2{font-family:var(--serif);font-weight:600;font-size:20px;color:var(--navy);margin:0 0 16px;letter-spacing:-.005em}
@@ -307,6 +310,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/admin/app.js?v=3"></script>
+<script src="/admin/app.js?v=4"></script>
 </body>
 </html>

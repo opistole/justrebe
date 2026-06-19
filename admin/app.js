@@ -527,7 +527,7 @@
 
     if (intakeBits.length) {
       cdIntakeBody.innerHTML = intakeBits.map(([k, v]) =>
-        `<div class="pf-row" style="margin:0 0 12px"><span class="pf-label">${escapeHtml(k)}</span><span class="pf-value">${escapeHtml(String(v))}</span></div>`
+        `<div class="pf-row"><span class="pf-label">${escapeHtml(k)}</span><span class="pf-value">${escapeHtml(String(v))}</span></div>`
       ).join('');
     } else {
       cdIntakeBody.innerHTML = '<p class="pf-value muted">No intake data on file.</p>';
