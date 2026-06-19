@@ -190,6 +190,8 @@
   /* === Activity item: note edit/delete + Kit events === */
   .activity-item.kind-kit{border-left-color:var(--gold-ink)}
   .activity-item .ai-type.kit{color:var(--gold-ink)}
+  .activity-item.kind-sms-in{border-left-color:#3a8ed8}
+  .activity-item .ai-type.sms-in{color:#246fbf}
   .activity-item .ai-actions{display:flex;gap:10px;margin:6px 0 0}
   .activity-item .ai-action-btn{background:transparent;border:0;color:var(--muted);font-size:11px;cursor:pointer;text-decoration:underline;font-family:inherit;padding:0;letter-spacing:.02em}
   .activity-item .ai-action-btn:hover{color:var(--green-ink)}
@@ -433,8 +435,11 @@
           <!-- SMS panel -->
           <div class="compose-panel hidden" id="compose-sms">
             <div>
-              <label>From</label>
-              <input type="text" disabled value="(941) 297-4243 · ReBe Quo line">
+              <label for="sms-provider">Send from</label>
+              <select id="sms-provider">
+                <option value="openphone">📱 OpenPhone · (941) 297-4243 — personal / Ashley's line</option>
+                <option value="twilio">📞 Twilio · (941) 269-6448 — for reply threads / automated</option>
+              </select>
             </div>
             <div>
               <label for="sms-body">Message <span class="char-count" id="sms-char-count">0 chars</span></label>
@@ -508,6 +513,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=11"></script>
+<script src="/admin/app.js?v=12"></script>
 </body>
 </html>

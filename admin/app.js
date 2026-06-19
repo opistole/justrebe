@@ -126,6 +126,7 @@
   const smsSendError  = document.getElementById('sms-send-error');
   const smsSendSuccess= document.getElementById('sms-send-success');
   const smsCharCount  = document.getElementById('sms-char-count');
+  const smsProvider   = document.getElementById('sms-provider');
 
   // Note compose
   const noteInput   = document.getElementById('note-input');
@@ -743,7 +744,7 @@
         .ilike('customer_email', currentDetailEmail)
         .order('created_at', { ascending: false }).limit(200),
       sb.from('customer_activities')
-        .select('id, type, body, subject, from_addr, to_addr, actor_email, status, error_message, created_at')
+        .select('id, type, body, subject, from_addr, to_addr, actor_email, status, error_message, metadata, created_at')
         .ilike('customer_email', currentDetailEmail)
         .order('created_at', { ascending: false }).limit(200),
       sb.from('customer_tasks')
@@ -848,6 +849,19 @@
       cdIntakeBody.innerHTML = '<p class="pf-value muted">No intake data on file.</p>';
     }
 
+    // Smart-default SMS provider: look at the most recent SMS activity
+    // (either sent or received). If its provider was Twilio, default to
+    // Twilio so replies continue on the same thread. Otherwise default
+    // OpenPhone (the personal/CRM standard).
+    if (smsProvider) {
+      const smsItems = (activities || []).filter((a) =>
+        a.type === 'sms_received' || a.type === 'sms_sent'
+      );
+      const mostRecentSms = smsItems[0]; // already ordered desc
+      const lastProvider = (mostRecentSms && mostRecentSms.metadata && mostRecentSms.metadata.provider) || null;
+      smsProvider.value = lastProvider === 'twilio' ? 'twilio' : 'openphone';
+    }
+
     // Tasks
     renderTasks(tasks);
 
@@ -894,11 +908,19 @@
       });
     });
     (activities || []).forEach((a) => {
+      const provider = a.metadata && a.metadata.provider;
+      const kind =
+        a.type === 'email_sent'   ? 'email' :
+        a.type === 'sms_sent'     ? 'sms' :
+        a.type === 'sms_received' ? 'sms-in' :
+        'other';
       items.push({
-        kind: a.type === 'email_sent' ? 'email' : a.type === 'sms_sent' ? 'sms' : 'other',
+        kind,
         id: a.id,
         date: a.created_at,
-        author: a.actor_email || '(system)',
+        author: a.type === 'sms_received'
+          ? `From ${a.from_addr || '(unknown)'}${provider ? ' · ' + provider : ''}`
+          : (a.actor_email || '(system)') + (provider ? ' · ' + provider : ''),
         subject: a.subject,
         body: a.body || '',
         from: a.from_addr,
@@ -928,10 +950,11 @@
       const cls = ['activity-item', `kind-${it.kind}`];
       if (it.failed) cls.push('kind-failed');
       const typeLabel =
-        it.kind === 'note'  ? '📝 Note' :
-        it.kind === 'email' ? '📧 Email' :
-        it.kind === 'sms'   ? '📱 SMS' :
-        it.kind === 'kit'   ? '✨ Kit' : it.kind;
+        it.kind === 'note'   ? '📝 Note' :
+        it.kind === 'email'  ? '📧 Email' :
+        it.kind === 'sms'    ? '📱 SMS sent' :
+        it.kind === 'sms-in' ? '📥 SMS received' :
+        it.kind === 'kit'    ? '✨ Kit' : it.kind;
       const subject = it.subject ? `<p class="ai-subject">${escapeHtml(it.subject)}</p>` : '';
       const failedMsg = it.failed ? `<p class="ai-fail">✗ Failed to send${it.error ? ': ' + escapeHtml(it.error) : ''}</p>` : '';
       const actions = it.kind === 'note' && it.mine
@@ -966,7 +989,7 @@
         .ilike('customer_email', currentDetailEmail)
         .order('created_at', { ascending: false }).limit(200),
       sb.from('customer_activities')
-        .select('id, type, body, subject, from_addr, to_addr, actor_email, status, error_message, created_at')
+        .select('id, type, body, subject, from_addr, to_addr, actor_email, status, error_message, metadata, created_at')
         .ilike('customer_email', currentDetailEmail)
         .order('created_at', { ascending: false }).limit(200),
       sb.from('kit_events')
@@ -1237,8 +1260,14 @@
       smsSendBtn.disabled = true;
       smsSendBtn.textContent = 'Sending…';
 
+      const provider = (smsProvider && smsProvider.value) || 'openphone';
+      const endpoint = provider === 'twilio'
+        ? '/api/admin/send-sms-twilio'
+        : '/api/admin/send-sms';
+      const providerLabel = provider === 'twilio' ? 'Twilio' : 'OpenPhone';
+
       try {
-        const resp = await fetch('/api/admin/send-sms', {
+        const resp = await fetch(endpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -1252,7 +1281,7 @@
         });
         const data = await resp.json();
         if (!resp.ok) throw new Error(data.error || data.detail || `HTTP ${resp.status}`);
-        showError(smsSendSuccess, `✓ Text sent to ${currentDetailPhone}`);
+        showError(smsSendSuccess, `✓ Text sent via ${providerLabel} to ${currentDetailPhone}`);
         smsBody.value = '';
         if (smsCharCount) smsCharCount.textContent = '0 chars';
         refreshActivity();
