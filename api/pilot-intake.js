@@ -26,12 +26,12 @@
 const PATHWAY_MAP = {
   'ReBe Education': {
     enum: 'education',
-    recipients: ['v.ellery@justrebe.com', 'refresh@justrebe.com'],
+    recipients: ['v.ellery@justrebe.com', 'a.pace@justrebe.com'],
     subject: 'Education Pilot Request',
   },
   'ReBe Workplace': {
     enum: 'workplace',
-    recipients: ['e.good@justrebe.com', 'refresh@justrebe.com'],
+    recipients: ['o.pistole@justrebe.com', 'e.good@justrebe.com'],
     subject: 'Corporate Pilot Request',
   },
   'Both / Not Sure': {
