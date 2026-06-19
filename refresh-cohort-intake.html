@@ -267,7 +267,14 @@
         body: JSON.stringify(data),
       });
       var body = await r.json();
-      if (!r.ok) throw new Error(body.error || 'Couldn\'t save your intake.');
+      if (!r.ok) {
+        var msg = body.error || 'Couldn\'t save your intake.';
+        if (body.detail) {
+          var detailStr = typeof body.detail === 'string' ? body.detail : JSON.stringify(body.detail);
+          msg += ' (' + detailStr.slice(0, 300) + ')';
+        }
+        throw new Error(msg);
+      }
 
       card.classList.add('hidden');
       ok.classList.remove('hidden');
