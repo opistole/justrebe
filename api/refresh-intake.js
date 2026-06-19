@@ -61,6 +61,17 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Valid email required' });
   }
 
+  // The form's "Which cohort time slot?" answer is the actual slot →
+  // belongs in preferred_group_time. group_type + audience_type are enum
+  // columns with CHECK constraints; mirror what Stripe webhook does.
+  const slot = body.group_type || body.preferred_group_time || null;
+
+  // Free-text "Which best describes your world?" answer goes into notes,
+  // since audience_type only accepts a small enum.
+  const worldNote = body.audience_type ? `World: ${String(body.audience_type).trim()}` : null;
+  const extraNotes = [worldNote, body.notes ? String(body.notes).trim() : null]
+    .filter(Boolean).join('\n\n');
+
   const row = {
     full_name: fullName,
     email,
@@ -69,15 +80,15 @@ module.exports = async function handler(req, res) {
     status: 'enrolled',
     readiness: 'enrolled',
     paid_amount_cents: 0,
-    group_type:               body.group_type               ? String(body.group_type).trim()               : null,
-    preferred_group_time:     body.preferred_group_time     ? String(body.preferred_group_time).trim()     : null,
-    audience_type:            body.audience_type            ? String(body.audience_type).trim()            : 'Not specified',
+    audience_type: 'groups',          // cohort intake = group setting
+    group_type: 'no_preference',      // constraint-safe constant
+    preferred_group_time:     slot ? String(slot).trim() : null,
     area_needing_refresh:     body.area_needing_refresh     ? String(body.area_needing_refresh).trim()     : null,
     reason_for_interest:      body.reason_for_interest      ? String(body.reason_for_interest).trim()      : null,
     previous_rebe_experience: body.previous_rebe_experience ? String(body.previous_rebe_experience).trim() : null,
     organization_name:        body.organization_name        ? String(body.organization_name).trim()        : null,
     role_title:               body.role_title               ? String(body.role_title).trim()               : null,
-    notes:                    body.notes                    ? String(body.notes).trim()                    : null,
+    notes:                    extraNotes || null,
     // consents — voluntary form submission implies both; mirrors how Stripe
     // webhook fills these for paid signups
     consent_to_contact: true,
