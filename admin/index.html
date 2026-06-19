@@ -9,7 +9,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -23,68 +23,134 @@
   }
   *,*::before,*::after{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
-  body{margin:0;background:var(--mist);color:var(--body);font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;background:var(--mist);color:var(--body);font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
 
-  /* Header */
-  .admin-bar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 12px rgba(6,11,80,.18)}
-  .admin-bar .wordmark{font-family:var(--serif);font-weight:600;font-size:20px;color:#fff;text-decoration:none;letter-spacing:-.005em}
+  /* === Header === */
+  .admin-bar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:12px 24px;display:flex;align-items:center;gap:24px;box-shadow:0 4px 12px rgba(6,11,80,.18);flex-wrap:wrap}
+  .admin-bar .wordmark{font-family:var(--serif);font-weight:600;font-size:18px;color:#fff;text-decoration:none;letter-spacing:-.005em;flex-shrink:0}
   .admin-bar .wordmark .accent{color:var(--gold)}
-  .admin-bar .who{display:flex;align-items:center;gap:14px;font-size:13px}
-  .admin-bar .role-pill{background:var(--green-ink);padding:4px 10px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
-  .admin-bar .logout-btn{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);padding:6px 14px;border-radius:999px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.04em;transition:background .2s}
+  .admin-bar nav{display:flex;gap:4px;flex:1;min-width:0}
+  .admin-bar nav a{color:rgba(255,255,255,.7);text-decoration:none;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;letter-spacing:.02em;transition:background .15s,color .15s}
+  .admin-bar nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+  .admin-bar nav a.active{background:var(--green-ink);color:#fff}
+  .admin-bar .who{display:flex;align-items:center;gap:12px;font-size:12px;color:rgba(255,255,255,.85)}
+  .admin-bar .who .email{max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .admin-bar .role-pill{background:var(--green-ink);padding:3px 9px;border-radius:999px;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+  .admin-bar .logout-btn{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:999px;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:.04em;transition:background .2s}
   .admin-bar .logout-btn:hover{background:rgba(255,255,255,.22)}
 
-  /* Layout */
-  main{max-width:1100px;margin:0 auto;padding:40px 24px 80px}
+  /* === Layout === */
+  main{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
 
-  /* Login card */
-  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  /* === Login === */
+  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--mist)}
   .login-card{background:#fff;border-radius:16px;padding:40px 36px 32px;width:100%;max-width:420px;box-shadow:0 20px 50px rgba(6,11,80,.12);text-align:center}
   .login-card h1{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--navy);margin:0 0 6px;letter-spacing:-.01em}
   .login-card .login-sub{font-size:14px;color:var(--muted);margin:0 0 28px}
   .login-card label{display:block;text-align:left;font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;margin:0 0 6px}
   .login-card input{width:100%;padding:12px 14px;border:1px solid var(--bone);border-radius:10px;font-family:inherit;font-size:15px;color:var(--slate);margin:0 0 16px;transition:border-color .2s}
   .login-card input:focus{outline:0;border-color:var(--green)}
-  .login-card .btn{display:block;width:100%;padding:14px 18px;background:var(--green-ink);color:#fff;border:0;border-radius:999px;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s,opacity .2s;margin:8px 0 0}
-  .login-card .btn:hover:not(:disabled){background:var(--green-deep);transform:translateY(-1px)}
-  .login-card .btn:disabled{opacity:.55;cursor:wait}
+  .btn{display:inline-block;padding:11px 22px;background:var(--green-ink);color:#fff;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s,opacity .2s}
+  .btn:hover:not(:disabled){background:var(--green-deep);transform:translateY(-1px);color:#fff}
+  .btn:disabled{opacity:.55;cursor:wait}
+  .btn--block{display:block;width:100%;text-align:center;padding:14px 18px;font-size:14px;margin:8px 0 0}
+  .btn--secondary{background:#fff;color:var(--green-ink);border:2px solid var(--green-ink)}
+  .btn--secondary:hover:not(:disabled){background:var(--green-wash);color:var(--green-ink)}
   .login-card .login-help{font-size:13px;color:var(--muted);margin:18px 0 0;line-height:1.55}
-  .login-card .login-error{color:var(--coral);font-size:13px;margin:14px 0 0;display:none}
-  .login-card .login-success{color:var(--green-ink);font-size:13px;margin:14px 0 0;display:none}
-  .login-card .magic-toggle{display:block;margin:14px auto 0;background:transparent;border:0;color:var(--green-ink);text-decoration:underline;font-size:12px;cursor:pointer;font-family:inherit;letter-spacing:.04em}
+  .msg-error{color:var(--coral);font-size:13px;margin:14px 0 0;display:none;text-align:center}
+  .msg-success{color:var(--green-ink);font-size:13px;margin:14px 0 0;display:none;text-align:center}
+  .magic-toggle{display:block;margin:14px auto 0;background:transparent;border:0;color:var(--green-ink);text-decoration:underline;font-size:12px;cursor:pointer;font-family:inherit;letter-spacing:.04em}
 
-  /* Dashboard cards */
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin:0 0 32px}
-  .card{background:#fff;border-radius:14px;padding:22px 24px;box-shadow:0 6px 18px rgba(6,11,80,.06);border:1px solid var(--bone)}
+  /* === Welcome + stats === */
+  .welcome{background:linear-gradient(135deg,var(--gold-wash) 0%,var(--green-wash) 100%);border-radius:14px;padding:24px 28px;margin:0 0 24px;border:1px solid #ead7a8}
+  .welcome h2{font-family:var(--serif);font-weight:600;font-size:24px;color:var(--navy);margin:0 0 6px;letter-spacing:-.005em}
+  .welcome p{margin:0;font-size:14px;color:var(--body)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:0 0 28px}
+  .card{background:#fff;border-radius:12px;padding:20px 22px;box-shadow:0 4px 14px rgba(6,11,80,.06);border:1px solid var(--bone)}
   .card .card-label{font-family:var(--sans);font-weight:700;font-size:10px;letter-spacing:.22em;color:var(--green-ink);text-transform:uppercase;margin:0 0 8px}
-  .card .card-number{font-family:var(--serif);font-weight:600;font-size:42px;color:var(--navy);line-height:1;margin:0 0 4px;letter-spacing:-.01em}
-  .card .card-sub{font-size:13px;color:var(--muted);margin:0}
+  .card .card-number{font-family:var(--serif);font-weight:600;font-size:38px;color:var(--navy);line-height:1;margin:0 0 4px;letter-spacing:-.01em}
+  .card .card-sub{font-size:12px;color:var(--muted);margin:0}
 
-  /* Welcome */
-  .welcome{background:linear-gradient(135deg,var(--gold-wash) 0%,var(--green-wash) 100%);border-radius:14px;padding:28px 32px;margin:0 0 28px;border:1px solid #ead7a8}
-  .welcome h2{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--navy);margin:0 0 6px;letter-spacing:-.005em}
-  .welcome p{margin:0;font-size:15px;color:var(--body)}
+  /* === Customer list === */
+  .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 18px}
+  .toolbar .search-input{flex:1;min-width:260px;padding:10px 14px;border:1px solid var(--bone);border-radius:10px;font-family:inherit;font-size:14px;color:var(--slate);background:#fff;transition:border-color .2s}
+  .toolbar .search-input:focus{outline:0;border-color:var(--green)}
+  .toolbar .filter-pills{display:flex;gap:6px;flex-wrap:wrap}
+  .filter-pill{padding:7px 14px;border-radius:999px;border:1px solid var(--bone);background:#fff;color:var(--body);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.02em;transition:all .15s}
+  .filter-pill:hover{border-color:var(--green-ink);color:var(--green-ink)}
+  .filter-pill.active{background:var(--green-ink);border-color:var(--green-ink);color:#fff}
 
-  /* Coming soon block */
-  .placeholder{background:#fff;border:2px dashed var(--bone);border-radius:14px;padding:32px;text-align:center;color:var(--muted)}
-  .placeholder h3{font-family:var(--serif);font-size:22px;color:var(--navy);margin:0 0 8px;font-weight:600}
-  .placeholder p{margin:0 0 12px;font-size:14px}
-  .placeholder ul{display:inline-block;text-align:left;margin:14px 0 0;padding:0;list-style:none}
-  .placeholder li{padding:6px 0;font-size:14px;color:var(--body)}
-  .placeholder li::before{content:'→  ';color:var(--green-ink);font-weight:700}
+  .table-wrap{background:#fff;border:1px solid var(--bone);border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(6,11,80,.04)}
+  table{width:100%;border-collapse:collapse}
+  th,td{text-align:left;padding:12px 16px;font-size:13px;border-bottom:1px solid var(--mist)}
+  th{background:var(--mist);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  tr:last-child td{border-bottom:0}
+  tbody tr{cursor:pointer;transition:background .12s}
+  tbody tr:hover{background:var(--green-wash)}
+  td .name{font-weight:700;color:var(--navy)}
+  td .email{color:var(--body);font-size:12px}
+  td .phone{color:var(--muted);font-size:12px}
+  .source-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:6px;margin:2px 4px 2px 0;white-space:nowrap}
+  .source-tag.workshop{background:var(--gold-wash);color:var(--gold-ink)}
+  .source-tag.paid{background:var(--green-wash);color:var(--green-ink)}
+  .source-tag.lead{background:#FFF1F0;color:var(--coral)}
+  .source-tag.waitlist{background:#E8E8FB;color:var(--navy)}
+  .empty{padding:48px 24px;text-align:center;color:var(--muted)}
+  .empty p{margin:6px 0}
+  .loading{padding:32px;text-align:center;color:var(--muted)}
 
-  /* Utility */
+  /* === Customer detail === */
+  .detail-header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:0 0 20px}
+  .detail-header .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--green-ink);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.04em}
+  .detail-header .back-link:hover{text-decoration:underline}
+  .profile-card{background:#fff;border:1px solid var(--bone);border-radius:14px;padding:28px 32px;box-shadow:0 4px 14px rgba(6,11,80,.06);margin:0 0 24px}
+  .profile-card h1{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--navy);margin:0 0 6px;letter-spacing:-.01em}
+  .profile-card .profile-meta{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 18px}
+  .profile-card .profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0 0;padding:18px 0 0;border-top:1px solid var(--mist)}
+  .profile-card .pf-row{display:flex;flex-direction:column;gap:2px}
+  .profile-card .pf-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.18em;text-transform:uppercase}
+  .profile-card .pf-value{font-size:14px;color:var(--navy);font-weight:600;word-break:break-word}
+  .profile-card .pf-value.muted{color:var(--muted);font-weight:400;font-style:italic}
+  .profile-card .pf-value a{color:var(--green-ink);text-decoration:none}
+  .profile-card .pf-value a:hover{text-decoration:underline}
+
+  .section{background:#fff;border:1px solid var(--bone);border-radius:14px;padding:24px 28px;box-shadow:0 4px 14px rgba(6,11,80,.04);margin:0 0 20px}
+  .section h2{font-family:var(--serif);font-weight:600;font-size:20px;color:var(--navy);margin:0 0 16px;letter-spacing:-.005em}
+  .section h3{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 10px}
+
+  /* === Notes === */
+  .notes-list{display:flex;flex-direction:column;gap:12px;margin:0 0 18px}
+  .note{background:var(--mist);border:1px solid var(--bone);border-radius:10px;padding:14px 16px}
+  .note .note-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 6px;flex-wrap:wrap}
+  .note .note-author{font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.02em}
+  .note .note-date{font-size:11px;color:var(--muted);font-family:var(--sans)}
+  .note .note-body{font-size:14px;color:var(--slate);line-height:1.55;white-space:pre-wrap;margin:0;word-break:break-word}
+  .notes-empty{padding:18px;text-align:center;color:var(--muted);font-style:italic;font-size:13px}
+  .note-form textarea{width:100%;padding:12px 14px;border:1px solid var(--bone);border-radius:10px;font-family:inherit;font-size:14px;color:var(--slate);background:#fff;min-height:80px;resize:vertical;transition:border-color .2s;line-height:1.5}
+  .note-form textarea:focus{outline:0;border-color:var(--green)}
+  .note-form .note-actions{display:flex;justify-content:flex-end;gap:8px;margin:10px 0 0}
+
+  /* === Utility === */
   .hidden{display:none !important}
   .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
   @keyframes spin{to{transform:rotate(360deg)}}
+  .admin-footer{text-align:center;color:var(--muted);font-size:11px;margin:48px 0 0;padding:20px 0 0;border-top:1px solid var(--bone)}
 
-  /* Footer */
-  .admin-footer{text-align:center;color:var(--muted);font-size:12px;margin:48px 0 0;padding:24px 0 0;border-top:1px solid var(--bone)}
+  /* === Mobile === */
+  @media (max-width:680px){
+    .admin-bar{gap:12px;padding:10px 16px}
+    .admin-bar nav{order:3;width:100%;justify-content:center}
+    main{padding:24px 16px 60px}
+    .toolbar{flex-direction:column;align-items:stretch}
+    th,td{padding:10px 12px;font-size:12px}
+    .profile-card{padding:22px 20px}
+  }
 </style>
 </head>
 <body>
 
-<!-- LOGIN VIEW -->
+<!-- ============== LOGIN VIEW ============== -->
 <div id="login-view" class="login-wrap">
   <div class="login-card">
     <h1>ReBe <span style="color:var(--gold-ink)">Admin</span></h1>
@@ -97,75 +163,150 @@
       <label for="login-password" id="password-label">Password</label>
       <input type="password" id="login-password" name="password" autocomplete="current-password">
 
-      <button type="submit" class="btn" id="login-submit">Sign in</button>
-      <p class="login-error" id="login-error"></p>
-      <p class="login-success" id="login-success"></p>
+      <button type="submit" class="btn btn--block" id="login-submit">Sign in</button>
+      <p class="msg-error" id="login-error"></p>
+      <p class="msg-success" id="login-success"></p>
     </form>
 
     <button type="button" class="magic-toggle" id="magic-toggle">Or send me a magic link</button>
 
-    <p class="login-help">First time signing in? Check your inbox for the invite email from Supabase — set your password from there.</p>
+    <p class="login-help">First time signing in? Check your inbox for the invite — set your password from there.</p>
   </div>
 </div>
 
-<!-- DASHBOARD VIEW -->
-<div id="dashboard-view" class="hidden">
+<!-- ============== APP SHELL (visible when authed) ============== -->
+<div id="app-view" class="hidden">
+
   <header class="admin-bar">
-    <a class="wordmark" href="/admin/">ReBe<span class="accent"> · Admin</span></a>
+    <a class="wordmark" href="#dashboard">ReBe<span class="accent"> · Admin</span></a>
+    <nav id="nav-links">
+      <a href="#dashboard" data-route="dashboard">Dashboard</a>
+      <a href="#customers" data-route="customers">Customers</a>
+    </nav>
     <div class="who">
-      <span id="user-email">—</span>
+      <span class="email" id="user-email">—</span>
       <span class="role-pill" id="user-role">—</span>
       <button type="button" class="logout-btn" id="logout-btn">Log out</button>
     </div>
   </header>
 
   <main>
-    <div class="welcome">
-      <h2 id="welcome-name">Welcome.</h2>
-      <p>Your team CRM lives here. Phase 1 is logged-in shell; customer list, notes, and Kit activity are next.</p>
-    </div>
 
-    <div class="grid" id="stats-grid">
-      <div class="card">
-        <p class="card-label">Workshop signups</p>
-        <p class="card-number" id="stat-workshop">—</p>
-        <p class="card-sub">Total in contacts table</p>
+    <!-- ============== DASHBOARD VIEW ============== -->
+    <section id="view-dashboard">
+      <div class="welcome">
+        <h2 id="welcome-name">Welcome.</h2>
+        <p>Your team CRM. Click <strong>Customers</strong> to see everyone — search, filter, and add notes.</p>
       </div>
-      <div class="card">
-        <p class="card-label">Cohort paid</p>
-        <p class="card-number" id="stat-cohort">—</p>
-        <p class="card-sub">refresh_signups · enrolled</p>
+      <div class="grid">
+        <div class="card">
+          <p class="card-label">Workshop signups</p>
+          <p class="card-number" id="stat-workshop">—</p>
+          <p class="card-sub">Total in contacts table</p>
+        </div>
+        <div class="card">
+          <p class="card-label">Cohort paid</p>
+          <p class="card-number" id="stat-cohort">—</p>
+          <p class="card-sub">refresh_signups · enrolled</p>
+        </div>
+        <div class="card">
+          <p class="card-label">Cohort leads</p>
+          <p class="card-number" id="stat-leads">—</p>
+          <p class="card-sub">refresh_signups · wants_more_info</p>
+        </div>
+        <div class="card">
+          <p class="card-label">Team notes</p>
+          <p class="card-number" id="stat-notes">—</p>
+          <p class="card-sub">customer_notes total</p>
+        </div>
       </div>
-      <div class="card">
-        <p class="card-label">Cohort leads</p>
-        <p class="card-number" id="stat-leads">—</p>
-        <p class="card-sub">refresh_signups · wants_more_info</p>
-      </div>
-      <div class="card">
-        <p class="card-label">Team notes</p>
-        <p class="card-number" id="stat-notes">—</p>
-        <p class="card-sub">customer_notes total</p>
-      </div>
-    </div>
+    </section>
 
-    <div class="placeholder">
-      <h3>Coming next (Phase 2 + 3)</h3>
-      <p>Phase 1 confirms your team can log in and the database is gated correctly. Up next:</p>
-      <ul>
-        <li>Customer list with search, filter, sort</li>
-        <li>Customer detail view with intake form + payment info</li>
-        <li>Per-customer notes (audit-trailed)</li>
-        <li>Kit activity feed (tags, link clicks) per customer</li>
-        <li>Invite more team members</li>
-      </ul>
-    </div>
+    <!-- ============== CUSTOMERS LIST VIEW ============== -->
+    <section id="view-customers" class="hidden">
+      <div class="toolbar">
+        <input type="search" class="search-input" id="customer-search" placeholder="Search by name, email, or phone…">
+        <div class="filter-pills" id="filter-pills">
+          <button type="button" class="filter-pill active" data-filter="all">All</button>
+          <button type="button" class="filter-pill" data-filter="paid">Paid cohort</button>
+          <button type="button" class="filter-pill" data-filter="lead">Cohort leads</button>
+          <button type="button" class="filter-pill" data-filter="workshop">Workshop</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div id="customer-list-loading" class="loading">Loading customers…</div>
+        <table id="customer-table" class="hidden">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Contact</th>
+              <th>Source</th>
+              <th>Signed up</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="customer-tbody"></tbody>
+        </table>
+        <div id="customer-empty" class="empty hidden">
+          <p>No customers match your filter.</p>
+        </div>
+      </div>
+    </section>
 
-    <p class="admin-footer">ReBe ReFresh · Internal use only · <span id="build-info">build pending</span></p>
+    <!-- ============== CUSTOMER DETAIL VIEW ============== -->
+    <section id="view-customer" class="hidden">
+      <div class="detail-header">
+        <a class="back-link" href="#customers">← All customers</a>
+      </div>
+      <div id="customer-detail-loading" class="loading">Loading customer…</div>
+      <div id="customer-detail-content" class="hidden">
+        <div class="profile-card">
+          <h1 id="cd-name">—</h1>
+          <div class="profile-meta" id="cd-tags"></div>
+          <div class="profile-grid">
+            <div class="pf-row"><span class="pf-label">Email</span><span class="pf-value" id="cd-email">—</span></div>
+            <div class="pf-row"><span class="pf-label">Phone</span><span class="pf-value" id="cd-phone">—</span></div>
+            <div class="pf-row"><span class="pf-label">First seen</span><span class="pf-value" id="cd-first-seen">—</span></div>
+            <div class="pf-row"><span class="pf-label">Cohort slot</span><span class="pf-value" id="cd-slot">—</span></div>
+            <div class="pf-row"><span class="pf-label">Payment</span><span class="pf-value" id="cd-payment">—</span></div>
+            <div class="pf-row"><span class="pf-label">Readiness</span><span class="pf-value" id="cd-readiness">—</span></div>
+          </div>
+        </div>
+
+        <div class="section" id="cd-intake-section">
+          <h2>Intake & context</h2>
+          <div id="cd-intake-body">
+            <p class="pf-value muted">No intake data on file.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Team notes</h2>
+          <div id="notes-list" class="notes-list">
+            <div class="notes-empty">No notes yet. Be the first.</div>
+          </div>
+          <form id="note-form" class="note-form">
+            <h3>Add a note</h3>
+            <textarea id="note-input" placeholder="Last call she mentioned she's nervous about Tuesdays. Following up Friday."></textarea>
+            <p class="msg-error" id="note-error"></p>
+            <div class="note-actions">
+              <button type="submit" class="btn" id="note-submit">Save note</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="customer-detail-error" class="empty hidden">
+        <p>Customer not found.</p>
+        <p><a href="#customers" class="back-link">← Back to customers</a></p>
+      </div>
+    </section>
+
+    <p class="admin-footer">ReBe ReFresh · Internal use only</p>
+
   </main>
 </div>
 
-<!-- Supabase JS SDK from CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/admin/app.js?v=2"></script>
+<script src="/admin/app.js?v=3"></script>
 </body>
 </html>
