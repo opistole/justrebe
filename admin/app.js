@@ -249,8 +249,22 @@
 
     userEmailEl.textContent = user.email || '(no email)';
     userRoleEl.textContent  = currentRole;
-    const display = (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name))
-                    || (user.email || '').split('@')[0];
+
+    // Friendly first-name greeting by email local-part. Falls back to
+    // Supabase user_metadata.full_name or the email's local-part.
+    const local = (user.email || '').toLowerCase().split('@')[0];
+    const firstNameMap = {
+      osilpistole: 'Osil',
+      'o.pistole': 'Osil',
+      opistole:    'Osil',
+      'a.logan':   'Ashley',
+      alogan:      'Ashley',
+      'e.good':    'Elizabeth',
+      egood:       'Elizabeth',
+    };
+    const display = firstNameMap[local]
+      || (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name))
+      || local;
     welcomeNameEl.textContent = `Welcome, ${display}.`;
 
     loginView.classList.add('hidden');
