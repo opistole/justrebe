@@ -25,9 +25,9 @@ if (!API_KEY) {
   process.exit(1);
 }
 
-// Kit V4 keeps "automation hooks" as the webhooks resource path
+// Kit V4 renamed the endpoint from V3's /automations/hooks to /webhooks
 const BASE = 'https://api.kit.com/v4';
-const HOOK_PATH = '/automations/hooks';
+const HOOK_PATH = '/webhooks';
 
 const HEADERS = {
   'X-Kit-Api-Key': API_KEY,
@@ -76,7 +76,7 @@ async function listExistingHooks() {
     console.error(`  ✗ List failed (${r.status}): ${r.text.slice(0, 300)}`);
     return [];
   }
-  return r.json && (r.json.automation_hooks || r.json.hooks || r.json.webhooks) || [];
+  return r.json && (r.json.webhooks || r.json.automation_hooks || r.json.hooks || r.json.data) || [];
 }
 
 async function listTags() {
