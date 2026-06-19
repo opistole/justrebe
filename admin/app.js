@@ -61,6 +61,15 @@
   const statCohort   = document.getElementById('stat-cohort');
   const statLeads    = document.getElementById('stat-leads');
   const statNotes    = document.getElementById('stat-notes');
+  const myTasksList  = document.getElementById('my-tasks-list');
+
+  // Tasks (customer detail)
+  const tasksList   = document.getElementById('tasks-list');
+  const taskTitle   = document.getElementById('task-title');
+  const taskDue     = document.getElementById('task-due');
+  const taskAssign  = document.getElementById('task-assign');
+  const taskSubmit  = document.getElementById('task-submit');
+  const taskError   = document.getElementById('task-error');
 
   // Customer list
   const searchInput   = document.getElementById('customer-search');
@@ -309,6 +318,65 @@
     statCohort.textContent   = p ?? '—';
     statLeads.textContent    = l ?? '—';
     statNotes.textContent    = n ?? '—';
+
+    // My tasks (open, assigned to me OR unassigned)
+    loadMyTasks();
+  }
+
+  async function loadMyTasks() {
+    if (!myTasksList || !currentUser) return;
+    // Open tasks where assigned_to is me OR null (unassigned — anyone can pick up)
+    const { data, error } = await sb.from('customer_tasks')
+      .select('id, customer_email, title, due_date, assigned_to, assigned_to_email')
+      .eq('status', 'open')
+      .or(`assigned_to.eq.${currentUser.id},assigned_to.is.null`)
+      .order('due_date', { ascending: true, nullsFirst: false })
+      .limit(50);
+    if (error) {
+      console.warn('My tasks fetch failed:', error);
+      myTasksList.innerHTML = '<div class="tasks-empty">Couldn\'t load tasks.</div>';
+      return;
+    }
+    if (!data || !data.length) {
+      myTasksList.innerHTML = '<div class="tasks-empty">No open tasks. Nice.</div>';
+      return;
+    }
+    const today = new Date(); today.setHours(0,0,0,0);
+    myTasksList.innerHTML = data.map((t) => {
+      const isOverdue = t.due_date && new Date(t.due_date) < today;
+      const isToday   = t.due_date && new Date(t.due_date).toDateString() === today.toDateString();
+      const cls = ['task-item'];
+      if (isOverdue) cls.push('overdue');
+      else if (isToday) cls.push('due-soon');
+      const dueCls = isOverdue ? 'overdue' : isToday ? 'today' : '';
+      const dueLabel = t.due_date ? (isOverdue ? `Overdue · ${fmtDate(t.due_date)}` : isToday ? 'Today' : fmtDate(t.due_date)) : 'No due date';
+      const customerLabel = t.customer_email || '(no customer)';
+      return `
+        <div class="${cls.join(' ')}">
+          <input type="checkbox" class="task-check" data-dash-toggle-task="${escapeHtml(t.id)}">
+          <div class="task-body">
+            <p class="task-title">${escapeHtml(t.title)}</p>
+            <div class="task-meta">
+              <span class="task-due ${dueCls}">${escapeHtml(dueLabel)}</span>
+              <span>· <a href="#customer/${escapeHtml(encodeURIComponent(customerLabel))}" class="task-customer">${escapeHtml(customerLabel)}</a></span>
+              ${t.assigned_to ? '' : '<span>· <em>unassigned</em></span>'}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Dashboard task checkbox handler (complete from the dashboard)
+  if (myTasksList) {
+    myTasksList.addEventListener('change', async (e) => {
+      const cb = e.target.closest('[data-dash-toggle-task]');
+      if (!cb || !cb.checked) return;
+      const taskId = cb.getAttribute('data-dash-toggle-task');
+      const { error } = await sb.from('customer_tasks').update({ status: 'completed' }).eq('id', taskId);
+      if (error) { alert('Couldn\'t update: ' + error.message); cb.checked = false; return; }
+      loadMyTasks();
+    });
   }
 
   // ============================================================
@@ -522,7 +590,7 @@
     cdContent.classList.add('hidden');
     cdError.classList.add('hidden');
 
-    const [contactRes, cohortRes, notesRes, activitiesRes] = await Promise.all([
+    const [contactRes, cohortRes, notesRes, activitiesRes, tasksRes, kitEventsRes] = await Promise.all([
       sb.from('contacts')
         .select('first_name, last_name, email, phone, sms_consent, marketing_consent, notes, created_at')
         .ilike('email', currentDetailEmail).limit(1),
@@ -537,6 +605,16 @@
         .select('id, type, body, subject, from_addr, to_addr, actor_email, status, error_message, created_at')
         .ilike('customer_email', currentDetailEmail)
         .order('created_at', { ascending: false }).limit(200),
+      sb.from('customer_tasks')
+        .select('id, title, description, due_date, status, assigned_to, assigned_to_email, created_by, created_by_email, created_at, completed_at')
+        .ilike('customer_email', currentDetailEmail)
+        .order('status', { ascending: true })
+        .order('due_date', { ascending: true, nullsFirst: false })
+        .limit(200),
+      sb.from('kit_events')
+        .select('id, event_type, tag_name, link_url, form_id, created_at')
+        .ilike('customer_email', currentDetailEmail)
+        .order('created_at', { ascending: false }).limit(100),
     ]);
 
     cdLoading.classList.add('hidden');
@@ -545,6 +623,8 @@
     const cohort     = (cohortRes.data || [])[0] || null;
     const notes      = notesRes.data || [];
     const activities = activitiesRes.data || [];
+    const tasks      = tasksRes.data || [];
+    const kitEvents  = kitEventsRes.data || [];
 
     if (!contact && !cohort) {
       cdError.classList.remove('hidden');
@@ -627,24 +707,55 @@
       cdIntakeBody.innerHTML = '<p class="pf-value muted">No intake data on file.</p>';
     }
 
-    // Unified activity feed: notes + sent emails + sent texts
-    renderActivity(notes, activities);
+    // Tasks
+    renderTasks(tasks);
+
+    // Populate task-assign dropdown (cached after first load)
+    populateTaskAssign();
+
+    // Reset task form
+    if (taskTitle) taskTitle.value = '';
+    if (taskDue) taskDue.value = '';
+    if (taskAssign) taskAssign.value = '';
+    hideMsg(taskError);
+
+    // Unified activity feed: notes + sent emails + sent texts + kit events
+    renderActivity(notes, activities, kitEvents);
   }
 
-  function renderActivity(notes, activities) {
-    // Merge into a single sorted list, newest first
+  function formatKitEvent(ev) {
+    const t = ev.event_type || 'event';
+    if (t === 'tag_add')         return `Tag added: ${ev.tag_name || ev.tag_id || '(unnamed)'}`;
+    if (t === 'tag_remove')      return `Tag removed: ${ev.tag_name || ev.tag_id || '(unnamed)'}`;
+    if (t === 'link_click')      return `Link clicked: ${ev.link_url || '(unknown URL)'}`;
+    if (t === 'form_subscribe')  return `Subscribed via form ${ev.form_id || ''}`.trim();
+    if (t === 'course_subscribe')return `Joined a Kit sequence`;
+    if (t === 'course_complete') return `Completed a Kit sequence`;
+    if (t === 'subscriber_activate')    return `Subscribed to Kit`;
+    if (t === 'subscriber_unsubscribe') return `Unsubscribed from Kit`;
+    if (t === 'subscriber_bounce')      return `Email bounced (Kit)`;
+    if (t === 'subscriber_complain')    return `Marked as spam (Kit)`;
+    if (t === 'product_purchase')       return `Made a purchase (Kit)`;
+    return t.replace(/_/g, ' ');
+  }
+
+  function renderActivity(notes, activities, kitEvents) {
     const items = [];
     (notes || []).forEach((n) => {
       items.push({
         kind: 'note',
+        id: n.id,
         date: n.created_at,
         author: n.author_email || '(unknown)',
+        authorId: n.author_id,
         body: n.body || '',
+        mine: currentUser && n.author_id === currentUser.id,
       });
     });
     (activities || []).forEach((a) => {
       items.push({
         kind: a.type === 'email_sent' ? 'email' : a.type === 'sms_sent' ? 'sms' : 'other',
+        id: a.id,
         date: a.created_at,
         author: a.actor_email || '(system)',
         subject: a.subject,
@@ -655,22 +766,41 @@
         error: a.error_message,
       });
     });
+    (kitEvents || []).forEach((ev) => {
+      items.push({
+        kind: 'kit',
+        id: ev.id,
+        date: ev.created_at,
+        author: 'Kit',
+        body: formatKitEvent(ev),
+      });
+    });
 
     items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
     if (!items.length) {
-      activityList.innerHTML = '<div class="activity-empty">No activity yet — notes, emails, and texts will show here.</div>';
+      activityList.innerHTML = '<div class="activity-empty">No activity yet — notes, emails, texts, and Kit events will show here.</div>';
       return;
     }
 
     activityList.innerHTML = items.map((it) => {
       const cls = ['activity-item', `kind-${it.kind}`];
       if (it.failed) cls.push('kind-failed');
-      const typeLabel = it.kind === 'note' ? '📝 Note' : it.kind === 'email' ? '📧 Email' : it.kind === 'sms' ? '📱 SMS' : it.kind;
+      const typeLabel =
+        it.kind === 'note'  ? '📝 Note' :
+        it.kind === 'email' ? '📧 Email' :
+        it.kind === 'sms'   ? '📱 SMS' :
+        it.kind === 'kit'   ? '✨ Kit' : it.kind;
       const subject = it.subject ? `<p class="ai-subject">${escapeHtml(it.subject)}</p>` : '';
       const failedMsg = it.failed ? `<p class="ai-fail">✗ Failed to send${it.error ? ': ' + escapeHtml(it.error) : ''}</p>` : '';
+      const actions = it.kind === 'note' && it.mine
+        ? `<div class="ai-actions">
+             <button class="ai-action-btn" data-edit-note="${escapeHtml(it.id)}">Edit</button>
+             <button class="ai-action-btn delete" data-delete-note="${escapeHtml(it.id)}">Delete</button>
+           </div>`
+        : '';
       return `
-        <div class="${cls.join(' ')}">
+        <div class="${cls.join(' ')}" data-note-id="${escapeHtml(it.id || '')}">
           <div class="ai-head">
             <div class="ai-meta">
               <span class="ai-type ${it.kind}">${escapeHtml(typeLabel)}</span>
@@ -679,8 +809,9 @@
             <span class="ai-date">${escapeHtml(fmtDateTime(it.date))}</span>
           </div>
           ${subject}
-          <p class="ai-body">${escapeHtml(it.body)}</p>
+          <div class="ai-body-wrap"><p class="ai-body">${escapeHtml(it.body)}</p></div>
           ${failedMsg}
+          ${actions}
         </div>
       `;
     }).join('');
@@ -688,7 +819,7 @@
 
   async function refreshActivity() {
     if (!currentDetailEmail) return;
-    const [notesRes, activitiesRes] = await Promise.all([
+    const [notesRes, activitiesRes, kitEventsRes] = await Promise.all([
       sb.from('customer_notes')
         .select('id, body, author_id, author_email, created_at, updated_at')
         .ilike('customer_email', currentDetailEmail)
@@ -697,8 +828,192 @@
         .select('id, type, body, subject, from_addr, to_addr, actor_email, status, error_message, created_at')
         .ilike('customer_email', currentDetailEmail)
         .order('created_at', { ascending: false }).limit(200),
+      sb.from('kit_events')
+        .select('id, event_type, tag_name, link_url, form_id, created_at')
+        .ilike('customer_email', currentDetailEmail)
+        .order('created_at', { ascending: false }).limit(100),
     ]);
-    renderActivity(notesRes.data || [], activitiesRes.data || []);
+    renderActivity(notesRes.data || [], activitiesRes.data || [], kitEventsRes.data || []);
+  }
+
+  async function refreshTasks() {
+    if (!currentDetailEmail) return;
+    const { data } = await sb.from('customer_tasks')
+      .select('id, title, description, due_date, status, assigned_to, assigned_to_email, created_by, created_by_email, created_at, completed_at')
+      .ilike('customer_email', currentDetailEmail)
+      .order('status', { ascending: true })
+      .order('due_date', { ascending: true, nullsFirst: false })
+      .limit(200);
+    renderTasks(data || []);
+  }
+
+  function renderTasks(tasks) {
+    if (!tasks || !tasks.length) {
+      tasksList.innerHTML = '<div class="tasks-empty">No open tasks for this customer.</div>';
+      return;
+    }
+    const today = new Date(); today.setHours(0,0,0,0);
+    tasksList.innerHTML = tasks.map((t) => {
+      const isDone = t.status === 'completed';
+      const isOverdue = !isDone && t.due_date && new Date(t.due_date) < today;
+      const isToday = !isDone && t.due_date && new Date(t.due_date).toDateString() === today.toDateString();
+      const cls = ['task-item'];
+      if (isDone) cls.push('completed');
+      else if (isOverdue) cls.push('overdue');
+      else if (isToday) cls.push('due-soon');
+
+      const dueCls = isOverdue ? 'overdue' : isToday ? 'today' : '';
+      const dueLabel = t.due_date ? (isOverdue ? `Overdue · ${fmtDate(t.due_date)}` : isToday ? `Today` : fmtDate(t.due_date)) : 'No due date';
+
+      return `
+        <div class="${cls.join(' ')}" data-task-id="${escapeHtml(t.id)}">
+          <input type="checkbox" class="task-check" data-toggle-task="${escapeHtml(t.id)}" ${isDone ? 'checked' : ''}>
+          <div class="task-body">
+            <p class="task-title">${escapeHtml(t.title)}</p>
+            <div class="task-meta">
+              <span class="task-due ${dueCls}">${escapeHtml(dueLabel)}</span>
+              ${t.assigned_to_email ? `<span>· <span class="task-assign">${escapeHtml(t.assigned_to_email)}</span></span>` : '<span>· Unassigned</span>'}
+              <span>· added by ${escapeHtml(t.created_by_email || '(unknown)')}</span>
+            </div>
+          </div>
+          <button class="task-delete-btn" data-delete-task="${escapeHtml(t.id)}" title="Delete">✕</button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Cache team members for assignment dropdown
+  let teamMembersCache = null;
+  async function populateTaskAssign() {
+    if (!taskAssign) return;
+    if (!teamMembersCache) {
+      const { data, error } = await sb.rpc('list_team_members');
+      if (error) {
+        console.warn('Team list fetch failed:', error);
+        teamMembersCache = [];
+      } else {
+        teamMembersCache = data || [];
+      }
+    }
+    taskAssign.innerHTML =
+      '<option value="">Assign to (anyone)</option>' +
+      teamMembersCache.map((m) =>
+        `<option value="${escapeHtml(m.user_id)}" data-email="${escapeHtml(m.email)}">${escapeHtml(m.full_name || m.email)}</option>`
+      ).join('');
+  }
+
+  // Task event delegation: toggle complete + delete
+  if (tasksList) {
+    tasksList.addEventListener('change', async (e) => {
+      const cb = e.target.closest('[data-toggle-task]');
+      if (!cb) return;
+      const taskId = cb.getAttribute('data-toggle-task');
+      const status = cb.checked ? 'completed' : 'open';
+      const { error } = await sb.from('customer_tasks').update({ status }).eq('id', taskId);
+      if (error) { alert('Couldn\'t update task: ' + error.message); cb.checked = !cb.checked; return; }
+      refreshTasks();
+    });
+    tasksList.addEventListener('click', async (e) => {
+      const btn = e.target.closest('[data-delete-task]');
+      if (!btn) return;
+      if (!confirm('Delete this task?')) return;
+      const taskId = btn.getAttribute('data-delete-task');
+      const { error } = await sb.from('customer_tasks').delete().eq('id', taskId);
+      if (error) { alert('Couldn\'t delete task: ' + error.message); return; }
+      refreshTasks();
+    });
+  }
+
+  // Task submit (add)
+  if (taskSubmit) {
+    taskSubmit.addEventListener('click', async () => {
+      hideMsg(taskError);
+      const title = (taskTitle.value || '').trim();
+      if (!title) { showError(taskError, 'Task title required.'); return; }
+      if (!currentDetailEmail) { showError(taskError, 'No customer loaded.'); return; }
+      const due = taskDue.value || null;
+      const assignedTo = taskAssign.value || null;
+      const assignedToEmail = assignedTo
+        ? (taskAssign.options[taskAssign.selectedIndex].getAttribute('data-email') || '')
+        : null;
+
+      taskSubmit.disabled = true;
+      taskSubmit.textContent = 'Adding…';
+      const { error } = await sb.from('customer_tasks').insert({
+        customer_email: currentDetailEmail,
+        title,
+        due_date: due,
+        assigned_to: assignedTo,
+        assigned_to_email: assignedToEmail,
+        created_by: currentUser.id,
+        created_by_email: currentUser.email,
+      });
+      taskSubmit.disabled = false;
+      taskSubmit.textContent = 'Add task';
+      if (error) { showError(taskError, `Couldn't add: ${error.message}`); return; }
+      taskTitle.value = '';
+      taskDue.value = '';
+      taskAssign.value = '';
+      refreshTasks();
+    });
+  }
+
+  // === Note edit/delete (event delegation on activityList) ===
+  if (activityList) {
+    activityList.addEventListener('click', async (e) => {
+      // Delete note
+      const delBtn = e.target.closest('[data-delete-note]');
+      if (delBtn) {
+        if (!confirm('Delete this note?')) return;
+        const id = delBtn.getAttribute('data-delete-note');
+        const { error } = await sb.from('customer_notes').delete().eq('id', id);
+        if (error) { alert('Couldn\'t delete: ' + error.message); return; }
+        refreshActivity();
+        return;
+      }
+      // Edit note → swap body for textarea
+      const editBtn = e.target.closest('[data-edit-note]');
+      if (editBtn) {
+        const id = editBtn.getAttribute('data-edit-note');
+        const item = editBtn.closest('.activity-item');
+        if (!item) return;
+        const bodyEl = item.querySelector('.ai-body');
+        if (!bodyEl) return;
+        const currentText = bodyEl.textContent;
+        const wrap = item.querySelector('.ai-body-wrap');
+        wrap.innerHTML = `
+          <div class="note-edit-area">
+            <textarea>${escapeHtml(currentText)}</textarea>
+            <div class="edit-actions">
+              <button type="button" class="save" data-save-note="${escapeHtml(id)}">Save</button>
+              <button type="button" class="cancel" data-cancel-edit>Cancel</button>
+            </div>
+          </div>
+        `;
+        const actionsRow = item.querySelector('.ai-actions');
+        if (actionsRow) actionsRow.style.display = 'none';
+        wrap.querySelector('textarea').focus();
+        return;
+      }
+      // Save edited note
+      const saveBtn = e.target.closest('[data-save-note]');
+      if (saveBtn) {
+        const id = saveBtn.getAttribute('data-save-note');
+        const item = saveBtn.closest('.activity-item');
+        const newBody = (item.querySelector('textarea').value || '').trim();
+        if (!newBody) { alert('Note can\'t be empty.'); return; }
+        const { error } = await sb.from('customer_notes')
+          .update({ body: newBody, updated_at: new Date().toISOString() })
+          .eq('id', id);
+        if (error) { alert('Couldn\'t save: ' + error.message); return; }
+        refreshActivity();
+        return;
+      }
+      // Cancel edit
+      if (e.target.closest('[data-cancel-edit]')) {
+        refreshActivity();
+      }
+    });
   }
 
   // === Note submit ===

@@ -158,6 +158,48 @@
   .compose-panel .char-count{font-size:11px;color:var(--muted);font-family:var(--sans)}
   .compose-panel .char-count.over{color:var(--coral);font-weight:700}
 
+  /* === Tasks === */
+  .tasks-list{display:flex;flex-direction:column;gap:8px}
+  .task-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:#fff;border:1px solid var(--bone);border-radius:8px;transition:background .15s}
+  .task-item:hover{background:var(--mist)}
+  .task-item.overdue{border-left:3px solid var(--coral)}
+  .task-item.due-soon{border-left:3px solid var(--gold)}
+  .task-item.completed{opacity:.55}
+  .task-item.completed .task-title{text-decoration:line-through}
+  .task-check{width:18px;height:18px;cursor:pointer;flex-shrink:0;accent-color:var(--green-ink);margin-top:1px}
+  .task-body{flex:1;min-width:0}
+  .task-title{font-size:14px;font-weight:600;color:var(--navy);margin:0 0 3px;line-height:1.4}
+  .task-meta{font-size:11px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-family:var(--sans)}
+  .task-meta .task-assign{color:var(--green-ink);font-weight:700}
+  .task-meta .task-due{font-weight:600}
+  .task-meta .task-due.overdue{color:var(--coral)}
+  .task-meta .task-due.today{color:var(--gold-ink)}
+  .task-meta .task-customer{color:var(--navy);font-weight:600}
+  .task-delete-btn{background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:14px;padding:2px 6px;border-radius:4px;flex-shrink:0;font-family:inherit}
+  .task-delete-btn:hover{background:rgba(234,73,46,.1);color:var(--coral)}
+  .tasks-empty{padding:18px;text-align:center;color:var(--muted);font-style:italic;font-size:13px;background:var(--mist);border-radius:8px}
+  .task-form{background:var(--mist);padding:14px 16px;border-radius:10px;margin:14px 0 0}
+  .task-form h3{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green-ink);margin:0 0 10px}
+  .task-form .task-form-row{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+  .task-form .task-form-row > *{flex:1;min-width:140px}
+  .task-form input[type="text"],.task-form input[type="date"],.task-form select{padding:9px 12px;border:1px solid var(--bone);border-radius:6px;font-family:inherit;font-size:14px;color:var(--slate);background:#fff;transition:border-color .2s;width:100%}
+  .task-form input[type="text"]{margin-bottom:4px}
+  .task-form input:focus,.task-form select:focus{outline:0;border-color:var(--green)}
+  .task-form .task-actions{display:flex;justify-content:flex-end;margin:8px 0 0}
+
+  /* === Activity item: note edit/delete + Kit events === */
+  .activity-item.kind-kit{border-left-color:var(--gold-ink)}
+  .activity-item .ai-type.kit{color:var(--gold-ink)}
+  .activity-item .ai-actions{display:flex;gap:10px;margin:6px 0 0}
+  .activity-item .ai-action-btn{background:transparent;border:0;color:var(--muted);font-size:11px;cursor:pointer;text-decoration:underline;font-family:inherit;padding:0;letter-spacing:.02em}
+  .activity-item .ai-action-btn:hover{color:var(--green-ink)}
+  .activity-item .ai-action-btn.delete:hover{color:var(--coral)}
+  .activity-item .note-edit-area textarea{width:100%;padding:8px 10px;border:1px solid var(--green);border-radius:6px;font-family:inherit;font-size:14px;line-height:1.5;min-height:80px;resize:vertical;background:#fff;color:var(--slate)}
+  .activity-item .note-edit-area .edit-actions{display:flex;gap:8px;margin-top:8px}
+  .activity-item .note-edit-area .edit-actions button{padding:6px 14px;font-size:11px;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600;letter-spacing:.04em}
+  .activity-item .note-edit-area .edit-actions .save{background:var(--green-ink);color:#fff;border:0}
+  .activity-item .note-edit-area .edit-actions .cancel{background:transparent;color:var(--muted);border:1px solid var(--bone)}
+
   /* === Utility === */
   .hidden{display:none !important}
   .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
@@ -223,8 +265,16 @@
     <section id="view-dashboard">
       <div class="welcome">
         <h2 id="welcome-name">Welcome.</h2>
-        <p>Your team CRM. Click <strong>Customers</strong> to see everyone — search, filter, and add notes.</p>
+        <p>Your team CRM. Click <strong>Customers</strong> to see everyone — search, filter, send messages, and add notes.</p>
       </div>
+
+      <div class="welcome" style="background:linear-gradient(135deg,#FBF4E4 0%,#F2F8F2 100%)">
+        <h2 style="font-size:20px">Your tasks</h2>
+        <div id="my-tasks-list" class="tasks-list" style="margin-top:14px">
+          <div class="tasks-empty">No open tasks. Nice.</div>
+        </div>
+      </div>
+
       <div class="grid">
         <div class="card">
           <p class="card-label">Workshop signups</p>
@@ -304,6 +354,27 @@
           <h2>Intake & context</h2>
           <div id="cd-intake-body">
             <p class="pf-value muted">No intake data on file.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Tasks</h2>
+          <div id="tasks-list" class="tasks-list">
+            <div class="tasks-empty">No open tasks for this customer.</div>
+          </div>
+          <div class="task-form">
+            <h3>Add a follow-up</h3>
+            <input type="text" id="task-title" placeholder="Call to confirm 11 AM session…">
+            <div class="task-form-row">
+              <input type="date" id="task-due">
+              <select id="task-assign">
+                <option value="">Assign to (anyone)</option>
+              </select>
+            </div>
+            <p class="msg-error" id="task-error"></p>
+            <div class="task-actions">
+              <button type="button" class="btn" id="task-submit">Add task</button>
+            </div>
           </div>
         </div>
 
@@ -388,6 +459,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/admin/app.js?v=6"></script>
+<script src="/admin/app.js?v=7"></script>
 </body>
 </html>
