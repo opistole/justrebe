@@ -45,44 +45,56 @@ module.exports = async function handler(req, res) {
 
   const body = req.body || {};
 
-  // Kit V4 webhook payload shape:
-  // {
-  //   "subscriber": { "id": ..., "email_address": ..., ... },
-  //   "tag": { "id": ..., "name": ... }, (when tag_add/tag_remove)
-  //   "link": { "url": ..., ... }, (when link_click)
-  //   "form": { "id": ..., "name": ... }, (when form_subscribe)
-  // }
-  // The webhook URL also includes a path/query indicating the event type,
-  // OR there's an `event` field. Different versions vary. We handle both.
+  // Always log so we can see in Vercel function logs what Kit is sending
+  console.log('Kit webhook received:', JSON.stringify(body).slice(0, 2000));
 
-  const sub = body.subscriber || {};
-  const customerEmail = String(sub.email_address || sub.email || '').toLowerCase().trim();
+  // Kit V4 wraps things differently depending on event. Search both
+  // top-level and inside common wrappers (data, payload, event).
+  const containers = [body, body.data, body.payload, body.event].filter(Boolean);
 
-  if (!customerEmail) {
-    // Some Kit webhooks don't include email (e.g., purchase events). Skip silently.
-    console.warn('Kit webhook: no email in payload, ignoring', JSON.stringify(body).slice(0, 300));
-    return res.status(200).json({ ok: true, skipped: 'no_email' });
+  function pick(prop) {
+    for (const c of containers) {
+      if (c && typeof c === 'object' && c[prop]) return c[prop];
+    }
+    return null;
   }
+
+  const sub = pick('subscriber') || {};
+  const tag = pick('tag');
+  const link = pick('link');
+  const form = pick('form');
+
+  const customerEmail = String(
+    sub.email_address ||
+    sub.email ||
+    (body.subscriber_email_address) ||
+    (body.email_address) ||
+    ''
+  ).toLowerCase().trim();
 
   // Determine event_type from a few possible locations
   let eventType =
     body.event_type ||
-    body.event ||
+    (typeof body.event === 'string' ? body.event : null) ||
+    (body.event && body.event.name) ||
     (req.query && req.query.event) ||
     'unknown';
 
-  // Normalize: 'subscriber.tag_add' -> 'tag_add'
   if (typeof eventType === 'string' && eventType.includes('.')) {
     eventType = eventType.split('.').pop();
   }
 
+  // Even if we can't find an email, log it anyway so we can debug the shape.
+  // Use a placeholder so the row is queryable.
+  const emailForRow = customerEmail || '(no-email-in-payload)';
+
   const row = {
-    customer_email: customerEmail,
+    customer_email: emailForRow,
     event_type: String(eventType),
-    tag_id: body.tag && body.tag.id ? String(body.tag.id) : null,
-    tag_name: body.tag && body.tag.name ? String(body.tag.name) : null,
-    link_url: body.link && body.link.url ? String(body.link.url) : null,
-    form_id: body.form && body.form.id ? String(body.form.id) : null,
+    tag_id: tag && tag.id ? String(tag.id) : null,
+    tag_name: tag && tag.name ? String(tag.name) : null,
+    link_url: link && link.url ? String(link.url) : null,
+    form_id: form && form.id ? String(form.id) : null,
     raw: body,
   };
 
