@@ -62,14 +62,17 @@ async function requireAdminStaff(req) {
 
   // Confirm user has a role in user_roles using service_role (bypasses RLS).
   // This is the actual auth check — without a row here, the user can't act.
+  // Strip any trailing slash from SUPABASE_URL to avoid // double-slash bugs.
+  const baseUrl = SUPABASE_URL.replace(/\/+$/, '');
+  const rolesUrl = `${baseUrl}/rest/v1/user_roles?select=role&user_id=eq.${userId}&limit=1`;
+
   let roleResp;
   try {
-    roleResp = await fetch(
-      `${SUPABASE_URL}/rest/v1/user_roles?select=role&user_id=eq.${userId}&limit=1`,
-      { headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` } }
-    );
+    roleResp = await fetch(rolesUrl, {
+      headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` },
+    });
   } catch (err) {
-    return { error: { status: 500, msg: `Role lookup network error: ${err.message}` } };
+    return { error: { status: 500, msg: `Role lookup network error: ${err.message} (URL: ${rolesUrl})` } };
   }
   if (!roleResp.ok) {
     let detail = '';
@@ -77,7 +80,7 @@ async function requireAdminStaff(req) {
     return {
       error: {
         status: 500,
-        msg: `Role lookup failed (HTTP ${roleResp.status}): ${detail.slice(0, 200)}`,
+        msg: `Role lookup failed (HTTP ${roleResp.status}) at URL [${rolesUrl}]: ${detail.slice(0, 200)}`,
       },
     };
   }
