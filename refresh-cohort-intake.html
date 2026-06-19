@@ -271,7 +271,7 @@
         var msg = body.error || 'Couldn\'t save your intake.';
         if (body.detail) {
           var detailStr = typeof body.detail === 'string' ? body.detail : JSON.stringify(body.detail);
-          msg += ' (' + detailStr.slice(0, 300) + ')';
+          msg += ' (' + detailStr.slice(0, 800) + ')';
         }
         throw new Error(msg);
       }

@@ -97,9 +97,11 @@ module.exports = async function handler(req, res) {
     });
     const data = await resp.json();
     if (!resp.ok) {
+      // Surface Supabase's message field (has column name for NOT NULL violations)
+      const supabaseMsg = data && (data.message || data.msg || data.error_description);
       return res.status(500).json({
         error: 'Couldn\'t save your intake — please try again or email refresh@justrebe.com.',
-        detail: data,
+        detail: supabaseMsg || data,
       });
     }
     return res.status(200).json({ ok: true, id: Array.isArray(data) ? data[0]?.id : data.id });
