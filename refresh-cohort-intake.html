@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ReBe ReFresh · Cohort Intake</title>
+<meta name="description" content="Intake for facilitators and complimentary participants of the ReBe ReFresh cohort." />
+<meta name="robots" content="noindex,nofollow" />
+<link rel="icon" type="image/jpeg" href="/ReBe_Favicon.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:#FFFFFF; --mist:#FAF9F7; --navy:#252C5C; --navy-dark:#040832;
+    --green:#449945; --green-ink:#3A8438; --green-deep:#2A6D2C; --green-wash:#F2F8F2;
+    --gold:#E3A01F; --gold-ink:#B07D14; --gold-wash:#FBF4E4;
+    --slate:#212B37; --body:#4A535E; --muted:#9DA1A8; --bone:#E2E2E2; --coral:#EA492E;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--mist);color:var(--body);font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+
+  .wrap{max-width:680px;margin:0 auto;padding:48px 24px 80px}
+
+  .brand{display:flex;align-items:center;gap:8px;margin:0 0 32px;text-decoration:none;color:inherit}
+  .brand .wordmark{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--navy);letter-spacing:-.005em}
+  .brand .wordmark .accent{color:var(--gold-ink)}
+
+  .header{margin:0 0 32px}
+  .header .eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:700;color:var(--green-ink);margin:0 0 10px}
+  .header h1{font-family:var(--serif);font-weight:600;font-size:36px;color:var(--navy);margin:0 0 12px;letter-spacing:-.01em;line-height:1.2}
+  .header p{font-size:16px;color:var(--body);margin:0;max-width:540px}
+
+  .card{background:#fff;border:1px solid var(--bone);border-radius:16px;padding:32px 28px;box-shadow:0 6px 24px rgba(6,11,80,.05)}
+
+  fieldset{border:0;padding:0;margin:0 0 28px}
+  fieldset:last-of-type{margin-bottom:0}
+  legend{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green-ink);margin:0 0 14px;padding:0}
+
+  .row{display:grid;grid-template-columns:1fr;gap:16px;margin:0 0 16px}
+  .row.two{grid-template-columns:1fr 1fr}
+  @media (max-width:560px){.row.two{grid-template-columns:1fr}}
+
+  label{display:block;font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.04em;text-transform:uppercase;margin:0 0 6px}
+  label .req{color:var(--coral);font-weight:700;margin-left:4px}
+
+  input[type="text"],input[type="email"],input[type="tel"],select,textarea{
+    width:100%;padding:11px 14px;border:1px solid var(--bone);border-radius:10px;
+    font-family:inherit;font-size:15px;color:var(--slate);background:#fff;
+    transition:border-color .2s,box-shadow .2s;line-height:1.5;
+  }
+  input:focus,select:focus,textarea:focus{outline:0;border-color:var(--green);box-shadow:0 0 0 3px rgba(68,153,69,.15)}
+  textarea{min-height:90px;resize:vertical}
+  select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23252C5C' d='M6 8L0 0h12z'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+
+  .help{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.5}
+
+  .submit-row{display:flex;justify-content:flex-end;align-items:center;gap:14px;margin:24px 0 0}
+  .btn{background:var(--green-ink);color:#fff;border:0;padding:13px 28px;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.04em;cursor:pointer;transition:background .15s,transform .1s;font-family:var(--sans)}
+  .btn:hover{background:var(--green-deep)}
+  .btn:active{transform:translateY(1px)}
+  .btn:disabled{opacity:.55;cursor:not-allowed}
+
+  .msg{margin:14px 0 0;padding:12px 14px;border-radius:10px;font-size:14px;line-height:1.5;display:none}
+  .msg.show{display:block}
+  .msg.error{background:#FFF1EE;color:#A33421;border:1px solid #F5B9AD}
+  .msg.success{background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF}
+
+  .footer{margin:36px 0 0;text-align:center;font-size:12px;color:var(--muted)}
+  .footer a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--bone)}
+
+  .hidden{display:none}
+
+  .success-card{background:var(--green-wash);border:1px solid #BFE3BF;border-radius:14px;padding:28px 28px;text-align:center;margin:18px 0 0}
+  .success-card h2{font-family:var(--serif);font-weight:600;font-size:24px;color:var(--green-deep);margin:0 0 8px}
+  .success-card p{color:var(--green-deep);margin:0;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="/" class="brand">
+    <span class="wordmark">ReBe · <span class="accent">ReFresh</span></span>
+  </a>
+
+  <div class="header">
+    <p class="eyebrow">Cohort intake</p>
+    <h1>Welcome — let's set up your seat.</h1>
+    <p>This form is for facilitators and complimentary participants whose seat doesn't go through checkout. Takes 3 minutes. Your spot's reserved either way.</p>
+  </div>
+
+  <div class="card" id="form-card">
+    <form id="intake-form" novalidate>
+      <fieldset>
+        <legend>About you</legend>
+
+        <div class="row two">
+          <div>
+            <label for="full_name">Full name <span class="req">*</span></label>
+            <input type="text" id="full_name" name="full_name" required autocomplete="name">
+          </div>
+          <div>
+            <label for="email">Email <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="row two">
+          <div>
+            <label for="phone">Mobile (optional — for cohort SMS reminders)</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+          </div>
+          <div>
+            <label for="seat_type">Your role <span class="req">*</span></label>
+            <select id="seat_type" name="seat_type" required>
+              <option value="" disabled selected>Select one…</option>
+              <option value="facilitator">Facilitator</option>
+              <option value="comped">Free participant (comped seat)</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="group_type">Which cohort time slot? <span class="req">*</span></label>
+            <select id="group_type" name="group_type" required>
+              <option value="" disabled selected>Pick a slot…</option>
+              <option value="11 AM ET">11 AM ET (Wednesdays · midday slot)</option>
+              <option value="8 PM ET">8 PM ET (Wednesdays · evening slot)</option>
+              <option value="Either">Either works</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Context (so the team knows you)</legend>
+
+        <div class="row two">
+          <div>
+            <label for="organization_name">Organization (optional)</label>
+            <input type="text" id="organization_name" name="organization_name" autocomplete="organization">
+          </div>
+          <div>
+            <label for="role_title">Role / title (optional)</label>
+            <input type="text" id="role_title" name="role_title" autocomplete="organization-title">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="audience_type">Which best describes your world?</label>
+            <select id="audience_type" name="audience_type">
+              <option value="">— choose if you'd like —</option>
+              <option>Educator (K-12)</option>
+              <option>Educator (higher ed)</option>
+              <option>Healthcare</option>
+              <option>Faith / ministry</option>
+              <option>Nonprofit</option>
+              <option>Coach / consultant</option>
+              <option>Business leader</option>
+              <option>Caregiver / homemaker</option>
+              <option>Student</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="previous_rebe_experience">Have you done anything with ReBe before?</label>
+            <select id="previous_rebe_experience" name="previous_rebe_experience">
+              <option value="">— choose if you'd like —</option>
+              <option>None — this is my first ReBe thing</option>
+              <option>A workshop</option>
+              <option>1:1 sessions</option>
+              <option>A prior cohort</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>What brings you here</legend>
+
+        <div class="row">
+          <div>
+            <label for="area_needing_refresh">What area of your life feels in need of a refresh right now?</label>
+            <textarea id="area_needing_refresh" name="area_needing_refresh" placeholder="A sentence or two is plenty."></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="reason_for_interest">Why does this cohort feel like the right next step?</label>
+            <textarea id="reason_for_interest" name="reason_for_interest" placeholder="What you hope to walk away with."></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="notes">Anything else we should know (optional)</label>
+            <textarea id="notes" name="notes" placeholder="Allergies, accessibility needs, scheduling notes, whatever."></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <p class="msg error" id="form-error"></p>
+
+      <div class="submit-row">
+        <button type="submit" class="btn" id="submit-btn">Save my intake</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="success-card hidden" id="success-card">
+    <h2>You're in. 💛</h2>
+    <p>Thanks — your intake is saved. We'll be in touch with the cohort details soon. If you need anything in the meantime, email <a href="mailto:refresh@justrebe.com" style="color:var(--green-deep);text-decoration:underline">refresh@justrebe.com</a>.</p>
+  </div>
+
+  <div class="footer">
+    <p>Questions? <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a> · ReBe · ReFresh Cohort</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var form = document.getElementById('intake-form');
+  var btn  = document.getElementById('submit-btn');
+  var err  = document.getElementById('form-error');
+  var card = document.getElementById('form-card');
+  var ok   = document.getElementById('success-card');
+
+  function showError(msg) {
+    err.textContent = msg;
+    err.classList.add('show');
+  }
+  function hideError() {
+    err.textContent = '';
+    err.classList.remove('show');
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    hideError();
+
+    var data = {};
+    new FormData(form).forEach(function (v, k) { data[k] = String(v).trim(); });
+
+    if (!data.full_name)                                                                  return showError('Please enter your full name.');
+    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))                    return showError('Please enter a valid email.');
+    if (!data.seat_type)                                                                  return showError('Please pick your role.');
+    if (!data.group_type)                                                                 return showError('Please pick a cohort time slot.');
+
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    try {
+      var r = await fetch('/api/refresh-intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      var body = await r.json();
+      if (!r.ok) throw new Error(body.error || 'Couldn\'t save your intake.');
+
+      card.classList.add('hidden');
+      ok.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e2) {
+      btn.disabled = false;
+      btn.textContent = 'Save my intake';
+      showError(e2.message || 'Something went wrong. Please try again or email refresh@justrebe.com.');
+    }
+  });
+})();
+</script>
+</body>
+</html>
