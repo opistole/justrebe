@@ -146,6 +146,8 @@
   let currentRole = null;
   let allCustomers = []; // cached list, refreshed on customers view enter
   let currentFilter = 'all';
+  let currentSort = 'signed_up';   // 'name' | 'signed_up' | 'notes'
+  let currentSortDir = 'desc';     // 'asc' | 'desc'
   let currentSearch = '';
 
   // ============================================================
@@ -353,8 +355,18 @@
     if (!currentUser) return; // Auth state will trigger when ready
 
     const hash = (window.location.hash || '').replace(/^#/, '');
-    const [route, ...rest] = hash.split('/');
+    // Support ?filter=… on customers route (e.g. #customers?filter=workshop)
+    const [pathPart, queryPart] = hash.split('?');
+    const [route, ...rest] = pathPart.split('/');
     const param = rest.join('/');
+
+    const queryParams = {};
+    if (queryPart) {
+      queryPart.split('&').forEach((p) => {
+        const [k, v] = p.split('=');
+        if (k) queryParams[decodeURIComponent(k)] = decodeURIComponent(v || '');
+      });
+    }
 
     // Hide all views
     viewDashboard.classList.add('hidden');
@@ -368,6 +380,13 @@
 
     if (route === 'customers') {
       viewCustomers.classList.remove('hidden');
+      // Apply ?filter=… from dashboard cards
+      if (queryParams.filter) {
+        currentFilter = queryParams.filter;
+        document.querySelectorAll('.filter-pill').forEach((b) => {
+          b.classList.toggle('active', b.getAttribute('data-filter') === currentFilter);
+        });
+      }
       loadCustomerList();
     } else if (route === 'customer' && param) {
       viewCustomer.classList.remove('hidden');
@@ -633,11 +652,36 @@
         if (!blob.includes(q)) return false;
       }
       // Source filter
-      if (currentFilter !== 'all') {
+      if (currentFilter === 'notes') {
+        if (!c.noteCount || c.noteCount <= 0) return false;
+      } else if (currentFilter !== 'all') {
         if (!c.sources.has(currentFilter)) return false;
       }
       return true;
     });
+
+    // Apply sort if set
+    if (currentSort) {
+      const dir = currentSortDir === 'desc' ? -1 : 1;
+      filtered.sort((a, b) => {
+        let av, bv;
+        if (currentSort === 'name') {
+          av = (a.name || '').toLowerCase();
+          bv = (b.name || '').toLowerCase();
+        } else if (currentSort === 'signed_up') {
+          av = a.firstSeen || '';
+          bv = b.firstSeen || '';
+        } else if (currentSort === 'notes') {
+          av = a.noteCount || 0;
+          bv = b.noteCount || 0;
+        } else {
+          return 0;
+        }
+        if (av < bv) return -1 * dir;
+        if (av > bv) return  1 * dir;
+        return 0;
+      });
+    }
 
     if (!filtered.length) {
       customerTable.classList.add('hidden');
@@ -647,6 +691,19 @@
 
     listEmpty.classList.add('hidden');
     customerTable.classList.remove('hidden');
+
+    // Show the sort arrow for the active column
+    document.querySelectorAll('#customer-table th.sortable').forEach((h) => {
+      const col = h.getAttribute('data-sort');
+      const arrow = h.querySelector('.sort-arrow');
+      if (col === currentSort) {
+        h.classList.add('sort-active');
+        if (arrow) arrow.textContent = currentSortDir === 'asc' ? '▲' : '▼';
+      } else {
+        h.classList.remove('sort-active');
+        if (arrow) arrow.textContent = '';
+      }
+    });
 
     customerTbody.innerHTML = filtered.map((c) => {
       const tags = Array.from(c.sources).map((s) => {
@@ -685,6 +742,31 @@
     btn.classList.add('active');
     currentFilter = btn.getAttribute('data-filter');
     renderCustomerList();
+  });
+
+  // Sortable column headers — click to toggle asc/desc on the chosen column
+  document.querySelectorAll('#customer-table th.sortable').forEach((th) => {
+    th.addEventListener('click', () => {
+      const col = th.getAttribute('data-sort');
+      if (currentSort === col) {
+        currentSortDir = currentSortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSort = col;
+        currentSortDir = 'asc';
+      }
+      // Update arrow indicators
+      document.querySelectorAll('#customer-table th.sortable').forEach((h) => {
+        const arrow = h.querySelector('.sort-arrow');
+        if (h === th) {
+          h.classList.add('sort-active');
+          if (arrow) arrow.textContent = currentSortDir === 'asc' ? '▲' : '▼';
+        } else {
+          h.classList.remove('sort-active');
+          if (arrow) arrow.textContent = '';
+        }
+      });
+      renderCustomerList();
+    });
   });
 
   // ============================================================
