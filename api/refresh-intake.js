@@ -78,6 +78,10 @@ module.exports = async function handler(req, res) {
     organization_name:        body.organization_name        ? String(body.organization_name).trim()        : null,
     role_title:               body.role_title               ? String(body.role_title).trim()               : null,
     notes:                    body.notes                    ? String(body.notes).trim()                    : null,
+    // consents — voluntary form submission implies both; mirrors how Stripe
+    // webhook fills these for paid signups
+    consent_to_contact: true,
+    consent_to_confidentiality: true,
   };
 
   try {
