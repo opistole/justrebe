@@ -263,9 +263,12 @@
     window.location.hash = '';
   });
 
-  sb.auth.onAuthStateChange(async (event, session) => {
+  // Don't await enterApp() here — Supabase JS may block signInWithPassword
+  // resolution on this handler completing. We fire-and-forget instead so the
+  // sign-in Promise resolves promptly even if role-lookup or rendering hangs.
+  sb.auth.onAuthStateChange((event, session) => {
     if (session && session.user) {
-      await enterApp(session.user);
+      enterApp(session.user).catch((err) => console.warn('enterApp failed in auth listener:', err));
     } else {
       enterLogin();
     }
