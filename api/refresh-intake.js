@@ -71,7 +71,7 @@ module.exports = async function handler(req, res) {
     paid_amount_cents: 0,
     group_type:               body.group_type               ? String(body.group_type).trim()               : null,
     preferred_group_time:     body.preferred_group_time     ? String(body.preferred_group_time).trim()     : null,
-    audience_type:            body.audience_type            ? String(body.audience_type).trim()            : null,
+    audience_type:            body.audience_type            ? String(body.audience_type).trim()            : 'Not specified',
     area_needing_refresh:     body.area_needing_refresh     ? String(body.area_needing_refresh).trim()     : null,
     reason_for_interest:      body.reason_for_interest      ? String(body.reason_for_interest).trim()      : null,
     previous_rebe_experience: body.previous_rebe_experience ? String(body.previous_rebe_experience).trim() : null,
