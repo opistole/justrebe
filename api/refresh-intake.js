@@ -52,9 +52,9 @@ module.exports = async function handler(req, res) {
   const fullName = String(body.full_name || '').trim();
   const email = String(body.email || '').trim().toLowerCase();
   const phone = normalizePhone(body.phone);
-  const seatType = ['facilitator', 'comped', 'other'].includes(String(body.seat_type || '').toLowerCase())
+  const seatType = ['facilitator', 'attendee', 'comped', 'other'].includes(String(body.seat_type || '').toLowerCase())
     ? String(body.seat_type).toLowerCase()
-    : 'comped';
+    : 'attendee';
 
   if (!fullName) return res.status(400).json({ error: 'Full name required' });
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
