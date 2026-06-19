@@ -185,18 +185,6 @@
     e.preventDefault();
     hideMsg(errorEl); hideMsg(successEl);
 
-    // Defensive: clear any stale Supabase auth tokens before login.
-    // Fixes "spinner hangs forever" issue caused by corrupted session state
-    // left in localStorage from earlier failed/expired sessions.
-    try {
-      const keysToRemove = [];
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        if (k && (k.startsWith('sb-') || k.startsWith('supabase.'))) keysToRemove.push(k);
-      }
-      keysToRemove.forEach((k) => localStorage.removeItem(k));
-    } catch (_) {}
-
     const email = (emailInput.value || '').trim().toLowerCase();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       showError(errorEl, 'Please enter a valid email.'); return;
@@ -219,11 +207,54 @@
     const password = passInput.value || '';
     if (!password) { showError(errorEl, 'Please enter your password.'); submitBtn.disabled = false; return; }
     submitBtn.textContent = 'Signing in…';
-    const { error } = await sb.auth.signInWithPassword({ email, password });
+
+    // Reset auth state cleanly before signing in — fixes spinner-hang caused
+    // by stale tokens or in-flight token-refresh cycles fighting with the
+    // new sign-in. signOut() clears both internal state and localStorage;
+    // race against a short timeout in case signOut hangs.
+    try {
+      await Promise.race([
+        sb.auth.signOut().catch(() => null),
+        new Promise((resolve) => setTimeout(resolve, 1200)),
+      ]);
+    } catch (_) {}
+    try {
+      const keysToRemove = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && (k.startsWith('sb-') || k.startsWith('supabase.'))) keysToRemove.push(k);
+      }
+      keysToRemove.forEach((k) => localStorage.removeItem(k));
+    } catch (_) {}
+
+    // Sign in with a hard 15s timeout — if the network call hangs, fail
+    // visibly instead of spinning forever.
+    let result;
+    try {
+      result = await Promise.race([
+        sb.auth.signInWithPassword({ email, password }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Sign-in timed out (15s). Refresh the page and try again — if it keeps happening, your network or Supabase may be having issues.')), 15000)
+        ),
+      ]);
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Sign in';
+      showError(errorEl, err.message);
+      return;
+    }
+
     submitBtn.disabled = false;
     submitBtn.textContent = 'Sign in';
-    if (error) { showError(errorEl, error.message); return; }
-    // onAuthStateChange handles the rest
+    if (result && result.error) {
+      showError(errorEl, result.error.message);
+      return;
+    }
+    // Fallback: explicitly enter app in case onAuthStateChange doesn't fire
+    // fast enough (rare but happens with some Supabase client states).
+    if (result && result.data && result.data.user) {
+      enterApp(result.data.user);
+    }
   });
 
   logoutBtn.addEventListener('click', async () => {
