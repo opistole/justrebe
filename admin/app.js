@@ -992,6 +992,30 @@
     renderActivity(notes, activities, kitEvents);
   }
 
+  // Map a team email to a friendly first name (shared with greeting logic).
+  function friendlyActorName(email) {
+    if (!email) return '(system)';
+    const local = String(email).toLowerCase().split('@')[0];
+    const map = {
+      osilpistole: 'Osil',
+      'o.pistole': 'Osil',
+      opistole:    'Osil',
+      'a.logan':   'Ashley',
+      alogan:      'Ashley',
+      'e.good':    'Elizabeth',
+      egood:       'Elizabeth',
+    };
+    return map[local] || email;
+  }
+
+  // Pretty-print a phone number to "(941) 297-4243" if it looks like a US E.164
+  function prettyPhone(p) {
+    if (!p) return p || '';
+    const m = String(p).match(/^\+?1?(\d{3})(\d{3})(\d{4})$/);
+    if (m) return `(${m[1]}) ${m[2]}-${m[3]}`;
+    return p;
+  }
+
   function formatKitEvent(ev) {
     const t = ev.event_type || 'event';
     if (t === 'tag_add')         return `Tag added: ${ev.tag_name || ev.tag_id || '(unnamed)'}`;
@@ -1028,13 +1052,25 @@
         a.type === 'sms_sent'     ? 'sms' :
         a.type === 'sms_received' ? 'sms-in' :
         'other';
+
+      // Pretty author line: friendly name + which address/phone they sent from
+      let authorLine;
+      if (a.type === 'sms_received') {
+        const fromPretty = prettyPhone(a.from_addr) || a.from_addr || '(unknown)';
+        authorLine = `From ${fromPretty}${provider ? ' · via ' + provider : ''}`;
+      } else {
+        const who  = friendlyActorName(a.actor_email);
+        const sent = a.type === 'sms_sent'
+          ? prettyPhone(a.from_addr) || a.from_addr || ''
+          : a.from_addr || '';
+        authorLine = sent ? `${who} · from ${sent}` : who;
+      }
+
       items.push({
         kind,
         id: a.id,
         date: a.created_at,
-        author: a.type === 'sms_received'
-          ? `From ${a.from_addr || '(unknown)'}${provider ? ' · ' + provider : ''}`
-          : (a.actor_email || '(system)') + (provider ? ' · ' + provider : ''),
+        author: authorLine,
         subject: a.subject,
         body: a.body || '',
         from: a.from_addr,
@@ -1069,8 +1105,9 @@
         it.kind === 'sms'    ? '📱 SMS sent' :
         it.kind === 'sms-in' ? '📥 SMS received' :
         it.kind === 'kit'    ? '✨ Kit' : it.kind;
+      const toPretty = it.kind === 'sms' ? prettyPhone(it.to) : it.to;
       const recipientLine = (it.kind === 'email' || it.kind === 'sms') && it.to
-        ? `<p class="ai-subject" style="font-weight:600;font-size:12px;color:var(--muted)">→ ${escapeHtml(it.to)}</p>`
+        ? `<p class="ai-subject" style="font-weight:600;font-size:12px;color:var(--muted)">→ ${escapeHtml(toPretty)}</p>`
         : '';
       const subject = it.subject ? `<p class="ai-subject">${escapeHtml(it.subject)}</p>` : '';
       const failedMsg = it.failed ? `<p class="ai-fail">✗ Failed to send${it.error ? ': ' + escapeHtml(it.error) : ''}</p>` : '';
