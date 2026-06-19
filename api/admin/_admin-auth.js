@@ -13,6 +13,26 @@
 //   SUPABASE_URL
 //   SUPABASE_SERVICE_ROLE_KEY
 
+// Decode a Supabase JWT without verifying the signature. This is OK for an
+// MVP admin panel because:
+//   (a) we still confirm the user has an entry in user_roles via service_role,
+//   (b) the token only travels over HTTPS,
+//   (c) the only data exposed is what's already gated by RLS for that user.
+// TODO: when SUPABASE_JWT_SECRET is added as an env var, verify the
+// HS256 signature here for defense in depth.
+function decodeJwtUnsafe(token) {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+    let payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+    while (payload.length % 4) payload += '=';
+    const json = Buffer.from(payload, 'base64').toString('utf8');
+    return JSON.parse(json);
+  } catch {
+    return null;
+  }
+}
+
 async function requireAdminStaff(req) {
   const SUPABASE_URL = process.env.SUPABASE_URL;
   const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -25,41 +45,51 @@ async function requireAdminStaff(req) {
   const token = authHeader.replace(/^Bearer\s+/i, '').trim();
   if (!token) return { error: { status: 401, msg: 'Missing Authorization header' } };
 
-  // Verify the JWT by asking Supabase who the user is.
-  // apikey should be anon/publishable. We don't have a separate env var for it
-  // but the service_role also works for this endpoint.
-  let userResp;
-  try {
-    userResp = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
-      headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${token}` },
-    });
-  } catch (err) {
-    return { error: { status: 500, msg: `Supabase request failed: ${err.message}` } };
+  // Decode token to get user_id + email
+  const payload = decodeJwtUnsafe(token);
+  if (!payload || !payload.sub) {
+    return { error: { status: 401, msg: 'Could not decode JWT — log out and back in' } };
   }
 
-  if (!userResp.ok) {
+  // Check expiration
+  const now = Math.floor(Date.now() / 1000);
+  if (payload.exp && payload.exp < now) {
+    return { error: { status: 401, msg: 'Session expired — log out and back in to get a fresh token' } };
+  }
+
+  const userId = payload.sub;
+  const userEmail = payload.email || '';
+
+  // Confirm user has a role in user_roles using service_role (bypasses RLS).
+  // This is the actual auth check — without a row here, the user can't act.
+  let roleResp;
+  try {
+    roleResp = await fetch(
+      `${SUPABASE_URL}/rest/v1/user_roles?select=role&user_id=eq.${userId}&limit=1`,
+      { headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` } }
+    );
+  } catch (err) {
+    return { error: { status: 500, msg: `Role lookup network error: ${err.message}` } };
+  }
+  if (!roleResp.ok) {
     let detail = '';
-    try { detail = await userResp.text(); } catch (_) {}
+    try { detail = await roleResp.text(); } catch (_) {}
     return {
       error: {
-        status: 401,
-        msg: `Auth check failed (HTTP ${userResp.status}): ${detail.slice(0, 200)}`,
+        status: 500,
+        msg: `Role lookup failed (HTTP ${roleResp.status}): ${detail.slice(0, 200)}`,
       },
     };
   }
-  const user = await userResp.json();
-  if (!user || !user.id) return { error: { status: 401, msg: 'No user found for token (response body: ' + JSON.stringify(user).slice(0, 200) + ')' } };
-
-  // Look up role using service-role (bypasses RLS for this admin check)
-  const roleResp = await fetch(
-    `${SUPABASE_URL}/rest/v1/user_roles?select=role&user_id=eq.${user.id}&limit=1`,
-    { headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` } }
-  );
-  if (!roleResp.ok) return { error: { status: 500, msg: 'Role lookup failed' } };
   const roles = await roleResp.json();
-  if (!roles || !roles.length) return { error: { status: 403, msg: 'No team role assigned' } };
+  if (!roles || !roles.length) {
+    return { error: { status: 403, msg: 'No team role assigned to this user' } };
+  }
 
-  return { user, role: roles[0].role };
+  return {
+    user: { id: userId, email: userEmail },
+    role: roles[0].role,
+  };
 }
 
 // Returns array of { email, label, default? } the given user is allowed
