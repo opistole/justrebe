@@ -78,7 +78,7 @@ module.exports = async function handler(req, res) {
     phone,
     seat_type: seatType,
     status: 'enrolled',
-    readiness: 'enrolled',
+    readiness: 'ready_to_pay',  // closest valid enum value for a confirmed seat
     paid_amount_cents: 0,
     audience_type: 'groups',          // cohort intake = group setting
     group_type: 'no_preference',      // constraint-safe constant
