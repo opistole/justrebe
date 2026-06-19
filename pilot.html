@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0, shrink-to-fit=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Apply for a Pilot · ReBe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,6 +201,7 @@ fetch('footer.html').then(r=>r.text()).then(h=>{document.getElementById('footer'
 </script>
 
 <script>
+// v2 — uses /api/pilot-intake (Supabase-backed). NO formsubmit.co.
 // updateFormAction kept as a no-op so existing inline onchange="updateFormAction(this.value)"
 // handlers in the form HTML don't throw. Real routing happens on submit below.
 function updateFormAction(val) { /* no-op — pathway is read on submit */ }
