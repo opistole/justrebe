@@ -200,6 +200,23 @@
   .activity-item .note-edit-area .edit-actions .save{background:var(--green-ink);color:#fff;border:0}
   .activity-item .note-edit-area .edit-actions .cancel{background:transparent;color:var(--muted);border:1px solid var(--bone)}
 
+  /* === Invite modal === */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(4,8,50,.55);display:none;align-items:center;justify-content:center;padding:24px;z-index:200}
+  .modal-backdrop.open{display:flex}
+  .modal-card{background:#fff;border-radius:14px;padding:28px 28px 22px;width:100%;max-width:440px;box-shadow:0 20px 50px rgba(6,11,80,.25)}
+  .modal-card h3{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--navy);margin:0 0 6px}
+  .modal-card .modal-sub{font-size:13px;color:var(--muted);margin:0 0 18px}
+  .modal-card label{display:block;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin:14px 0 6px}
+  .modal-card input,.modal-card select{width:100%;padding:10px 12px;border:1px solid var(--bone);border-radius:8px;font-family:inherit;font-size:14px;color:var(--slate);background:#fff;transition:border-color .2s}
+  .modal-card input:focus,.modal-card select:focus{outline:0;border-color:var(--green)}
+  .modal-card .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin:20px 0 0}
+  .modal-card .modal-actions button{padding:9px 18px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.04em;cursor:pointer;border:0;transition:opacity .15s}
+  .modal-card .modal-actions .invite-cancel{background:transparent;color:var(--muted);border:1px solid var(--bone)}
+  .modal-card .modal-actions .invite-submit{background:var(--green-ink);color:#fff}
+  .modal-card .modal-actions button:disabled{opacity:.5;cursor:not-allowed}
+  .invite-btn{background:var(--navy);color:#fff;border:0;padding:8px 14px;border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.04em;transition:background .15s}
+  .invite-btn:hover{background:var(--navy-dark)}
+
   /* === Utility === */
   .hidden{display:none !important}
   .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
@@ -264,8 +281,13 @@
     <!-- ============== DASHBOARD VIEW ============== -->
     <section id="view-dashboard">
       <div class="welcome">
-        <h2 id="welcome-name">Welcome.</h2>
-        <p>Your team CRM. Click <strong>Customers</strong> to see everyone — search, filter, send messages, and add notes.</p>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap">
+          <div style="flex:1;min-width:240px">
+            <h2 id="welcome-name">Welcome.</h2>
+            <p>Your team CRM. Click <strong>Customers</strong> to see everyone — search, filter, send messages, and add notes.</p>
+          </div>
+          <button type="button" id="invite-btn" class="invite-btn hidden">+ Invite teammate</button>
+        </div>
       </div>
 
       <div class="welcome" style="background:linear-gradient(135deg,#FBF4E4 0%,#F2F8F2 100%)">
@@ -459,6 +481,33 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/admin/app.js?v=8"></script>
+<div id="invite-modal" class="modal-backdrop">
+  <div class="modal-card">
+    <h3>Invite teammate</h3>
+    <p class="modal-sub">They'll get a Supabase email to set their password, then can log in at /admin.</p>
+
+    <label for="invite-email">Email</label>
+    <input type="email" id="invite-email" placeholder="a.logan@justrebe.com" autocomplete="off">
+
+    <label for="invite-name">First name (optional)</label>
+    <input type="text" id="invite-name" placeholder="Ashley" autocomplete="off">
+
+    <label for="invite-role">Role</label>
+    <select id="invite-role">
+      <option value="staff">Staff (full CRM access)</option>
+      <option value="admin">Admin (can also invite teammates)</option>
+    </select>
+
+    <p class="msg-error" id="invite-error" style="margin:14px 0 0"></p>
+    <p class="msg-success" id="invite-success" style="margin:14px 0 0"></p>
+
+    <div class="modal-actions">
+      <button type="button" class="invite-cancel" id="invite-cancel">Cancel</button>
+      <button type="button" class="invite-submit" id="invite-submit">Send invite</button>
+    </div>
+  </div>
+</div>
+
+<script src="/admin/app.js?v=9"></script>
 </body>
 </html>

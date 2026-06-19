@@ -21,6 +21,8 @@
 // see any data until their row in user_roles is created (this endpoint
 // inserts it for them).
 
+const { requireAdminStaff } = require('./_admin-auth.js');
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -35,13 +37,7 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Server not configured' });
   }
 
-  // SUPABASE_URL on Vercel includes /rest/v1 suffix. Strip it so /auth/v1/*
-  // and /rest/v1/* requests build correctly.
   const SUPABASE_URL = rawUrl.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
-  if (!ADMIN_INVITE_SECRET) {
-    console.error('Missing ADMIN_INVITE_SECRET env var — refusing to allow invites');
-    return res.status(500).json({ error: 'Invite endpoint disabled (no secret configured)' });
-  }
 
   const body = req.body || {};
   const email = String(body.email || '').trim().toLowerCase();
@@ -49,9 +45,25 @@ module.exports = async function handler(req, res) {
   const invitedBySecret = String(body.invited_by_secret || '');
   const fullName = body.full_name ? String(body.full_name).trim() : '';
 
-  if (invitedBySecret !== ADMIN_INVITE_SECRET) {
-    return res.status(401).json({ error: 'Invalid invite secret' });
+  // Two auth paths:
+  //   1. In-app invite: Authorization Bearer <user JWT> — must be admin
+  //   2. Server-to-server / curl: invited_by_secret matching env var
+  let authedVia = null;
+  if (req.headers.authorization) {
+    const auth = await requireAdminStaff(req);
+    if (auth.error) return res.status(auth.error.status).json({ error: auth.error.msg });
+    if (auth.role !== 'admin') {
+      return res.status(403).json({ error: 'Only admins can invite teammates (your role is "' + auth.role + '")' });
+    }
+    authedVia = 'jwt';
+  } else if (ADMIN_INVITE_SECRET && invitedBySecret === ADMIN_INVITE_SECRET) {
+    authedVia = 'secret';
+  } else {
+    return res.status(401).json({
+      error: 'Unauthorized — provide either an admin JWT in Authorization header or invited_by_secret in body',
+    });
   }
+
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Valid email required' });
   }

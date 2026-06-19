@@ -63,6 +63,17 @@
   const statNotes    = document.getElementById('stat-notes');
   const myTasksList  = document.getElementById('my-tasks-list');
 
+  // Invite modal
+  const inviteBtn     = document.getElementById('invite-btn');
+  const inviteModal   = document.getElementById('invite-modal');
+  const inviteEmail   = document.getElementById('invite-email');
+  const inviteName    = document.getElementById('invite-name');
+  const inviteRole    = document.getElementById('invite-role');
+  const inviteSubmit  = document.getElementById('invite-submit');
+  const inviteCancel  = document.getElementById('invite-cancel');
+  const inviteError   = document.getElementById('invite-error');
+  const inviteSuccess = document.getElementById('invite-success');
+
   // Tasks (customer detail)
   const tasksList   = document.getElementById('tasks-list');
   const taskTitle   = document.getElementById('task-title');
@@ -267,6 +278,12 @@
       || local;
     welcomeNameEl.textContent = `Welcome, ${display}.`;
 
+    // Show invite button only to admins
+    if (inviteBtn) {
+      if (currentRole === 'admin') inviteBtn.classList.remove('hidden');
+      else inviteBtn.classList.add('hidden');
+    }
+
     loginView.classList.add('hidden');
     appView.classList.remove('hidden');
 
@@ -390,6 +407,68 @@
       const { error } = await sb.from('customer_tasks').update({ status: 'completed' }).eq('id', taskId);
       if (error) { alert('Couldn\'t update: ' + error.message); cb.checked = false; return; }
       loadMyTasks();
+    });
+  }
+
+  // ============================================================
+  // Invite teammate (admin-only)
+  // ============================================================
+  function openInviteModal() {
+    if (!inviteModal) return;
+    hideMsg(inviteError); hideMsg(inviteSuccess);
+    inviteEmail.value = '';
+    inviteName.value  = '';
+    inviteRole.value  = 'staff';
+    inviteModal.classList.add('open');
+    setTimeout(() => inviteEmail.focus(), 50);
+  }
+  function closeInviteModal() {
+    if (inviteModal) inviteModal.classList.remove('open');
+  }
+  if (inviteBtn)    inviteBtn.addEventListener('click', openInviteModal);
+  if (inviteCancel) inviteCancel.addEventListener('click', closeInviteModal);
+  if (inviteModal)  inviteModal.addEventListener('click', (e) => {
+    if (e.target === inviteModal) closeInviteModal();
+  });
+
+  if (inviteSubmit) {
+    inviteSubmit.addEventListener('click', async () => {
+      hideMsg(inviteError); hideMsg(inviteSuccess);
+      const email = (inviteEmail.value || '').trim().toLowerCase();
+      const fullName = (inviteName.value || '').trim();
+      const role = inviteRole.value || 'staff';
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError(inviteError, 'Enter a valid email.'); return;
+      }
+
+      const { data: { session } } = await sb.auth.getSession();
+      if (!session) { showError(inviteError, 'Not logged in.'); return; }
+
+      inviteSubmit.disabled = true;
+      inviteSubmit.textContent = 'Sending…';
+
+      try {
+        const resp = await fetch('/api/admin/invite-user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ email, full_name: fullName, role }),
+        });
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data.error || data.detail || `HTTP ${resp.status}`);
+        showError(inviteSuccess, `✓ Invited ${email} as ${role}. They'll get a Supabase email to set their password.`);
+        inviteEmail.value = '';
+        inviteName.value = '';
+        setTimeout(closeInviteModal, 2500);
+      } catch (err) {
+        showError(inviteError, `Couldn't invite: ${err.message}`);
+      } finally {
+        inviteSubmit.disabled = false;
+        inviteSubmit.textContent = 'Send invite';
+      }
     });
   }
 
