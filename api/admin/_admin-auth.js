@@ -25,13 +25,30 @@ async function requireAdminStaff(req) {
   const token = authHeader.replace(/^Bearer\s+/i, '').trim();
   if (!token) return { error: { status: 401, msg: 'Missing Authorization header' } };
 
-  // Verify the JWT by asking Supabase who the user is
-  const userResp = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
-    headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${token}` },
-  });
-  if (!userResp.ok) return { error: { status: 401, msg: 'Invalid auth token' } };
+  // Verify the JWT by asking Supabase who the user is.
+  // apikey should be anon/publishable. We don't have a separate env var for it
+  // but the service_role also works for this endpoint.
+  let userResp;
+  try {
+    userResp = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+      headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${token}` },
+    });
+  } catch (err) {
+    return { error: { status: 500, msg: `Supabase request failed: ${err.message}` } };
+  }
+
+  if (!userResp.ok) {
+    let detail = '';
+    try { detail = await userResp.text(); } catch (_) {}
+    return {
+      error: {
+        status: 401,
+        msg: `Auth check failed (HTTP ${userResp.status}): ${detail.slice(0, 200)}`,
+      },
+    };
+  }
   const user = await userResp.json();
-  if (!user || !user.id) return { error: { status: 401, msg: 'No user found for token' } };
+  if (!user || !user.id) return { error: { status: 401, msg: 'No user found for token (response body: ' + JSON.stringify(user).slice(0, 200) + ')' } };
 
   // Look up role using service-role (bypasses RLS for this admin check)
   const roleResp = await fetch(
