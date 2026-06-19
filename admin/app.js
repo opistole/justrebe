@@ -138,6 +138,19 @@
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     hideMsg(errorEl); hideMsg(successEl);
+
+    // Defensive: clear any stale Supabase auth tokens before login.
+    // Fixes "spinner hangs forever" issue caused by corrupted session state
+    // left in localStorage from earlier failed/expired sessions.
+    try {
+      const keysToRemove = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && (k.startsWith('sb-') || k.startsWith('supabase.'))) keysToRemove.push(k);
+      }
+      keysToRemove.forEach((k) => localStorage.removeItem(k));
+    } catch (_) {}
+
     const email = (emailInput.value || '').trim().toLowerCase();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       showError(errorEl, 'Please enter a valid email.'); return;
