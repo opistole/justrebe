@@ -1429,13 +1429,10 @@
       smsSendBtn.textContent = 'Sending…';
 
       const provider = (smsProvider && smsProvider.value) || 'openphone';
-      const endpoint = provider === 'twilio'
-        ? '/api/admin/send-sms-twilio'
-        : '/api/admin/send-sms';
       const providerLabel = provider === 'twilio' ? 'Twilio' : 'OpenPhone';
 
       try {
-        const resp = await fetch(endpoint, {
+        const resp = await fetch('/api/admin/send-sms', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -1445,6 +1442,7 @@
             to: currentDetailPhone,
             customer_email: currentDetailEmail,
             body,
+            provider,
           }),
         });
         const data = await resp.json();
