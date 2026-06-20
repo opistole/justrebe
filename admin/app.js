@@ -2040,9 +2040,41 @@
       if (!currentDetailEmail) return;
       const newReadiness = statusOverride.value;
       if (!newReadiness) return;
-      const patch = newReadiness === 'paid'
-        ? { status: 'enrolled', readiness: 'ready_to_pay' }
-        : { status: 'enrolled', readiness: newReadiness };
+
+      let patch;
+      if (newReadiness === 'paid') {
+        // Prompt for amount + slot so we record a real payment, not just
+        // flip a flag. Default amount = $300 (cohort price).
+        const amountStr = prompt(
+          'Mark as paid — enter the amount they paid in dollars\n(default $300):',
+          '300'
+        );
+        if (amountStr === null) { statusOverride.value = ''; return; }
+        const amount = parseFloat(String(amountStr).replace(/[$,\s]/g, ''));
+        if (isNaN(amount) || amount < 0) {
+          alert('Invalid amount.');
+          statusOverride.value = '';
+          return;
+        }
+        const slot = prompt(
+          'Which cohort slot? Type "11" for 11 AM ET, "8" for 8 PM ET, or leave blank for no preference:',
+          ''
+        );
+        const preferredTime = !slot
+          ? null
+          : String(slot).includes('8') ? 'Tuesdays at 8 PM ET' : 'Tuesdays at 11 AM ET';
+        patch = {
+          status: 'enrolled',
+          readiness: 'ready_to_pay',
+          paid_amount_cents: Math.round(amount * 100),
+          paid_at: new Date().toISOString(),
+          seat_type: 'paid',
+          intake_completed: true,
+        };
+        if (preferredTime) patch.preferred_group_time = preferredTime;
+      } else {
+        patch = { status: 'enrolled', readiness: newReadiness };
+      }
       // Update existing row OR insert if not present
       const { data: existing } = await sb.from('refresh_signups').select('id').ilike('email', currentDetailEmail).limit(1);
       let error;
@@ -2050,6 +2082,7 @@
         const r = await sb.from('refresh_signups').update(patch).eq('id', existing[0].id);
         error = r.error;
       } else {
+        // No refresh_signups row yet — insert one carrying the patch values
         const r = await sb.from('refresh_signups').insert({
           email: currentDetailEmail,
           full_name: currentDetailEmail,
@@ -2060,7 +2093,11 @@
           group_type: 'no_preference',
           consent_to_contact: true,
           consent_to_confidentiality: true,
-          paid_amount_cents: 0,
+          paid_amount_cents: patch.paid_amount_cents || 0,
+          paid_at: patch.paid_at || null,
+          preferred_group_time: patch.preferred_group_time || null,
+          seat_type: patch.seat_type || 'paid',
+          intake_completed: patch.intake_completed !== undefined ? patch.intake_completed : null,
         });
         error = r.error;
       }
