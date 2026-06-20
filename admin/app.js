@@ -1925,7 +1925,7 @@
             const r = await sb.from('refresh_signups').insert({
               full_name: fullName,
               email,
-              phone: phone || null,
+              phone: phone || '',
               status,
               readiness,
               audience_type: 'groups',
@@ -2015,6 +2015,7 @@
         const r = await sb.from('refresh_signups').insert({
           email: currentDetailEmail,
           full_name: currentDetailEmail,
+          phone: currentDetailPhone || '',
           status: 'enrolled',
           readiness: 'ready_to_pay',
           audience_type: 'groups',
@@ -2052,6 +2053,7 @@
         const r = await sb.from('refresh_signups').insert({
           email: currentDetailEmail,
           full_name: currentDetailEmail,
+          phone: currentDetailPhone || '',
           status: patch.status,
           readiness: patch.readiness,
           audience_type: 'groups',
