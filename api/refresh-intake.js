@@ -70,11 +70,25 @@ module.exports = async function handler(req, res) {
   // columns with CHECK constraints; mirror what Stripe webhook does.
   const slot = body.group_type || body.preferred_group_time || null;
 
-  // Free-text "Which best describes your world?" answer goes into notes,
-  // since audience_type only accepts a small enum.
-  const worldNote = body.audience_type ? `World: ${String(body.audience_type).trim()}` : null;
-  const extraNotes = [worldNote, body.notes ? String(body.notes).trim() : null]
-    .filter(Boolean).join('\n\n');
+  // New fields that don't have dedicated columns get folded into notes
+  // as a structured block. Keeps everything searchable from one place
+  // without a schema migration.
+  const whyArr = Array.isArray(body.why_here) ? body.why_here : [];
+  const extras = [
+    body.city || body.state || body.country
+      ? `Location: ${[body.city, body.state, body.country].filter(Boolean).join(', ')}`
+      : null,
+    body.prior_experience      ? `Prior ReBe experience: ${String(body.prior_experience).trim()}` : null,
+    whyArr.length              ? `Why they're joining: ${whyArr.join(', ')}`                       : null,
+    body.heard_from            ? `Heard about ReBe from: ${String(body.heard_from).trim()}`        : null,
+    body.referrer              ? `Referred by: ${String(body.referrer).trim()}`                    : null,
+    body.breakout_preference   ? `Breakout-room preference: ${String(body.breakout_preference).trim()}` : null,
+    body.audience_type         ? `World: ${String(body.audience_type).trim()}`                     : null,
+  ].filter(Boolean);
+  const extraNotes = [
+    extras.length ? extras.join('\n') : null,
+    body.notes ? `\n${String(body.notes).trim()}` : null,
+  ].filter(Boolean).join('\n');
 
   const row = {
     full_name: fullName,
@@ -91,7 +105,11 @@ module.exports = async function handler(req, res) {
     preferred_group_time:     slot ? String(slot).trim() : null,
     area_needing_refresh:     body.area_needing_refresh     ? String(body.area_needing_refresh).trim()     : null,
     reason_for_interest:      body.reason_for_interest      ? String(body.reason_for_interest).trim()      : null,
-    previous_rebe_experience: body.previous_rebe_experience ? String(body.previous_rebe_experience).trim() : null,
+    previous_rebe_experience: body.prior_experience
+      ? String(body.prior_experience).trim()
+      : body.previous_rebe_experience
+        ? String(body.previous_rebe_experience).trim()
+        : null,
     organization_name:        body.organization_name        ? String(body.organization_name).trim()        : null,
     role_title:               body.role_title               ? String(body.role_title).trim()               : null,
     notes:                    extraNotes || null,
