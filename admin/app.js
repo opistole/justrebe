@@ -394,10 +394,8 @@
     });
 
     if (route === 'customers') {
+      sessionStorage.setItem('lastListRoute', '#customers' + (queryParams.filter ? `?filter=${queryParams.filter}` : ''));
       viewCustomers.classList.remove('hidden');
-      // Reset filter to 'all' first so the Customers nav link always lands you
-      // on a clean unfiltered list, then re-apply ?filter=… if present from a
-      // dashboard card.
       currentFilter = queryParams.filter || 'all';
       document.querySelectorAll('#view-customers .filter-pill').forEach((b) => {
         b.classList.toggle('active', b.getAttribute('data-filter') === currentFilter);
@@ -407,16 +405,19 @@
       if (viewPilots) viewPilots.classList.remove('hidden');
       loadPilotList();
     } else if (route === 'cohorts') {
-      // Cohorts = all refresh_signups (paid + lead + waitlist), filterable by slot
+      sessionStorage.setItem('lastListRoute', '#cohorts');
       viewCustomers.classList.remove('hidden');
       currentFilter = queryParams.filter || 'cohort';
       currentSlotFilter = queryParams.slot || 'all';
       document.querySelectorAll('#view-customers .filter-pill').forEach((b) => {
         b.classList.toggle('active', b.getAttribute('data-filter') === currentFilter);
       });
+      document.querySelectorAll('#slot-pills .filter-pill').forEach((b) => {
+        b.classList.toggle('active', b.getAttribute('data-slot') === currentSlotFilter);
+      });
       loadCustomerList();
     } else if (route === 'popups') {
-      // Pop-Ups = workshop attendees
+      sessionStorage.setItem('lastListRoute', '#popups');
       viewCustomers.classList.remove('hidden');
       currentFilter = 'workshop';
       currentSlotFilter = 'all';
@@ -612,7 +613,7 @@
         .order('created_at', { ascending: false })
         .limit(500),
       sb.from('refresh_signups')
-        .select('id, full_name, email, phone, status, readiness, preferred_group_time, paid_amount_cents, paid_at, created_at')
+        .select('id, full_name, email, phone, status, readiness, preferred_group_time, seat_type, paid_amount_cents, paid_at, created_at')
         .order('created_at', { ascending: false })
         .limit(500),
       sb.from('customer_notes')
@@ -655,13 +656,29 @@
       existing.phone = existing.phone || s.phone;
       existing.firstSeen = earliest(existing.firstSeen, s.created_at);
 
-      if (s.status === 'enrolled') existing.sources.add('paid');
-      if (s.readiness === 'wants_more_info') existing.sources.add('lead');
-      if (s.readiness === 'waitlist') existing.sources.add('waitlist');
-      // Unified 'cohort' source: anyone in refresh_signups, regardless of status
-      existing.sources.add('cohort');
+      const paidAmount = s.paid_amount_cents || 0;
+      const seat = (s.seat_type || '').toLowerCase();
+      const readiness = s.readiness || '';
+      const intakeDone = ['attendee', 'facilitator', 'comped', 'other'].includes(seat);
+
+      // 'paid' = actually paid money (not just status='enrolled')
+      if (paidAmount > 0) existing.sources.add('paid');
+      // Track specific intake categories so we can filter facilitators later
+      if (seat === 'attendee')    existing.sources.add('attendee');
+      if (seat === 'facilitator') existing.sources.add('facilitator');
+      if (seat === 'comped')      existing.sources.add('comped');
+
+      // 'cohort' = in the cohort = paid OR completed intake form (facilitator/attendee/comped/other)
+      // Excludes raw leads (wants_more_info) and waitlist.
+      if (paidAmount > 0 || intakeDone) existing.sources.add('cohort');
+
+      // Lead / waitlist labels — kept separate from 'cohort'
+      if (readiness === 'wants_more_info') existing.sources.add('lead');
+      if (readiness === 'waitlist')        existing.sources.add('waitlist');
 
       existing.preferredSlot = existing.preferredSlot || s.preferred_group_time;
+      existing.intakeDone = existing.intakeDone || intakeDone;
+      existing.seatType = existing.seatType || seat;
       existing.paidAt = existing.paidAt || s.paid_at;
       merged.set(email, existing);
     });
@@ -706,6 +723,8 @@
       preferredSlot: null,
       paidAt: null,
       noteCount: 0,
+      intakeDone: false,
+      seatType: '',
     };
   }
 
@@ -784,16 +803,46 @@
     });
 
     customerTbody.innerHTML = filtered.map((c) => {
-      const tags = Array.from(c.sources).map((s) => {
-        const label = s === 'paid' ? 'Paid' : s === 'lead' ? 'Lead' : s === 'workshop' ? 'Workshop' : s === 'waitlist' ? 'Waitlist' : s;
-        return `<span class="source-tag ${escapeHtml(s)}">${escapeHtml(label)}</span>`;
-      }).join('');
+      const tagLabel = (s) => {
+        if (s === 'paid')        return 'Paid';
+        if (s === 'lead')        return 'Lead';
+        if (s === 'workshop')    return 'Workshop';
+        if (s === 'waitlist')    return 'Waitlist';
+        if (s === 'attendee')    return 'Attendee';
+        if (s === 'facilitator') return 'Facilitator';
+        if (s === 'comped')      return 'Comped';
+        if (s === 'cohort')      return null; // hide the umbrella tag — too generic
+        return s;
+      };
+      const tags = Array.from(c.sources)
+        .map(tagLabel)
+        .filter(Boolean)
+        .map((label, i) => {
+          const sourceKey = Array.from(c.sources).filter((s) => tagLabel(s) === label)[0] || 'paid';
+          return `<span class="source-tag ${escapeHtml(sourceKey)}">${escapeHtml(label)}</span>`;
+        })
+        .join('');
+
+      // Slot badge (visible whenever the person has a slot — cohort signups)
+      const slotLower = (c.preferredSlot || '').toLowerCase();
+      const slotBadge = slotLower.includes('11')
+        ? `<span class="source-tag" style="background:#FBF4E4;color:#B07D14;border:1px solid #ead7a8">11 AM ET</span>`
+        : slotLower.includes('8')
+          ? `<span class="source-tag" style="background:#E9EDFB;color:#252C5C;border:1px solid #C8D0EE">8 PM ET</span>`
+          : '';
+
+      // Intake-form indicator
+      const intakeBadge = c.sources.has('cohort')
+        ? (c.intakeDone
+            ? `<span class="source-tag" style="background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF" title="Intake form completed">✓ Intake</span>`
+            : `<span class="source-tag" style="background:#FFF1EE;color:#A33421;border:1px solid #F5B9AD" title="Intake form not yet completed">Needs intake</span>`)
+        : '';
 
       const phone = c.phone ? `<div class="phone">${escapeHtml(c.phone)}</div>` : '';
       return `<tr data-email="${escapeHtml(c.email)}">
         <td><div class="name">${escapeHtml(c.name || '(no name)')}</div></td>
         <td><div class="email">${escapeHtml(c.email)}</div>${phone}</td>
-        <td>${tags || '—'}</td>
+        <td>${tags}${slotBadge}${intakeBadge || '—'}</td>
         <td>${escapeHtml(fmtDate(c.firstSeen))}</td>
         <td>${c.noteCount ? `${c.noteCount} 📝` : '—'}</td>
       </tr>`;
@@ -976,6 +1025,18 @@
       return;
     }
     cdContent.classList.remove('hidden');
+
+    // Rewrite the back link to point to wherever the user came from
+    const backLink = document.querySelector('#view-customer .back-link');
+    if (backLink) {
+      const last = sessionStorage.getItem('lastListRoute') || '#customers';
+      backLink.setAttribute('href', last);
+      backLink.textContent =
+        last.startsWith('#cohorts') ? '← All cohort' :
+        last.startsWith('#popups')  ? '← Pop-Ups' :
+        last.startsWith('#pilots')  ? '← Pilot requests' :
+                                      '← All customers';
+    }
 
     // Cache phone for SMS composer
     currentDetailPhone = (cohort && cohort.phone) || (contact && contact.phone) || null;
@@ -1846,10 +1907,32 @@
       if (!ok) return;
       deleteCustomerBtn.disabled = true;
       deleteCustomerBtn.textContent = 'Deleting…';
+      const emailToDelete = currentDetailEmail;
       try {
-        await sb.from('contacts').delete().ilike('email', currentDetailEmail);
-        await sb.from('refresh_signups').delete().ilike('email', currentDetailEmail);
-        window.location.hash = '#customers';
+        // .select() makes Postgrest return the deleted rows so we can detect
+        // silent RLS-blocked deletes (returns 0 rows, no error).
+        const cR = await sb.from('contacts').delete().ilike('email', emailToDelete).select('email');
+        const rR = await sb.from('refresh_signups').delete().ilike('email', emailToDelete).select('email');
+
+        if (cR.error || rR.error) {
+          throw new Error((cR.error || rR.error).message);
+        }
+        const deletedRows = (cR.data || []).length + (rR.data || []).length;
+        if (deletedRows === 0) {
+          // RLS policy is missing — surface a clear instruction.
+          alert(
+            'Delete returned 0 rows. The most likely cause: the DELETE permission ' +
+            'policy on contacts/refresh_signups isn\'t enabled in Supabase yet.\n\n' +
+            'Run migration 018 in Supabase SQL Editor (or paste this):\n\n' +
+            'CREATE POLICY "admin_staff_delete_contacts" ON contacts FOR DELETE TO authenticated USING (is_admin_or_staff());\n' +
+            'CREATE POLICY "admin_staff_delete_refresh_signups" ON refresh_signups FOR DELETE TO authenticated USING (is_admin_or_staff());'
+          );
+          return;
+        }
+
+        // Navigate back to wherever we came from instead of dumping into All Customers
+        const lastListRoute = sessionStorage.getItem('lastListRoute') || '#customers';
+        window.location.hash = lastListRoute;
       } catch (err) {
         alert('Delete failed: ' + (err.message || err));
       } finally {
