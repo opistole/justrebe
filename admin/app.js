@@ -613,7 +613,7 @@
         .order('created_at', { ascending: false })
         .limit(500),
       sb.from('refresh_signups')
-        .select('id, full_name, email, phone, status, readiness, preferred_group_time, seat_type, area_needing_refresh, reason_for_interest, previous_rebe_experience, paid_amount_cents, paid_at, created_at')
+        .select('id, full_name, email, phone, status, readiness, preferred_group_time, seat_type, intake_completed, area_needing_refresh, reason_for_interest, previous_rebe_experience, paid_amount_cents, paid_at, created_at')
         .order('created_at', { ascending: false })
         .limit(500),
       sb.from('customer_notes')
@@ -660,16 +660,20 @@
       const seat = (s.seat_type || '').toLowerCase();
       const readiness = s.readiness || '';
       const status = s.status || '';
-      // Intake-done inference — works WITHOUT migration 019 by using existing
-      // columns. Cast everything to string before truthy-check so a BOOLEAN
-      // column like previous_rebe_experience doesn't throw.
+      // Intake-done logic: explicit column wins. If not set yet, fall back
+      // to inference from seat_type + free-text fields. Cast values to
+      // string before .trim() so BOOLEAN columns don't blow up.
       const hasIntakeContent = !!(
         ['attendee', 'facilitator', 'comped', 'other'].includes(seat)
         || (s.area_needing_refresh && String(s.area_needing_refresh).trim())
         || (s.reason_for_interest && String(s.reason_for_interest).trim())
         || (s.previous_rebe_experience !== null && s.previous_rebe_experience !== undefined && s.previous_rebe_experience !== false && String(s.previous_rebe_experience).trim())
       );
-      const intakeDone = hasIntakeContent;
+      const intakeDone = s.intake_completed === true
+        ? true
+        : s.intake_completed === false
+          ? false
+          : hasIntakeContent;
 
       // 'paid' = actually paid money
       if (paidAmount > 0) existing.sources.add('paid');
