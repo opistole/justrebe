@@ -613,7 +613,7 @@
         .order('created_at', { ascending: false })
         .limit(500),
       sb.from('refresh_signups')
-        .select('id, full_name, email, phone, status, readiness, preferred_group_time, seat_type, paid_amount_cents, paid_at, created_at')
+        .select('id, full_name, email, phone, status, readiness, preferred_group_time, seat_type, intake_completed, area_needing_refresh, reason_for_interest, previous_rebe_experience, paid_amount_cents, paid_at, created_at')
         .order('created_at', { ascending: false })
         .limit(500),
       sb.from('customer_notes')
@@ -659,7 +659,14 @@
       const paidAmount = s.paid_amount_cents || 0;
       const seat = (s.seat_type || '').toLowerCase();
       const readiness = s.readiness || '';
-      const intakeDone = ['attendee', 'facilitator', 'comped', 'other'].includes(seat);
+      // Explicit DB column wins; fall back to inferring from seat_type or
+      // free-text intake fields if it hasn't been set yet.
+      const intakeDone = (s.intake_completed === true) || (s.intake_completed === null && (
+        ['attendee', 'facilitator', 'comped', 'other'].includes(seat)
+        || (s.area_needing_refresh && s.area_needing_refresh.trim())
+        || (s.reason_for_interest && s.reason_for_interest.trim())
+        || (s.previous_rebe_experience && s.previous_rebe_experience.trim())
+      ));
 
       // 'paid' = actually paid money (not just status='enrolled')
       if (paidAmount > 0) existing.sources.add('paid');
@@ -1939,6 +1946,47 @@
         deleteCustomerBtn.disabled = false;
         deleteCustomerBtn.textContent = 'Delete customer';
       }
+    });
+  }
+
+  // Intake-completed override (Mark intake done / needed)
+  const intakeOverride = document.getElementById('cd-intake-override');
+  if (intakeOverride) {
+    intakeOverride.addEventListener('change', async () => {
+      if (!currentDetailEmail) return;
+      const val = intakeOverride.value;
+      if (!val) return;
+      const newVal = val === 'done';
+
+      // Find existing refresh_signups row for this email; if none, create a
+      // minimal one so we have somewhere to store the flag.
+      const { data: existing } = await sb.from('refresh_signups')
+        .select('id').ilike('email', currentDetailEmail).limit(1);
+
+      let error;
+      if (existing && existing.length) {
+        const r = await sb.from('refresh_signups')
+          .update({ intake_completed: newVal })
+          .eq('id', existing[0].id);
+        error = r.error;
+      } else {
+        const r = await sb.from('refresh_signups').insert({
+          email: currentDetailEmail,
+          full_name: currentDetailEmail,
+          status: 'enrolled',
+          readiness: 'ready_to_pay',
+          audience_type: 'groups',
+          group_type: 'no_preference',
+          consent_to_contact: true,
+          consent_to_confidentiality: true,
+          paid_amount_cents: 0,
+          intake_completed: newVal,
+        });
+        error = r.error;
+      }
+      intakeOverride.value = '';
+      if (error) { alert('Couldn\'t update intake status: ' + error.message); return; }
+      loadCustomerDetail(currentDetailEmail);
     });
   }
 

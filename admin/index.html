@@ -541,6 +541,11 @@
             <option value="wants_more_info">Mark as lead</option>
             <option value="waitlist">Mark as waitlist</option>
           </select>
+          <select id="cd-intake-override" style="padding:7px 10px;border:1px solid var(--bone);border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:#fff;cursor:pointer">
+            <option value="" disabled selected>Intake…</option>
+            <option value="done">Mark intake done ✓</option>
+            <option value="needed">Mark intake needed ✗</option>
+          </select>
           <button type="button" id="delete-customer-btn" style="background:transparent;color:var(--coral);border:1px solid #F5B9AD;padding:7px 12px;border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer">Delete customer</button>
         </div>
       </div>
@@ -745,6 +750,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=23"></script>
+<script src="/admin/app.js?v=24"></script>
 </body>
 </html>
