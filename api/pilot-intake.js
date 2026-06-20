@@ -86,6 +86,8 @@ module.exports = async function handler(req, res) {
   // ──────────────────────────────────────────────────────────────
   // 1. Save to Supabase
   // ──────────────────────────────────────────────────────────────
+  // Don't persist the raw POST body — only known/validated fields.
+  // Avoids storing unknown keys, oversized payloads, or PII we didn't ask for.
   const insertRow = {
     first_name: firstName,
     last_name: lastName || null,
@@ -97,7 +99,6 @@ module.exports = async function handler(req, res) {
     pathway: pathwayConfig.enum,
     challenges: challenges.length ? challenges : null,
     timing: timing || null,
-    raw: body,
   };
 
   let pilotRow = null;

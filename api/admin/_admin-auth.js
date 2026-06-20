@@ -13,24 +13,55 @@
 //   SUPABASE_URL
 //   SUPABASE_SERVICE_ROLE_KEY
 
-// Decode a Supabase JWT without verifying the signature. This is OK for an
-// MVP admin panel because:
-//   (a) we still confirm the user has an entry in user_roles via service_role,
-//   (b) the token only travels over HTTPS,
-//   (c) the only data exposed is what's already gated by RLS for that user.
-// TODO: when SUPABASE_JWT_SECRET is added as an env var, verify the
-// HS256 signature here for defense in depth.
-function decodeJwtUnsafe(token) {
+const crypto = require('crypto');
+
+// Verify a Supabase HS256 JWT against SUPABASE_JWT_SECRET, returning the
+// decoded payload or null on any failure (bad format, bad signature, etc.).
+// If SUPABASE_JWT_SECRET isn't set, falls back to unsafe decode so the
+// CRM keeps working — but logs a warning so we know to add the env var.
+function base64UrlDecode(str) {
+  let s = String(str || '').replace(/-/g, '+').replace(/_/g, '/');
+  while (s.length % 4) s += '=';
+  return Buffer.from(s, 'base64');
+}
+function constantTimeEqual(a, b) {
+  if (a.length !== b.length) return false;
+  try { return crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b)); }
+  catch { return false; }
+}
+function verifyJwtHS256(token, secret) {
   try {
-    const parts = token.split('.');
-    if (parts.length !== 3) return null;
-    let payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
-    while (payload.length % 4) payload += '=';
-    const json = Buffer.from(payload, 'base64').toString('utf8');
-    return JSON.parse(json);
+    const [headerB64, payloadB64, sigB64] = String(token).split('.');
+    if (!headerB64 || !payloadB64 || !sigB64) return null;
+    const header = JSON.parse(base64UrlDecode(headerB64).toString('utf8'));
+    if (header.alg !== 'HS256') return null;
+
+    const data = `${headerB64}.${payloadB64}`;
+    const expectedSig = crypto.createHmac('sha256', secret).update(data).digest();
+    const providedSig = base64UrlDecode(sigB64);
+    if (!constantTimeEqual(expectedSig, providedSig)) return null;
+
+    return JSON.parse(base64UrlDecode(payloadB64).toString('utf8'));
   } catch {
     return null;
   }
+}
+function decodeJwtUnverified(token) {
+  try {
+    const payloadB64 = String(token).split('.')[1];
+    if (!payloadB64) return null;
+    return JSON.parse(base64UrlDecode(payloadB64).toString('utf8'));
+  } catch {
+    return null;
+  }
+}
+function decodeAndVerifyJwt(token) {
+  const secret = process.env.SUPABASE_JWT_SECRET;
+  if (secret) return verifyJwtHS256(token, secret);
+  // Fallback only if the secret isn't configured. Log a clear warning so
+  // ops sees it and adds the env var.
+  console.warn('[_admin-auth] SUPABASE_JWT_SECRET not configured — JWT signature NOT verified.');
+  return decodeJwtUnverified(token);
 }
 
 async function requireAdminStaff(req) {
@@ -45,10 +76,10 @@ async function requireAdminStaff(req) {
   const token = authHeader.replace(/^Bearer\s+/i, '').trim();
   if (!token) return { error: { status: 401, msg: 'Missing Authorization header' } };
 
-  // Decode token to get user_id + email
-  const payload = decodeJwtUnsafe(token);
+  // Verify JWT signature (if SUPABASE_JWT_SECRET is set) + decode payload
+  const payload = decodeAndVerifyJwt(token);
   if (!payload || !payload.sub) {
-    return { error: { status: 401, msg: 'Could not decode JWT — log out and back in' } };
+    return { error: { status: 401, msg: 'Invalid or unverifiable JWT — log out and back in' } };
   }
 
   // Check expiration

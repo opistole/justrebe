@@ -464,7 +464,9 @@
 
     const [w, p, l, n] = await Promise.all([
       safeCount('contacts'),
-      safeCount('refresh_signups', (q) => q.eq('status', 'enrolled')),
+      // Match the list-view 'Paid only' filter exactly: only count rows with
+      // a real Stripe payment recorded.
+      safeCount('refresh_signups', (q) => q.eq('status', 'enrolled').gt('paid_amount_cents', 0)),
       safeCount('refresh_signups', (q) => q.eq('readiness', 'wants_more_info')),
       safeCount('customer_notes'),
     ]);
@@ -859,7 +861,7 @@
       const intakeBadge = c.sources.has('cohort')
         ? (c.intakeDone
             ? `<span class="source-tag" style="background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF" title="Intake form completed">✓ Intake</span>`
-            : `<span class="source-tag" style="background:#FFF1EE;color:#A33421;border:1px solid #F5B9AD" title="Intake form not yet completed">Needs intake</span>`)
+            : `<span class="source-tag" style="background:var(--coral-wash);color:var(--coral-ink);border:1px solid var(--coral-border)" title="Intake form not yet completed">Needs intake</span>`)
         : '';
 
       const phone = c.phone ? `<div class="phone">${escapeHtml(c.phone)}</div>` : '';
@@ -894,6 +896,29 @@
     currentFilter = btn.getAttribute('data-filter');
     renderCustomerList();
   });
+
+  // Mobile sidebar hamburger
+  const mobileMenuBtn   = document.getElementById('mobile-menu-btn');
+  const sidebarEl       = document.getElementById('sidebar');
+  const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+  function openSidebar() {
+    if (sidebarEl)       sidebarEl.classList.add('open');
+    if (sidebarBackdrop) sidebarBackdrop.classList.add('show');
+    if (mobileMenuBtn)   mobileMenuBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closeSidebar() {
+    if (sidebarEl)       sidebarEl.classList.remove('open');
+    if (sidebarBackdrop) sidebarBackdrop.classList.remove('show');
+    if (mobileMenuBtn)   mobileMenuBtn.setAttribute('aria-expanded', 'false');
+  }
+  if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openSidebar);
+  if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeSidebar);
+  // Close on any nav link click (so mobile nav doesn't stay open after navigation)
+  if (sidebarEl) {
+    sidebarEl.addEventListener('click', (e) => {
+      if (e.target.closest('a')) closeSidebar();
+    });
+  }
 
   // Global search in the topbar — searches across customer list, jumps to
   // /admin/#customers with the query applied. Cmd+K focuses it.
@@ -1115,10 +1140,18 @@
 
     cdReadiness.textContent = (cohort && cohort.readiness) || '—';
 
-    // Source + slot + intake tags
+    // Source + slot + intake tags. Distinguish paid (money received) from
+    // "enrolled but unpaid" (comped/attendee/facilitator) so the lead override
+    // doesn't double-tag people.
     const tags = [];
     if (contact) tags.push({ label: 'Workshop', cls: 'workshop' });
-    if (cohort && cohort.status === 'enrolled') tags.push({ label: 'Paid cohort', cls: 'paid' });
+    const paidAmountD = (cohort && cohort.paid_amount_cents) || 0;
+    const seatD = ((cohort && cohort.seat_type) || '').toLowerCase();
+    if (paidAmountD > 0) {
+      tags.push({ label: 'Paid cohort', cls: 'paid' });
+    } else if (cohort && cohort.status === 'enrolled' && ['attendee', 'facilitator', 'comped', 'other'].includes(seatD)) {
+      tags.push({ label: seatD === 'facilitator' ? 'Facilitator' : seatD === 'comped' ? 'Comped' : 'Attendee', cls: 'paid' });
+    }
     if (cohort && cohort.readiness === 'wants_more_info') tags.push({ label: 'Cohort lead', cls: 'lead' });
     if (cohort && cohort.readiness === 'waitlist') tags.push({ label: 'Waitlist', cls: 'waitlist' });
 
@@ -1146,7 +1179,7 @@
         : cohort.intake_completed === false ? false : !!hasContent;
       intakeTagHtml = inferredDone
         ? `<span class="source-tag" style="background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF">✓ Intake</span>`
-        : `<span class="source-tag" style="background:#FFF1EE;color:#A33421;border:1px solid #F5B9AD">Needs intake</span>`;
+        : `<span class="source-tag" style="background:var(--coral-wash);color:var(--coral-ink);border:1px solid var(--coral-border)">Needs intake</span>`;
     }
 
     cdTags.innerHTML = (tags.length
@@ -1277,7 +1310,10 @@
         author: n.author_email || '(unknown)',
         authorId: n.author_id,
         body: n.body || '',
-        mine: currentUser && n.author_id === currentUser.id,
+        // Show the edit/delete actions if the current user wrote it OR if
+        // they're an admin. (Admin delete is already allowed by the RLS
+        // policy; this just exposes the UI.)
+        mine: (currentUser && n.author_id === currentUser.id) || currentRole === 'admin',
       });
     });
     (activities || []).forEach((a) => {
@@ -1363,7 +1399,7 @@
           </div>
           ${recipientLine}
           ${subject}
-          <div class="ai-body-wrap"><p class="ai-body">${escapeHtml(it.body)}</p></div>
+          <div class="ai-body-wrap"><p class="ai-body" data-raw="${escapeHtml(it.body)}">${escapeHtml(it.body)}</p></div>
           ${failedMsg}
           ${actions}
         </div>
@@ -1533,20 +1569,38 @@
         if (!item) return;
         const bodyEl = item.querySelector('.ai-body');
         if (!bodyEl) return;
-        const currentText = bodyEl.textContent;
+        // Read the raw text we stashed on the body element (avoids
+        // double-encoding via textContent → escapeHtml → innerHTML round-trip).
+        const currentText = bodyEl.dataset.raw != null ? bodyEl.dataset.raw : bodyEl.textContent;
         const wrap = item.querySelector('.ai-body-wrap');
-        wrap.innerHTML = `
-          <div class="note-edit-area">
-            <textarea>${escapeHtml(currentText)}</textarea>
-            <div class="edit-actions">
-              <button type="button" class="save" data-save-note="${escapeHtml(id)}">Save</button>
-              <button type="button" class="cancel" data-cancel-edit>Cancel</button>
-            </div>
-          </div>
-        `;
+
+        // Build the edit UI with DOM APIs so the textarea's value is set
+        // through the property (no HTML encoding involved).
+        wrap.innerHTML = '';
+        const editArea = document.createElement('div');
+        editArea.className = 'note-edit-area';
+        const ta = document.createElement('textarea');
+        ta.value = currentText;
+        editArea.appendChild(ta);
+        const actions = document.createElement('div');
+        actions.className = 'edit-actions';
+        const saveBtn = document.createElement('button');
+        saveBtn.type = 'button';
+        saveBtn.className = 'save';
+        saveBtn.dataset.saveNote = id;
+        saveBtn.textContent = 'Save';
+        const cancelBtn = document.createElement('button');
+        cancelBtn.type = 'button';
+        cancelBtn.className = 'cancel';
+        cancelBtn.dataset.cancelEdit = '';
+        cancelBtn.textContent = 'Cancel';
+        actions.appendChild(saveBtn);
+        actions.appendChild(cancelBtn);
+        editArea.appendChild(actions);
+        wrap.appendChild(editArea);
         const actionsRow = item.querySelector('.ai-actions');
         if (actionsRow) actionsRow.style.display = 'none';
-        wrap.querySelector('textarea').focus();
+        ta.focus();
         return;
       }
       // Save edited note
@@ -1753,7 +1807,7 @@
             <div class="email">${escapeHtml(p.role_title)}</div>
             ${p.website ? `<div class="phone"><a href="${escapeHtml(p.website)}" target="_blank" rel="noopener">${escapeHtml(p.website)}</a></div>` : ''}
           </td>
-          <td><span class="source-tag ${p.pathway === 'workplace' ? 'paid' : p.pathway === 'education' ? 'lead' : 'workshop'}">${escapeHtml(pathwayLabel)}</span></td>
+          <td><span class="source-tag pathway-${escapeHtml(p.pathway || 'both')}">${escapeHtml(pathwayLabel)}</span></td>
           <td>
             <select class="pilot-status-select" data-pilot-id="${escapeHtml(p.id)}" onclick="event.stopPropagation()">${statusOptions}</select>
           </td>
@@ -1951,9 +2005,21 @@
       }
 
       // Build storage path: <user_id>/avatar-<timestamp>.<ext>
+      // Date.now() ensures the path is unique across the session lifetime
+      // (performance.now() resets to 0 on each page load and could collide).
       const ext = ((file.name.match(/\.(\w+)$/) || [])[1] || 'png').toLowerCase();
-      const ts  = Math.floor(performance.now() * 1000);
+      const ts  = Date.now();
       const path = `${currentUser.id}/avatar-${ts}.${ext}`;
+
+      // Best-effort cleanup of previous avatars so we don't accumulate cruft
+      // in storage. Ignore errors here — the upload is the important part.
+      try {
+        const { data: existing } = await sb.storage.from('avatars').list(currentUser.id);
+        const toRemove = (existing || []).map((f) => `${currentUser.id}/${f.name}`);
+        if (toRemove.length) await sb.storage.from('avatars').remove(toRemove);
+      } catch (cleanupErr) {
+        console.warn('[avatar upload] cleanup failed (non-fatal):', cleanupErr);
+      }
 
       const avatarEl = document.getElementById('acct-avatar');
       const previousAvatarHtml = avatarEl ? avatarEl.innerHTML : '';
@@ -2071,13 +2137,20 @@
             error = r.error;
           } else {
             // cohort / lead / waitlist / paid go into refresh_signups
-            const status = source === 'paid' ? 'enrolled' : 'enrolled';
+            const status = source === 'paid' ? 'enrolled' : source === 'cohort' ? 'enrolled' : 'pending';
             const readiness =
               source === 'paid'     ? 'ready_to_pay' :
-              source === 'lead'     ? 'wants_more_info' :
+              source === 'cohort'   ? 'ready_to_pay' :
               source === 'waitlist' ? 'waitlist' :
                                        'wants_more_info';
             const preferredTime = slot === '11am' ? '11 AM ET' : slot === '8pm' ? '8 PM ET' : null;
+            // seat_type must NOT be 'attendee' for waitlist/lead since the
+            // intake heuristic would then mis-mark them as 'intake done'.
+            const seatType =
+              source === 'paid'     ? 'paid' :
+              source === 'cohort'   ? 'other' :    // generic enrolled — they'll need intake
+              source === 'waitlist' ? null  :     // not in cohort yet
+                                       null;
             const r = await sb.from('refresh_signups').insert({
               full_name: fullName,
               email,
@@ -2090,7 +2163,8 @@
               paid_amount_cents: 0,
               consent_to_contact: true,
               consent_to_confidentiality: true,
-              seat_type: source === 'paid' ? 'paid' : 'attendee',
+              seat_type: seatType,
+              intake_completed: null,
             });
             error = r.error;
           }
@@ -2185,6 +2259,17 @@
       }
       intakeOverride.value = '';
       if (error) { alert('Couldn\'t update intake status: ' + error.message); return; }
+
+      // Audit trail: write a note so the team has a record of the override
+      try {
+        await sb.from('customer_notes').insert({
+          customer_email: currentDetailEmail,
+          author_id: currentUser.id,
+          author_email: currentUser.email,
+          body: `🔁 Intake status changed to "${newVal ? 'done ✓' : 'needed ✗'}" by ${friendlyActorName(currentUser.email)}`,
+        });
+      } catch (_) {}
+
       loadCustomerDetail(currentDetailEmail);
     });
   }
@@ -2258,6 +2343,22 @@
         error = r.error;
       }
       if (error) { alert('Couldn\'t update status: ' + error.message); return; }
+
+      // Audit trail
+      try {
+        const label =
+          newReadiness === 'paid'             ? `paid${patch.paid_amount_cents ? ' ($' + (patch.paid_amount_cents/100).toFixed(2) + ')' : ''}` :
+          newReadiness === 'wants_more_info'  ? 'cohort lead' :
+          newReadiness === 'waitlist'         ? 'cohort waitlist' :
+                                                 newReadiness;
+        await sb.from('customer_notes').insert({
+          customer_email: currentDetailEmail,
+          author_id: currentUser.id,
+          author_email: currentUser.email,
+          body: `🔁 Status changed to "${label}" by ${friendlyActorName(currentUser.email)}`,
+        });
+      } catch (_) {}
+
       loadCustomerDetail(currentDetailEmail);
     });
   }

@@ -18,7 +18,9 @@
 //          node scripts/setup-kit-webhooks.js
 
 const API_KEY = process.env.KIT_API_KEY;
-const TARGET_URL = process.env.KIT_WEBHOOK_URL || 'https://www.justrebe.com/api/kit-webhook';
+const SECRET  = process.env.KIT_WEBHOOK_SECRET;
+const BASE_URL = process.env.KIT_WEBHOOK_URL || 'https://www.justrebe.com/api/kit-webhook';
+const TARGET_URL = SECRET ? `${BASE_URL}?secret=${encodeURIComponent(SECRET)}` : BASE_URL;
 
 if (!API_KEY) {
   console.error('✗ Missing KIT_API_KEY env var. See header comment for how to get one.');

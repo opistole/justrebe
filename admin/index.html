@@ -16,7 +16,9 @@
     --paper:#FFFFFF; --mist:#F5F6F8; --navy:#252C5C; --navy-dark:#040832;
     --green:#449945; --green-ink:#3A8438; --green-deep:#2A6D2C; --green-wash:#F2F8F2;
     --gold:#E3A01F; --gold-ink:#B07D14; --gold-wash:#FBF4E4;
-    --slate:#0F172A; --body:#475569; --muted:#94A3B8; --bone:#E5E7EB; --coral:#EA492E;
+    --coral:#EA492E; --coral-ink:#A33421; --coral-wash:#FFF1EE; --coral-border:#F5B9AD;
+    --blue:#3A8ED8; --blue-ink:#246FBF; --blue-wash:#E9EDFB;
+    --slate:#0F172A; --body:#475569; --muted:#94A3B8; --bone:#E5E7EB;
     --side:#EEF1F6; --side-hover:#E5E9F0;
     /* Single font family across the whole admin — Inter, like Tyler's. */
     --serif:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
@@ -78,10 +80,16 @@
 
   @media (max-width:880px){
     :root{--sidebar-w:0px}
-    .sidebar{transform:translateX(-100%);transition:transform .25s}
+    .sidebar{transform:translateX(-100%);transition:transform .25s;box-shadow:0 0 32px rgba(15,23,42,.18)}
     .sidebar.open{transform:translateX(0)}
     main{padding:18px 18px 80px}
+    #mobile-menu-btn{display:inline-flex !important}
+    .topbar .search{max-width:none}
+    .topbar .who .email{display:none}
   }
+  /* Mobile sidebar backdrop */
+  .sidebar-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.4);z-index:35;display:none}
+  .sidebar-backdrop.show{display:block}
 
   /* === Login === */
   .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--mist)}
@@ -104,16 +112,16 @@
 
   /* === Welcome + stats === */
   /* "Hey Osil." style hero card — clean, no gradient */
-  .welcome{background:transparent;border:0;border-radius:0;padding:8px 0 4px;margin:0 0 22px}
-  .welcome h2{font-family:var(--serif);font-weight:600;font-size:32px;color:var(--slate);margin:0 0 6px;letter-spacing:-.015em;line-height:1.1}
+  .welcome{background:transparent;border:0;border-radius:0;padding:8px 0 4px;margin:0 0 24px}
+  .welcome h2{font-family:var(--serif);font-weight:700;font-size:36px;color:var(--slate);margin:0 0 6px;letter-spacing:-.02em;line-height:1.1}
   .welcome p{margin:0;font-size:14px;color:var(--muted)}
-  .welcome.panel{background:#fff;border:1px solid var(--bone);border-radius:12px;padding:18px 22px;margin:0 0 20px}
-  .welcome.panel h2{font-size:18px;letter-spacing:-.005em;margin:0 0 4px}
+  .welcome.panel{background:#fff;border:1px solid var(--bone);border-radius:12px;padding:18px 22px;margin:0 0 24px}
+  .welcome.panel h2{font-size:18px;font-weight:600;letter-spacing:-.005em;margin:0 0 4px}
 
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:0 0 28px}
   .card{background:#fff;border-radius:12px;padding:20px 22px;border:1px solid var(--bone);box-shadow:0 1px 2px rgba(15,23,42,.04)}
   .card .card-label{font-family:var(--sans);font-weight:700;font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin:0 0 8px}
-  .card .card-number{font-family:var(--serif);font-weight:600;font-size:38px;color:var(--slate);line-height:1;margin:0 0 6px;letter-spacing:-.02em}
+  .card .card-number{font-family:var(--serif);font-weight:600;font-size:32px;color:var(--slate);line-height:1;margin:0 0 6px;letter-spacing:-.02em}
   .card .card-sub{font-size:12px;color:var(--muted);margin:0;font-weight:500}
   a.card-link{text-decoration:none;color:inherit;display:block;transition:border-color .15s,box-shadow .15s;cursor:pointer}
   a.card-link:hover{border-color:var(--navy);box-shadow:0 4px 12px rgba(15,23,42,.08)}
@@ -124,16 +132,16 @@
   .toolbar .search-input{flex:1;min-width:260px;padding:10px 14px;border:1px solid var(--bone);border-radius:10px;font-family:inherit;font-size:14px;color:var(--slate);background:#fff;transition:border-color .2s}
   .toolbar .search-input:focus{outline:0;border-color:var(--green)}
   .toolbar .filter-pills{display:flex;gap:6px;flex-wrap:wrap}
-  .filter-pill{padding:7px 14px;border-radius:999px;border:1px solid var(--bone);background:#fff;color:var(--body);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.02em;transition:all .15s}
+  .filter-pill{padding:7px 14px;border-radius:999px;border:1px solid var(--bone);background:#fff;color:var(--body);font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;transition:all .15s}
   .filter-pill:hover{border-color:var(--green-ink);color:var(--green-ink)}
   .filter-pill.active{background:var(--green-ink);border-color:var(--green-ink);color:#fff}
 
   .table-wrap{background:#fff;border:1px solid var(--bone);border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(6,11,80,.04)}
   table{width:100%;border-collapse:collapse}
   th,td{text-align:left;padding:12px 16px;font-size:13px;border-bottom:1px solid var(--mist)}
-  th{background:var(--mist);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  th{background:var(--mist);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
   th.sortable{cursor:pointer;user-select:none;transition:background .12s,color .12s}
-  th.sortable:hover{background:#F2EDE0;color:var(--navy)}
+  th.sortable:hover{background:var(--gold-wash);color:var(--navy)}
   th .sort-arrow{display:inline-block;width:10px;text-align:center;color:var(--green-ink);font-size:11px;margin-left:4px;opacity:.4;font-weight:700}
   th.sort-active .sort-arrow{opacity:1}
   tr:last-child td{border-bottom:0}
@@ -144,6 +152,9 @@
   td .phone{color:var(--muted);font-size:12px}
   .source-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:5px;margin:1px 3px 1px 0;white-space:nowrap;line-height:1.3}
   .source-tag.workshop{background:var(--gold-wash);color:var(--gold-ink)}
+  .source-tag.pathway-workplace{background:var(--gold-wash);color:var(--gold-ink)}
+  .source-tag.pathway-education{background:var(--blue-wash);color:var(--blue-ink)}
+  .source-tag.pathway-both{background:var(--mist);color:var(--body);border:1px solid var(--bone)}
   .source-tag.paid{background:var(--green-wash);color:var(--green-ink)}
   .source-tag.lead{background:#FFF1F0;color:var(--coral)}
   .source-tag.waitlist{background:#E8E8FB;color:var(--navy)}
@@ -170,7 +181,7 @@
   .section .pf-row:last-child{border-bottom:0;padding-bottom:0}
 
   .section{background:#fff;border:1px solid var(--bone);border-radius:14px;padding:24px 28px;box-shadow:0 4px 14px rgba(6,11,80,.04);margin:0 0 20px}
-  .section h2{font-family:var(--serif);font-weight:600;font-size:20px;color:var(--navy);margin:0 0 16px;letter-spacing:-.005em}
+  .section h2{font-family:var(--serif);font-weight:500;font-size:18px;color:var(--body);margin:0 0 16px;letter-spacing:-.005em}
   .section h3{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 10px}
 
   /* === Notes / Activity === */
@@ -182,7 +193,7 @@
   .activity-item.kind-failed{border-left-color:var(--coral);opacity:.85}
   .activity-item .ai-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 6px;flex-wrap:wrap}
   .activity-item .ai-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);font-family:var(--sans);flex-wrap:wrap}
-  .activity-item .ai-type{font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:#fff;padding:2px 8px;border-radius:6px;border:1px solid var(--bone)}
+  .activity-item .ai-type{font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);background:#fff;padding:2px 8px;border-radius:6px;border:1px solid var(--bone)}
   .activity-item .ai-type.email{color:var(--navy)}
   .activity-item .ai-type.sms{color:var(--green-ink)}
   .activity-item .ai-type.note{color:var(--gold-ink)}
@@ -241,8 +252,8 @@
   /* === Activity item: note edit/delete + Kit events === */
   .activity-item.kind-kit{border-left-color:var(--gold-ink)}
   .activity-item .ai-type.kit{color:var(--gold-ink)}
-  .activity-item.kind-sms-in{border-left-color:#3a8ed8}
-  .activity-item .ai-type.sms-in{color:#246fbf}
+  .activity-item.kind-sms-in{border-left-color:var(--blue)}
+  .activity-item .ai-type.sms-in{color:var(--blue-ink)}
   .activity-item .ai-actions{display:flex;gap:10px;margin:6px 0 0}
   .activity-item .ai-action-btn{background:transparent;border:0;color:var(--muted);font-size:11px;cursor:pointer;text-decoration:underline;font-family:inherit;padding:0;letter-spacing:.02em}
   .activity-item .ai-action-btn:hover{color:var(--green-ink)}
@@ -316,32 +327,35 @@
 <!-- ============== APP SHELL (visible when authed) ============== -->
 <div id="app-view" class="app-shell hidden">
 
+  <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
   <aside class="sidebar" id="sidebar">
     <a class="brand" href="#dashboard">
       <img class="logo" src="/Logo_Blue.png" alt="ReBe">
     </a>
     <nav id="nav-links">
-      <a href="#dashboard"   data-route="dashboard"><span class="icon">▦</span>Dashboard</a>
-      <a href="#cohorts"     data-route="cohorts"><span class="icon">◎</span>ReFresh Cohorts</a>
-      <a href="#one-to-one"  data-route="one-to-one"><span class="icon">⊙</span>1:1 Clients</a>
-      <a href="#popups"      data-route="popups"><span class="icon">✺</span>Pop-Ups</a>
-      <a href="#community"   data-route="community"><span class="icon">❖</span>Community</a>
-      <a href="#pilots"      data-route="pilots"><span class="icon">⌖</span>Pilot Requests</a>
-      <a href="#customers"   data-route="customers"><span class="icon">☰</span>All Customers</a>
-      <a href="#team"        data-route="team"><span class="icon">⚑</span>Team</a>
+      <a href="#dashboard"   data-route="dashboard"><span class="icon" aria-hidden="true">▦</span>Dashboard</a>
+      <a href="#cohorts"     data-route="cohorts"><span class="icon" aria-hidden="true">◎</span>ReFresh Cohorts</a>
+      <a href="#one-to-one"  data-route="one-to-one"><span class="icon" aria-hidden="true">⊙</span>1:1 Clients</a>
+      <a href="#popups"      data-route="popups"><span class="icon" aria-hidden="true">✺</span>Pop-Ups</a>
+      <a href="#community"   data-route="community"><span class="icon" aria-hidden="true">❖</span>Community</a>
+      <a href="#pilots"      data-route="pilots"><span class="icon" aria-hidden="true">⌖</span>Pilot Requests</a>
+      <a href="#customers"   data-route="customers"><span class="icon" aria-hidden="true">☰</span>All Customers</a>
+      <a href="#team"        data-route="team"><span class="icon" aria-hidden="true">⚑</span>Team</a>
     </nav>
     <div class="side-foot">ReBe Admin · v0.7</div>
   </aside>
 
   <div style="flex:1;margin-left:var(--sidebar-w);min-width:0">
     <header class="topbar">
+      <button type="button" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" style="display:none;background:transparent;border:0;padding:6px 10px;cursor:pointer;color:var(--slate);font-size:18px">☰</button>
       <div class="search">
         <span style="opacity:.6">⌕</span>
-        <input type="search" id="global-search" placeholder="Search customers, pilots, notes…" autocomplete="off">
+        <input type="search" id="global-search" aria-label="Search customers, pilots, and notes" placeholder="Search customers, pilots, notes…" autocomplete="off">
         <span class="kbd">⌘K</span>
       </div>
       <div class="who">
-        <a href="#account" id="topbar-avatar" title="My account" style="width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px;text-decoration:none;flex-shrink:0;overflow:hidden;border:1px solid var(--bone)">—</a>
+        <a href="#account" id="topbar-avatar" aria-label="My account" title="My account" style="width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px;text-decoration:none;flex-shrink:0;overflow:hidden;border:1px solid var(--bone)">—</a>
         <span class="email" id="user-email">—</span>
         <span class="role-pill" id="user-role">—</span>
         <button type="button" class="logout-btn" id="logout-btn">Log out</button>
@@ -435,9 +449,9 @@
 
     <!-- ============== PILOT REQUESTS LIST VIEW ============== -->
     <section id="view-pilots" class="hidden">
-      <div class="welcome" style="background:linear-gradient(135deg,var(--gold-wash) 0%,var(--mist) 100%)">
-        <h2 style="font-size:22px">Pilot requests</h2>
-        <p>Submissions from <strong>/pilot</strong> on the public site. Education + Workplace + Both. Marked status stays per row.</p>
+      <div class="welcome">
+        <h2>Pilot requests</h2>
+        <p>Submissions from <strong>/pilot</strong> on the public site. Education, Workplace, and Both / Not Sure. Status stays per row.</p>
       </div>
       <div class="toolbar">
         <input type="search" class="search-input" id="pilot-search" placeholder="Search by name, organization, or email…">
@@ -448,6 +462,7 @@
           <button type="button" class="filter-pill" data-pilot-filter="qualified">Qualified</button>
           <button type="button" class="filter-pill" data-pilot-filter="workplace">Workplace</button>
           <button type="button" class="filter-pill" data-pilot-filter="education">Education</button>
+          <button type="button" class="filter-pill" data-pilot-filter="both">Both / Not sure</button>
         </div>
       </div>
       <div class="table-wrap">
@@ -558,21 +573,23 @@
 
     <!-- ============== CUSTOMER DETAIL VIEW ============== -->
     <section id="view-customer" class="hidden">
-      <div class="detail-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div class="detail-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px">
         <a class="back-link" href="#customers">← All customers</a>
-        <div style="display:flex;gap:8px;align-items:center">
-          <select id="cd-status-override" style="padding:7px 10px;border:1px solid var(--bone);border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:#fff;cursor:pointer">
+        <div style="display:flex;gap:6px;align-items:center;background:#fff;border:1px solid var(--bone);border-radius:10px;padding:5px 6px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+          <select id="cd-status-override" aria-label="Change customer status" style="padding:6px 10px;border:0;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:transparent;cursor:pointer">
             <option value="" disabled selected>Change status…</option>
             <option value="paid">Mark as paid</option>
             <option value="wants_more_info">Mark as lead</option>
             <option value="waitlist">Mark as waitlist</option>
           </select>
-          <select id="cd-intake-override" style="padding:7px 10px;border:1px solid var(--bone);border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:#fff;cursor:pointer">
+          <span style="width:1px;height:18px;background:var(--bone)"></span>
+          <select id="cd-intake-override" aria-label="Change intake status" style="padding:6px 10px;border:0;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:transparent;cursor:pointer">
             <option value="" disabled selected>Intake…</option>
             <option value="done">Mark intake done ✓</option>
             <option value="needed">Mark intake needed ✗</option>
           </select>
-          <button type="button" id="delete-customer-btn" style="background:transparent;color:var(--coral);border:1px solid #F5B9AD;padding:7px 12px;border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer">Delete customer</button>
+          <span style="width:1px;height:18px;background:var(--bone)"></span>
+          <button type="button" id="delete-customer-btn" style="background:transparent;color:var(--coral);border:0;padding:6px 10px;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer">Delete customer</button>
         </div>
       </div>
       <div id="customer-detail-loading" class="loading">Loading customer…</div>
@@ -621,9 +638,9 @@
         <div class="section">
           <h2>Send a message</h2>
           <div class="compose-tabs">
-            <button type="button" class="compose-tab active" data-compose="email">📧 Email</button>
-            <button type="button" class="compose-tab" data-compose="sms">📱 SMS</button>
-            <button type="button" class="compose-tab" data-compose="note">📝 Note</button>
+            <button type="button" class="compose-tab active" data-compose="email"><span aria-hidden="true">📧</span> Email</button>
+            <button type="button" class="compose-tab" data-compose="sms"><span aria-hidden="true">📱</span> SMS</button>
+            <button type="button" class="compose-tab" data-compose="note"><span aria-hidden="true">📝</span> Note</button>
           </div>
 
           <!-- Email panel -->
@@ -776,6 +793,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=32"></script>
+<script src="/admin/app.js?v=33"></script>
 </body>
 </html>

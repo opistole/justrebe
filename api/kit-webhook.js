@@ -35,6 +35,20 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Shared-secret check. Kit V4 webhooks don't support signing yet, but we
+  // can append ?secret=… to the webhook URL when we register it, then
+  // verify here. Anyone POSTing without the secret gets 403.
+  const expectedSecret = process.env.KIT_WEBHOOK_SECRET;
+  if (expectedSecret) {
+    const providedSecret = (req.query && req.query.secret) || req.headers['x-kit-webhook-secret'] || '';
+    if (providedSecret !== expectedSecret) {
+      console.warn('[kit-webhook] Invalid or missing secret, rejecting');
+      return res.status(403).json({ error: 'Invalid secret' });
+    }
+  } else {
+    console.warn('[kit-webhook] KIT_WEBHOOK_SECRET not configured — webhook is OPEN to the internet.');
+  }
+
   const rawUrl = process.env.SUPABASE_URL;
   const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!rawUrl || !SERVICE_KEY) {

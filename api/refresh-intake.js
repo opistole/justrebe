@@ -52,9 +52,13 @@ module.exports = async function handler(req, res) {
   const fullName = String(body.full_name || '').trim();
   const email = String(body.email || '').trim().toLowerCase();
   const phone = normalizePhone(body.phone);
-  const seatType = ['facilitator', 'attendee', 'comped', 'other'].includes(String(body.seat_type || '').toLowerCase())
+  // SECURITY: the public form must never let a stranger self-mark as a
+  // paying 'attendee'. Only facilitators / comped / other are accepted
+  // from the public POST. 'attendee' / 'paid' can only be set server-side
+  // by the Stripe webhook or by admin/staff via the CRM.
+  const seatType = ['facilitator', 'comped', 'other'].includes(String(body.seat_type || '').toLowerCase())
     ? String(body.seat_type).toLowerCase()
-    : 'attendee';
+    : 'other';
 
   if (!fullName) return res.status(400).json({ error: 'Full name required' });
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {

@@ -26,9 +26,38 @@ function normalizePhone(p) {
   return `+${digits}`;
 }
 
+const crypto = require('crypto');
+
+// Validate OpenPhone webhook signature. OpenPhone sends an HMAC-SHA256 of
+// the raw body in 'openphone-signature' header. Skip if no secret env
+// var is set (with warning).
+function isValidOpenPhoneSignature(req) {
+  const secret = process.env.OPENPHONE_WEBHOOK_SECRET;
+  if (!secret) {
+    console.warn('[openphone-incoming] OPENPHONE_WEBHOOK_SECRET not set — signature NOT verified.');
+    return true;
+  }
+  const sigHeader = req.headers['openphone-signature'] || req.headers['x-openphone-signature'] || '';
+  if (!sigHeader) return false;
+  const rawBody = typeof req.body === 'string'
+    ? req.body
+    : JSON.stringify(req.body || {});
+  const computed = crypto.createHmac('sha256', secret).update(rawBody, 'utf8').digest('hex');
+  try {
+    return crypto.timingSafeEqual(Buffer.from(computed), Buffer.from(sigHeader));
+  } catch {
+    return false;
+  }
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  if (!isValidOpenPhoneSignature(req)) {
+    console.warn('[openphone-incoming] Invalid signature, rejecting');
+    return res.status(403).json({ error: 'Invalid signature' });
   }
 
   const rawUrl = process.env.SUPABASE_URL;

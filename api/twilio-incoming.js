@@ -19,10 +19,41 @@
 // Twilio posts application/x-www-form-urlencoded — Vercel auto-parses this
 // into req.body when bodyParser is left on (default).
 
+const crypto = require('crypto');
+
+// Validate Twilio's X-Twilio-Signature header. Returns true if valid (or
+// if TWILIO_AUTH_TOKEN isn't set, in which case we log + skip).
+// Signature spec: HMAC-SHA1(authToken, fullUrl + sorted POST params concatenated as key+value)
+function isValidTwilioSignature(req) {
+  const authToken = process.env.TWILIO_AUTH_TOKEN;
+  if (!authToken) {
+    console.warn('[twilio-incoming] TWILIO_AUTH_TOKEN not set — signature NOT verified.');
+    return true;
+  }
+  const sigHeader = req.headers['x-twilio-signature'] || '';
+  const proto = req.headers['x-forwarded-proto'] || 'https';
+  const host  = req.headers['x-forwarded-host']  || req.headers.host;
+  const url   = `${proto}://${host}${req.url}`;
+  const params = req.body || {};
+  const keys = Object.keys(params).sort();
+  const concatenated = keys.reduce((acc, k) => acc + k + params[k], url);
+  const computed = crypto.createHmac('sha1', authToken).update(Buffer.from(concatenated, 'utf-8')).digest('base64');
+  try {
+    return crypto.timingSafeEqual(Buffer.from(computed), Buffer.from(sigHeader));
+  } catch {
+    return false;
+  }
+}
+
 module.exports = async function handler(req, res) {
   // Twilio always uses POST for webhooks
   if (req.method !== 'POST') {
     return res.status(405).send('Method not allowed');
+  }
+
+  if (!isValidTwilioSignature(req)) {
+    console.warn('[twilio-incoming] Invalid signature, rejecting');
+    return res.status(403).send('Invalid signature');
   }
 
   const body = req.body || {};
