@@ -613,7 +613,7 @@
         .order('created_at', { ascending: false })
         .limit(500),
       sb.from('refresh_signups')
-        .select('id, full_name, email, phone, status, readiness, preferred_group_time, seat_type, intake_completed, area_needing_refresh, reason_for_interest, previous_rebe_experience, paid_amount_cents, paid_at, created_at')
+        .select('id, full_name, email, phone, status, readiness, preferred_group_time, seat_type, area_needing_refresh, reason_for_interest, previous_rebe_experience, paid_amount_cents, paid_at, created_at')
         .order('created_at', { ascending: false })
         .limit(500),
       sb.from('customer_notes')
@@ -659,27 +659,34 @@
       const paidAmount = s.paid_amount_cents || 0;
       const seat = (s.seat_type || '').toLowerCase();
       const readiness = s.readiness || '';
-      // Explicit DB column wins; fall back to inferring from seat_type or
-      // free-text intake fields if it hasn't been set yet.
-      const intakeDone = (s.intake_completed === true) || (s.intake_completed === null && (
+      const status = s.status || '';
+      // Intake-done inference — works WITHOUT migration 019 by using existing
+      // columns. Cast everything to string before truthy-check so a BOOLEAN
+      // column like previous_rebe_experience doesn't throw.
+      const hasIntakeContent = !!(
         ['attendee', 'facilitator', 'comped', 'other'].includes(seat)
-        || (s.area_needing_refresh && s.area_needing_refresh.trim())
-        || (s.reason_for_interest && s.reason_for_interest.trim())
-        || (s.previous_rebe_experience && s.previous_rebe_experience.trim())
-      ));
+        || (s.area_needing_refresh && String(s.area_needing_refresh).trim())
+        || (s.reason_for_interest && String(s.reason_for_interest).trim())
+        || (s.previous_rebe_experience !== null && s.previous_rebe_experience !== undefined && s.previous_rebe_experience !== false && String(s.previous_rebe_experience).trim())
+      );
+      const intakeDone = hasIntakeContent;
 
-      // 'paid' = actually paid money (not just status='enrolled')
+      // 'paid' = actually paid money
       if (paidAmount > 0) existing.sources.add('paid');
-      // Track specific intake categories so we can filter facilitators later
+      // Specific intake categories
       if (seat === 'attendee')    existing.sources.add('attendee');
       if (seat === 'facilitator') existing.sources.add('facilitator');
       if (seat === 'comped')      existing.sources.add('comped');
 
-      // 'cohort' = in the cohort = paid OR completed intake form (facilitator/attendee/comped/other)
-      // Excludes raw leads (wants_more_info) and waitlist.
-      if (paidAmount > 0 || intakeDone) existing.sources.add('cohort');
+      // 'cohort' = in the cohort. Trust status='enrolled' as the primary
+      // signal (Stripe webhook + intake form both set it). Also include
+      // paid customers + intake-done customers as a safety net for any
+      // rows where status didn't get set.
+      const isLeadOrWaitlist = (readiness === 'wants_more_info' || readiness === 'waitlist');
+      if ((status === 'enrolled' || paidAmount > 0 || intakeDone) && !isLeadOrWaitlist) {
+        existing.sources.add('cohort');
+      }
 
-      // Lead / waitlist labels — kept separate from 'cohort'
       if (readiness === 'wants_more_info') existing.sources.add('lead');
       if (readiness === 'waitlist')        existing.sources.add('waitlist');
 

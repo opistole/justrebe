@@ -17,12 +17,14 @@ ALTER TABLE refresh_signups
 
 -- Backfill: anyone with an intake-style seat_type OR who has any
 -- of the free-text intake fields filled in is treated as 'done'.
+-- Cast each field to text in case the schema is using different types
+-- (e.g. previous_rebe_experience may be a BOOLEAN, not TEXT).
 UPDATE refresh_signups
 SET intake_completed = TRUE
 WHERE intake_completed IS NULL
   AND (
     seat_type IN ('attendee', 'facilitator', 'comped', 'other')
-    OR COALESCE(area_needing_refresh, '') <> ''
-    OR COALESCE(reason_for_interest,  '') <> ''
-    OR COALESCE(previous_rebe_experience, '') <> ''
+    OR COALESCE(area_needing_refresh::text,     '') <> ''
+    OR COALESCE(reason_for_interest::text,      '') <> ''
+    OR COALESCE(previous_rebe_experience::text, '') <> ''
   );
