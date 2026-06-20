@@ -105,11 +105,16 @@ module.exports = async function handler(req, res) {
     preferred_group_time:     slot ? String(slot).trim() : null,
     area_needing_refresh:     body.area_needing_refresh     ? String(body.area_needing_refresh).trim()     : null,
     reason_for_interest:      body.reason_for_interest      ? String(body.reason_for_interest).trim()      : null,
+    // previous_rebe_experience is a BOOLEAN column in the schema:
+    // - 'First time' means no prior experience → false
+    // - Any other value means they have prior experience → true
+    // The exact value ('Reset workshop' / 'REAL TALK program' / etc.) is
+    // also preserved verbatim in the notes block below for full detail.
     previous_rebe_experience: body.prior_experience
-      ? String(body.prior_experience).trim()
-      : body.previous_rebe_experience
-        ? String(body.previous_rebe_experience).trim()
-        : null,
+      ? (String(body.prior_experience).trim().toLowerCase() === 'first time' ? false : true)
+      : (body.previous_rebe_experience === true || body.previous_rebe_experience === false
+          ? body.previous_rebe_experience
+          : null),
     organization_name:        body.organization_name        ? String(body.organization_name).trim()        : null,
     role_title:               body.role_title               ? String(body.role_title).trim()               : null,
     notes:                    extraNotes || null,
