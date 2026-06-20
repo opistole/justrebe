@@ -79,7 +79,9 @@ module.exports = async function handler(req, res) {
   const row = {
     full_name: fullName,
     email,
-    phone,
+    // 'phone' is NOT NULL in refresh_signups — default to '' if blank
+    // so the insert doesn't violate the constraint.
+    phone: phone || '',
     seat_type: seatType,
     status: 'enrolled',
     readiness: 'ready_to_pay',  // closest valid enum value for a confirmed seat

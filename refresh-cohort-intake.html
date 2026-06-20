@@ -236,6 +236,17 @@
   var card = document.getElementById('form-card');
   var ok   = document.getElementById('success-card');
 
+  // Allow ?thanks=1 to land directly on the confirmation panel — used
+  // when someone's first submit attempt errored and we need to send them
+  // a confirmation link without having them re-fill the form.
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('thanks') === '1' || params.get('thanks') === 'true') {
+      if (card) card.style.display = 'none';
+      if (ok)   ok.classList.remove('hidden');
+    }
+  } catch (_) {}
+
   function showError(msg) {
     err.textContent = msg;
     err.classList.add('show');
