@@ -390,13 +390,13 @@
 
     if (route === 'customers') {
       viewCustomers.classList.remove('hidden');
-      // Apply ?filter=… from dashboard cards
-      if (queryParams.filter) {
-        currentFilter = queryParams.filter;
-        document.querySelectorAll('.filter-pill').forEach((b) => {
-          b.classList.toggle('active', b.getAttribute('data-filter') === currentFilter);
-        });
-      }
+      // Reset filter to 'all' first so the Customers nav link always lands you
+      // on a clean unfiltered list, then re-apply ?filter=… if present from a
+      // dashboard card.
+      currentFilter = queryParams.filter || 'all';
+      document.querySelectorAll('#view-customers .filter-pill').forEach((b) => {
+        b.classList.toggle('active', b.getAttribute('data-filter') === currentFilter);
+      });
       loadCustomerList();
     } else if (route === 'pilots') {
       if (viewPilots) viewPilots.classList.remove('hidden');
@@ -516,6 +516,11 @@
   if (inviteModal)  inviteModal.addEventListener('click', (e) => {
     if (e.target === inviteModal) closeInviteModal();
   });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && inviteModal && inviteModal.classList.contains('open')) {
+      closeInviteModal();
+    }
+  });
 
   if (inviteSubmit) {
     inviteSubmit.addEventListener('click', async () => {
@@ -634,6 +639,24 @@
       .sort((a, b) => (b.firstSeen || '').localeCompare(a.firstSeen || ''));
 
     listLoading.classList.add('hidden');
+
+    // Show a banner if either source hit the 500-row cap so we don't silently
+    // lose customers as the business grows.
+    const limitHit = (contactsRes.data || []).length >= 500 || (cohortRes.data || []).length >= 500;
+    let banner = document.getElementById('customer-limit-banner');
+    if (limitHit) {
+      if (!banner) {
+        banner = document.createElement('div');
+        banner.id = 'customer-limit-banner';
+        banner.style.cssText = 'background:var(--gold-wash);border:1px solid #ead7a8;color:var(--gold-ink);padding:10px 14px;border-radius:10px;font-size:13px;margin:0 0 12px;font-weight:600';
+        banner.textContent = 'Showing up to 500 customers per source — use search to find specific people, or ask for the cap to be raised.';
+        const toolbar = document.querySelector('#view-customers .toolbar');
+        if (toolbar && toolbar.parentNode) toolbar.parentNode.insertBefore(banner, toolbar);
+      }
+    } else if (banner) {
+      banner.remove();
+    }
+
     renderCustomerList();
   }
 
@@ -1000,6 +1023,12 @@
     hideMsg(emailSendError); hideMsg(emailSendSuccess);
     hideMsg(smsSendError);   hideMsg(smsSendSuccess);
     hideMsg(noteError);
+
+    // Reset compose tab back to Email so we never start on a stale tab
+    composeTabs.forEach((t) => t.classList.toggle('active', t.getAttribute('data-compose') === 'email'));
+    Object.entries(composePanels).forEach(([k, p]) => {
+      if (p) p.classList.toggle('hidden', k !== 'email');
+    });
 
     // Unified activity feed: notes + sent emails + sent texts + kit events
     renderActivity(notes, activities, kitEvents);

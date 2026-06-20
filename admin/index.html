@@ -13,34 +13,75 @@
 
 <style>
   :root {
-    --paper:#FFFFFF; --mist:#FAF9F7; --navy:#252C5C; --navy-dark:#040832;
+    --paper:#FFFFFF; --mist:#F5F6F8; --navy:#252C5C; --navy-dark:#040832;
     --green:#449945; --green-ink:#3A8438; --green-deep:#2A6D2C; --green-wash:#F2F8F2;
     --gold:#E3A01F; --gold-ink:#B07D14; --gold-wash:#FBF4E4;
-    --slate:#212B37; --body:#4A535E; --muted:#9DA1A8; --bone:#E2E2E2; --coral:#EA492E;
+    --slate:#0F172A; --body:#475569; --muted:#94A3B8; --bone:#E5E7EB; --coral:#EA492E;
+    --side:#EEF1F6; --side-hover:#E5E9F0;
     --serif:'Fraunces',Georgia,serif;
     --sans:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
     --ease:cubic-bezier(.16,1,.3,1);
+
+    --sidebar-w:220px;
   }
   *,*::before,*::after{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{margin:0;background:var(--mist);color:var(--body);font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
 
-  /* === Header === */
-  .admin-bar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:12px 24px;display:flex;align-items:center;gap:24px;box-shadow:0 4px 12px rgba(6,11,80,.18);flex-wrap:wrap}
-  .admin-bar .wordmark{font-family:var(--serif);font-weight:600;font-size:18px;color:#fff;text-decoration:none;letter-spacing:-.005em;flex-shrink:0}
-  .admin-bar .wordmark .accent{color:var(--gold)}
-  .admin-bar nav{display:flex;gap:4px;flex:1;min-width:0}
-  .admin-bar nav a{color:rgba(255,255,255,.7);text-decoration:none;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;letter-spacing:.02em;transition:background .15s,color .15s}
-  .admin-bar nav a:hover{background:rgba(255,255,255,.08);color:#fff}
-  .admin-bar nav a.active{background:var(--green-ink);color:#fff}
-  .admin-bar .who{display:flex;align-items:center;gap:12px;font-size:12px;color:rgba(255,255,255,.85)}
-  .admin-bar .who .email{max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .admin-bar .role-pill{background:var(--green-ink);padding:3px 9px;border-radius:999px;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
-  .admin-bar .logout-btn{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:999px;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:.04em;transition:background .2s}
-  .admin-bar .logout-btn:hover{background:rgba(255,255,255,.22)}
+  /* === Sidebar + topbar layout (Tyler-inspired) === */
+  .app-shell{display:flex;min-height:100vh;background:var(--mist)}
 
-  /* === Layout === */
-  main{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);
+    background:var(--side);border-right:1px solid var(--bone);
+    padding:22px 14px 14px;display:flex;flex-direction:column;gap:18px;z-index:40;
+  }
+  .sidebar .brand{display:flex;align-items:center;gap:9px;padding:0 10px 6px;text-decoration:none}
+  .sidebar .brand .mark{
+    width:26px;height:26px;border-radius:50%;background:var(--navy);
+    display:grid;place-items:center;flex-shrink:0;
+  }
+  .sidebar .brand .mark::after{content:"";display:block;width:14px;height:14px;border-radius:50%;border:3px solid var(--gold);border-top-color:transparent;transform:rotate(40deg)}
+  .sidebar .brand .wordmark{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--slate);letter-spacing:-.01em}
+  .sidebar .brand .wordmark .accent{color:var(--gold-ink)}
+
+  .sidebar nav{display:flex;flex-direction:column;gap:2px;flex:1}
+  .sidebar nav a{
+    display:flex;align-items:center;gap:10px;padding:9px 12px;
+    color:var(--body);text-decoration:none;border-radius:8px;
+    font-size:13px;font-weight:600;letter-spacing:.01em;
+    transition:background .15s,color .15s;
+  }
+  .sidebar nav a .icon{flex-shrink:0;opacity:.65}
+  .sidebar nav a:hover{background:var(--side-hover);color:var(--slate)}
+  .sidebar nav a.active{background:#fff;color:var(--navy);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .sidebar nav a.active .icon{opacity:1}
+
+  .sidebar .side-foot{padding:10px 12px 4px;border-top:1px solid var(--bone);font-size:11px;color:var(--muted)}
+
+  .topbar{
+    position:sticky;top:0;z-index:30;
+    background:rgba(245,246,248,.85);backdrop-filter:saturate(180%) blur(10px);
+    -webkit-backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--bone);
+    padding:10px 28px;display:flex;align-items:center;gap:14px;
+  }
+  .topbar .search{flex:1;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--bone);border-radius:10px;padding:6px 12px;color:var(--muted);font-size:13px;max-width:560px;cursor:default}
+  .topbar .search .kbd{margin-left:auto;font-family:var(--sans);font-size:11px;color:var(--muted);background:var(--mist);padding:2px 6px;border-radius:4px;border:1px solid var(--bone)}
+  .topbar .who{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--slate);margin-left:auto}
+  .topbar .who .email{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--body);font-weight:600}
+  .topbar .role-pill{background:var(--green-wash);color:var(--green-deep);padding:3px 9px;border-radius:999px;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid #BFE3BF}
+  .topbar .logout-btn{background:transparent;color:var(--body);border:1px solid var(--bone);padding:6px 12px;border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s}
+  .topbar .logout-btn:hover{background:var(--side)}
+
+  main{padding:24px 28px 80px;max-width:1280px}
+
+  @media (max-width:880px){
+    :root{--sidebar-w:0px}
+    .sidebar{transform:translateX(-100%);transition:transform .25s}
+    .sidebar.open{transform:translateX(0)}
+    main{padding:18px 18px 80px}
+  }
 
   /* === Login === */
   .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--mist)}
@@ -62,18 +103,21 @@
   .magic-toggle{display:block;margin:14px auto 0;background:transparent;border:0;color:var(--green-ink);text-decoration:underline;font-size:12px;cursor:pointer;font-family:inherit;letter-spacing:.04em}
 
   /* === Welcome + stats === */
-  .welcome{background:linear-gradient(135deg,var(--gold-wash) 0%,var(--green-wash) 100%);border-radius:14px;padding:24px 28px;margin:0 0 24px;border:1px solid #ead7a8}
-  .welcome h2{font-family:var(--serif);font-weight:600;font-size:24px;color:var(--navy);margin:0 0 6px;letter-spacing:-.005em}
-  .welcome p{margin:0;font-size:14px;color:var(--body)}
+  /* "Hey Osil." style hero card — clean, no gradient */
+  .welcome{background:transparent;border:0;border-radius:0;padding:8px 0 4px;margin:0 0 22px}
+  .welcome h2{font-family:var(--serif);font-weight:600;font-size:32px;color:var(--slate);margin:0 0 6px;letter-spacing:-.015em;line-height:1.1}
+  .welcome p{margin:0;font-size:14px;color:var(--muted)}
+  .welcome.panel{background:#fff;border:1px solid var(--bone);border-radius:12px;padding:18px 22px;margin:0 0 20px}
+  .welcome.panel h2{font-size:18px;letter-spacing:-.005em;margin:0 0 4px}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:0 0 28px}
-  .card{background:#fff;border-radius:12px;padding:20px 22px;box-shadow:0 4px 14px rgba(6,11,80,.06);border:1px solid var(--bone)}
-  .card .card-label{font-family:var(--sans);font-weight:700;font-size:10px;letter-spacing:.22em;color:var(--green-ink);text-transform:uppercase;margin:0 0 8px}
-  .card .card-number{font-family:var(--serif);font-weight:600;font-size:38px;color:var(--navy);line-height:1;margin:0 0 4px;letter-spacing:-.01em}
-  .card .card-sub{font-size:12px;color:var(--muted);margin:0}
-  a.card-link{text-decoration:none;color:inherit;display:block;transition:transform .15s,box-shadow .15s,border-color .15s;cursor:pointer}
-  a.card-link:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(6,11,80,.10);border-color:var(--green)}
-  a.card-link:hover .card-sub{color:var(--green-ink)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:0 0 28px}
+  .card{background:#fff;border-radius:12px;padding:20px 22px;border:1px solid var(--bone);box-shadow:0 1px 2px rgba(15,23,42,.04)}
+  .card .card-label{font-family:var(--sans);font-weight:700;font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin:0 0 8px}
+  .card .card-number{font-family:var(--serif);font-weight:600;font-size:38px;color:var(--slate);line-height:1;margin:0 0 6px;letter-spacing:-.02em}
+  .card .card-sub{font-size:12px;color:var(--muted);margin:0;font-weight:500}
+  a.card-link{text-decoration:none;color:inherit;display:block;transition:border-color .15s,box-shadow .15s;cursor:pointer}
+  a.card-link:hover{border-color:var(--navy);box-shadow:0 4px 12px rgba(15,23,42,.08)}
+  a.card-link:hover .card-sub{color:var(--navy)}
 
   /* === Customer list === */
   .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 18px}
@@ -270,21 +314,34 @@
 </div>
 
 <!-- ============== APP SHELL (visible when authed) ============== -->
-<div id="app-view" class="hidden">
+<div id="app-view" class="app-shell hidden">
 
-  <header class="admin-bar">
-    <a class="wordmark" href="#dashboard">ReBe<span class="accent"> · Admin</span></a>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#dashboard">
+      <span class="mark"></span>
+      <span class="wordmark">re·<span class="accent">be</span></span>
+    </a>
     <nav id="nav-links">
-      <a href="#dashboard" data-route="dashboard">Dashboard</a>
-      <a href="#customers" data-route="customers">Customers</a>
-      <a href="#pilots" data-route="pilots">Pilots</a>
+      <a href="#dashboard" data-route="dashboard"><span class="icon">▦</span>Dashboard</a>
+      <a href="#customers" data-route="customers"><span class="icon">☰</span>Customers</a>
+      <a href="#pilots" data-route="pilots"><span class="icon">⌖</span>Pilots</a>
     </nav>
-    <div class="who">
-      <span class="email" id="user-email">—</span>
-      <span class="role-pill" id="user-role">—</span>
-      <button type="button" class="logout-btn" id="logout-btn">Log out</button>
-    </div>
-  </header>
+    <div class="side-foot">ReBe Admin · v0.6</div>
+  </aside>
+
+  <div style="flex:1;margin-left:var(--sidebar-w);min-width:0">
+    <header class="topbar">
+      <div class="search">
+        <span style="opacity:.6">⌕</span>
+        <span>Search customers, pilots, notes…</span>
+        <span class="kbd">⌘K</span>
+      </div>
+      <div class="who">
+        <span class="email" id="user-email">—</span>
+        <span class="role-pill" id="user-role">—</span>
+        <button type="button" class="logout-btn" id="logout-btn">Log out</button>
+      </div>
+    </header>
 
   <main>
 
@@ -294,15 +351,15 @@
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap">
           <div style="flex:1;min-width:240px">
             <h2 id="welcome-name">Welcome.</h2>
-            <p>Your team CRM. Click <strong>Customers</strong> to see everyone — search, filter, send messages, and add notes.</p>
+            <p>Your customers, pilots, tasks, and team comms — all in one place.</p>
           </div>
           <button type="button" id="invite-btn" class="invite-btn hidden">+ Invite teammate</button>
         </div>
       </div>
 
-      <div class="welcome" style="background:linear-gradient(135deg,#FBF4E4 0%,#F2F8F2 100%)">
-        <h2 style="font-size:20px">Your tasks</h2>
-        <div id="my-tasks-list" class="tasks-list" style="margin-top:14px">
+      <div class="welcome panel">
+        <h2>On your plate</h2>
+        <div id="my-tasks-list" class="tasks-list" style="margin-top:12px">
           <div class="tasks-empty">No open tasks. Nice.</div>
         </div>
       </div>
@@ -537,7 +594,8 @@
     <p class="admin-footer">ReBe ReFresh · Internal use only</p>
 
   </main>
-</div>
+  </div><!-- /content-wrap -->
+</div><!-- /app-shell -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <div id="invite-modal" class="modal-backdrop">
@@ -567,6 +625,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=19"></script>
+<script src="/admin/app.js?v=20"></script>
 </body>
 </html>
