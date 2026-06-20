@@ -1838,8 +1838,8 @@
       const displayName = m.full_name || friendlyActorName(m.email) || m.email;
       const isMe = currentUser && m.user_id === currentUser.id;
       const avatarHtml = m.avatar_url
-        ? `<div style="width:44px;height:44px;border-radius:50%;flex-shrink:0;background:#fff;overflow:hidden;border:1px solid var(--bone)"><img src="${escapeHtml(m.avatar_url)}" alt="" style="width:100%;height:100%;object-fit:cover"></div>`
-        : `<div style="width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0">${escapeHtml(initials)}</div>`;
+        ? `<div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:#fff;overflow:hidden;border:1px solid var(--bone)"><img src="${escapeHtml(m.avatar_url)}" alt="" style="width:100%;height:100%;object-fit:cover"></div>`
+        : `<div style="width:80px;height:80px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:24px;flex-shrink:0">${escapeHtml(initials)}</div>`;
       const titleLine = m.title
         ? `<p style="margin:2px 0 0;font-size:12px;color:var(--body)">${escapeHtml(m.title)}</p>`
         : '';
