@@ -36,12 +36,8 @@
     background:var(--side);border-right:1px solid var(--bone);
     padding:22px 14px 14px;display:flex;flex-direction:column;gap:18px;z-index:40;
   }
-  .sidebar .brand{display:flex;align-items:center;gap:9px;padding:0 10px 6px;text-decoration:none}
-  .sidebar .brand .mark{
-    width:26px;height:26px;border-radius:50%;background:var(--navy);
-    display:grid;place-items:center;flex-shrink:0;
-  }
-  .sidebar .brand .mark::after{content:"";display:block;width:14px;height:14px;border-radius:50%;border:3px solid var(--gold);border-top-color:transparent;transform:rotate(40deg)}
+  .sidebar .brand{display:flex;align-items:center;gap:10px;padding:0 8px 6px;text-decoration:none}
+  .sidebar .brand img.logo{height:32px;width:auto;display:block;flex-shrink:0}
   .sidebar .brand .wordmark{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--slate);letter-spacing:-.01em}
   .sidebar .brand .wordmark .accent{color:var(--gold-ink)}
 
@@ -318,8 +314,7 @@
 
   <aside class="sidebar" id="sidebar">
     <a class="brand" href="#dashboard">
-      <span class="mark"></span>
-      <span class="wordmark">re·<span class="accent">be</span></span>
+      <img class="logo" src="/Logo_Blue.png" alt="ReBe">
     </a>
     <nav id="nav-links">
       <a href="#dashboard" data-route="dashboard"><span class="icon">▦</span>Dashboard</a>
