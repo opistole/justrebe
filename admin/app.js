@@ -661,10 +661,13 @@
       const readiness = s.readiness || '';
       const status = s.status || '';
       // Intake-done logic: explicit column wins. If not set yet, fall back
-      // to inference from seat_type + free-text fields. Cast values to
-      // string before .trim() so BOOLEAN columns don't blow up.
+      // to inference. Stripe Checkout collects intake-style custom fields
+      // as part of the payment flow — so anyone with a stripe_session_id
+      // has completed intake even though the values weren't persisted
+      // into the dedicated columns.
       const hasIntakeContent = !!(
-        ['attendee', 'facilitator', 'comped', 'other'].includes(seat)
+        paidAmount > 0 // Stripe-paid customers had to fill the Checkout custom fields
+        || ['attendee', 'facilitator', 'comped', 'other'].includes(seat)
         || (s.area_needing_refresh && String(s.area_needing_refresh).trim())
         || (s.reason_for_interest && String(s.reason_for_interest).trim())
         || (s.previous_rebe_experience !== null && s.previous_rebe_experience !== undefined && s.previous_rebe_experience !== false && String(s.previous_rebe_experience).trim())
@@ -1007,7 +1010,7 @@
         .select('first_name, last_name, email, phone, sms_consent, marketing_consent, notes, created_at')
         .ilike('email', currentDetailEmail).limit(1),
       sb.from('refresh_signups')
-        .select('full_name, email, phone, status, readiness, preferred_group_time, audience_type, group_type, area_needing_refresh, reason_for_interest, previous_rebe_experience, organization_name, role_title, notes, paid_amount_cents, paid_at, stripe_session_id, created_at')
+        .select('full_name, email, phone, status, readiness, preferred_group_time, audience_type, group_type, seat_type, intake_completed, area_needing_refresh, reason_for_interest, previous_rebe_experience, organization_name, role_title, notes, paid_amount_cents, paid_at, stripe_session_id, created_at')
         .ilike('email', currentDetailEmail).order('created_at', { ascending: false }).limit(1),
       sb.from('customer_notes')
         .select('id, body, author_id, author_email, created_at, updated_at')
@@ -1109,15 +1112,43 @@
 
     cdReadiness.textContent = (cohort && cohort.readiness) || '—';
 
-    // Source tags
+    // Source + slot + intake tags
     const tags = [];
     if (contact) tags.push({ label: 'Workshop', cls: 'workshop' });
     if (cohort && cohort.status === 'enrolled') tags.push({ label: 'Paid cohort', cls: 'paid' });
     if (cohort && cohort.readiness === 'wants_more_info') tags.push({ label: 'Cohort lead', cls: 'lead' });
     if (cohort && cohort.readiness === 'waitlist') tags.push({ label: 'Waitlist', cls: 'waitlist' });
-    cdTags.innerHTML = tags.length
+
+    // Slot tag (11 AM / 8 PM if known)
+    const slotLowerD = (cohort && cohort.preferred_group_time || '').toLowerCase();
+    let slotTagHtml = '';
+    if (slotLowerD.includes('11')) {
+      slotTagHtml = `<span class="source-tag" style="background:#FBF4E4;color:#B07D14;border:1px solid #ead7a8">11 AM ET</span>`;
+    } else if (slotLowerD.includes('8')) {
+      slotTagHtml = `<span class="source-tag" style="background:#E9EDFB;color:#252C5C;border:1px solid #C8D0EE">8 PM ET</span>`;
+    }
+
+    // Intake-status tag — uses the same logic as the list view
+    let intakeTagHtml = '';
+    if (cohort && cohort.status === 'enrolled') {
+      const seatD = (cohort.seat_type || '').toLowerCase();
+      const paidD = cohort.paid_amount_cents || 0;
+      const hasContent = paidD > 0
+        || ['attendee', 'facilitator', 'comped', 'other'].includes(seatD)
+        || (cohort.area_needing_refresh && String(cohort.area_needing_refresh).trim())
+        || (cohort.reason_for_interest && String(cohort.reason_for_interest).trim())
+        || (cohort.previous_rebe_experience !== null && cohort.previous_rebe_experience !== undefined && cohort.previous_rebe_experience !== false && String(cohort.previous_rebe_experience).trim());
+      const inferredDone = cohort.intake_completed === true
+        ? true
+        : cohort.intake_completed === false ? false : !!hasContent;
+      intakeTagHtml = inferredDone
+        ? `<span class="source-tag" style="background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF">✓ Intake</span>`
+        : `<span class="source-tag" style="background:#FFF1EE;color:#A33421;border:1px solid #F5B9AD">Needs intake</span>`;
+    }
+
+    cdTags.innerHTML = (tags.length
       ? tags.map((t) => `<span class="source-tag ${t.cls}">${escapeHtml(t.label)}</span>`).join('')
-      : '';
+      : '') + slotTagHtml + intakeTagHtml;
 
     // Intake / context
     const intakeBits = [];
