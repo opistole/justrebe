@@ -1928,27 +1928,38 @@
 
   // Photo upload
   const acctPhotoInput = document.getElementById('acct-photo-input');
+  const acctAvatarWrap = document.getElementById('acct-avatar-wrap');
+  if (acctAvatarWrap && acctPhotoInput) {
+    acctAvatarWrap.addEventListener('click', (e) => {
+      e.preventDefault();
+      acctPhotoInput.click();
+    });
+  }
   if (acctPhotoInput) {
     acctPhotoInput.addEventListener('change', async (e) => {
-      const file = e.target.files && e.target.files[0];
-      if (!file || !currentUser) return;
-      if (file.size > 5 * 1024 * 1024) {
-        showError(document.getElementById('acct-error'), 'Photo too large (max 5 MB).');
-        acctPhotoInput.value = '';
-        return;
-      }
       const errEl = document.getElementById('acct-error');
       const okEl  = document.getElementById('acct-success');
       hideMsg(errEl); hideMsg(okEl);
 
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      if (!currentUser) { showError(errEl, 'Not signed in.'); return; }
+      if (file.size > 5 * 1024 * 1024) {
+        showError(errEl, 'Photo too large (max 5 MB).');
+        acctPhotoInput.value = '';
+        return;
+      }
+
       // Build storage path: <user_id>/avatar-<timestamp>.<ext>
-      // Including a timestamp ensures the URL changes (defeats browser cache).
-      const ext = (file.name.match(/\.(\w+)$/) || ['', 'png'])[1].toLowerCase();
-      const ts  = Math.floor((currentUser.last_sign_in_at ? new Date(currentUser.last_sign_in_at).getTime() : 0) + Math.random() * 1e6);
+      const ext = ((file.name.match(/\.(\w+)$/) || [])[1] || 'png').toLowerCase();
+      const ts  = Math.floor(performance.now() * 1000);
       const path = `${currentUser.id}/avatar-${ts}.${ext}`;
 
       const avatarEl = document.getElementById('acct-avatar');
+      const previousAvatarHtml = avatarEl ? avatarEl.innerHTML : '';
       if (avatarEl) avatarEl.textContent = '…';
+
+      console.log('[avatar upload] uploading to', path, 'size', file.size, 'type', file.type);
 
       const { error: upErr } = await sb.storage.from('avatars').upload(path, file, {
         cacheControl: '3600',
@@ -1956,14 +1967,30 @@
         contentType: file.type || 'image/png',
       });
       if (upErr) {
-        showError(errEl, 'Upload failed: ' + upErr.message);
-        loadAccount();
+        console.error('[avatar upload] storage upload error:', upErr);
+        // Restore previous avatar state
+        if (avatarEl) avatarEl.innerHTML = previousAvatarHtml;
+        // Common cause: migration 022 not run → bucket missing
+        const msg = (upErr.message || String(upErr)).toLowerCase();
+        if (msg.includes('not found') || msg.includes('bucket')) {
+          showError(errEl,
+            'Upload failed: the avatars storage bucket doesn\'t exist yet. ' +
+            'Run migration 022 in Supabase SQL Editor to create it. ' +
+            '(' + upErr.message + ')');
+        } else if (msg.includes('row-level security') || msg.includes('policy')) {
+          showError(errEl,
+            'Upload failed: storage policy blocked the write. ' +
+            'Re-run migration 022 to set up policies. (' + upErr.message + ')');
+        } else {
+          showError(errEl, 'Upload failed: ' + upErr.message);
+        }
         return;
       }
 
       // Public URL
       const { data: pub } = sb.storage.from('avatars').getPublicUrl(path);
       const avatarUrl = pub && pub.publicUrl;
+      console.log('[avatar upload] public URL:', avatarUrl);
 
       // Save URL to user_metadata
       const { data, error: userErr } = await sb.auth.updateUser({
@@ -1973,6 +2000,8 @@
         },
       });
       if (userErr) {
+        console.error('[avatar upload] user-metadata save error:', userErr);
+        if (avatarEl) avatarEl.innerHTML = previousAvatarHtml;
         showError(errEl, 'Photo uploaded but profile save failed: ' + userErr.message);
         return;
       }
