@@ -38,7 +38,8 @@
     padding:22px 14px 14px;display:flex;flex-direction:column;gap:18px;z-index:40;
   }
   .sidebar .brand{display:flex;align-items:center;gap:10px;padding:0 8px 6px;text-decoration:none}
-  .sidebar .brand img.logo{height:32px;width:auto;display:block;flex-shrink:0}
+  .sidebar .brand{padding:4px 8px 14px}
+  .sidebar .brand img.logo{height:48px;width:auto;display:block;flex-shrink:0}
   .sidebar .brand .wordmark{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--slate);letter-spacing:-.01em}
   .sidebar .brand .wordmark .accent{color:var(--gold-ink)}
 
@@ -63,7 +64,9 @@
     border-bottom:1px solid var(--bone);
     padding:10px 28px;display:flex;align-items:center;gap:14px;
   }
-  .topbar .search{flex:1;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--bone);border-radius:10px;padding:6px 12px;color:var(--muted);font-size:13px;max-width:560px;cursor:default}
+  .topbar .search{flex:1;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--bone);border-radius:10px;padding:6px 12px;color:var(--muted);font-size:13px;max-width:560px}
+  .topbar .search input{border:0;outline:0;background:transparent;flex:1;font-family:inherit;font-size:13px;color:var(--slate);padding:2px 0;min-width:0}
+  .topbar .search input::placeholder{color:var(--muted)}
   .topbar .search .kbd{margin-left:auto;font-family:var(--sans);font-size:11px;color:var(--muted);background:var(--mist);padding:2px 6px;border-radius:4px;border:1px solid var(--bone)}
   .topbar .who{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--slate);margin-left:auto}
   .topbar .who .email{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--body);font-weight:600}
@@ -318,18 +321,23 @@
       <img class="logo" src="/Logo_Blue.png" alt="ReBe">
     </a>
     <nav id="nav-links">
-      <a href="#dashboard" data-route="dashboard"><span class="icon">▦</span>Dashboard</a>
-      <a href="#customers" data-route="customers"><span class="icon">☰</span>Customers</a>
-      <a href="#pilots" data-route="pilots"><span class="icon">⌖</span>Pilots</a>
+      <a href="#dashboard"   data-route="dashboard"><span class="icon">▦</span>Dashboard</a>
+      <a href="#cohorts"     data-route="cohorts"><span class="icon">◎</span>ReFresh Cohorts</a>
+      <a href="#one-to-one"  data-route="one-to-one"><span class="icon">⊙</span>1:1 Clients</a>
+      <a href="#popups"      data-route="popups"><span class="icon">✺</span>Pop-Ups</a>
+      <a href="#community"   data-route="community"><span class="icon">❖</span>Community</a>
+      <a href="#pilots"      data-route="pilots"><span class="icon">⌖</span>Pilot Requests</a>
+      <a href="#customers"   data-route="customers"><span class="icon">☰</span>All Customers</a>
+      <a href="#team"        data-route="team"><span class="icon">⚑</span>Team</a>
     </nav>
-    <div class="side-foot">ReBe Admin · v0.6</div>
+    <div class="side-foot">ReBe Admin · v0.7</div>
   </aside>
 
   <div style="flex:1;margin-left:var(--sidebar-w);min-width:0">
     <header class="topbar">
       <div class="search">
         <span style="opacity:.6">⌕</span>
-        <span>Search customers, pilots, notes…</span>
+        <input type="search" id="global-search" placeholder="Search customers, pilots, notes…" autocomplete="off">
         <span class="kbd">⌘K</span>
       </div>
       <div class="who">
@@ -388,12 +396,20 @@
     <section id="view-customers" class="hidden">
       <div class="toolbar">
         <input type="search" class="search-input" id="customer-search" placeholder="Search by name, email, or phone…">
+        <button type="button" id="add-customer-btn" class="btn" style="padding:8px 14px;font-size:12px;letter-spacing:.04em">+ Add customer</button>
         <div class="filter-pills" id="filter-pills">
           <button type="button" class="filter-pill active" data-filter="all">All</button>
-          <button type="button" class="filter-pill" data-filter="paid">Paid cohort</button>
-          <button type="button" class="filter-pill" data-filter="lead">Cohort leads</button>
+          <button type="button" class="filter-pill" data-filter="cohort">All cohort</button>
+          <button type="button" class="filter-pill" data-filter="paid">Paid only</button>
+          <button type="button" class="filter-pill" data-filter="lead">Leads</button>
+          <button type="button" class="filter-pill" data-filter="waitlist">Waitlist</button>
           <button type="button" class="filter-pill" data-filter="workshop">Workshop</button>
           <button type="button" class="filter-pill" data-filter="notes">With notes</button>
+        </div>
+        <div class="filter-pills" id="slot-pills" style="margin-left:0">
+          <button type="button" class="filter-pill active" data-slot="all">Any slot</button>
+          <button type="button" class="filter-pill" data-slot="11am">11 AM ET</button>
+          <button type="button" class="filter-pill" data-slot="8pm">8 PM ET</button>
         </div>
       </div>
       <div class="table-wrap">
@@ -453,10 +469,80 @@
       </div>
     </section>
 
+    <!-- ============== TEAM DIRECTORY VIEW ============== -->
+    <section id="view-team" class="hidden">
+      <div class="welcome">
+        <h2>Team</h2>
+        <p>Everyone with access to the ReBe Admin CRM. Admins can invite teammates.</p>
+      </div>
+      <div id="team-list-loading" class="loading">Loading team…</div>
+      <div id="team-grid" class="grid hidden" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))"></div>
+    </section>
+
+    <!-- ============== MY ACCOUNT VIEW ============== -->
+    <section id="view-account" class="hidden">
+      <div class="welcome">
+        <h2>My account</h2>
+        <p>Your profile and role. Editable display name + photo coming soon.</p>
+      </div>
+      <div class="card" style="max-width:560px">
+        <div style="display:flex;align-items:center;gap:14px;margin:0 0 18px">
+          <div id="acct-avatar" style="width:56px;height:56px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:20px;letter-spacing:.02em">—</div>
+          <div>
+            <p style="margin:0;font-size:18px;font-weight:700;color:var(--slate)" id="acct-name">—</p>
+            <p style="margin:2px 0 0;font-size:13px;color:var(--muted)" id="acct-email">—</p>
+          </div>
+        </div>
+        <div class="pf-row"><span class="pf-label">Role</span><span class="pf-value" id="acct-role">—</span></div>
+        <div class="pf-row"><span class="pf-label">User ID</span><span class="pf-value muted" id="acct-id">—</span></div>
+        <div class="pf-row"><span class="pf-label">Last sign-in</span><span class="pf-value" id="acct-last-signin">—</span></div>
+      </div>
+    </section>
+
+    <!-- ============== PLACEHOLDER VIEWS (1:1, Community) ============== -->
+    <section id="view-one-to-one" class="hidden">
+      <div class="welcome">
+        <h2>1:1 Clients</h2>
+        <p>People in private 1:1 sessions with a ReBe facilitator.</p>
+      </div>
+      <div class="card" style="text-align:center;padding:48px 28px">
+        <p style="font-size:15px;color:var(--body);margin:0 0 8px"><strong>Coming soon.</strong></p>
+        <p style="font-size:13px;color:var(--muted);margin:0;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6">
+          We'll wire this up to your 1:1 booking source — either matching Kit tags
+          like "1:1 · Beth Rech" / "1:1 · Osil Pistole" to subscribers, or pulling
+          from a future Cal.com / Stripe 1:1 product. Tell me which and I'll
+          connect it.
+        </p>
+      </div>
+    </section>
+
+    <section id="view-community" class="hidden">
+      <div class="welcome">
+        <h2>ReFresh Community</h2>
+        <p>Membership for cohort alumni and ongoing participants.</p>
+      </div>
+      <div class="card" style="text-align:center;padding:48px 28px">
+        <p style="font-size:15px;color:var(--body);margin:0 0 8px"><strong>Coming soon.</strong></p>
+        <p style="font-size:13px;color:var(--muted);margin:0;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6">
+          When the community launches, members will land here with their tier,
+          join date, and engagement signals.
+        </p>
+      </div>
+    </section>
+
     <!-- ============== CUSTOMER DETAIL VIEW ============== -->
     <section id="view-customer" class="hidden">
-      <div class="detail-header">
+      <div class="detail-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
         <a class="back-link" href="#customers">← All customers</a>
+        <div style="display:flex;gap:8px;align-items:center">
+          <select id="cd-status-override" style="padding:7px 10px;border:1px solid var(--bone);border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:#fff;cursor:pointer">
+            <option value="" disabled selected>Change status…</option>
+            <option value="paid">Mark as paid</option>
+            <option value="wants_more_info">Mark as lead</option>
+            <option value="waitlist">Mark as waitlist</option>
+          </select>
+          <button type="button" id="delete-customer-btn" style="background:transparent;color:var(--coral);border:1px solid #F5B9AD;padding:7px 12px;border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer">Delete customer</button>
+        </div>
       </div>
       <div id="customer-detail-loading" class="loading">Loading customer…</div>
       <div id="customer-detail-content" class="hidden">
@@ -594,6 +680,44 @@
 </div><!-- /app-shell -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<div id="add-customer-modal" class="modal-backdrop">
+  <div class="modal-card">
+    <h3>Add customer manually</h3>
+    <p class="modal-sub">Use this for anyone who didn't sign up through the website — phone-in, in-person, comped, etc.</p>
+
+    <label for="add-cust-name">Full name</label>
+    <input type="text" id="add-cust-name" autocomplete="off">
+
+    <label for="add-cust-email">Email</label>
+    <input type="email" id="add-cust-email" autocomplete="off">
+
+    <label for="add-cust-phone">Phone (optional)</label>
+    <input type="tel" id="add-cust-phone" autocomplete="off">
+
+    <label for="add-cust-source">Category</label>
+    <select id="add-cust-source">
+      <option value="cohort">Cohort lead (wants info)</option>
+      <option value="paid">Cohort paid (enrolled)</option>
+      <option value="waitlist">Cohort waitlist</option>
+      <option value="workshop">Workshop attendee</option>
+    </select>
+
+    <label for="add-cust-slot">Cohort slot (if cohort)</label>
+    <select id="add-cust-slot">
+      <option value="">No preference</option>
+      <option value="11am">11 AM ET</option>
+      <option value="8pm">8 PM ET</option>
+    </select>
+
+    <p class="msg-error" id="add-cust-error" style="margin:14px 0 0"></p>
+
+    <div class="modal-actions">
+      <button type="button" class="invite-cancel" id="add-cust-cancel">Cancel</button>
+      <button type="button" class="invite-submit" id="add-cust-submit">Add customer</button>
+    </div>
+  </div>
+</div>
+
 <div id="invite-modal" class="modal-backdrop">
   <div class="modal-card">
     <h3>Invite teammate</h3>
@@ -621,6 +745,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=21"></script>
+<script src="/admin/app.js?v=22"></script>
 </body>
 </html>

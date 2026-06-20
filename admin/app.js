@@ -155,6 +155,7 @@
   let currentRole = null;
   let allCustomers = []; // cached list, refreshed on customers view enter
   let currentFilter = 'all';
+  let currentSlotFilter = 'all';   // 'all' | '11am' | '8pm'
   let currentSort = 'signed_up';   // 'name' | 'signed_up' | 'notes'
   let currentSortDir = 'desc';     // 'asc' | 'desc'
   let currentSearch = '';
@@ -382,6 +383,10 @@
     viewCustomers.classList.add('hidden');
     viewCustomer.classList.add('hidden');
     if (viewPilots) viewPilots.classList.add('hidden');
+    ['view-team', 'view-account', 'view-one-to-one', 'view-community'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('hidden');
+    });
 
     // Highlight active nav
     navLinks.forEach((a) => {
@@ -401,6 +406,35 @@
     } else if (route === 'pilots') {
       if (viewPilots) viewPilots.classList.remove('hidden');
       loadPilotList();
+    } else if (route === 'cohorts') {
+      // Cohorts = all refresh_signups (paid + lead + waitlist), filterable by slot
+      viewCustomers.classList.remove('hidden');
+      currentFilter = queryParams.filter || 'cohort';
+      currentSlotFilter = queryParams.slot || 'all';
+      document.querySelectorAll('#view-customers .filter-pill').forEach((b) => {
+        b.classList.toggle('active', b.getAttribute('data-filter') === currentFilter);
+      });
+      loadCustomerList();
+    } else if (route === 'popups') {
+      // Pop-Ups = workshop attendees
+      viewCustomers.classList.remove('hidden');
+      currentFilter = 'workshop';
+      currentSlotFilter = 'all';
+      document.querySelectorAll('#view-customers .filter-pill').forEach((b) => {
+        b.classList.toggle('active', b.getAttribute('data-filter') === 'workshop');
+      });
+      loadCustomerList();
+    } else if (route === 'team') {
+      const el = document.getElementById('view-team');
+      if (el) el.classList.remove('hidden');
+      loadTeamDirectory();
+    } else if (route === 'account') {
+      const el = document.getElementById('view-account');
+      if (el) el.classList.remove('hidden');
+      loadAccount();
+    } else if (route === 'one-to-one' || route === 'community') {
+      const el = document.getElementById('view-' + route);
+      if (el) el.classList.remove('hidden');
     } else if (route === 'customer' && param) {
       viewCustomer.classList.remove('hidden');
       loadCustomerDetail(decodeURIComponent(param));
@@ -624,6 +658,8 @@
       if (s.status === 'enrolled') existing.sources.add('paid');
       if (s.readiness === 'wants_more_info') existing.sources.add('lead');
       if (s.readiness === 'waitlist') existing.sources.add('waitlist');
+      // Unified 'cohort' source: anyone in refresh_signups, regardless of status
+      existing.sources.add('cohort');
 
       existing.preferredSlot = existing.preferredSlot || s.preferred_group_time;
       existing.paidAt = existing.paidAt || s.paid_at;
@@ -692,6 +728,12 @@
         if (!c.noteCount || c.noteCount <= 0) return false;
       } else if (currentFilter !== 'all') {
         if (!c.sources.has(currentFilter)) return false;
+      }
+      // Slot sub-filter (only meaningful for cohort signups)
+      if (currentSlotFilter && currentSlotFilter !== 'all') {
+        const slot = (c.preferredSlot || '').toLowerCase();
+        if (currentSlotFilter === '11am' && !slot.includes('11')) return false;
+        if (currentSlotFilter === '8pm'  && !slot.includes('8'))  return false;
       }
       return true;
     });
@@ -779,6 +821,44 @@
     currentFilter = btn.getAttribute('data-filter');
     renderCustomerList();
   });
+
+  // Global search in the topbar — searches across customer list, jumps to
+  // /admin/#customers with the query applied. Cmd+K focuses it.
+  const globalSearch = document.getElementById('global-search');
+  if (globalSearch) {
+    globalSearch.addEventListener('input', () => {
+      const q = globalSearch.value || '';
+      if (window.location.hash.split('?')[0] !== '#customers') {
+        window.location.hash = '#customers';
+      }
+      currentSearch = q;
+      if (searchInput) searchInput.value = q;
+      renderCustomerList();
+    });
+    globalSearch.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { globalSearch.value = ''; globalSearch.dispatchEvent(new Event('input')); globalSearch.blur(); }
+    });
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        globalSearch.focus();
+        globalSearch.select();
+      }
+    });
+  }
+
+  // Slot pill (11 AM / 8 PM / Any) — sub-filter on top of the source filter
+  const slotPills = document.getElementById('slot-pills');
+  if (slotPills) {
+    slotPills.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-pill');
+      if (!btn) return;
+      slotPills.querySelectorAll('.filter-pill').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentSlotFilter = btn.getAttribute('data-slot');
+      renderCustomerList();
+    });
+  }
 
   // Sortable column headers — click to toggle asc/desc on the chosen column
   document.querySelectorAll('#customer-table th.sortable').forEach((th) => {
@@ -1613,6 +1693,204 @@
       btn.classList.add('active');
       pilotFilter = btn.getAttribute('data-pilot-filter');
       renderPilotList();
+    });
+  }
+
+  // ============================================================
+  // Team directory + My Account
+  // ============================================================
+  async function loadTeamDirectory() {
+    const loading = document.getElementById('team-list-loading');
+    const grid    = document.getElementById('team-grid');
+    if (!grid) return;
+    if (loading) loading.classList.remove('hidden');
+    grid.classList.add('hidden');
+
+    const { data, error } = await sb.rpc('list_team_members');
+    if (loading) loading.classList.add('hidden');
+    if (error) {
+      grid.classList.remove('hidden');
+      grid.innerHTML = `<div class="card" style="grid-column:1/-1"><p class="msg-error show">Couldn't load team: ${escapeHtml(error.message || '')}</p></div>`;
+      return;
+    }
+    const members = data || [];
+    if (!members.length) {
+      grid.classList.remove('hidden');
+      grid.innerHTML = '<div class="card" style="grid-column:1/-1;text-align:center;color:var(--muted)"><p>No team members yet.</p></div>';
+      return;
+    }
+    grid.classList.remove('hidden');
+    grid.innerHTML = members.map((m) => {
+      const initials = (m.full_name || m.email || '?').split(/\s+|@/).filter(Boolean).map((s) => s[0]).slice(0, 2).join('').toUpperCase();
+      const name = friendlyActorName(m.email) === m.email ? (m.full_name || m.email) : friendlyActorName(m.email);
+      const isMe = currentUser && m.user_id === currentUser.id;
+      return `
+        <div class="card" style="padding:18px 20px">
+          <div style="display:flex;align-items:center;gap:12px;margin:0 0 10px">
+            <div style="width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0">${escapeHtml(initials)}</div>
+            <div style="min-width:0;flex:1">
+              <p style="margin:0;font-size:15px;font-weight:700;color:var(--slate);display:flex;align-items:center;gap:6px">${escapeHtml(name)}${isMe ? '<span class="role-pill" style="background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF">YOU</span>' : ''}</p>
+              <p style="margin:2px 0 0;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(m.email)}</p>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700">
+            <span>Role</span>
+            <span style="color:var(--navy)">${escapeHtml(m.role || '—')}</span>
+          </div>
+          ${isMe ? `<div style="margin:14px 0 0;padding:12px 0 0;border-top:1px solid var(--bone)"><a href="#account" style="color:var(--green-ink);font-size:12px;font-weight:700;text-decoration:none">Edit my profile →</a></div>` : ''}
+        </div>
+      `;
+    }).join('');
+  }
+
+  async function loadAccount() {
+    if (!currentUser) return;
+    const fullName = (currentUser.user_metadata && (currentUser.user_metadata.full_name || currentUser.user_metadata.name))
+      || friendlyActorName(currentUser.email);
+    const initials = fullName.split(/\s+/).filter(Boolean).map((s) => s[0]).slice(0, 2).join('').toUpperCase();
+    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    set('acct-name', fullName);
+    set('acct-email', currentUser.email || '—');
+    set('acct-role', currentRole || '—');
+    set('acct-id', currentUser.id || '—');
+    set('acct-avatar', initials || '—');
+    set('acct-last-signin', currentUser.last_sign_in_at ? fmtDateTime(currentUser.last_sign_in_at) : '—');
+  }
+
+  // ============================================================
+  // Manual add customer + delete customer
+  // ============================================================
+  const addCustomerBtn = document.getElementById('add-customer-btn');
+  const addCustomerModal = document.getElementById('add-customer-modal');
+  if (addCustomerBtn && addCustomerModal) {
+    addCustomerBtn.addEventListener('click', () => {
+      hideMsg(document.getElementById('add-cust-error'));
+      ['add-cust-name', 'add-cust-email', 'add-cust-phone'].forEach((id) => {
+        const el = document.getElementById(id); if (el) el.value = '';
+      });
+      const src = document.getElementById('add-cust-source'); if (src) src.value = 'cohort';
+      addCustomerModal.classList.add('open');
+      setTimeout(() => document.getElementById('add-cust-name').focus(), 50);
+    });
+    const cancel = document.getElementById('add-cust-cancel');
+    if (cancel) cancel.addEventListener('click', () => addCustomerModal.classList.remove('open'));
+    addCustomerModal.addEventListener('click', (e) => {
+      if (e.target === addCustomerModal) addCustomerModal.classList.remove('open');
+    });
+    const submitBtn = document.getElementById('add-cust-submit');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', async () => {
+        const errEl = document.getElementById('add-cust-error');
+        hideMsg(errEl);
+        const fullName = (document.getElementById('add-cust-name').value || '').trim();
+        const email    = (document.getElementById('add-cust-email').value || '').trim().toLowerCase();
+        const phone    = (document.getElementById('add-cust-phone').value || '').trim();
+        const source   = (document.getElementById('add-cust-source').value || 'cohort');
+        const slot     = (document.getElementById('add-cust-slot').value || '');
+
+        if (!fullName) { showError(errEl, 'Full name required.'); return; }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError(errEl, 'Valid email required.'); return; }
+
+        submitBtn.disabled = true; submitBtn.textContent = 'Saving…';
+        let error = null;
+        try {
+          if (source === 'workshop') {
+            const [firstName, ...rest] = fullName.split(/\s+/);
+            const r = await sb.from('contacts').insert({
+              first_name: firstName,
+              last_name: rest.join(' ') || null,
+              email,
+              phone: phone || null,
+            });
+            error = r.error;
+          } else {
+            // cohort / lead / waitlist / paid go into refresh_signups
+            const status = source === 'paid' ? 'enrolled' : 'enrolled';
+            const readiness =
+              source === 'paid'     ? 'ready_to_pay' :
+              source === 'lead'     ? 'wants_more_info' :
+              source === 'waitlist' ? 'waitlist' :
+                                       'wants_more_info';
+            const preferredTime = slot === '11am' ? '11 AM ET' : slot === '8pm' ? '8 PM ET' : null;
+            const r = await sb.from('refresh_signups').insert({
+              full_name: fullName,
+              email,
+              phone: phone || null,
+              status,
+              readiness,
+              audience_type: 'groups',
+              group_type: 'no_preference',
+              preferred_group_time: preferredTime,
+              paid_amount_cents: 0,
+              consent_to_contact: true,
+              consent_to_confidentiality: true,
+              seat_type: source === 'paid' ? 'paid' : 'attendee',
+            });
+            error = r.error;
+          }
+        } catch (e) { error = e; }
+        submitBtn.disabled = false; submitBtn.textContent = 'Add customer';
+        if (error) { showError(errEl, `Couldn't add: ${error.message || error}`); return; }
+        addCustomerModal.classList.remove('open');
+        loadCustomerList();
+      });
+    }
+  }
+
+  // Delete-customer button on customer detail (hard delete from both tables)
+  const deleteCustomerBtn = document.getElementById('delete-customer-btn');
+  if (deleteCustomerBtn) {
+    deleteCustomerBtn.addEventListener('click', async () => {
+      if (!currentDetailEmail) return;
+      const ok = confirm(`Delete ${currentDetailEmail} from the CRM?\n\nThis removes them from contacts + refresh_signups. Activity, notes, and tasks tied to this email stay (they're keyed by email so they'd reappear if the person comes back).\n\nThis cannot be undone.`);
+      if (!ok) return;
+      deleteCustomerBtn.disabled = true;
+      deleteCustomerBtn.textContent = 'Deleting…';
+      try {
+        await sb.from('contacts').delete().ilike('email', currentDetailEmail);
+        await sb.from('refresh_signups').delete().ilike('email', currentDetailEmail);
+        window.location.hash = '#customers';
+      } catch (err) {
+        alert('Delete failed: ' + (err.message || err));
+      } finally {
+        deleteCustomerBtn.disabled = false;
+        deleteCustomerBtn.textContent = 'Delete customer';
+      }
+    });
+  }
+
+  // Status override dropdown on customer detail (Mark as paid / lead / waitlist)
+  const statusOverride = document.getElementById('cd-status-override');
+  if (statusOverride) {
+    statusOverride.addEventListener('change', async () => {
+      if (!currentDetailEmail) return;
+      const newReadiness = statusOverride.value;
+      if (!newReadiness) return;
+      const patch = newReadiness === 'paid'
+        ? { status: 'enrolled', readiness: 'ready_to_pay' }
+        : { status: 'enrolled', readiness: newReadiness };
+      // Update existing row OR insert if not present
+      const { data: existing } = await sb.from('refresh_signups').select('id').ilike('email', currentDetailEmail).limit(1);
+      let error;
+      if (existing && existing.length) {
+        const r = await sb.from('refresh_signups').update(patch).eq('id', existing[0].id);
+        error = r.error;
+      } else {
+        const r = await sb.from('refresh_signups').insert({
+          email: currentDetailEmail,
+          full_name: currentDetailEmail,
+          status: patch.status,
+          readiness: patch.readiness,
+          audience_type: 'groups',
+          group_type: 'no_preference',
+          consent_to_contact: true,
+          consent_to_confidentiality: true,
+          paid_amount_cents: 0,
+        });
+        error = r.error;
+      }
+      if (error) { alert('Couldn\'t update status: ' + error.message); return; }
+      loadCustomerDetail(currentDetailEmail);
     });
   }
 
