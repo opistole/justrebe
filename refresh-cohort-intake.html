@@ -3,228 +3,257 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>ReBe ReFresh · Cohort Intake</title>
-<meta name="description" content="Intake for facilitators and complimentary participants of the ReBe ReFresh cohort." />
 <meta name="robots" content="noindex,nofollow" />
-<link rel="icon" type="image/jpeg" href="/ReBe_Favicon.jpg" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>ReBe ReFresh · Cohort Intake</title>
+<meta name="description" content="Cohort intake for the ReBe ReFresh 5-week cohort." />
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --paper:#FFFFFF; --mist:#FAF9F7; --navy:#252C5C; --navy-dark:#040832;
-    --green:#449945; --green-ink:#3A8438; --green-deep:#2A6D2C; --green-wash:#F2F8F2;
+    --paper:#FFFFFF; --mist:#FAF9F7; --navy:#060B50; --navy-dark:#040832;
+    --green:#449945; --green-ink:#3A8438; --green-deep:#2D6A2C; --green-wash:#F2F8F2;
     --gold:#E3A01F; --gold-ink:#B07D14; --gold-wash:#FBF4E4;
     --slate:#212B37; --body:#4A535E; --muted:#9DA1A8; --bone:#E2E2E2; --coral:#EA492E;
     --serif:'Fraunces',Georgia,serif;
     --sans:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --display:'Anton','Arial Narrow',Impact,sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
   }
   *,*::before,*::after{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{margin:0;background:var(--mist);color:var(--body);font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:#FFFFFF;color:var(--body);font-family:var(--sans);font-weight:400;font-size:20px;line-height:1.7;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  @media (max-width:640px){body{font-size:18px}}
 
-  .wrap{max-width:680px;margin:0 auto;padding:48px 24px 80px}
+  .util-bar{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--bone)}
+  .util-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;height:56px}
+  .wordmark{font-family:var(--sans);font-weight:700;color:var(--navy);letter-spacing:.02em;font-size:18px;text-decoration:none}
+  .wordmark span{color:var(--green)}
 
-  .brand{display:flex;align-items:center;gap:8px;margin:0 0 32px;text-decoration:none;color:inherit}
-  .brand .wordmark{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--navy);letter-spacing:-.005em}
-  .brand .wordmark .accent{color:var(--gold-ink)}
+  main{flex:1;display:flex;align-items:center;justify-content:center;padding:64px 24px 48px;position:relative;overflow:hidden}
+  main::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 10%,rgba(227,160,31,.04),transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(68,153,69,.04),transparent 50%);pointer-events:none;z-index:0}
 
-  .header{margin:0 0 32px}
-  .header .eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:700;color:var(--green-ink);margin:0 0 10px}
-  .header h1{font-family:var(--serif);font-weight:600;font-size:36px;color:var(--navy);margin:0 0 12px;letter-spacing:-.01em;line-height:1.2}
-  .header p{font-size:16px;color:var(--body);margin:0;max-width:540px}
+  .wrap{position:relative;z-index:1;max-width:720px;width:100%;text-align:center}
 
-  .card{background:#fff;border:1px solid var(--bone);border-radius:16px;padding:32px 28px;box-shadow:0 6px 24px rgba(6,11,80,.05)}
+  .check{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#54AC54,var(--green-ink));color:#fff;font-size:32px;font-weight:700;margin:0 auto 28px;box-shadow:0 12px 30px rgba(68,153,69,.32)}
 
-  fieldset{border:0;padding:0;margin:0 0 28px}
-  fieldset:last-of-type{margin-bottom:0}
-  legend{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green-ink);margin:0 0 14px;padding:0}
+  .eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:13px;letter-spacing:.2em;color:var(--green-ink);margin:0 0 22px;position:relative;display:inline-block}
+  .eyebrow::before{content:'';display:block;width:48px;height:1px;background:var(--green-ink);margin:0 auto 16px;opacity:.55}
 
-  .row{display:grid;grid-template-columns:1fr;gap:16px;margin:0 0 16px}
-  .row.two{grid-template-columns:1fr 1fr}
-  @media (max-width:560px){.row.two{grid-template-columns:1fr}}
+  h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(36px,5.5vw,58px);line-height:1.06;letter-spacing:.01em;color:var(--navy);margin:0 0 20px;max-width:18ch;margin-left:auto;margin-right:auto}
+  h1 .accent{color:var(--green)}
 
-  label{display:block;font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.04em;text-transform:uppercase;margin:0 0 6px}
-  label .req{color:var(--coral);font-weight:700;margin-left:4px}
+  .lede{font-family:var(--sans);font-weight:300;font-size:22px;line-height:1.55;color:var(--body);margin:0 auto 32px;max-width:560px;letter-spacing:-.005em}
 
-  input[type="text"],input[type="email"],input[type="tel"],select,textarea{
-    width:100%;padding:11px 14px;border:1px solid var(--bone);border-radius:10px;
-    font-family:inherit;font-size:15px;color:var(--slate);background:#fff;
-    transition:border-color .2s,box-shadow .2s;line-height:1.5;
+  .cohort-meta{display:inline-block;background:var(--gold-wash);border:1px solid #f5d4a8;border-radius:14px;padding:18px 28px;margin:0 0 32px;text-align:center}
+  .cohort-meta .label{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);margin:0 0 6px}
+  .cohort-meta .date{font-family:var(--display);font-size:30px;color:var(--navy);letter-spacing:.01em;line-height:1;margin:0 0 4px}
+  .cohort-meta .time{font-family:var(--sans);font-size:14px;color:var(--body);font-weight:400}
+
+  .help{font-size:15px;color:var(--muted);margin:32px 0 0;line-height:1.7}
+  .help a{color:var(--green-ink);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-ink);padding-bottom:1px}
+  .help a:hover{border-bottom-style:solid}
+  .home-link{display:inline-block;margin-top:24px;font-size:14px;color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid var(--navy);padding-bottom:1px}
+
+  /* ===== Zoom link card — both slots ===== */
+  .zoom-card{background:#F4FAEF;border:1px solid #cfe6d0;border-radius:14px;padding:22px 24px;margin:0 auto 36px;max-width:560px;text-align:left;box-shadow:0 6px 20px rgba(68,153,69,.10)}
+  .zoom-card .zoom-label{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 6px;text-align:center}
+  .zoom-card .zoom-intro{font-family:var(--sans);font-size:13px;color:var(--body);margin:0 0 16px;font-style:italic;text-align:center}
+  .zoom-card .zoom-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:#fff;border:1px solid #cfe6d0;margin:0 0 8px}
+  .zoom-card .zoom-row:last-child{margin-bottom:0}
+  .zoom-card .zoom-row-label{font-family:var(--sans);font-weight:700;color:var(--navy);font-size:13px;flex-shrink:0;min-width:78px}
+  .zoom-card .zoom-row-link{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--green-ink);text-decoration:underline;word-break:break-all}
+  .zoom-card .zoom-row-link:hover{color:var(--green-deep)}
+  .zoom-card .zoom-sub{font-family:var(--sans);font-size:12px;color:var(--body);margin:14px 0 0;line-height:1.5;font-style:italic;text-align:center}
+
+  /* ===== Intake form ===== */
+  .intake{background:var(--paper);border:1px solid var(--bone);border-radius:18px;padding:32px 36px;box-shadow:0 10px 40px rgba(6,11,80,.06);text-align:left;margin:0 0 28px;position:relative;overflow:hidden}
+  .intake::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--green) 0%,var(--gold) 100%)}
+  .intake-eyebrow{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 10px}
+  .intake h2{font-family:var(--serif);font-style:italic;font-weight:600;font-size:24px;color:var(--navy);margin:0 0 8px;line-height:1.2}
+  .intake .intake-sub{font-family:var(--sans);font-size:15px;color:var(--body);margin:0 0 26px;line-height:1.55}
+  .field{margin:0 0 18px}
+  .field label{display:block;font-family:var(--sans);font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;margin:0 0 8px}
+  .field label .opt{font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:12px;margin-left:6px;font-style:italic}
+  .field label .req{color:var(--coral);margin-left:3px;font-weight:700}
+  .field input[type="text"], .field input[type="email"], .field input[type="tel"], .field select, .field textarea{width:100%;padding:11px 14px;border:1px solid var(--bone);border-radius:10px;font-family:var(--sans);font-size:15px;color:var(--slate);background:#fff;outline:0;transition:border-color .15s}
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--green)}
+  .field textarea{min-height:90px;resize:vertical;line-height:1.5}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:520px){.field-row{grid-template-columns:1fr}}
+  .checkgroup{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
+  @media (max-width:520px){.checkgroup{grid-template-columns:1fr}}
+  .checkgroup label{font-size:14px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--slate);display:flex;align-items:flex-start;gap:9px;cursor:pointer;padding:6px 0;margin:0}
+  .checkgroup input[type="checkbox"], .checkgroup input[type="radio"]{margin:3px 0 0;accent-color:var(--green);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+  .checkgroup input[type="checkbox"]+span, .checkgroup input[type="radio"]+span{line-height:1.35}
+  .intake-submit{display:block;width:100%;padding:16px 22px;background:var(--green-ink);color:#fff;border:0;border-radius:999px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:background .2s,transform .15s;margin-top:8px}
+  .intake-submit:hover:not(:disabled){background:var(--green-deep);transform:translateY(-1px)}
+  .intake-submit:disabled{opacity:.55;cursor:wait}
+  .intake-error{color:#c0392b;font-size:13px;text-align:center;margin:14px 0 0;line-height:1.5}
+  .intake-success{display:none;text-align:center;padding:30px 8px}
+  .intake-success.show{display:block}
+  .intake-success .ok-mark{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:var(--green-wash);color:var(--green-ink);font-size:28px;font-weight:700;margin:0 0 18px}
+  .intake-success h3{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--navy);margin:0 0 8px}
+  .intake-success p{font-size:15px;color:var(--body);margin:0;line-height:1.55}
+
+  /* "What happens next" modal — opens AFTER intake submit */
+  .next-modal{width:min(600px,calc(100vw - 32px));max-height:90vh;border:0;border-radius:18px;background:#fff;color:var(--navy);box-shadow:0 28px 72px rgba(6,11,80,.32);padding:0;overflow:hidden}
+  .next-modal::backdrop{background:rgba(6,11,80,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+  @keyframes nextPop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
+  .next-modal[open]{animation:nextPop .25s var(--ease)}
+  .next-inner{padding:36px 36px 32px;position:relative;overflow-y:auto;max-height:90vh}
+  .next-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border:1px solid var(--bone);background:transparent;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;color:var(--slate);display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .next-close:hover{background:var(--bone)}
+  .next-modal h2{font-family:var(--serif);font-style:italic;font-weight:600;font-size:26px;color:var(--navy);margin:0 0 20px;line-height:1.2;padding-right:30px}
+  .next-modal ol{padding:0;margin:0;list-style:none;counter-reset:step}
+  .next-modal li{counter-increment:step;position:relative;padding:14px 0 14px 50px;font-size:16px;line-height:1.6;color:var(--body);border-top:1px solid var(--bone)}
+  .next-modal li:first-child{border-top:none}
+  .next-modal li::before{content:counter(step);position:absolute;left:0;top:14px;width:32px;height:32px;border-radius:50%;background:var(--green-wash);color:var(--green-ink);font-family:var(--display);font-size:18px;display:flex;align-items:center;justify-content:center;line-height:1}
+  .next-modal strong{color:var(--navy);font-weight:700}
+  .next-modal .next-done{display:block;margin:24px auto 0;background:var(--green-ink);color:#fff;border:0;border-radius:999px;padding:13px 30px;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .15s}
+  .next-modal .next-done:hover{background:var(--green-deep)}
+
+  footer{background:var(--mist);padding:36px 24px;text-align:center;border-top:1px solid var(--bone);font-size:13px;color:var(--muted);line-height:1.65}
+  footer a{color:var(--green-ink);font-weight:700;text-decoration:none}
+
+  @media (max-width:640px){
+    main{padding:48px 18px 36px}
   }
-  input:focus,select:focus,textarea:focus{outline:0;border-color:var(--green);box-shadow:0 0 0 3px rgba(68,153,69,.15)}
-  textarea{min-height:90px;resize:vertical}
-  select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23252C5C' d='M6 8L0 0h12z'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
-
-  .help{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.5}
-
-  .submit-row{display:flex;justify-content:flex-end;align-items:center;gap:14px;margin:24px 0 0}
-  .btn{background:var(--green-ink);color:#fff;border:0;padding:13px 28px;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.04em;cursor:pointer;transition:background .15s,transform .1s;font-family:var(--sans)}
-  .btn:hover{background:var(--green-deep)}
-  .btn:active{transform:translateY(1px)}
-  .btn:disabled{opacity:.55;cursor:not-allowed}
-
-  .msg{margin:14px 0 0;padding:12px 14px;border-radius:10px;font-size:14px;line-height:1.5;display:none}
-  .msg.show{display:block}
-  .msg.error{background:#FFF1EE;color:#A33421;border:1px solid #F5B9AD}
-  .msg.success{background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF}
-
-  .footer{margin:36px 0 0;text-align:center;font-size:12px;color:var(--muted)}
-  .footer a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--bone)}
-
-  .hidden{display:none}
-
-  .success-card{background:var(--green-wash);border:1px solid #BFE3BF;border-radius:14px;padding:28px 28px;text-align:center;margin:18px 0 0}
-  .success-card h2{font-family:var(--serif);font-weight:600;font-size:24px;color:var(--green-deep);margin:0 0 8px}
-  .success-card p{color:var(--green-deep);margin:0;font-size:15px}
-
-  /* Radio / checkbox groups (match paid intake) */
-  .checkgroup{display:flex;flex-direction:column;gap:8px;margin:4px 0 0}
-  .checkgroup label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:9px 12px;border:1px solid var(--bone);border-radius:8px;background:#fff;transition:border-color .15s,background .15s;font-size:14px;color:var(--slate);text-transform:none;letter-spacing:0;font-weight:500;margin:0}
-  .checkgroup label:hover{border-color:var(--green);background:var(--mist)}
-  .checkgroup input[type="radio"],
-  .checkgroup input[type="checkbox"]{margin:2px 0 0;accent-color:var(--green-ink);flex-shrink:0}
-  .checkgroup input[type="radio"]:checked + span,
-  .checkgroup input[type="checkbox"]:checked + span{color:var(--green-deep);font-weight:700}
-  .checkgroup label:has(input:checked){border-color:var(--green);background:var(--green-wash)}
-  @media (min-width:520px){
-    .checkgroup--cols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  }
-  .req{color:var(--coral);font-weight:700}
-  .opt{color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.04em}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <a href="/" class="brand">
-    <span class="wordmark">ReBe · <span class="accent">ReFresh</span></span>
-  </a>
-
-  <div class="header">
-    <h1>ReFresh Cohort Intake</h1>
+<header class="util-bar">
+  <div class="util-inner">
+    <a href="/" class="wordmark">Re<span>Be</span></a>
   </div>
+</header>
 
-  <div class="card" id="form-card">
-    <form id="intake-form" novalidate>
-      <fieldset>
-        <legend>About you</legend>
+<main>
+  <div class="wrap">
+    <div class="check" aria-hidden="true">✓</div>
+    <p class="eyebrow">Cohort intake</p>
+    <h1>Welcome. <span class="accent">See you June 23.</span></h1>
+    <p class="lede">Your seat in the first ReBe ReFresh cohort is reserved. Fill out the intake below so Elizabeth and the team can prepare for you.</p>
 
-        <div class="row two">
-          <div>
-            <label for="full_name">Full name <span class="req">*</span></label>
-            <input type="text" id="full_name" name="full_name" required autocomplete="name">
+    <div class="cohort-meta">
+      <p class="label">Cohort starts</p>
+      <p class="date">JUNE 23, 2026</p>
+      <p class="time">5 weekly sessions · 5 weeks</p>
+    </div>
+
+    <div class="zoom-card">
+      <p class="zoom-label">Your Zoom links</p>
+      <p class="zoom-intro">You'll join one based on the slot you choose below.</p>
+      <p class="zoom-row">
+        <span class="zoom-row-label">11 AM ET:</span>
+        <a class="zoom-row-link" href="https://us06web.zoom.us/j/88554567062" target="_blank" rel="noopener">https://us06web.zoom.us/j/88554567062</a>
+      </p>
+      <p class="zoom-row">
+        <span class="zoom-row-label">8 PM ET:</span>
+        <a class="zoom-row-link" href="https://us06web.zoom.us/j/81155916766" target="_blank" rel="noopener">https://us06web.zoom.us/j/81155916766</a>
+      </p>
+      <p class="zoom-sub">Save the link for your slot — it's the same every Tuesday for all 5 weeks.</p>
+    </div>
+
+    <div class="intake" id="intake-card">
+      <p class="intake-eyebrow">One last step</p>
+      <h2>Help us prepare for you.</h2>
+      <p class="intake-sub">A quick 2-minute intake. The more you share, the better Elizabeth and the team can hold the cohort for who you are and where you're coming from.</p>
+
+      <form id="intake-form" novalidate>
+        <div class="field">
+          <label for="if-name">Full name <span class="req">*</span></label>
+          <input id="if-name" name="full_name" type="text" autocomplete="name" required>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="if-email">Email <span class="req">*</span></label>
+            <input id="if-email" name="email" type="email" autocomplete="email" required>
           </div>
-          <div>
-            <label for="seat_type">Your role <span class="req">*</span></label>
-            <select id="seat_type" name="seat_type" required>
-              <option value="" disabled selected>Select one…</option>
-              <option value="facilitator">Facilitator</option>
-              <option value="attendee">Attendee</option>
-              <option value="other">Other</option>
-            </select>
+          <div class="field">
+            <label for="if-phone">Phone <span class="req">*</span></label>
+            <input id="if-phone" name="phone" type="tel" autocomplete="tel" required>
           </div>
         </div>
 
-        <div class="row two">
-          <div>
-            <label for="email">Email <span class="req">*</span></label>
-            <input type="email" id="email" name="email" required autocomplete="email">
-          </div>
-          <div>
-            <label for="phone">Phone <span class="req">*</span></label>
-            <input type="tel" id="phone" name="phone" required autocomplete="tel">
+        <div class="field">
+          <label>Which cohort slot are you joining? <span class="req">*</span></label>
+          <div class="checkgroup">
+            <label><input type="radio" name="cohort_slot" value="11 AM ET" required><span>11 AM Eastern (Tuesdays)</span></label>
+            <label><input type="radio" name="cohort_slot" value="8 PM ET"><span>8 PM Eastern (Tuesdays)</span></label>
           </div>
         </div>
 
-        <div class="row">
-          <div>
-            <label for="group_type">Which cohort time slot? <span class="req">*</span></label>
-            <select id="group_type" name="group_type" required>
-              <option value="" disabled selected>Pick a slot…</option>
-              <option value="11 AM ET">11 AM ET (Tuesdays)</option>
-              <option value="8 PM ET">8 PM ET (Tuesdays)</option>
-              <option value="Either">Either works</option>
-            </select>
+        <div class="field-row">
+          <div class="field">
+            <label for="if-city">City <span class="req">*</span></label>
+            <input id="if-city" name="city" type="text" autocomplete="address-level2" required>
+          </div>
+          <div class="field">
+            <label for="if-state">State / Province</label>
+            <input id="if-state" name="state" type="text" autocomplete="address-level1">
           </div>
         </div>
 
-        <div class="row two">
-          <div>
-            <label for="city">City <span class="req">*</span></label>
-            <input type="text" id="city" name="city" required autocomplete="address-level2">
-          </div>
-          <div>
-            <label for="state">State / Province</label>
-            <input type="text" id="state" name="state" autocomplete="address-level1">
+        <div class="field">
+          <label for="if-country">Country <span class="req">*</span></label>
+          <select id="if-country" name="country" required>
+            <option value="">Choose a country…</option>
+            <option value="United States">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Australia">Australia</option>
+            <option value="New Zealand">New Zealand</option>
+            <option value="Ireland">Ireland</option>
+            <option value="Mexico">Mexico</option>
+            <option value="South Africa">South Africa</option>
+            <option value="India">India</option>
+            <option value="Germany">Germany</option>
+            <option value="France">France</option>
+            <option value="Other">Other (please add in the notes below)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Have you done any ReBe or REAL TALK work before? <span class="req">*</span></label>
+          <div class="checkgroup">
+            <label><input type="radio" name="prior_experience" value="First time" required><span>This is my first time with ReBe</span></label>
+            <label><input type="radio" name="prior_experience" value="Reset workshop"><span>I've done a Reset workshop</span></label>
+            <label><input type="radio" name="prior_experience" value="REAL TALK program"><span>I've done the REAL TALK program</span></label>
+            <label><input type="radio" name="prior_experience" value="Refresh cohort"><span>I've done a Refresh cohort before</span></label>
+            <label><input type="radio" name="prior_experience" value="1:1 with a confidant"><span>I've had 1:1s with a ReBe confidant</span></label>
+            <label><input type="radio" name="prior_experience" value="Multiple of the above"><span>Multiple of the above</span></label>
           </div>
         </div>
 
-        <div class="row">
-          <div>
-            <label for="country">Country <span class="req">*</span></label>
-            <select id="country" name="country" required>
-              <option value="">Choose a country…</option>
-              <option value="United States">United States</option>
-              <option value="Canada">Canada</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="Australia">Australia</option>
-              <option value="New Zealand">New Zealand</option>
-              <option value="Ireland">Ireland</option>
-              <option value="Mexico">Mexico</option>
-              <option value="South Africa">South Africa</option>
-              <option value="India">India</option>
-              <option value="Germany">Germany</option>
-              <option value="France">France</option>
-              <option value="Other">Other (please add in the notes below)</option>
-            </select>
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Your story</legend>
-
-        <div class="row">
-          <div>
-            <label>Have you done any ReBe or REAL TALK work before? <span class="req">*</span></label>
-            <div class="checkgroup">
-              <label><input type="radio" name="prior_experience" value="First time" required><span>This is my first time with ReBe</span></label>
-              <label><input type="radio" name="prior_experience" value="Reset workshop"><span>I've done a Reset workshop</span></label>
-              <label><input type="radio" name="prior_experience" value="REAL TALK program"><span>I've done the REAL TALK program</span></label>
-              <label><input type="radio" name="prior_experience" value="Refresh cohort"><span>I've done a Refresh cohort before</span></label>
-              <label><input type="radio" name="prior_experience" value="1:1 with a confidant"><span>I've had 1:1s with a ReBe confidant</span></label>
-              <label><input type="radio" name="prior_experience" value="Multiple of the above"><span>Multiple of the above</span></label>
-            </div>
+        <div class="field">
+          <label>Why are you joining? <span class="opt">(select all that apply)</span> <span class="req">*</span></label>
+          <div class="checkgroup">
+            <label><input type="checkbox" name="why_here" value="Burnout"><span>Burnout</span></label>
+            <label><input type="checkbox" name="why_here" value="Anxiety"><span>Anxiety</span></label>
+            <label><input type="checkbox" name="why_here" value="Grief or loss"><span>Grief or loss</span></label>
+            <label><input type="checkbox" name="why_here" value="Loneliness or isolation"><span>Loneliness or isolation</span></label>
+            <label><input type="checkbox" name="why_here" value="Relationship challenges"><span>Relationship challenges</span></label>
+            <label><input type="checkbox" name="why_here" value="Identity or purpose"><span>Identity / purpose</span></label>
+            <label><input type="checkbox" name="why_here" value="Trauma recovery"><span>Trauma recovery</span></label>
+            <label><input type="checkbox" name="why_here" value="Spiritual exploration"><span>Spiritual exploration</span></label>
+            <label><input type="checkbox" name="why_here" value="Personal growth"><span>Personal growth</span></label>
+            <label><input type="checkbox" name="why_here" value="Not feeling like myself"><span>Not feeling like myself</span></label>
+            <label><input type="checkbox" name="why_here" value="Curious / exploring"><span>Curious / exploring</span></label>
+            <label><input type="checkbox" name="why_here" value="Other"><span>Other (note below)</span></label>
           </div>
         </div>
 
-        <div class="row">
-          <div>
-            <label>Why are you joining? <span class="opt">(select all that apply)</span> <span class="req">*</span></label>
-            <div class="checkgroup checkgroup--cols">
-              <label><input type="checkbox" name="why_here" value="Burnout"><span>Burnout</span></label>
-              <label><input type="checkbox" name="why_here" value="Anxiety"><span>Anxiety</span></label>
-              <label><input type="checkbox" name="why_here" value="Grief or loss"><span>Grief or loss</span></label>
-              <label><input type="checkbox" name="why_here" value="Loneliness or isolation"><span>Loneliness or isolation</span></label>
-              <label><input type="checkbox" name="why_here" value="Relationship challenges"><span>Relationship challenges</span></label>
-              <label><input type="checkbox" name="why_here" value="Identity or purpose"><span>Identity / purpose</span></label>
-              <label><input type="checkbox" name="why_here" value="Trauma recovery"><span>Trauma recovery</span></label>
-              <label><input type="checkbox" name="why_here" value="Spiritual exploration"><span>Spiritual exploration</span></label>
-              <label><input type="checkbox" name="why_here" value="Personal growth"><span>Personal growth</span></label>
-              <label><input type="checkbox" name="why_here" value="Not feeling like myself"><span>Not feeling like myself</span></label>
-              <label><input type="checkbox" name="why_here" value="Curious / exploring"><span>Curious / exploring</span></label>
-              <label><input type="checkbox" name="why_here" value="Other"><span>Other (note below)</span></label>
-            </div>
-          </div>
-        </div>
-
-        <div class="row two">
-          <div>
-            <label for="heard_from">How did you hear about ReBe? <span class="req">*</span></label>
-            <select id="heard_from" name="heard_from" required>
+        <div class="field-row">
+          <div class="field">
+            <label for="if-heard">How did you hear about ReBe? <span class="req">*</span></label>
+            <select id="if-heard" name="heard_from" required>
               <option value="">Choose…</option>
               <option value="Friend">A friend told me</option>
               <option value="ReBe team member">A ReBe team member</option>
@@ -237,160 +266,204 @@
               <option value="Other">Other (please note below)</option>
             </select>
           </div>
-          <div>
-            <label for="referrer">Who referred you? <span class="opt">(if anyone)</span></label>
-            <input type="text" id="referrer" name="referrer" placeholder="Their name">
+          <div class="field">
+            <label for="if-referrer">Who referred you? <span class="opt">(if anyone)</span></label>
+            <input id="if-referrer" name="referrer" type="text" placeholder="Their name">
           </div>
         </div>
 
-        <div class="row">
-          <div>
-            <label>For breakout rooms, what are you comfortable with? <span class="req">*</span></label>
-            <div class="checkgroup">
-              <label><input type="radio" name="breakout_preference" value="Co-ed (mixed)" required><span>Co-ed (mixed)</span></label>
-              <label><input type="radio" name="breakout_preference" value="Women only"><span>Women only</span></label>
-              <label><input type="radio" name="breakout_preference" value="Men only"><span>Men only</span></label>
-              <label><input type="radio" name="breakout_preference" value="No strong preference"><span>No strong preference</span></label>
-            </div>
+        <div class="field">
+          <label>For breakout rooms, what are you comfortable with? <span class="req">*</span></label>
+          <div class="checkgroup">
+            <label><input type="radio" name="breakout_preference" value="Co-ed (mixed)" required><span>Co-ed (mixed)</span></label>
+            <label><input type="radio" name="breakout_preference" value="Women only"><span>Women only</span></label>
+            <label><input type="radio" name="breakout_preference" value="Men only"><span>Men only</span></label>
+            <label><input type="radio" name="breakout_preference" value="No strong preference"><span>No strong preference</span></label>
           </div>
         </div>
 
-        <div class="row">
-          <div>
-            <label for="notes">Anything else we should know? <span class="opt">(optional)</span></label>
-            <textarea id="notes" name="notes" placeholder="What's bringing you here, what you're hoping for, anything you want Elizabeth and the team to know going in…"></textarea>
-          </div>
+        <div class="field">
+          <label for="if-notes">Anything else we should know? <span class="opt">(optional)</span></label>
+          <textarea id="if-notes" name="notes" placeholder="What's bringing you here, what you're hoping for, anything you want Elizabeth and the team to know going in…"></textarea>
         </div>
-      </fieldset>
 
-      <p class="msg error" id="form-error"></p>
+        <button type="submit" class="intake-submit" id="intake-submit">Send to the team →</button>
+        <p class="intake-error" id="intake-error"></p>
+      </form>
 
-      <div class="submit-row">
-        <button type="submit" class="btn" id="submit-btn">Send to the team →</button>
+      <div class="intake-success" id="intake-success" role="status">
+        <div class="ok-mark" aria-hidden="true">✓</div>
+        <h3>We've got you.</h3>
+        <p>Thank you for filling this out.<br>We can't wait to meet you in the room on Tuesday, June 23.</p>
+        <p style="margin-top:18px;font-size:14px;color:var(--green-ink);font-weight:600">Check your email for confirmation.</p>
+        <p style="margin-top:6px;font-size:13px"><a id="intake-success-zoom" href="https://us06web.zoom.us/j/88554567062" target="_blank" rel="noopener" style="color:var(--green-ink);text-decoration:underline;word-break:break-all">https://us06web.zoom.us/j/88554567062</a></p>
       </div>
-    </form>
-  </div>
+    </div>
 
-  <div class="success-card hidden" id="success-card">
-    <h2>You're in. 💛</h2>
-    <p>Thanks — your intake is saved. We'll be in touch with the cohort details soon. If you need anything in the meantime, email <a href="mailto:refresh@justrebe.com" style="color:var(--green-deep);text-decoration:underline">refresh@justrebe.com</a>.</p>
+    <p class="help">
+      Questions, or didn't see the welcome within 48 hours? Email <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a>.
+    </p>
+    <a href="/" class="home-link">← Back to ReBe</a>
   </div>
+</main>
 
-  <div class="footer">
-    <p>Questions? <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a> · ReBe · ReFresh Cohort</p>
+<!-- "What happens next" modal — opens automatically after intake submit -->
+<dialog class="next-modal" id="next-modal" aria-labelledby="next-title">
+  <div class="next-inner">
+    <button class="next-close" type="button" id="next-close" aria-label="Close">×</button>
+    <h2 id="next-title">What happens next.</h2>
+    <ol>
+      <li>You'll get a confirmation email from <strong>refresh@justrebe.com</strong> within an hour.</li>
+      <li>Within <strong>24–48 hours</strong>, you'll receive your cohort welcome with the Zoom link and what to bring (which is mostly: yourself).</li>
+      <li id="next-step-3">Five weekly live sessions starting <strong>Tuesday, June 23</strong>.</li>
+    </ol>
+    <button type="button" class="next-done" id="next-done">Got it</button>
   </div>
-</div>
+</dialog>
+
+<footer>
+  <p>ReBe — Rebuilding people from the inside out. Better me. Better we.</p>
+</footer>
 
 <script>
-(function () {
-  var form = document.getElementById('intake-form');
-  var btn  = document.getElementById('submit-btn');
-  var err  = document.getElementById('form-error');
-  var card = document.getElementById('form-card');
-  var ok   = document.getElementById('success-card');
-
-  // Allow ?thanks=1 to land directly on the confirmation panel — used
-  // when someone's first submit attempt errored and we need to send them
-  // a confirmation link without having them re-fill the form.
-  try {
-    var params = new URLSearchParams(window.location.search);
-    if (params.get('thanks') === '1' || params.get('thanks') === 'true') {
-      if (card) card.style.display = 'none';
-      if (ok)   ok.classList.remove('hidden');
-    }
-  } catch (_) {}
-
-  function showError(msg) {
-    err.textContent = msg;
-    err.classList.add('show');
-  }
-  function hideError() {
-    err.textContent = '';
-    err.classList.remove('show');
-  }
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    hideError();
-
-    var fd = new FormData(form);
-    var whyHere = fd.getAll('why_here');
-    var data = {};
-    fd.forEach(function (v, k) {
-      if (k === 'why_here') return; // handled separately
-      data[k] = String(v).trim();
-    });
-
-    if (!data.full_name)                                                                  return showError('Please enter your full name.');
-    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))                    return showError('Please enter a valid email.');
-    if (!data.phone || data.phone.replace(/\D/g,'').length < 10)                          return showError('Please enter a phone number (10+ digits).');
-    if (!data.seat_type)                                                                  return showError('Please pick your role.');
-    if (!data.group_type)                                                                 return showError('Please pick a cohort time slot.');
-    if (!data.city)                                                                       return showError('Please add your city.');
-    if (!data.country)                                                                    return showError('Please choose a country.');
-    if (!data.prior_experience)                                                           return showError('Please tell us your prior ReBe experience.');
-    if (whyHere.length === 0)                                                             return showError('Please pick at least one reason you\'re joining.');
-    if (!data.heard_from)                                                                 return showError('Please choose how you heard about ReBe.');
-    if (!data.breakout_preference)                                                        return showError('Please pick a breakout-room preference.');
-
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
-
-    // Compose payloads for both endpoints
-    var dbPayload = Object.assign({}, data, { why_here: whyHere });
-    var notifyPayload = {
-      kind: 'cohort_intake',
-      record: {
-        full_name: data.full_name,
-        email: data.email,
-        phone: data.phone,
-        city: data.city,
-        state: data.state || '',
-        country: data.country,
-        cohort_slot: data.group_type,
-        prior_experience: data.prior_experience,
-        why_here: whyHere,
-        heard_from: data.heard_from,
-        referrer: data.referrer || '',
-        breakout_preference: data.breakout_preference,
-        notes: data.notes || ''
-      }
-    };
-
+  // ?thanks=1 jumps straight to the success state (used to send a
+  // confirmation link to someone whose first submit errored).
+  (function () {
     try {
-      // DB save is the critical one — must succeed
-      var r = await fetch('/api/refresh-intake', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dbPayload),
-      });
-      var body = await r.json();
-      if (!r.ok) {
-        var msg = body.error || 'Couldn\'t save your intake.';
-        if (body.detail) {
-          var detailStr = typeof body.detail === 'string' ? body.detail : JSON.stringify(body.detail);
-          msg += ' (' + detailStr.slice(0, 800) + ')';
-        }
-        throw new Error(msg);
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('thanks') === '1' || params.get('thanks') === 'true') {
+        document.getElementById('intake-form').style.display = 'none';
+        document.getElementById('intake-success').classList.add('show');
       }
+    } catch (_) {}
+  })();
 
-      // Notify (admin email + Kit tags + OpenPhone) — fire-and-forget; non-blocking
-      fetch('/api/notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(notifyPayload),
-      }).catch(function (err) { console.warn('notify failed (non-fatal):', err); });
+  // "What happens next" modal
+  (function(){
+    var modal = document.getElementById('next-modal');
+    if (!modal) return;
+    var closeBtn = document.getElementById('next-close');
+    var doneBtn = document.getElementById('next-done');
+    function close(){ modal.close(); }
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (doneBtn) doneBtn.addEventListener('click', close);
+    modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+    window.openNextModal = function(){
+      if (typeof modal.showModal === 'function') modal.showModal();
+    };
+  })();
 
-      card.classList.add('hidden');
-      ok.classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (e2) {
-      btn.disabled = false;
-      btn.textContent = 'Send to the team →';
-      showError(e2.message || 'Something went wrong. Please try again or email refresh@justrebe.com.');
-    }
+  // Intake form submit — saves to /api/refresh-intake (DB row in refresh_signups)
+  // AND fires /api/notify (admin email + Kit tags + OpenPhone push) so it
+  // matches the post-payment flow as closely as possible.
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('intake-form');
+    var submitBtn = document.getElementById('intake-submit');
+    var errorEl = document.getElementById('intake-error');
+    var successEl = document.getElementById('intake-success');
+    if (!form) return;
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      errorEl.textContent = '';
+
+      var fd = new FormData(form);
+      var fullName = (fd.get('full_name') || '').trim();
+      var email = (fd.get('email') || '').trim();
+      var phone = (fd.get('phone') || '').trim();
+      var cohortSlot = fd.get('cohort_slot') || '';
+      var city = (fd.get('city') || '').trim();
+      var state = (fd.get('state') || '').trim();
+      var country = (fd.get('country') || '').trim();
+      var priorExp = fd.get('prior_experience') || '';
+      var whyHere = fd.getAll('why_here');
+      var heardFrom = fd.get('heard_from') || '';
+      var referrer = (fd.get('referrer') || '').trim();
+      var breakout = fd.get('breakout_preference') || '';
+      var notes = (fd.get('notes') || '').trim();
+
+      if (!fullName) { errorEl.textContent = 'Please add your full name.'; return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorEl.textContent = 'Please add a valid email.'; return; }
+      if (!phone || phone.replace(/\D/g,'').length < 10) { errorEl.textContent = 'Please add a 10-digit phone number.'; return; }
+      if (!cohortSlot) { errorEl.textContent = 'Please pick a cohort slot.'; return; }
+      if (!city) { errorEl.textContent = 'Please add your city.'; return; }
+      if (!country) { errorEl.textContent = 'Please choose a country.'; return; }
+      if (!priorExp) { errorEl.textContent = 'Please tell us your prior experience.'; return; }
+      if (whyHere.length === 0) { errorEl.textContent = 'Please pick at least one reason you\'re joining.'; return; }
+      if (!heardFrom) { errorEl.textContent = 'Please choose how you heard about us.'; return; }
+      if (!breakout) { errorEl.textContent = 'Please pick a breakout-room preference.'; return; }
+
+      submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
+
+      try {
+        // DB save (refresh_signups) — must succeed
+        var dbResp = await fetch('/api/refresh-intake', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            full_name: fullName,
+            email: email,
+            phone: phone,
+            group_type: cohortSlot,
+            city: city,
+            state: state,
+            country: country,
+            prior_experience: priorExp,
+            why_here: whyHere,
+            heard_from: heardFrom,
+            referrer: referrer,
+            breakout_preference: breakout,
+            notes: notes
+          })
+        });
+        if (!dbResp.ok) {
+          var body = await dbResp.json();
+          var msg = body.error || 'Couldn\'t save your intake.';
+          if (body.detail) {
+            var detailStr = typeof body.detail === 'string' ? body.detail : JSON.stringify(body.detail);
+            msg += ' (' + detailStr.slice(0, 400) + ')';
+          }
+          throw new Error(msg);
+        }
+
+        // Admin email + Kit tag + OpenPhone — fire-and-forget; non-blocking
+        fetch('/api/notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            kind: 'cohort_intake',
+            record: {
+              full_name: fullName, email: email, phone: phone,
+              city: city, state: state, country: country,
+              cohort_slot: cohortSlot,
+              prior_experience: priorExp,
+              why_here: whyHere,
+              heard_from: heardFrom,
+              referrer: referrer,
+              breakout_preference: breakout,
+              notes: notes
+            }
+          })
+        }).catch(function(err){ console.warn('notify failed (non-fatal):', err); });
+
+        // Swap the success Zoom link to their actual slot
+        var slotZoom = cohortSlot.indexOf('8') === 0 ? 'https://us06web.zoom.us/j/81155916766' : 'https://us06web.zoom.us/j/88554567062';
+        var successZoom = document.getElementById('intake-success-zoom');
+        if (successZoom) { successZoom.href = slotZoom; successZoom.textContent = slotZoom; }
+
+        form.style.display = 'none';
+        successEl.classList.add('show');
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function(){ if (typeof window.openNextModal === 'function') window.openNextModal(); }, 900);
+      } catch (err) {
+        console.error('Intake submit failed', err);
+        errorEl.textContent = err.message || "Couldn't send right now — please email refresh@justrebe.com directly. We won't lose your intake.";
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send to the team →';
+      }
+    });
   });
-})();
 </script>
+
 </body>
 </html>
