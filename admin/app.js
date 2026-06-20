@@ -350,6 +350,9 @@
       else inviteBtn.classList.add('hidden');
     }
 
+    // Render the topbar avatar (uses user_metadata.avatar_url if set)
+    renderTopbarAvatar();
+
     loginView.classList.add('hidden');
     appView.classList.remove('hidden');
 
@@ -1832,15 +1835,22 @@
     grid.classList.remove('hidden');
     grid.innerHTML = members.map((m) => {
       const initials = (m.full_name || m.email || '?').split(/\s+|@/).filter(Boolean).map((s) => s[0]).slice(0, 2).join('').toUpperCase();
-      const name = friendlyActorName(m.email) === m.email ? (m.full_name || m.email) : friendlyActorName(m.email);
+      const displayName = m.full_name || friendlyActorName(m.email) || m.email;
       const isMe = currentUser && m.user_id === currentUser.id;
+      const avatarHtml = m.avatar_url
+        ? `<div style="width:44px;height:44px;border-radius:50%;flex-shrink:0;background:#fff;overflow:hidden;border:1px solid var(--bone)"><img src="${escapeHtml(m.avatar_url)}" alt="" style="width:100%;height:100%;object-fit:cover"></div>`
+        : `<div style="width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0">${escapeHtml(initials)}</div>`;
+      const titleLine = m.title
+        ? `<p style="margin:2px 0 0;font-size:12px;color:var(--body)">${escapeHtml(m.title)}</p>`
+        : '';
       return `
         <div class="card" style="padding:18px 20px">
           <div style="display:flex;align-items:center;gap:12px;margin:0 0 10px">
-            <div style="width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0">${escapeHtml(initials)}</div>
+            ${avatarHtml}
             <div style="min-width:0;flex:1">
-              <p style="margin:0;font-size:15px;font-weight:700;color:var(--slate);display:flex;align-items:center;gap:6px">${escapeHtml(name)}${isMe ? '<span class="role-pill" style="background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF">YOU</span>' : ''}</p>
-              <p style="margin:2px 0 0;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(m.email)}</p>
+              <p style="margin:0;font-size:15px;font-weight:700;color:var(--slate);display:flex;align-items:center;gap:6px">${escapeHtml(displayName)}${isMe ? '<span class="role-pill" style="background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF">YOU</span>' : ''}</p>
+              ${titleLine}
+              <p style="margin:2px 0 0;font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(m.email)}</p>
             </div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700">
@@ -1853,18 +1863,135 @@
     }).join('');
   }
 
+  function renderAvatar(target, fullName, avatarUrl) {
+    if (!target) return;
+    if (avatarUrl) {
+      target.innerHTML = `<img src="${escapeHtml(avatarUrl)}" alt="" style="width:100%;height:100%;object-fit:cover">`;
+      target.style.background = 'transparent';
+    } else {
+      const initials = (fullName || '?').split(/\s+/).filter(Boolean).map((s) => s[0]).slice(0, 2).join('').toUpperCase() || '—';
+      target.textContent = initials;
+      target.style.background = 'var(--navy)';
+      target.style.color = '#fff';
+    }
+  }
+
   async function loadAccount() {
     if (!currentUser) return;
-    const fullName = (currentUser.user_metadata && (currentUser.user_metadata.full_name || currentUser.user_metadata.name))
-      || friendlyActorName(currentUser.email);
-    const initials = fullName.split(/\s+/).filter(Boolean).map((s) => s[0]).slice(0, 2).join('').toUpperCase();
+    const meta = currentUser.user_metadata || {};
+    const fullName = meta.full_name || meta.name || friendlyActorName(currentUser.email) || '';
+    const title    = meta.title || '';
+    const avatarUrl = meta.avatar_url || '';
+
     const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-    set('acct-name', fullName);
     set('acct-email', currentUser.email || '—');
-    set('acct-role', currentRole || '—');
-    set('acct-id', currentUser.id || '—');
-    set('acct-avatar', initials || '—');
-    set('acct-last-signin', currentUser.last_sign_in_at ? fmtDateTime(currentUser.last_sign_in_at) : '—');
+    set('acct-meta', `${currentRole || '—'}  ·  signed in ${currentUser.last_sign_in_at ? fmtDateTime(currentUser.last_sign_in_at) : '—'}`);
+    const nameInput  = document.getElementById('acct-display-name');
+    const titleInput = document.getElementById('acct-title');
+    if (nameInput)  nameInput.value  = fullName;
+    if (titleInput) titleInput.value = title;
+    renderAvatar(document.getElementById('acct-avatar'), fullName, avatarUrl);
+    hideMsg(document.getElementById('acct-error'));
+    hideMsg(document.getElementById('acct-success'));
+  }
+
+  // Save profile (display name + title)
+  const acctSaveBtn = document.getElementById('acct-save-btn');
+  if (acctSaveBtn) {
+    acctSaveBtn.addEventListener('click', async () => {
+      const errEl = document.getElementById('acct-error');
+      const okEl  = document.getElementById('acct-success');
+      hideMsg(errEl); hideMsg(okEl);
+      const fullName = (document.getElementById('acct-display-name').value || '').trim();
+      const title    = (document.getElementById('acct-title').value || '').trim();
+      acctSaveBtn.disabled = true;
+      acctSaveBtn.textContent = 'Saving…';
+      const { data, error } = await sb.auth.updateUser({
+        data: {
+          ...(currentUser.user_metadata || {}),
+          full_name: fullName,
+          title,
+        },
+      });
+      acctSaveBtn.disabled = false;
+      acctSaveBtn.textContent = 'Save profile';
+      if (error) { showError(errEl, 'Couldn\'t save: ' + error.message); return; }
+      if (data && data.user) currentUser = data.user;
+      showError(okEl, '✓ Saved.');
+      // Re-render avatar in case name initials changed
+      renderAvatar(document.getElementById('acct-avatar'),
+        fullName,
+        currentUser.user_metadata && currentUser.user_metadata.avatar_url);
+      renderTopbarAvatar();
+    });
+  }
+
+  // Photo upload
+  const acctPhotoInput = document.getElementById('acct-photo-input');
+  if (acctPhotoInput) {
+    acctPhotoInput.addEventListener('change', async (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file || !currentUser) return;
+      if (file.size > 5 * 1024 * 1024) {
+        showError(document.getElementById('acct-error'), 'Photo too large (max 5 MB).');
+        acctPhotoInput.value = '';
+        return;
+      }
+      const errEl = document.getElementById('acct-error');
+      const okEl  = document.getElementById('acct-success');
+      hideMsg(errEl); hideMsg(okEl);
+
+      // Build storage path: <user_id>/avatar-<timestamp>.<ext>
+      // Including a timestamp ensures the URL changes (defeats browser cache).
+      const ext = (file.name.match(/\.(\w+)$/) || ['', 'png'])[1].toLowerCase();
+      const ts  = Math.floor((currentUser.last_sign_in_at ? new Date(currentUser.last_sign_in_at).getTime() : 0) + Math.random() * 1e6);
+      const path = `${currentUser.id}/avatar-${ts}.${ext}`;
+
+      const avatarEl = document.getElementById('acct-avatar');
+      if (avatarEl) avatarEl.textContent = '…';
+
+      const { error: upErr } = await sb.storage.from('avatars').upload(path, file, {
+        cacheControl: '3600',
+        upsert: true,
+        contentType: file.type || 'image/png',
+      });
+      if (upErr) {
+        showError(errEl, 'Upload failed: ' + upErr.message);
+        loadAccount();
+        return;
+      }
+
+      // Public URL
+      const { data: pub } = sb.storage.from('avatars').getPublicUrl(path);
+      const avatarUrl = pub && pub.publicUrl;
+
+      // Save URL to user_metadata
+      const { data, error: userErr } = await sb.auth.updateUser({
+        data: {
+          ...(currentUser.user_metadata || {}),
+          avatar_url: avatarUrl,
+        },
+      });
+      if (userErr) {
+        showError(errEl, 'Photo uploaded but profile save failed: ' + userErr.message);
+        return;
+      }
+      if (data && data.user) currentUser = data.user;
+      renderAvatar(avatarEl, currentUser.user_metadata.full_name, avatarUrl);
+      renderTopbarAvatar();
+      showError(okEl, '✓ Photo updated.');
+      acctPhotoInput.value = '';
+    });
+  }
+
+  // Topbar mini-avatar
+  function renderTopbarAvatar() {
+    const wrap = document.getElementById('topbar-avatar');
+    if (!wrap || !currentUser) return;
+    const meta = currentUser.user_metadata || {};
+    const fullName = meta.full_name || friendlyActorName(currentUser.email) || '';
+    const avatarUrl = meta.avatar_url || '';
+    renderAvatar(wrap, fullName, avatarUrl);
   }
 
   // ============================================================
