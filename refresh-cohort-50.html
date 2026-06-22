@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex,nofollow" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>ReBe ReFresh · Discounted Seat ($50)</title>
+<meta name="description" content="Reserve your seat in the ReBe ReFresh 5-week cohort at $50 (normally $300). Pick your slot below." />
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:#FFFFFF; --mist:#FAF9F7; --navy:#060B50; --navy-dark:#040832;
+    --green:#449945; --green-ink:#3A8438; --green-deep:#2D6A2C; --green-wash:#F2F8F2;
+    --gold:#E3A01F; --gold-ink:#B07D14; --gold-wash:#FBF4E4;
+    --slate:#212B37; --body:#4A535E; --muted:#9DA1A8; --bone:#E2E2E2; --coral:#EA492E;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --display:'Anton','Arial Narrow',Impact,sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:#FFFFFF;color:var(--body);font-family:var(--sans);font-weight:400;font-size:20px;line-height:1.7;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  @media (max-width:640px){body{font-size:18px}}
+
+  .util-bar{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--bone)}
+  .util-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;height:56px}
+  .wordmark{font-family:var(--sans);font-weight:700;color:var(--navy);letter-spacing:.02em;font-size:18px;text-decoration:none}
+  .wordmark span{color:var(--green)}
+
+  main{flex:1;display:flex;align-items:center;justify-content:center;padding:56px 24px 48px;position:relative;overflow:hidden}
+  main::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 10%,rgba(227,160,31,.04),transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(68,153,69,.04),transparent 50%);pointer-events:none;z-index:0}
+
+  .wrap{position:relative;z-index:1;max-width:680px;width:100%;text-align:center}
+
+  .eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.2em;color:var(--green-ink);margin:0 0 18px;display:inline-block}
+  .eyebrow::before{content:'';display:block;width:48px;height:1px;background:var(--green-ink);margin:0 auto 14px;opacity:.55}
+
+  h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(34px,5.2vw,52px);line-height:1.06;letter-spacing:.01em;color:var(--navy);margin:0 0 16px;max-width:18ch;margin-left:auto;margin-right:auto}
+  h1 .accent{color:var(--green)}
+
+  .lede{font-family:var(--sans);font-weight:300;font-size:20px;line-height:1.55;color:var(--body);margin:0 auto 24px;max-width:540px;letter-spacing:-.005em}
+
+  .price-pill{display:inline-flex;align-items:center;gap:10px;background:#F4FAEF;border:1px solid #cfe6d0;border-radius:999px;padding:6px 14px;margin:0 0 30px;line-height:1}
+  .price-pill .price{font-family:var(--display);font-weight:400;font-size:22px;color:#3A8438;letter-spacing:.02em}
+  .price-pill .strike{font-family:var(--sans);font-size:13px;color:var(--muted);text-decoration:line-through}
+  .price-pill .sep{width:1px;height:16px;background:#cfe6d0}
+  .price-pill .label{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#3A8438}
+
+  .cohort-meta{display:inline-block;background:var(--gold-wash);border:1px solid #f5d4a8;border-radius:14px;padding:16px 26px;margin:0 0 30px;text-align:center}
+  .cohort-meta .label{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);margin:0 0 6px}
+  .cohort-meta .date{font-family:var(--display);font-size:28px;color:var(--navy);letter-spacing:.01em;line-height:1;margin:0 0 4px}
+  .cohort-meta .time{font-family:var(--sans);font-size:13px;color:var(--body);font-weight:400}
+
+  .slot-card{background:#fff;border:1px solid var(--bone);border-radius:16px;padding:28px 28px;box-shadow:0 10px 32px rgba(6,11,80,.05);text-align:left;margin:0 0 22px}
+  .slot-card h2{font-family:var(--serif);font-style:italic;font-weight:600;font-size:22px;color:var(--navy);margin:0 0 6px;line-height:1.2}
+  .slot-card .slot-sub{font-family:var(--sans);font-size:14px;color:var(--body);margin:0 0 22px;line-height:1.5}
+
+  .slot-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:520px){.slot-grid{grid-template-columns:1fr}}
+
+  .slot-btn{display:flex;flex-direction:column;align-items:flex-start;gap:8px;background:#fff;border:2px solid var(--green-ink);border-radius:12px;padding:18px 20px;cursor:pointer;font-family:var(--sans);transition:background .15s,transform .12s,box-shadow .15s;text-align:left;text-decoration:none;color:var(--slate)}
+  .slot-btn:hover:not(:disabled){background:var(--green-ink);color:#fff;transform:translateY(-2px);box-shadow:0 8px 22px rgba(58,132,56,.18)}
+  .slot-btn:hover:not(:disabled) .slot-btn-time,
+  .slot-btn:hover:not(:disabled) .slot-btn-meta{color:rgba(255,255,255,.85)}
+  .slot-btn:disabled{opacity:.6;cursor:wait}
+  .slot-btn-label{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink)}
+  .slot-btn:hover:not(:disabled) .slot-btn-label{color:#fff}
+  .slot-btn-time{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.1;color:var(--navy);transition:color .15s}
+  .slot-btn-meta{font-family:var(--sans);font-size:13px;color:var(--body);line-height:1.4;transition:color .15s}
+  .slot-btn-arrow{margin-top:6px;font-size:20px;line-height:1}
+
+  .error{display:none;color:#c0392b;font-size:13px;text-align:center;margin:14px 0 0;line-height:1.5}
+  .error.show{display:block}
+
+  .help{font-size:14px;color:var(--muted);margin:24px 0 0;line-height:1.6}
+  .help a{color:var(--green-ink);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-ink)}
+  .help a:hover{border-bottom-style:solid}
+
+  footer{background:var(--mist);padding:28px 24px;text-align:center;border-top:1px solid var(--bone);font-size:13px;color:var(--muted);line-height:1.6}
+
+  @media (max-width:640px){
+    main{padding:36px 16px 32px}
+    .slot-card{padding:22px 20px}
+    .cohort-meta{padding:14px 20px}
+  }
+</style>
+</head>
+<body>
+
+<header class="util-bar">
+  <div class="util-inner">
+    <a href="/" class="wordmark">Re<span>Be</span></a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="eyebrow">By invitation · Discounted seat</p>
+    <h1>Reserve your seat <span class="accent">for $50</span></h1>
+    <p class="lede">A discounted invite to the first ReBe ReFresh cohort. Pick your slot below and check out — you'll fill out the rest of the intake on the next screen.</p>
+
+    <div class="price-pill">
+      <span class="price">$50</span>
+      <span class="strike">$300</span>
+      <span class="sep"></span>
+      <span class="label">First-cohort invite</span>
+    </div>
+
+    <div class="cohort-meta">
+      <p class="label">Cohort starts</p>
+      <p class="date">JUNE 23, 2026</p>
+      <p class="time">5 weekly sessions · 5 weeks</p>
+    </div>
+
+    <div class="slot-card">
+      <h2>Pick your slot.</h2>
+      <p class="slot-sub">Both meet weekly on Tuesdays for 5 weeks. Same group, just different times. Click to reserve at $50.</p>
+
+      <div class="slot-grid">
+        <button type="button" class="slot-btn" data-slot="11am">
+          <span class="slot-btn-label">Slot A</span>
+          <span class="slot-btn-time">11 AM Eastern</span>
+          <span class="slot-btn-meta">Tuesdays · midday<br>Reserve · $50</span>
+          <span class="slot-btn-arrow">→</span>
+        </button>
+        <button type="button" class="slot-btn" data-slot="8pm">
+          <span class="slot-btn-label">Slot B</span>
+          <span class="slot-btn-time">8 PM Eastern</span>
+          <span class="slot-btn-meta">Tuesdays · evening<br>Reserve · $50</span>
+          <span class="slot-btn-arrow">→</span>
+        </button>
+      </div>
+
+      <p class="error" id="checkout-error"></p>
+    </div>
+
+    <p class="help">After checkout you'll fill out a quick intake (the same one all cohort members fill out). Questions? <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a>.</p>
+  </div>
+</main>
+
+<footer>
+  <p>ReBe — Rebuilding people from the inside out.</p>
+</footer>
+
+<script>
+(function(){
+  var AMOUNT_CENTS = 5000; // $50
+  var buttons = document.querySelectorAll('.slot-btn');
+  var errEl = document.getElementById('checkout-error');
+
+  function showError(msg) {
+    errEl.textContent = msg;
+    errEl.classList.add('show');
+  }
+  function hideError() {
+    errEl.textContent = '';
+    errEl.classList.remove('show');
+  }
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', async function(){
+      hideError();
+      var slot = btn.getAttribute('data-slot');
+      var zoneLabel = slot === '8pm' ? '8 PM ET' : '11 AM ET';
+
+      // Lock all buttons during the round trip
+      buttons.forEach(function(b){ b.disabled = true; });
+      btn.querySelector('.slot-btn-meta').innerHTML = 'Loading checkout…';
+
+      try {
+        var resp = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            kind: 'cohort',
+            slot: slot,
+            ui_mode: 'hosted',
+            amount_cents: AMOUNT_CENTS,
+            description: 'ReBe ReFresh · 5-Week Cohort (' + zoneLabel + ') · Discounted seat',
+            success_url: window.location.origin + '/thank-you-cohort?slot=' + slot,
+            cancel_url:  window.location.origin + '/refresh-cohort-50'
+          })
+        });
+        var data = await resp.json();
+        if (!resp.ok || !data.url) {
+          throw new Error((data && data.error) || 'Failed to start checkout');
+        }
+        window.location.href = data.url;
+      } catch (err) {
+        console.error('Checkout error', err);
+        buttons.forEach(function(b){ b.disabled = false; });
+        btn.querySelector('.slot-btn-meta').innerHTML = (slot === '8pm' ? 'Tuesdays · evening' : 'Tuesdays · midday') + '<br>Reserve · $50';
+        showError("Couldn't start checkout — " + (err.message || 'please try again or email refresh@justrebe.com'));
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
