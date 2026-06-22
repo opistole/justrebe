@@ -110,7 +110,17 @@
   footer a{color:var(--green-ink);font-weight:700;text-decoration:none}
 
   @media (max-width:640px){
-    main{padding:48px 18px 36px}
+    main{padding:40px 16px 32px}
+    .intake{padding:24px 22px}
+    .cohort-meta{padding:14px 20px;margin:0 0 24px}
+    .cohort-meta .date{font-size:24px}
+    h1{font-size:34px !important;line-height:1.1}
+    .lede{font-size:18px;margin-bottom:24px}
+    .field{margin:0 0 16px}
+  }
+  @media (max-width:380px){
+    .intake{padding:20px 18px}
+    h1{font-size:28px !important}
   }
 </style>
 </head>
@@ -130,18 +140,17 @@
     <p class="lede">Fill out the form below to reserve your seat in the first ReBe ReFresh cohort. Elizabeth and the team will follow up with your welcome and Zoom link.</p>
 
     <!-- Link to the main cohort marketing page for anyone who landed here without context -->
-    <p style="margin:0 0 28px;">
-      <a href="https://www.justrebe.com/refresh-cohort" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-family:Lato,Arial,sans-serif;font-size:14px;font-weight:700;color:#060B50;text-decoration:none;border-bottom:1px solid #060B50;padding-bottom:2px;letter-spacing:.02em;">
-        New here? See what the ReFresh cohort is
-        <span aria-hidden="true">→</span>
+    <p style="margin:0 0 22px;line-height:1.5;">
+      <a href="https://www.justrebe.com/refresh-cohort" target="_blank" rel="noopener" style="font-family:Lato,Arial,sans-serif;font-size:13px;font-weight:700;color:#060B50;text-decoration:none;border-bottom:1px solid #060B50;padding-bottom:2px;letter-spacing:.02em;white-space:normal;">
+        New here? See what the ReFresh cohort is&nbsp;→
       </a>
     </p>
 
-    <!-- Price badge — visually shows this is a complimentary seat ($0) -->
-    <div style="display:inline-flex;align-items:center;gap:14px;background:#F4FAEF;border:1px solid #cfe6d0;border-radius:999px;padding:10px 22px;margin:0 0 28px;">
-      <span style="font-family:Anton,sans-serif;font-weight:400;font-size:24px;letter-spacing:.02em;color:#3A8438;line-height:1;">$0</span>
-      <span style="width:1px;height:18px;background:#cfe6d0;"></span>
-      <span style="font-family:Lato,Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#3A8438;">Complimentary seat</span>
+    <!-- Price badge — small pill: '$0 · Complimentary seat' -->
+    <div style="display:inline-flex;align-items:center;gap:8px;background:#F4FAEF;border:1px solid #cfe6d0;border-radius:999px;padding:5px 12px;margin:0 0 24px;line-height:1;">
+      <span style="font-family:Lato,Arial,sans-serif;font-weight:700;font-size:13px;color:#3A8438;letter-spacing:.02em;">$0</span>
+      <span style="width:1px;height:11px;background:#cfe6d0;"></span>
+      <span style="font-family:Lato,Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#3A8438;">Complimentary seat</span>
     </div>
 
     <div class="cohort-meta">
