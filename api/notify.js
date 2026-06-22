@@ -83,6 +83,113 @@ async function sendEmail({ to, subject, text, cc }) {
   return r.json();
 }
 
+// Branded HTML welcome email sent to a cohort participant after they
+// complete the intake form on /thank-you-cohort. Picks the right Zoom
+// link based on the slot they chose at Stripe Checkout.
+async function sendCohortWelcomeEmail({ toEmail, firstName, slotChoice }) {
+  const resendKey = process.env.RESEND_API_KEY;
+  if (!resendKey) {
+    console.warn('cohort-welcome: RESEND_API_KEY not set, skipping');
+    return;
+  }
+  const fromAddr = FROM || 'ReBe ReFresh <refresh@justrebe.com>';
+
+  const slotLower = String(slotChoice || '').toLowerCase();
+  const isEightPm  = slotLower.includes('8');
+  const isElevenAm = slotLower.includes('11');
+  const ZOOM_11AM = 'https://us06web.zoom.us/j/88554567062';
+  const ZOOM_8PM  = 'https://us06web.zoom.us/j/81155916766';
+
+  let slotLabel, zoomBlock, plainZoom;
+  if (isEightPm && !isElevenAm) {
+    slotLabel = 'Tuesdays · 8 PM Eastern';
+    plainZoom = ZOOM_8PM;
+    zoomBlock = `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#F4FAEF;border:1px solid #cfe6d0;border-radius:14px;padding:22px 24px;margin:24px 0;text-align:center;"><tr><td><p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3A8438;">Your Zoom — 8 PM Eastern</p><p style="margin:0 0 14px;font-family:Georgia,serif;font-size:15px;color:#4A535E;line-height:1.5;">Save this link — it's the same every Tuesday for all 5 weeks.</p><a href="${ZOOM_8PM}" style="display:inline-block;padding:14px 28px;background:#3A8438;color:#FFFFFF;font-family:Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:999px;">Join Zoom →</a><p style="margin:14px 0 0;font-family:Arial,sans-serif;font-size:12px;color:#9DA1A8;word-break:break-all;">${ZOOM_8PM}</p></td></tr></table>`;
+  } else if (isElevenAm && !isEightPm) {
+    slotLabel = 'Tuesdays · 11 AM Eastern';
+    plainZoom = ZOOM_11AM;
+    zoomBlock = `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#F4FAEF;border:1px solid #cfe6d0;border-radius:14px;padding:22px 24px;margin:24px 0;text-align:center;"><tr><td><p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3A8438;">Your Zoom — 11 AM Eastern</p><p style="margin:0 0 14px;font-family:Georgia,serif;font-size:15px;color:#4A535E;line-height:1.5;">Save this link — it's the same every Tuesday for all 5 weeks.</p><a href="${ZOOM_11AM}" style="display:inline-block;padding:14px 28px;background:#3A8438;color:#FFFFFF;font-family:Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:999px;">Join Zoom →</a><p style="margin:14px 0 0;font-family:Arial,sans-serif;font-size:12px;color:#9DA1A8;word-break:break-all;">${ZOOM_11AM}</p></td></tr></table>`;
+  } else {
+    slotLabel = 'Tuesdays · pick the slot that fits your schedule';
+    plainZoom = `11 AM ET: ${ZOOM_11AM}\n8 PM ET: ${ZOOM_8PM}`;
+    zoomBlock = `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#F4FAEF;border:1px solid #cfe6d0;border-radius:14px;padding:22px 24px;margin:24px 0;text-align:center;"><tr><td><p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3A8438;">Your Zoom links</p><p style="margin:0 0 14px;font-family:Georgia,serif;font-size:14px;color:#4A535E;line-height:1.5;">Pick whichever Tuesday slot fits you — same link every week for that slot.</p><p style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:13px;color:#060B50;"><strong>11 AM Eastern:</strong> <a href="${ZOOM_11AM}" style="color:#3A8438;font-weight:700;">${ZOOM_11AM}</a></p><p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#060B50;"><strong>8 PM Eastern:</strong> <a href="${ZOOM_8PM}" style="color:#3A8438;font-weight:700;">${ZOOM_8PM}</a></p></td></tr></table>`;
+  }
+
+  const greeting = firstName ? `Hi ${firstName},` : 'Hi friend,';
+
+  const html =
+`<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#FAF9F7;padding:32px 12px;font-family:Georgia,'Times New Roman',serif;color:#4A535E;line-height:1.6;">
+<tr><td align="center">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="width:100%;max-width:600px;background:#FFFFFF;border-radius:14px;border:1px solid #E2E2E2;overflow:hidden;">
+<tr><td style="padding:36px 36px 8px;">
+<p style="margin:0 0 18px;font-family:Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3A8438;">Welcome to ReBe ReFresh</p>
+<h1 style="margin:0 0 14px;font-family:Georgia,serif;font-weight:600;font-size:30px;line-height:1.2;color:#060B50;">You're in.</h1>
+</td></tr>
+<tr><td style="padding:8px 36px 12px;font-size:16px;line-height:1.7;">
+<p style="margin:0 0 18px;">${greeting}</p>
+<p style="margin:0 0 18px;">Thank you for joining the first ReBe ReFresh cohort. We're so glad you're here.</p>
+<p style="margin:0 0 18px;">Below is your Zoom link for our weekly sessions. Save it — it's the same link every Tuesday for all 5 weeks.</p>
+<p style="margin:0 0 18px;"><strong style="color:#060B50;">Schedule:</strong> ${slotLabel}<br><strong style="color:#060B50;">First session:</strong> Tuesday, June 23</p>
+</td></tr>
+<tr><td style="padding:0 36px;">${zoomBlock}</td></tr>
+<tr><td style="padding:8px 36px 12px;font-size:16px;line-height:1.7;">
+<p style="margin:0 0 18px;">In the next few days you'll get a follow-up from Elizabeth with what to bring (mostly: yourself) and a few thoughts to settle into before we begin.</p>
+<p style="margin:0 0 6px;">If you have any questions, just reply to this email.</p>
+</td></tr>
+<tr><td style="padding:20px 36px 36px;font-size:16px;line-height:1.7;border-top:1px solid #E2E2E2;">
+<p style="margin:18px 0 4px;">With love,</p>
+<p style="margin:0;font-family:Georgia,serif;font-style:italic;font-size:24px;color:#060B50;">Elizabeth &amp; the ReBe team</p>
+</td></tr>
+<tr><td style="padding:20px 24px;background:#FAF9F7;text-align:center;font-family:Arial,sans-serif;font-size:12px;color:#9DA1A8;line-height:1.5;border-top:1px solid #E2E2E2;">
+ReBe — Rebuilding people from the inside out.<br>
+Questions? <a href="mailto:refresh@justrebe.com" style="color:#3A8438;text-decoration:none;font-weight:700;">refresh@justrebe.com</a>
+</td></tr>
+</table>
+</td></tr>
+</table>`;
+
+  const text =
+`${greeting}
+
+Thank you for joining the first ReBe ReFresh cohort. We're so glad you're here.
+
+Below is your Zoom link for our weekly sessions. Save it — it's the same link every Tuesday for all 5 weeks.
+
+Schedule:    ${slotLabel}
+First session: Tuesday, June 23
+
+YOUR ZOOM LINK
+${plainZoom}
+
+In the next few days you'll get a follow-up from Elizabeth with what to bring (mostly: yourself) and a few thoughts to settle into before we begin.
+
+If you have any questions, just reply to this email.
+
+With love,
+Elizabeth & the ReBe team
+
+—
+ReBe · refresh@justrebe.com`;
+
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: fromAddr,
+      to: toEmail,
+      reply_to: 'refresh@justrebe.com',
+      subject: 'Welcome to the ReBe ReFresh cohort 💛',
+      html,
+      text,
+    }),
+  });
+  if (!r.ok) {
+    const detail = await r.text().catch(() => '');
+    throw new Error(`Resend ${r.status}: ${detail.slice(0, 300)}`);
+  }
+  return r.json();
+}
+
 // ---------- Twilio (SMS) — gracefully no-op if env vars are missing ----------
 async function sendSMS({ to, body }) {
   const sid  = process.env.TWILIO_ACCOUNT_SID;
@@ -511,6 +618,8 @@ ${r.notes ? r.notes : '(nothing added)'}
       const { firstName, lastName } = splitName(name);
       await Promise.all([
         sendEmail(adminMsg),
+        sendCohortWelcomeEmail({ toEmail: email, firstName, slotChoice: slot })
+          .catch((e) => console.error('Welcome email (cohort_intake):', e)),
         kitSubscribe({ email, first_name: firstNameFromFull(name), tags })
           .catch((e) => console.error('Kit (cohort_intake):', e)),
         pushToOpenPhone(
