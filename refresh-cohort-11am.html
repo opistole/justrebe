@@ -319,9 +319,27 @@
   var slot = document.body.getAttribute('data-slot') || '11am';
   var timeLabel = document.body.getAttribute('data-time-label') || 'Tuesdays at 11 AM Eastern';
   var zoneLabel = document.body.getAttribute('data-zone-label') || '11 AM ET';
-  var testMode = new URLSearchParams(window.location.search).get('testpay') === 'ospo';
-  var basePrice = testMode ? 1 : 300;
+  var qs = new URLSearchParams(window.location.search);
+  var testMode = qs.get('testpay') === 'ospo';
+  var discountMode = qs.get('discount') === '50';
+  var basePrice = testMode ? 1 : (discountMode ? 50 : 300);
   var amountCents = Math.round(basePrice * 100);
+
+  // Swap every '$300' on the page to '$50' when ?discount=50 is in the URL
+  if (discountMode) {
+    document.querySelectorAll('.cc-price, .mc-price').forEach(function(el){
+      el.childNodes.forEach(function(node){
+        if (node.nodeType === Node.TEXT_NODE && node.nodeValue.indexOf('$300') !== -1) {
+          node.nodeValue = node.nodeValue.replace('$300', '$50');
+        }
+      });
+    });
+    var dbanner = document.createElement('p');
+    dbanner.style.cssText = 'background:#F2F8F2;border:1px solid #BFE3BF;color:#2A6D2C;padding:10px 14px;border-radius:8px;font-size:12px;font-weight:700;text-align:center;margin:0 0 12px;letter-spacing:.04em';
+    dbanner.textContent = '🌱 Discounted seat · $50 (normally $300)';
+    var ce = document.getElementById('checkout');
+    if (ce && ce.parentNode) ce.parentNode.insertBefore(dbanner, ce);
+  }
 
   var tosLink = document.getElementById('tos-link');
   var loadingEl = document.getElementById('checkout-loading');
