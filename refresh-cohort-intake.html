@@ -59,17 +59,6 @@
   .help a:hover{border-bottom-style:solid}
   .home-link{display:inline-block;margin-top:24px;font-size:14px;color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid var(--navy);padding-bottom:1px}
 
-  /* ===== Zoom link card — both slots ===== */
-  .zoom-card{background:#F4FAEF;border:1px solid #cfe6d0;border-radius:14px;padding:22px 24px;margin:0 auto 36px;max-width:560px;text-align:left;box-shadow:0 6px 20px rgba(68,153,69,.10)}
-  .zoom-card .zoom-label{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 6px;text-align:center}
-  .zoom-card .zoom-intro{font-family:var(--sans);font-size:13px;color:var(--body);margin:0 0 16px;font-style:italic;text-align:center}
-  .zoom-card .zoom-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:#fff;border:1px solid #cfe6d0;margin:0 0 8px}
-  .zoom-card .zoom-row:last-child{margin-bottom:0}
-  .zoom-card .zoom-row-label{font-family:var(--sans);font-weight:700;color:var(--navy);font-size:13px;flex-shrink:0;min-width:78px}
-  .zoom-card .zoom-row-link{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--green-ink);text-decoration:underline;word-break:break-all}
-  .zoom-card .zoom-row-link:hover{color:var(--green-deep)}
-  .zoom-card .zoom-sub{font-family:var(--sans);font-size:12px;color:var(--body);margin:14px 0 0;line-height:1.5;font-style:italic;text-align:center}
-
   /* ===== Intake form ===== */
   .intake{background:var(--paper);border:1px solid var(--bone);border-radius:18px;padding:32px 36px;box-shadow:0 10px 40px rgba(6,11,80,.06);text-align:left;margin:0 0 28px;position:relative;overflow:hidden}
   .intake::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--green) 0%,var(--gold) 100%)}
@@ -136,28 +125,14 @@
 <main>
   <div class="wrap">
     <div class="check" aria-hidden="true">✓</div>
-    <p class="eyebrow">Cohort intake</p>
-    <h1>Welcome. <span class="accent">See you June 23.</span></h1>
-    <p class="lede">Your seat in the first ReBe ReFresh cohort is reserved. Fill out the intake below so Elizabeth and the team can prepare for you.</p>
+    <p class="eyebrow">Registration link</p>
+    <h1>Reserve your seat.</h1>
+    <p class="lede">Fill out the form below to reserve your seat in the first ReBe ReFresh cohort. Elizabeth and the team will follow up with your welcome and Zoom link.</p>
 
     <div class="cohort-meta">
       <p class="label">Cohort starts</p>
       <p class="date">JUNE 23, 2026</p>
       <p class="time">5 weekly sessions · 5 weeks</p>
-    </div>
-
-    <div class="zoom-card">
-      <p class="zoom-label">Your Zoom links</p>
-      <p class="zoom-intro">You'll join one based on the slot you choose below.</p>
-      <p class="zoom-row">
-        <span class="zoom-row-label">11 AM ET:</span>
-        <a class="zoom-row-link" href="https://us06web.zoom.us/j/88554567062" target="_blank" rel="noopener">https://us06web.zoom.us/j/88554567062</a>
-      </p>
-      <p class="zoom-row">
-        <span class="zoom-row-label">8 PM ET:</span>
-        <a class="zoom-row-link" href="https://us06web.zoom.us/j/81155916766" target="_blank" rel="noopener">https://us06web.zoom.us/j/81155916766</a>
-      </p>
-      <p class="zoom-sub">Save the link for your slot — it's the same every Tuesday for all 5 weeks.</p>
     </div>
 
     <div class="intake" id="intake-card">
@@ -293,10 +268,9 @@
 
       <div class="intake-success" id="intake-success" role="status">
         <div class="ok-mark" aria-hidden="true">✓</div>
-        <h3>We've got you.</h3>
+        <h3>Your seat is reserved.</h3>
         <p>Thank you for filling this out.<br>We can't wait to meet you in the room on Tuesday, June 23.</p>
-        <p style="margin-top:18px;font-size:14px;color:var(--green-ink);font-weight:600">Check your email for confirmation.</p>
-        <p style="margin-top:6px;font-size:13px"><a id="intake-success-zoom" href="https://us06web.zoom.us/j/88554567062" target="_blank" rel="noopener" style="color:var(--green-ink);text-decoration:underline;word-break:break-all">https://us06web.zoom.us/j/88554567062</a></p>
+        <p style="margin-top:18px;font-size:14px;color:var(--green-ink);font-weight:600">Watch your inbox — Elizabeth will send your welcome and Zoom link shortly.</p>
       </div>
     </div>
 
@@ -445,11 +419,6 @@
             }
           })
         }).catch(function(err){ console.warn('notify failed (non-fatal):', err); });
-
-        // Swap the success Zoom link to their actual slot
-        var slotZoom = cohortSlot.indexOf('8') === 0 ? 'https://us06web.zoom.us/j/81155916766' : 'https://us06web.zoom.us/j/88554567062';
-        var successZoom = document.getElementById('intake-success-zoom');
-        if (successZoom) { successZoom.href = slotZoom; successZoom.textContent = slotZoom; }
 
         form.style.display = 'none';
         successEl.classList.add('show');
