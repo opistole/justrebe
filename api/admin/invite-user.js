@@ -77,6 +77,7 @@ module.exports = async function handler(req, res) {
     'Content-Type': 'application/json',
   };
 
+  let emailSentKind = 'invite'; // 'invite' | 'recovery' | 'none'
   try {
     // 1. Create + invite the user via Supabase Auth Admin API
     const inviteResp = await fetch(`${SUPABASE_URL}/auth/v1/invite`, {
@@ -90,10 +91,24 @@ module.exports = async function handler(req, res) {
     const inviteData = await inviteResp.json();
 
     if (!inviteResp.ok) {
-      // If user already exists, Supabase returns 422 'A user with this email address has already been registered'
-      // — that's actually fine for our purpose. Continue to upsert the role.
+      // If user already exists, Supabase returns 422 'A user with this email
+      // address has already been registered' — that's the most common case
+      // when re-inviting from the dashboard. Fall back to sending a password
+      // recovery email so the user gets SOMETHING actionable in their inbox.
       const msg = String(inviteData.msg || inviteData.message || inviteData.error_description || '').toLowerCase();
-      if (!msg.includes('already')) {
+      if (msg.includes('already')) {
+        try {
+          const recoverResp = await fetch(`${SUPABASE_URL}/auth/v1/recover`, {
+            method: 'POST',
+            headers: authHeaders,
+            body: JSON.stringify({ email }),
+          });
+          emailSentKind = recoverResp.ok ? 'recovery' : 'none';
+        } catch (recoverErr) {
+          console.error('Recovery send failed:', recoverErr);
+          emailSentKind = 'none';
+        }
+      } else {
         return res.status(inviteResp.status).json({
           error: 'Supabase invite failed',
           detail: inviteData,
@@ -143,12 +158,19 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    const message =
+      emailSentKind === 'invite'
+        ? `Invite sent to ${email}. They'll get an email to set their password, then can log in at /admin/.`
+        : emailSentKind === 'recovery'
+          ? `${email} already had an account — sent them a password-recovery email instead. They reset, then log in at /admin/.`
+          : `Role assigned for ${email}, but no email was sent (recovery send failed). Use Supabase Dashboard → Users → ⋯ → Send password recovery as a fallback.`;
     return res.status(200).json({
       ok: true,
       user_id: userId,
       email,
       role,
-      message: `Invite sent to ${email}. They'll get an email from Supabase to set their password, then can log in at /admin/.`,
+      email_sent: emailSentKind,
+      message,
     });
   } catch (err) {
     console.error('Invite error:', err);

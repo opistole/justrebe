@@ -590,7 +590,9 @@
         });
         const data = await resp.json();
         if (!resp.ok) throw new Error(data.error || data.detail || `HTTP ${resp.status}`);
-        showError(inviteSuccess, `✓ Invited ${email} as ${role}. They'll get a Supabase email to set their password.`);
+        const msg = data.message ||
+          `✓ Invited ${email} as ${role}. They'll get an email to set their password.`;
+        showError(inviteSuccess, '✓ ' + msg);
         inviteEmail.value = '';
         inviteName.value = '';
         setTimeout(closeInviteModal, 2500);
