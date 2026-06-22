@@ -76,8 +76,9 @@ module.exports = async function handler(req, res) {
   if (uiMode === 'embedded') {
     if (!return_url) return res.status(400).json({ error: "Missing 'return_url' (required for embedded mode)" });
   } else {
-    if (!signup_id) return res.status(400).json({ error: "Missing 'signup_id'" });
-    if (!customer_email) return res.status(400).json({ error: "Missing 'customer_email'" });
+    // Hosted mode: signup_id + customer_email are OPTIONAL now.
+    // When missing, the Stripe webhook creates a fresh refresh_signups
+    // row from session data — same path embedded mode uses.
     if (!success_url) return res.status(400).json({ error: "Missing 'success_url'" });
     if (!cancel_url) return res.status(400).json({ error: "Missing 'cancel_url'" });
   }
@@ -104,6 +105,14 @@ module.exports = async function handler(req, res) {
     if (signup_id) params.append('client_reference_id', signup_id);
     params.append('success_url', success_url + (success_url.includes('?') ? '&' : '?') + 'session_id={CHECKOUT_SESSION_ID}');
     params.append('cancel_url', cancel_url);
+    // When the caller didn't pre-create a signup row, mirror the embedded
+    // flow's collection settings so Stripe gathers everything the webhook
+    // needs to create the refresh_signups row from session data.
+    if (!signup_id) {
+      params.append('phone_number_collection[enabled]', 'true');
+      params.append('customer_creation', 'always');
+      params.append('billing_address_collection', 'auto');
+    }
   }
 
   // Line item
