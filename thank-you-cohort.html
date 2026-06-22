@@ -176,13 +176,22 @@
     </div>
 
     <div class="zoom-card" id="zoom-card">
-      <p class="zoom-label" id="zoom-card-label">11 AM Zoom Group</p>
-      <p class="zoom-sub" style="margin-bottom:14px">Check your email for confirmation.</p>
-      <p class="zoom-link-row">
-        <span class="zoom-icon" aria-hidden="true">▶</span>
-        <a class="zoom-link" id="zoom-card-link" href="https://us06web.zoom.us/j/88554567062" target="_blank" rel="noopener">https://us06web.zoom.us/j/88554567062</a>
-      </p>
-      <p class="zoom-sub" style="margin-top:10px">Save this link — it's the same one every Tuesday for the full 5 weeks.</p>
+      <p class="zoom-label">Your Zoom links</p>
+      <p class="zoom-sub" style="margin-bottom:16px">Save the link for your slot — it's the same one every Tuesday for all 5 weeks.</p>
+
+      <!-- 11 AM cohort -->
+      <div id="zoom-row-11am" style="background:#fff;border:1px solid #cfe6d0;border-radius:10px;padding:14px 18px;margin:0 0 10px;text-align:left;">
+        <p style="margin:0 0 6px;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#060B50;">11 AM Eastern · Tuesdays</p>
+        <a href="https://us06web.zoom.us/j/88554567062" target="_blank" rel="noopener" style="font-family:var(--sans);font-size:14px;font-weight:700;color:#3A8438;text-decoration:underline;word-break:break-all;">https://us06web.zoom.us/j/88554567062</a>
+      </div>
+
+      <!-- 8 PM cohort -->
+      <div id="zoom-row-8pm" style="background:#fff;border:1px solid #cfe6d0;border-radius:10px;padding:14px 18px;margin:0;text-align:left;">
+        <p style="margin:0 0 6px;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#060B50;">8 PM Eastern · Tuesdays</p>
+        <a href="https://us06web.zoom.us/j/81155916766" target="_blank" rel="noopener" style="font-family:var(--sans);font-size:14px;font-weight:700;color:#3A8438;text-decoration:underline;word-break:break-all;">https://us06web.zoom.us/j/81155916766</a>
+      </div>
+
+      <p class="zoom-sub" style="margin-top:14px">If you don't see your welcome email, check spam — or email <a href="mailto:refresh@justrebe.com" style="color:#3A8438;font-weight:700;text-decoration:underline;">refresh@justrebe.com</a>.</p>
     </div>
 
     <!-- "What happens next" is now in a modal that opens AFTER intake submit (see #next-modal below) -->
@@ -206,18 +215,22 @@
         // Show the payment-confirmed banner only when arriving via Stripe.
         if (banner && sessionId && sessionId.indexOf('cs_') === 0) banner.classList.add('show');
 
-        // Zoom link swap based on slot. 11 AM and 8 PM groups have separate Zoom meeting IDs.
+        // We always display BOTH Zoom links in the zoom-card so attendees see
+        // their option regardless of how they arrived. Just update the
+        // success-state link to match the slot they picked at checkout.
         var ZOOM_11AM = 'https://us06web.zoom.us/j/88554567062';
         var ZOOM_8PM  = 'https://us06web.zoom.us/j/81155916766';
-        var zoomLabel = document.getElementById('zoom-card-label');
-        var zoomLink  = document.getElementById('zoom-card-link');
         var zoomURL   = slot === '8pm' ? ZOOM_8PM : ZOOM_11AM;
-        var zoomGroupLabel = slot === '8pm' ? '8 PM Zoom Group' : '11 AM Zoom Group';
-        if (zoomLabel) zoomLabel.textContent = zoomGroupLabel;
-        if (zoomLink)  { zoomLink.href = zoomURL; zoomLink.textContent = zoomURL; }
-        // Also update the success-state Zoom link
         var successLink = document.getElementById('intake-success-zoom');
         if (successLink) { successLink.href = zoomURL; successLink.textContent = zoomURL; }
+
+        // Optional emphasis: if the URL specifies a slot, highlight that row
+        // in the zoom-card with a soft green border so the right one stands out.
+        var emphasisRow = document.getElementById(slot === '8pm' ? 'zoom-row-8pm' : 'zoom-row-11am');
+        if (emphasisRow && slot) {
+          emphasisRow.style.borderColor = '#3A8438';
+          emphasisRow.style.boxShadow = '0 0 0 3px rgba(58,132,56,.12)';
+        }
       })();
     </script>
 
