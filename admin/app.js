@@ -893,7 +893,13 @@
       // and in the database — they're just not rendered next to the
       // name. The only badge that survives in the row is 'Needs intake'
       // because it's an action item.
-      const needsIntakeBadge = c.sources.has('cohort') && !c.intakeDone
+      //
+      // Intake indicator only matters for cohort participants — gate on
+      // a 'Cohort' manual tag (or any Cohort-prefixed tag). Workshop-only
+      // / lead-only people don't show 'Needs intake'.
+      const manualTagsList = c.manualTags || [];
+      const isCohortTagged = manualTagsList.some((t) => /^cohort/i.test(String(t || '').trim()));
+      const needsIntakeBadge = isCohortTagged && !c.intakeDone
         ? `<span class="source-tag" style="background:var(--coral-wash);color:var(--coral-ink);border:1px solid var(--coral-border)" title="Intake form not yet completed">Needs intake</span>`
         : '';
 
@@ -1363,9 +1369,12 @@
         : `<span class="source-tag" style="background:var(--coral-wash);color:var(--coral-ink);border:1px solid var(--coral-border)">Needs intake</span>`;
     }
 
-    cdTags.innerHTML = (tags.length
-      ? tags.map((t) => `<span class="source-tag ${t.cls}">${escapeHtml(t.label)}</span>`).join('')
-      : '') + slotTagHtml + intakeTagHtml;
+    // Tag-first model: the team manages tags directly via the manual-tags
+    // editor below this row. The auto-derived pills (Paid/Cohort/Lead/etc.)
+    // are now redundant — they're created as customer_tags by DB triggers
+    // and shown in the manual-tags row where they can be removed. Suppress
+    // them here to keep the UI clean.
+    cdTags.innerHTML = '';
 
     // Intake / context
     const intakeBits = [];
@@ -1422,12 +1431,23 @@
       intakeBits.push(['Stripe session', cohort.stripe_session_id.slice(0, 18) + '…']);
     }
 
-    if (intakeBits.length) {
-      cdIntakeBody.innerHTML = intakeBits.map(([k, v]) =>
-        `<div class="pf-row"><span class="pf-label">${escapeHtml(k)}</span><span class="pf-value">${escapeHtml(String(v))}</span></div>`
-      ).join('');
-    } else {
-      cdIntakeBody.innerHTML = '<p class="pf-value muted">No intake data on file.</p>';
+    // Tag-first model: hide the Intake & context section entirely when
+    // this person isn't tagged as a cohort participant. Workshop-only or
+    // lead-only people don't need that block.
+    const intakeSection = document.getElementById('cd-intake-section');
+    const currentTags = (tagsByEmail[currentDetailEmail] || []).map((t) => String(t.tag || ''));
+    const showIntakeSection = currentTags.some((t) => /^cohort/i.test(t.trim()));
+    if (intakeSection) {
+      intakeSection.style.display = showIntakeSection ? '' : 'none';
+    }
+    if (showIntakeSection) {
+      if (intakeBits.length) {
+        cdIntakeBody.innerHTML = intakeBits.map(([k, v]) =>
+          `<div class="pf-row"><span class="pf-label">${escapeHtml(k)}</span><span class="pf-value">${escapeHtml(String(v))}</span></div>`
+        ).join('');
+      } else {
+        cdIntakeBody.innerHTML = '<p class="pf-value muted">No intake data on file.</p>';
+      }
     }
 
     // Smart-default SMS provider: look at the most recent SMS activity
@@ -2705,6 +2725,31 @@
         error = r.error;
       }
       if (error) { alert('Couldn\'t update status: ' + error.message); return; }
+
+      // Tag-first model: status changes also create the matching manual tags
+      // so they show up in the new tag-based UI. The team can remove these
+      // later if they want — they're not auto-recomputed from the data.
+      try {
+        const tagsToAdd = [];
+        if (newReadiness === 'paid') {
+          tagsToAdd.push('Paid', 'Cohort');
+          if (patch.preferred_group_time && patch.preferred_group_time.includes('8 PM')) tagsToAdd.push('Cohort 8 PM');
+          else if (patch.preferred_group_time && patch.preferred_group_time.includes('11 AM')) tagsToAdd.push('Cohort 11 AM');
+        } else if (newReadiness === 'wants_more_info') {
+          tagsToAdd.push('Lead');
+        } else if (newReadiness === 'waitlist') {
+          tagsToAdd.push('Waitlist');
+        }
+        for (const t of tagsToAdd) {
+          await sb.from('customer_tags').insert({
+            customer_email: currentDetailEmail,
+            tag: t,
+            added_by_email: (currentUser && currentUser.email || '').toLowerCase(),
+          }).select(); // ignore duplicate-key errors
+        }
+      } catch (e) {
+        console.warn('status-tag insert non-fatal:', e);
+      }
 
       // Audit trail
       try {
