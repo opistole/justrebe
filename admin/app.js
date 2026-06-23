@@ -827,17 +827,27 @@
       if (q) {
         if (!c.searchText || !c.searchText.includes(q)) return false;
       }
-      // Source filter
+      // Tag-based filter (filters match manual tag presence — the new
+      // tag-first model. Auto-derived c.sources is no longer consulted
+      // for filtering, only manual customer_tags rows.)
+      const tagsLc = (c.manualTags || []).map((t) => String(t || '').toLowerCase().trim());
       if (currentFilter === 'notes') {
         if (!c.noteCount || c.noteCount <= 0) return false;
-      } else if (currentFilter !== 'all') {
-        if (!c.sources.has(currentFilter)) return false;
+      } else if (currentFilter === 'cohort') {
+        if (!tagsLc.some((t) => t.startsWith('cohort'))) return false;
+      } else if (currentFilter === 'paid') {
+        if (!tagsLc.includes('paid')) return false;
+      } else if (currentFilter === 'lead') {
+        if (!tagsLc.includes('lead')) return false;
+      } else if (currentFilter === 'waitlist') {
+        if (!tagsLc.includes('waitlist')) return false;
+      } else if (currentFilter === 'workshop') {
+        if (!tagsLc.includes('workshop attendee')) return false;
       }
-      // Slot sub-filter (only meaningful for cohort signups)
+      // Slot sub-filter — also tag-based now
       if (currentSlotFilter && currentSlotFilter !== 'all') {
-        const slot = (c.preferredSlot || '').toLowerCase();
-        if (currentSlotFilter === '11am' && !slot.includes('11')) return false;
-        if (currentSlotFilter === '8pm'  && !slot.includes('8'))  return false;
+        if (currentSlotFilter === '11am' && !tagsLc.includes('cohort 11 am')) return false;
+        if (currentSlotFilter === '8pm'  && !tagsLc.includes('cohort 8 pm'))  return false;
       }
       return true;
     });
@@ -894,12 +904,14 @@
       // name. The only badge that survives in the row is 'Needs intake'
       // because it's an action item.
       //
-      // Intake indicator only matters for cohort participants — gate on
-      // a 'Cohort' manual tag (or any Cohort-prefixed tag). Workshop-only
-      // / lead-only people don't show 'Needs intake'.
+      // Pure tag-based now: someone needs intake when they have any
+      // 'Cohort*' tag but do NOT have the 'Intake complete' tag. Workshop-
+      // only / lead-only people don't show 'Needs intake'.
       const manualTagsList = c.manualTags || [];
-      const isCohortTagged = manualTagsList.some((t) => /^cohort/i.test(String(t || '').trim()));
-      const needsIntakeBadge = isCohortTagged && !c.intakeDone
+      const tagsLcRow = manualTagsList.map((t) => String(t || '').toLowerCase().trim());
+      const isCohortTagged = tagsLcRow.some((t) => t.startsWith('cohort'));
+      const intakeCompleteTag = tagsLcRow.includes('intake complete');
+      const needsIntakeBadge = isCohortTagged && !intakeCompleteTag
         ? `<span class="source-tag" style="background:var(--coral-wash);color:var(--coral-ink);border:1px solid var(--coral-border)" title="Intake form not yet completed">Needs intake</span>`
         : '';
 

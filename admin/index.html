@@ -610,23 +610,11 @@
     <section id="view-customer" class="hidden">
       <div class="detail-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px">
         <a class="back-link" href="#customers">← All customers</a>
-        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-          <div style="display:flex;gap:6px;align-items:center;background:#fff;border:1px solid var(--bone);border-radius:10px;padding:5px 6px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
-            <select id="cd-status-override" aria-label="Change customer status" style="padding:6px 10px;border:0;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:transparent;cursor:pointer">
-              <option value="" disabled selected>Change status…</option>
-              <option value="paid">Mark as paid</option>
-              <option value="wants_more_info">Mark as lead</option>
-              <option value="waitlist">Mark as waitlist</option>
-            </select>
-            <span style="width:1px;height:18px;background:var(--bone)"></span>
-            <select id="cd-intake-override" aria-label="Change intake status" style="padding:6px 10px;border:0;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:transparent;cursor:pointer">
-              <option value="" disabled selected>Intake…</option>
-              <option value="done">Mark intake done ✓</option>
-              <option value="needed">Mark intake needed ✗</option>
-            </select>
-          </div>
-          <button type="button" id="delete-customer-btn" title="Permanently delete this customer and all related records" style="background:#fff;color:var(--coral);border:1px solid var(--coral);padding:6px 12px;border-radius:8px;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background .15s,color .15s">Delete</button>
-        </div>
+        <!-- Status pickers were removed in the tag-first migration.
+             Everything is a tag now — use the '+ Tag' button on the
+             profile to change classification (Paid / Lead / Waitlist /
+             etc.). Only the Delete action lives here. -->
+        <button type="button" id="delete-customer-btn" title="Permanently delete this customer and all related records" style="background:#fff;color:var(--coral);border:1px solid var(--coral);padding:6px 12px;border-radius:8px;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background .15s,color .15s">Delete customer</button>
       </div>
       <div id="customer-detail-loading" class="loading">Loading customer…</div>
       <div id="customer-detail-content" class="hidden">
@@ -872,6 +860,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=39"></script>
+<script src="/admin/app.js?v=40"></script>
 </body>
 </html>
