@@ -970,10 +970,13 @@
     });
   }
 
-  searchInput.addEventListener('input', (e) => {
-    currentSearch = e.target.value;
-    renderCustomerList();
-  });
+  // Local search input was removed — global topbar search drives this view now.
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value;
+      renderCustomerList();
+    });
+  }
 
   filterPills.addEventListener('click', (e) => {
     const btn = e.target.closest('.filter-pill');
