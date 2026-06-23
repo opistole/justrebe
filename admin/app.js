@@ -113,6 +113,18 @@
   const cdReadiness = document.getElementById('cd-readiness');
   const cdIntakeBody = document.getElementById('cd-intake-body');
 
+  // Edit-intake controls
+  const cdEditIntakeBtn   = document.getElementById('cd-edit-intake-btn');
+  const cdIntakeEditor    = document.getElementById('cd-intake-editor');
+  const cdIntakeArea      = document.getElementById('cd-intake-area');
+  const cdIntakeReason    = document.getElementById('cd-intake-reason');
+  const cdIntakeNotes     = document.getElementById('cd-intake-notes');
+  const cdIntakeSave      = document.getElementById('cd-intake-save');
+  const cdIntakeCancel    = document.getElementById('cd-intake-cancel');
+  const cdIntakeEditError = document.getElementById('cd-intake-edit-error');
+  // Cohort row currently shown in the drawer (so edit can patch by id).
+  let currentCohortRow = null;
+
   // Manual tags (editable)
   const cdManualTagsChips = document.getElementById('cd-manual-tags-chips');
   const cdAddTagBtn       = document.getElementById('cd-add-tag-btn');
@@ -922,10 +934,23 @@
       // Manual tags are intentional team-added labels (e.g. 'Showed up — 11 AM',
       // 'VIP') — they DO belong next to the name. Auto-derived 'source' tags
       // were the cluttered ones; those are gone.
+      // Categorize the chip color by tag content (for a glanceable list)
+      const tagCategory = (t) => {
+        const lc = String(t || '').toLowerCase();
+        if (lc.startsWith('no-show')) return 'noshow';
+        if (lc.startsWith('cohort'))  return 'cohort';
+        if (lc === 'paid' || lc === 'comped') return 'paid';
+        if (lc.startsWith('workshop')) return 'workshop';
+        if (lc === 'lead' || lc === 'waitlist') return 'lead';
+        if (lc === 'intake complete') return 'intake';
+        return '';
+      };
       const manualTagsHtml = Array.isArray(c.manualTags) && c.manualTags.length
-        ? ' ' + c.manualTags.slice(0, 3).map((t) =>
-            `<span class="row-tag-chip" title="${escapeHtml(t)}">${escapeHtml(t)}</span>`
-          ).join('') + (c.manualTags.length > 3
+        ? ' ' + c.manualTags.slice(0, 3).map((t) => {
+            const cat = tagCategory(t);
+            const catAttr = cat ? ` data-cat="${cat}"` : '';
+            return `<span class="row-tag-chip"${catAttr} title="${escapeHtml(t)}">${escapeHtml(t)}</span>`;
+          }).join('') + (c.manualTags.length > 3
             ? `<span class="row-tag-chip" title="${escapeHtml(c.manualTags.slice(3).join(', '))}">+${c.manualTags.length - 3}</span>` : '')
         : '';
       return `<tr data-email="${escapeHtml(c.email)}">
@@ -1217,6 +1242,111 @@
     });
   }
 
+  // ============================================================
+  // Edit-intake editor — fills the gap for historical customers
+  // whose intake data never reached the DB.
+  // ============================================================
+  function openIntakeEditor() {
+    if (!cdIntakeEditor) return;
+    const r = currentCohortRow || {};
+    if (cdIntakeArea)   cdIntakeArea.value   = r.area_needing_refresh || '';
+    if (cdIntakeReason) cdIntakeReason.value = r.reason_for_interest || '';
+    if (cdIntakeNotes)  cdIntakeNotes.value  = r.notes || '';
+    if (cdIntakeEditError) { cdIntakeEditError.textContent = ''; cdIntakeEditError.style.display = 'none'; }
+    cdIntakeEditor.classList.remove('hidden');
+    cdEditIntakeBtn && cdEditIntakeBtn.setAttribute('aria-expanded', 'true');
+    setTimeout(() => cdIntakeArea && cdIntakeArea.focus(), 30);
+  }
+  function closeIntakeEditor() {
+    if (!cdIntakeEditor) return;
+    cdIntakeEditor.classList.add('hidden');
+    cdEditIntakeBtn && cdEditIntakeBtn.setAttribute('aria-expanded', 'false');
+  }
+  async function saveIntakeEditor() {
+    if (!currentDetailEmail) return;
+    const area   = (cdIntakeArea && cdIntakeArea.value || '').trim();
+    const reason = (cdIntakeReason && cdIntakeReason.value || '').trim();
+    const notes  = (cdIntakeNotes && cdIntakeNotes.value || '').trim();
+    if (!area && !reason && !notes) {
+      if (cdIntakeEditError) {
+        cdIntakeEditError.textContent = 'Add something to at least one field before saving.';
+        cdIntakeEditError.style.display = 'block';
+      }
+      return;
+    }
+    const patch = {
+      area_needing_refresh: area || null,
+      reason_for_interest:  reason || null,
+      notes:                notes || null,
+      intake_completed:     true,
+    };
+    cdIntakeSave.disabled = true;
+    cdIntakeSave.textContent = 'Saving…';
+    try {
+      let error;
+      if (currentCohortRow && currentCohortRow.id) {
+        // Update existing row
+        const r = await sb.from('refresh_signups')
+          .update(patch).eq('id', currentCohortRow.id);
+        error = r.error;
+      } else {
+        // No refresh_signups row yet — insert a minimal one
+        const r = await sb.from('refresh_signups').insert({
+          email: currentDetailEmail,
+          full_name: currentDetailEmail,
+          phone: currentDetailPhone || '',
+          status: 'enrolled',
+          readiness: 'ready_to_pay',
+          paid_amount_cents: 0,
+          audience_type: 'groups',
+          group_type: 'no_preference',
+          seat_type: 'attendee',
+          consent_to_contact: true,
+          consent_to_confidentiality: true,
+          ...patch,
+        });
+        error = r.error;
+      }
+      if (error) {
+        if (cdIntakeEditError) {
+          cdIntakeEditError.textContent = "Couldn't save: " + (error.message || 'unknown error');
+          cdIntakeEditError.style.display = 'block';
+        }
+        return;
+      }
+      closeIntakeEditor();
+      // Audit note
+      try {
+        await sb.from('customer_notes').insert({
+          customer_email: currentDetailEmail,
+          author_id: currentUser && currentUser.id,
+          author_email: currentUser && currentUser.email,
+          body: `📝 Intake details edited by ${friendlyActorName(currentUser && currentUser.email)}`,
+        });
+      } catch (_) {}
+      // Reload the drawer to show the new values (trigger 026 will add
+      // the Intake complete tag via DB trigger on intake_completed flip).
+      loadCustomerDetail(currentDetailEmail);
+    } catch (err) {
+      console.error('saveIntakeEditor', err);
+      if (cdIntakeEditError) {
+        cdIntakeEditError.textContent = "Couldn't save: " + (err.message || err);
+        cdIntakeEditError.style.display = 'block';
+      }
+    } finally {
+      cdIntakeSave.disabled = false;
+      cdIntakeSave.textContent = 'Save intake';
+    }
+  }
+  if (cdEditIntakeBtn) {
+    cdEditIntakeBtn.addEventListener('click', () => {
+      if (cdIntakeEditor && cdIntakeEditor.classList.contains('hidden')) openIntakeEditor();
+      else closeIntakeEditor();
+    });
+  }
+  if (cdIntakeCancel) cdIntakeCancel.addEventListener('click', closeIntakeEditor);
+  if (cdIntakeSave) cdIntakeSave.addEventListener('click', saveIntakeEditor);
+
   async function loadCustomerDetail(email) {
     currentDetailEmail = email.toLowerCase().trim();
     currentDetailPhone = null;
@@ -1263,6 +1393,7 @@
 
     const contact    = (contactRes.data || [])[0] || null;
     const cohort     = (cohortRes.data || [])[0] || null;
+    currentCohortRow = cohort; // used by the edit-intake editor
     const notes      = notesRes.data || [];
     const activities = activitiesRes.data || [];
     const tasks      = tasksRes.data || [];

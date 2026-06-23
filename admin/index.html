@@ -31,33 +31,35 @@
   html{-webkit-text-size-adjust:100%}
   body{margin:0;background:var(--mist);color:var(--body);font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
 
-  /* === Sidebar + topbar layout (Tyler-inspired) === */
+  /* === Sidebar + topbar layout (Go High Level inspired — dark navy left rail) === */
   .app-shell{display:flex;min-height:100vh;background:var(--mist)}
 
   .sidebar{
     position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);
-    background:var(--side);border-right:1px solid var(--bone);
-    padding:22px 14px 14px;display:flex;flex-direction:column;gap:18px;z-index:40;
+    background:linear-gradient(180deg,#060B50 0%,#080F60 100%);
+    border-right:0;
+    padding:24px 14px 14px;display:flex;flex-direction:column;gap:20px;z-index:40;
+    box-shadow:1px 0 0 rgba(0,0,0,.06);
   }
-  .sidebar .brand{display:flex;align-items:center;gap:10px;padding:0 8px 6px;text-decoration:none}
-  .sidebar .brand{padding:4px 8px 14px}
-  .sidebar .brand img.logo{height:48px;width:auto;display:block;flex-shrink:0}
-  .sidebar .brand .wordmark{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--slate);letter-spacing:-.01em}
-  .sidebar .brand .wordmark .accent{color:var(--gold-ink)}
+  .sidebar .brand{display:flex;align-items:center;gap:10px;padding:4px 8px 18px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .sidebar .brand img.logo{height:42px;width:auto;display:block;flex-shrink:0;filter:brightness(0) invert(1);opacity:.95}
+  .sidebar .brand .wordmark{font-family:var(--serif);font-weight:700;font-size:18px;color:#fff;letter-spacing:-.01em}
+  .sidebar .brand .wordmark .accent{color:#E3A01F}
 
-  .sidebar nav{display:flex;flex-direction:column;gap:2px;flex:1}
+  .sidebar nav{display:flex;flex-direction:column;gap:3px;flex:1}
   .sidebar nav a{
-    display:flex;align-items:center;gap:10px;padding:9px 12px;
-    color:var(--body);text-decoration:none;border-radius:8px;
+    display:flex;align-items:center;gap:12px;padding:10px 14px;
+    color:rgba(255,255,255,.7);text-decoration:none;border-radius:8px;
     font-size:13px;font-weight:600;letter-spacing:.01em;
     transition:background .15s,color .15s;
   }
-  .sidebar nav a .icon{flex-shrink:0;opacity:.65}
-  .sidebar nav a:hover{background:var(--side-hover);color:var(--slate)}
-  .sidebar nav a.active{background:#fff;color:var(--navy);box-shadow:0 1px 2px rgba(0,0,0,.04)}
-  .sidebar nav a.active .icon{opacity:1}
+  .sidebar nav a .icon{flex-shrink:0;opacity:.75;font-size:14px}
+  .sidebar nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+  .sidebar nav a:hover .icon{opacity:1}
+  .sidebar nav a.active{background:rgba(255,255,255,.14);color:#fff;font-weight:700}
+  .sidebar nav a.active .icon{opacity:1;color:#E3A01F}
 
-  .sidebar .side-foot{padding:10px 12px 4px;border-top:1px solid var(--bone);font-size:11px;color:var(--muted)}
+  .sidebar .side-foot{padding:12px 14px 4px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.02em}
 
   .topbar{
     position:sticky;top:0;z-index:30;
@@ -111,45 +113,51 @@
   .magic-toggle{display:block;margin:14px auto 0;background:transparent;border:0;color:var(--green-ink);text-decoration:underline;font-size:12px;cursor:pointer;font-family:inherit;letter-spacing:.04em}
 
   /* === Welcome + stats === */
-  /* "Hey Osil." style hero card — clean, no gradient */
-  .welcome{background:transparent;border:0;border-radius:0;padding:8px 0 4px;margin:0 0 24px}
-  .welcome h2{font-family:var(--serif);font-weight:700;font-size:36px;color:var(--slate);margin:0 0 6px;letter-spacing:-.02em;line-height:1.1}
-  .welcome p{margin:0;font-size:14px;color:var(--muted)}
-  .welcome.panel{background:#fff;border:1px solid var(--bone);border-radius:12px;padding:18px 22px;margin:0 0 24px}
-  .welcome.panel h2{font-size:18px;font-weight:600;letter-spacing:-.005em;margin:0 0 4px}
+  /* "Hey Osil." style hero card — modern, larger */
+  .welcome{background:transparent;border:0;border-radius:0;padding:8px 0 8px;margin:0 0 28px}
+  .welcome h2{font-family:var(--serif);font-weight:700;font-size:40px;color:var(--slate);margin:0 0 8px;letter-spacing:-.025em;line-height:1.05}
+  .welcome p{margin:0;font-size:15px;color:var(--muted);line-height:1.55}
+  .welcome.panel{background:#fff;border:1px solid var(--bone);border-radius:14px;padding:20px 24px;margin:0 0 28px;box-shadow:0 1px 2px rgba(15,23,42,.03)}
+  .welcome.panel h2{font-size:18px;font-weight:700;letter-spacing:-.005em;margin:0 0 4px;color:var(--navy)}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:0 0 28px}
-  .card{background:#fff;border-radius:12px;padding:20px 22px;border:1px solid var(--bone);box-shadow:0 1px 2px rgba(15,23,42,.04)}
-  .card .card-label{font-family:var(--sans);font-weight:700;font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin:0 0 8px}
-  .card .card-number{font-family:var(--serif);font-weight:600;font-size:32px;color:var(--slate);line-height:1;margin:0 0 6px;letter-spacing:-.02em}
-  .card .card-sub{font-size:12px;color:var(--muted);margin:0;font-weight:500}
-  a.card-link{text-decoration:none;color:inherit;display:block;transition:border-color .15s,box-shadow .15s;cursor:pointer}
-  a.card-link:hover{border-color:var(--navy);box-shadow:0 4px 12px rgba(15,23,42,.08)}
+  /* === Stats grid — Go High Level style: bigger numbers, color accents === */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:0 0 32px}
+  .card{background:#fff;border-radius:14px;padding:22px 24px;border:1px solid var(--bone);box-shadow:0 1px 3px rgba(15,23,42,.04);position:relative;overflow:hidden;transition:transform .15s,box-shadow .2s,border-color .15s}
+  .card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--green);border-radius:14px 0 0 14px;opacity:.85}
+  .card:nth-of-type(1)::before{background:#E3A01F}
+  .card:nth-of-type(2)::before{background:#449945}
+  .card:nth-of-type(3)::before{background:#EA492E}
+  .card:nth-of-type(4)::before{background:#3251B5}
+  .card .card-label{font-family:var(--sans);font-weight:700;font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin:0 0 12px}
+  .card .card-number{font-family:var(--sans);font-weight:800;font-size:44px;color:var(--navy);line-height:1;margin:0 0 8px;letter-spacing:-.02em;font-feature-settings:"tnum"}
+  .card .card-sub{font-size:12px;color:var(--muted);margin:0;font-weight:600;letter-spacing:.01em}
+  a.card-link{text-decoration:none;color:inherit;display:block;cursor:pointer}
+  a.card-link:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(15,23,42,.08);border-color:transparent}
   a.card-link:hover .card-sub{color:var(--navy)}
 
   /* === Customer list === */
-  .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 18px}
-  .toolbar .search-input{flex:1;min-width:260px;padding:10px 14px;border:1px solid var(--bone);border-radius:10px;font-family:inherit;font-size:14px;color:var(--slate);background:#fff;transition:border-color .2s}
-  .toolbar .search-input:focus{outline:0;border-color:var(--green)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 20px;background:#fff;border:1px solid var(--bone);border-radius:14px;padding:14px 16px;box-shadow:0 1px 2px rgba(15,23,42,.03)}
+  .toolbar .search-input{flex:1;min-width:240px;padding:10px 14px;border:1px solid var(--bone);border-radius:10px;font-family:inherit;font-size:14px;color:var(--slate);background:var(--mist);transition:background .15s,border-color .15s}
+  .toolbar .search-input:focus{outline:0;background:#fff;border-color:var(--navy)}
   .toolbar .filter-pills{display:flex;gap:6px;flex-wrap:wrap}
-  .filter-pill{padding:7px 14px;border-radius:999px;border:1px solid var(--bone);background:#fff;color:var(--body);font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;transition:all .15s}
-  .filter-pill:hover{border-color:var(--green-ink);color:var(--green-ink)}
-  .filter-pill.active{background:var(--green-ink);border-color:var(--green-ink);color:#fff}
+  .filter-pill{padding:7px 14px;border-radius:999px;border:1px solid var(--bone);background:#fff;color:var(--body);font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.06em;transition:all .15s}
+  .filter-pill:hover{border-color:var(--navy);color:var(--navy)}
+  .filter-pill.active{background:var(--navy);border-color:var(--navy);color:#fff}
 
-  .table-wrap{background:#fff;border:1px solid var(--bone);border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(6,11,80,.04)}
+  .table-wrap{background:#fff;border:1px solid var(--bone);border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(6,11,80,.04)}
   table{width:100%;border-collapse:collapse}
-  th,td{text-align:left;padding:12px 16px;font-size:13px;border-bottom:1px solid var(--mist)}
-  th{background:var(--mist);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  th,td{text-align:left;padding:14px 18px;font-size:14px;border-bottom:1px solid var(--mist)}
+  th{background:var(--mist);font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:11px 18px}
   th.sortable{cursor:pointer;user-select:none;transition:background .12s,color .12s}
-  th.sortable:hover{background:var(--gold-wash);color:var(--navy)}
-  th .sort-arrow{display:inline-block;width:10px;text-align:center;color:var(--green-ink);font-size:11px;margin-left:4px;opacity:.4;font-weight:700}
+  th.sortable:hover{background:#EFE9D8;color:var(--navy)}
+  th .sort-arrow{display:inline-block;width:10px;text-align:center;color:var(--gold-ink);font-size:11px;margin-left:4px;opacity:.4;font-weight:700}
   th.sort-active .sort-arrow{opacity:1}
   tr:last-child td{border-bottom:0}
   tbody tr{cursor:pointer;transition:background .12s}
-  tbody tr:hover{background:var(--green-wash)}
-  td .name{font-weight:700;color:var(--navy)}
-  td .email{color:var(--body);font-size:12px}
-  td .phone{color:var(--muted);font-size:12px}
+  tbody tr:hover{background:#FAFBFE}
+  td .name{font-weight:700;color:var(--navy);font-size:15px;line-height:1.3}
+  td .email{color:var(--body);font-size:13px}
+  td .phone{color:var(--muted);font-size:12px;margin-top:2px}
   .source-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:5px;margin:1px 3px 1px 0;white-space:nowrap;line-height:1.3}
   .source-tag.workshop{background:var(--gold-wash);color:var(--gold-ink)}
   .source-tag.pathway-workplace{background:var(--gold-wash);color:var(--gold-ink)}
@@ -184,7 +192,14 @@
   .quick-tag:hover{border-color:var(--green-ink);background:var(--green-wash);color:var(--green-ink)}
 
   /* Compact version of manual-tag-chip for the customers list row */
-  .row-tag-chip{display:inline-block;background:#E9EDFB;color:#252C5C;border:1px solid #C8D0EE;border-radius:6px;padding:1px 6px;font-size:10px;font-weight:600;line-height:1.4;margin:1px 3px 1px 0;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+  .row-tag-chip{display:inline-block;background:#EEF1FB;color:#3B4880;border:0;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;letter-spacing:.02em;line-height:1.4;margin:1px 4px 1px 0;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+  /* Color the row chips by category so a glance shows the type */
+  .row-tag-chip[data-cat="cohort"]{background:#FBF4E4;color:#9C7A1A}
+  .row-tag-chip[data-cat="paid"]{background:#E7F4E5;color:#2D6A2C}
+  .row-tag-chip[data-cat="workshop"]{background:#FFF1F0;color:#B23A28}
+  .row-tag-chip[data-cat="lead"]{background:#FEF3E6;color:#A35E15}
+  .row-tag-chip[data-cat="intake"]{background:#E1F0F9;color:#1F5681}
+  .row-tag-chip[data-cat="noshow"]{background:#F5E9EB;color:#892838}
 
   /* Hide visually but keep available for screen readers */
   .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -672,9 +687,40 @@
         </div>
 
         <div class="section" id="cd-intake-section">
-          <h2>Intake & context</h2>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px">
+            <h2 style="margin:0">Intake &amp; context</h2>
+            <button type="button" id="cd-edit-intake-btn" class="btn ghost" style="padding:6px 12px;font-size:11px;letter-spacing:.04em;background:transparent;color:var(--navy);border:1px solid var(--bone)">Edit</button>
+          </div>
           <div id="cd-intake-body">
             <p class="pf-value muted">No intake data on file.</p>
+          </div>
+          <!-- Inline editor — hidden by default. Lets the team paste/type
+               intake data for historical customers whose intake forms
+               predate the auto-persist fix. -->
+          <div id="cd-intake-editor" class="hidden" style="background:var(--mist);border:1px solid var(--bone);border-radius:10px;padding:16px 18px;margin:8px 0 0">
+            <label for="cd-intake-area" class="pf-label" style="margin:0 0 6px">Area needing refresh / why they're here</label>
+            <textarea id="cd-intake-area" rows="2" style="width:100%;padding:8px 10px;border:1px solid var(--bone);border-radius:6px;font-family:inherit;font-size:13px;color:var(--slate);margin:0 0 14px"></textarea>
+
+            <label for="cd-intake-reason" class="pf-label" style="margin:0 0 6px">Reason for interest / their freeform note</label>
+            <textarea id="cd-intake-reason" rows="3" style="width:100%;padding:8px 10px;border:1px solid var(--bone);border-radius:6px;font-family:inherit;font-size:13px;color:var(--slate);margin:0 0 14px"></textarea>
+
+            <label for="cd-intake-notes" class="pf-label" style="margin:0 0 6px">Full intake details (structured block — labels become rows above)</label>
+            <textarea id="cd-intake-notes" rows="8" style="width:100%;padding:8px 10px;border:1px solid var(--bone);border-radius:6px;font-family:inherit;font-size:13px;color:var(--slate);margin:0 0 6px"
+              placeholder="Location: Sarasota, FL, US
+Prior ReBe experience: First time
+Why they're joining: Burnout, Anxiety
+How they heard: Friend
+Breakout-room preference: Women only
+
+Free-text notes:
+Whatever they wrote in the 'anything else' box…"></textarea>
+            <p class="pf-value muted" style="font-size:11px;margin:4px 0 12px">Tip: paste your admin email text here — the lines like "Label: value" will become labeled rows. Anything after "Free-text notes:" shows as a single note.</p>
+
+            <p class="msg-error" id="cd-intake-edit-error" style="margin:0 0 8px"></p>
+            <div style="display:flex;gap:8px;justify-content:flex-end">
+              <button type="button" id="cd-intake-cancel" class="btn ghost" style="background:transparent;color:var(--body);border:1px solid var(--bone);padding:8px 14px;font-size:11px;letter-spacing:.05em">Cancel</button>
+              <button type="button" id="cd-intake-save" class="btn" style="padding:8px 14px;font-size:11px;letter-spacing:.05em">Save intake</button>
+            </div>
           </div>
         </div>
 
@@ -860,6 +906,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=40"></script>
+<script src="/admin/app.js?v=41"></script>
 </body>
 </html>
