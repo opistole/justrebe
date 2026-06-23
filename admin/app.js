@@ -114,14 +114,25 @@
   const cdIntakeBody = document.getElementById('cd-intake-body');
 
   // Edit-intake controls
-  const cdEditIntakeBtn   = document.getElementById('cd-edit-intake-btn');
-  const cdIntakeEditor    = document.getElementById('cd-intake-editor');
-  const cdIntakeArea      = document.getElementById('cd-intake-area');
-  const cdIntakeReason    = document.getElementById('cd-intake-reason');
-  const cdIntakeNotes     = document.getElementById('cd-intake-notes');
-  const cdIntakeSave      = document.getElementById('cd-intake-save');
-  const cdIntakeCancel    = document.getElementById('cd-intake-cancel');
-  const cdIntakeEditError = document.getElementById('cd-intake-edit-error');
+  const cdEditIntakeBtn      = document.getElementById('cd-edit-intake-btn');
+  const cdMarkIntakeDoneBtn  = document.getElementById('cd-mark-intake-done-btn');
+  const cdIntakeEditor       = document.getElementById('cd-intake-editor');
+  const cdIntakeArea         = document.getElementById('cd-intake-area');
+  const cdIntakeReason       = document.getElementById('cd-intake-reason');
+  const cdIntakeNotes        = document.getElementById('cd-intake-notes');
+  const cdIntakeSave         = document.getElementById('cd-intake-save');
+  const cdIntakeCancel       = document.getElementById('cd-intake-cancel');
+  const cdIntakeEditError    = document.getElementById('cd-intake-edit-error');
+  // Payment editor controls
+  const cdEditPaymentBtn     = document.getElementById('cd-edit-payment-btn');
+  const cdPaymentEditor      = document.getElementById('cd-payment-editor');
+  const cdPaymentAmount      = document.getElementById('cd-payment-amount');
+  const cdPaymentQuickComp   = document.getElementById('cd-payment-quick-comp');
+  const cdPaymentQuick50     = document.getElementById('cd-payment-quick-50');
+  const cdPaymentQuick300    = document.getElementById('cd-payment-quick-300');
+  const cdPaymentSave        = document.getElementById('cd-payment-save');
+  const cdPaymentCancel      = document.getElementById('cd-payment-cancel');
+  const cdPaymentEditError   = document.getElementById('cd-payment-edit-error');
   // Cohort row currently shown in the drawer (so edit can patch by id).
   let currentCohortRow = null;
 
@@ -492,11 +503,14 @@
     };
 
     const [w, p, l, n] = await Promise.all([
+      // Workshop attendees = anyone in contacts (rebe workshop list)
       safeCount('contacts'),
-      // Match the list-view 'Paid only' filter exactly: only count rows with
-      // a real Stripe payment recorded.
-      safeCount('refresh_signups', (q) => q.eq('status', 'enrolled').gt('paid_amount_cents', 0)),
-      safeCount('refresh_signups', (q) => q.eq('readiness', 'wants_more_info')),
+      // Cohort attendees = anyone tagged 'Cohort' (paid + free intake +
+      // manually added). Uses customer_tags so the count tracks the
+      // tag-first model rather than the underlying paid_amount_cents.
+      safeCount('customer_tags', (q) => q.eq('tag', 'Cohort')),
+      // Cohort leads = anyone tagged 'Lead' (replaces readiness check)
+      safeCount('customer_tags', (q) => q.eq('tag', 'Lead')),
       safeCount('customer_notes'),
     ]);
 
@@ -934,27 +948,12 @@
       // Manual tags are intentional team-added labels (e.g. 'Showed up — 11 AM',
       // 'VIP') — they DO belong next to the name. Auto-derived 'source' tags
       // were the cluttered ones; those are gone.
-      // Categorize the chip color by tag content (for a glanceable list)
-      const tagCategory = (t) => {
-        const lc = String(t || '').toLowerCase();
-        if (lc.startsWith('no-show')) return 'noshow';
-        if (lc.startsWith('cohort'))  return 'cohort';
-        if (lc === 'paid' || lc === 'comped') return 'paid';
-        if (lc.startsWith('workshop')) return 'workshop';
-        if (lc === 'lead' || lc === 'waitlist') return 'lead';
-        if (lc === 'intake complete') return 'intake';
-        return '';
-      };
-      const manualTagsHtml = Array.isArray(c.manualTags) && c.manualTags.length
-        ? ' ' + c.manualTags.slice(0, 3).map((t) => {
-            const cat = tagCategory(t);
-            const catAttr = cat ? ` data-cat="${cat}"` : '';
-            return `<span class="row-tag-chip"${catAttr} title="${escapeHtml(t)}">${escapeHtml(t)}</span>`;
-          }).join('') + (c.manualTags.length > 3
-            ? `<span class="row-tag-chip" title="${escapeHtml(c.manualTags.slice(3).join(', '))}">+${c.manualTags.length - 3}</span>` : '')
-        : '';
+      // Per user feedback: tags belong INSIDE the customer file, not next
+      // to the name in the list. Only the actionable 'Needs intake'
+      // badge survives in the row (and the search still indexes tags so
+      // typing one finds people).
       return `<tr data-email="${escapeHtml(c.email)}">
-        <td><div class="name">${escapeHtml(c.name || '(no name)')}${manualTagsHtml}</div></td>
+        <td><div class="name">${escapeHtml(c.name || '(no name)')}</div></td>
         <td><div class="email">${escapeHtml(c.email)}</div>${phone}</td>
         <td>${needsIntakeBadge || '—'}</td>
         <td>${escapeHtml(fmtDate(c.firstSeen))}</td>
@@ -1346,6 +1345,161 @@
   }
   if (cdIntakeCancel) cdIntakeCancel.addEventListener('click', closeIntakeEditor);
   if (cdIntakeSave) cdIntakeSave.addEventListener('click', saveIntakeEditor);
+
+  // Quick action: mark intake done without filling in fields
+  if (cdMarkIntakeDoneBtn) {
+    cdMarkIntakeDoneBtn.addEventListener('click', async () => {
+      if (!currentDetailEmail) return;
+      cdMarkIntakeDoneBtn.disabled = true;
+      cdMarkIntakeDoneBtn.textContent = 'Saving…';
+      try {
+        let error;
+        if (currentCohortRow && currentCohortRow.id) {
+          const r = await sb.from('refresh_signups')
+            .update({ intake_completed: true })
+            .eq('id', currentCohortRow.id);
+          error = r.error;
+        } else {
+          // No refresh_signups row — insert a minimal one so the tag has a backing record
+          const r = await sb.from('refresh_signups').insert({
+            email: currentDetailEmail,
+            full_name: currentDetailEmail,
+            phone: currentDetailPhone || '',
+            status: 'enrolled',
+            readiness: 'ready_to_pay',
+            paid_amount_cents: 0,
+            audience_type: 'groups',
+            group_type: 'no_preference',
+            seat_type: 'attendee',
+            consent_to_contact: true,
+            consent_to_confidentiality: true,
+            intake_completed: true,
+          });
+          error = r.error;
+        }
+        if (error) { alert("Couldn't mark intake done: " + (error.message || error)); return; }
+        // Also explicitly add the tag (in case trigger 026 hasn't fired yet)
+        try {
+          await sb.from('customer_tags').insert({
+            customer_email: currentDetailEmail,
+            tag: 'Intake complete',
+            added_by_email: (currentUser && currentUser.email || '').toLowerCase(),
+          });
+        } catch (_) { /* duplicate-key ignored */ }
+        try {
+          await sb.from('customer_notes').insert({
+            customer_email: currentDetailEmail,
+            author_id: currentUser && currentUser.id,
+            author_email: currentUser && currentUser.email,
+            body: `✓ Intake marked complete by ${friendlyActorName(currentUser && currentUser.email)}`,
+          });
+        } catch (_) {}
+        loadCustomerDetail(currentDetailEmail);
+      } finally {
+        cdMarkIntakeDoneBtn.disabled = false;
+        cdMarkIntakeDoneBtn.textContent = 'Mark done ✓';
+      }
+    });
+  }
+
+  // ============================================================
+  // Payment editor — change amount, mark comp, change paid date
+  // ============================================================
+  function openPaymentEditor() {
+    if (!cdPaymentEditor) return;
+    const r = currentCohortRow || {};
+    if (cdPaymentAmount) cdPaymentAmount.value = (r.paid_amount_cents != null ? (r.paid_amount_cents / 100).toFixed(2) : '');
+    if (cdPaymentEditError) { cdPaymentEditError.textContent = ''; cdPaymentEditError.style.display = 'none'; }
+    cdPaymentEditor.classList.remove('hidden');
+    setTimeout(() => cdPaymentAmount && cdPaymentAmount.focus(), 30);
+  }
+  function closePaymentEditor() {
+    if (cdPaymentEditor) cdPaymentEditor.classList.add('hidden');
+  }
+  async function savePaymentEditor() {
+    if (!currentDetailEmail) return;
+    const raw = (cdPaymentAmount && cdPaymentAmount.value || '').trim();
+    if (raw === '') {
+      cdPaymentEditError.textContent = 'Enter an amount (use 0 for comp).';
+      cdPaymentEditError.style.display = 'block';
+      return;
+    }
+    const dollars = parseFloat(raw);
+    if (isNaN(dollars) || dollars < 0) {
+      cdPaymentEditError.textContent = 'Enter a valid number (0 or more).';
+      cdPaymentEditError.style.display = 'block';
+      return;
+    }
+    const cents = Math.round(dollars * 100);
+    const isComp = cents === 0;
+    const patch = {
+      paid_amount_cents: cents,
+      paid_at: cents > 0 ? new Date().toISOString() : null,
+      seat_type: isComp ? 'comped' : 'paid',
+    };
+    cdPaymentSave.disabled = true;
+    cdPaymentSave.textContent = 'Saving…';
+    try {
+      let error;
+      if (currentCohortRow && currentCohortRow.id) {
+        const r = await sb.from('refresh_signups').update(patch).eq('id', currentCohortRow.id);
+        error = r.error;
+      } else {
+        const r = await sb.from('refresh_signups').insert({
+          email: currentDetailEmail,
+          full_name: currentDetailEmail,
+          phone: currentDetailPhone || '',
+          status: 'enrolled',
+          readiness: 'ready_to_pay',
+          audience_type: 'groups',
+          group_type: 'no_preference',
+          consent_to_contact: true,
+          consent_to_confidentiality: true,
+          ...patch,
+        });
+        error = r.error;
+      }
+      if (error) {
+        cdPaymentEditError.textContent = "Couldn't save: " + (error.message || error);
+        cdPaymentEditError.style.display = 'block';
+        return;
+      }
+      // Sync tags: add the right one, remove the wrong one
+      try {
+        if (isComp) {
+          await sb.from('customer_tags').insert({ customer_email: currentDetailEmail, tag: 'Comped', added_by_email: (currentUser && currentUser.email || '').toLowerCase() });
+          await sb.from('customer_tags').delete().eq('customer_email', currentDetailEmail).eq('tag', 'Paid');
+        } else {
+          await sb.from('customer_tags').insert({ customer_email: currentDetailEmail, tag: 'Paid', added_by_email: (currentUser && currentUser.email || '').toLowerCase() });
+          await sb.from('customer_tags').delete().eq('customer_email', currentDetailEmail).eq('tag', 'Comped');
+        }
+      } catch (_) {}
+      try {
+        await sb.from('customer_notes').insert({
+          customer_email: currentDetailEmail,
+          author_id: currentUser && currentUser.id,
+          author_email: currentUser && currentUser.email,
+          body: `💵 Payment ${isComp ? 'set to COMP ($0)' : 'set to $' + dollars.toFixed(2)} by ${friendlyActorName(currentUser && currentUser.email)}`,
+        });
+      } catch (_) {}
+      closePaymentEditor();
+      loadCustomerDetail(currentDetailEmail);
+    } finally {
+      cdPaymentSave.disabled = false;
+      cdPaymentSave.textContent = 'Save payment';
+    }
+  }
+  if (cdEditPaymentBtn) {
+    cdEditPaymentBtn.addEventListener('click', () => {
+      if (cdPaymentEditor && cdPaymentEditor.classList.contains('hidden')) openPaymentEditor();
+      else closePaymentEditor();
+    });
+  }
+  if (cdPaymentCancel) cdPaymentCancel.addEventListener('click', closePaymentEditor);
+  if (cdPaymentSave) cdPaymentSave.addEventListener('click', savePaymentEditor);
+  if (cdPaymentQuickComp) cdPaymentQuickComp.addEventListener('click', () => { if (cdPaymentAmount) cdPaymentAmount.value = '0'; });
+  if (cdPaymentQuick50)   cdPaymentQuick50.addEventListener('click',   () => { if (cdPaymentAmount) cdPaymentAmount.value = '50'; });
+  if (cdPaymentQuick300)  cdPaymentQuick300.addEventListener('click',  () => { if (cdPaymentAmount) cdPaymentAmount.value = '300'; });
 
   async function loadCustomerDetail(email) {
     currentDetailEmail = email.toLowerCase().trim();
