@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex,nofollow" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<title>ReBe ReFresh · Cohort Home</title>
+<meta name="description" content="Your cohort home — upcoming sessions, Zoom links, resources, and everything you need for the ReBe ReFresh experience." />
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:#FFFFFF; --mist:#FAF9F7; --navy:#060B50; --navy-dark:#040832;
+    --green:#449945; --green-ink:#3A8438; --green-deep:#2D6A2C; --green-wash:#F2F8F2;
+    --gold:#E3A01F; --gold-ink:#B07D14; --gold-wash:#FBF4E4;
+    --slate:#212B37; --body:#4A535E; --muted:#9DA1A8; --bone:#E2E2E2; --coral:#EA492E;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --display:'Anton','Arial Narrow',Impact,sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--mist);color:var(--body);font-family:var(--sans);font-weight:400;font-size:18px;line-height:1.65;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  .util-bar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--bone)}
+  .util-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;height:56px;gap:14px}
+  .wordmark{font-family:var(--sans);font-weight:700;color:var(--navy);letter-spacing:.02em;font-size:18px;text-decoration:none}
+  .wordmark span{color:var(--green)}
+  .util-tag{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink);background:var(--gold-wash);padding:5px 12px;border-radius:999px;border:1px solid #f5d4a8}
+
+  main{flex:1;max-width:880px;width:100%;margin:0 auto;padding:48px 24px 64px}
+
+  /* Hero */
+  .hero{margin:0 0 36px;text-align:center}
+  .hero .eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.2em;color:var(--green-ink);margin:0 0 16px;display:inline-block}
+  .hero .eyebrow::before{content:'';display:block;width:42px;height:1px;background:var(--green-ink);margin:0 auto 14px;opacity:.55}
+  .hero h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(38px,5.5vw,56px);line-height:1.05;color:var(--navy);margin:0 0 14px;letter-spacing:.01em;max-width:18ch;margin-left:auto;margin-right:auto}
+  .hero p{font-family:var(--sans);font-weight:300;font-size:18px;color:var(--body);max-width:540px;margin:0 auto;line-height:1.55}
+
+  /* Zoom callout (universal session link) */
+  .zoom-box{background:linear-gradient(135deg,#F4FAEF 0%,#E9F5E1 100%);border:1px solid #cfe6d0;border-radius:16px;padding:26px 28px;margin:0 0 36px;text-align:center}
+  .zoom-box .zb-label{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 6px}
+  .zoom-box .zb-title{font-family:var(--serif);font-style:italic;font-weight:600;font-size:22px;color:var(--navy);margin:0 0 14px;line-height:1.25}
+  .zoom-box .zb-btn{display:inline-block;background:var(--green-ink);color:#fff;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:13px 28px;border-radius:999px;text-decoration:none;transition:background .15s,transform .12s,box-shadow .15s;margin:4px 0 12px}
+  .zoom-box .zb-btn:hover{background:var(--green-deep);transform:translateY(-2px);box-shadow:0 8px 20px rgba(58,132,56,.18)}
+  .zoom-box .zb-url{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:12px;color:var(--muted);margin:0 0 4px;word-break:break-all}
+  .zoom-box .zb-meeting{font-size:12px;color:var(--body);margin:0;font-weight:600}
+
+  /* Section heading */
+  .section-h{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:22px;color:var(--navy);letter-spacing:.04em;margin:36px 0 16px;padding:0 0 8px;border-bottom:2px solid var(--gold);display:inline-block}
+
+  /* Session cards */
+  .session-card{background:#fff;border:1px solid var(--bone);border-radius:16px;padding:24px 28px;margin:0 0 16px;box-shadow:0 4px 12px rgba(6,11,80,.04);transition:box-shadow .15s,transform .12s}
+  .session-card:hover{box-shadow:0 8px 22px rgba(6,11,80,.08);transform:translateY(-1px)}
+  .session-card .sc-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+  .session-card .sc-date{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:14px;color:var(--gold-ink);letter-spacing:.06em;background:var(--gold-wash);padding:4px 12px;border-radius:999px;border:1px solid #f5d4a8}
+  .session-card .sc-recur{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink);background:var(--green-wash);padding:3px 10px;border-radius:999px;border:1px solid #BFE3BF}
+  .session-card .sc-tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);background:#E9EDFB;padding:3px 10px;border-radius:999px;border:1px solid #C8D0EE}
+  .session-card h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:24px;color:var(--navy);margin:0 0 4px;line-height:1.2}
+  .session-card .sc-facil{font-size:14px;color:var(--gold-ink);font-weight:700;margin:0 0 14px}
+  .session-card .sc-desc{font-size:15px;line-height:1.6;color:var(--body);margin:0 0 16px}
+  .session-card .sc-desc p{margin:0 0 10px}
+  .session-card .sc-desc p:last-child{margin:0}
+  .session-card .sc-pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:0 0 16px}
+  .session-card .sc-pillar{background:var(--mist);border-left:3px solid var(--gold);padding:10px 12px;border-radius:0 8px 8px 0}
+  .session-card .sc-pillar-name{font-family:var(--display);font-size:13px;color:var(--gold-ink);letter-spacing:.08em;margin:0 0 4px}
+  .session-card .sc-pillar-body{font-size:13px;color:var(--body);line-height:1.5;margin:0}
+  .sc-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0;padding:14px 0 0;border-top:1px solid var(--mist)}
+  .sc-btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:10px 18px;border-radius:999px;text-decoration:none;border:1.5px solid var(--green-ink);color:var(--green-ink);background:#fff;cursor:pointer;transition:background .15s,color .15s,transform .12s}
+  .sc-btn:hover{background:var(--green-ink);color:#fff;transform:translateY(-2px)}
+  .sc-btn.sc-btn-primary{background:var(--green-ink);color:#fff}
+  .sc-btn.sc-btn-primary:hover{background:var(--green-deep);color:#fff}
+
+  /* Coming-soon card */
+  .soon-card{background:#fff;border:1px dashed var(--bone);border-radius:14px;padding:20px 24px;margin:0 0 16px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .soon-card .sc-info h4{font-family:var(--serif);font-style:italic;font-weight:600;font-size:18px;color:var(--navy);margin:0 0 4px;line-height:1.2}
+  .soon-card .sc-info p{margin:0;font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+  .soon-tag{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--mist);padding:5px 12px;border-radius:999px;border:1px solid var(--bone)}
+
+  /* Resources placeholder */
+  .resources-empty{background:#fff;border:1px dashed var(--bone);border-radius:14px;padding:32px 28px;text-align:center;color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 16px}
+  .resources-empty strong{color:var(--navy);display:block;margin:0 0 6px;font-family:var(--serif);font-style:italic;font-size:16px;font-weight:600}
+
+  /* Help footer */
+  .help-foot{background:#fff;border:1px solid var(--bone);border-radius:14px;padding:24px 28px;margin:36px 0 0;text-align:center}
+  .help-foot p{margin:0;font-size:14px;color:var(--body);line-height:1.6}
+  .help-foot a{color:var(--green-ink);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-ink)}
+  .help-foot a:hover{border-bottom-style:solid}
+
+  footer{background:#fff;padding:24px 24px;text-align:center;border-top:1px solid var(--bone);font-size:12px;color:var(--muted);line-height:1.6}
+
+  /* ===== BB the Bee — chat widget ===== */
+  .bb-launcher{position:fixed;right:22px;bottom:22px;z-index:80;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--bone);border-radius:999px;padding:10px 22px 10px 10px;box-shadow:0 12px 28px rgba(6,11,80,.18);cursor:pointer;font-family:var(--sans);transition:transform .2s var(--ease),box-shadow .2s var(--ease);max-width:calc(100vw - 44px);border:0}
+  .bb-launcher:hover{transform:translateY(-3px);box-shadow:0 18px 36px rgba(6,11,80,.24)}
+  .bb-launcher-avatar{width:64px;height:64px;border-radius:50%;background:#FCEFB8 center/cover no-repeat;background-image:url('Images/BB-mascot.png');flex-shrink:0;border:3px solid var(--gold);box-shadow:0 4px 12px rgba(176,125,20,.25)}
+  .bb-launcher-text{font-size:14px;color:var(--navy);font-weight:700;letter-spacing:.01em;line-height:1.2}
+  .bb-launcher-text small{display:block;font-weight:400;font-size:11px;color:var(--muted);letter-spacing:0;margin-top:3px;font-style:italic}
+  .bb-launcher.is-hidden{display:none}
+  .bb-window{position:fixed;right:22px;bottom:22px;z-index:81;width:min(400px,calc(100vw - 44px));height:min(620px,calc(100vh - 44px));background:#fff;border-radius:18px;box-shadow:0 28px 60px rgba(6,11,80,.28);display:none;flex-direction:column;overflow:hidden;font-family:var(--sans);border:1px solid var(--bone)}
+  .bb-window.is-open{display:flex;animation:bbPop .25s var(--ease)}
+  @keyframes bbPop{from{transform:translateY(20px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+  .bb-header{display:flex;align-items:center;gap:14px;padding:16px 18px;background:linear-gradient(135deg,var(--gold-wash) 0%,#FBEFCB 100%);border-bottom:1px solid #f0d4a8;flex-shrink:0}
+  .bb-header-avatar{width:56px;height:56px;border-radius:50%;background:#FCEFB8 center/cover no-repeat;background-image:url('Images/BB-mascot.png');flex-shrink:0;border:3px solid var(--gold-ink);box-shadow:0 3px 10px rgba(176,125,20,.25)}
+  .bb-header-text{flex:1;min-width:0}
+  .bb-header-name{font-weight:700;font-size:16px;color:var(--navy);line-height:1;margin:0 0 5px}
+  .bb-header-sub{font-size:11px;color:var(--gold-ink);line-height:1;margin:0;display:flex;align-items:center;gap:6px}
+  .bb-header-sub::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(68,153,69,.18)}
+  .bb-close{background:transparent;border:0;cursor:pointer;font-size:22px;line-height:1;color:var(--navy);padding:4px 8px;border-radius:6px;flex-shrink:0}
+  .bb-close:hover{background:rgba(0,0,0,.06)}
+  .bb-messages{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px;background:var(--mist)}
+  .bb-msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.5;word-wrap:break-word}
+  .bb-msg-bot{background:#fff;border:1px solid var(--bone);color:var(--slate);border-bottom-left-radius:4px;align-self:flex-start;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .bb-msg-user{background:var(--green-ink);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+  .bb-msg p{margin:0 0 6px}
+  .bb-msg p:last-child{margin:0}
+  .bb-typing{align-self:flex-start;background:#fff;border:1px solid var(--bone);border-radius:14px;border-bottom-left-radius:4px;padding:10px 14px;display:none}
+  .bb-typing.is-visible{display:inline-flex;gap:4px;align-items:center}
+  .bb-typing span{width:6px;height:6px;background:var(--muted);border-radius:50%;animation:bbDot 1.3s ease-in-out infinite}
+  .bb-typing span:nth-child(2){animation-delay:.15s}
+  .bb-typing span:nth-child(3){animation-delay:.3s}
+  @keyframes bbDot{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+  .bb-disclaimer{padding:9px 14px 0;background:#fff;border-top:1px solid var(--bone);font-size:10.5px;color:var(--muted);text-align:center;line-height:1.4;font-style:italic;flex-shrink:0}
+  .bb-disclaimer a{color:var(--green-ink);text-decoration:none;border-bottom:1px dotted var(--green-ink)}
+  .bb-input-row{padding:10px 12px 12px;background:#fff;display:flex;gap:8px;align-items:flex-end;flex-shrink:0}
+  .bb-input{flex:1;border:1px solid var(--bone);border-radius:10px;padding:9px 12px;font-family:inherit;font-size:14px;color:var(--slate);resize:none;outline:0;max-height:80px;line-height:1.4;transition:border-color .15s}
+  .bb-input:focus{border-color:var(--green)}
+  .bb-send{background:var(--green-ink);color:#fff;border:0;border-radius:10px;padding:10px 14px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s;flex-shrink:0;letter-spacing:.02em}
+  .bb-send:hover:not(:disabled){background:var(--green-deep)}
+  .bb-send:disabled{opacity:.45;cursor:wait}
+
+  @media (max-width:640px){
+    main{padding:32px 16px 56px}
+    .zoom-box{padding:20px}
+    .session-card{padding:20px}
+    .bb-launcher-text{display:none}
+    .bb-launcher{padding:8px}
+    .bb-launcher-avatar{width:54px;height:54px;border-width:2px}
+  }
+</style>
+</head>
+<body>
+
+<header class="util-bar">
+  <div class="util-inner">
+    <a href="/" class="wordmark">Re<span>Be</span></a>
+    <span class="util-tag">Cohort home</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="eyebrow">Welcome, friend</p>
+    <h1>Your cohort home.</h1>
+    <p>Everything you need for the ReBe ReFresh experience — sessions, calendar links, Zoom, and resources, all in one spot. Bookmark this page.</p>
+  </section>
+
+  <!-- Universal Zoom callout -->
+  <section class="zoom-box" aria-labelledby="zoom-title">
+    <p class="zb-label">One Zoom room for everything</p>
+    <p class="zb-title" id="zoom-title">All sessions use the same link.</p>
+    <a class="zb-btn" href="https://us06web.zoom.us/j/9057767620" target="_blank" rel="noopener">Join Zoom →</a>
+    <p class="zb-url">https://us06web.zoom.us/j/9057767620</p>
+    <p class="zb-meeting">Meeting ID: 905 776 7620</p>
+  </section>
+
+  <!-- Upcoming sessions -->
+  <h2 class="section-h">Upcoming Sessions</h2>
+
+  <!-- 1. Limitless -->
+  <article class="session-card" id="session-limitless">
+    <div class="sc-meta">
+      <span class="sc-date">Thu · June 25 · 9 AM ET</span>
+      <span class="sc-tag">Physical Health</span>
+    </div>
+    <h3>"Limitless" — Physical Health</h3>
+    <p class="sc-facil">with Kindsey Pentecost Chadwick</p>
+    <div class="sc-desc">
+      <p><em>"We're not just building healthier bodies — we're building limitless lives."</em></p>
+      <p><strong>The Three Pillars:</strong></p>
+    </div>
+    <div class="sc-pillars">
+      <div class="sc-pillar">
+        <p class="sc-pillar-name">Balance</p>
+        <p class="sc-pillar-body">Your body in balance is your foundation. Science-backed nutrition to fuel your cells and show up fully.</p>
+      </div>
+      <div class="sc-pillar">
+        <p class="sc-pillar-name">Freedom</p>
+        <p class="sc-pillar-body">Freedom from burnout, from settling, from feeling stuck — when health, mindset, and purpose align.</p>
+      </div>
+      <div class="sc-pillar">
+        <p class="sc-pillar-name">Purpose</p>
+        <p class="sc-pillar-body">Aligning your physical health with what you're here to do.</p>
+      </div>
+    </div>
+    <div class="sc-actions">
+      <button type="button" class="sc-btn" data-add-cal="limitless">📅 Add to Calendar</button>
+      <a class="sc-btn sc-btn-primary" href="https://us06web.zoom.us/j/9057767620" target="_blank" rel="noopener">Join Zoom →</a>
+    </div>
+  </article>
+
+  <!-- 2. Happy Hour -->
+  <article class="session-card" id="session-happy-hour">
+    <div class="sc-meta">
+      <span class="sc-date">Fridays · 3 PM ET</span>
+      <span class="sc-recur">Weekly</span>
+      <span class="sc-tag">Community</span>
+    </div>
+    <h3>Happy Hour with Osil Pistole</h3>
+    <p class="sc-facil">Fridays at 3 PM Eastern · every week</p>
+    <div class="sc-desc">
+      <p>A safe place to connect, build community, and learn to see the gold in ourselves and each other. Bring your favorite beverage and let's hang out :)</p>
+    </div>
+    <div class="sc-actions">
+      <button type="button" class="sc-btn" data-add-cal="happy-hour">📅 Add to Calendar</button>
+      <a class="sc-btn sc-btn-primary" href="https://us06web.zoom.us/j/9057767620" target="_blank" rel="noopener">Join Zoom →</a>
+    </div>
+  </article>
+
+  <!-- 3. Who am I? -->
+  <article class="session-card" id="session-who-am-i">
+    <div class="sc-meta">
+      <span class="sc-date">Thu · July 9 · 7 PM ET</span>
+      <span class="sc-tag">Emotional Health</span>
+    </div>
+    <h3>"Who am I?" — Emotional Health</h3>
+    <p class="sc-facil">with Beth Rech &amp; Fred Feller</p>
+    <div class="sc-desc">
+      <p>Where are my thoughts, beliefs, and emotions about myself coming from? Are they true? What do I do with them?</p>
+    </div>
+    <div class="sc-actions">
+      <button type="button" class="sc-btn" data-add-cal="who-am-i">📅 Add to Calendar</button>
+      <a class="sc-btn sc-btn-primary" href="https://us06web.zoom.us/j/9057767620" target="_blank" rel="noopener">Join Zoom →</a>
+    </div>
+  </article>
+
+  <!-- Coming soon -->
+  <h2 class="section-h">Coming Soon</h2>
+  <div class="soon-card">
+    <div class="sc-info">
+      <h4>Two Sessions with Dr. Jason Quintal</h4>
+      <p>Date &amp; time to be announced</p>
+    </div>
+    <span class="soon-tag">TBD</span>
+  </div>
+
+  <!-- Resources -->
+  <h2 class="section-h">Resources</h2>
+  <div class="resources-empty">
+    <strong>Materials coming soon.</strong>
+    PDFs, recordings, and supplemental materials from each session will appear here as they're shared. Check back before and after each call.
+  </div>
+
+  <!-- Help -->
+  <div class="help-foot">
+    <p>Questions, schedule changes, or anything else? Email <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a> — we've got you.</p>
+  </div>
+</main>
+
+<footer>
+  <p>ReBe — Rebuilding people from the inside out.</p>
+</footer>
+
+<!-- BB the Bee — chat widget -->
+<button type="button" class="bb-launcher" id="bb-launcher" aria-label="Chat with BB">
+  <div class="bb-launcher-avatar" aria-hidden="true"></div>
+  <span class="bb-launcher-text">Chat with BB<small>Your ReBe guide · Ask me anything</small></span>
+</button>
+<div class="bb-window" id="bb-window" role="dialog" aria-label="Chat with BB">
+  <div class="bb-header">
+    <div class="bb-header-avatar" aria-hidden="true"></div>
+    <div class="bb-header-text">
+      <p class="bb-header-name">BB</p>
+      <p class="bb-header-sub">Your ReBe guide</p>
+    </div>
+    <button type="button" class="bb-close" id="bb-close" aria-label="Close chat">×</button>
+  </div>
+  <div class="bb-messages" id="bb-messages" aria-live="polite">
+    <div class="bb-typing" id="bb-typing"><span></span><span></span><span></span></div>
+  </div>
+  <p class="bb-disclaimer">BB is an AI assistant. Don't share anything you wouldn't put in an email. <a href="/privacy" target="_blank" rel="noopener">Privacy</a></p>
+  <div class="bb-input-row">
+    <textarea class="bb-input" id="bb-input" rows="1" placeholder="Ask BB anything…" aria-label="Type your message"></textarea>
+    <button type="button" class="bb-send" id="bb-send">Send</button>
+  </div>
+</div>
+
+<script>
+// ===== Add-to-calendar (.ics) generation =====
+(function(){
+  // All session times in UTC. June/July 2026 = EDT = UTC-4.
+  var SESSIONS = {
+    'limitless': {
+      title: 'Limitless — Physical Health with Kindsey Pentecost Chadwick',
+      startUtc: '20260625T130000Z', // June 25 2026 9 AM ET
+      endUtc:   '20260625T140000Z',
+      desc: 'ReBe ReFresh Cohort — "Limitless" Physical Health session with Kindsey Pentecost Chadwick. \\n\\n"We\\'re not just building healthier bodies — we\\'re building limitless lives." \\n\\nThree pillars: Balance, Freedom, Purpose. \\n\\nZoom: https://us06web.zoom.us/j/9057767620 \\nMeeting ID: 905 776 7620',
+      location: 'https://us06web.zoom.us/j/9057767620'
+    },
+    'happy-hour': {
+      title: 'Happy Hour with Osil Pistole',
+      startUtc: '20260626T190000Z', // First Friday: June 26 2026 3 PM ET
+      endUtc:   '20260626T200000Z',
+      desc: 'ReBe ReFresh Cohort — weekly Happy Hour with Osil Pistole. A safe place to connect, build community, and learn to see the gold in ourselves and each other. Bring your favorite beverage. \\n\\nZoom: https://us06web.zoom.us/j/9057767620 \\nMeeting ID: 905 776 7620',
+      location: 'https://us06web.zoom.us/j/9057767620',
+      rrule: 'FREQ=WEEKLY;BYDAY=FR'
+    },
+    'who-am-i': {
+      title: '"Who am I?" — Emotional Health with Beth Rech & Fred Feller',
+      startUtc: '20260709T230000Z', // July 9 2026 7 PM ET = 23:00 UTC
+      endUtc:   '20260710T000000Z',
+      desc: 'ReBe ReFresh Cohort — "Who am I?" Emotional Health session with Beth Rech and Fred Feller. \\n\\nWhere are my thoughts, beliefs, and emotions about myself coming from? Are they true? What do I do with them? \\n\\nZoom: https://us06web.zoom.us/j/9057767620 \\nMeeting ID: 905 776 7620',
+      location: 'https://us06web.zoom.us/j/9057767620'
+    }
+  };
+
+  function buildIcs(s) {
+    var lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//ReBe ReFresh//Cohort Sessions//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:' + s.startUtc + '-' + Math.random().toString(36).slice(2, 9) + '@justrebe.com',
+      'DTSTART:' + s.startUtc,
+      'DTEND:' + s.endUtc,
+      'SUMMARY:' + s.title,
+      'DESCRIPTION:' + s.desc,
+      'LOCATION:' + s.location,
+      'STATUS:CONFIRMED'
+    ];
+    if (s.rrule) lines.push('RRULE:' + s.rrule);
+    lines.push('END:VEVENT', 'END:VCALENDAR');
+    return lines.join('\r\n');
+  }
+
+  function downloadIcs(key) {
+    var s = SESSIONS[key];
+    if (!s) return;
+    var ics = buildIcs(s);
+    var blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'rebe-' + key + '.ics';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+  }
+
+  document.querySelectorAll('[data-add-cal]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      downloadIcs(btn.getAttribute('data-add-cal'));
+    });
+  });
+})();
+
+// ===== BB the Bee — chat widget =====
+(function(){
+  var launcher = document.getElementById('bb-launcher');
+  var win = document.getElementById('bb-window');
+  var closeBtn = document.getElementById('bb-close');
+  var messagesEl = document.getElementById('bb-messages');
+  var typingEl = document.getElementById('bb-typing');
+  var input = document.getElementById('bb-input');
+  var sendBtn = document.getElementById('bb-send');
+  if (!launcher || !win || !messagesEl || !input || !sendBtn) return;
+
+  var history = [];
+
+  function escapeHTML(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function linkify(text){
+    var t = escapeHTML(text);
+    t = t.replace(/(https?:\/\/[^\s<]+[^\s<\.,;:!?\)])/g, function(url){
+      return '<a href="' + url + '" target="_blank" rel="noopener" style="color:#3A8438;text-decoration:underline">' + url + '</a>';
+    });
+    t = t.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, function(addr){
+      return '<a href="mailto:' + addr + '" style="color:#3A8438;text-decoration:underline">' + addr + '</a>';
+    });
+    return t;
+  }
+  function appendMessage(role, text){
+    var div = document.createElement('div');
+    div.className = 'bb-msg ' + (role === 'assistant' ? 'bb-msg-bot' : 'bb-msg-user');
+    String(text).split(/\n\n+/).forEach(function(para){
+      var p = document.createElement('p');
+      if (role === 'assistant') p.innerHTML = linkify(para);
+      else p.textContent = para;
+      div.appendChild(p);
+    });
+    messagesEl.insertBefore(div, typingEl);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+  function showTyping(on){
+    typingEl.classList.toggle('is-visible', !!on);
+    if (on) messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+  async function sendMessage(text){
+    if (!text.trim()) return;
+    appendMessage('user', text);
+    history.push({ role: 'user', content: text });
+    input.value = '';
+    input.style.height = 'auto';
+    sendBtn.disabled = true;
+    showTyping(true);
+    try {
+      var resp = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history })
+      });
+      var data = await resp.json();
+      showTyping(false);
+      if (!resp.ok || !data.reply) {
+        appendMessage('assistant', "Sorry — I'm having trouble reaching my brain. Email refresh@justrebe.com and the team will help directly.");
+      } else {
+        appendMessage('assistant', data.reply);
+        history.push({ role: 'assistant', content: data.reply });
+      }
+    } catch (err) {
+      console.error('BB error', err);
+      showTyping(false);
+      appendMessage('assistant', "Sorry — I'm having trouble connecting. Email refresh@justrebe.com and the team will help directly.");
+    }
+    sendBtn.disabled = false;
+    input.focus();
+  }
+  function openChat(){
+    launcher.classList.add('is-hidden');
+    win.classList.add('is-open');
+    if (history.length === 0) {
+      var greeting = "Hi — I'm BB, your ReBe guide. I'm an AI assistant. Ask me anything about the cohort — sessions, schedule, resources, or anything else on your mind.";
+      appendMessage('assistant', greeting);
+      history.push({ role: 'assistant', content: greeting });
+    }
+    setTimeout(function(){ input.focus(); }, 200);
+  }
+  function closeChat(){
+    win.classList.remove('is-open');
+    launcher.classList.remove('is-hidden');
+  }
+  launcher.addEventListener('click', openChat);
+  closeBtn.addEventListener('click', closeChat);
+  sendBtn.addEventListener('click', function(){ sendMessage(input.value); });
+  input.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(input.value); }
+  });
+  input.addEventListener('input', function(){
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+  });
+})();
+</script>
+
+</body>
+</html>
