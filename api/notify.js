@@ -190,6 +190,97 @@ ReBe · refresh@justrebe.com`;
   return r.json();
 }
 
+// Persist cohort intake responses to refresh_signups so the CRM drawer
+// shows them. Up until now this handler only emailed admin + sent the
+// welcome email — none of the intake data made it into the database.
+//
+// Strategy: PATCH the existing refresh_signups row (matched by email,
+// which is unique per cohort signup). Writes a structured notes block
+// + sets intake_completed=true so dashboards stop showing 'Needs intake'.
+async function persistCohortIntakeToDb({ email, name, slot, record, whyList, location }) {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key) {
+    console.warn('persistCohortIntakeToDb: Supabase env not configured, skipping');
+    return;
+  }
+
+  const r = record || {};
+  const blocks = [
+    `Location: ${location || '(not given)'}`,
+    `Prior ReBe experience: ${r.prior_experience || '(not given)'}`,
+    `Why they're joining: ${whyList || '(none selected)'}`,
+    `How they heard: ${r.heard_from || '(not given)'}` + (r.referrer ? ` (referred by ${r.referrer})` : ''),
+    `Breakout-room preference: ${r.breakout_preference || '(not given)'}`,
+    r.notes ? `\nFree-text notes:\n${r.notes}` : '',
+  ].filter(Boolean).join('\n');
+
+  const patch = {
+    intake_completed: true,
+    preferred_group_time: slot && slot !== '(slot unknown)' ? slot : undefined,
+    // previous_rebe_experience is BOOLEAN: 'First time' -> false, anything else -> true
+    previous_rebe_experience: r.prior_experience
+      ? (String(r.prior_experience).trim().toLowerCase() === 'first time' ? false : true)
+      : undefined,
+    // area_needing_refresh is a free-text column - put their primary 'why' there.
+    area_needing_refresh: Array.isArray(r.why_here) && r.why_here.length ? r.why_here.join(', ') : undefined,
+    // reason_for_interest holds their freeform note so it's discoverable in the drawer.
+    reason_for_interest: (r.notes || '').trim() || undefined,
+    notes: blocks,
+    // Update phone if the form has one and the existing row doesn't.
+    phone: r.phone ? String(r.phone).trim() : undefined,
+  };
+  // Strip undefined keys so PATCH only updates what we have.
+  Object.keys(patch).forEach((k) => patch[k] === undefined && delete patch[k]);
+
+  const emailLc = String(email || '').trim().toLowerCase();
+  if (!emailLc) return;
+
+  const headers = {
+    apikey: key,
+    Authorization: `Bearer ${key}`,
+    'Content-Type': 'application/json',
+    Prefer: 'return=representation',
+  };
+
+  // Try to UPDATE first (the normal case — Stripe webhook created the row).
+  const patchResp = await fetch(
+    `${url}/rest/v1/refresh_signups?email=ilike.${encodeURIComponent(emailLc)}`,
+    { method: 'PATCH', headers, body: JSON.stringify(patch) }
+  );
+  const patchData = await patchResp.json().catch(() => null);
+  if (!patchResp.ok) {
+    throw new Error(`persistCohortIntakeToDb PATCH ${patchResp.status}: ${JSON.stringify(patchData).slice(0, 300)}`);
+  }
+  if (Array.isArray(patchData) && patchData.length > 0) return patchData;
+
+  // No row updated — fall back to INSERT (rare: free intake form or row missing).
+  const insertRow = {
+    full_name: name || 'Unknown',
+    email: emailLc,
+    phone: r.phone || '',
+    status: 'enrolled',
+    readiness: 'ready_to_pay',
+    paid_amount_cents: 0,
+    audience_type: 'groups',
+    group_type: 'no_preference',
+    seat_type: 'attendee',
+    consent_to_contact: true,
+    consent_to_confidentiality: true,
+    ...patch,
+  };
+  const insertResp = await fetch(`${url}/rest/v1/refresh_signups`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(insertRow),
+  });
+  if (!insertResp.ok) {
+    const detail = await insertResp.text().catch(() => '');
+    throw new Error(`persistCohortIntakeToDb INSERT ${insertResp.status}: ${detail.slice(0, 300)}`);
+  }
+  return insertResp.json();
+}
+
 // ---------- Twilio (SMS) — gracefully no-op if env vars are missing ----------
 async function sendSMS({ to, body }) {
   const sid  = process.env.TWILIO_ACCOUNT_SID;
@@ -618,6 +709,8 @@ ${r.notes ? r.notes : '(nothing added)'}
       const { firstName, lastName } = splitName(name);
       await Promise.all([
         sendEmail(adminMsg),
+        persistCohortIntakeToDb({ email, name, slot, record: r, whyList, location })
+          .catch((e) => console.error('DB persist (cohort_intake):', e)),
         sendCohortWelcomeEmail({ toEmail: email, firstName, slotChoice: slot })
           .catch((e) => console.error('Welcome email (cohort_intake):', e)),
         kitSubscribe({ email, first_name: firstNameFromFull(name), tags })
