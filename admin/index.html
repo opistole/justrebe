@@ -413,7 +413,7 @@
         <input type="search" class="search-input" id="customer-search" placeholder="Search by name, email, or phone…">
         <button type="button" id="add-customer-btn" class="btn" style="padding:8px 14px;font-size:12px;letter-spacing:.04em">+ Add customer</button>
         <button type="button" id="export-intake-btn" class="btn" style="padding:8px 14px;font-size:12px;letter-spacing:.04em;background:#fff;color:#060B50;border:1px solid #060B50" title="Open a printable view of cohort intake responses. Use your browser's File → Print → Save as PDF.">Export intake → PDF</button>
-        <div class="filter-pills" id="filter-pills">
+        <div class="filter-pills" id="filter-pills" role="group" aria-label="Filter by source">
           <button type="button" class="filter-pill active" data-filter="all">All</button>
           <button type="button" class="filter-pill" data-filter="cohort">All cohort</button>
           <button type="button" class="filter-pill" data-filter="paid">Paid only</button>
@@ -422,10 +422,13 @@
           <button type="button" class="filter-pill" data-filter="workshop">Workshop</button>
           <button type="button" class="filter-pill" data-filter="notes">With notes</button>
         </div>
-        <div class="filter-pills" id="slot-pills" style="margin-left:0">
-          <button type="button" class="filter-pill active" data-slot="all">Any slot</button>
-          <button type="button" class="filter-pill" data-slot="11am">11 AM ET</button>
-          <button type="button" class="filter-pill" data-slot="8pm">8 PM ET</button>
+        <div class="filter-group" style="display:flex;align-items:center;gap:8px;padding:6px 12px;background:var(--mist);border-radius:999px;border:1px solid var(--bone)">
+          <span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Slot</span>
+          <div class="filter-pills" id="slot-pills" style="margin-left:0;gap:4px" role="group" aria-label="Filter by cohort slot">
+            <button type="button" class="filter-pill active" data-slot="all">Any</button>
+            <button type="button" class="filter-pill" data-slot="11am">11 AM ET</button>
+            <button type="button" class="filter-pill" data-slot="8pm">8 PM ET</button>
+          </div>
         </div>
       </div>
       <div class="table-wrap">
@@ -435,7 +438,7 @@
             <tr>
               <th class="sortable" data-sort="name">Name <span class="sort-arrow"></span></th>
               <th>Contact</th>
-              <th>Source</th>
+              <th>Status</th>
               <th class="sortable" data-sort="signed_up">Signed up <span class="sort-arrow"></span></th>
               <th class="sortable" data-sort="notes">Notes <span class="sort-arrow"></span></th>
             </tr>
@@ -794,6 +797,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=36"></script>
+<script src="/admin/app.js?v=37"></script>
 </body>
 </html>

@@ -852,48 +852,25 @@
     });
 
     customerTbody.innerHTML = filtered.map((c) => {
-      const tagLabel = (s) => {
-        if (s === 'paid')        return 'Paid';
-        if (s === 'lead')        return 'Lead';
-        if (s === 'workshop')    return 'Workshop';
-        if (s === 'waitlist')    return 'Waitlist';
-        if (s === 'attendee')    return 'Attendee';
-        if (s === 'facilitator') return 'Facilitator';
-        if (s === 'comped')      return 'Comped';
-        if (s === 'cohort')      return null; // hide the umbrella tag — too generic
-        return s;
-      };
-      const tags = Array.from(c.sources)
-        .map(tagLabel)
-        .filter(Boolean)
-        .map((label, i) => {
-          const sourceKey = Array.from(c.sources).filter((s) => tagLabel(s) === label)[0] || 'paid';
-          return `<span class="source-tag ${escapeHtml(sourceKey)}">${escapeHtml(label)}</span>`;
-        })
-        .join('');
-
-      // Slot badge (visible whenever the person has a slot — cohort signups)
-      const slotLower = (c.preferredSlot || '').toLowerCase();
-      const slotBadge = slotLower.includes('11')
-        ? `<span class="source-tag" style="background:#FBF4E4;color:#B07D14;border:1px solid #ead7a8">11 AM ET</span>`
-        : slotLower.includes('8')
-          ? `<span class="source-tag" style="background:#E9EDFB;color:#252C5C;border:1px solid #C8D0EE">8 PM ET</span>`
-          : '';
-
-      // Intake-form indicator
-      const intakeBadge = c.sources.has('cohort')
-        ? (c.intakeDone
-            ? `<span class="source-tag" style="background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF" title="Intake form completed">✓ Intake</span>`
-            : `<span class="source-tag" style="background:var(--coral-wash);color:var(--coral-ink);border:1px solid var(--coral-border)" title="Intake form not yet completed">Needs intake</span>`)
+      // Per user request: tag pills are visual clutter in the list row.
+      // They still live on c.sources (used by filters + profile drawer)
+      // and in the database — they're just not rendered next to the
+      // name. The only badge that survives in the row is 'Needs intake'
+      // because it's an action item.
+      const needsIntakeBadge = c.sources.has('cohort') && !c.intakeDone
+        ? `<span class="source-tag" style="background:var(--coral-wash);color:var(--coral-ink);border:1px solid var(--coral-border)" title="Intake form not yet completed">Needs intake</span>`
         : '';
 
       const phone = c.phone ? `<div class="phone">${escapeHtml(c.phone)}</div>` : '';
+      const notesCell = c.noteCount
+        ? `<span aria-label="${c.noteCount} note${c.noteCount === 1 ? '' : 's'}">${c.noteCount} note${c.noteCount === 1 ? '' : 's'}</span>`
+        : '—';
       return `<tr data-email="${escapeHtml(c.email)}">
         <td><div class="name">${escapeHtml(c.name || '(no name)')}</div></td>
         <td><div class="email">${escapeHtml(c.email)}</div>${phone}</td>
-        <td>${tags}${slotBadge}${intakeBadge || '—'}</td>
+        <td>${needsIntakeBadge || '—'}</td>
         <td>${escapeHtml(fmtDate(c.firstSeen))}</td>
-        <td>${c.noteCount ? `${c.noteCount} 📝` : '—'}</td>
+        <td>${notesCell}</td>
       </tr>`;
     }).join('');
 
