@@ -24,6 +24,10 @@
   }
   *,*::before,*::after{box-sizing:border-box}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+  /* Skip link — hidden off-screen until a keyboard user tabs to it. */
+  .skip-link{position:absolute;left:-9999px;top:auto;background:var(--navy);color:#fff;padding:10px 16px;border-radius:6px;z-index:200;font-weight:700;text-decoration:none}
+  .skip-link:focus{left:16px;top:16px}
   body{margin:0;background:#FFFFFF;color:var(--body);font-family:var(--sans);font-weight:400;font-size:20px;line-height:1.7;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
   @media (max-width:640px){body{font-size:18px}}
 
