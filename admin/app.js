@@ -113,6 +113,20 @@
   const cdReadiness = document.getElementById('cd-readiness');
   const cdIntakeBody = document.getElementById('cd-intake-body');
 
+  // Manual tags (editable)
+  const cdManualTagsChips = document.getElementById('cd-manual-tags-chips');
+  const cdAddTagBtn       = document.getElementById('cd-add-tag-btn');
+  const cdAddTagPanel     = document.getElementById('cd-add-tag-panel');
+  const cdTagInput        = document.getElementById('cd-tag-input');
+  const cdTagSave         = document.getElementById('cd-tag-save');
+  const cdTagCancel       = document.getElementById('cd-tag-cancel');
+  const cdQuickTagBtns    = document.querySelectorAll('#cd-add-tag-panel .quick-tag');
+  // Tags-by-email cache so the customers list can show them without
+  // hitting the DB per row.
+  const tagsByEmail = {};
+  // Email currently shown in the drawer (used by save/remove handlers).
+  let currentTagEmail = null;
+
   // Compose tabs
   const composeTabs = document.querySelectorAll('.compose-tab');
   const composePanels = {
@@ -323,6 +337,9 @@
 
     currentUser = user;
     currentRole = roles[0].role;
+    // Expose user email globally so feature handlers (e.g. customer_tags
+    // 'added_by_email') can attribute writes without re-fetching session.
+    window.__currentUserEmail = (user.email || '').toLowerCase();
 
     userEmailEl.textContent = user.email || '(no email)';
     userRoleEl.textContent  = currentRole;
@@ -614,7 +631,7 @@
     listEmpty.classList.add('hidden');
 
     // Pull both sources in parallel
-    const [contactsRes, cohortRes, notesRes] = await Promise.all([
+    const [contactsRes, cohortRes, notesRes, tagsRes] = await Promise.all([
       sb.from('contacts')
         .select('id, first_name, last_name, email, phone, created_at')
         .order('created_at', { ascending: false })
@@ -625,6 +642,9 @@
         .limit(500),
       sb.from('customer_notes')
         .select('customer_email')
+        .limit(2000),
+      sb.from('customer_tags')
+        .select('id, customer_email, tag, added_by_email, added_at')
         .limit(2000),
     ]);
 
@@ -724,6 +744,22 @@
     // Apply notes counts
     merged.forEach((c, email) => {
       c.noteCount = notesByEmail[email] || 0;
+    });
+
+    // Apply manual tags from customer_tags.
+    // Also update the per-customer searchText so the user can type a
+    // tag in the search box and find people by it.
+    (tagsRes && tagsRes.data || []).forEach((t) => {
+      const e = (t.customer_email || '').toLowerCase().trim();
+      if (!e) return;
+      const c = merged.get(e);
+      if (!c) return;
+      c.manualTags = c.manualTags || [];
+      c.manualTags.push(t.tag);
+      appendSearch(c, t.tag);
+      // Keep the per-email cache in sync so opening the drawer is instant.
+      tagsByEmail[e] = tagsByEmail[e] || [];
+      tagsByEmail[e].push({ id: t.id, tag: t.tag, added_by_email: t.added_by_email, added_at: t.added_at });
     });
 
     allCustomers = Array.from(merged.values())
@@ -865,8 +901,17 @@
       const notesCell = c.noteCount
         ? `<span aria-label="${c.noteCount} note${c.noteCount === 1 ? '' : 's'}">${c.noteCount} note${c.noteCount === 1 ? '' : 's'}</span>`
         : '—';
+      // Manual tags are intentional team-added labels (e.g. 'Showed up — 11 AM',
+      // 'VIP') — they DO belong next to the name. Auto-derived 'source' tags
+      // were the cluttered ones; those are gone.
+      const manualTagsHtml = Array.isArray(c.manualTags) && c.manualTags.length
+        ? ' ' + c.manualTags.slice(0, 3).map((t) =>
+            `<span class="row-tag-chip" title="${escapeHtml(t)}">${escapeHtml(t)}</span>`
+          ).join('') + (c.manualTags.length > 3
+            ? `<span class="row-tag-chip" title="${escapeHtml(c.manualTags.slice(3).join(', '))}">+${c.manualTags.length - 3}</span>` : '')
+        : '';
       return `<tr data-email="${escapeHtml(c.email)}">
-        <td><div class="name">${escapeHtml(c.name || '(no name)')}</div></td>
+        <td><div class="name">${escapeHtml(c.name || '(no name)')}${manualTagsHtml}</div></td>
         <td><div class="email">${escapeHtml(c.email)}</div>${phone}</td>
         <td>${needsIntakeBadge || '—'}</td>
         <td>${escapeHtml(fmtDate(c.firstSeen))}</td>
@@ -1033,6 +1078,127 @@
     });
   }
 
+  // ============================================================
+  // Manual customer tags — add/remove free-text labels per customer
+  // (see migration 024_customer_tags.sql)
+  // ============================================================
+  function escapeHtmlAttr(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function renderManualTagsInDrawer() {
+    if (!cdManualTagsChips || !currentTagEmail) return;
+    const list = tagsByEmail[currentTagEmail] || [];
+    if (!list.length) {
+      cdManualTagsChips.innerHTML = '<span style="font-size:11px;color:var(--muted);font-style:italic">No tags yet</span>';
+    } else {
+      cdManualTagsChips.innerHTML = list.map((t) => {
+        const tag = String(t.tag || '');
+        return `<span class="manual-tag-chip" data-tag-id="${t.id}"><span title="${escapeHtmlAttr(tag)}">${escapeHtmlAttr(tag)}</span><button type="button" class="remove-tag" aria-label="Remove tag: ${escapeHtmlAttr(tag)}" title="Remove">×</button></span>`;
+      }).join('');
+    }
+  }
+  async function addTagToCurrent(rawTag) {
+    if (!currentTagEmail) return;
+    const tag = String(rawTag || '').trim();
+    if (!tag) return;
+    if (tag.length > 60) {
+      alert('Tag is too long (max 60 characters).');
+      return;
+    }
+    const existing = tagsByEmail[currentTagEmail] || [];
+    if (existing.some((t) => String(t.tag).toLowerCase() === tag.toLowerCase())) {
+      // Already exists — close the panel quietly.
+      closeAddTagPanel();
+      return;
+    }
+    const actorEmail = (window.__currentUserEmail || '').toLowerCase() || null;
+    const { data, error } = await sb.from('customer_tags').insert({
+      customer_email: currentTagEmail,
+      tag,
+      added_by_email: actorEmail,
+    }).select().limit(1);
+    if (error) {
+      console.error('addTag failed:', error);
+      alert("Couldn't add tag: " + (error.message || error.details || 'unknown error'));
+      return;
+    }
+    const row = (data && data[0]) || { id: Date.now(), tag, added_by_email: actorEmail, added_at: new Date().toISOString() };
+    tagsByEmail[currentTagEmail] = [...existing, row];
+    renderManualTagsInDrawer();
+    closeAddTagPanel();
+    // Update the in-memory customers list so the row chip reflects it
+    // without a full reload.
+    if (Array.isArray(allCustomers)) {
+      const c = allCustomers.find((c) => c.email === currentTagEmail);
+      if (c) {
+        c.manualTags = (c.manualTags || []).concat([tag]);
+        appendSearch(c, tag);
+      }
+    }
+  }
+  async function removeTag(tagId) {
+    if (!currentTagEmail || !tagId) return;
+    const { error } = await sb.from('customer_tags').delete().eq('id', tagId);
+    if (error) {
+      console.error('removeTag failed:', error);
+      alert("Couldn't remove tag: " + (error.message || error.details || 'unknown error'));
+      return;
+    }
+    tagsByEmail[currentTagEmail] = (tagsByEmail[currentTagEmail] || []).filter((t) => t.id !== tagId);
+    renderManualTagsInDrawer();
+    if (Array.isArray(allCustomers)) {
+      const c = allCustomers.find((c) => c.email === currentTagEmail);
+      if (c) {
+        c.manualTags = (tagsByEmail[currentTagEmail] || []).map((t) => t.tag);
+      }
+    }
+  }
+  function openAddTagPanel() {
+    if (!cdAddTagPanel || !cdAddTagBtn) return;
+    cdAddTagPanel.classList.remove('hidden');
+    cdAddTagBtn.setAttribute('aria-expanded', 'true');
+    if (cdTagInput) {
+      cdTagInput.value = '';
+      setTimeout(() => cdTagInput.focus(), 30);
+    }
+  }
+  function closeAddTagPanel() {
+    if (!cdAddTagPanel || !cdAddTagBtn) return;
+    cdAddTagPanel.classList.add('hidden');
+    cdAddTagBtn.setAttribute('aria-expanded', 'false');
+  }
+  if (cdAddTagBtn) {
+    cdAddTagBtn.addEventListener('click', () => {
+      if (cdAddTagPanel.classList.contains('hidden')) openAddTagPanel();
+      else closeAddTagPanel();
+    });
+  }
+  if (cdTagCancel) cdTagCancel.addEventListener('click', closeAddTagPanel);
+  if (cdTagSave) {
+    cdTagSave.addEventListener('click', () => addTagToCurrent(cdTagInput && cdTagInput.value));
+  }
+  if (cdTagInput) {
+    cdTagInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); addTagToCurrent(cdTagInput.value); }
+      if (e.key === 'Escape') closeAddTagPanel();
+    });
+  }
+  cdQuickTagBtns.forEach((b) => {
+    b.addEventListener('click', () => addTagToCurrent(b.getAttribute('data-quick') || b.textContent));
+  });
+  if (cdManualTagsChips) {
+    cdManualTagsChips.addEventListener('click', (e) => {
+      const btn = e.target.closest('.remove-tag');
+      if (!btn) return;
+      const chip = btn.closest('.manual-tag-chip');
+      const id = chip && chip.getAttribute('data-tag-id');
+      if (!id) return;
+      removeTag(isNaN(Number(id)) ? id : Number(id));
+    });
+  }
+
   async function loadCustomerDetail(email) {
     currentDetailEmail = email.toLowerCase().trim();
     currentDetailPhone = null;
@@ -1040,7 +1206,7 @@
     cdContent.classList.add('hidden');
     cdError.classList.add('hidden');
 
-    const [contactRes, cohortRes, notesRes, activitiesRes, tasksRes, kitEventsRes] = await Promise.all([
+    const [contactRes, cohortRes, notesRes, activitiesRes, tasksRes, kitEventsRes, tagsRes] = await Promise.all([
       sb.from('contacts')
         .select('first_name, last_name, email, phone, sms_consent, marketing_consent, notes, created_at')
         .ilike('email', currentDetailEmail).limit(1),
@@ -1065,7 +1231,15 @@
         .select('id, event_type, tag_name, link_url, form_id, created_at')
         .ilike('customer_email', currentDetailEmail)
         .order('created_at', { ascending: false }).limit(100),
+      sb.from('customer_tags')
+        .select('id, tag, added_by_email, added_at')
+        .ilike('customer_email', currentDetailEmail)
+        .order('added_at', { ascending: true }).limit(50),
     ]);
+    // Update cache + drawer state for tag editor.
+    tagsByEmail[currentDetailEmail] = (tagsRes && tagsRes.data) || [];
+    currentTagEmail = currentDetailEmail;
+    renderManualTagsInDrawer();
 
     cdLoading.classList.add('hidden');
 
@@ -1203,7 +1377,41 @@
       if (cohort.previous_rebe_experience) intakeBits.push(['Previous ReBe experience', cohort.previous_rebe_experience]);
       if (cohort.organization_name) intakeBits.push(['Organization', cohort.organization_name]);
       if (cohort.role_title)        intakeBits.push(['Role/title', cohort.role_title]);
-      if (cohort.notes)             intakeBits.push(['Cohort signup notes', cohort.notes]);
+      if (cohort.notes) {
+        // The notes column is a structured block written by /api/notify
+        // (persistCohortIntakeToDb) — lines of the form 'Label: value'.
+        // Parse it so each line shows as its own pf-row instead of one
+        // wall of text. Falls back to a single row if it doesn't match.
+        const lines = String(cohort.notes).split('\n').map((l) => l.trim());
+        let parsedAny = false;
+        let freeTextStarted = false;
+        const freeTextLines = [];
+        lines.forEach((line) => {
+          if (!line) return;
+          if (line.toLowerCase().startsWith('free-text notes:')) {
+            freeTextStarted = true;
+            return;
+          }
+          if (freeTextStarted) { freeTextLines.push(line); return; }
+          const colonIdx = line.indexOf(':');
+          if (colonIdx > 0 && colonIdx < 40) {
+            const label = line.slice(0, colonIdx).trim();
+            const value = line.slice(colonIdx + 1).trim();
+            if (label && value) {
+              intakeBits.push([label, value]);
+              parsedAny = true;
+              return;
+            }
+          }
+          if (!freeTextStarted) freeTextLines.push(line);
+        });
+        if (freeTextLines.length) {
+          intakeBits.push(['Their note', freeTextLines.join('\n')]);
+        }
+        if (!parsedAny && !freeTextLines.length) {
+          intakeBits.push(['Cohort signup notes', cohort.notes]);
+        }
+      }
     }
     if (contact && contact.notes) intakeBits.push(['Contact notes', contact.notes]);
     if (contact) {

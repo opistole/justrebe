@@ -158,6 +158,37 @@
   .source-tag.paid{background:var(--green-wash);color:var(--green-ink)}
   .source-tag.lead{background:#FFF1F0;color:var(--coral)}
   .source-tag.waitlist{background:#E8E8FB;color:var(--navy)}
+
+  /* === Manual tags (editable in profile drawer + shown in list rows) === */
+  .manual-tags-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 16px}
+  .manual-tags-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .manual-tag-chip{display:inline-flex;align-items:center;gap:6px;background:#E9EDFB;color:#252C5C;border:1px solid #C8D0EE;border-radius:999px;padding:3px 6px 3px 10px;font-size:11px;font-weight:600;letter-spacing:.02em;line-height:1.3;max-width:240px}
+  .manual-tag-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .manual-tag-chip button{background:transparent;border:0;color:inherit;cursor:pointer;font-size:14px;line-height:1;padding:0 4px;border-radius:50%;opacity:.7;transition:opacity .15s,background .15s}
+  .manual-tag-chip button:hover{opacity:1;background:rgba(0,0,0,.08)}
+  .manual-tag-chip button:focus-visible{outline:2px solid var(--navy);outline-offset:1px}
+  .add-tag-btn{background:transparent;border:1px dashed var(--bone);color:var(--body);padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+  .add-tag-btn:hover{border-color:var(--navy);color:var(--navy);background:var(--mist)}
+  .add-tag-btn[aria-expanded="true"]{background:var(--navy);color:#fff;border-color:var(--navy);border-style:solid}
+  .add-tag-panel{background:var(--mist);border:1px solid var(--bone);border-radius:10px;padding:14px 16px;margin:0 0 16px}
+  .add-tag-label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+  .add-tag-input-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px}
+  .add-tag-input-row input{flex:1;min-width:200px;padding:8px 12px;border:1px solid var(--bone);border-radius:8px;font-family:inherit;font-size:13px;color:var(--slate);background:#fff}
+  .add-tag-input-row input:focus{outline:0;border-color:var(--navy)}
+  .add-tag-input-row .btn{padding:8px 14px;font-size:11px;letter-spacing:.05em}
+  .add-tag-input-row .btn.ghost{background:transparent;color:var(--body);border:1px solid var(--bone)}
+  .add-tag-input-row .btn.ghost:hover{border-color:var(--navy);color:var(--navy)}
+  .quick-tags-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+  .quick-tags{display:flex;flex-wrap:wrap;gap:6px}
+  .quick-tag{background:#fff;border:1px solid var(--bone);color:var(--body);padding:5px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:border-color .15s,background .15s,color .15s}
+  .quick-tag:hover{border-color:var(--green-ink);background:var(--green-wash);color:var(--green-ink)}
+
+  /* Compact version of manual-tag-chip for the customers list row */
+  .row-tag-chip{display:inline-block;background:#E9EDFB;color:#252C5C;border:1px solid #C8D0EE;border-radius:6px;padding:1px 6px;font-size:10px;font-weight:600;line-height:1.4;margin:1px 3px 1px 0;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+
+  /* Hide visually but keep available for screen readers */
+  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
   .empty{padding:48px 24px;text-align:center;color:var(--muted)}
   .empty p{margin:6px 0}
   .loading{padding:32px;text-align:center;color:var(--muted)}
@@ -579,21 +610,22 @@
     <section id="view-customer" class="hidden">
       <div class="detail-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px">
         <a class="back-link" href="#customers">← All customers</a>
-        <div style="display:flex;gap:6px;align-items:center;background:#fff;border:1px solid var(--bone);border-radius:10px;padding:5px 6px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
-          <select id="cd-status-override" aria-label="Change customer status" style="padding:6px 10px;border:0;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:transparent;cursor:pointer">
-            <option value="" disabled selected>Change status…</option>
-            <option value="paid">Mark as paid</option>
-            <option value="wants_more_info">Mark as lead</option>
-            <option value="waitlist">Mark as waitlist</option>
-          </select>
-          <span style="width:1px;height:18px;background:var(--bone)"></span>
-          <select id="cd-intake-override" aria-label="Change intake status" style="padding:6px 10px;border:0;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:transparent;cursor:pointer">
-            <option value="" disabled selected>Intake…</option>
-            <option value="done">Mark intake done ✓</option>
-            <option value="needed">Mark intake needed ✗</option>
-          </select>
-          <span style="width:1px;height:18px;background:var(--bone)"></span>
-          <button type="button" id="delete-customer-btn" style="background:transparent;color:var(--coral);border:0;padding:6px 10px;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer">Delete customer</button>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <div style="display:flex;gap:6px;align-items:center;background:#fff;border:1px solid var(--bone);border-radius:10px;padding:5px 6px;box-shadow:0 1px 2px rgba(15,23,42,.04)">
+            <select id="cd-status-override" aria-label="Change customer status" style="padding:6px 10px;border:0;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:transparent;cursor:pointer">
+              <option value="" disabled selected>Change status…</option>
+              <option value="paid">Mark as paid</option>
+              <option value="wants_more_info">Mark as lead</option>
+              <option value="waitlist">Mark as waitlist</option>
+            </select>
+            <span style="width:1px;height:18px;background:var(--bone)"></span>
+            <select id="cd-intake-override" aria-label="Change intake status" style="padding:6px 10px;border:0;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;color:var(--slate);background:transparent;cursor:pointer">
+              <option value="" disabled selected>Intake…</option>
+              <option value="done">Mark intake done ✓</option>
+              <option value="needed">Mark intake needed ✗</option>
+            </select>
+          </div>
+          <button type="button" id="delete-customer-btn" title="Permanently delete this customer and all related records" style="background:#fff;color:var(--coral);border:1px solid var(--coral);padding:6px 12px;border-radius:8px;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background .15s,color .15s">Delete</button>
         </div>
       </div>
       <div id="customer-detail-loading" class="loading">Loading customer…</div>
@@ -601,6 +633,33 @@
         <div class="profile-card">
           <h1 id="cd-name">—</h1>
           <div class="profile-meta" id="cd-tags"></div>
+
+          <!-- Manual tags: editable by the team. Auto-derived tags above
+               stay read-only; this row is for showed-up / no-show / VIP /
+               any free-text label the team wants to add. -->
+          <div class="manual-tags-row" id="cd-manual-tags-row">
+            <div class="manual-tags-chips" id="cd-manual-tags-chips"></div>
+            <button type="button" id="cd-add-tag-btn" class="add-tag-btn" aria-expanded="false" aria-controls="cd-add-tag-panel">+ Tag</button>
+          </div>
+          <div id="cd-add-tag-panel" class="add-tag-panel hidden" role="region" aria-label="Add a tag">
+            <label for="cd-tag-input" class="add-tag-label">Add a tag</label>
+            <div class="add-tag-input-row">
+              <input type="text" id="cd-tag-input" placeholder="e.g. No-show 11 AM, VIP, Refund issued…" maxlength="60" autocomplete="off">
+              <button type="button" id="cd-tag-save" class="btn">Add</button>
+              <button type="button" id="cd-tag-cancel" class="btn ghost">Cancel</button>
+            </div>
+            <p class="quick-tags-label">Quick-add:</p>
+            <div class="quick-tags">
+              <button type="button" class="quick-tag" data-quick="Showed up — 11 AM">Showed up — 11 AM</button>
+              <button type="button" class="quick-tag" data-quick="Showed up — 8 PM">Showed up — 8 PM</button>
+              <button type="button" class="quick-tag" data-quick="No-show — 11 AM">No-show — 11 AM</button>
+              <button type="button" class="quick-tag" data-quick="No-show — 8 PM">No-show — 8 PM</button>
+              <button type="button" class="quick-tag" data-quick="Added to cohort manually">Added to cohort manually</button>
+              <button type="button" class="quick-tag" data-quick="VIP">VIP</button>
+              <button type="button" class="quick-tag" data-quick="Followed up">Followed up</button>
+              <button type="button" class="quick-tag" data-quick="Refund issued">Refund issued</button>
+            </div>
+          </div>
           <div class="profile-grid">
             <div class="pf-row"><span class="pf-label">Email</span><span class="pf-value" id="cd-email">—</span></div>
             <div class="pf-row"><span class="pf-label">Phone</span><span class="pf-value" id="cd-phone">—</span></div>
@@ -625,9 +684,12 @@
           </div>
           <div class="task-form">
             <h3>Add a follow-up</h3>
+            <label for="task-title" class="visually-hidden">Task description</label>
             <input type="text" id="task-title" placeholder="Call to confirm 11 AM session…">
             <div class="task-form-row">
+              <label for="task-due" class="visually-hidden">Due date</label>
               <input type="date" id="task-due">
+              <label for="task-assign" class="visually-hidden">Assign to</label>
               <select id="task-assign">
                 <option value="">Assign to (anyone)</option>
               </select>
@@ -650,7 +712,7 @@
           <!-- Email panel -->
           <div class="compose-panel" id="compose-email">
             <div>
-              <label>To</label>
+              <label for="email-to-display">To</label>
               <input type="text" id="email-to-display" disabled>
             </div>
             <div>
@@ -676,7 +738,7 @@
           <!-- SMS panel -->
           <div class="compose-panel hidden" id="compose-sms">
             <div>
-              <label>To</label>
+              <label for="sms-to-display">To</label>
               <input type="text" id="sms-to-display" disabled>
             </div>
             <div>
@@ -797,6 +859,6 @@
   </div>
 </div>
 
-<script src="/admin/app.js?v=37"></script>
+<script src="/admin/app.js?v=38"></script>
 </body>
 </html>
