@@ -84,8 +84,8 @@
   /* Facilitator row inside a session card — round photo(s) + name + bio link */
   .sc-people{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px;padding:12px 14px;background:var(--mist);border-radius:12px;border:1px solid var(--bone)}
   .sc-people-photos{display:flex;align-items:center}
-  .sc-people-photos .sc-photo{width:52px;height:52px;border-radius:50%;overflow:hidden;background:var(--mist);border:2px solid #fff;box-shadow:0 4px 10px rgba(6,11,80,.12),inset 0 0 0 1px var(--green);flex-shrink:0;cursor:pointer;transition:transform .15s,box-shadow .15s}
-  .sc-people-photos .sc-photo + .sc-photo{margin-left:-10px}
+  .sc-people-photos .sc-photo{width:76px;height:76px;border-radius:50%;overflow:hidden;background:var(--mist);border:3px solid #fff;box-shadow:0 6px 14px rgba(6,11,80,.14),inset 0 0 0 2px var(--green);flex-shrink:0;cursor:pointer;transition:transform .15s,box-shadow .15s;padding:0}
+  .sc-people-photos .sc-photo + .sc-photo{margin-left:-14px}
   .sc-people-photos .sc-photo:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 18px rgba(68,153,69,.28),inset 0 0 0 1px var(--green-ink);z-index:2}
   .sc-people-photos .sc-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
   .sc-people-text{flex:1;min-width:0;font-size:13px;line-height:1.5;color:var(--body)}
@@ -393,7 +393,7 @@
   <!-- Upcoming: Dr. Q 2-part series -->
   <div class="soon-card" style="align-items:flex-start;margin:0 0 16px">
     <div style="display:flex;align-items:flex-start;gap:14px;flex:1;min-width:0">
-      <button type="button" class="sc-photo" data-bio="bio-quintal" aria-label="Read about Dr. Jason Quintal" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--mist);border:2px solid #fff;box-shadow:0 4px 10px rgba(6,11,80,.12),inset 0 0 0 1px var(--green);flex-shrink:0;cursor:pointer;padding:0;margin-top:2px">
+      <button type="button" class="sc-photo" data-bio="bio-quintal" aria-label="Read about Dr. Jason Quintal" style="width:76px;height:76px;border-radius:50%;overflow:hidden;background:var(--mist);border:3px solid #fff;box-shadow:0 6px 14px rgba(6,11,80,.14),inset 0 0 0 2px var(--green);flex-shrink:0;cursor:pointer;padding:0;margin-top:2px">
         <picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block"></picture>
       </button>
       <div class="sc-info" style="flex:1">
