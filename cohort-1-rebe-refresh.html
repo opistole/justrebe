@@ -93,6 +93,37 @@
   .sc-btn.sc-btn-primary{background:var(--green-ink);color:#fff}
   .sc-btn.sc-btn-primary:hover{background:var(--green-deep);color:#fff}
 
+  /* Confidants grid — round photos, click for bio */
+  .confidants-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;max-width:760px;margin:0 auto}
+  @media (max-width:720px){.confidants-grid{grid-template-columns:repeat(3,1fr);gap:22px}}
+  @media (max-width:440px){.confidants-grid{grid-template-columns:repeat(2,1fr)}}
+  .confidant-card{background:transparent;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-align:center;transition:transform .25s var(--ease)}
+  .confidant-card:hover{transform:translateY(-4px)}
+  .confidant-card:focus-visible{outline:3px solid rgba(68,153,69,.5);outline-offset:4px;border-radius:14px}
+  .confidant-photo{width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;background:var(--mist);box-shadow:0 8px 22px rgba(6,11,80,.14),inset 0 0 0 2px var(--green);margin:0 0 12px;position:relative;transition:box-shadow .25s var(--ease)}
+  .confidant-card:hover .confidant-photo{box-shadow:0 14px 32px rgba(68,153,69,.28),inset 0 0 0 2px var(--green-ink)}
+  .confidant-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s var(--ease)}
+  .confidant-card:hover .confidant-photo img{transform:scale(1.06)}
+  .confidant-name{font-family:var(--serif);font-style:italic;font-weight:600;font-size:15px;color:var(--navy);line-height:1.2;margin:0 0 2px}
+  .confidant-role{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-ink);margin:0;line-height:1.3}
+
+  /* Bio modal */
+  .bio-modal{width:min(520px,calc(100vw - 32px));max-height:90vh;border:0;border-radius:18px;background:#fff;color:var(--navy);box-shadow:0 28px 72px rgba(6,11,80,.32);padding:0;overflow:hidden}
+  .bio-modal::backdrop{background:rgba(6,11,80,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+  @keyframes bioPop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+  .bio-modal[open]{animation:bioPop .25s var(--ease)}
+  .bio-inner{padding:32px 32px 28px;position:relative;overflow-y:auto;max-height:90vh;text-align:center}
+  .bio-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border:1px solid var(--bone);background:transparent;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;color:var(--slate);display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .bio-close:hover{background:var(--bone)}
+  .bio-photo{width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 18px;border:3px solid var(--green);box-shadow:0 10px 26px rgba(68,153,69,.22)}
+  .bio-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .bio-name{font-family:var(--display);font-size:28px;line-height:1.1;color:var(--navy);margin:0 0 6px;text-transform:uppercase;letter-spacing:.005em}
+  .bio-name em{font-style:italic;font-family:var(--serif);font-weight:600;text-transform:none;color:var(--green-ink);letter-spacing:0}
+  .bio-role{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-ink);margin:0 0 20px}
+  .bio-text{font-family:var(--sans);font-size:14px;line-height:1.65;color:var(--body);text-align:left}
+  .bio-text p{margin:0 0 10px}
+  .bio-text p:last-child{margin:0}
+
   /* Coming-soon card */
   .soon-card{background:#fff;border:1px dashed var(--bone);border-radius:14px;padding:20px 24px;margin:0 0 16px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
   .soon-card .sc-info h4{font-family:var(--serif);font-style:italic;font-weight:600;font-size:18px;color:var(--navy);margin:0 0 4px;line-height:1.2}
@@ -276,6 +307,37 @@
     </div>
   </article>
 
+  <!-- Meet your confidants -->
+  <h2 class="section-h">Meet Your Confidants</h2>
+  <p style="text-align:center;margin:-8px 0 24px;font-size:14px;color:var(--muted)">Tap a face to read their bio.</p>
+  <div class="confidants-grid">
+    <button type="button" class="confidant-card" data-bio="bio-kindsey" aria-label="Read about Kindsey Pentecost Chadwick">
+      <div class="confidant-photo"><img src="Images/kindsey.png" alt="Kindsey Pentecost Chadwick" loading="lazy"></div>
+      <p class="confidant-name">Kindsey Chadwick</p>
+      <p class="confidant-role">Physical Health</p>
+    </button>
+    <button type="button" class="confidant-card" data-bio="bio-osil" aria-label="Read about Osil Pistole">
+      <div class="confidant-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole" loading="lazy"></picture></div>
+      <p class="confidant-name">Osil Pistole</p>
+      <p class="confidant-role">Happy Hour</p>
+    </button>
+    <button type="button" class="confidant-card" data-bio="bio-beth" aria-label="Read about Beth Rech">
+      <div class="confidant-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech" loading="lazy"></picture></div>
+      <p class="confidant-name">Beth Rech</p>
+      <p class="confidant-role">Emotional Health</p>
+    </button>
+    <button type="button" class="confidant-card" data-bio="bio-fred" aria-label="Read about Fred Feller">
+      <div class="confidant-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller" loading="lazy"></picture></div>
+      <p class="confidant-name">Fred Feller</p>
+      <p class="confidant-role">Emotional Health</p>
+    </button>
+    <button type="button" class="confidant-card" data-bio="bio-quintal" aria-label="Read about Dr. Jason Quintal">
+      <div class="confidant-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal" loading="lazy"></picture></div>
+      <p class="confidant-name">Dr. Jason Quintal</p>
+      <p class="confidant-role">Trauma Specialist</p>
+    </button>
+  </div>
+
   <!-- Coming soon -->
   <h2 class="section-h">Coming Soon</h2>
   <div class="soon-card">
@@ -303,6 +365,62 @@
   <p>ReBe — Rebuilding people from the inside out.</p>
 </footer>
 
+<!-- Bio modals (one per confidant) -->
+<dialog class="bio-modal" id="bio-kindsey"><div class="bio-inner">
+  <button class="bio-close" type="button" aria-label="Close">×</button>
+  <div class="bio-photo"><img src="Images/kindsey.png" alt="Kindsey Pentecost Chadwick"></div>
+  <h3 class="bio-name">Kindsey Pentecost <em>Chadwick</em></h3>
+  <p class="bio-role">Holistic Wellness Expert</p>
+  <div class="bio-text">
+    <p>Kindsey is a holistic wellness expert with 20+ years across nonprofits and for-profits — including a decade as CMO scaling a 9-figure health and wellness company. She holds a Master's in Criminal Justice and spent 12+ years shaping national policy and helping bring people to freedom from sex trafficking.</p>
+    <p>Certified Holy Yoga Instructor (C-HYI) and Lectio Divina practitioner — restoring wholeness in body, mind, and spirit. International speaker, coach, and author who has guided thousands toward balance, purpose, and whole-life wellness.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-osil"><div class="bio-inner">
+  <button class="bio-close" type="button" aria-label="Close">×</button>
+  <div class="bio-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole"></picture></div>
+  <h3 class="bio-name">Osil <em>Pistole</em></h3>
+  <p class="bio-role">Purpose &amp; Destiny Coach</p>
+  <div class="bio-text">
+    <p>Osil is a speaker and intuitive coach with 20+ years of experience and a particular gift for speaking into a person's true identity. She tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
+    <p>Known for her honest, empowering, and engaging approach, Osil creates spaces where people feel seen — not just for what they're working on, but for who they actually are underneath it.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-beth"><div class="bio-inner">
+  <button class="bio-close" type="button" aria-label="Close">×</button>
+  <div class="bio-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech"></picture></div>
+  <h3 class="bio-name">Beth <em>Rech</em></h3>
+  <p class="bio-role">Inner Healing Mentor · 30+ yrs</p>
+  <div class="bio-text">
+    <p>Beth has spent more than 30 years mentoring women and helping individuals navigate emotional healing, personal growth, and self-discovery. With advanced training in spiritual formation and more than 15 years of inner healing work, she is passionate about helping people break free from limiting beliefs, unresolved trauma, generational patterns, and emotional wounds.</p>
+    <p>Known for her warmth, authenticity, and nurturing presence, she helps people move toward greater wholeness, emotional resilience, and personal transformation.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-fred"><div class="bio-inner">
+  <button class="bio-close" type="button" aria-label="Close">×</button>
+  <div class="bio-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller"></picture></div>
+  <h3 class="bio-name">Fred <em>Feller</em></h3>
+  <p class="bio-role">Leadership &amp; Identity Mentor · 35+ yrs</p>
+  <div class="bio-text">
+    <p>For more than 35 years, Fred Feller has helped leaders, teams, and individuals navigate transformation, breakthrough, and personal growth with clarity, wisdom, and stability.</p>
+    <p>Having worked internationally across nine countries, Fred is recognized for bringing stability in high-pressure environments. A husband of nearly 50 years, father of four, and grandfather of seven, he leads from a foundation of consistency, integrity, and deep relational wisdom.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-quintal"><div class="bio-inner">
+  <button class="bio-close" type="button" aria-label="Close">×</button>
+  <div class="bio-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal"></picture></div>
+  <h3 class="bio-name">Dr. Jason <em>Quintal</em></h3>
+  <p class="bio-role">PhD · Trauma Resolution Specialist</p>
+  <div class="bio-text">
+    <p>Dr. Jason Quintal is a trauma specialist with more than 25 years of experience helping people heal from severe and complex trauma — PTSD, grief, shame, abuse recovery, and emotional wounds. He works in TTR (Trauma &amp; Tension Release).</p>
+    <p>As a master practitioner in trauma resolution and Neurolinguistic Programming (NLP), he's continually inspired by the profound shifts these accelerated healing methods bring.</p>
+  </div>
+</div></dialog>
+
 <!-- BB the Bee — chat widget -->
 <button type="button" class="bb-launcher" id="bb-launcher" aria-label="Chat with BB">
   <div class="bb-launcher-avatar" aria-hidden="true"></div>
@@ -328,6 +446,23 @@
 </div>
 
 <script>
+// ===== Bio modals =====
+document.querySelectorAll('[data-bio]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var modal = document.getElementById(btn.getAttribute('data-bio'));
+    if (modal && typeof modal.showModal === 'function') modal.showModal();
+  });
+});
+document.querySelectorAll('.bio-modal .bio-close').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var dlg = btn.closest('dialog');
+    if (dlg) dlg.close();
+  });
+});
+document.querySelectorAll('.bio-modal').forEach(function(m){
+  m.addEventListener('click', function(e){ if (e.target === m) m.close(); });
+});
+
 // ===== Add-to-calendar (.ics) generation =====
 (function(){
   // All session times in UTC. June/July 2026 = EDT = UTC-4.
