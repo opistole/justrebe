@@ -2092,6 +2092,153 @@
   }
 
   // ============================================================
+  // Export → Cohort intake (printable HTML for browser-PDF)
+  // ============================================================
+  const exportIntakeBtn = document.getElementById('export-intake-btn');
+  if (exportIntakeBtn) {
+    exportIntakeBtn.addEventListener('click', async () => {
+      const orig = exportIntakeBtn.textContent;
+      exportIntakeBtn.disabled = true;
+      exportIntakeBtn.textContent = 'Loading…';
+      try {
+        const { data, error } = await sb.from('refresh_signups')
+          .select('id, full_name, email, phone, preferred_group_time, seat_type, intake_completed, area_needing_refresh, reason_for_interest, previous_rebe_experience, organization_name, role_title, notes, paid_amount_cents, paid_at, created_at')
+          .order('preferred_group_time', { ascending: true })
+          .order('full_name', { ascending: true })
+          .limit(1000);
+        if (error) throw error;
+
+        // Only people with any intake content OR who paid for a cohort seat
+        const rows = (data || []).filter((r) => {
+          if (r.intake_completed === true) return true;
+          if ((r.notes || '').trim() !== '') return true;
+          if ((r.area_needing_refresh || '').trim() !== '') return true;
+          if ((r.reason_for_interest || '').trim() !== '') return true;
+          if (typeof r.paid_amount_cents === 'number' && r.paid_amount_cents > 0) return true;
+          return false;
+        });
+
+        // Group by slot: '11 AM ET' / '8 PM ET' / everything else
+        const groups = { '11 AM ET': [], '8 PM ET': [], 'Other / no slot': [] };
+        rows.forEach((r) => {
+          const slot = String(r.preferred_group_time || '').trim();
+          if (/11\s*AM/i.test(slot)) groups['11 AM ET'].push(r);
+          else if (/8\s*PM/i.test(slot)) groups['8 PM ET'].push(r);
+          else groups['Other / no slot'].push(r);
+        });
+
+        const esc = (s) => String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+        const fmtMoney = (cents) => {
+          if (typeof cents !== 'number') return '—';
+          if (cents === 0) return 'Comp ($0)';
+          return '$' + (cents / 100).toFixed(2);
+        };
+        const fmtDate = (d) => d ? new Date(d).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }) : '—';
+        const fmtBool = (b) => b === true ? 'Yes — prior ReBe experience' : b === false ? 'No — first time' : '—';
+
+        const renderPerson = (r) => `
+          <article class="person">
+            <header class="person-head">
+              <h3>${esc(r.full_name || '(no name)')}</h3>
+              <p class="contact">${esc(r.email || '')}${r.phone ? ' · ' + esc(r.phone) : ''}</p>
+            </header>
+            <dl class="kv">
+              <div><dt>Paid</dt><dd>${esc(fmtMoney(r.paid_amount_cents))}</dd></div>
+              <div><dt>Paid on</dt><dd>${esc(fmtDate(r.paid_at))}</dd></div>
+              <div><dt>Signed up</dt><dd>${esc(fmtDate(r.created_at))}</dd></div>
+              <div><dt>Seat type</dt><dd>${esc(r.seat_type || '—')}</dd></div>
+              <div><dt>Prior ReBe?</dt><dd>${esc(fmtBool(r.previous_rebe_experience))}</dd></div>
+              ${r.organization_name ? `<div><dt>Org</dt><dd>${esc(r.organization_name)}${r.role_title ? ' · ' + esc(r.role_title) : ''}</dd></div>` : ''}
+            </dl>
+            ${r.area_needing_refresh ? `<div class="block"><h4>Area needing refresh</h4><p>${esc(r.area_needing_refresh)}</p></div>` : ''}
+            ${r.reason_for_interest ? `<div class="block"><h4>Reason for interest</h4><p>${esc(r.reason_for_interest)}</p></div>` : ''}
+            ${r.notes ? `<div class="block"><h4>Intake details + notes</h4><pre class="notes">${esc(r.notes)}</pre></div>` : ''}
+          </article>
+        `;
+
+        const totalCount = rows.length;
+        const today = new Date().toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+        const slotSection = (label, list) => {
+          if (!list.length) return '';
+          return `
+            <section class="slot-section">
+              <h2 class="slot-title">${esc(label)} <span class="slot-count">${list.length} ${list.length === 1 ? 'person' : 'people'}</span></h2>
+              ${list.map(renderPerson).join('')}
+            </section>
+          `;
+        };
+
+        const html = `<!doctype html><html><head>
+<meta charset="utf-8"/>
+<title>Cohort intake — ${esc(today)}</title>
+<style>
+  @page { margin: 18mm 14mm; }
+  *,*::before,*::after { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #212B37; margin: 0; padding: 32px 36px; line-height: 1.5; font-size: 12pt; }
+  .report-head { border-bottom: 2px solid #060B50; padding-bottom: 18px; margin: 0 0 24px; }
+  .report-head h1 { font-family: Georgia, serif; font-weight: 600; font-size: 26pt; margin: 0 0 6px; color: #060B50; }
+  .report-head p { margin: 0; color: #4A535E; font-size: 11pt; }
+  .summary { background: #FAF9F7; border: 1px solid #E2E2E2; border-radius: 8px; padding: 12px 16px; margin: 0 0 28px; font-size: 11pt; }
+  .summary strong { color: #060B50; }
+  .slot-section { margin: 0 0 32px; page-break-inside: auto; }
+  .slot-title { font-family: Georgia, serif; font-weight: 600; font-size: 18pt; color: #060B50; border-bottom: 1px solid #E3A01F; padding: 0 0 6px; margin: 24px 0 16px; }
+  .slot-count { font-family: -apple-system, sans-serif; font-size: 10pt; color: #9DA1A8; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; margin-left: 8px; }
+  .person { border: 1px solid #E2E2E2; border-radius: 8px; padding: 16px 20px; margin: 0 0 14px; page-break-inside: avoid; background: #FFFFFF; }
+  .person-head h3 { margin: 0 0 4px; font-family: Georgia, serif; font-size: 14pt; color: #060B50; font-weight: 600; }
+  .person-head .contact { margin: 0 0 12px; color: #4A535E; font-size: 10pt; }
+  .kv { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; margin: 0 0 12px; padding: 0; }
+  .kv > div { display: flex; gap: 6px; font-size: 10pt; }
+  .kv dt { color: #9DA1A8; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; min-width: 96px; margin: 0; }
+  .kv dd { margin: 0; color: #212B37; }
+  .block { margin: 12px 0 0; padding: 10px 12px; background: #FAF9F7; border-left: 3px solid #449945; border-radius: 0 6px 6px 0; }
+  .block h4 { margin: 0 0 4px; font-size: 9.5pt; color: #3A8438; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+  .block p, .block pre { margin: 0; font-size: 11pt; color: #212B37; line-height: 1.55; }
+  .notes { white-space: pre-wrap; font-family: inherit; }
+  .print-controls { position: fixed; top: 12px; right: 12px; background: #060B50; color: #fff; padding: 10px 16px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.18); font-size: 12px; }
+  .print-controls button { background: #fff; color: #060B50; border: 0; padding: 6px 12px; border-radius: 4px; font-weight: 700; cursor: pointer; margin-left: 8px; }
+  @media print { .print-controls { display: none; } body { padding: 0; } }
+</style>
+</head>
+<body>
+  <div class="print-controls">Use File → Print → Save as PDF <button onclick="window.print()">Print now</button></div>
+  <header class="report-head">
+    <h1>ReBe ReFresh — Cohort intake forms</h1>
+    <p>Generated ${esc(today)}</p>
+  </header>
+  <div class="summary">
+    <strong>${totalCount}</strong> ${totalCount === 1 ? 'person' : 'people'} with intake on file ·
+    <strong>${groups['11 AM ET'].length}</strong> in 11 AM ET ·
+    <strong>${groups['8 PM ET'].length}</strong> in 8 PM ET ·
+    <strong>${groups['Other / no slot'].length}</strong> other
+  </div>
+  ${slotSection('11 AM Eastern cohort', groups['11 AM ET'])}
+  ${slotSection('8 PM Eastern cohort', groups['8 PM ET'])}
+  ${slotSection('Other / slot not recorded', groups['Other / no slot'])}
+  ${totalCount === 0 ? '<p style="text-align:center;color:#9DA1A8;font-style:italic;padding:40px 0">No intake responses on file yet.</p>' : ''}
+</body></html>`;
+
+        const w = window.open('', '_blank');
+        if (!w) {
+          alert("Couldn't open the print window — your browser may have blocked the pop-up. Allow pop-ups for this site and try again.");
+          return;
+        }
+        w.document.open();
+        w.document.write(html);
+        w.document.close();
+      } catch (err) {
+        console.error('Intake export failed:', err);
+        alert("Couldn't load intake data: " + (err.message || err));
+      } finally {
+        exportIntakeBtn.disabled = false;
+        exportIntakeBtn.textContent = orig;
+      }
+    });
+  }
+
+  // ============================================================
   // Manual add customer + delete customer
   // ============================================================
   const addCustomerBtn = document.getElementById('add-customer-btn');
