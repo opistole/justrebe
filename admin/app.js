@@ -651,6 +651,7 @@
       existing.phone = existing.phone || c.phone;
       existing.sources.add('workshop');
       existing.firstSeen = earliest(existing.firstSeen, c.created_at);
+      appendSearch(existing, name, c.first_name, c.last_name, c.phone);
       merged.set(email, existing);
     });
 
@@ -708,6 +709,15 @@
       existing.intakeDone = existing.intakeDone || intakeDone;
       existing.seatType = existing.seatType || seat;
       existing.paidAt = existing.paidAt || s.paid_at;
+      appendSearch(
+        existing,
+        name,
+        s.phone,
+        s.preferred_group_time,
+        s.seat_type,
+        s.area_needing_refresh,
+        s.reason_for_interest,
+      );
       merged.set(email, existing);
     });
 
@@ -753,7 +763,19 @@
       noteCount: 0,
       intakeDone: false,
       seatType: '',
+      // Lowercased blob of every string we want to be searchable on a
+      // customer — name, email, phone, org, role, slot, seat type, and
+      // every free-text intake field. Built incrementally during merge.
+      searchText: email.toLowerCase(),
     };
+  }
+  function appendSearch(c, ...bits) {
+    bits.forEach((b) => {
+      if (!b) return;
+      const s = String(b).toLowerCase().trim();
+      if (!s) return;
+      if (c.searchText.indexOf(s) === -1) c.searchText += ' ' + s;
+    });
   }
 
   function earliest(a, b) {
@@ -767,8 +789,7 @@
     const filtered = allCustomers.filter((c) => {
       // Search filter
       if (q) {
-        const blob = `${c.name} ${c.email} ${c.phone || ''}`.toLowerCase();
-        if (!blob.includes(q)) return false;
+        if (!c.searchText || !c.searchText.includes(q)) return false;
       }
       // Source filter
       if (currentFilter === 'notes') {
@@ -926,13 +947,20 @@
   // /admin/#customers with the query applied. Cmd+K focuses it.
   const globalSearch = document.getElementById('global-search');
   if (globalSearch) {
-    globalSearch.addEventListener('input', () => {
+    globalSearch.addEventListener('input', async () => {
       const q = globalSearch.value || '';
       if (window.location.hash.split('?')[0] !== '#customers') {
         window.location.hash = '#customers';
       }
       currentSearch = q;
       if (searchInput) searchInput.value = q;
+      // Bug fix: if the user types in the topbar search before the customer
+      // list has been loaded (e.g. they're on the Dashboard view and start
+      // typing), allCustomers is empty and the render returns 0 results
+      // even for valid queries. Load it on demand if missing.
+      if (!Array.isArray(allCustomers) || allCustomers.length === 0) {
+        try { await loadCustomerList(); } catch (_) { /* surfaces in loading row */ }
+      }
       renderCustomerList();
     });
     globalSearch.addEventListener('keydown', (e) => {
