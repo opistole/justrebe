@@ -223,7 +223,7 @@
 <main>
   <section class="hero">
     <p class="eyebrow">Welcome, friend</p>
-    <h1>Your cohort home.</h1>
+    <h1>Your ReFresh Cohort Home.</h1>
     <p>Everything you need for the ReBe ReFresh experience — sessions, calendar links, Zoom, and resources, all in one spot. Bookmark this page.</p>
   </section>
 
@@ -313,12 +313,21 @@
   <!-- 2. Happy Hour -->
   <article class="session-card" id="session-happy-hour">
     <div class="sc-meta">
-      <span class="sc-date">Fridays · 3 PM ET</span>
-      <span class="sc-recur">Weekly</span>
+      <span class="sc-date">4 Fridays · alternating noon &amp; 5 PM ET</span>
+      <span class="sc-recur">Every other week</span>
       <span class="sc-tag">Community</span>
     </div>
     <h3>Happy Hour with Osil Pistole</h3>
-    <p class="sc-facil">Fridays at 3 PM Eastern · every week</p>
+    <p class="sc-facil">Alternating noon and 5 PM Eastern · every other Friday</p>
+    <div style="background:var(--mist);border:1px solid var(--bone);border-radius:10px;padding:12px 16px;margin:0 0 16px">
+      <p style="margin:0 0 6px;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink)">Schedule</p>
+      <ul style="margin:0;padding:0 0 0 18px;font-size:14px;line-height:1.6;color:var(--body)">
+        <li><strong>Fri Jun 26</strong> · Noon Eastern</li>
+        <li><strong>Fri Jul 3</strong> · 5 PM Eastern</li>
+        <li><strong>Fri Jul 10</strong> · Noon Eastern</li>
+        <li><strong>Fri Jul 17</strong> · 5 PM Eastern</li>
+      </ul>
+    </div>
     <div class="sc-people">
       <div class="sc-people-photos">
         <button type="button" class="sc-photo" data-bio="bio-osil" aria-label="Read about Osil Pistole">
@@ -550,11 +559,20 @@ document.querySelectorAll('.bio-modal').forEach(function(m){
     },
     'happy-hour': {
       title: 'Happy Hour with Osil Pistole',
-      startUtc: '20260626T190000Z', // First Friday: June 26 2026 3 PM ET
-      endUtc:   '20260626T200000Z',
-      desc: 'ReBe ReFresh Cohort — weekly Happy Hour with Osil Pistole. A safe place to connect, build community, and learn to see the gold in ourselves and each other. Bring your favorite beverage.\n\nZoom: https://us06web.zoom.us/j/9057767620\nMeeting ID: 905 776 7620',
+      // For Google/Outlook URL (single-event APIs) we use the first
+      // occurrence + put the full schedule in the description.
+      startUtc: '20260626T160000Z', // First: June 26 2026 Noon ET = 16:00 UTC
+      endUtc:   '20260626T170000Z',
+      desc: 'ReBe ReFresh Cohort — Happy Hour with Osil Pistole. A safe place to connect, build community, and learn to see the gold in ourselves and each other. Bring your favorite beverage.\n\nFULL SCHEDULE (4 Fridays, alternating noon and 5 PM Eastern):\n• Fri Jun 26 · Noon ET\n• Fri Jul 3 · 5 PM ET\n• Fri Jul 10 · Noon ET\n• Fri Jul 17 · 5 PM ET\n\nZoom: https://us06web.zoom.us/j/9057767620\nMeeting ID: 905 776 7620',
       location: 'https://us06web.zoom.us/j/9057767620',
-      rrule: 'RRULE:FREQ=WEEKLY;BYDAY=FR'
+      // For .ics download (Apple/Outlook desktop) we emit ALL FOUR dates
+      // as separate VEVENTs so the user gets every Happy Hour added at once.
+      multiDates: [
+        { startUtc: '20260626T160000Z', endUtc: '20260626T170000Z' },
+        { startUtc: '20260703T210000Z', endUtc: '20260703T220000Z' },
+        { startUtc: '20260710T160000Z', endUtc: '20260710T170000Z' },
+        { startUtc: '20260717T210000Z', endUtc: '20260717T220000Z' }
+      ]
     },
     'who-am-i': {
       title: '"Who am I?" — Emotional Health with Beth Rech & Fred Feller',
@@ -603,18 +621,33 @@ document.querySelectorAll('.bio-modal').forEach(function(m){
       'VERSION:2.0',
       'PRODID:-//ReBe ReFresh//Cohort Sessions//EN',
       'CALSCALE:GREGORIAN',
-      'METHOD:PUBLISH',
-      'BEGIN:VEVENT',
-      'UID:' + s.startUtc + '-rebe@justrebe.com',
-      'DTSTART:' + s.startUtc,
-      'DTEND:'   + s.endUtc,
-      'SUMMARY:' + s.title.replace(/[,;\\]/g, '\\$&'),
-      'DESCRIPTION:' + s.desc.replace(/[,;\\]/g, '\\$&').replace(/\n/g, '\\n'),
-      'LOCATION:' + s.location.replace(/[,;\\]/g, '\\$&'),
-      'STATUS:CONFIRMED'
+      'METHOD:PUBLISH'
     ];
-    if (s.rrule) lines.push(s.rrule); // 'RRULE:FREQ=WEEKLY;...' already
-    lines.push('END:VEVENT', 'END:VCALENDAR');
+    var titleEsc = s.title.replace(/[,;\\]/g, '\\$&');
+    var descEsc  = s.desc.replace(/[,;\\]/g, '\\$&').replace(/\n/g, '\\n');
+    var locEsc   = s.location.replace(/[,;\\]/g, '\\$&');
+
+    // If multiDates is set, emit one VEVENT per occurrence (e.g. the
+    // 4 alternating-Friday Happy Hours). Otherwise emit a single event
+    // (with optional RRULE).
+    var occurrences = Array.isArray(s.multiDates) && s.multiDates.length
+      ? s.multiDates
+      : [{ startUtc: s.startUtc, endUtc: s.endUtc }];
+    occurrences.forEach(function(occ, i) {
+      lines.push(
+        'BEGIN:VEVENT',
+        'UID:' + occ.startUtc + '-' + i + '-rebe@justrebe.com',
+        'DTSTART:' + occ.startUtc,
+        'DTEND:'   + occ.endUtc,
+        'SUMMARY:' + titleEsc,
+        'DESCRIPTION:' + descEsc,
+        'LOCATION:' + locEsc,
+        'STATUS:CONFIRMED'
+      );
+      if (s.rrule && !s.multiDates) lines.push(s.rrule);
+      lines.push('END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
     return lines.join('\r\n');
   }
   function downloadIcs(key, appName) {
