@@ -657,7 +657,7 @@
     listEmpty.classList.add('hidden');
 
     // Pull both sources in parallel
-    const [contactsRes, cohortRes, notesRes, tagsRes] = await Promise.all([
+    const [contactsRes, cohortRes, notesRes, tagsRes, listSurveysRes] = await Promise.all([
       sb.from('contacts')
         .select('id, first_name, last_name, email, phone, created_at')
         .order('created_at', { ascending: false })
@@ -672,6 +672,10 @@
       sb.from('customer_tags')
         .select('id, customer_email, tag, added_by_email, added_at')
         .limit(2000),
+      sb.from('cohort_surveys')
+        .select('email, full_name, survey_type, submitted_at')
+        .order('submitted_at', { ascending: false })
+        .limit(1000),
     ]);
 
     if (contactsRes.error) console.warn('contacts fetch error', contactsRes.error);
@@ -770,6 +774,21 @@
     // Apply notes counts
     merged.forEach((c, email) => {
       c.noteCount = notesByEmail[email] || 0;
+    });
+
+    // Pull in anyone who only exists in cohort_surveys (survey-only
+    // people who haven't been added to contacts or refresh_signups yet).
+    // Add them as minimal customer records so they show up in the list.
+    (listSurveysRes && listSurveysRes.data || []).forEach((s) => {
+      const email = (s.email || '').toLowerCase().trim();
+      if (!email || merged.has(email)) return;
+      const name = (s.full_name || '').trim() || '(no name)';
+      const stub = makeCustomer(email);
+      stub.name = name;
+      stub.firstSeen = s.submitted_at || null;
+      stub.sources.add(s.survey_type === 'post' ? 'survey-post' : 'survey-pre');
+      appendSearch(stub, name, s.email);
+      merged.set(email, stub);
     });
 
     // Apply manual tags from customer_tags.
