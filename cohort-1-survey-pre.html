@@ -59,9 +59,15 @@
   .question .q-cat{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);background:var(--gold-wash);padding:3px 10px;border-radius:999px;border:1px solid #f5d4a8}
   .question h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:18px;color:var(--navy);margin:0 0 12px;line-height:1.35}
 
-  .answer-input{width:100%;padding:12px 14px;border:1px solid var(--bone);border-radius:10px;font-family:inherit;font-size:15px;color:var(--slate);background:var(--mist);min-height:80px;resize:vertical;line-height:1.5;transition:background .15s,border-color .15s}
-  .answer-input:focus{outline:0;background:#fff;border-color:var(--green-ink);box-shadow:0 0 0 3px rgba(68,153,69,.12)}
-  .answer-input::placeholder{color:var(--muted);font-style:italic}
+  /* Yes / No selector */
+  .yn-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 6px}
+  .yn-opt{display:flex;align-items:center;justify-content:center;text-align:center;padding:16px 12px;border:2px solid var(--bone);border-radius:12px;background:#fff;cursor:pointer;transition:all .15s var(--ease);font-family:inherit;font-weight:700;letter-spacing:.02em}
+  .yn-opt input{position:absolute;opacity:0;pointer-events:none}
+  .yn-opt .yn-label{font-family:var(--serif);font-size:18px;color:var(--slate);line-height:1}
+  .yn-opt:hover{border-color:var(--green-ink);background:var(--green-wash)}
+  .yn-opt:hover .yn-label{color:var(--green-ink)}
+  .yn-opt:has(input:checked){border-color:var(--green-ink);background:var(--green-ink);box-shadow:0 6px 16px rgba(58,132,56,.22);transform:translateY(-2px)}
+  .yn-opt:has(input:checked) .yn-label{color:#fff}
 
   .submit-row{display:flex;justify-content:center;margin:24px 0 0}
   .btn{display:inline-flex;align-items:center;gap:8px;background:var(--green-ink);color:#fff;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:14px 32px;border:0;border-radius:999px;text-decoration:none;cursor:pointer;transition:background .15s,transform .12s,box-shadow .15s}
@@ -120,7 +126,10 @@
         <span class="q-cat">1 · Perspective</span>
       </div>
       <h3>Do you see a need to reframe any aspects of your perspective on your life?</h3>
-      <textarea class="answer-input" id="perspective_answer" name="perspective_answer" placeholder="Type your answer…" maxlength="2000" required></textarea>
+      <div class="yn-group" role="radiogroup" aria-label="Yes or No answer for Perspective">
+        <label class="yn-opt"><input type="radio" name="perspective_answer" value="Yes" required><span class="yn-label">Yes</span></label>
+        <label class="yn-opt"><input type="radio" name="perspective_answer" value="No"><span class="yn-label">No</span></label>
+      </div>
     </div>
 
     <!-- Q2 Community Connection -->
@@ -129,7 +138,10 @@
         <span class="q-cat">2 · Community Connection</span>
       </div>
       <h3>Are you feeling a bit uncomfortable or somewhat disconnected in your community of friends and co-workers?</h3>
-      <textarea class="answer-input" id="connection_answer" name="connection_answer" placeholder="Type your answer…" maxlength="2000" required></textarea>
+      <div class="yn-group" role="radiogroup" aria-label="Yes or No answer for Community Connection">
+        <label class="yn-opt"><input type="radio" name="connection_answer" value="Yes" required><span class="yn-label">Yes</span></label>
+        <label class="yn-opt"><input type="radio" name="connection_answer" value="No"><span class="yn-label">No</span></label>
+      </div>
     </div>
 
     <!-- Q3 Hope -->
@@ -138,7 +150,10 @@
         <span class="q-cat">3 · Hope</span>
       </div>
       <h3>Does your present situation and/or behavior give you a feeling of hope and optimism for the future?</h3>
-      <textarea class="answer-input" id="hope_answer" name="hope_answer" placeholder="Type your answer…" maxlength="2000" required></textarea>
+      <div class="yn-group" role="radiogroup" aria-label="Yes or No answer for Hope">
+        <label class="yn-opt"><input type="radio" name="hope_answer" value="Yes" required><span class="yn-label">Yes</span></label>
+        <label class="yn-opt"><input type="radio" name="hope_answer" value="No"><span class="yn-label">No</span></label>
+      </div>
     </div>
 
     <p class="err" id="form-err"></p>
