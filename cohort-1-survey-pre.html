@@ -255,21 +255,30 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Saving…';
 
+    var record = {
+      cohort_id: 'cohort-1',
+      survey_type: 'pre',
+      full_name: fullName,
+      email: email,
+      perspective_score: parseInt(perspective, 10),
+      perspective_comment: (data.get('perspective_comment') || '').trim() || null,
+      connection_score: parseInt(connection, 10),
+      connection_comment: (data.get('connection_comment') || '').trim() || null,
+      hope_score: parseInt(hope, 10),
+      hope_comment: (data.get('hope_comment') || '').trim() || null,
+      user_agent: navigator.userAgent
+    };
+
     try {
-      var { error } = await sb.from('cohort_surveys').insert({
-        cohort_id: 'cohort-1',
-        survey_type: 'pre',
-        full_name: fullName,
-        email: email,
-        perspective_score: parseInt(perspective, 10),
-        perspective_comment: (data.get('perspective_comment') || '').trim() || null,
-        connection_score: parseInt(connection, 10),
-        connection_comment: (data.get('connection_comment') || '').trim() || null,
-        hope_score: parseInt(hope, 10),
-        hope_comment: (data.get('hope_comment') || '').trim() || null,
-        user_agent: navigator.userAgent
-      });
+      var { error } = await sb.from('cohort_surveys').insert(record);
       if (error) throw error;
+      // Fire-and-forget email backup so Osil has a paper trail outside
+      // the DB. Don't block the UI on it — the survey is already saved.
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ kind: 'survey_pre', record: record })
+      }).catch(function(e){ console.warn('Survey email backup failed:', e); });
       form.style.display = 'none';
       thankYou.classList.add('show');
       thankYou.scrollIntoView({ behavior: 'smooth', block: 'center' });

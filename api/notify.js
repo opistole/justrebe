@@ -795,6 +795,53 @@ refresh@justrebe.com`
     }
   }
 
+  // -------- Cohort survey backup (pre + post) --------
+  // body shape: { kind:'survey_pre' | 'survey_post', record: { full_name, email,
+  //   cohort_id, perspective_score, perspective_comment, connection_score,
+  //   connection_comment, hope_score, hope_comment } }
+  // The actual data already lives in cohort_surveys (inserted client-side from
+  // the survey page). This handler just emails a paper-trail copy to admin
+  // so Osil has a backup outside the database she can search/forward.
+  if (body.kind === 'survey_pre' || body.kind === 'survey_post') {
+    const r = body.record || {};
+    if (!r.email) return res.status(400).json({ error: 'Missing record.email' });
+    try {
+      const which = body.kind === 'survey_post' ? 'POST' : 'PRE';
+      const fmt = (n) => (n == null || n === '') ? '—' : String(n);
+      const adminMsg = {
+        to: ADMIN_EMAIL,
+        subject: `Survey · ${which} · ${r.full_name || r.email} · ${r.cohort_id || 'cohort-1'}`,
+        text:
+`${r.full_name || '(no name)'} submitted the ${which} survey for ${r.cohort_id || 'cohort-1'}.
+
+CONTACT
+  Name:  ${r.full_name || '(no name)'}
+  Email: ${r.email}
+
+1) PERSPECTIVE  (1=Not really → 5=Definitely)
+  Score:   ${fmt(r.perspective_score)}/5
+  Comment: ${r.perspective_comment || '(none)'}
+
+2) COMMUNITY CONNECTION  (1=Not at all → 5=Very much so)
+  Score:   ${fmt(r.connection_score)}/5
+  Comment: ${r.connection_comment || '(none)'}
+
+3) HOPE  (1=Not really → 5=Definitely)
+  Score:   ${fmt(r.hope_score)}/5
+  Comment: ${r.hope_comment || '(none)'}
+
+— Saved to cohort_surveys table. This email is a backup copy.`,
+      };
+      await sendEmail(adminMsg);
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      console.error('Notify error (survey):', err);
+      // Soft-fail: the survey already saved to DB. Don't block the user UI on
+      // this email backup. Return 200 anyway so the page treats it as success.
+      return res.status(200).json({ ok: true, warning: 'Email backup failed; row saved to DB' });
+    }
+  }
+
   // -------- A3) Direct 1:1 request from refresh-private.html / refresh-groups.html --------
   // body shape: { kind:'confidant_request', record: { name, email, ... } }
   if (body.kind === 'confidant_request') {
