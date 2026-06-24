@@ -54,28 +54,14 @@
   .field input{width:100%;padding:10px 12px;border:1px solid var(--bone);border-radius:8px;font-family:inherit;font-size:14px;color:var(--slate);background:var(--mist);transition:background .15s,border-color .15s}
   .field input:focus{outline:0;background:#fff;border-color:var(--navy)}
 
-  .question{margin:0 0 18px}
+  .question{margin:0 0 22px}
   .question .q-meta{display:flex;align-items:center;gap:10px;margin:0 0 6px}
   .question .q-cat{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);background:var(--gold-wash);padding:3px 10px;border-radius:999px;border:1px solid #f5d4a8}
-  .question h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:18px;color:var(--navy);margin:0 0 4px;line-height:1.35}
-  .question .q-text{font-size:15px;color:var(--body);line-height:1.55;margin:0 0 16px}
+  .question h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:18px;color:var(--navy);margin:0 0 12px;line-height:1.35}
 
-  .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:0 0 14px}
-  .scale-opt{display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 6px;border:2px solid var(--bone);border-radius:10px;background:#fff;cursor:pointer;transition:all .15s var(--ease);font-family:inherit}
-  .scale-opt:hover{border-color:var(--green-ink);background:var(--green-wash)}
-  .scale-opt input{position:absolute;opacity:0;pointer-events:none}
-  .scale-opt .num{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--navy);line-height:1;margin:0 0 4px}
-  .scale-opt .lbl{font-size:10px;font-weight:600;letter-spacing:.02em;color:var(--muted);line-height:1.2;min-height:2.4em;display:flex;align-items:center;justify-content:center}
-  .scale-opt:has(input:checked){border-color:var(--green-ink);background:var(--green-ink);color:#fff;box-shadow:0 6px 16px rgba(58,132,56,.22);transform:translateY(-2px)}
-  .scale-opt:has(input:checked) .num{color:#fff}
-  .scale-opt:has(input:checked) .lbl{color:rgba(255,255,255,.9)}
-
-  .comment-toggle{display:inline-block;background:transparent;border:0;color:var(--green-ink);font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.04em;cursor:pointer;padding:0;border-bottom:1px dotted var(--green-ink)}
-  .comment-toggle:hover{border-bottom-style:solid}
-  .comment-box{display:none;margin:10px 0 0}
-  .comment-box.is-open{display:block}
-  .comment-box textarea{width:100%;padding:10px 12px;border:1px solid var(--bone);border-radius:8px;font-family:inherit;font-size:14px;color:var(--slate);background:var(--mist);min-height:70px;resize:vertical;transition:background .15s,border-color .15s}
-  .comment-box textarea:focus{outline:0;background:#fff;border-color:var(--navy)}
+  .answer-input{width:100%;padding:12px 14px;border:1px solid var(--bone);border-radius:10px;font-family:inherit;font-size:15px;color:var(--slate);background:var(--mist);min-height:80px;resize:vertical;line-height:1.5;transition:background .15s,border-color .15s}
+  .answer-input:focus{outline:0;background:#fff;border-color:var(--green-ink);box-shadow:0 0 0 3px rgba(68,153,69,.12)}
+  .answer-input::placeholder{color:var(--muted);font-style:italic}
 
   .submit-row{display:flex;justify-content:center;margin:24px 0 0}
   .btn{display:inline-flex;align-items:center;gap:8px;background:var(--green-ink);color:#fff;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:14px 32px;border:0;border-radius:999px;text-decoration:none;cursor:pointer;transition:background .15s,transform .12s,box-shadow .15s}
@@ -134,17 +120,7 @@
         <span class="q-cat">1 · Perspective</span>
       </div>
       <h3>Do you see a need to reframe any aspects of your perspective on your life?</h3>
-      <div class="scale" role="radiogroup" aria-label="Perspective score (1 = not really, 5 = definitely)">
-        <label class="scale-opt"><input type="radio" name="perspective_score" value="1" required><span class="num">1</span><span class="lbl">Not really</span></label>
-        <label class="scale-opt"><input type="radio" name="perspective_score" value="2"><span class="num">2</span><span class="lbl">A little</span></label>
-        <label class="scale-opt"><input type="radio" name="perspective_score" value="3"><span class="num">3</span><span class="lbl">Somewhat</span></label>
-        <label class="scale-opt"><input type="radio" name="perspective_score" value="4"><span class="num">4</span><span class="lbl">A lot</span></label>
-        <label class="scale-opt"><input type="radio" name="perspective_score" value="5"><span class="num">5</span><span class="lbl">Definitely</span></label>
-      </div>
-      <button type="button" class="comment-toggle" data-toggle="perspective_comment_box">+ Add a comment (optional)</button>
-      <div class="comment-box" id="perspective_comment_box">
-        <textarea name="perspective_comment" placeholder="What comes up for you with this question?" maxlength="600"></textarea>
-      </div>
+      <textarea class="answer-input" id="perspective_answer" name="perspective_answer" placeholder="Type your answer…" maxlength="2000" required></textarea>
     </div>
 
     <!-- Q2 Community Connection -->
@@ -153,17 +129,7 @@
         <span class="q-cat">2 · Community Connection</span>
       </div>
       <h3>Are you feeling a bit uncomfortable or somewhat disconnected in your community of friends and co-workers?</h3>
-      <div class="scale" role="radiogroup" aria-label="Connection score (1 = not at all, 5 = very much so)">
-        <label class="scale-opt"><input type="radio" name="connection_score" value="1" required><span class="num">1</span><span class="lbl">Not at all</span></label>
-        <label class="scale-opt"><input type="radio" name="connection_score" value="2"><span class="num">2</span><span class="lbl">A little</span></label>
-        <label class="scale-opt"><input type="radio" name="connection_score" value="3"><span class="num">3</span><span class="lbl">Somewhat</span></label>
-        <label class="scale-opt"><input type="radio" name="connection_score" value="4"><span class="num">4</span><span class="lbl">A lot</span></label>
-        <label class="scale-opt"><input type="radio" name="connection_score" value="5"><span class="num">5</span><span class="lbl">Very much so</span></label>
-      </div>
-      <button type="button" class="comment-toggle" data-toggle="connection_comment_box">+ Add a comment (optional)</button>
-      <div class="comment-box" id="connection_comment_box">
-        <textarea name="connection_comment" placeholder="What comes up for you with this question?" maxlength="600"></textarea>
-      </div>
+      <textarea class="answer-input" id="connection_answer" name="connection_answer" placeholder="Type your answer…" maxlength="2000" required></textarea>
     </div>
 
     <!-- Q3 Hope -->
@@ -172,17 +138,7 @@
         <span class="q-cat">3 · Hope</span>
       </div>
       <h3>Does your present situation and/or behavior give you a feeling of hope and optimism for the future?</h3>
-      <div class="scale" role="radiogroup" aria-label="Hope score (1 = not really, 5 = definitely)">
-        <label class="scale-opt"><input type="radio" name="hope_score" value="1" required><span class="num">1</span><span class="lbl">Not really</span></label>
-        <label class="scale-opt"><input type="radio" name="hope_score" value="2"><span class="num">2</span><span class="lbl">A little</span></label>
-        <label class="scale-opt"><input type="radio" name="hope_score" value="3"><span class="num">3</span><span class="lbl">Somewhat</span></label>
-        <label class="scale-opt"><input type="radio" name="hope_score" value="4"><span class="num">4</span><span class="lbl">A lot</span></label>
-        <label class="scale-opt"><input type="radio" name="hope_score" value="5"><span class="num">5</span><span class="lbl">Definitely</span></label>
-      </div>
-      <button type="button" class="comment-toggle" data-toggle="hope_comment_box">+ Add a comment (optional)</button>
-      <div class="comment-box" id="hope_comment_box">
-        <textarea name="hope_comment" placeholder="What comes up for you with this question?" maxlength="600"></textarea>
-      </div>
+      <textarea class="answer-input" id="hope_answer" name="hope_answer" placeholder="Type your answer…" maxlength="2000" required></textarea>
     </div>
 
     <p class="err" id="form-err"></p>
@@ -212,17 +168,6 @@
   var SUPABASE_ANON = 'sb_publishable_3L24YRPqcRSQNHWa8ofpSA_t0mAB6LY';
   var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-  // Comment-toggle expand/collapse
-  document.querySelectorAll('.comment-toggle').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var id = btn.getAttribute('data-toggle');
-      var box = document.getElementById(id);
-      if (!box) return;
-      box.classList.toggle('is-open');
-      btn.textContent = box.classList.contains('is-open') ? '− Hide comment' : '+ Add a comment (optional)';
-    });
-  });
-
   // Submit
   var form = document.getElementById('survey-form');
   var errEl = document.getElementById('form-err');
@@ -244,9 +189,9 @@
     var data = new FormData(form);
     var fullName = (data.get('full_name') || '').trim();
     var email = (data.get('email') || '').trim().toLowerCase();
-    var perspective = data.get('perspective_score');
-    var connection = data.get('connection_score');
-    var hope = data.get('hope_score');
+    var perspective = (data.get('perspective_answer') || '').trim();
+    var connection = (data.get('connection_answer') || '').trim();
+    var hope = (data.get('hope_answer') || '').trim();
 
     if (!fullName) { showErr('Please add your full name.'); return; }
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('Please add a valid email.'); return; }
@@ -255,17 +200,16 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Saving…';
 
+    // Free-text answers go into the *_comment columns (already TEXT in the
+    // schema). *_score stays null since this round is qualitative.
     var record = {
       cohort_id: 'cohort-1',
       survey_type: 'pre',
       full_name: fullName,
       email: email,
-      perspective_score: parseInt(perspective, 10),
-      perspective_comment: (data.get('perspective_comment') || '').trim() || null,
-      connection_score: parseInt(connection, 10),
-      connection_comment: (data.get('connection_comment') || '').trim() || null,
-      hope_score: parseInt(hope, 10),
-      hope_comment: (data.get('hope_comment') || '').trim() || null,
+      perspective_comment: perspective,
+      connection_comment: connection,
+      hope_comment: hope,
       user_agent: navigator.userAgent
     };
 

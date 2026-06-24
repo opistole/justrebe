@@ -191,6 +191,24 @@
   .quick-tag{background:#fff;border:1px solid var(--bone);color:var(--body);padding:5px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:border-color .15s,background .15s,color .15s}
   .quick-tag:hover{border-color:var(--green-ink);background:var(--green-wash);color:var(--green-ink)}
 
+  /* Survey display in profile drawer */
+  .survey-card{background:#fff;border:1px solid var(--bone);border-radius:12px;padding:18px 20px;margin:0 0 14px}
+  .survey-card .sv-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px}
+  .survey-card .sv-tag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
+  .survey-card .sv-tag.pre{background:var(--gold-wash);color:var(--gold-ink);border:1px solid #f5d4a8}
+  .survey-card .sv-tag.post{background:var(--green-wash);color:var(--green-deep);border:1px solid #BFE3BF}
+  .survey-card .sv-date{font-size:11px;color:var(--muted);font-weight:600}
+  .survey-card .sv-row{margin:0 0 12px;padding:0 0 12px;border-bottom:1px solid var(--mist)}
+  .survey-card .sv-row:last-child{margin:0;padding:0;border:0}
+  .survey-card .sv-q{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+  .survey-card .sv-score{display:inline-flex;align-items:center;gap:8px;font-family:var(--serif);font-weight:600;font-size:22px;color:var(--navy);line-height:1}
+  .survey-card .sv-score-out{font-family:var(--sans);font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+  .survey-card .sv-delta{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.02em}
+  .survey-card .sv-delta.up{background:var(--green-wash);color:var(--green-deep)}
+  .survey-card .sv-delta.down{background:#FFF1F0;color:var(--coral)}
+  .survey-card .sv-delta.flat{background:var(--mist);color:var(--muted)}
+  .survey-card .sv-comment{margin:6px 0 0;padding:8px 12px;background:var(--mist);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;font-size:13px;color:var(--body);font-style:italic;line-height:1.5}
+
   /* Compact version of manual-tag-chip for the customers list row */
   .row-tag-chip{display:inline-block;background:#EEF1FB;color:#3B4880;border:0;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;letter-spacing:.02em;line-height:1.4;margin:1px 4px 1px 0;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
   /* Color the row chips by category so a glance shows the type */
@@ -751,6 +769,12 @@ Whatever they wrote in the 'anything else' box…"></textarea>
           </div>
         </div>
 
+        <!-- Pre/Post survey responses (hidden if no surveys on file) -->
+        <div class="section hidden" id="cd-surveys-section">
+          <h2 style="margin:0 0 14px">Pre/Post Surveys</h2>
+          <div id="cd-surveys-body"></div>
+        </div>
+
         <div class="section">
           <h2>Tasks</h2>
           <div id="tasks-list" class="tasks-list">
@@ -933,6 +957,6 @@ Whatever they wrote in the 'anything else' box…"></textarea>
   </div>
 </div>
 
-<script src="/admin/app.js?v=44"></script>
+<script src="/admin/app.js?v=45"></script>
 </body>
 </html>

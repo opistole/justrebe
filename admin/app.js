@@ -1511,7 +1511,7 @@
     cdContent.classList.add('hidden');
     cdError.classList.add('hidden');
 
-    const [contactRes, cohortRes, notesRes, activitiesRes, tasksRes, kitEventsRes, tagsRes] = await Promise.all([
+    const [contactRes, cohortRes, notesRes, activitiesRes, tasksRes, kitEventsRes, tagsRes, surveysRes] = await Promise.all([
       sb.from('contacts')
         .select('first_name, last_name, email, phone, sms_consent, marketing_consent, notes, created_at')
         .ilike('email', currentDetailEmail).limit(1),
@@ -1540,6 +1540,10 @@
         .select('id, tag, added_by_email, added_at')
         .ilike('customer_email', currentDetailEmail)
         .order('added_at', { ascending: true }).limit(50),
+      sb.from('cohort_surveys')
+        .select('id, cohort_id, survey_type, perspective_score, perspective_comment, connection_score, connection_comment, hope_score, hope_comment, submitted_at')
+        .ilike('email', currentDetailEmail)
+        .order('submitted_at', { ascending: true }).limit(10),
     ]);
     // Update cache + drawer state for tag editor.
     tagsByEmail[currentDetailEmail] = (tagsRes && tagsRes.data) || [];
@@ -1748,6 +1752,55 @@
       } else {
         cdIntakeBody.innerHTML = '<p class="pf-value muted">No intake data on file.</p>';
       }
+    }
+
+    // ============================================================
+    // Pre/Post Surveys section — shows any rows from cohort_surveys
+    // ============================================================
+    const surveysSection = document.getElementById('cd-surveys-section');
+    const surveysBody    = document.getElementById('cd-surveys-body');
+    const surveys = (surveysRes && surveysRes.data) || [];
+    if (!surveys.length) {
+      if (surveysSection) surveysSection.classList.add('hidden');
+    } else if (surveysBody) {
+      surveysSection.classList.remove('hidden');
+      // Build a small map for delta calculation per question
+      const byType = {};
+      surveys.forEach((s) => { if (s.survey_type) byType[s.survey_type] = s; });
+      const renderScore = (score, qKey, isPost) => {
+        if (score == null) return '';
+        let delta = '';
+        if (isPost && byType.pre && byType.pre[qKey] != null) {
+          const diff = score - byType.pre[qKey];
+          if (diff > 0) delta = `<span class="sv-delta up">+${diff}</span>`;
+          else if (diff < 0) delta = `<span class="sv-delta down">${diff}</span>`;
+          else delta = `<span class="sv-delta flat">no change</span>`;
+        }
+        return `<span class="sv-score">${score}<span class="sv-score-out">/5</span>${delta}</span>`;
+      };
+      const renderRow = (q, label, comment, score, qKey, isPost) => {
+        if (!comment && score == null) return '';
+        const scoreHtml = renderScore(score, qKey, isPost);
+        const commentHtml = comment ? `<p class="sv-comment">${escapeHtml(String(comment))}</p>` : '';
+        return `<div class="sv-row"><p class="sv-q">${escapeHtml(q)} · ${escapeHtml(label)}</p>${scoreHtml}${commentHtml}</div>`;
+      };
+      surveysBody.innerHTML = surveys.map((s) => {
+        const isPost = s.survey_type === 'post';
+        const tagCls = isPost ? 'post' : 'pre';
+        const tagLbl = isPost ? 'POST · Week 5' : 'PRE · Baseline';
+        const date = s.submitted_at ? new Date(s.submitted_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+        return `
+          <div class="survey-card">
+            <div class="sv-head">
+              <span class="sv-tag ${tagCls}">${tagLbl}</span>
+              <span class="sv-date">${escapeHtml(date)}</span>
+            </div>
+            ${renderRow('1', 'Perspective',           s.perspective_comment, s.perspective_score, 'perspective_score', isPost) || '<div class="sv-row"><p class="sv-q">1 · Perspective</p><p class="pf-value muted" style="font-size:13px">(no answer)</p></div>'}
+            ${renderRow('2', 'Community Connection',  s.connection_comment,  s.connection_score,  'connection_score',  isPost) || '<div class="sv-row"><p class="sv-q">2 · Community Connection</p><p class="pf-value muted" style="font-size:13px">(no answer)</p></div>'}
+            ${renderRow('3', 'Hope',                  s.hope_comment,        s.hope_score,        'hope_score',        isPost) || '<div class="sv-row"><p class="sv-q">3 · Hope</p><p class="pf-value muted" style="font-size:13px">(no answer)</p></div>'}
+          </div>
+        `;
+      }).join('');
     }
 
     // Smart-default SMS provider: look at the most recent SMS activity

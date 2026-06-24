@@ -807,7 +807,9 @@ refresh@justrebe.com`
     if (!r.email) return res.status(400).json({ error: 'Missing record.email' });
     try {
       const which = body.kind === 'survey_post' ? 'POST' : 'PRE';
-      const fmt = (n) => (n == null || n === '') ? '—' : String(n);
+      // The questions are now free-text — answers land in the *_comment
+      // columns. Format each as a labeled block in the email body.
+      const ans = (txt) => (txt && String(txt).trim()) ? String(txt).trim() : '(no answer)';
       const adminMsg = {
         to: ADMIN_EMAIL,
         subject: `Survey · ${which} · ${r.full_name || r.email} · ${r.cohort_id || 'cohort-1'}`,
@@ -818,18 +820,25 @@ CONTACT
   Name:  ${r.full_name || '(no name)'}
   Email: ${r.email}
 
-1) PERSPECTIVE  (1=Not really → 5=Definitely)
-  Score:   ${fmt(r.perspective_score)}/5
-  Comment: ${r.perspective_comment || '(none)'}
+──────────────────────────────────────────────
+1) PERSPECTIVE
+Do you see a need to reframe any aspects of your perspective on your life?
 
-2) COMMUNITY CONNECTION  (1=Not at all → 5=Very much so)
-  Score:   ${fmt(r.connection_score)}/5
-  Comment: ${r.connection_comment || '(none)'}
+${ans(r.perspective_comment)}
 
-3) HOPE  (1=Not really → 5=Definitely)
-  Score:   ${fmt(r.hope_score)}/5
-  Comment: ${r.hope_comment || '(none)'}
+──────────────────────────────────────────────
+2) COMMUNITY CONNECTION
+Are you feeling a bit uncomfortable or somewhat disconnected in your community of friends and co-workers?
 
+${ans(r.connection_comment)}
+
+──────────────────────────────────────────────
+3) HOPE
+Does your present situation and/or behavior give you a feeling of hope and optimism for the future?
+
+${ans(r.hope_comment)}
+
+──────────────────────────────────────────────
 — Saved to cohort_surveys table. This email is a backup copy.`,
       };
       await sendEmail(adminMsg);
