@@ -770,7 +770,7 @@ document.querySelectorAll('.bio-modal').forEach(function(m){
       var resp = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: history })
+        body: JSON.stringify({ messages: history, page: 'cohort-member' })
       });
       var data = await resp.json();
       showTyping(false);
@@ -792,7 +792,7 @@ document.querySelectorAll('.bio-modal').forEach(function(m){
     launcher.classList.add('is-hidden');
     win.classList.add('is-open');
     if (history.length === 0) {
-      var greeting = "Hi — I'm BB, your ReBe guide. I'm an AI assistant. Ask me anything about the cohort — sessions, schedule, resources, or anything else on your mind.";
+      var greeting = "Hi — I'm BB, your ReBe guide for the cohort. I'm an AI assistant. Ask me anything about sessions, Zoom links, the schedule, the slides, or anything else on this page.";
       appendMessage('assistant', greeting);
       history.push({ role: 'assistant', content: greeting });
     }
