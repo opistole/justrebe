@@ -1,271 +1,503 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="robots" content="noindex,nofollow" />
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<title>ReBe Ed for NAESP — Conference Specials</title>
-<meta name="description" content="Conference specials for NAESP attendees from ReBe Ed: K-2 Health Boosts, K-2 Health Boosts + Residency, and a free 3-5 pilot offering." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>ReBe Ed for NAESP — Bringing wellbeing into K-5 classrooms</title>
+<meta name="description" content="Conference specials for NAESP attendees from ReBe Ed: K-2 Health Boosts, K-2 Health Boosts + Residency, and a free 3-5 pilot offering for your school." />
 <link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-  :root {
-    /* ReBe Ed palette (matches the LABS Word Work cards) */
-    --navy:#0F4D5C;
-    --green:#7DAA34;
-    --green-deep:#5E8323;
-    --green-wash:#F4FAEC;
-    --gold:#F5B82E;
-    --gold-deep:#C99413;
-    --gold-wash:#FEF7E5;
-    --navy-wash:#E8F1F3;
-    --purple:#6B5BD6;
-    --slate:#2A2F3A;
-    --ink:#111418;
-    --body:#4A535E;
-    --muted:#6B7280;
-    --bone:#E2E2E2;
-    --mist:#F5F4F0;
-    --paper:#FFFFFF;
-    --display:'Fredoka','Quicksand',-apple-system,sans-serif;
-    --sans:'Lato',-apple-system,BlinkMacSystemFont,sans-serif;
-    --ease:cubic-bezier(.16,1,.3,1);
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  img { max-width: 100%; height: auto; display: block; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; padding: 0; width: 100%; max-width: 100%; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1A1A1A;
+    background: #fff;
   }
-  *,*::before,*::after{box-sizing:border-box}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{
-    margin:0;
-    background:var(--mist);
-    color:var(--body);
-    font-family:var(--sans);
-    font-weight:400;
-    font-size:17px;
-    line-height:1.6;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    -webkit-font-smoothing:antialiased;
+  a { color: inherit; }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+
+  /* ===== Brand tokens (matches main justrebe.com) ===== */
+  :root {
+    --teal:#034E64;
+    --teal-deep:#023d4f;
+    --teal-soft:#045d77;
+    --orange:#F06905;
+    --gold:#FEB909;
+    --gold-deep:#e5a708;
+    --green:#638D13;
+    --green-deep:#527610;
+    --cream:#F2EDE8;
+    --ink:#1A1A1A;
+    --body:#444;
+    --muted:#888;
+    --bone:#E8E5E0;
   }
 
-  /* Skip-link a11y */
-  .skip-link{position:absolute;left:-9999px;background:var(--navy);color:#fff;padding:10px 16px;border-radius:6px;z-index:200;font-weight:700;text-decoration:none}
-  .skip-link:focus{left:16px;top:16px}
+  .ac  { color: var(--orange); font-style: italic; }
+  .acg { color: var(--green); }
+  .act { color: var(--teal); }
 
   /* ===== Top bar ===== */
-  .util-bar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--bone)}
-  .util-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;height:60px;gap:14px}
-  .wordmark{display:inline-flex;align-items:baseline;gap:4px;font-family:var(--display);font-weight:700;font-size:22px;color:var(--ink);text-decoration:none;line-height:1}
-  .wordmark .wave{color:var(--purple);font-size:18px;line-height:1;transform:translateY(-2px)}
-  .wordmark .dot{color:var(--ink);padding:0 1px}
-  .wordmark .ed-tag{background:var(--purple);color:#fff;font-size:12px;padding:2px 6px;border-radius:3px;margin-left:2px;font-weight:700;letter-spacing:.04em}
-  .util-tag{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);background:var(--green-wash);padding:5px 12px;border-radius:999px;border:1px solid #cfe6a3}
-
-  main{flex:1;max-width:1040px;width:100%;margin:0 auto;padding:48px 24px 56px}
-
-  /* ===== Hero ===== */
-  .hero{text-align:center;margin:0 0 40px}
-  .hero .eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.22em;color:var(--green-deep);margin:0 0 16px;display:inline-block}
-  .hero .eyebrow::before{content:'';display:block;width:46px;height:1px;background:var(--green-deep);margin:0 auto 14px;opacity:.55}
-  .hero h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,5.6vw,60px);line-height:1.05;color:var(--ink);margin:0 0 18px;letter-spacing:-.005em;max-width:18ch;margin-left:auto;margin-right:auto}
-  .hero h1 .accent{color:var(--green)}
-  .hero .lede{font-family:var(--sans);font-weight:300;font-size:20px;line-height:1.55;color:var(--body);max-width:600px;margin:0 auto;letter-spacing:-.005em}
-
-  /* ===== Offers section ===== */
-  .section-h{font-family:var(--display);font-weight:700;font-size:32px;color:var(--ink);margin:36px 0 18px;line-height:1.15}
-  .section-h .sub{display:block;font-family:var(--sans);font-size:14px;font-weight:400;color:var(--muted);letter-spacing:.02em;margin:6px 0 0;text-transform:none}
-
-  .offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:0 0 18px}
-  @media (max-width:880px){.offer-grid{grid-template-columns:1fr}}
-
-  .offer{background:#fff;border:1px solid var(--bone);border-radius:18px;padding:26px 24px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,77,92,.05);position:relative;overflow:hidden}
-  .offer::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--green);border-radius:18px 0 0 18px}
-  .offer[data-color="gold"]::before{background:var(--gold)}
-  .offer[data-color="navy"]::before{background:var(--navy)}
-
-  .offer .badge{display:inline-block;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:4px 11px;border-radius:999px;color:var(--green-deep);background:var(--green-wash);border:1px solid #cfe6a3;align-self:flex-start;margin:0 0 14px}
-  .offer[data-color="gold"] .badge{color:var(--gold-deep);background:var(--gold-wash);border-color:#f3d997}
-  .offer[data-color="navy"] .badge{color:var(--navy);background:var(--navy-wash);border-color:#bed5db}
-  .offer .badge.free{color:#fff;background:var(--navy);border-color:var(--navy)}
-
-  .offer h3{font-family:var(--display);font-weight:700;font-size:23px;color:var(--ink);line-height:1.18;margin:0 0 8px}
-  .offer .grade{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
-  .offer .desc{font-size:14.5px;line-height:1.55;color:var(--body);margin:0 0 18px;flex:1}
-  .offer .price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:14px 16px;background:var(--mist);border-radius:10px;border:1px dashed var(--bone)}
-  .offer .price-row .price{font-family:var(--display);font-weight:700;font-size:24px;color:var(--ink);line-height:1}
-  .offer .price-row .strike{font-family:var(--sans);font-size:14px;color:var(--muted);text-decoration:line-through}
-  .offer .price-row .label{font-family:var(--sans);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-left:auto}
-  .offer .cta{display:inline-flex;align-items:center;justify-content:center;background:var(--green-deep);color:#fff;font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:13px 22px;border-radius:999px;text-decoration:none;transition:background .15s,transform .12s;text-align:center;margin-top:auto}
-  .offer .cta:hover{background:#4d6a1c;transform:translateY(-2px)}
-  .offer[data-color="gold"] .cta{background:var(--gold-deep)}
-  .offer[data-color="gold"] .cta:hover{background:#a47812}
-  .offer[data-color="navy"] .cta{background:var(--navy)}
-  .offer[data-color="navy"] .cta:hover{background:#0a3947}
-  .offer .cta.placeholder{background:#fff;color:var(--muted);border:1.5px dashed var(--bone);cursor:not-allowed;text-transform:uppercase;font-style:italic}
-  .offer .cta.placeholder:hover{transform:none;background:#fff}
-
-  /* ===== Documents section ===== */
-  .docs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:0 0 22px}
-  .doc{background:#fff;border:1px solid var(--bone);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;transition:transform .15s,border-color .15s,box-shadow .15s}
-  .doc:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 6px 18px rgba(15,77,92,.07)}
-  .doc.placeholder{cursor:default;border-style:dashed;background:#FAFBF7;opacity:.85}
-  .doc.placeholder:hover{transform:none;box-shadow:none;border-color:var(--bone)}
-  .doc .icon{flex-shrink:0;width:46px;height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--green) 0%,var(--green-deep) 100%);color:#fff;border-radius:6px;box-shadow:0 4px 8px rgba(15,77,92,.15);font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.04em;line-height:1}
-  .doc .icon .ext{font-size:9px;opacity:.85;margin-top:3px;letter-spacing:.08em}
-  .doc .info{flex:1;min-width:0}
-  .doc .info h4{font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);margin:0 0 3px;line-height:1.2}
-  .doc .info p{font-family:var(--sans);font-size:12px;color:var(--muted);margin:0;line-height:1.4}
-  .doc .info .pending{display:inline-block;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);background:var(--gold-wash);border:1px solid #f3d997;padding:2px 8px;border-radius:999px;margin-top:4px}
-
-  /* ===== Contact CTA ===== */
-  .contact-cta{background:linear-gradient(135deg,var(--green-wash) 0%,#E7F4DA 100%);border:1px solid #cfe6a3;border-radius:18px;padding:32px 36px;margin:32px 0 0;text-align:center}
-  .contact-cta h2{font-family:var(--display);font-weight:700;font-size:24px;color:var(--ink);margin:0 0 8px;line-height:1.2}
-  .contact-cta p{margin:0 0 18px;font-size:15px;color:var(--body);line-height:1.55;max-width:520px;margin-left:auto;margin-right:auto}
-  .contact-cta p:last-of-type{margin-bottom:0}
-  .contact-cta .contact-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 0 14px}
-  .contact-cta a.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:13px 24px;border-radius:999px;text-decoration:none;transition:background .15s,transform .12s,box-shadow .15s}
-  .contact-cta a.btn.primary{background:var(--green-deep);color:#fff}
-  .contact-cta a.btn.primary:hover{background:#4d6a1c;transform:translateY(-2px);box-shadow:0 6px 16px rgba(94,131,35,.22)}
-  .contact-cta a.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
-  .contact-cta a.btn.ghost:hover{background:var(--navy);color:#fff}
-
-  footer{background:#fff;padding:28px 24px;text-align:center;border-top:1px solid var(--bone);font-size:13px;color:var(--muted);line-height:1.6}
-  footer a{color:var(--green-deep);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-deep)}
-  footer a:hover{border-bottom-style:solid}
-
-  /* ===== Small-screen polish ===== */
-  @media (max-width:640px){
-    main{padding:32px 16px 40px}
-    .offer{padding:22px 20px}
-    .contact-cta{padding:24px 22px}
-    .util-tag{display:none}
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: #fff;
+    border-bottom: 1px solid #EEE;
+    height: 72px;
+    display: flex; align-items: center;
   }
+  .topbar-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; }
+  .brand { display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none; font-weight: 900; font-size: 22px; color: var(--ink); letter-spacing: -.01em; }
+  .brand .ed-tag { background: var(--teal); color: #fff; font-size: 12px; padding: 3px 8px; border-radius: 4px; letter-spacing: .04em; font-weight: 800; margin-left: 4px; line-height: 1; }
+  .top-tag { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--orange); padding: 6px 12px; background: rgba(240,105,5,.08); border-radius: 999px; }
+  @media (max-width: 600px) { .top-tag { display: none; } }
+
+  /* ===== Hero (full-bleed image, matches main site) ===== */
+  .hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--teal);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('Images/teacherstudent.jpg');
+    background-size: cover;
+    background-position: center 28%;
+    filter: brightness(.55);
+  }
+  .hero-grad {
+    position: absolute; inset: 0;
+    background: linear-gradient(120deg, rgba(3,78,100,.78) 0%, rgba(3,78,100,.45) 55%, rgba(3,78,100,.10) 100%);
+  }
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 1400px; margin: 0 auto;
+    padding: 96px clamp(32px, 5vw, 64px);
+    width: 100%;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(254,185,9,.12);
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(254,185,9,.35);
+    margin-bottom: 24px;
+  }
+  .hero-h1 {
+    font-size: clamp(44px, 5.5vw, 76px);
+    font-weight: 900; letter-spacing: -.03em; line-height: 1.05;
+    color: #fff;
+    max-width: min(800px, 60vw);
+    margin-bottom: 22px;
+  }
+  .hero-h1 em { font-style: italic; color: var(--gold); font-weight: 800; }
+  .hero-sub {
+    font-size: clamp(17px, 1.9vw, 22px);
+    color: rgba(255,255,255,.88);
+    line-height: 1.6;
+    max-width: min(620px, 50vw);
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 32px; border-radius: 50px;
+    font-size: 15px; font-weight: 700;
+    text-decoration: none;
+    letter-spacing: .02em;
+    transition: all .2s ease;
+    cursor: pointer; border: none;
+    white-space: nowrap;
+  }
+  .btn-gold { background: var(--gold); color: var(--ink); box-shadow: 0 6px 20px rgba(254,185,9,.32); }
+  .btn-gold:hover { background: var(--gold-deep); transform: translateY(-2px); }
+  .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.55); padding: 14px 32px; }
+  .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+  .btn-teal { background: var(--teal); color: #fff; box-shadow: 0 4px 18px rgba(3,78,100,.25); }
+  .btn-teal:hover { background: var(--teal-deep); transform: translateY(-1px); }
+  .btn-green { background: var(--green); color: #fff; box-shadow: 0 4px 18px rgba(99,141,19,.25); }
+  .btn-green:hover { background: var(--green-deep); transform: translateY(-1px); }
+  .btn-orange { background: var(--orange); color: #fff; box-shadow: 0 4px 18px rgba(240,105,5,.28); }
+  .btn-orange:hover { background: #d65d04; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--teal); border: 2px solid var(--teal); padding: 14px 30px; }
+  .btn-ghost:hover { background: var(--teal); color: #fff; }
+
+  /* ===== Intro section ===== */
+  .intro { padding: 88px 0; background: #fff; }
+  .intro-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+  .intro-ey { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 18px; }
+  .intro-h { font-size: clamp(30px, 3.4vw, 48px); font-weight: 900; color: var(--teal); letter-spacing: -.025em; line-height: 1.12; margin-bottom: 24px; }
+  .intro-body p { font-size: 17px; color: var(--body); line-height: 1.75; margin-bottom: 16px; }
+  .intro-body p strong { color: var(--ink); }
+  .intro-stats { background: var(--cream); border-radius: 20px; padding: 36px; display: flex; flex-direction: column; gap: 24px; }
+  .stat-row { display: flex; gap: 18px; align-items: flex-start; }
+  .stat-num { font-size: 44px; font-weight: 900; color: var(--orange); line-height: 1; letter-spacing: -.02em; min-width: 110px; }
+  .stat-txt { font-size: 15px; color: var(--body); line-height: 1.55; padding-top: 6px; }
+  .stat-txt strong { color: var(--ink); }
+
+  /* ===== Offers (the main meat) ===== */
+  .offers { background: var(--cream); padding: 96px 0; }
+  .offers-head { text-align: center; max-width: 760px; margin: 0 auto 56px; padding: 0 48px; }
+  .offers-ey { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
+  .offers-h { font-size: clamp(30px, 3.4vw, 46px); font-weight: 900; color: var(--teal); letter-spacing: -.025em; line-height: 1.12; margin-bottom: 14px; }
+  .offers-sub { font-size: 17px; color: var(--body); line-height: 1.6; }
+  .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+  @media (max-width: 980px) { .offers-grid { grid-template-columns: 1fr; max-width: 600px; } }
+  .ocard {
+    background: #fff; border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(3,78,100,.08);
+    display: flex; flex-direction: column;
+    border: 1px solid #eee;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .ocard:hover { transform: translateY(-6px); box-shadow: 0 16px 44px rgba(3,78,100,.14); }
+  .ocard-top {
+    padding: 28px 30px 22px;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-soft) 100%);
+    color: #fff;
+    position: relative;
+  }
+  .ocard[data-color="orange"] .ocard-top { background: linear-gradient(135deg, var(--orange) 0%, #d65d04 100%); }
+  .ocard[data-color="green"]  .ocard-top { background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%); }
+  .ocard-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink); background: var(--gold);
+    padding: 5px 11px; border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .ocard-badge.free { background: #fff; color: var(--teal); }
+  .ocard-grade { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 8px; }
+  .ocard-title { font-size: 26px; font-weight: 900; line-height: 1.15; letter-spacing: -.015em; color: #fff; margin-bottom: 4px; }
+  .ocard-body { padding: 26px 30px 30px; flex: 1; display: flex; flex-direction: column; }
+  .ocard-desc { font-size: 15px; color: var(--body); line-height: 1.65; margin-bottom: 22px; flex: 1; }
+  .ocard-desc .placeholder { color: var(--muted); font-style: italic; }
+  .ocard-feats { list-style: none; padding: 0; margin: 0 0 24px; }
+  .ocard-feats li { font-size: 14px; color: var(--body); padding: 7px 0; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+  .ocard-feats li::before { content: '\2192'; color: var(--orange); font-weight: 800; flex-shrink: 0; line-height: 1.5; }
+  .ocard[data-color="green"] .ocard-feats li::before { color: var(--green); }
+  .price-block { padding: 18px 20px; background: #FAF6F1; border-radius: 14px; margin-bottom: 22px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .price-block .price { font-size: 28px; font-weight: 900; color: var(--ink); letter-spacing: -.02em; line-height: 1; }
+  .price-block .strike { font-size: 15px; color: var(--muted); text-decoration: line-through; }
+  .price-block .lbl { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-left: auto; }
+  .price-block.free .price { color: var(--green); font-style: italic; }
+  .ocard-cta { margin-top: auto; }
+  .ocard-cta .btn { width: 100%; justify-content: center; padding: 15px 24px; font-size: 14px; }
+  .placeholder-cta { background: #fff !important; color: var(--muted) !important; border: 2px dashed var(--bone) !important; font-style: italic; cursor: not-allowed; box-shadow: none !important; padding: 13px 24px !important; }
+  .placeholder-cta:hover { transform: none !important; background: #fff !important; }
+
+  /* ===== Documents ===== */
+  .docs { background: #fff; padding: 96px 0; }
+  .docs-head { text-align: center; max-width: 720px; margin: 0 auto 48px; padding: 0 48px; }
+  .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+  .doc {
+    background: #fff;
+    border: 1px solid var(--bone);
+    border-radius: 16px;
+    padding: 22px 24px;
+    display: flex; align-items: center; gap: 16px;
+    text-decoration: none; color: inherit;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .doc:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: 0 8px 22px rgba(3,78,100,.08); }
+  .doc-placeholder { cursor: default; border-style: dashed; background: #FAFAF8; opacity: .92; }
+  .doc-placeholder:hover { transform: none; box-shadow: none; border-color: var(--bone); }
+  .doc-icon {
+    flex-shrink: 0;
+    width: 52px; height: 60px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-soft) 100%);
+    color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(3,78,100,.18);
+    font-weight: 900; font-size: 13px;
+    letter-spacing: .04em; line-height: 1;
+  }
+  .doc-icon .ext { font-size: 9px; opacity: .85; margin-top: 3px; letter-spacing: .08em; font-weight: 600; }
+  .doc-info { flex: 1; min-width: 0; }
+  .doc-info h4 { font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 4px; line-height: 1.25; letter-spacing: -.005em; }
+  .doc-info p { font-size: 13px; color: var(--muted); line-height: 1.45; margin: 0; }
+  .pending-tag { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); background: rgba(254,185,9,.18); border: 1px solid rgba(254,185,9,.5); padding: 2px 8px; border-radius: 999px; margin-top: 6px; }
+
+  /* ===== CTA section ===== */
+  .ctasec {
+    background: var(--teal);
+    padding: 88px 0;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .ctasec::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 0%, rgba(254,185,9,.10) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 100%, rgba(240,105,5,.10) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .ctasec-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 0 32px; }
+  .cta-ey { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  .cta-h { font-size: clamp(28px, 3.4vw, 44px); font-weight: 900; color: #fff; letter-spacing: -.025em; line-height: 1.12; margin-bottom: 18px; }
+  .cta-sub { font-size: 17px; color: rgba(255,255,255,.78); line-height: 1.65; margin-bottom: 36px; }
+  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .cta-emails { margin-top: 24px; font-size: 13px; color: rgba(255,255,255,.55); letter-spacing: .04em; }
+  .cta-emails a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+
+  /* ===== Footer ===== */
+  footer {
+    background: #fff;
+    padding: 36px 0;
+    border-top: 1px solid #EEE;
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 6px; }
+  footer a { color: var(--teal); font-weight: 700; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 980px) {
+    .intro-grid { grid-template-columns: 1fr; gap: 48px; }
+    .topbar-inner, .container, .intro-grid, .offers-grid, .docs-grid { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (max-width: 768px) {
+    .hero { min-height: 70vh; }
+    .hero-inner { padding: 72px 24px; }
+    .hero-h1, .hero-sub { max-width: 100%; }
+    .hero-btns, .cta-btns { flex-direction: column; align-items: stretch; }
+    .btn { width: 100%; justify-content: center; }
+    .intro, .offers, .docs, .ctasec { padding: 64px 0; }
+    .intro-stats { padding: 28px 24px; }
+    .stat-num { font-size: 38px; min-width: 90px; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .hero-inner { padding: 60px 18px; }
+    .topbar-inner { padding: 0 18px; }
+  }
+
+  /* Skip link */
+  .skip-link { position: absolute; left: -9999px; background: var(--teal); color: #fff; padding: 10px 16px; border-radius: 6px; z-index: 999; font-weight: 700; text-decoration: none; }
+  .skip-link:focus { left: 16px; top: 16px; }
 </style>
 </head>
 <body>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="util-bar">
-  <div class="util-inner">
-    <a href="/" class="wordmark"><span class="wave">∼</span>re<span class="dot">·</span>be<span class="ed-tag">Ed</span></a>
-    <span class="util-tag">NAESP · Conference Specials</span>
+<!-- Topbar -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="https://www.justrebe.com" class="brand">re·be<span class="ed-tag">Ed</span></a>
+    <span class="top-tag">NAESP · Conference Specials</span>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section class="hero">
-    <p class="eyebrow">Hi, NAESP friends 👋</p>
-    <h1>Bring ReBe Ed to your <span class="accent">elementary school.</span></h1>
-    <p class="lede">Three ways to get started, with special pricing reserved for NAESP attendees through this page. Pick what fits.</p>
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-grad" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <span class="hero-tag">Welcome, NAESP Principals</span>
+      <h1 class="hero-h1">Wellbeing belongs in <em>every</em> elementary classroom.</h1>
+      <p class="hero-sub">Conference-only pricing on the ReBe Ed K-2 program — plus a free 3-5 pilot for the schools ready to lead. Built for principals who want resilient students, supported teachers, and outcomes you can see.</p>
+      <div class="hero-btns">
+        <a href="#offers" class="btn btn-gold">See the offerings &rarr;</a>
+        <a href="#contact" class="btn btn-outline-white">Talk with us</a>
+      </div>
+    </div>
   </section>
 
-  <!-- Offers -->
-  <h2 class="section-h">
-    Conference Offers
-    <span class="sub">Pricing on this page is reserved for NAESP attendees.</span>
-  </h2>
-
-  <div class="offer-grid">
-
-    <!-- Offer 1: K-2 Health Boosts -->
-    <article class="offer" data-color="green">
-      <span class="badge">NAESP Special</span>
-      <h3>K-2 Health Boosts</h3>
-      <p class="grade">Grades K – 2</p>
-      <p class="desc">[Replace this with a 2–3 sentence pitch for the K-2 Health Boosts package — what's in it, who facilitates, how it ships.]</p>
-      <div class="price-row">
-        <span class="price">$TBD</span>
-        <span class="strike">$TBD</span>
-        <span class="label">Conference rate</span>
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="intro-grid">
+      <div>
+        <p class="intro-ey">What is ReBe Ed</p>
+        <h2 class="intro-h">An ACE-informed wellbeing platform built for the youngest learners.</h2>
+        <div class="intro-body">
+          <p>ReBe Ed brings the science of self-awareness, emotional regulation, and identity-formation into the rhythms of the school day — not as another curriculum to bolt on, but as <strong>five-minute Health Boosts</strong> that fit into what your teachers are already doing.</p>
+          <p>The result: students who can name what they feel, classrooms that move from reactive to responsive, and a principal who finally has data to show the school board.</p>
+        </div>
       </div>
-      <a class="cta placeholder" href="#" aria-disabled="true">Order link coming soon</a>
-    </article>
+      <aside class="intro-stats" aria-label="Why this matters">
+        <div class="stat-row">
+          <div class="stat-num">7 in 10</div>
+          <div class="stat-txt">U.S. children experience <strong>at least one adverse childhood experience</strong> before age 18 — and 5 of the top 10 leading causes of death in adulthood are linked to ACEs.</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-num">by 7</div>
+          <div class="stat-txt">Most of our <strong>core beliefs about ourselves</strong> are already set by age seven. K-2 is the window.</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-num">90%</div>
+          <div class="stat-txt">Of our daily thoughts are <strong>on auto-repeat</strong> — built from those early years. ReBe Ed gives kids the tools to rewrite the loop.</div>
+        </div>
+      </aside>
+    </div>
+  </section>
 
-    <!-- Offer 2: K-2 Health Boosts + Residency -->
-    <article class="offer" data-color="gold">
-      <span class="badge">NAESP Special</span>
-      <h3>K-2 Health Boosts <br>+ Residency</h3>
-      <p class="grade">Grades K – 2</p>
-      <p class="desc">[Replace with 2–3 sentences explaining the bundle: Health Boosts + on-site residency days / coaching / whatever's included.]</p>
-      <div class="price-row">
-        <span class="price">$TBD</span>
-        <span class="strike">$TBD</span>
-        <span class="label">Conference rate</span>
-      </div>
-      <a class="cta placeholder" href="#" aria-disabled="true">Order link coming soon</a>
-    </article>
+  <!-- OFFERS -->
+  <section class="offers" id="offers">
+    <div class="offers-head">
+      <p class="offers-ey">For NAESP attendees only</p>
+      <h2 class="offers-h">Three ways to bring ReBe Ed to your school.</h2>
+      <p class="offers-sub">Conference pricing is reserved through this page. Pick what fits your school's stage, budget, and timeline — and we'll do the rest.</p>
+    </div>
 
-    <!-- Offer 3: Free 3-5 Pilot -->
-    <article class="offer" data-color="navy">
-      <span class="badge free">Free Pilot</span>
-      <h3>3-5 Pilot Program</h3>
-      <p class="grade">Grades 3 – 5</p>
-      <p class="desc">[Replace with 2–3 sentences about the free pilot for 3–5 classrooms — what you provide, how long the pilot runs, what you ask in return (data / feedback / etc).]</p>
-      <div class="price-row">
-        <span class="price">FREE</span>
-        <span class="label">Limited cohort</span>
-      </div>
-      <a class="cta placeholder" href="#" aria-disabled="true">Apply link coming soon</a>
-    </article>
+    <div class="offers-grid">
 
-  </div>
+      <!-- OFFER 1: K-2 Health Boosts -->
+      <article class="ocard">
+        <div class="ocard-top">
+          <span class="ocard-badge">NAESP Special</span>
+          <p class="ocard-grade">Grades K – 2</p>
+          <h3 class="ocard-title">K-2 Health Boosts</h3>
+        </div>
+        <div class="ocard-body">
+          <p class="ocard-desc"><span class="placeholder">[2–3 sentence pitch for the core K-2 package: what arrives, how teachers use it, who supports them. Replace this paragraph this week.]</span></p>
+          <ul class="ocard-feats">
+            <li>Daily 5-minute Health Boosts that fit any morning meeting</li>
+            <li>Teacher-facing facilitator guide + family take-home cards</li>
+            <li>Digital + printable assets for every classroom</li>
+          </ul>
+          <div class="price-block">
+            <span class="price">$TBD</span>
+            <span class="strike">$TBD</span>
+            <span class="lbl">Conference rate</span>
+          </div>
+          <div class="ocard-cta">
+            <a href="#" class="btn placeholder-cta" aria-disabled="true">Order link coming this week</a>
+          </div>
+        </div>
+      </article>
 
-  <!-- Documents / Resources -->
-  <h2 class="section-h">
-    Documents &amp; Resources
-    <span class="sub">Download samples, framework overviews, and pricing sheets.</span>
-  </h2>
+      <!-- OFFER 2: K-2 Health Boosts + Residency -->
+      <article class="ocard" data-color="orange">
+        <div class="ocard-top">
+          <span class="ocard-badge">NAESP Special</span>
+          <p class="ocard-grade">Grades K – 2 · Most popular</p>
+          <h3 class="ocard-title">K-2 Health Boosts <span style="display:block;font-weight:700;opacity:.9;font-size:18px;">+ Residency</span></h3>
+        </div>
+        <div class="ocard-body">
+          <p class="ocard-desc"><span class="placeholder">[2–3 sentence pitch for the bundle: Health Boosts plus on-site residency days, coaching, observation cycles — whatever's included. Replace this paragraph this week.]</span></p>
+          <ul class="ocard-feats">
+            <li>Everything in K-2 Health Boosts</li>
+            <li>On-site residency days with a ReBe Ed facilitator</li>
+            <li>Teacher coaching cycles + principal-level reporting</li>
+          </ul>
+          <div class="price-block">
+            <span class="price">$TBD</span>
+            <span class="strike">$TBD</span>
+            <span class="lbl">Conference rate</span>
+          </div>
+          <div class="ocard-cta">
+            <a href="#" class="btn placeholder-cta" aria-disabled="true">Order link coming this week</a>
+          </div>
+        </div>
+      </article>
 
-  <div class="docs-grid">
-    <!-- Placeholders — replace href with real PDF/Drive links + tweak titles -->
-    <a class="doc placeholder" href="#" aria-disabled="true">
-      <div class="icon">PDF<span class="ext">PDF</span></div>
-      <div class="info">
-        <h4>K-2 Health Boosts Overview</h4>
-        <p>One-page summary of what's in the package</p>
-        <span class="pending">Coming soon</span>
-      </div>
-    </a>
-    <a class="doc placeholder" href="#" aria-disabled="true">
-      <div class="icon">PDF<span class="ext">PDF</span></div>
-      <div class="info">
-        <h4>Residency Bundle Details</h4>
-        <p>What residency days look like in your school</p>
-        <span class="pending">Coming soon</span>
-      </div>
-    </a>
-    <a class="doc placeholder" href="#" aria-disabled="true">
-      <div class="icon">PDF<span class="ext">PDF</span></div>
-      <div class="info">
-        <h4>3-5 Pilot Information</h4>
-        <p>Eligibility, timeline, what we ask in return</p>
-        <span class="pending">Coming soon</span>
-      </div>
-    </a>
-    <a class="doc placeholder" href="#" aria-disabled="true">
-      <div class="icon">PDF<span class="ext">PDF</span></div>
-      <div class="info">
-        <h4>Sample Lesson Cards</h4>
-        <p>A glimpse of what teachers + students see</p>
-        <span class="pending">Coming soon</span>
-      </div>
-    </a>
-  </div>
+      <!-- OFFER 3: Free 3-5 Pilot -->
+      <article class="ocard" data-color="green">
+        <div class="ocard-top">
+          <span class="ocard-badge free">Free Pilot</span>
+          <p class="ocard-grade">Grades 3 – 5 · Limited cohort</p>
+          <h3 class="ocard-title">3-5 Pilot Program</h3>
+        </div>
+        <div class="ocard-body">
+          <p class="ocard-desc"><span class="placeholder">[2–3 sentence pitch for the free 3-5 pilot: what classrooms get, how long the pilot runs, what you ask in return (data / case-study consent / etc). Replace this paragraph this week.]</span></p>
+          <ul class="ocard-feats">
+            <li>Full program access at no cost to selected schools</li>
+            <li>Co-design support + pre/post measurement</li>
+            <li>Featured case-study spotlight (with your permission)</li>
+          </ul>
+          <div class="price-block free">
+            <span class="price">Free</span>
+            <span class="lbl">Limited cohort</span>
+          </div>
+          <div class="ocard-cta">
+            <a href="#" class="btn placeholder-cta" aria-disabled="true">Apply link coming this week</a>
+          </div>
+        </div>
+      </article>
 
-  <!-- Contact CTA -->
-  <section class="contact-cta">
-    <h2>Questions? Want to talk?</h2>
-    <p>I'd love to hear what's true for your school. Email me and we'll set up a quick call.</p>
-    <div class="contact-row">
-      <a class="btn primary" href="mailto:refresh@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20Osil%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BK-2%20Health%20Boosts%20%2F%20Residency%20%2F%203-5%20Pilot%5D%0A%0AName%3A%0ASchool%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0A%0AThank%20you%21">Email refresh@justrebe.com</a>
-      <a class="btn ghost" href="https://www.justrebe.com" target="_blank" rel="noopener">Visit justrebe.com</a>
+    </div>
+  </section>
+
+  <!-- DOCUMENTS -->
+  <section class="docs" id="documents">
+    <div class="docs-head">
+      <p class="offers-ey">Take it with you</p>
+      <h2 class="offers-h">Documents &amp; resources</h2>
+      <p class="offers-sub">One-pagers, framework overviews, sample lessons, and the principal-ready evidence binder.</p>
+    </div>
+
+    <div class="docs-grid">
+      <a class="doc doc-placeholder" href="#" aria-disabled="true">
+        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
+        <div class="doc-info">
+          <h4>K-2 Health Boosts Overview</h4>
+          <p>One-page summary for principals + district leaders</p>
+          <span class="pending-tag">Coming this week</span>
+        </div>
+      </a>
+      <a class="doc doc-placeholder" href="#" aria-disabled="true">
+        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
+        <div class="doc-info">
+          <h4>Residency Bundle Details</h4>
+          <p>What residency days look like in your school</p>
+          <span class="pending-tag">Coming this week</span>
+        </div>
+      </a>
+      <a class="doc doc-placeholder" href="#" aria-disabled="true">
+        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
+        <div class="doc-info">
+          <h4>3-5 Pilot Information</h4>
+          <p>Eligibility, timeline, what we ask in return</p>
+          <span class="pending-tag">Coming this week</span>
+        </div>
+      </a>
+      <a class="doc doc-placeholder" href="#" aria-disabled="true">
+        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
+        <div class="doc-info">
+          <h4>Sample Lesson Cards</h4>
+          <p>What teachers + students actually see</p>
+          <span class="pending-tag">Coming this week</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ctasec" id="contact">
+    <div class="ctasec-inner">
+      <p class="cta-ey">Let's talk</p>
+      <h2 class="cta-h">Ready to bring this to your principals, your district, your students?</h2>
+      <p class="cta-sub">Email us with what you saw at NAESP and what your school needs most. We'll set up a 20-minute call.</p>
+      <div class="cta-btns">
+        <a class="btn btn-gold" href="mailto:refresh@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20ReBe%20Ed%20team%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BK-2%20Health%20Boosts%20%2F%20Residency%20%2F%203-5%20Pilot%5D%0A%0AName%3A%0ASchool%20%2F%20District%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0AGrade%20bands%3A%0ABest%20way%20to%20reach%20me%3A%0A%0AThank%20you%21">Email us about your school &rarr;</a>
+        <a class="btn btn-outline-white" href="https://www.justrebe.com" target="_blank" rel="noopener">Visit justrebe.com</a>
+      </div>
+      <p class="cta-emails">Questions? <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a></p>
     </div>
   </section>
 
@@ -273,7 +505,7 @@
 
 <footer>
   <p>ReBe Ed — part of the ReBe family. Rebuilding people from the inside out.</p>
-  <p><a href="https://www.justrebe.com" target="_blank" rel="noopener">justrebe.com</a> · <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a></p>
+  <p><a href="https://www.justrebe.com" target="_blank" rel="noopener">justrebe.com</a> &nbsp;·&nbsp; <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a></p>
 </footer>
 
 </body>
