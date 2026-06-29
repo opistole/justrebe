@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex,nofollow" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<title>ReBe Ed for NAESP — Conference Specials</title>
+<meta name="description" content="Conference specials for NAESP attendees from ReBe Ed: K-2 Health Boosts, K-2 Health Boosts + Residency, and a free 3-5 pilot offering." />
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* ReBe Ed palette (matches the LABS Word Work cards) */
+    --navy:#0F4D5C;
+    --green:#7DAA34;
+    --green-deep:#5E8323;
+    --green-wash:#F4FAEC;
+    --gold:#F5B82E;
+    --gold-deep:#C99413;
+    --gold-wash:#FEF7E5;
+    --navy-wash:#E8F1F3;
+    --purple:#6B5BD6;
+    --slate:#2A2F3A;
+    --ink:#111418;
+    --body:#4A535E;
+    --muted:#6B7280;
+    --bone:#E2E2E2;
+    --mist:#F5F4F0;
+    --paper:#FFFFFF;
+    --display:'Fredoka','Quicksand',-apple-system,sans-serif;
+    --sans:'Lato',-apple-system,BlinkMacSystemFont,sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--mist);
+    color:var(--body);
+    font-family:var(--sans);
+    font-weight:400;
+    font-size:17px;
+    line-height:1.6;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* Skip-link a11y */
+  .skip-link{position:absolute;left:-9999px;background:var(--navy);color:#fff;padding:10px 16px;border-radius:6px;z-index:200;font-weight:700;text-decoration:none}
+  .skip-link:focus{left:16px;top:16px}
+
+  /* ===== Top bar ===== */
+  .util-bar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--bone)}
+  .util-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;height:60px;gap:14px}
+  .wordmark{display:inline-flex;align-items:baseline;gap:4px;font-family:var(--display);font-weight:700;font-size:22px;color:var(--ink);text-decoration:none;line-height:1}
+  .wordmark .wave{color:var(--purple);font-size:18px;line-height:1;transform:translateY(-2px)}
+  .wordmark .dot{color:var(--ink);padding:0 1px}
+  .wordmark .ed-tag{background:var(--purple);color:#fff;font-size:12px;padding:2px 6px;border-radius:3px;margin-left:2px;font-weight:700;letter-spacing:.04em}
+  .util-tag{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);background:var(--green-wash);padding:5px 12px;border-radius:999px;border:1px solid #cfe6a3}
+
+  main{flex:1;max-width:1040px;width:100%;margin:0 auto;padding:48px 24px 56px}
+
+  /* ===== Hero ===== */
+  .hero{text-align:center;margin:0 0 40px}
+  .hero .eyebrow{font-family:var(--sans);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.22em;color:var(--green-deep);margin:0 0 16px;display:inline-block}
+  .hero .eyebrow::before{content:'';display:block;width:46px;height:1px;background:var(--green-deep);margin:0 auto 14px;opacity:.55}
+  .hero h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,5.6vw,60px);line-height:1.05;color:var(--ink);margin:0 0 18px;letter-spacing:-.005em;max-width:18ch;margin-left:auto;margin-right:auto}
+  .hero h1 .accent{color:var(--green)}
+  .hero .lede{font-family:var(--sans);font-weight:300;font-size:20px;line-height:1.55;color:var(--body);max-width:600px;margin:0 auto;letter-spacing:-.005em}
+
+  /* ===== Offers section ===== */
+  .section-h{font-family:var(--display);font-weight:700;font-size:32px;color:var(--ink);margin:36px 0 18px;line-height:1.15}
+  .section-h .sub{display:block;font-family:var(--sans);font-size:14px;font-weight:400;color:var(--muted);letter-spacing:.02em;margin:6px 0 0;text-transform:none}
+
+  .offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:0 0 18px}
+  @media (max-width:880px){.offer-grid{grid-template-columns:1fr}}
+
+  .offer{background:#fff;border:1px solid var(--bone);border-radius:18px;padding:26px 24px;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(15,77,92,.05);position:relative;overflow:hidden}
+  .offer::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--green);border-radius:18px 0 0 18px}
+  .offer[data-color="gold"]::before{background:var(--gold)}
+  .offer[data-color="navy"]::before{background:var(--navy)}
+
+  .offer .badge{display:inline-block;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:4px 11px;border-radius:999px;color:var(--green-deep);background:var(--green-wash);border:1px solid #cfe6a3;align-self:flex-start;margin:0 0 14px}
+  .offer[data-color="gold"] .badge{color:var(--gold-deep);background:var(--gold-wash);border-color:#f3d997}
+  .offer[data-color="navy"] .badge{color:var(--navy);background:var(--navy-wash);border-color:#bed5db}
+  .offer .badge.free{color:#fff;background:var(--navy);border-color:var(--navy)}
+
+  .offer h3{font-family:var(--display);font-weight:700;font-size:23px;color:var(--ink);line-height:1.18;margin:0 0 8px}
+  .offer .grade{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+  .offer .desc{font-size:14.5px;line-height:1.55;color:var(--body);margin:0 0 18px;flex:1}
+  .offer .price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:14px 16px;background:var(--mist);border-radius:10px;border:1px dashed var(--bone)}
+  .offer .price-row .price{font-family:var(--display);font-weight:700;font-size:24px;color:var(--ink);line-height:1}
+  .offer .price-row .strike{font-family:var(--sans);font-size:14px;color:var(--muted);text-decoration:line-through}
+  .offer .price-row .label{font-family:var(--sans);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-left:auto}
+  .offer .cta{display:inline-flex;align-items:center;justify-content:center;background:var(--green-deep);color:#fff;font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:13px 22px;border-radius:999px;text-decoration:none;transition:background .15s,transform .12s;text-align:center;margin-top:auto}
+  .offer .cta:hover{background:#4d6a1c;transform:translateY(-2px)}
+  .offer[data-color="gold"] .cta{background:var(--gold-deep)}
+  .offer[data-color="gold"] .cta:hover{background:#a47812}
+  .offer[data-color="navy"] .cta{background:var(--navy)}
+  .offer[data-color="navy"] .cta:hover{background:#0a3947}
+  .offer .cta.placeholder{background:#fff;color:var(--muted);border:1.5px dashed var(--bone);cursor:not-allowed;text-transform:uppercase;font-style:italic}
+  .offer .cta.placeholder:hover{transform:none;background:#fff}
+
+  /* ===== Documents section ===== */
+  .docs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:0 0 22px}
+  .doc{background:#fff;border:1px solid var(--bone);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;transition:transform .15s,border-color .15s,box-shadow .15s}
+  .doc:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 6px 18px rgba(15,77,92,.07)}
+  .doc.placeholder{cursor:default;border-style:dashed;background:#FAFBF7;opacity:.85}
+  .doc.placeholder:hover{transform:none;box-shadow:none;border-color:var(--bone)}
+  .doc .icon{flex-shrink:0;width:46px;height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--green) 0%,var(--green-deep) 100%);color:#fff;border-radius:6px;box-shadow:0 4px 8px rgba(15,77,92,.15);font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.04em;line-height:1}
+  .doc .icon .ext{font-size:9px;opacity:.85;margin-top:3px;letter-spacing:.08em}
+  .doc .info{flex:1;min-width:0}
+  .doc .info h4{font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);margin:0 0 3px;line-height:1.2}
+  .doc .info p{font-family:var(--sans);font-size:12px;color:var(--muted);margin:0;line-height:1.4}
+  .doc .info .pending{display:inline-block;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);background:var(--gold-wash);border:1px solid #f3d997;padding:2px 8px;border-radius:999px;margin-top:4px}
+
+  /* ===== Contact CTA ===== */
+  .contact-cta{background:linear-gradient(135deg,var(--green-wash) 0%,#E7F4DA 100%);border:1px solid #cfe6a3;border-radius:18px;padding:32px 36px;margin:32px 0 0;text-align:center}
+  .contact-cta h2{font-family:var(--display);font-weight:700;font-size:24px;color:var(--ink);margin:0 0 8px;line-height:1.2}
+  .contact-cta p{margin:0 0 18px;font-size:15px;color:var(--body);line-height:1.55;max-width:520px;margin-left:auto;margin-right:auto}
+  .contact-cta p:last-of-type{margin-bottom:0}
+  .contact-cta .contact-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 0 14px}
+  .contact-cta a.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:13px 24px;border-radius:999px;text-decoration:none;transition:background .15s,transform .12s,box-shadow .15s}
+  .contact-cta a.btn.primary{background:var(--green-deep);color:#fff}
+  .contact-cta a.btn.primary:hover{background:#4d6a1c;transform:translateY(-2px);box-shadow:0 6px 16px rgba(94,131,35,.22)}
+  .contact-cta a.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+  .contact-cta a.btn.ghost:hover{background:var(--navy);color:#fff}
+
+  footer{background:#fff;padding:28px 24px;text-align:center;border-top:1px solid var(--bone);font-size:13px;color:var(--muted);line-height:1.6}
+  footer a{color:var(--green-deep);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-deep)}
+  footer a:hover{border-bottom-style:solid}
+
+  /* ===== Small-screen polish ===== */
+  @media (max-width:640px){
+    main{padding:32px 16px 40px}
+    .offer{padding:22px 20px}
+    .contact-cta{padding:24px 22px}
+    .util-tag{display:none}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="util-bar">
+  <div class="util-inner">
+    <a href="/" class="wordmark"><span class="wave">∼</span>re<span class="dot">·</span>be<span class="ed-tag">Ed</span></a>
+    <span class="util-tag">NAESP · Conference Specials</span>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="eyebrow">Hi, NAESP friends 👋</p>
+    <h1>Bring ReBe Ed to your <span class="accent">elementary school.</span></h1>
+    <p class="lede">Three ways to get started, with special pricing reserved for NAESP attendees through this page. Pick what fits.</p>
+  </section>
+
+  <!-- Offers -->
+  <h2 class="section-h">
+    Conference Offers
+    <span class="sub">Pricing on this page is reserved for NAESP attendees.</span>
+  </h2>
+
+  <div class="offer-grid">
+
+    <!-- Offer 1: K-2 Health Boosts -->
+    <article class="offer" data-color="green">
+      <span class="badge">NAESP Special</span>
+      <h3>K-2 Health Boosts</h3>
+      <p class="grade">Grades K – 2</p>
+      <p class="desc">[Replace this with a 2–3 sentence pitch for the K-2 Health Boosts package — what's in it, who facilitates, how it ships.]</p>
+      <div class="price-row">
+        <span class="price">$TBD</span>
+        <span class="strike">$TBD</span>
+        <span class="label">Conference rate</span>
+      </div>
+      <a class="cta placeholder" href="#" aria-disabled="true">Order link coming soon</a>
+    </article>
+
+    <!-- Offer 2: K-2 Health Boosts + Residency -->
+    <article class="offer" data-color="gold">
+      <span class="badge">NAESP Special</span>
+      <h3>K-2 Health Boosts <br>+ Residency</h3>
+      <p class="grade">Grades K – 2</p>
+      <p class="desc">[Replace with 2–3 sentences explaining the bundle: Health Boosts + on-site residency days / coaching / whatever's included.]</p>
+      <div class="price-row">
+        <span class="price">$TBD</span>
+        <span class="strike">$TBD</span>
+        <span class="label">Conference rate</span>
+      </div>
+      <a class="cta placeholder" href="#" aria-disabled="true">Order link coming soon</a>
+    </article>
+
+    <!-- Offer 3: Free 3-5 Pilot -->
+    <article class="offer" data-color="navy">
+      <span class="badge free">Free Pilot</span>
+      <h3>3-5 Pilot Program</h3>
+      <p class="grade">Grades 3 – 5</p>
+      <p class="desc">[Replace with 2–3 sentences about the free pilot for 3–5 classrooms — what you provide, how long the pilot runs, what you ask in return (data / feedback / etc).]</p>
+      <div class="price-row">
+        <span class="price">FREE</span>
+        <span class="label">Limited cohort</span>
+      </div>
+      <a class="cta placeholder" href="#" aria-disabled="true">Apply link coming soon</a>
+    </article>
+
+  </div>
+
+  <!-- Documents / Resources -->
+  <h2 class="section-h">
+    Documents &amp; Resources
+    <span class="sub">Download samples, framework overviews, and pricing sheets.</span>
+  </h2>
+
+  <div class="docs-grid">
+    <!-- Placeholders — replace href with real PDF/Drive links + tweak titles -->
+    <a class="doc placeholder" href="#" aria-disabled="true">
+      <div class="icon">PDF<span class="ext">PDF</span></div>
+      <div class="info">
+        <h4>K-2 Health Boosts Overview</h4>
+        <p>One-page summary of what's in the package</p>
+        <span class="pending">Coming soon</span>
+      </div>
+    </a>
+    <a class="doc placeholder" href="#" aria-disabled="true">
+      <div class="icon">PDF<span class="ext">PDF</span></div>
+      <div class="info">
+        <h4>Residency Bundle Details</h4>
+        <p>What residency days look like in your school</p>
+        <span class="pending">Coming soon</span>
+      </div>
+    </a>
+    <a class="doc placeholder" href="#" aria-disabled="true">
+      <div class="icon">PDF<span class="ext">PDF</span></div>
+      <div class="info">
+        <h4>3-5 Pilot Information</h4>
+        <p>Eligibility, timeline, what we ask in return</p>
+        <span class="pending">Coming soon</span>
+      </div>
+    </a>
+    <a class="doc placeholder" href="#" aria-disabled="true">
+      <div class="icon">PDF<span class="ext">PDF</span></div>
+      <div class="info">
+        <h4>Sample Lesson Cards</h4>
+        <p>A glimpse of what teachers + students see</p>
+        <span class="pending">Coming soon</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- Contact CTA -->
+  <section class="contact-cta">
+    <h2>Questions? Want to talk?</h2>
+    <p>I'd love to hear what's true for your school. Email me and we'll set up a quick call.</p>
+    <div class="contact-row">
+      <a class="btn primary" href="mailto:refresh@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20Osil%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BK-2%20Health%20Boosts%20%2F%20Residency%20%2F%203-5%20Pilot%5D%0A%0AName%3A%0ASchool%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0A%0AThank%20you%21">Email refresh@justrebe.com</a>
+      <a class="btn ghost" href="https://www.justrebe.com" target="_blank" rel="noopener">Visit justrebe.com</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>ReBe Ed — part of the ReBe family. Rebuilding people from the inside out.</p>
+  <p><a href="https://www.justrebe.com" target="_blank" rel="noopener">justrebe.com</a> · <a href="mailto:refresh@justrebe.com">refresh@justrebe.com</a></p>
+</footer>
+
+</body>
+</html>
