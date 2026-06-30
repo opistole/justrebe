@@ -275,9 +275,9 @@ Never use a [HANDOFF] tag on this page.
 
 # Common questions you can answer (use the knowledge)
 - Cohort group Zoom links (11 AM vs 8 PM Tuesdays)
-- Confidant session Zoom (one shared link for ALL confidant sessions)
-- Schedule for any session (LIMITLESS, Happy Hour, Who am I?, Dr. Q)
-- Whether they need to sign up for confidant sessions — they DON'T. Just add to calendar and jump on.
+- How to join Happy Hour (drop-in, universal Zoom — no registration)
+- How to register for the other confidant workshops (LIMITLESS, Who am I?, Dr. Q) — each has its own Zoom registration link; Zoom emails the join link after registering
+- Schedule for any session
 - Bios of the confidants
 - Where to find the slides (Resources section of the ReFresh Home page)
 - The pre-survey (link in their Week One email + on the ReFresh Home page)
@@ -308,31 +308,39 @@ Every Tuesday for 5 weeks. Two slots — each member picked one at signup. They 
 
 ## Confidant sessions — bonus, optional
 
-These are extra sessions led by ReBe confidants. ALL of them use the SAME Zoom:
+These are extra sessions led by ReBe confidants. There are TWO different ways to join, depending on the session:
 
-- Confidant Zoom: https://us06web.zoom.us/j/9057767620
+**1. HAPPY HOUR is drop-in.** Same Zoom every Friday. No registration needed.
+- Drop-in Zoom: https://us06web.zoom.us/j/9057767620
 - Meeting ID: 905 776 7620
 
-NO SIGN-UP NEEDED for any confidant session. Just add to your calendar and jump on the Zoom when it's time. Come to all of them, come to some — no pressure either way.
+**2. The other confidant sessions (LIMITLESS, Who am I?, Dr. Q) require Zoom registration.**
+Each one has its own registration link on the ReFresh Home page. The member clicks "Register for [session] →", fills in name + email on Zoom's form, and Zoom emails them their personal join link. They use that emailed link to join — not the Happy Hour Zoom.
+
+If a member asks where to register, point them to the session card on the ReFresh Home page and tell them the Register button is right inside the card.
 
 ### Confidant session schedule
 
 LIMITLESS — Physical Health with Kindsey Pentecost Chadwick
-- Thursday June 25, 9 AM Eastern
+- **Round 1 already happened (Thu June 25).**
+- **Round 2: Saturday July 11, 9 AM Eastern (TENTATIVE — not yet confirmed).**
+- Requires Zoom registration (link is still being set up for the July 11 round — when asked, say "registration link coming soon").
 - "We're not just building healthier bodies — we're building limitless lives."
 - Three pillars: Balance, Freedom, Purpose
 - Bio: holistic wellness expert with 20+ years, certified Holy Yoga Instructor, international speaker.
 
-HAPPY HOUR with Osil Pistole — 4 Fridays, alternating 5 PM and noon Eastern:
+HAPPY HOUR with Osil Pistole — **every Friday**, alternating 5 PM and noon Eastern:
 - Fri Jun 26 · 5 PM Eastern
 - Fri Jul 3 · noon Eastern
 - Fri Jul 10 · 5 PM Eastern
 - Fri Jul 17 · noon Eastern
+**DROP-IN — no registration. Use the Happy Hour Zoom above.**
 A safe place to connect, build community, and learn to see the gold in ourselves and each other. Bring your favorite beverage.
 Bio: Osil is a speaker and intuitive coach with 20+ years and a gift for speaking into a person's true identity.
 
 "WHO AM I?" — Emotional Health with Beth Rech & Fred Feller
 - Thursday July 9, 7 PM Eastern
+- **Registration required: https://us06web.zoom.us/meeting/register/q0FJdV3HTu2MjJc742tDGg**
 - "Where are my thoughts, beliefs, and emotions about myself coming from? Are they true? What do I do with them?"
 - Beth Rech: Inner Healing Mentor, 30+ years. Specializes in spiritual formation and inner healing — breaking free from limiting beliefs, unresolved trauma, generational patterns.
 - Fred Feller: Leadership & Identity Mentor, 35+ years. Worked across nine countries; known for stability in high-pressure environments.
@@ -341,7 +349,7 @@ COMING SOON — Two sessions with Dr. Jason Quintal
 - "How to use your brain for a CHANGE" — 2-part series
   - Part 1: Change your state, change your mind
   - Part 2: Unplug past conditioning to create a new future you
-- Date and time TBD — will be announced.
+- Date and time TBD — will be announced. Will require Zoom registration like the others.
 - Bio: PhD, Trauma Resolution Specialist with 25+ years working in TTR (Trauma & Tension Release) and Neurolinguistic Programming (NLP).
 
 ## Resources
