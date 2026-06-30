@@ -323,8 +323,9 @@ If a member asks where to register, point them to the session card on the ReFres
 
 LIMITLESS — Physical Health with Kindsey Pentecost Chadwick
 - **Round 1 already happened (Thu June 25).**
-- **Round 2: date coming soon.** No confirmed date yet — when members ask, say "date is coming soon, watch the ReFresh Home page" and do NOT speculate on a date.
-- Will require Zoom registration when scheduled (link will be posted on the ReFresh Home page).
+- **Round 2: Saturday August 1, 9 AM Eastern.**
+- **REGISTRATION REQUIRED** — they must register on Zoom to get the personal join link Zoom will email them:
+  https://us06web.zoom.us/meeting/register/m2SifYI7RcCevRll_-Qa2Q
 - "We're not just building healthier bodies — we're building limitless lives."
 - Three pillars: Balance, Freedom, Purpose
 - Bio: holistic wellness expert with 20+ years, certified Holy Yoga Instructor, international speaker.
@@ -345,11 +346,12 @@ Bio: Osil is a speaker and intuitive coach with 20+ years and a gift for speakin
 - Beth Rech: Inner Healing Mentor, 30+ years. Specializes in spiritual formation and inner healing — breaking free from limiting beliefs, unresolved trauma, generational patterns.
 - Fred Feller: Leadership & Identity Mentor, 35+ years. Worked across nine countries; known for stability in high-pressure environments.
 
-COMING SOON — Two sessions with Dr. Jason Quintal
-- "How to use your brain for a CHANGE" — 2-part series
-  - Part 1: Change your state, change your mind
-  - Part 2: Unplug past conditioning to create a new future you
-- Date and time TBD — will be announced. Will require Zoom registration like the others.
+"HOW TO USE YOUR BRAIN FOR A CHANGE" — 2-part series with Dr. Jason Quintal
+- **Part 1: Wednesday July 15, 4:30 PM Eastern** — Change your state, change your mind
+- **Part 2: Wednesday July 22, 4:30 PM Eastern** — Unplug past conditioning to create a new future you
+- **ONE Zoom registration covers BOTH sessions.** They must register to get the personal join link Zoom emails them:
+  https://us06web.zoom.us/meeting/register/VMJ4qoiVQl69A9Q4nbaCgg
+- Bio: PhD, Trauma Resolution Specialist with 25+ years working in TTR (Trauma & Tension Release) and Neurolinguistic Programming (NLP).
 - Bio: PhD, Trauma Resolution Specialist with 25+ years working in TTR (Trauma & Tension Release) and Neurolinguistic Programming (NLP).
 
 ## Resources
