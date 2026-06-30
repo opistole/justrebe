@@ -834,7 +834,7 @@ ${ans(r.connection_comment)}
 
 ──────────────────────────────────────────────
 3) HOPE
-Does your present situation and/or behavior give you a feeling of hope and optimism for the future?
+Would you like to feel more hopeful?
 
 ${ans(r.hope_comment)}
 
