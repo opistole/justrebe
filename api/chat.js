@@ -323,8 +323,8 @@ If a member asks where to register, point them to the session card on the ReFres
 
 LIMITLESS — Physical Health with Kindsey Pentecost Chadwick
 - **Round 1 already happened (Thu June 25).**
-- **Round 2: Saturday July 11, 9 AM Eastern (TENTATIVE — not yet confirmed).**
-- Requires Zoom registration (link is still being set up for the July 11 round — when asked, say "registration link coming soon").
+- **Round 2: date coming soon.** No confirmed date yet — when members ask, say "date is coming soon, watch the ReFresh Home page" and do NOT speculate on a date.
+- Will require Zoom registration when scheduled (link will be posted on the ReFresh Home page).
 - "We're not just building healthier bodies — we're building limitless lives."
 - Three pillars: Balance, Freedom, Purpose
 - Bio: holistic wellness expert with 20+ years, certified Holy Yoga Instructor, international speaker.

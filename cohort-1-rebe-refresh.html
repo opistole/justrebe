@@ -354,57 +354,6 @@
     </div>
   </article>
 
-  <!-- 3. Limitless (round 2 — tentative) -->
-  <article class="session-card" id="session-limitless">
-    <div class="sc-meta">
-      <span class="sc-date">Sat · July 11 · 9 AM ET</span>
-      <span class="sc-recur" style="background:#FBF4E4;color:#B07D14;border-color:#f5d4a8">Tentative</span>
-      <span class="sc-tag">Physical Health</span>
-    </div>
-    <h3>"Limitless" — Physical Health</h3>
-    <p class="sc-facil">with Kindsey Pentecost Chadwick</p>
-    <div class="sc-people">
-      <div class="sc-people-photos">
-        <button type="button" class="sc-photo" data-bio="bio-kindsey" aria-label="Read about Kindsey Pentecost Chadwick">
-          <img src="Images/kindsey.png" alt="Kindsey Pentecost Chadwick" loading="lazy">
-        </button>
-      </div>
-      <div class="sc-people-text">
-        <strong>Kindsey Pentecost Chadwick</strong>
-        <a data-bio="bio-kindsey" type="button">Read bio →</a>
-      </div>
-    </div>
-    <div class="sc-desc">
-      <p><em>"We're not just building healthier bodies — we're building limitless lives."</em></p>
-      <p><strong>The Three Pillars:</strong></p>
-    </div>
-    <div class="sc-pillars">
-      <div class="sc-pillar">
-        <p class="sc-pillar-name">Balance</p>
-        <p class="sc-pillar-body">Your body in balance is your foundation. Science-backed nutrition to fuel your cells and show up fully.</p>
-      </div>
-      <div class="sc-pillar">
-        <p class="sc-pillar-name">Freedom</p>
-        <p class="sc-pillar-body">Freedom from burnout, from settling, from feeling stuck — when health, mindset, and purpose align.</p>
-      </div>
-      <div class="sc-pillar">
-        <p class="sc-pillar-name">Purpose</p>
-        <p class="sc-pillar-body">Aligning your physical health with what you're here to do.</p>
-      </div>
-    </div>
-    <div class="sc-actions">
-      <div class="cal-wrap">
-        <button type="button" class="sc-btn cal-trigger" data-cal-event="limitless">📅 Add to Calendar ▾</button>
-        <div class="cal-menu">
-          <button type="button" data-cal-app="apple"   data-cal-event="limitless"><span class="cal-icon">🍎</span> Apple Calendar</button>
-          <button type="button" data-cal-app="google"  data-cal-event="limitless"><span class="cal-icon">📆</span> Google Calendar</button>
-          <button type="button" data-cal-app="outlook" data-cal-event="limitless"><span class="cal-icon">📧</span> Outlook</button>
-        </div>
-      </div>
-      <span class="sc-btn" aria-disabled="true" style="border-style:dashed;color:var(--muted);background:#fff;font-style:italic;cursor:default">Registration link coming soon</span>
-    </div>
-  </article>
-
   <!-- Coming soon -->
   <!-- Coming Soon — additional sessions in the works -->
   <h3 style="font-family:var(--serif);font-style:italic;font-weight:600;text-transform:none;font-size:24px;color:var(--gold-ink);letter-spacing:-.01em;margin:30px 0 14px;padding:0 0 6px;border-bottom:1px solid var(--gold-wash);line-height:1.2">Coming Soon</h3>
@@ -425,6 +374,22 @@
       </div>
     </div>
     <span class="soon-tag" style="align-self:flex-start;margin-top:2px">Date TBD</span>
+  </div>
+
+  <!-- Coming Soon: LIMITLESS round 2 with Kindsey (date TBD) -->
+  <div class="soon-card" id="session-limitless" style="align-items:flex-start;margin:0 0 16px">
+    <div style="display:flex;align-items:flex-start;gap:14px;flex:1;min-width:0">
+      <button type="button" class="sc-photo" data-bio="bio-kindsey" aria-label="Read about Kindsey Pentecost Chadwick" style="width:76px;height:76px;border-radius:50%;overflow:hidden;background:var(--mist);border:3px solid #fff;box-shadow:0 6px 14px rgba(6,11,80,.14),inset 0 0 0 2px var(--green);flex-shrink:0;cursor:pointer;padding:0;margin-top:2px">
+        <img src="Images/kindsey.png" alt="Kindsey Pentecost Chadwick" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block">
+      </button>
+      <div class="sc-info" style="flex:1">
+        <h4 style="margin:0 0 4px">"Limitless" — Physical Health (Round 2)</h4>
+        <p style="margin:0 0 8px">A second session with Kindsey Pentecost Chadwick · <a data-bio="bio-kindsey" style="color:var(--green-ink);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-ink);cursor:pointer">Read bio</a></p>
+        <p style="margin:0 0 6px;font-size:13px;color:var(--body);line-height:1.5;font-style:italic">"We're not just building healthier bodies — we're building limitless lives."</p>
+        <p style="margin:8px 0 0;font-size:12px;color:var(--muted);font-style:italic">Zoom registration link will be posted here once the date is set.</p>
+      </div>
+    </div>
+    <span class="soon-tag" style="align-self:flex-start;margin-top:2px">Date coming soon</span>
   </div>
 
   <!-- Resources -->
@@ -561,13 +526,9 @@ document.querySelectorAll('.bio-modal').forEach(function(m){
 (function(){
   // All session times in UTC. June/July 2026 = EDT = UTC-4.
   var SESSIONS = {
-    'limitless': {
-      title: 'Limitless — Physical Health with Kindsey Pentecost Chadwick',
-      startUtc: '20260711T130000Z', // Sat July 11 2026 9 AM ET (tentative)
-      endUtc:   '20260711T140000Z',
-      desc: 'ReBe ReFresh Cohort — "Limitless" Physical Health session with Kindsey Pentecost Chadwick.\n\n"We\'re not just building healthier bodies — we\'re building limitless lives."\n\nThree pillars: Balance, Freedom, Purpose.\n\nRegistration required — register here and Zoom will email you the join link:\nREPLACE_WITH_LIMITLESS_ZOOM_REGISTRATION_URL',
-      location: 'REPLACE_WITH_LIMITLESS_ZOOM_REGISTRATION_URL'
-    },
+    // 'limitless' (round 2) entry removed — no date set yet. When Kindsey
+    // confirms the new date + Zoom registration URL, restore this entry
+    // and add the Add-to-Calendar buttons back into the LIMITLESS card.
     'happy-hour': {
       title: 'Happy Hour with Osil Pistole',
       // For Google/Outlook URL (single-event APIs) we use the first
